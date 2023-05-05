@@ -1,9 +1,11 @@
+import { ThemeProvider } from '@mui/material';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';
 import { Provider } from 'react-redux';
 import App from './App';
-import { store } from './app/store';
+import  store from './app/store';
+import theme from './app/theme';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -12,9 +14,11 @@ const root = ReactDOM.createRoot(
 root.render(
 	<React.StrictMode>
 		<Provider store={store}>
-			<HelmetProvider>
-				<App />
-			</HelmetProvider>
+			<ThemeProvider theme={theme}>
+				<HelmetProvider>
+					<App />
+				</HelmetProvider>
+			</ThemeProvider>
 		</Provider>
 	</React.StrictMode>
 );

@@ -1,9 +1,11 @@
-import { useGetUsersQuery } from '../features/user/userApi';
+
 
 const Home = () => {
-	const { data } = useGetUsersQuery({});
-	console.log('data', data);
-	return <>home</>;
+	return (
+		<>
+			
+		</>
+	);
 };
 
 export default Home;
