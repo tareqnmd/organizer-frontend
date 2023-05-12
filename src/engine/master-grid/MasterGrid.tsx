@@ -7,28 +7,30 @@ import {
 	TableHead,
 	TableRow,
 } from '@mui/material';
+import { GridPropType } from '../../utils/common-types';
+import { getFieldValue } from '../../utils/helper';
 
-const MasterGrid = () => {
+const MasterGrid = ({ data, columns }: GridPropType) => {
 	return (
 		<TableContainer component={Paper}>
 			<Table>
 				<TableHead>
 					<TableRow>
-						<TableCell>0</TableCell>
-						<TableCell align="right">1</TableCell>
-						<TableCell align="right">2</TableCell>
-						<TableCell align="right">3</TableCell>
-						<TableCell align="right">4</TableCell>
+						{columns?.map((column, index) => (
+							<TableCell key={index}>{column?.title}</TableCell>
+						))}
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					<TableRow>
-						<TableCell>0</TableCell>
-						<TableCell align="right">1</TableCell>
-						<TableCell align="right">2</TableCell>
-						<TableCell align="right">3</TableCell>
-						<TableCell align="right">4</TableCell>
-					</TableRow>
+					{data?.map((item, rowIndex) => (
+						<TableRow key={rowIndex}>
+							{columns?.map((column, columnIndex) => (
+								<TableCell key={columnIndex}>
+									{getFieldValue(item, column)}
+								</TableCell>
+							))}
+						</TableRow>
+					))}
 				</TableBody>
 			</Table>
 		</TableContainer>

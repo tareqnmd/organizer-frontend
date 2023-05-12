@@ -1,9 +1,9 @@
-import MonthWiseTransactions from '../components/transactions/MonthWiseTransactions';
+import AllTransactions from '../components/transactions/AllTransactions';
 
 const Home = () => {
 	return (
 		<>
-			<MonthWiseTransactions />
+			<AllTransactions />
 		</>
 	);
 };

@@ -1,11 +1,5 @@
-import MasterGrid from '../../engine/master-grid/MasterGrid';
-
 const MonthWiseTransactions = () => {
-	return (
-		<>
-			<MasterGrid />
-		</>
-	);
+	return <></>;
 };
 
 export default MonthWiseTransactions;
