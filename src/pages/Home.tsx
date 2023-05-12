@@ -1,5 +1,11 @@
+import MonthWiseTransactions from '../components/transactions/MonthWiseTransactions';
+
 const Home = () => {
-	return <>home</>;
+	return (
+		<>
+			<MonthWiseTransactions />
+		</>
+	);
 };
 
 export default Home;
