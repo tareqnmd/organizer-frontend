@@ -13,8 +13,12 @@ const userSlice = createSlice({
 			state.username = action.payload.username;
 			state.fullName = action.payload.fullName;
 		},
+		logOut: (state) => {
+			state.username = null;
+			state.fullName = null;
+		},
 	},
 });
 
-export const { setUser } = userSlice.actions;
+export const { setUser, logOut } = userSlice.actions;
 export default userSlice;
