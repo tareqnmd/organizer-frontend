@@ -4,9 +4,10 @@ import ReactDOM from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';
 import { Provider } from 'react-redux';
 import App from './App';
-import  store from './app/store';
+import store from './app/store';
 import theme from './app/theme';
 import reportWebVitals from './reportWebVitals';
+import './styles/global.scss';
 
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement

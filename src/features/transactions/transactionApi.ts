@@ -7,7 +7,14 @@ export const userApi = apiSlice.injectEndpoints({
 				url: '/transactions',
 			}),
 		}),
+		addTransaction: builder.mutation({
+			query: (payload) => ({
+				url: '/transaction',
+				method: 'POST',
+				data: payload,
+			}),
+		}),
 	}),
 });
 
-export const { useGetTransactionsQuery } = userApi;
+export const { useGetTransactionsQuery, useAddTransactionMutation } = userApi;
