@@ -1,4 +1,11 @@
-import { Box, Button, MenuItem, TextField } from '@mui/material';
+import {
+	Alert,
+	Box,
+	Button,
+	CircularProgress,
+	MenuItem,
+	TextField,
+} from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +18,8 @@ const TransactionForm = () => {
 	const [values, setValues] = useState({});
 	const { data: types } = useGetTypesQuery({});
 	const user = useSelector((state: userValue) => state.user);
-	const [transaction, { isSuccess }] = useAddTransactionMutation({});
+	const [transaction, { isSuccess, isLoading, isError }] =
+		useAddTransactionMutation({});
 	const inputHandler = (e: any) => {
 		const { name, value } = e.target;
 		setValues((prev) => ({
@@ -89,8 +97,24 @@ const TransactionForm = () => {
 				variant="contained"
 				sx={{ marginTop: '20px' }}
 			>
+				{isLoading && (
+					<CircularProgress
+						color="inherit"
+						size="1rem"
+						style={{ marginRight: '6px' }}
+					/>
+				)}
 				Add Transaction
 			</Button>
+
+			{isError && (
+				<Alert
+					style={{ marginTop: '10px' }}
+					severity="error"
+				>
+					Failed to submit
+				</Alert>
+			)}
 		</Box>
 	);
 };
