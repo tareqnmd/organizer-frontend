@@ -6,4 +6,37 @@ html {
 body {
 	margin: 0;
 	padding: 0;
+	background: linear-gradient(
+		83deg,
+		rgba(14, 28, 54, 1) 0%,
+		rgba(23, 50, 101, 1) 50%
+	);
+}
+
+.section-header {
+	width: max-content;
+	color: #444;
+	border-bottom: 2px solid;
+	margin: 10px auto 0;
+	padding: 0;
+}
+
+.section-center {
+	display: grid;
+	place-items: center;
+	height: 100%;
+}
+
+.height-100 {
+	height: 100vh;
+}
+
+.input-fields {
+	background-color: white;
+	border-radius: 4px;
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	max-width: 300px;
 }

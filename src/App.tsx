@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AuthCheck from './components/auth/AuthCheck';
 import HomeRedirect from './components/auth/HomeRedirect';
 import Layout from './components/layout/Layout';
-import AddTransaction from './components/transactions/AddTransaction';
 import useAuthCheck from './hooks/useAuthCheck';
+import AddTransaction from './pages/AddTransaction';
 import Home from './pages/Home';
 import Login from './pages/Login';
 
@@ -13,7 +13,9 @@ const Apps = () => {
 	return (
 		<>
 			{!authChecked ? (
-				<CircularProgress disableShrink />
+				<div className="section-center height-100">
+					<CircularProgress disableShrink />
+				</div>
 			) : (
 				<BrowserRouter>
 					<Layout>

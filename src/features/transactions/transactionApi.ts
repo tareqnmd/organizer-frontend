@@ -1,6 +1,6 @@
 import { apiSlice } from '../api/apiSlice';
 
-export const userApi = apiSlice.injectEndpoints({
+export const transactionApi = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
 		getTransactions: builder.query({
 			query: () => ({
@@ -11,10 +11,11 @@ export const userApi = apiSlice.injectEndpoints({
 			query: (payload) => ({
 				url: '/transaction',
 				method: 'POST',
-				data: payload,
+				body: payload,
 			}),
 		}),
 	}),
 });
 
-export const { useGetTransactionsQuery, useAddTransactionMutation } = userApi;
+export const { useGetTransactionsQuery, useAddTransactionMutation } =
+	transactionApi;

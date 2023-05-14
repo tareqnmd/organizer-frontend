@@ -16,3 +16,8 @@ export type GridPropType = {
 	data: any[];
 	columns: GridColumnsProp;
 };
+
+export type TypePropType = {
+	value: number;
+	name: string;
+};
