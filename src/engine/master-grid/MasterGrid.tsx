@@ -15,7 +15,7 @@ const MasterGrid = ({ data, columns }: GridPropType) => {
 		<TableContainer component={Paper}>
 			<Table>
 				<TableHead>
-					<TableRow>
+					<TableRow className={`table-head`}>
 						{columns?.map((column, index) => (
 							<TableCell key={index}>{column?.title}</TableCell>
 						))}
@@ -23,7 +23,10 @@ const MasterGrid = ({ data, columns }: GridPropType) => {
 				</TableHead>
 				<TableBody>
 					{data?.map((item, rowIndex) => (
-						<TableRow key={rowIndex}>
+						<TableRow
+							className={`${item.type.toLowerCase()}-row`}
+							key={rowIndex}
+						>
 							{columns?.map((column, columnIndex) => (
 								<TableCell key={columnIndex}>
 									{getFieldValue(item, column)}
