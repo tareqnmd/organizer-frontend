@@ -1,4 +1,4 @@
-export type userValue = { user: { username: string } };
+export type userValue = { user: { username: string; userId: string } };
 
 export type GridColumnsProp = {
 	title: string;
@@ -18,6 +18,6 @@ export type GridPropType = {
 };
 
 export type TypePropType = {
-	value: number;
+	_id: string;
 	name: string;
 };

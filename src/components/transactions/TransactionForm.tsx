@@ -1,14 +1,16 @@
 import { Box, Button, MenuItem, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useGetTypesQuery } from '../../features/system/systemApi';
 import { useAddTransactionMutation } from '../../features/transactions/transactionApi';
-import { TypePropType } from '../../utils/common-types';
+import { TypePropType, userValue } from '../../utils/common-types';
 
 const TransactionForm = () => {
 	const navigate = useNavigate();
 	const [values, setValues] = useState({});
 	const { data: types } = useGetTypesQuery({});
+	const user = useSelector((state: userValue) => state.user);
 	const [transaction, { isSuccess }] = useAddTransactionMutation({});
 	const inputHandler = (e: any) => {
 		const { name, value } = e.target;
@@ -19,14 +21,14 @@ const TransactionForm = () => {
 	};
 	const submitHandler = (e: any) => {
 		e.preventDefault();
-		transaction(values);
+		transaction({ ...values, userId: user?.userId });
 	};
 
 	useEffect(() => {
 		if (isSuccess) {
 			navigate('/');
 		}
-	}, [isSuccess,navigate]);
+	}, [isSuccess, navigate]);
 	return (
 		<Box
 			component="form"
@@ -51,7 +53,7 @@ const TransactionForm = () => {
 			/>
 			<TextField
 				required
-				name="type"
+				name="typeId"
 				label="Type"
 				select
 				variant="standard"
@@ -59,8 +61,8 @@ const TransactionForm = () => {
 			>
 				{types?.map((type: TypePropType) => (
 					<MenuItem
-						key={type.value}
-						value={type.value}
+						key={type._id}
+						value={type._id}
 					>
 						{type.name}
 					</MenuItem>
