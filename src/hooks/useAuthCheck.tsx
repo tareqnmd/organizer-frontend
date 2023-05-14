@@ -14,6 +14,7 @@ const useAuthCheck = () => {
 					setUser({
 						fullName: user.fullName,
 						username: user.username,
+						userId: user.userId,
 					})
 				);
 			}

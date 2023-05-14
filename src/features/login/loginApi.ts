@@ -15,6 +15,7 @@ export const loginApi = apiSlice.injectEndpoints({
 					const data = {
 						fullName: result.data.fullName,
 						username: result.data.username,
+						userId: result.data._id,
 					};
 					localStorage.setItem('user', JSON.stringify(data));
 					dispatch(setUser(data));
