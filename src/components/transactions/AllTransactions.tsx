@@ -1,10 +1,11 @@
 import MasterGrid from '../../engine/master-grid/MasterGrid';
-import { useGetTransactionsQuery } from '../../features/transactions/transactionApi';
+import { useGetTransactionsWithColumnQuery } from '../../features/transactions/transactionApi';
 import Error from '../ui/Error';
 import Loading from '../ui/Loading';
 import NoDataFound from '../ui/NoDataFound';
 const AllTransactions = () => {
-	const { data, isSuccess, isError, isLoading } = useGetTransactionsQuery({});
+	const { data, isSuccess, isError, isLoading } =
+		useGetTransactionsWithColumnQuery({});
 
 	let content = null;
 	if (isLoading) {

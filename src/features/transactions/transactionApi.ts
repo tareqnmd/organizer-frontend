@@ -2,9 +2,9 @@ import { apiSlice } from '../api/apiSlice';
 
 export const transactionApi = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
-		getTransactions: builder.query({
+		getTransactionsWithColumn: builder.query({
 			query: () => ({
-				url: '/transactions',
+				url: '/transactions-with-column',
 			}),
 		}),
 		addTransaction: builder.mutation({
@@ -14,8 +14,16 @@ export const transactionApi = apiSlice.injectEndpoints({
 				body: payload,
 			}),
 		}),
+		transactionInfo: builder.query({
+			query: (payload) => ({
+				url: '/transactions-info',
+			}),
+		}),
 	}),
 });
 
-export const { useGetTransactionsQuery, useAddTransactionMutation } =
-	transactionApi;
+export const {
+	useGetTransactionsWithColumnQuery,
+	useAddTransactionMutation,
+	useTransactionInfoQuery,
+} = transactionApi;
