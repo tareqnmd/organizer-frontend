@@ -9,6 +9,9 @@ const theme = createTheme({
 				fontWeight: 'bold',
 				textDecoration: 'none',
 			},
+			indicator: {
+				backgroundColor: 'white',
+			},
 		},
 	},
 });

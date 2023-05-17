@@ -40,7 +40,7 @@ const TransactionForm = () => {
 	return (
 		<Box
 			component="form"
-			className="input-fields"
+			className="transaction-fields"
 			onSubmit={submitHandler}
 		>
 			<h3 className="section-header">Add Transaction</h3>

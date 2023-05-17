@@ -11,15 +11,10 @@ const Navbar = () => {
 	};
 	return (
 		<nav>
-			<AppBar>
+			<AppBar className="app-nav">
 				<Toolbar>
 					<Link to="/">Hisab</Link>
-					<Tabs value={0}>
-						<Tab
-							component={Link}
-							to="/"
-							label="Home"
-						/>
+					<Tabs>
 						<Tab
 							component={Link}
 							to="/add-transaction"
