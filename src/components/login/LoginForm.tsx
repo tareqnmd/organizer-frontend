@@ -26,6 +26,7 @@ const LoginForm = () => {
 	return (
 		<Box
 			component="form"
+			className="login-form"
 			onSubmit={submitHandler}
 		>
 			<TextField
@@ -33,6 +34,7 @@ const LoginForm = () => {
 				label="User Name"
 				name="username"
 				autoComplete="off"
+				variant="standard"
 				onChange={inputHandler}
 			/>
 			<TextField
@@ -40,6 +42,7 @@ const LoginForm = () => {
 				name="password"
 				label="Password"
 				type="password"
+				variant="standard"
 				onChange={inputHandler}
 			/>
 			<Button

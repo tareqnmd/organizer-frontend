@@ -85,3 +85,19 @@ body {
 		padding: 6px;
 	}
 }
+
+.login-form {
+	background-color: white;
+	border-radius: 4px;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	max-width: 300px;
+	gap: 20px;
+	button {
+		background: linear-gradient(83deg, #0e1c36 0%, #173265 50%);
+		padding: 10px;
+		font-weight: bold;
+	}
+}
