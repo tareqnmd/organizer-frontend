@@ -40,10 +40,10 @@ const MasterGrid = ({ data, columns }: GridPropType) => {
 
 	return (
 		<Paper>
-			<TableContainer>
+			<TableContainer sx={{ maxHeight: `calc(100vh - 160px)` }}>
 				<Table
 					size="small"
-					// stickyHeader
+					stickyHeader
 				>
 					<TableHead className="table-head">
 						<TableRow>
