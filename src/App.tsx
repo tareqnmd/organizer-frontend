@@ -7,6 +7,7 @@ import useAuthCheck from './hooks/useAuthCheck';
 import AddTransaction from './pages/AddTransaction';
 import Home from './pages/Home';
 import Login from './pages/Login';
+import TransactionList from './pages/TransactionList';
 
 const Apps = () => {
 	const authChecked = useAuthCheck();
@@ -25,6 +26,14 @@ const Apps = () => {
 								element={
 									<AuthCheck>
 										<Home />
+									</AuthCheck>
+								}
+							/>
+							<Route
+								path="/transactions"
+								element={
+									<AuthCheck>
+										<TransactionList />
 									</AuthCheck>
 								}
 							/>

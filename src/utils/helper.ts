@@ -21,7 +21,7 @@ export const millionNumberFormat = (
 	currency = 'BDT',
 	format = 'en-US'
 ) => {
-	const number = Number(amount.toFixed(2));
+	const number = amount ? Number(amount.toFixed(2)) : 0;
 	const result = Intl.NumberFormat(format).format(number);
 	return `${result} ${currency}`;
 };

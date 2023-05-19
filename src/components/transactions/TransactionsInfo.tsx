@@ -1,7 +1,15 @@
-import { Card } from '@mui/material';
+import {
+	Card,
+	CardActionArea,
+	CardActions,
+	CardContent,
+	CardMedia,
+	CircularProgress,
+	Typography,
+} from '@mui/material';
+import { Link } from 'react-router-dom';
+import moneyImage from '../../assets/images/money-tree.jpg';
 import { useTransactionInfoQuery } from '../../features/transactions/transactionApi';
-import Error from '../ui/Error';
-import Loading from '../ui/Loading';
 import { millionNumberFormat } from '../../utils/helper';
 
 const TransactionsInfo = () => {
@@ -9,21 +17,38 @@ const TransactionsInfo = () => {
 
 	let content = null;
 	if (isLoading) {
-		content = <Loading />;
+		content = <CircularProgress />;
 	} else if (!isLoading && isError) {
-		content = <Error message={'Error found'} />;
+		content = <>Error Found</>;
 	} else if (!isLoading && isSuccess) {
-		content = (
-			<Card
-				className="amount-info"
-				variant="outlined"
-			>
-				<h3>Amount : {millionNumberFormat(data?.currentValue)}</h3>
-				<h3>Total Transaction : {data?.totalTransactions}</h3>
-			</Card>
-		);
+		content = <>Amount : {millionNumberFormat(data?.currentValue)}</>;
 	}
-	return content;
+	return (
+		<Card
+			sx={{ maxWidth: 300, boxShadow: '0px 10px 15px -3px rgba(0,0,0,0.1);' }}
+		>
+			<CardActionArea>
+				<CardMedia
+					component="img"
+					height="200"
+					image={moneyImage}
+					alt="Money Tree"
+				/>
+				<CardContent>
+					<Typography
+						variant="h5"
+						component="div"
+						className="text-center"
+					>
+						{content}
+					</Typography>
+				</CardContent>
+			</CardActionArea>
+			<CardActions className="card-link">
+				<Link to="/transactions">Transaction History</Link>
+			</CardActions>
+		</Card>
+	);
 };
 
 export default TransactionsInfo;

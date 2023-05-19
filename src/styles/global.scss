@@ -1,6 +1,6 @@
 html {
 	scroll-behavior: smooth;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Poppins', sans-serif;
 }
 
 body {
@@ -10,7 +10,7 @@ body {
 }
 
 .table-head {
-	background: #000000;
+	background: #222222;
 }
 
 .table-head th {
@@ -122,4 +122,18 @@ body {
 		font-weight: bold;
 		align-self: center;
 	}
+}
+
+.card-link {
+	background-color: rgb(90, 221, 171);
+	justify-content: center;
+	a {
+		color: #333333;
+		font-weight: 600;
+		text-decoration: none;
+	}
+}
+
+.text-center {
+	text-align: center;
 }
