@@ -10,7 +10,11 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { GridDataType, GridPropType } from '../../utils/common-types';
-import { getFieldValue } from '../../utils/helper';
+import {
+	getFieldValue,
+	getTotal,
+	millionNumberFormat,
+} from '../../utils/helper';
 
 const MasterGrid = ({ data, columns }: GridPropType) => {
 	const [page, setPage] = useState(0);
@@ -65,11 +69,25 @@ const MasterGrid = ({ data, columns }: GridPropType) => {
 								))}
 							</TableRow>
 						))}
+						<TableRow>
+							<TableCell
+								colSpan={columns?.length - 2}
+								className="fw-bold"
+							>
+								Total Amount
+							</TableCell>
+							<TableCell
+								colSpan={2}
+								className="fw-bold"
+							>
+								{millionNumberFormat(getTotal(filteredData))}
+							</TableCell>
+						</TableRow>
 					</TableBody>
 				</Table>
 			</TableContainer>
 			<TablePagination
-				rowsPerPageOptions={[10, 25, 100]}
+				rowsPerPageOptions={[10, 50, { value: -1, label: 'All' }]}
 				component="div"
 				count={data?.length}
 				rowsPerPage={rowsPerPage}

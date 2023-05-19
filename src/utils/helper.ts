@@ -25,3 +25,16 @@ export const millionNumberFormat = (
 	const result = Intl.NumberFormat(format).format(number);
 	return `${result} ${currency}`;
 };
+
+export const getTotal = (data: { type: string; amount: number }[]) => {
+	return data?.reduce(
+		(acc, item) =>
+			acc +
+			(item.type === 'Income'
+				? item.amount
+				: item.type === 'Expense'
+				? -item.amount
+				: 0),
+		0
+	);
+};
