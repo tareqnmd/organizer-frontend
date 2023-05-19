@@ -43,8 +43,10 @@ const MasterGrid = ({ data, columns }: GridPropType) => {
 	}, [data, rowsPerPage, page]);
 
 	return (
-		<Paper>
-			<TableContainer sx={{ maxHeight: `calc(100vh - 160px)` }}>
+		<Paper sx={{}}>
+			<TableContainer
+				sx={{ maxHeight: `calc(100vh - 160px)`, miWidth: '500px' }}
+			>
 				<Table
 					size="small"
 					stickyHeader
@@ -73,6 +75,7 @@ const MasterGrid = ({ data, columns }: GridPropType) => {
 							<TableCell
 								colSpan={columns?.length - 2}
 								className="fw-bold"
+								align="right"
 							>
 								Total Amount
 							</TableCell>
