@@ -15,6 +15,7 @@ import {
 	getTotal,
 	millionNumberFormat,
 } from '../../utils/helper';
+import MasterGridStyle from './Mastergrid.style';
 
 const MasterGrid = ({ data, columns }: GridPropType) => {
 	const [page, setPage] = useState(0);
@@ -43,62 +44,66 @@ const MasterGrid = ({ data, columns }: GridPropType) => {
 	}, [data, rowsPerPage, page]);
 
 	return (
-		<Paper sx={{}}>
-			<TableContainer
-				sx={{ maxHeight: `calc(100vh - 160px)`, miWidth: '500px' }}
-			>
-				<Table
-					size="small"
-					stickyHeader
-				>
-					<TableHead className="table-head">
-						<TableRow>
-							{columns?.map((column, index) => (
-								<TableCell key={index}>{column?.title}</TableCell>
-							))}
-						</TableRow>
-					</TableHead>
-					<TableBody>
-						{filteredData?.map((item, rowIndex) => (
-							<TableRow
-								className={`${item?.type.toLowerCase()}-row`}
-								key={rowIndex}
-							>
-								{columns?.map((column, columnIndex) => (
-									<TableCell key={columnIndex}>
-										{getFieldValue(item, column)}
-									</TableCell>
+		<MasterGridStyle>
+			<Paper sx={{}}>
+				<TableContainer sx={{ maxHeight: `calc(100vh - 170px)` }}>
+					<Table
+						size="small"
+						stickyHeader
+					>
+						<TableHead className="table-head">
+							<TableRow>
+								{columns?.map((column, index) => (
+									<TableCell key={index}>{column?.title}</TableCell>
 								))}
 							</TableRow>
-						))}
-						<TableRow>
-							<TableCell
-								colSpan={columns?.length - 2}
-								className="fw-bold"
-								align="right"
-							>
-								Total Amount
-							</TableCell>
-							<TableCell
-								colSpan={2}
-								className="fw-bold"
-							>
-								{millionNumberFormat(getTotal(filteredData))}
-							</TableCell>
-						</TableRow>
-					</TableBody>
-				</Table>
-			</TableContainer>
-			<TablePagination
-				rowsPerPageOptions={[10, 50, { value: -1, label: 'All' }]}
-				component="div"
-				count={data?.length}
-				rowsPerPage={rowsPerPage}
-				page={page}
-				onPageChange={handleChangePage}
-				onRowsPerPageChange={handleChangeRowsPerPage}
-			/>
-		</Paper>
+						</TableHead>
+						<TableBody>
+							{filteredData?.map((item, rowIndex) => (
+								<TableRow
+									className={`${item?.type.toLowerCase()}-row`}
+									key={rowIndex}
+								>
+									{columns?.map((column, columnIndex) => (
+										<TableCell
+											sx={{ whiteSpace: 'nowrap' }}
+											key={columnIndex}
+										>
+											{getFieldValue(item, column)}
+										</TableCell>
+									))}
+								</TableRow>
+							))}
+							<TableRow>
+								<TableCell
+									colSpan={columns?.length - 2}
+									className="fw-bold"
+									align="right"
+								>
+									Total Amount
+								</TableCell>
+								<TableCell
+									colSpan={2}
+									className="fw-bold"
+								>
+									{millionNumberFormat(getTotal(filteredData))}
+								</TableCell>
+							</TableRow>
+						</TableBody>
+					</Table>
+				</TableContainer>
+				<TablePagination
+					labelRowsPerPage=""
+					rowsPerPageOptions={[10, 50, { value: -1, label: 'All' }]}
+					component="div"
+					count={data?.length}
+					rowsPerPage={rowsPerPage}
+					page={page}
+					onPageChange={handleChangePage}
+					onRowsPerPageChange={handleChangeRowsPerPage}
+				/>
+			</Paper>
+		</MasterGridStyle>
 	);
 };
 

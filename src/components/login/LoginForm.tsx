@@ -1,3 +1,4 @@
+import LoginIcon from '@mui/icons-material/Login';
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -49,7 +50,7 @@ const LoginForm = () => {
 				type="submit"
 				variant="contained"
 			>
-				Login
+				<LoginIcon /> Login
 			</Button>
 		</Box>
 	);

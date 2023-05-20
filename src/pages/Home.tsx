@@ -1,11 +1,7 @@
-import TransactionsInfo from '../components/transactions/TransactionsInfo';
+import HomeCards from '../components/home/HomeCards';
 
 const Home = () => {
-	return (
-		<>
-			<TransactionsInfo />
-		</>
-	);
+	return <HomeCards />;
 };
 
 export default Home;

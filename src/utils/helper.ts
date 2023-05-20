@@ -38,3 +38,14 @@ export const getTotal = (data: { type: string; amount: number }[]) => {
 		0
 	);
 };
+
+export const homeCardName = (name: string) => {
+	return name === 'currentAmount'
+		? 'Current Amount'
+		: name === 'totalIncome'
+		? 'Total Income'
+		: name === 'totalExpense'
+		? 'Total Expense'
+		: name;
+};
+

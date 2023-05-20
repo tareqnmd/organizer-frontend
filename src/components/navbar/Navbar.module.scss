@@ -1,0 +1,40 @@
+.app-nav {
+	background-color: #5addab !important;
+	button {
+		margin-left: 10px;
+		background: red;
+		height: max-content;
+		border-radius: 25px;
+		font-weight: bold;
+		align-self: center;
+	}
+	padding: 6px 0;
+}
+
+.logo-img {
+	width: 42px;
+}
+
+.nav-items {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-weight: 400;
+}
+
+.nav-links {
+	a {
+		font-weight: 600 !important;
+		color: #444 !important;
+		&:hover {
+			color: #1976d2 !important;
+		}
+		&.active {
+			color: #1976d2 !important;
+		}
+	}
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-size: 16px;
+}

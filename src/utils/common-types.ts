@@ -23,3 +23,9 @@ export type TypePropType = {
 	_id: string;
 	name: string;
 };
+
+export type HomeCardProps = {
+	amount: number;
+	name: string;
+	transaction: number;
+};
