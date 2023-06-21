@@ -1,0 +1,22 @@
+.transaction-filter {
+	@apply flex justify-between overflow-hidden bg-white;
+}
+
+.transaction-filter-btns {
+	@apply border rounded-md;
+}
+
+.transaction-filter-btn {
+	@apply px-4 py-2 text-sm font-medium text-gray-600 transition-colors duration-200;
+	&.active {
+		@apply text-gray-800 bg-green-200;
+	}
+}
+
+.transaction-cards {
+	@apply flex gap-4;
+}
+
+.transaction-card {
+	@apply grid place-items-center w-full h-full p-2 bg-white rounded-md shadow-md;
+}

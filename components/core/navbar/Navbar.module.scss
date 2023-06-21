@@ -1,0 +1,27 @@
+.nav-links {
+	@apply container mx-auto flex items-center justify-end py-3 px-2 gap-6 md:gap-4;
+
+	a {
+		@apply text-gray-800 transition-colors duration-300;
+
+		&:first-child {
+			margin-right: auto;
+			font-weight: 700;
+		}
+	}
+
+	.active {
+		border-bottom: 1px solid;
+	}
+}
+
+.logout-btn {
+	background-color: red;
+	display: flex;
+	align-items: center;
+	padding: 4px 12px;
+	border-radius: 25px;
+	color: white;
+	gap: 2px;
+	font-weight: 500;
+}

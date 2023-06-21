@@ -1,0 +1,12 @@
+.input-area {
+	label {
+		@apply text-gray-700 dark:text-gray-200;
+	}
+	input,
+	select {
+		@apply block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md;
+	}
+	textarea {
+		@apply block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md;
+	}
+}

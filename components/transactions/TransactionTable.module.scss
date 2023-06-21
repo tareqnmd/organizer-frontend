@@ -1,0 +1,16 @@
+.transaction-table {
+	@apply min-w-full divide-y border divide-gray-200;
+	thead {
+		@apply bg-gray-200 dark:bg-gray-800;
+	}
+	th,
+	td {
+		@apply p-2 text-sm font-normal text-left;
+	}
+	tbody {
+		@apply bg-white divide-y divide-gray-200;
+	}
+	td {
+		@apply whitespace-nowrap;
+	}
+}

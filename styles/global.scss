@@ -1,0 +1,17 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+html {
+	scroll-behavior: smooth;
+}
+
+#mainRoot {
+	display: grid;
+	height: 100vh;
+	grid-template-rows: auto 1fr auto;
+}
+
+#mainRoot main {
+	@apply container mx-auto my-4 px-2;
+}

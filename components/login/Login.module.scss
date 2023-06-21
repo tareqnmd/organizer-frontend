@@ -1,0 +1,7 @@
+.login-wrapper {
+	@apply grid w-screen h-screen place-items-center;
+}
+
+.login-area {
+	@apply w-full max-w-[500px] p-6 mx-auto bg-white rounded-md shadow-md;
+}
