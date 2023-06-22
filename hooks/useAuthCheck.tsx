@@ -1,15 +1,21 @@
 'use client';
 import { setUser } from '@/features/user/user-slice';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 const useAuthCheck = () => {
 	const dispatch = useDispatch();
 	const pathname = usePathname();
 	const [loading, setLoading] = useState(true);
-	const localAuth = localStorage.getItem('user');
-	const user = localAuth ? JSON.parse(localAuth) : null;
+
+	const localStorageUser =
+		typeof window !== 'undefined' ? localStorage?.getItem('user') : null;
+	const user = useMemo(
+		() => localStorageUser && JSON.parse(localStorageUser),
+		[localStorageUser]
+	);
+	
 	const userCheck = !!user?.username && !!user.fullName;
 
 	useEffect(() => {
