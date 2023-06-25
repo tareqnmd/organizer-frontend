@@ -1,10 +1,7 @@
+import { getUserItem } from '@/utils/helpers';
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-	name: null,
-	email: null,
-	userId: null,
-};
+const initialState = getUserItem();
 
 const userSlice = createSlice({
 	name: 'user',

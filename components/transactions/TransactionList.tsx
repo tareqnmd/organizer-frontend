@@ -3,7 +3,7 @@ import TransactionsDetails from './TransactionsDetails';
 
 async function getTransactionData() {
 	try {
-		const response = await fetchData('transactions');
+		const response = await fetchData('transaction');
 		return response.data;
 	} catch (error) {
 		return [];

@@ -14,7 +14,7 @@ const TransactionTable = () => {
 		useSelector(getTransactionsState);
 	return (
 		<>
-			{transactions?.length && transactionTableColumns?.length && (
+			{transactions?.length && transactionTableColumns?.length ? (
 				<table className={`${styles['transaction-table']}`}>
 					<thead>
 						<tr>
@@ -39,7 +39,7 @@ const TransactionTable = () => {
 						))}
 					</tbody>
 				</table>
-			)}
+			) : null}
 		</>
 	);
 };
