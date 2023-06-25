@@ -15,15 +15,15 @@ const useAuthCheck = () => {
 		() => localStorageUser && JSON.parse(localStorageUser),
 		[localStorageUser]
 	);
-	
-	const userCheck = !!user?.username && !!user.fullName;
+
+	const userCheck = !!user?.name && !!user.email;
 
 	useEffect(() => {
 		if (userCheck) {
 			dispatch(
 				setUser({
-					fullName: user.fullName,
-					username: user.username,
+					name: user.name,
+					email: user.email,
 					userId: user.userId,
 				})
 			);

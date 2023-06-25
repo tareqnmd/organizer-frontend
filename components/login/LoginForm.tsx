@@ -16,7 +16,7 @@ const LoginForm = () => {
 	const getEvent: getEventProps = (name, value) => {
 		setInputsValue((prev) => ({
 			...prev,
-			[name]: name === 'amount' ? Number(value ?? 0) : value,
+			[name]: value,
 		}));
 	};
 

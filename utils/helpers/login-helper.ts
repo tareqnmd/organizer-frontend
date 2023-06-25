@@ -1,8 +1,8 @@
 export const loginFormInputs = [
 	{
-		name: 'username',
-		label: 'User Name',
-		type: 'text',
+		name: 'email',
+		label: 'Email',
+		type: 'email',
 		required: true,
 	},
 	{
