@@ -2,7 +2,7 @@
 import Button from '@/components/shared/button/Button';
 import Input from '@/components/shared/input/Input';
 import Error from '@/components/shared/ui/Error';
-import { useLoginMutation } from '@/features/login/login-api';
+import { useLoginMutation } from '@/features/user/user-api';
 import { loginFormInputs } from '@/utils/helpers/login-helper';
 import { getEventProps } from '@/utils/types/input-types';
 import { useRouter } from 'next/navigation';

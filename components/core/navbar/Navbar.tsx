@@ -1,8 +1,8 @@
-import { logOut } from '@/features/user/user-slice';
+import { useLogoutMutation } from '@/features/user/user-api';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { BiLogOut } from 'react-icons/bi';
-import { useDispatch } from 'react-redux';
 import styles from './Navbar.module.scss';
 
 const activePath = (path: string, url: string) => path === url;
@@ -10,13 +10,17 @@ const activePath = (path: string, url: string) => path === url;
 const Navbar = () => {
 	const pathname = usePathname();
 	const router = useRouter();
-	const dispatch = useDispatch();
+	const [logout, { isSuccess }] = useLogoutMutation();
 
 	const logoutHandler = () => {
-		router.push('/login');
-		localStorage.removeItem('user');
-		dispatch(logOut());
+		logout({});
 	};
+
+	useEffect(() => {
+		if (isSuccess) {
+			router.push('/login');
+		}
+	}, [isSuccess, router]);
 
 	return (
 		<nav className="bg-white shadow">
