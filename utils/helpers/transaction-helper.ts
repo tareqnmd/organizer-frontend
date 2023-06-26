@@ -117,7 +117,7 @@ export const transactionTableColumns = [
 	{ title: 'Date', dataIndex: 'date', type: 'date' },
 	{ title: 'Type', dataIndex: 'type', type: 'text' },
 	{ title: 'Amount', dataIndex: 'amount', type: 'number' },
-	{ title: 'Details', dataIndex: 'details', type: 'text' },
+	{ title: 'Description', dataIndex: 'description', type: 'text' },
 ];
 
 export const transactionFormInputs = [
@@ -141,11 +141,11 @@ export const transactionFormInputs = [
 		placeholder: 'Amount',
 	},
 	{
-		name: 'details',
-		label: 'Transaction Details',
+		name: 'description',
+		label: 'Transaction Description',
 		type: 'textarea',
 		rows: 4,
-		placeholder: 'Details',
+		placeholder: 'Description',
 		required: true,
 	},
 ];
