@@ -9,21 +9,7 @@ export const transactionApi = apiSlice.injectEndpoints({
 				body: payload,
 			}),
 		}),
-		transactionInfo: builder.query({
-			query: () => ({
-				url: '/transactions-info',
-			}),
-		}),
-		getTransactionTypes: builder.query({
-			query: () => ({
-				url: '/transaction-types',
-			}),
-		}),
 	}),
 });
 
-export const {
-	useAddTransactionMutation,
-	useTransactionInfoQuery,
-	useGetTransactionTypesQuery,
-} = transactionApi;
+export const { useAddTransactionMutation } = transactionApi;

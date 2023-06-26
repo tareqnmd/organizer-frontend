@@ -1,9 +1,9 @@
 'use client';
-import { useGetTransactionTypesQuery } from '@/features/transactions/transactions-api';
 import { InputProps } from '@/utils/types/input-types';
 import { TransactionTypeOptionType } from '@/utils/types/transaction-types';
 import { ChangeEvent, FC } from 'react';
 import styles from './Input.module.scss';
+import { useGetTypesQuery } from '@/features/type/type-api';
 
 const Input: FC<InputProps> = ({
 	label,
@@ -15,7 +15,7 @@ const Input: FC<InputProps> = ({
 	value,
 	getEvent,
 }) => {
-	const { data: types } = useGetTransactionTypesQuery(
+	const { data: types } = useGetTypesQuery(
 		{},
 		{
 			skip: type !== 'select',
@@ -32,7 +32,7 @@ const Input: FC<InputProps> = ({
 	};
 
 	const getColumnWidth = (name: string) => {
-		if (['details', 'typeId'].includes(name)) {
+		if (['description', 'typeId'].includes(name)) {
 			return 'col-span-2';
 		}
 		return '';

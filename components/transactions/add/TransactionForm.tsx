@@ -2,14 +2,17 @@
 import Button from '@/components/shared/button/Button';
 import Input from '@/components/shared/input/Input';
 import { useAddTransactionMutation } from '@/features/transactions/transactions-api';
+import { getUserState } from '@/features/user/user-slice';
 import { transactionFormInputs } from '@/utils/helpers/transaction-helper';
 import { getEventProps } from '@/utils/types/input-types';
 import { FormEvent, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const TransactionForm = () => {
 	const [inputs] = useState(transactionFormInputs);
 	const [inputsValue, setInputsValue] = useState({});
 	const [addTransaction, {}] = useAddTransactionMutation();
+	const { userId } = useSelector(getUserState);
 	const getEvent: getEventProps = (name, value) => {
 		setInputsValue((prev) => ({
 			...prev,
@@ -19,7 +22,7 @@ const TransactionForm = () => {
 
 	const transactionMutation = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		addTransaction(inputsValue);
+		addTransaction({ ...inputsValue, userId });
 	};
 
 	return (
