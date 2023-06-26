@@ -3,7 +3,7 @@ import { IThemeStore } from '@/utils/types/theme-types';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: IThemeStore = {
-	loading: false,
+	loading: true,
 };
 
 const themeSlice = createSlice({

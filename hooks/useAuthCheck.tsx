@@ -1,26 +1,27 @@
 'use client';
+import { setThemeLoading } from '@/features/theme/theme-slice';
 import { getUserState } from '@/features/user/user-slice';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const useAuthCheck = () => {
 	const pathname = usePathname();
-	const user = useSelector(getUserState);
+	const dispatch = useDispatch();
 	const [authChecked, setAuthCheck] = useState(false);
-	const [loading, setLoading] = useState(true);
+	const user = useSelector(getUserState);
 
 	useEffect(() => {
 		setAuthCheck(!!user?.name && !!user.email);
 		const loadingTimeout = setTimeout(() => {
-			setLoading(false);
+			dispatch(setThemeLoading(false));
 		}, 1500);
 		return () => {
 			clearTimeout(loadingTimeout);
 		};
-	}, [user]);
+	}, [user, dispatch]);
 
-	return { loading, authChecked, pathname };
+	return { authChecked, pathname };
 };
 
 export default useAuthCheck;
