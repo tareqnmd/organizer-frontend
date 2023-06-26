@@ -13,9 +13,9 @@ const Navbar = () => {
 	const dispatch = useDispatch();
 
 	const logoutHandler = () => {
-		dispatch(logOut());
-		localStorage.removeItem('user');
 		router.push('/login');
+		localStorage.removeItem('user');
+		dispatch(logOut());
 	};
 
 	return (
@@ -24,7 +24,9 @@ const Navbar = () => {
 				<Link href="/">Hisab</Link>
 				<Link
 					className={
-						activePath(pathname, '/transactions') ? styles['active'] : ''
+						activePath(pathname, '/transactions')
+							? styles['active']
+							: ''
 					}
 					href="/transactions"
 				>
@@ -32,7 +34,9 @@ const Navbar = () => {
 				</Link>
 				<Link
 					className={
-						activePath(pathname, '/transactions/add') ? styles['active'] : ''
+						activePath(pathname, '/transactions/add')
+							? styles['active']
+							: ''
 					}
 					href="/transactions/add"
 				>

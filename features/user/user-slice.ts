@@ -1,3 +1,4 @@
+import { AppState } from '@/app/store';
 import { getUserItem } from '@/utils/helpers';
 import { createSlice } from '@reduxjs/toolkit';
 
@@ -21,4 +22,6 @@ const userSlice = createSlice({
 });
 
 export const { setUser, logOut } = userSlice.actions;
+export const getUserState = (state: AppState): typeof initialState =>
+	state.user;
 export default userSlice;
