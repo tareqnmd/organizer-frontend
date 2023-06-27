@@ -38,17 +38,20 @@ const LoginForm = () => {
 
 	return (
 		<form onSubmit={loginMutation}>
-			{loginFormInputs?.map((input) => (
-				<Input
-					key={input.name}
-					getEvent={getEvent}
-					{...input}
-				/>
-			))}
+			<div className="flex flex-col gap-2">
+				{loginFormInputs?.map((input) => (
+					<Input
+						key={input.name}
+						getEvent={getEvent}
+						{...input}
+					/>
+				))}
+			</div>
 			<div className="flex justify-end mt-6">
 				<Button
 					type="submit"
 					name="Login"
+					extraClassNames="w-full"
 				/>
 			</div>
 		</form>

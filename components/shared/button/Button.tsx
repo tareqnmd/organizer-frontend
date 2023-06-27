@@ -1,11 +1,15 @@
 import { ButtonProps } from '@/utils/types/button-types';
 import { FC } from 'react';
 import styles from './Button.module.scss';
-const Button: FC<ButtonProps> = ({ type = 'button', name }) => {
+const Button: FC<ButtonProps> = ({
+	type = 'button',
+	name,
+	extraClassNames = '',
+}) => {
 	return (
 		<button
 			type={type}
-			className={styles['button']}
+			className={`${styles['button']} ${extraClassNames}`}
 		>
 			{name}
 		</button>
