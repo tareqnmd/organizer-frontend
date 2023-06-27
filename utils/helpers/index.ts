@@ -1,5 +1,6 @@
 export const getUserItem = () => {
-	const localUser = localStorage.getItem('user');
+	const localUser =
+		typeof window !== 'undefined' ? localStorage.getItem('user') : null;
 	if (localUser) {
 		const userData = JSON.parse(localUser);
 		return {

@@ -3,10 +3,6 @@ export interface ITransactionsStore {
 	filterTime: string;
 	filterType: string;
 }
-
-export interface ITransactions {}
-[];
-
 export interface ITransaction {
 	_id: string;
 	date: Date;
@@ -16,6 +12,7 @@ export interface ITransaction {
 	details: string;
 }
 
+export type ITransactions = ITransaction[];
 export interface ITransactionTitle {
 	dataIndex: string;
 	type: string;
