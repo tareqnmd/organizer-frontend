@@ -9,7 +9,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 const LoginForm = () => {
 	const [inputsValue, setInputsValue] = useState({});
-	const [login, { isSuccess, isError, error }] = useLoginMutation();
+	const [login, { isSuccess, isLoading, isError, error }] = useLoginMutation();
 
 	const getEvent: getEventProps = (name, value) => {
 		setInputsValue((prev) => ({
@@ -52,6 +52,7 @@ const LoginForm = () => {
 					type="submit"
 					name="Login"
 					extraClassNames="w-full"
+					loading={isLoading}
 				/>
 			</div>
 		</form>

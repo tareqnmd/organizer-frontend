@@ -11,7 +11,8 @@ import { toast } from 'react-toastify';
 const RegisterForm = () => {
 	const [inputsValue, setInputsValue] = useState({});
 	const router = useRouter();
-	const [register, { isSuccess, isError, error }] = useRegisterMutation();
+	const [register, { isSuccess, isLoading, isError, error }] =
+		useRegisterMutation();
 
 	const getEvent: getEventProps = (name, value) => {
 		setInputsValue((prev) => ({
@@ -70,6 +71,7 @@ const RegisterForm = () => {
 					type="submit"
 					name="Register"
 					extraClassNames="w-full"
+					loading={isLoading}
 				/>
 			</div>
 		</form>
