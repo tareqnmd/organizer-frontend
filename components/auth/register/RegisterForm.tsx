@@ -23,10 +23,17 @@ const RegisterForm = () => {
 	const loginMutation = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const { password, confirmPassword }: any = inputsValue;
-		if (password === confirmPassword) {
-			register(inputsValue);
+		if (password.length >= 6) {
+			if (password === confirmPassword) {
+				register(inputsValue);
+			} else {
+				toast.error('Password miss match', {
+					position: 'top-center',
+					autoClose: 1000,
+				});
+			}
 		} else {
-			toast.error('Password miss match', {
+			toast.error('Password is too short', {
 				position: 'top-center',
 				autoClose: 1000,
 			});

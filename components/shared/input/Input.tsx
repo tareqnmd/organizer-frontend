@@ -1,9 +1,9 @@
 'use client';
+import { useGetTypesQuery } from '@/features/type/type-api';
 import { InputProps } from '@/utils/types/input-types';
 import { TransactionTypeOptionType } from '@/utils/types/transaction-types';
 import { ChangeEvent, FC } from 'react';
 import styles from './Input.module.scss';
-import { useGetTypesQuery } from '@/features/type/type-api';
 
 const Input: FC<InputProps> = ({
 	label,
@@ -14,6 +14,7 @@ const Input: FC<InputProps> = ({
 	placeholder,
 	value,
 	getEvent,
+	...rest
 }) => {
 	const { data: types } = useGetTypesQuery(
 		{},
@@ -85,6 +86,7 @@ const Input: FC<InputProps> = ({
 						required={required}
 						onChange={inputChangeHandler}
 						placeholder={placeholder}
+						{...rest}
 					/>
 				);
 		}

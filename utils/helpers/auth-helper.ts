@@ -31,6 +31,7 @@ export const registerFormInputs = [
 		label: 'Password',
 		type: 'password',
 		required: true,
+		minlength: 6,
 	},
 	{
 		name: 'confirmPassword',
