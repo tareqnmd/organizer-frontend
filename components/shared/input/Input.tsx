@@ -42,6 +42,7 @@ const Input: FC<InputProps> = ({
 						name={name}
 						required={required}
 						onChange={inputChangeHandler}
+						value={value ?? null}
 					>
 						<option
 							disabled
@@ -68,6 +69,7 @@ const Input: FC<InputProps> = ({
 						required={required}
 						rows={rows}
 						onChange={inputChangeHandler}
+						value={value ?? null}
 						placeholder={placeholder}
 					/>
 				);
@@ -80,6 +82,7 @@ const Input: FC<InputProps> = ({
 						required={required}
 						onChange={inputChangeHandler}
 						placeholder={placeholder}
+						value={value ?? null}
 						{...rest}
 					/>
 				);

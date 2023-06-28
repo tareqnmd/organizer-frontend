@@ -1,15 +1,25 @@
 import { useUserUpdateMutation } from '@/features/user/user-api';
+import { getUserState } from '@/features/user/user-slice';
 import { getError } from '@/utils/helpers';
 import { userUpdateFormInputs } from '@/utils/helpers/auth-helper';
+import { User } from '@/utils/types/auth-types';
 import { getEventProps } from '@/utils/types/input-types';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import Button from '../shared/button/Button';
 import Input from '../shared/input/Input';
 
 const UserEditData = () => {
 	const [inputsValue, setInputsValue] = useState({});
+	const user = useSelector(getUserState);
+
+	const modifiedInputElms = userUpdateFormInputs?.map((input) => ({
+		...input,
+		value: user[input.name as keyof User] ?? null,
+	}));
+
 	const router = useRouter();
 	const [update, { isSuccess, isLoading, isError, error }] =
 		useUserUpdateMutation();
@@ -59,7 +69,7 @@ const UserEditData = () => {
 			className="my-3 rounded p-3 bg-white"
 		>
 			<div className="grid grid-cols-2 gap-2">
-				{userUpdateFormInputs?.map((input) => (
+				{modifiedInputElms?.map((input) => (
 					<Input
 						key={input.name}
 						getEvent={getEvent}

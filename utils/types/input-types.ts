@@ -4,7 +4,7 @@ export interface InputProps {
 	type: string;
 	required: boolean;
 	rows?: number;
-	value?: string;
+	value?: any;
 	extraClass?: string;
 	placeholder?: string;
 	getEvent: getEventProps;
