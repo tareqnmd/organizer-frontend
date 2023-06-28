@@ -8,13 +8,13 @@ import Navbar from '../navbar/Navbar';
 
 const RootPageLayout = ({ children }: { children: React.ReactNode }) => {
 	const router = useRouter();
-	const { authChecked, pathname } = useAuthCheck();
+	const { authChecked, publicPath } = useAuthCheck();
 	const { loading } = useSelector(getThemeState);
 
-	if (!loading && !authChecked && pathname !== '/login') {
+	if (!loading && !authChecked && !publicPath) {
 		router.push('/login');
 	}
-	if (!loading && authChecked && pathname === '/login') {
+	if (!loading && authChecked && publicPath) {
 		router.push('/');
 	}
 	return (

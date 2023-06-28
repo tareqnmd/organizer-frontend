@@ -3,7 +3,7 @@ import Button from '@/components/shared/button/Button';
 import Input from '@/components/shared/input/Input';
 import { useLoginMutation } from '@/features/user/user-api';
 import { getError } from '@/utils/helpers';
-import { loginFormInputs } from '@/utils/helpers/login-helper';
+import { loginFormInputs } from '@/utils/helpers/auth-helper';
 import { getEventProps } from '@/utils/types/input-types';
 import { FormEvent, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
