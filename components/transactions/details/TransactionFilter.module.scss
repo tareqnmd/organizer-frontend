@@ -1,9 +1,9 @@
 .transaction-filter {
-	@apply flex justify-between overflow-hidden bg-white;
+	@apply flex justify-between overflow-hidden;
 }
 
 .transaction-filter-btns {
-	@apply border rounded-md;
+	@apply border rounded-md bg-white overflow-hidden;
 }
 
 .transaction-filter-btn {

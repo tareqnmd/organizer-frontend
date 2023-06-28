@@ -10,6 +10,7 @@ html {
 	display: grid;
 	height: 100vh;
 	grid-template-rows: auto 1fr auto;
+	@apply bg-global;
 }
 
 #mainRoot main {
@@ -17,5 +18,5 @@ html {
 }
 
 .bg-global {
-	background: #0B2447;
+	background: #0b2447;
 }
