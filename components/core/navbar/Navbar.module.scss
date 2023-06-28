@@ -2,7 +2,7 @@
 	@apply container mx-auto flex items-center justify-end py-3 px-2 gap-6 md:gap-4;
 
 	a {
-		@apply text-gray-800 transition-colors duration-300;
+		@apply text-white transition-colors duration-300;
 
 		&:first-child {
 			margin-right: auto;
