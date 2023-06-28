@@ -13,6 +13,7 @@ const Input: FC<InputProps> = ({
 	rows,
 	placeholder,
 	value,
+	extraClass = '',
 	getEvent,
 	...rest
 }) => {
@@ -30,13 +31,6 @@ const Input: FC<InputProps> = ({
 	) => {
 		const { name, value } = event.target;
 		getEvent(name, value);
-	};
-
-	const getColumnWidth = (name: string) => {
-		if (['description', 'typeId'].includes(name)) {
-			return 'col-span-2';
-		}
-		return '';
 	};
 
 	const getTypes = (type: string) => {
@@ -94,7 +88,7 @@ const Input: FC<InputProps> = ({
 	};
 
 	return (
-		<div className={`${styles['input-area']} ${getColumnWidth(name)}`}>
+		<div className={`${styles['input-area']} ${extraClass}`}>
 			<label htmlFor={name}>
 				{label}
 				{required && '*'}

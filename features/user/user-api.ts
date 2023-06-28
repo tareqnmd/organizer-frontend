@@ -29,6 +29,25 @@ export const loginApi = apiSlice.injectEndpoints({
 				} catch (error) {}
 			},
 		}),
+		userUpdate: builder.mutation({
+			query: (data) => ({
+				url: 'user/profile',
+				method: 'POST',
+				body: data,
+			}),
+			async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+				try {
+					const result = await queryFulfilled;
+					const data = {
+						name: result.data.name,
+						email: result.data.email,
+						userId: result.data._id,
+					};
+					localStorage.setItem('user', JSON.stringify(data));
+					dispatch(setUser(data));
+				} catch (error) {}
+			},
+		}),
 		logout: builder.mutation({
 			query: (data) => ({
 				url: 'user/logout',
@@ -46,5 +65,9 @@ export const loginApi = apiSlice.injectEndpoints({
 	}),
 });
 
-export const { useLoginMutation, useLogoutMutation, useRegisterMutation } =
-	loginApi;
+export const {
+	useLoginMutation,
+	useUserUpdateMutation,
+	useLogoutMutation,
+	useRegisterMutation,
+} = loginApi;

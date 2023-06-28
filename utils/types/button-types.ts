@@ -1,6 +1,6 @@
 export interface ButtonProps {
 	type: 'reset' | 'submit' | 'button';
 	name: string;
-	extraClassNames: string;
+	extraClassNames?: string;
 	loading: boolean;
 }

@@ -1,5 +1,7 @@
+import UserInfo from '@/components/user/UserInfo';
+
 const page = () => {
-	return <></>;
+	return <UserInfo />;
 };
 
 export default page;

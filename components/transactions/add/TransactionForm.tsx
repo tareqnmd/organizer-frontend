@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 const TransactionForm = () => {
 	const [inputs] = useState(transactionFormInputs);
 	const [inputsValue, setInputsValue] = useState({});
-	const [addTransaction, {}] = useAddTransactionMutation();
+	const [addTransaction, { isLoading }] = useAddTransactionMutation();
 	const { userId } = useSelector(getUserState);
 	const getEvent: getEventProps = (name, value) => {
 		setInputsValue((prev) => ({
@@ -25,6 +25,13 @@ const TransactionForm = () => {
 		addTransaction({ ...inputsValue, userId });
 	};
 
+	const getColumnWidth = (name: string) => {
+		if (['description', 'typeId'].includes(name)) {
+			return 'col-span-2';
+		}
+		return '';
+	};
+
 	return (
 		<form onSubmit={transactionMutation}>
 			<div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
@@ -32,6 +39,7 @@ const TransactionForm = () => {
 					<Input
 						key={input.name}
 						getEvent={getEvent}
+						extraClass={getColumnWidth(input.name)}
 						{...input}
 					/>
 				))}
@@ -40,6 +48,7 @@ const TransactionForm = () => {
 				<Button
 					type="submit"
 					name="Add Transaction"
+					loading={isLoading}
 				/>
 			</div>
 		</form>
