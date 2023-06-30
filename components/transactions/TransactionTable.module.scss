@@ -1,5 +1,5 @@
 .transaction-table {
-	@apply min-w-full divide-y border divide-gray-200;
+	@apply min-w-full divide-y border divide-gray-200 rounded-md overflow-hidden;
 	thead {
 		@apply bg-gray-200 dark:bg-gray-800;
 	}
@@ -12,5 +12,14 @@
 	}
 	td {
 		@apply whitespace-nowrap;
+	}
+}
+
+.action-btns {
+	@apply flex gap-1;
+	button {
+		&:disabled {
+			@apply text-gray-400 cursor-not-allowed;
+		}
 	}
 }

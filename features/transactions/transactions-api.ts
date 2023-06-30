@@ -9,7 +9,14 @@ export const transactionApi = apiSlice.injectEndpoints({
 				body: payload,
 			}),
 		}),
+		deleteTransaction: builder.mutation({
+			query: (id) => ({
+				url: `/transaction/${id}`,
+				method: 'DELETE',
+			}),
+		}),
 	}),
 });
 
-export const { useAddTransactionMutation } = transactionApi;
+export const { useAddTransactionMutation, useDeleteTransactionMutation } =
+	transactionApi;

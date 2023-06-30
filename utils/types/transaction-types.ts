@@ -8,6 +8,7 @@ export interface ITransaction {
 	date: Date;
 	name: string;
 	type: string;
+	typeName: string;
 	amount: number;
 	details: string;
 }
