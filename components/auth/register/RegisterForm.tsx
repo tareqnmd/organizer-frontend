@@ -23,10 +23,10 @@ const RegisterForm = () => {
 
 	const loginMutation = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		const { password, confirmPassword }: any = inputsValue;
+		const { password, confirmPassword, ...rest }: any = inputsValue;
 		if (password.length >= 6) {
 			if (password === confirmPassword) {
-				register(inputsValue);
+				register({ ...rest, password });
 			} else {
 				toast.error('Password miss match', {
 					position: 'top-center',

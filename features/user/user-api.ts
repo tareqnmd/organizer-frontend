@@ -30,9 +30,9 @@ export const loginApi = apiSlice.injectEndpoints({
 			},
 		}),
 		userUpdate: builder.mutation({
-			query: (data) => ({
-				url: 'user/profile',
-				method: 'POST',
+			query: ({ id, data }) => ({
+				url: `user/${id}`,
+				method: 'PUT',
 				body: data,
 			}),
 			async onQueryStarted(arg, { queryFulfilled, dispatch }) {
