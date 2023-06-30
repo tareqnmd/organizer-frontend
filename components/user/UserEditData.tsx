@@ -14,17 +14,26 @@ import Input from '../shared/input/Input';
 const UserEditData = () => {
 	const [inputsValue, setInputsValue] = useState({});
 	const user = useSelector(getUserState);
-
-	const modifiedInputElms = userUpdateFormInputs?.map((input) => ({
-		...input,
-		value: user[input.name as keyof User] ?? null,
-	}));
+	const [modifiedInputElms, setModifiedInputElms] = useState(
+		userUpdateFormInputs?.map((input) => ({
+			...input,
+			value: user[input.name as keyof User] ?? null,
+		}))
+	);
 
 	const router = useRouter();
 	const [update, { isSuccess, isLoading, isError, error }] =
 		useUserUpdateMutation();
 
 	const getEvent: getEventProps = (name, value) => {
+		setModifiedInputElms((prev) =>
+			prev.map((item) => {
+				if (name === item.name) {
+					return { ...item, value };
+				}
+				return item;
+			})
+		);
 		setInputsValue((prev) => ({
 			...prev,
 			[name]: value,
