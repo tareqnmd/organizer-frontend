@@ -24,7 +24,6 @@ export const loginApi = apiSlice.injectEndpoints({
 						email: result.data.email,
 						userId: result.data._id,
 					};
-					localStorage.setItem('user', JSON.stringify(data));
 					dispatch(setUser(data));
 				} catch (error) {}
 			},
@@ -43,7 +42,6 @@ export const loginApi = apiSlice.injectEndpoints({
 						email: result.data.email,
 						userId: result.data._id,
 					};
-					localStorage.setItem('user', JSON.stringify(data));
 					dispatch(setUser(data));
 				} catch (error) {}
 			},
@@ -57,7 +55,6 @@ export const loginApi = apiSlice.injectEndpoints({
 			async onQueryStarted(arg, { queryFulfilled, dispatch }) {
 				try {
 					await queryFulfilled;
-					localStorage.removeItem('user');
 					dispatch(removeUser());
 				} catch (error) {}
 			},

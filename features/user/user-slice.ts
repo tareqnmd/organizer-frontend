@@ -1,8 +1,11 @@
 import { AppState } from '@/app/store';
-import { getUserItem } from '@/utils/helpers';
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = getUserItem();
+const initialState = {
+	name: null,
+	email: null,
+	userId: null,
+};
 
 const userSlice = createSlice({
 	name: 'user',

@@ -4,6 +4,23 @@ import transactionsSlice from '@/features/transactions/transactions-slice';
 import userSlice from '@/features/user/user-slice';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
+import {
+	persistReducer,
+	persistStore,
+	FLUSH,
+	REHYDRATE,
+	PAUSE,
+	PERSIST,
+	PURGE,
+	REGISTER,
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+
+const persistConfig = {
+	key: 'root',
+	version: 1,
+	storage,
+};
 
 const rootReducer = combineReducers({
 	[apiSlice.reducerPath]: apiSlice.reducer,
@@ -11,12 +28,24 @@ const rootReducer = combineReducers({
 	[transactionsSlice.name]: transactionsSlice.reducer,
 	[themeSlice.name]: themeSlice.reducer,
 });
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
-	reducer: rootReducer,
+	reducer: persistedReducer,
 	devTools: process.env.NODE_ENV !== 'production',
 	middleware: (getDefaultMiddlewares) =>
-		getDefaultMiddlewares().concat(apiSlice.middleware),
+		getDefaultMiddlewares({
+			serializableCheck: {
+				ignoredActions: [
+					FLUSH,
+					REHYDRATE,
+					PAUSE,
+					PERSIST,
+					PURGE,
+					REGISTER,
+				],
+			},
+		}).concat(apiSlice.middleware),
 });
 
 const makeStore = () => store;
@@ -29,4 +58,5 @@ export type AppState = ReturnType<AppStore['getState']>;
 
 export type RootState = ReturnType<typeof rootReducer>;
 
+export const persistor = persistStore(store);
 export default store;
