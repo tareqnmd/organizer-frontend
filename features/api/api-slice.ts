@@ -3,6 +3,7 @@ import { removeUser } from '../user/user-slice';
 
 const baseQuery = fetchBaseQuery({
 	baseUrl: process.env.NEXT_PUBLIC_API_URL,
+	credentials: 'include',
 });
 
 const apiSlice = createApi({
@@ -12,6 +13,7 @@ const apiSlice = createApi({
 		if (result?.error?.status === 401) {
 			api.dispatch(removeUser());
 		}
+		console.log('result', result);
 		return result;
 	},
 	tagTypes: [],
