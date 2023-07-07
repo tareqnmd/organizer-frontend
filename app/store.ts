@@ -2,6 +2,7 @@ import apiSlice from '@/features/api/api-slice';
 import themeSlice from '@/features/theme/theme-slice';
 import transactionsSlice from '@/features/transactions/transactions-slice';
 import userSlice from '@/features/user/user-slice';
+import storage from '@/utils/redux-persist/storage';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import {
@@ -14,7 +15,6 @@ import {
 	persistReducer,
 	persistStore,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
 
 const persistConfig = {
 	key: 'hisab',
@@ -37,14 +37,7 @@ const store = configureStore({
 	middleware: (getDefaultMiddlewares) =>
 		getDefaultMiddlewares({
 			serializableCheck: {
-				ignoredActions: [
-					FLUSH,
-					REHYDRATE,
-					PAUSE,
-					PERSIST,
-					PURGE,
-					REGISTER,
-				],
+				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
 			},
 		}).concat(apiSlice.middleware),
 });
