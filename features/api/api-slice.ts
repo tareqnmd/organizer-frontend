@@ -13,7 +13,6 @@ const apiSlice = createApi({
 		if (result?.error?.status === 401) {
 			api.dispatch(removeUser());
 		}
-		console.log('result', result);
 		return result;
 	},
 	tagTypes: [],
