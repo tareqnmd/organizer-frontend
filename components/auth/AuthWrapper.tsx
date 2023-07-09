@@ -11,8 +11,8 @@ const AuthWrapper = ({
 }) => {
 	const authType = type === 'register';
 	return (
-		<section className={`${styles['login-wrapper']} bg-global`}>
-			<div className={`${styles['login-area']}`}>
+		<section className={`${styles['auth-wrapper']} bg-[#0B2447]`}>
+			<div className={`${styles['auth-area']}`}>
 				<AuthTopInfo type={type} />
 				{children}
 				<p className="mt-4 text-xs font-light text-center text-gray-600">

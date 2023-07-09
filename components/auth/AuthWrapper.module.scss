@@ -1,7 +1,7 @@
-.login-wrapper {
+.auth-wrapper {
 	@apply grid w-screen h-screen place-items-center;
 }
 
-.login-area {
+.auth-area {
 	@apply w-[90%] max-w-[360px] p-6 mx-auto bg-white rounded-lg shadow-md;
 }
