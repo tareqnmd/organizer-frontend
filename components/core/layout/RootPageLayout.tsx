@@ -11,23 +11,29 @@ const RootPageLayout = ({ children }: { children: React.ReactNode }) => {
 	const { authChecked, publicPath } = useAuthCheck();
 	const { loading } = useSelector(getThemeState);
 
-	if (!loading && !authChecked && !publicPath) {
+	if (loading) {
+		return <RootLoading />;
+	}
+
+	if (!authChecked && !publicPath) {
 		router.push('/login');
+		return null;
 	}
-	if (!loading && authChecked && publicPath) {
+	if (authChecked && publicPath) {
 		router.push('/');
+		return null;
 	}
+
 	return (
 		<>
-			{loading && <RootLoading />}
-			{!loading && authChecked && (
+			{!authChecked && <main>{children}</main>}
+			{authChecked && (
 				<div id="mainRoot">
 					<Navbar />
 					<main>{children}</main>
 					<Footer />
 				</div>
 			)}
-			{!loading && !authChecked && <main>{children}</main>}
 		</>
 	);
 };
