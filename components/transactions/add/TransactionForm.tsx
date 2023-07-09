@@ -39,7 +39,9 @@ const TransactionForm = () => {
 					<Input
 						key={input.name}
 						getEvent={getEvent}
-						extraClass={getColumnWidth(input.name)}
+						extraClass={`${getColumnWidth(
+							input.name
+						)} input-label-white`}
 						{...input}
 					/>
 				))}

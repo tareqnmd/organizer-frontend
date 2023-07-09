@@ -94,7 +94,7 @@ const Input: FC<InputProps> = ({
 		<div className={`${styles['input-area']} ${extraClass}`}>
 			<label htmlFor={name}>
 				{label}
-				{required && '*'}
+				{required && ' *'}
 			</label>
 			{getTypes(type)}
 		</div>
