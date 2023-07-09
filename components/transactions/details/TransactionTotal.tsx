@@ -8,7 +8,9 @@ const TransactionTotal = ({
 	transactions: ITransactions;
 }) => {
 	return (
-		<div className={styles['transaction-card']}>
+		<div
+			className={`${styles['transaction-card']} ${styles['transaction-card-total']}`}
+		>
 			{totalTransactionAmount(transactions)}
 		</div>
 	);

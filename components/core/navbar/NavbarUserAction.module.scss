@@ -1,13 +1,13 @@
 .menu-btn {
-	@apply flex items-center justify-center gap-1 rounded-md bg-white px-2 py-1 font-bold;
+	@apply flex items-center justify-center gap-1 rounded-md bg-[#0B2447] px-2 py-1 font-bold text-white;
 }
 
 .sub-menus {
-	@apply absolute flex flex-col gap-1 right-0 mt-2 shadow-md rounded-md bg-white px-3 py-2;
+	@apply absolute flex flex-col gap-1 right-0 mt-2 shadow-md rounded-md bg-[#0B2447] px-3 py-2;
 	a,
 	button {
 		@apply flex items-center gap-1;
-		color: black !important;
+		color: white !important;
 		font-weight: 500 !important;
 	}
 }

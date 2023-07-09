@@ -1,27 +1,15 @@
 .nav-links {
-	@apply container mx-auto flex items-center justify-end py-3 px-2 gap-6 md:gap-4;
-
-	a {
-		@apply text-white transition-colors duration-300;
-
+	@apply container mx-auto flex items-center justify-end py-3 px-2 gap-6 md:gap-4 shadow-sm shadow-gray-400;
+	& > a {
 		&:first-child {
-			margin-right: auto;
-			font-weight: 700;
+			@apply text-2xl font-bold mr-auto;
 		}
+	}
+	a {
+		@apply text-black transition-colors duration-300 font-medium;
 	}
 
 	.active {
-		border-bottom: 1px solid;
+		border-bottom: 2px solid #0b2447;
 	}
-}
-
-.logout-btn {
-	background-color: red;
-	display: flex;
-	align-items: center;
-	padding: 4px 12px;
-	border-radius: 25px;
-	color: white;
-	gap: 2px;
-	font-weight: 500;
 }

@@ -12,10 +12,14 @@ const TransactionInOut = ({
 }) => {
 	return (
 		<div className={styles['transaction-cards']}>
-			<div className={styles['transaction-card']}>
+			<div
+				className={`${styles['transaction-card']} ${styles['transaction-card-income']}`}
+			>
 				{incomeTransactionAmount(transactions)}
 			</div>
-			<div className={styles['transaction-card']}>
+			<div
+				className={`${styles['transaction-card']} ${styles['transaction-card-expense']}`}
+			>
 				{expenseTransactionAmount(transactions)}
 			</div>
 		</div>

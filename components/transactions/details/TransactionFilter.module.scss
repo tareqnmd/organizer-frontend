@@ -3,13 +3,13 @@
 }
 
 .transaction-filter-btns {
-	@apply border rounded-md bg-white overflow-hidden;
+	@apply border rounded-md bg-white overflow-hidden border-[#0B2447];
 }
 
 .transaction-filter-btn {
 	@apply px-4 py-2 text-sm font-medium text-gray-600 transition-colors duration-200;
 	&.active {
-		@apply text-gray-800 bg-green-200;
+		@apply text-white bg-[#0B2447];
 	}
 }
 
@@ -18,5 +18,17 @@
 }
 
 .transaction-card {
-	@apply grid place-items-center w-full h-full p-2 bg-white rounded-md shadow-md;
+	@apply grid place-items-center w-full h-full p-2  rounded-md shadow-md;
+}
+
+.transaction-card-income {
+	@apply bg-[#17594A] text-white font-semibold text-xl;
+}
+
+.transaction-card-expense {
+	@apply bg-[#CD1818] text-white font-semibold text-xl;
+}
+
+.transaction-card-total {
+	@apply bg-[#0B2447] text-white font-extrabold text-4xl;
 }

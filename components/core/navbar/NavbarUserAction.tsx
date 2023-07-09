@@ -36,7 +36,7 @@ const NavbarUserAction = () => {
 			<button className={styles['menu-btn']}>
 				{user?.name}
 				<svg
-					className="h-5 w-5 text-black"
+					className="h-5 w-5 text-white"
 					viewBox="0 0 20 20"
 					fill="currentColor"
 					aria-hidden="true"
