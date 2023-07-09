@@ -1,9 +1,9 @@
-import { fetchData } from '@/utils/fetch/axios-fetch';
+import { fetchServerData } from '@/utils/fetch/axios-fetch';
 import TransactionsDetails from './TransactionsDetails';
 
 async function getTransactionData() {
 	try {
-		const response = await fetchData('transaction');
+		const response = await fetchServerData('transaction');
 		return response.data;
 	} catch (error) {
 		return [];

@@ -1,5 +1,12 @@
+import { headers } from 'next/dist/client/components/headers';
 import { axiosInstance } from './axios-instance';
 
-export const fetchData = async (url: string) => {
-	return axiosInstance.get(url);
+export const fetchServerData = (url: string) => {
+	const headersList = headers();
+	const cookie = headersList.get('cookie');
+	return axiosInstance.get(url, {
+		headers: {
+			cookie,
+		},
+	});
 };
