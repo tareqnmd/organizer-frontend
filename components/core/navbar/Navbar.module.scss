@@ -1,5 +1,5 @@
 .nav-links {
-	@apply container mx-auto flex items-center justify-end py-3 px-2 gap-6 md:gap-4 shadow-sm shadow-gray-300;
+	@apply container mx-auto flex items-center justify-end py-3 px-2 gap-6 md:gap-4 ;
 	& > a {
 		&:first-child {
 			@apply text-2xl font-bold mr-auto;

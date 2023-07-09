@@ -8,12 +8,14 @@ const activePath = (path: string, url: string) => path === url;
 const Navbar = () => {
 	const pathname = usePathname();
 	return (
-		<nav>
+		<nav className="shadow-sm shadow-gray-300">
 			<div className={styles['nav-links']}>
 				<Link href="/">Hisab</Link>
 				<Link
 					className={
-						activePath(pathname, '/transactions') ? styles['active'] : ''
+						activePath(pathname, '/transactions')
+							? styles['active']
+							: ''
 					}
 					href="/transactions"
 				>
@@ -21,7 +23,9 @@ const Navbar = () => {
 				</Link>
 				<Link
 					className={
-						activePath(pathname, '/transactions/add') ? styles['active'] : ''
+						activePath(pathname, '/transactions/add')
+							? styles['active']
+							: ''
 					}
 					href="/transactions/add"
 				>
