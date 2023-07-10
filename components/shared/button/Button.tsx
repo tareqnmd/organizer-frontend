@@ -13,6 +13,7 @@ const Button: FC<ButtonProps> = ({
 }) => {
 	return (
 		<button
+			disabled={loading}
 			type={type}
 			className={`${styles['button']} ${extraClassNames}`}
 		>

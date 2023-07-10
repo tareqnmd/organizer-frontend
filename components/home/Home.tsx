@@ -1,11 +1,11 @@
 import TransactionsOverview from '@/components/transactions/overview/TransactionsOverview';
-import TransactionSamples from '@/components/transactions/sample/TransactionSamples';
+import RecentTransactions from '../transactions/sample/RecentTransactions';
 
 const Home = () => {
 	return (
-		<section className="grid grid-cols-2">
+		<section className="grid grid-cols-2 gap-4">
 			<TransactionsOverview />
-			<TransactionSamples />
+			<RecentTransactions />
 		</section>
 	);
 };

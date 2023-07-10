@@ -3,15 +3,20 @@ import Button from '@/components/shared/button/Button';
 import Input from '@/components/shared/input/Input';
 import { useAddTransactionMutation } from '@/features/transactions/transactions-api';
 import { getUserState } from '@/features/user/user-slice';
+import { getError } from '@/utils/helpers';
 import { transactionFormInputs } from '@/utils/helpers/transaction-helper';
 import { getEventProps } from '@/utils/types/input-types';
-import { FormEvent, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { FormEvent, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 const TransactionForm = () => {
+	const router = useRouter();
 	const [inputs] = useState(transactionFormInputs);
 	const [inputsValue, setInputsValue] = useState({});
-	const [addTransaction, { isLoading }] = useAddTransactionMutation();
+	const [addTransaction, { isLoading, isSuccess, isError, error }] =
+		useAddTransactionMutation();
 	const { userId } = useSelector(getUserState);
 	const getEvent: getEventProps = (name, value) => {
 		setInputsValue((prev) => ({
@@ -31,6 +36,20 @@ const TransactionForm = () => {
 		}
 		return '';
 	};
+
+	useEffect(() => {
+		if (isSuccess) {
+			toast.success('Successfully Added', {
+				position: 'top-center',
+				autoClose: 1000,
+				hideProgressBar: true,
+			});
+			router.push('/transactions');
+		}
+		if (isError) {
+			toast.error(getError(error), { position: 'top-center' });
+		}
+	}, [isSuccess, isError, error, router]);
 
 	return (
 		<form onSubmit={transactionMutation}>
