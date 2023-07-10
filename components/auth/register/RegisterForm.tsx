@@ -71,6 +71,7 @@ const RegisterForm = () => {
 					type="submit"
 					name="Register"
 					extraClassNames="w-full"
+					auth={true}
 					loading={isLoading}
 				/>
 			</div>

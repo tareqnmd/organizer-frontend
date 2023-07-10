@@ -52,6 +52,7 @@ const LoginForm = () => {
 					type="submit"
 					name="Login"
 					extraClassNames="w-full"
+					auth={true}
 					loading={isLoading}
 				/>
 			</div>
