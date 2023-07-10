@@ -23,6 +23,7 @@ export const loginApi = apiSlice.injectEndpoints({
 						name: result.data.name,
 						email: result.data.email,
 						userId: result.data._id,
+						role: result.data.role,
 					};
 					dispatch(setUser(data));
 				} catch (error) {}
@@ -41,6 +42,7 @@ export const loginApi = apiSlice.injectEndpoints({
 						name: result.data.name,
 						email: result.data.email,
 						userId: result.data._id,
+						role: result.data.role,
 					};
 					dispatch(setUser(data));
 				} catch (error) {}

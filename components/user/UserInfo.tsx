@@ -7,23 +7,29 @@ import styles from './UserInfo.module.scss';
 import UserViewData from './UserViewData';
 
 const UserInfo = () => {
-	const [editMode, setEditMode] = useState(false);
+	const [mode, setMode] = useState('view');
 	return (
-		<div>
+		<section>
 			<div className={styles['header']}>
-				<span>User Info</span>
-				{editMode ? (
-					<button onClick={() => setEditMode(false)}>
+				<h6>User Info</h6>
+				<div>
+					<button
+						className={mode === 'view' ? styles['active'] : ''}
+						onClick={() => setMode('view')}
+					>
 						<AiOutlineEye /> View
 					</button>
-				) : (
-					<button onClick={() => setEditMode(true)}>
+					<button
+						className={mode === 'edit' ? styles['active'] : ''}
+						onClick={() => setMode('edit')}
+					>
 						<BiEditAlt /> Edit
 					</button>
-				)}
+				</div>
 			</div>
-			{editMode ? <UserEditData /> : <UserViewData />}
-		</div>
+			{mode === 'view' && <UserViewData />}
+			{mode === 'edit' && <UserEditData />}
+		</section>
 	);
 };
 

@@ -13,6 +13,7 @@ import Input from '../shared/input/Input';
 
 const UserEditData = () => {
 	const [inputsValue, setInputsValue] = useState({});
+	const [passwordChange, setPasswordChange] = useState(true);
 	const user = useSelector(getUserState);
 	const [modifiedInputElms, setModifiedInputElms] = useState(
 		userUpdateFormInputs?.map((input) => ({
@@ -26,8 +27,8 @@ const UserEditData = () => {
 		useUserUpdateMutation();
 
 	const getEvent: getEventProps = (name, value) => {
-		setModifiedInputElms((prev) =>
-			prev.map((item) => {
+		setModifiedInputElms((prev: any) =>
+			prev.map((item: any) => {
 				if (name === item.name) {
 					return { ...item, value };
 				}
@@ -42,23 +43,46 @@ const UserEditData = () => {
 
 	const updateMutation = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		const { password, confirmPassword, ...rest }: any = inputsValue;
-		if (password.length >= 6) {
-			if (password === confirmPassword) {
-				update({ id: user.userId, data: { ...rest, password } });
+		const { password, currentPassword, confirmPassword, ...rest }: any =
+			inputsValue;
+		if (passwordChange) {
+			if (password.length >= 6) {
+				if (password === confirmPassword) {
+					update({
+						id: user.userId,
+						data: {
+							...rest,
+							passwordChange,
+							currentPassword,
+							password,
+						},
+					});
+				} else {
+					toast.error('Password miss match', {
+						position: 'top-center',
+						autoClose: 1000,
+					});
+				}
 			} else {
-				toast.error('Password miss match', {
+				toast.error('Password is too short', {
 					position: 'top-center',
 					autoClose: 1000,
 				});
 			}
-		} else {
-			toast.error('Password is too short', {
-				position: 'top-center',
-				autoClose: 1000,
-			});
+		} else if (!passwordChange) {
+			update({ id: user.userId, data: { ...rest, passwordChange } });
 		}
 	};
+
+	useEffect(() => {
+		setModifiedInputElms((prev: any) =>
+			prev.map((item: any) => ({
+				...item,
+				hide:
+					item.type === 'password' && !passwordChange ? true : false,
+			}))
+		);
+	}, [passwordChange]);
 
 	useEffect(() => {
 		if (isSuccess) {
@@ -75,22 +99,42 @@ const UserEditData = () => {
 	return (
 		<form
 			onSubmit={updateMutation}
-			className="my-3 rounded p-3 bg-white"
+			className="my-3 rounded p-3 bg-[#0B2447]"
 		>
+			<div className="flex justify-end items-center gap-1 ">
+				<input
+					id="passwordChange"
+					type="checkbox"
+					checked={passwordChange}
+					onChange={(e) => setPasswordChange(e.target.checked)}
+					className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded cursor-pointer"
+				/>
+				<label
+					htmlFor="passwordChange"
+					className="text-sm font-medium text-white select-none cursor-pointer"
+				>
+					Change Password?
+				</label>
+			</div>
 			<div className="grid grid-cols-2 gap-2">
-				{modifiedInputElms?.map((input) => (
-					<Input
-						key={input.name}
-						getEvent={getEvent}
-						{...input}
-					/>
-				))}
+				{modifiedInputElms?.map((input: any) =>
+					input?.hide ? null : (
+						<Input
+							key={input.name}
+							getEvent={getEvent}
+							extraClass={`input-label-white`}
+							{...input}
+						/>
+					)
+				)}
 			</div>
 			<div className="flex justify-end mt-6">
 				<Button
 					type="submit"
 					name="Update"
 					loading={isLoading}
+					extraClassNames="!bg-white !text-black"
+					mutation
 				/>
 			</div>
 		</form>
