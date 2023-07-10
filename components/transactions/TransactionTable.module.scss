@@ -1,7 +1,7 @@
 .transaction-table {
-	@apply min-w-full divide-y border divide-gray-200 rounded-md overflow-hidden;
+	@apply min-w-full  divide-[#0B2447] rounded-md overflow-hidden bg-[#0B2447];
 	thead {
-		@apply bg-gray-200 dark:bg-gray-800;
+		@apply bg-[#0B2447] text-white;
 	}
 	th,
 	td {
@@ -13,6 +13,14 @@
 	td {
 		@apply whitespace-nowrap;
 	}
+}
+
+.Income {
+	@apply bg-[#17594A50];
+}
+
+.Expense {
+	@apply bg-[#CD181850];
 }
 
 .action-btns {

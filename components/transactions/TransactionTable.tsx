@@ -62,7 +62,10 @@ const TransactionTable = () => {
 							filterTime,
 							filterType
 						)?.map((transaction: ITransaction) => (
-							<tr key={transaction._id}>
+							<tr
+								className={styles[transaction?.type]}
+								key={transaction._id}
+							>
 								{transactionTableColumns?.map((title) => (
 									<td key={title.dataIndex}>
 										{getColumnData(transaction, title)}
@@ -71,13 +74,17 @@ const TransactionTable = () => {
 								<td className={styles['action-btns']}>
 									<button
 										disabled={isLoading}
-										onClick={() => transactionEdit(transaction._id)}
+										onClick={() =>
+											transactionEdit(transaction._id)
+										}
 									>
 										<AiOutlineEdit />
 									</button>
 									<button
 										disabled={isLoading}
-										onClick={() => transactionDelete(transaction._id)}
+										onClick={() =>
+											transactionDelete(transaction._id)
+										}
 									>
 										<AiOutlineDelete />
 									</button>
