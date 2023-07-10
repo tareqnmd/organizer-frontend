@@ -3,4 +3,6 @@ export interface ButtonProps {
 	name: string;
 	extraClassNames?: string;
 	loading: boolean;
+	mutation?: boolean;
+	auth?: boolean;
 }

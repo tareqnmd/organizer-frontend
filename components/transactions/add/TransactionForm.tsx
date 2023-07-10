@@ -51,6 +51,8 @@ const TransactionForm = () => {
 					type="submit"
 					name="Add Transaction"
 					loading={isLoading}
+					mutation={true}
+					extraClassNames={`!bg-white !text-black font-semibold`}
 				/>
 			</div>
 		</form>
