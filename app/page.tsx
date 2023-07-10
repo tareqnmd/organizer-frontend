@@ -1,9 +1,7 @@
+import Home from '@/components/home/Home';
+
 const page = () => {
-  return (
-    <>
-      Transaction Info
-    </>
-  );
+	return <Home />;
 };
 
 export default page;

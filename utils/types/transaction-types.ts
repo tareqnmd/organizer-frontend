@@ -23,3 +23,12 @@ export interface TransactionTypeOptionType {
 	_id: string;
 	name: string;
 }
+
+export interface ITransactionsOverview {
+	totalTransactions: number;
+	currentAmount: number;
+	incomeTransactions: number;
+	incomeTransactionsAmount: number;
+	expenseTransactions: number;
+	expenseTransactionsAmount: number;
+}
