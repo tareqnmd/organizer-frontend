@@ -34,7 +34,7 @@ const TransactionForm = () => {
 		if (['description', 'typeId'].includes(name)) {
 			return 'col-span-2';
 		}
-		return '';
+		return 'col-span-2 md:col-span-1';
 	};
 
 	useEffect(() => {

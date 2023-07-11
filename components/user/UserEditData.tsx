@@ -116,7 +116,7 @@ const UserEditData = () => {
 					Change Password?
 				</label>
 			</div>
-			<div className="grid grid-cols-2 gap-2">
+			<div className="grid md:grid-cols-2 gap-2">
 				{modifiedInputElms?.map((input: any) =>
 					input?.hide ? null : (
 						<Input

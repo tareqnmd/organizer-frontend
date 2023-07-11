@@ -3,7 +3,7 @@ import RecentTransactions from '../transactions/sample/RecentTransactions';
 
 const Home = () => {
 	return (
-		<section className="grid grid-cols-2 gap-4">
+		<section className="grid xl:grid-cols-2 gap-4">
 			<TransactionsOverview />
 			<RecentTransactions />
 		</section>
