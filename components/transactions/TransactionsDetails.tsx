@@ -1,9 +1,10 @@
 'use client';
+import ModalButtons from '@/components/modal/ModalButtons';
+import TransactionsInfo from '@/components/transactions/info/TransactionsInfo';
+import TransactionTable from '@/components/transactions/table/TransactionTable';
 import { setTransactions } from '@/features/transactions/transactions-slice';
 import { ITransactions } from '@/utils/types/transaction-types';
 import { useDispatch } from 'react-redux';
-import TransactionTable from './TransactionTable';
-import TransactionsInfo from './details/TransactionsInfo';
 
 const TransactionsDetails = ({
 	transactions,
@@ -15,6 +16,7 @@ const TransactionsDetails = ({
 	return (
 		<>
 			<TransactionsInfo />
+			<ModalButtons />
 			<TransactionTable />
 		</>
 	);

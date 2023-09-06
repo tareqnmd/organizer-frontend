@@ -99,7 +99,7 @@ const UserEditData = () => {
 	return (
 		<form
 			onSubmit={updateMutation}
-			className="my-3 rounded p-3 bg-[#0B2447]"
+			className="rounded p-3 bg-[#0B2447]"
 		>
 			<div className="flex justify-end items-center gap-1 ">
 				<input

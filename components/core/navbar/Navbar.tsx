@@ -1,37 +1,36 @@
+import { useLogoutMutation } from '@/features/user/user-api';
+import { getUserState } from '@/features/user/user-slice';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import { BiLogOut } from 'react-icons/bi';
+import { useSelector } from 'react-redux';
 import styles from './Navbar.module.scss';
-import NavbarUserAction from './NavbarUserAction';
-
-const activePath = (path: string, url: string) => path === url;
 
 const Navbar = () => {
-	const pathname = usePathname();
+	const user = useSelector(getUserState);
+	const router = useRouter();
+
+	const [logout, { isSuccess }] = useLogoutMutation();
+
+	const logoutHandler = () => {
+		logout({});
+	};
+
+	useEffect(() => {
+		if (isSuccess) {
+			router.push('/login');
+		}
+	}, [isSuccess, router]);
+
 	return (
-		<nav className="shadow-sm shadow-gray-300">
-			<div className={styles['nav-links']}>
+		<nav className={styles['nav-links']}>
+			<div>
 				<Link href="/">Hisab</Link>
-				<Link
-					className={
-						activePath(pathname, '/transactions')
-							? styles['active']
-							: ''
-					}
-					href="/transactions"
-				>
-					Transactions
-				</Link>
-				<Link
-					className={
-						activePath(pathname, '/transactions/add')
-							? styles['active']
-							: ''
-					}
-					href="/transactions/add"
-				>
-					Add Transaction
-				</Link>
-				<NavbarUserAction />
+				<button onClick={logoutHandler}>
+					<BiLogOut />
+					<span>{user?.name}, Logout</span>
+				</button>
 			</div>
 		</nav>
 	);

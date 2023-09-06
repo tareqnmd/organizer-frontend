@@ -15,7 +15,7 @@ const TransactionsInfo = () => {
 	}, [transactions, filterTime, filterType]);
 
 	return (
-		<div className="grid md:grid-rows-2 grid-cols-12 gap-4 mb-4">
+		<div className="grid md:grid-rows-2 grid-cols-12 gap-4">
 			<div className="md:row-span-2 col-span-12 md:col-span-3">
 				<TransactionTotal transactions={modifiedTransaction} />
 			</div>

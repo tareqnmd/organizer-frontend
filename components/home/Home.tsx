@@ -1,13 +1,18 @@
-import TransactionsOverview from '@/components/transactions/overview/TransactionsOverview';
-import RecentTransactions from '../transactions/sample/RecentTransactions';
+import { fetchServerData } from '@/utils/fetch/axios-fetch';
+import TransactionsDetails from '../transactions/TransactionsDetails';
 
-const Home = () => {
-	return (
-		<section className="grid xl:grid-cols-2 gap-4">
-			<TransactionsOverview />
-			<RecentTransactions />
-		</section>
-	);
+async function getTransactionData() {
+	try {
+		const response = await fetchServerData('transaction');
+		return response.data;
+	} catch (error) {
+		return [];
+	}
+}
+
+const Home = async () => {
+	const transactions = await getTransactionData();
+	return <TransactionsDetails transactions={transactions} />;
 };
 
 export default Home;

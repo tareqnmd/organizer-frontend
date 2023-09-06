@@ -29,7 +29,7 @@
 		"**/*.tsx",
 		".next/types/**/*.ts",
 		"build/types/**/*.ts",
-		"components/transactions/add/TransactionForm.tsx"
+		"components/transactions/create/TransactionForm.tsx"
 	],
 	"exclude": ["node_modules"]
 }

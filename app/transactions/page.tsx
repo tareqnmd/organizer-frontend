@@ -1,7 +1,5 @@
-import TransactionList from '@/components/transactions/TransactionList';
-
-const page = async () => {
-	return <TransactionList />;
+const page = () => {
+	return <></>;
 };
 
 export default page;

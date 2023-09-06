@@ -1,15 +1,16 @@
 .nav-links {
-	@apply container mx-auto flex items-center justify-end py-3 px-2 gap-6 md:gap-4 ;
-	& > a {
-		&:first-child {
+	@apply shadow-sm shadow-gray-300;
+	> div {
+		@apply container mx-auto flex items-center justify-end py-3 px-2 gap-6 md:gap-4;
+		a {
 			@apply text-2xl font-bold mr-auto;
 		}
-	}
-	a {
-		@apply text-black transition-colors duration-300 font-medium;
-	}
-
-	.active {
-		border-bottom: 2px solid #0b2447;
+		button {
+			@apply flex items-center gap-1 rounded-md bg-[#0B2447] px-3 py-2 text-white text-sm font-bold;
+			svg {
+				width: 20px;
+				height: 20px;
+			}
+		}
 	}
 }

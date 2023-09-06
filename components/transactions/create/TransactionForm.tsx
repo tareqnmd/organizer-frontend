@@ -1,4 +1,5 @@
 'use client';
+import Modal from '@/components/modal/Modal';
 import Button from '@/components/shared/button/Button';
 import Input from '@/components/shared/input/Input';
 import { useAddTransactionMutation } from '@/features/transactions/transactions-api';
@@ -11,7 +12,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
-const TransactionForm = () => {
+const TransactionForm = ({ setModalType, modalType }: any) => {
 	const router = useRouter();
 	const [inputs] = useState(transactionFormInputs);
 	const [inputsValue, setInputsValue] = useState({});
@@ -37,6 +38,10 @@ const TransactionForm = () => {
 		return 'col-span-2 md:col-span-1';
 	};
 
+	const closeModal = () => {
+		setModalType('');
+	};
+
 	useEffect(() => {
 		if (isSuccess) {
 			toast.success('Successfully Added', {
@@ -52,29 +57,36 @@ const TransactionForm = () => {
 	}, [isSuccess, isError, error, router]);
 
 	return (
-		<form onSubmit={transactionMutation}>
-			<div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
-				{inputs.map((input) => (
-					<Input
-						key={input.name}
-						getEvent={getEvent}
-						extraClass={`${getColumnWidth(
-							input.name
-						)} input-label-white`}
-						{...input}
+		<Modal
+			title="User Info"
+			open={modalType === 'create'}
+			onCancel={closeModal}
+			footer={
+				<div className="flex justify-end">
+					<Button
+						type="submit"
+						name="Create Transaction"
+						loading={isLoading}
+						mutation={true}
 					/>
-				))}
-			</div>
-			<div className="flex justify-end mt-6">
-				<Button
-					type="submit"
-					name="Add Transaction"
-					loading={isLoading}
-					mutation={true}
-					extraClassNames={`!bg-white !text-black font-semibold`}
-				/>
-			</div>
-		</form>
+				</div>
+			}
+		>
+			<form onSubmit={transactionMutation}>
+				<div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+					{inputs.map((input) => (
+						<Input
+							key={input.name}
+							getEvent={getEvent}
+							extraClass={`${getColumnWidth(
+								input.name
+							)} input-label-white`}
+							{...input}
+						/>
+					))}
+				</div>
+			</form>
+		</Modal>
 	);
 };
 

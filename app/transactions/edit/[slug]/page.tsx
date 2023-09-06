@@ -1,4 +1,4 @@
-import TransactionEdit from '@/components/transactions/edit/TransactionEdit';
+import TransactionEdit from '@/components/transactions/update/TransactionEdit';
 import { fetchData } from '@/utils/fetch/axios-fetch';
 
 const getData = async (slug: string) => {
