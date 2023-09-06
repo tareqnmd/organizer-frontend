@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { AiOutlineClose, AiOutlineEye } from 'react-icons/ai';
+import { AiOutlineEye } from 'react-icons/ai';
 import { BiEditAlt } from 'react-icons/bi';
 import Modal from '../modal/Modal';
 import UserEditData from './UserEditData';
@@ -17,14 +17,6 @@ const UserInfo = ({ setModalType, modalType }: any) => {
 			title="User Info"
 			open={modalType === 'profile'}
 			onCancel={closeModal}
-			footer={
-				<>
-					<button onClick={closeModal}>
-						<AiOutlineClose />
-						Close
-					</button>
-				</>
-			}
 		>
 			<div className={styles['header']}>
 				<button
@@ -41,7 +33,7 @@ const UserInfo = ({ setModalType, modalType }: any) => {
 				</button>
 			</div>
 			{mode === 'view' && <UserViewData />}
-			{mode === 'edit' && <UserEditData />}
+			{mode === 'edit' && <UserEditData closeModal={closeModal} />}
 		</Modal>
 	);
 };

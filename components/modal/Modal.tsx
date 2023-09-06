@@ -23,7 +23,7 @@ export default function Modal({
 						>
 							<div className={styles['modal-container']}>
 								<div className={styles['modal-header']}>
-									{title}
+									<h6 className="font-bold">{title}</h6>
 									<button onClick={onCancel}>
 										<AiOutlineClose />
 									</button>
@@ -31,9 +31,11 @@ export default function Modal({
 								<div className={styles['modal-body']}>
 									{children}
 								</div>
-								<div className={styles['modal-footer']}>
-									{footer}
-								</div>
+								{footer && (
+									<div className={styles['modal-footer']}>
+										{footer}
+									</div>
+								)}
 							</div>
 						</section>
 					)}

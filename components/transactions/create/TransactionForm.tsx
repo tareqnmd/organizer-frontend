@@ -49,43 +49,44 @@ const TransactionForm = ({ setModalType, modalType }: any) => {
 				autoClose: 1000,
 				hideProgressBar: true,
 			});
-			router.push('/transactions');
+			setModalType('');
 		}
 		if (isError) {
 			toast.error(getError(error), { position: 'top-center' });
 		}
-	}, [isSuccess, isError, error, router]);
+	}, [isSuccess, isError, error, setModalType]);
 
 	return (
 		<Modal
-			title="User Info"
+			title="Create Transaction"
 			open={modalType === 'create'}
 			onCancel={closeModal}
-			footer={
-				<div className="flex justify-end">
-					<Button
-						type="submit"
-						name="Create Transaction"
-						loading={isLoading}
-						mutation={true}
-					/>
-				</div>
-			}
 		>
-			<form onSubmit={transactionMutation}>
-				<div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
-					{inputs.map((input) => (
-						<Input
-							key={input.name}
-							getEvent={getEvent}
-							extraClass={`${getColumnWidth(
-								input.name
-							)} input-label-white`}
-							{...input}
+			<div className="p-3 bg-[#0b2447] rounded-md shadow-md">
+				<form onSubmit={transactionMutation}>
+					<div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+						{inputs.map((input) => (
+							<Input
+								key={input.name}
+								getEvent={getEvent}
+								extraClass={`${getColumnWidth(
+									input.name
+								)} input-label-white`}
+								{...input}
+							/>
+						))}
+					</div>
+					<div className="flex justify-end mt-6">
+						<Button
+							type="submit"
+							name="Add Transaction"
+							loading={isLoading}
+							mutation={true}
+							extraClassNames={`!bg-white !text-black font-semibold`}
 						/>
-					))}
-				</div>
-			</form>
+					</div>
+				</form>
+			</div>
 		</Modal>
 	);
 };

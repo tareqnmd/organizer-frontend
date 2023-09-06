@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 import Button from '../shared/button/Button';
 import Input from '../shared/input/Input';
 
-const UserEditData = () => {
+const UserEditData = ({ closeModal }: any) => {
 	const [inputsValue, setInputsValue] = useState({});
 	const [passwordChange, setPasswordChange] = useState(true);
 	const user = useSelector(getUserState);
@@ -91,6 +91,7 @@ const UserEditData = () => {
 				autoClose: 1000,
 				hideProgressBar: true,
 			});
+			closeModal();
 		}
 		if (isError) {
 			toast.error(getError(error), { position: 'top-center' });
