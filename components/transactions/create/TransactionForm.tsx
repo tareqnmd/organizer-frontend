@@ -7,13 +7,11 @@ import { getUserState } from '@/features/user/user-slice';
 import { getError } from '@/utils/helpers';
 import { transactionFormInputs } from '@/utils/helpers/transaction-helper';
 import { getEventProps } from '@/utils/types/input-types';
-import { useRouter } from 'next/navigation';
 import { FormEvent, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
 const TransactionForm = ({ setModalType, modalType }: any) => {
-	const router = useRouter();
 	const [inputs] = useState(transactionFormInputs);
 	const [inputsValue, setInputsValue] = useState({});
 	const [addTransaction, { isLoading, isSuccess, isError, error }] =
@@ -76,7 +74,7 @@ const TransactionForm = ({ setModalType, modalType }: any) => {
 							/>
 						))}
 					</div>
-					<div className="flex justify-end mt-6">
+					<div className="flex justify-end mt-4">
 						<Button
 							type="submit"
 							name="Add Transaction"
