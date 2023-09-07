@@ -10,9 +10,9 @@ import { useState } from 'react';
 import { AiFillEye, AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
 import TransactionDelete from '../delete/TransactionDelete';
-import TransactionEdit from '../update/TransactionEdit';
-import styles from './TransactionTable.module.scss';
+import TransactionForm from '../form/TransactionForm';
 import TransactionView from '../view/TransactionView';
+import styles from './TransactionTable.module.scss';
 const TransactionTable = () => {
 	const [modalType, setModalType] = useState('');
 	const [transactionId, setTransactionId] = useState('');
@@ -31,7 +31,7 @@ const TransactionTable = () => {
 				setModalType={setModalType}
 				transactionId={transactionId}
 			/>
-			<TransactionEdit
+			<TransactionForm
 				modalType={modalType}
 				setModalType={setModalType}
 				transactionId={transactionId}
@@ -81,7 +81,7 @@ const TransactionTable = () => {
 										onClick={() =>
 											transactionAction(
 												transaction._id,
-												'edit'
+												'form'
 											)
 										}
 									>

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { CgProfile } from 'react-icons/cg';
 import { MdOutlineAddCircleOutline } from 'react-icons/md';
+import TransactionForm from '../transactions/form/TransactionForm';
 import UserInfo from '../user/UserInfo';
 import styles from './ModalButtons.module.scss';
-import TransactionForm from '../transactions/create/TransactionForm';
 
 const ModalButtons = () => {
 	const [modalType, setModalType] = useState('');
@@ -19,7 +19,7 @@ const ModalButtons = () => {
 				setModalType={setModalType}
 			/>
 			<div className={styles['transaction-links']}>
-				<button onClick={() => setModalType('create')}>
+				<button onClick={() => setModalType('form')}>
 					<MdOutlineAddCircleOutline />
 					Create
 				</button>

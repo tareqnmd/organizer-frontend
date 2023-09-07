@@ -128,6 +128,7 @@ export const transactionFormInputs = [
 		name: 'typeId',
 		label: 'Transaction Type',
 		type: 'select',
+		url: 'type',
 		required: true,
 	},
 	{
