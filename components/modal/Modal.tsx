@@ -12,13 +12,18 @@ export default function Modal({
 }: any) {
 	const [mounted, setMounted] = useState(false);
 	useLayoutEffect(() => setMounted(true), []);
-	const closeModal = (e: any) => {};
+	const closeModal = (e: any) => {
+		if (e.target.id === 'modal-root-area') {
+			onCancel();
+		}
+	};
 	return mounted
 		? createPortal(
 				<>
 					{open && (
 						<section
 							onClick={closeModal}
+							id="modal-root-area"
 							className={styles['modal-overlay']}
 						>
 							<div className={styles['modal-container']}>
