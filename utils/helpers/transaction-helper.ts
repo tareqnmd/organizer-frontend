@@ -21,7 +21,7 @@ export const getColumnData = (
 };
 
 export const dateFormat = (date: Date) => {
-	return dayjs(new Date(date)).format('DD-MM-YYYY');
+	return dayjs(date).format('DD-MM-YYYY');
 };
 
 export const millionNumberFormat = (
@@ -101,13 +101,16 @@ export const getFilteredTransactionType = (
 			? transactions
 			: transactions?.filter(
 					(transaction: ITransaction) =>
-						transaction.type === (type === 'income' ? 'Income' : 'Expense')
+						transaction.type ===
+						(type === 'income' ? 'Income' : 'Expense')
 			  );
 	const timeFiltered =
 		time === 'all'
 			? typeFiltered
 			: typeFiltered?.filter((transaction: ITransaction) =>
-					time === 'month' ? monthEqual(transaction) : getWeek(transaction.date)
+					time === 'month'
+						? monthEqual(transaction)
+						: getWeek(transaction.date)
 			  );
 
 	return timeFiltered;

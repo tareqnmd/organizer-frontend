@@ -1,56 +1,45 @@
 'use client';
-import { useDeleteTransactionMutation } from '@/features/transactions/transactions-api';
 import { getTransactionsState } from '@/features/transactions/transactions-slice';
-import { getError } from '@/utils/helpers';
 import {
 	getColumnData,
 	getFilteredTransactionType,
 	transactionTableColumns,
 } from '@/utils/helpers/transaction-helper';
 import { ITransaction } from '@/utils/types/transaction-types';
-import { useEffect, useState } from 'react';
-import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
+import { useState } from 'react';
+import { AiFillEye, AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
+import TransactionDelete from '../delete/TransactionDelete';
 import TransactionEdit from '../update/TransactionEdit';
 import styles from './TransactionTable.module.scss';
+import TransactionView from '../view/TransactionView';
 const TransactionTable = () => {
-	const [editModal, setEditModal] = useState(false);
-	const [editId, setEditId] = useState('');
+	const [modalType, setModalType] = useState('');
+	const [transactionId, setTransactionId] = useState('');
 	const { transactions, filterTime, filterType } =
 		useSelector(getTransactionsState);
 
-	const [deleteTransaction, { isSuccess, isLoading, isError, error }] =
-		useDeleteTransactionMutation();
-
-	const transactionDelete = (id: string) => {
-		deleteTransaction(id);
+	const transactionAction = (id: string, type: string) => {
+		setTransactionId(id);
+		setModalType(type);
 	};
-
-	const transactionEdit = (id: string) => {
-		setEditId(id);
-		setEditModal(true);
-	};
-
-	useEffect(() => {
-		if (isSuccess) {
-			toast.success('Successfully Deleted', {
-				position: 'top-center',
-				autoClose: 1000,
-				hideProgressBar: true,
-			});
-		}
-		if (isError) {
-			toast.error(getError(error), { position: 'top-center' });
-		}
-	}, [isSuccess, isError, error]);
 
 	return (
 		<>
+			<TransactionView
+				modalType={modalType}
+				setModalType={setModalType}
+				transactionId={transactionId}
+			/>
 			<TransactionEdit
-				editModal={editModal}
-				setEditModal={setEditModal}
-				editId={editId}
+				modalType={modalType}
+				setModalType={setModalType}
+				transactionId={transactionId}
+			/>
+			<TransactionDelete
+				modalType={modalType}
+				setModalType={setModalType}
+				transactionId={transactionId}
 			/>
 			{transactions?.length && transactionTableColumns?.length ? (
 				<table className={`${styles['transaction-table']}`}>
@@ -79,17 +68,31 @@ const TransactionTable = () => {
 								))}
 								<td className={styles['action-btns']}>
 									<button
-										disabled={isLoading}
 										onClick={() =>
-											transactionEdit(transaction._id)
+											transactionAction(
+												transaction._id,
+												'view'
+											)
+										}
+									>
+										<AiFillEye />
+									</button>
+									<button
+										onClick={() =>
+											transactionAction(
+												transaction._id,
+												'edit'
+											)
 										}
 									>
 										<AiOutlineEdit />
 									</button>
 									<button
-										disabled={isLoading}
 										onClick={() =>
-											transactionDelete(transaction._id)
+											transactionAction(
+												transaction._id,
+												'delete'
+											)
 										}
 									>
 										<AiOutlineDelete />

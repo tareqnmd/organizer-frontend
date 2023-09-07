@@ -14,13 +14,13 @@ import { FormEvent, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { toast } from 'react-toastify';
-const TransactionEdit = ({ editModal, setEditModal, editId }: any) => {
+const TransactionEdit = ({ modalType, setModalType, transactionId }: any) => {
 	const [inputs, setInputs] = useState(transactionFormInputs);
 	const [inputsValue, setInputsValue] = useState({});
 	const [editTransaction, { isLoading, isSuccess, isError, error }] =
 		useEditTransactionMutation();
-	const { data: transaction } = useGetTransactionQuery(editId, {
-		skip: !editId,
+	const { data: transaction } = useGetTransactionQuery(transactionId, {
+		skip: !transactionId,
 	});
 	const { userId } = useSelector(getUserState);
 	const getEvent: getEventProps = (name, value) => {
@@ -60,19 +60,19 @@ const TransactionEdit = ({ editModal, setEditModal, editId }: any) => {
 				autoClose: 1000,
 				hideProgressBar: true,
 			});
-			setEditModal(false);
+			setModalType('');
 		}
 		if (isError) {
 			toast.error(getError(error), { position: 'top-center' });
 		}
-	}, [isSuccess, isError, error, setEditModal]);
+	}, [isSuccess, isError, error, setModalType]);
 
 	return (
 		<Modal
 			title="Edit Transaction"
-			open={editModal}
+			open={modalType === 'edit'}
 			onCancel={() => {
-				setEditModal(false);
+				setModalType('');
 			}}
 		>
 			<div className="p-3 bg-[#0b2447] rounded-md shadow-md">
