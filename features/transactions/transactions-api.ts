@@ -16,9 +16,9 @@ export const transactionApi = apiSlice.injectEndpoints({
 		}),
 		editTransaction: builder.mutation({
 			query: (payload) => ({
-				url: '/transaction',
-				method: 'P',
-				body: payload,
+				url: `/transaction/${payload?.id}`,
+				method: 'PUT',
+				body: payload?.data,
 			}),
 		}),
 		deleteTransaction: builder.mutation({

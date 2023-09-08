@@ -64,7 +64,7 @@ const TransactionForm = ({ setModalType, modalType, transactionId }: any) => {
 
 	const transactionMutation = (data: any) => {
 		transactionId
-			? editTransaction({ ...data, userId })
+			? editTransaction({ id: transactionId, data: { ...data, userId } })
 			: addTransaction({ ...data, userId });
 	};
 
