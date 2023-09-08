@@ -3,7 +3,7 @@ import { useGetOptionsQuery } from '@/features/common/select-api';
 import { useEffect, useState } from 'react';
 
 const Select = ({ input, register }: any) => {
-	const { name, required, url } = input;
+	const { name, url } = input;
 	const [options, setOptions] = useState([]);
 	const { data } = useGetOptionsQuery(url);
 
@@ -12,10 +12,7 @@ const Select = ({ input, register }: any) => {
 	}, [data]);
 
 	return (
-		<select
-			required={required}
-			{...register(name)}
-		>
+		<select {...register(name)}>
 			<option
 				disabled
 				selected

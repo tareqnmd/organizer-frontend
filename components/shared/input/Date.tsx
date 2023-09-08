@@ -1,9 +1,8 @@
 const Date = ({ input, register }: any) => {
-	const { name, type, required, value } = input;
+	const { name, type } = input;
 	return (
 		<input
 			type={type}
-			required={required}
 			{...register(name)}
 		/>
 	);

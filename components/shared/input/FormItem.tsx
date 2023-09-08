@@ -1,10 +1,10 @@
 import Date from './Date';
-import styles from './Input.module.scss';
 import Input from './Input';
+import styles from './Input.module.scss';
 import Select from './Select';
 import Textarea from './Textarea';
 
-const FormInput = ({ register, input, extraClass }: any) => {
+const FormInput = ({ register, input, errors, extraClass }: any) => {
 	const getTypes = (type: string) => {
 		return type === 'select' ? (
 			<Select
@@ -35,6 +35,9 @@ const FormInput = ({ register, input, extraClass }: any) => {
 				{input?.required && ' *'}
 			</label>
 			{getTypes(input?.type)}
+			<p className="text-red-500 font-bold mt-2">
+				{errors[input?.name]?.message}
+			</p>
 		</div>
 	);
 };

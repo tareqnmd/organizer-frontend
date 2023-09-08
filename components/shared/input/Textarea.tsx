@@ -3,7 +3,6 @@ const Textarea = ({ input, register }: any) => {
 	return (
 		<textarea
 			name={name}
-			required={required}
 			placeholder={placeholder}
 			{...register(name)}
 		/>

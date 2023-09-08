@@ -24,6 +24,10 @@ export const dateFormat = (date: Date) => {
 	return dayjs(date).format('DD-MM-YYYY');
 };
 
+export const dateInputFormat = (date: Date) => {
+	return dayjs(date).format('YYYY-MM-DD');
+};
+
 export const millionNumberFormat = (
 	amount: number,
 	currency = 'BDT',
