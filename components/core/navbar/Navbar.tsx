@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { BiLogOut } from 'react-icons/bi';
-import { RiAdminFill } from 'react-icons/ri';
+import { RxDashboard } from 'react-icons/rx';
 import { useSelector } from 'react-redux';
 import styles from './Navbar.module.scss';
 
@@ -31,8 +31,8 @@ const Navbar = () => {
 				<div>
 					{user?.role === 32 && (
 						<Link href="/admin">
-							<RiAdminFill />
-							<span>Admin</span>
+							<RxDashboard />
+							<span>Dashboard</span>
 						</Link>
 					)}
 					<button onClick={logoutHandler}>
