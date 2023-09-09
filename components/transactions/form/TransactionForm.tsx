@@ -36,7 +36,7 @@ const TransactionForm = ({ setModalType, modalType, transactionId }: any) => {
 		handleSubmit,
 		formState: { errors },
 		reset,
-	} = useForm({
+	} = useForm<any>({
 		resolver: yupResolver(schema),
 	});
 	const { userId } = useSelector(getUserState);

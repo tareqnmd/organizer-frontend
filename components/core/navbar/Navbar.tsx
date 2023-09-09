@@ -30,7 +30,7 @@ const Navbar = () => {
 				<Link href="/">Hisab</Link>
 				<div>
 					{user?.role === 32 && (
-						<Link href="/admin">
+						<Link href="/dashboard">
 							<RxDashboard />
 							<span>Dashboard</span>
 						</Link>
