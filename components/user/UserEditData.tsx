@@ -2,69 +2,80 @@ import { useUserUpdateMutation } from '@/features/user/user-api';
 import { getUserState } from '@/features/user/user-slice';
 import { getError } from '@/utils/helpers';
 import { userUpdateFormInputs } from '@/utils/helpers/auth-helper';
-import { User } from '@/utils/types/auth-types';
-import { getEventProps } from '@/utils/types/input-types';
-import { useRouter } from 'next/navigation';
-import { FormEvent, useEffect, useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import * as yup from 'yup';
 import Button from '../shared/button/Button';
-import Input from '../shared/input/Input';
+import FormInput from '../shared/input/FormItem';
 
 const UserEditData = ({ closeModal }: any) => {
-	const [inputsValue, setInputsValue] = useState({});
 	const [passwordChange, setPasswordChange] = useState(true);
+	const schema = yup
+		.object(
+			passwordChange
+				? {
+						name: yup.string().required(),
+						email: yup.string().email().required(),
+						password: yup
+							.string()
+							.required()
+							.min(
+								6,
+								'Password is too short - should be 6 chars minimum.'
+							),
+						confirmPassword: yup
+							.string()
+							.required()
+							.min(
+								6,
+								'Password is too short - should be 6 chars minimum.'
+							),
+						currentPassword: yup
+							.string()
+							.required()
+							.min(
+								6,
+								'Password is too short - should be 6 chars minimum.'
+							),
+				  }
+				: {
+						name: yup.string().required(),
+						email: yup.string().email().required(),
+				  }
+		)
+		.required();
+	const {
+		register,
+		setValue,
+		handleSubmit,
+		formState: { errors },
+		reset,
+	} = useForm<any>({
+		resolver: yupResolver(schema),
+	});
 	const user = useSelector(getUserState);
-	const [modifiedInputElms, setModifiedInputElms] = useState(
-		userUpdateFormInputs?.map((input) => ({
-			...input,
-			value: user[input.name as keyof User] ?? null,
-		}))
-	);
 
-	const router = useRouter();
 	const [update, { isSuccess, isLoading, isError, error }] =
 		useUserUpdateMutation();
 
-	const getEvent: getEventProps = (name, value) => {
-		setModifiedInputElms((prev: any) =>
-			prev.map((item: any) => {
-				if (name === item.name) {
-					return { ...item, value };
-				}
-				return item;
-			})
-		);
-		setInputsValue((prev) => ({
-			...prev,
-			[name]: value,
-		}));
-	};
-
-	const updateMutation = (event: FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		const { password, currentPassword, confirmPassword, ...rest }: any =
-			inputsValue;
+	const updateMutation = (data: any) => {
+		const { password, currentPassword, confirmPassword, ...rest } = data;
 		if (passwordChange) {
-			if (password.length >= 6) {
-				if (password === confirmPassword) {
-					update({
-						id: user.userId,
-						data: {
-							...rest,
-							passwordChange,
-							currentPassword,
-							password,
-						},
-					});
-				} else {
-					toast.error('Password miss match', {
-						position: 'top-center',
-						autoClose: 1000,
-					});
-				}
+			if (password === confirmPassword) {
+				update({
+					id: user.userId,
+					data: {
+						...rest,
+						passwordChange,
+						currentPassword,
+						password,
+					},
+				});
 			} else {
-				toast.error('Password is too short', {
+				toast.error('Password miss match', {
 					position: 'top-center',
 					autoClose: 1000,
 				});
@@ -75,31 +86,30 @@ const UserEditData = ({ closeModal }: any) => {
 	};
 
 	useEffect(() => {
-		setModifiedInputElms((prev: any) =>
-			prev.map((item: any) => ({
-				...item,
-				hide:
-					item.type === 'password' && !passwordChange ? true : false,
-			}))
-		);
-	}, [passwordChange]);
-
-	useEffect(() => {
 		if (isSuccess) {
 			toast.success('Successfully Updated', {
 				position: 'top-center',
 				autoClose: 1000,
 				hideProgressBar: true,
 			});
+			reset();
 			closeModal();
 		}
 		if (isError) {
 			toast.error(getError(error), { position: 'top-center' });
 		}
-	}, [isSuccess, isError, error, router]);
+	}, [isSuccess, isError, error, reset, closeModal]);
+
+	useEffect(() => {
+		if (user?.email) {
+			setValue('name', user?.name);
+			setValue('email', user?.email);
+		}
+	}, [user, setValue]);
+
 	return (
 		<form
-			onSubmit={updateMutation}
+			onSubmit={handleSubmit(updateMutation)}
 			className="rounded p-3 bg-[#0B2447]"
 		>
 			<div className="flex justify-end items-center gap-1 ">
@@ -118,13 +128,14 @@ const UserEditData = ({ closeModal }: any) => {
 				</label>
 			</div>
 			<div className="grid md:grid-cols-2 gap-2">
-				{modifiedInputElms?.map((input: any) =>
-					input?.hide ? null : (
-						<Input
+				{userUpdateFormInputs?.map((input: any) =>
+					input?.type === 'password' && !passwordChange ? null : (
+						<FormInput
 							key={input.name}
-							getEvent={getEvent}
+							input={input}
 							extraClass={`input-label-white`}
-							{...input}
+							register={register}
+							errors={errors}
 						/>
 					)
 				)}

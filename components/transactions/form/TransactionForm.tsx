@@ -2,6 +2,7 @@
 import Modal from '@/components/modal/Modal';
 import Button from '@/components/shared/button/Button';
 import FormInput from '@/components/shared/input/FormItem';
+import Loading from '@/components/ui/loader/Loading';
 import {
 	useAddTransactionMutation,
 	useEditTransactionMutation,
@@ -40,9 +41,12 @@ const TransactionForm = ({ setModalType, modalType, transactionId }: any) => {
 		resolver: yupResolver(schema),
 	});
 	const { userId } = useSelector(getUserState);
-	const { data: transaction } = useGetTransactionQuery(transactionId, {
-		skip: !transactionId,
-	});
+	const { data: transaction, isFetching } = useGetTransactionQuery(
+		transactionId,
+		{
+			skip: !transactionId,
+		}
+	);
 	const [
 		addTransaction,
 		{
@@ -123,35 +127,37 @@ const TransactionForm = ({ setModalType, modalType, transactionId }: any) => {
 			open={modalType === 'form'}
 			onCancel={closeModal}
 		>
-			<form
-				className="p-3 bg-[#0b2447] rounded-md shadow-md"
-				onSubmit={handleSubmit(transactionMutation)}
-			>
-				<div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-					{transactionFormInputs?.map((input) => (
-						<FormInput
-							key={input?.name}
-							input={input}
-							register={register}
-							errors={errors}
-							extraClass={`${getColumnWidth(
-								input.name
-							)} input-label-white`}
+			<Loading loading={isFetching}>
+				<form
+					className="p-3 bg-[#0b2447] rounded-md shadow-md"
+					onSubmit={handleSubmit(transactionMutation)}
+				>
+					<div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+						{transactionFormInputs?.map((input) => (
+							<FormInput
+								key={input?.name}
+								input={input}
+								register={register}
+								errors={errors}
+								extraClass={`${getColumnWidth(
+									input.name
+								)} input-label-white`}
+							/>
+						))}
+					</div>
+					<div className="flex justify-end mt-4">
+						<Button
+							type="submit"
+							name={`${
+								transactionId ? 'Update' : 'Create'
+							} Transaction`}
+							loading={addIsLoading || editIsLoading}
+							mutation={true}
+							extraClassNames={`!bg-white !text-black font-semibold`}
 						/>
-					))}
-				</div>
-				<div className="flex justify-end mt-4">
-					<Button
-						type="submit"
-						name={`${
-							transactionId ? 'Update' : 'Create'
-						} Transaction`}
-						loading={addIsLoading || editIsLoading}
-						mutation={true}
-						extraClassNames={`!bg-white !text-black font-semibold`}
-					/>
-				</div>
-			</form>
+					</div>
+				</form>
+			</Loading>
 		</Modal>
 	);
 };

@@ -1,4 +1,4 @@
-import RootLoading from '@/components/ui/RootLoading';
+import RootLoading from '@/components/ui/loader/RootLoading';
 import { getThemeState } from '@/features/theme/theme-slice';
 import useAuthCheck from '@/hooks/useAuthCheck';
 import { useRouter } from 'next/navigation';

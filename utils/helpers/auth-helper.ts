@@ -59,20 +59,17 @@ export const userUpdateFormInputs = [
 		label: 'Current Password',
 		type: 'password',
 		required: true,
-		minlength: 6,
 	},
 	{
 		name: 'password',
 		label: 'Password',
 		type: 'password',
 		required: true,
-		minlength: 6,
 	},
 	{
 		name: 'confirmPassword',
 		label: 'Confirm Password',
 		type: 'password',
-		minlength: 6,
 		required: true,
 	},
 ];
