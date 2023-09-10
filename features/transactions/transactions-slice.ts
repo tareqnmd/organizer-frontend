@@ -15,6 +15,22 @@ const transactionsSlice = createSlice({
 		setTransactions: (state, action) => {
 			state.transactions = action.payload;
 		},
+		addTransaction: (state, action) => {
+			state.transactions.push(action.payload);
+		},
+		updateTransaction: (state, action) => {
+			state.transactions = state.transactions.map((item) => {
+				if (item._id === action.payload._id) {
+					return action.payload;
+				}
+				return item;
+			});
+		},
+		deleteTransaction: (state, action) => {
+			state.transactions = state.transactions.filter(
+				(item) => item._id !== action.payload
+			);
+		},
 		setFilterType: (state, action) => {
 			state.filterType = action.payload;
 		},
@@ -24,8 +40,14 @@ const transactionsSlice = createSlice({
 	},
 });
 
-export const { setTransactions, setFilterTime, setFilterType } =
-	transactionsSlice.actions;
+export const {
+	setTransactions,
+	addTransaction,
+	updateTransaction,
+	deleteTransaction,
+	setFilterTime,
+	setFilterType,
+} = transactionsSlice.actions;
 export const getTransactionsState = (state: AppState): typeof initialState =>
 	state.transactions;
 export default transactionsSlice;
