@@ -122,7 +122,7 @@ export const getFilteredTransactionType = (
 
 export const transactionTableColumns = [
 	{ title: 'Date', dataIndex: 'date', type: 'date' },
-	{ title: 'Type', dataIndex: 'type', type: 'text' },
+	{ title: 'Type', dataIndex: 'typeName', type: 'text' },
 	{ title: 'Amount', dataIndex: 'amount', type: 'number' },
 	{ title: 'Description', dataIndex: 'description', type: 'text' },
 ];

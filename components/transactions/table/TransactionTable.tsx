@@ -64,6 +64,9 @@ const TransactionTable = () => {
 								{transactionTableColumns?.map((title) => (
 									<td key={title.dataIndex}>
 										{getColumnData(transaction, title)}
+										{title?.dataIndex === 'typeName'
+											? ` (${transaction?.type})`
+											: null}
 									</td>
 								))}
 								<td className={styles['action-btns']}>
