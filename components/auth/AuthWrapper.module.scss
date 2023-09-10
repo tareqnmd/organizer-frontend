@@ -1,5 +1,5 @@
 .auth-wrapper {
-	@apply grid w-screen h-screen place-items-center;
+	@apply grid w-screen h-screen place-items-center overflow-auto;
 }
 
 .auth-area {

@@ -1,26 +1,35 @@
 'use client';
 import Button from '@/components/shared/button/Button';
-import Input from '@/components/shared/input/Input';
+import FormInput from '@/components/shared/input/FormItem';
 import { useLoginMutation } from '@/features/user/user-api';
 import { getError } from '@/utils/helpers';
 import { loginFormInputs } from '@/utils/helpers/auth-helper';
-import { getEventProps } from '@/utils/types/input-types';
-import { FormEvent, useEffect, useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import * as yup from 'yup';
+
+const schema = yup
+	.object({
+		email: yup.string().email().required(),
+		password: yup.string().required(),
+	})
+	.required();
+
 const LoginForm = () => {
-	const [inputsValue, setInputsValue] = useState({});
-	const [login, { isSuccess, isLoading, isError, error }] = useLoginMutation();
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<any>({
+		resolver: yupResolver(schema),
+	});
+	const [login, { isSuccess, isLoading, isError, error }] =
+		useLoginMutation();
 
-	const getEvent: getEventProps = (name, value) => {
-		setInputsValue((prev) => ({
-			...prev,
-			[name]: value,
-		}));
-	};
-
-	const loginMutation = (event: FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		login(inputsValue);
+	const loginMutation = (data: any) => {
+		login(data);
 	};
 
 	useEffect(() => {
@@ -37,13 +46,14 @@ const LoginForm = () => {
 	}, [isSuccess, isError, error]);
 
 	return (
-		<form onSubmit={loginMutation}>
+		<form onSubmit={handleSubmit(loginMutation)}>
 			<div className="flex flex-col gap-2">
 				{loginFormInputs?.map((input) => (
-					<Input
+					<FormInput
 						key={input.name}
-						getEvent={getEvent}
-						{...input}
+						input={input}
+						register={register}
+						errors={errors}
 					/>
 				))}
 			</div>

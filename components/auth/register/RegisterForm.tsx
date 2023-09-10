@@ -1,44 +1,53 @@
 'use client';
 import Button from '@/components/shared/button/Button';
-import Input from '@/components/shared/input/Input';
+import FormInput from '@/components/shared/input/FormItem';
 import { useRegisterMutation } from '@/features/user/user-api';
 import { getError } from '@/utils/helpers';
 import { registerFormInputs } from '@/utils/helpers/auth-helper';
-import { getEventProps } from '@/utils/types/input-types';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/navigation';
-import { FormEvent, useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import * as yup from 'yup';
+
+const schema = yup
+	.object({
+		name: yup.string().required(),
+		email: yup.string().email().required(),
+		password: yup
+			.string()
+			.required()
+			.min(6, 'Password is too short - should be 6 chars minimum.'),
+		confirmPassword: yup
+			.string()
+			.required()
+			.min(6, 'Password is too short - should be 6 chars minimum.'),
+	})
+	.required();
+
 const RegisterForm = () => {
-	const [inputsValue, setInputsValue] = useState({});
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<any>({
+		resolver: yupResolver(schema),
+	});
 	const router = useRouter();
-	const [register, { isSuccess, isLoading, isError, error }] =
+	const [registerHandler, { isSuccess, isLoading, isError, error }] =
 		useRegisterMutation();
-
-	const getEvent: getEventProps = (name, value) => {
-		setInputsValue((prev) => ({
-			...prev,
-			[name]: value,
-		}));
-	};
-
-	const loginMutation = (event: FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		const { password, confirmPassword, ...rest }: any = inputsValue;
-		if (password.length >= 6) {
+	const registerMutation = (data:any) => {
+		const { password, confirmPassword, ...rest } = data;
 			if (password === confirmPassword) {
-				register({ ...rest, password });
+				registerHandler({ ...rest, password });
 			} else {
 				toast.error('Password miss match', {
 					position: 'top-center',
 					autoClose: 1000,
 				});
 			}
-		} else {
-			toast.error('Password is too short', {
-				position: 'top-center',
-				autoClose: 1000,
-			});
-		}
+		
 	};
 
 	useEffect(() => {
@@ -56,13 +65,14 @@ const RegisterForm = () => {
 	}, [isSuccess, isError, error, router]);
 
 	return (
-		<form onSubmit={loginMutation}>
+		<form onSubmit={handleSubmit(registerMutation)}>
 			<div className="flex flex-col gap-2">
 				{registerFormInputs?.map((input) => (
-					<Input
+					<FormInput
 						key={input.name}
-						getEvent={getEvent}
-						{...input}
+						register={register}
+						input={input}
+						errors={errors}
 					/>
 				))}
 			</div>
