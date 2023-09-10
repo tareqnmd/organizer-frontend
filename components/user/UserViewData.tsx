@@ -7,7 +7,9 @@ const UserViewData = () => {
 		<div className="flex flex-col rounded p-3 bg-[#0B2447]">
 			<p className="text-white">Name : {user.name}</p>
 			<p className="text-white">Email : {user.email}</p>
-			<p className="text-white">Role : {user.role}</p>
+			<p className="text-white">
+				Role : {user.role === 32 ? 'Admin' : 'User'}
+			</p>
 		</div>
 	);
 };
