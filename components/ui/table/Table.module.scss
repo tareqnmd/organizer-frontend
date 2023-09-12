@@ -1,0 +1,28 @@
+.table {
+	@apply min-w-full  divide-[#0B2447] rounded-md overflow-hidden bg-[#0B2447];
+	thead {
+		@apply bg-[#0B2447] text-white;
+	}
+	th,
+	td {
+		@apply p-2 text-sm font-normal text-left;
+	}
+	tbody {
+		@apply bg-white divide-y divide-gray-200;
+		tr {
+			background: #17594a50;
+		}
+	}
+	td {
+		@apply whitespace-nowrap;
+	}
+}
+
+.action-btns {
+	@apply flex gap-1;
+	button {
+		&:disabled {
+			@apply text-gray-400 cursor-not-allowed;
+		}
+	}
+}

@@ -1,6 +1,7 @@
 import Date from './Date';
 import Input from './Input';
 import styles from './Input.module.scss';
+import Radio from './Radio';
 import Select from './Select';
 import Textarea from './Textarea';
 
@@ -21,6 +22,11 @@ const FormInput = ({ register, input, errors, extraClass }: any) => {
 				input={input}
 				register={register}
 			/>
+		) : type === 'radio' ? (
+			<Radio
+				input={input}
+				register={register}
+			/>
 		) : (
 			<Input
 				input={input}
@@ -30,11 +36,13 @@ const FormInput = ({ register, input, errors, extraClass }: any) => {
 	};
 	return (
 		<div className={`${styles['input-area']} ${extraClass}`}>
-			<label htmlFor={input?.name}>
-				{input?.label}
-				{input?.required && ' *'}
-			</label>
-			{getTypes(input?.type)}
+			<div>
+				<label htmlFor={input?.name}>
+					{input?.label}
+					{input?.required && ' *'}
+				</label>
+				{getTypes(input?.type)}
+			</div>
 			<p className="text-red-500 font-bold mt-2">
 				{errors[input?.name]?.message}
 			</p>

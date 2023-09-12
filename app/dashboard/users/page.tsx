@@ -1,5 +1,7 @@
+import UserDetails from '@/components/user/UserDetails';
+
 const page = () => {
-	return <>users</>;
+	return <UserDetails />;
 };
 
 export default page;

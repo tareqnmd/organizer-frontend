@@ -1,5 +1,5 @@
 'use client';
-import ModalButtons from '@/components/modal/ModalButtons';
+import ModalButtons from '@/components/transactions/buttons/TransactionButton';
 import TransactionsInfo from '@/components/transactions/info/TransactionsInfo';
 import TransactionTable from '@/components/transactions/table/TransactionTable';
 import { setTransactions } from '@/features/transactions/transactions-slice';

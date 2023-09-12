@@ -1,36 +1,27 @@
-'use client';
 import Modal from '@/components/modal/Modal';
 import Button from '@/components/shared/button/Button';
 import FormInput from '@/components/shared/input/FormItem';
 import Loading from '@/components/ui/loader/Loading';
 import {
-	useAddTransactionMutation,
-	useEditTransactionMutation,
-	useGetTransactionQuery,
-} from '@/features/transactions/transactions-api';
-import { getUserState } from '@/features/user/user-slice';
+	useAddTypeMutation,
+	useEditTypeMutation,
+	useGetTypeQuery,
+} from '@/features/type/type-api';
 import { getError } from '@/utils/helpers';
-import {
-	dateInputFormat,
-	transactionFormInputs,
-} from '@/utils/helpers/transaction-helper';
+import { typeFormInputs } from '@/utils/helpers/type-helper';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import * as yup from 'yup';
 
 const schema = yup
 	.object({
-		typeId: yup.string().required(),
-		amount: yup.number().typeError('amount is required'),
-		date: yup.date().typeError('date is required'),
-		description: yup.string().required(),
+		name: yup.string().required(),
+		type: yup.string().required(),
 	})
 	.required();
-
-const TransactionForm = ({ setModalType, modalType, transactionId }: any) => {
+const TypeForm = ({ typeId, modalType, setModalType }: any) => {
 	const {
 		register,
 		setValue,
@@ -40,36 +31,32 @@ const TransactionForm = ({ setModalType, modalType, transactionId }: any) => {
 	} = useForm<any>({
 		resolver: yupResolver(schema),
 	});
-	const { userId } = useSelector(getUserState);
-	const { data: transaction, isFetching } = useGetTransactionQuery(
-		transactionId,
-		{
-			skip: !transactionId,
-		}
-	);
+
+	const { data: type, isFetching } = useGetTypeQuery(typeId, {
+		skip: !typeId,
+	});
+
 	const [
-		addTransaction,
+		addType,
 		{
 			isLoading: addIsLoading,
 			isSuccess: addIsSuccess,
 			isError: addIsError,
 			error: addError,
 		},
-	] = useAddTransactionMutation();
+	] = useAddTypeMutation();
 	const [
-		editTransaction,
+		editType,
 		{
 			isLoading: editIsLoading,
 			isSuccess: editIsSuccess,
 			isError: editIsError,
 			error: editError,
 		},
-	] = useEditTransactionMutation();
+	] = useEditTypeMutation();
 
 	const transactionMutation = (data: any) => {
-		transactionId
-			? editTransaction({ id: transactionId, data: { ...data, userId } })
-			: addTransaction({ ...data, userId });
+		typeId ? editType({ id: typeId, data: data }) : addType(data);
 	};
 
 	const getColumnWidth = (name: string) => {
@@ -79,19 +66,12 @@ const TransactionForm = ({ setModalType, modalType, transactionId }: any) => {
 		return 'col-span-2 md:col-span-1';
 	};
 
-	const closeModal = () => {
-		setModalType('');
-		reset();
-	};
-
 	useEffect(() => {
-		if (transaction?._id) {
-			setValue('date', dateInputFormat(transaction.date));
-			setValue('amount', transaction.amount);
-			setValue('typeId', transaction.typeId);
-			setValue('description', transaction.description);
+		if (type?._id) {
+			setValue('name', type.name);
+			setValue('type', type.type);
 		}
-	}, [setValue, transaction]);
+	}, [setValue, type]);
 
 	useEffect(() => {
 		if (addIsSuccess) {
@@ -106,7 +86,7 @@ const TransactionForm = ({ setModalType, modalType, transactionId }: any) => {
 		if (addIsError) {
 			toast.error(getError(addError), { position: 'top-center' });
 		}
-	}, [addIsSuccess, addIsError, addError, setModalType, reset]);
+	}, [addIsSuccess, addIsError, addError, reset, setModalType]);
 
 	useEffect(() => {
 		if (editIsSuccess) {
@@ -121,13 +101,12 @@ const TransactionForm = ({ setModalType, modalType, transactionId }: any) => {
 		if (editIsError) {
 			toast.error(getError(editError), { position: 'top-center' });
 		}
-	}, [editIsSuccess, editIsError, editError, setModalType, reset]);
-
+	}, [editIsSuccess, editIsError, editError, reset, setModalType]);
 	return (
 		<Modal
-			title={`${transactionId ? 'Update' : 'Create'} Transaction`}
+			title={`${typeId ? 'Update' : 'Create'} Type`}
 			open={modalType === 'form'}
-			onCancel={closeModal}
+			onCancel={() => setModalType('')}
 		>
 			<Loading loading={isFetching}>
 				<form
@@ -135,7 +114,7 @@ const TransactionForm = ({ setModalType, modalType, transactionId }: any) => {
 					onSubmit={handleSubmit(transactionMutation)}
 				>
 					<div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-						{transactionFormInputs?.map((input) => (
+						{typeFormInputs?.map((input) => (
 							<FormInput
 								key={input?.name}
 								input={input}
@@ -150,9 +129,7 @@ const TransactionForm = ({ setModalType, modalType, transactionId }: any) => {
 					<div className="flex justify-end mt-4">
 						<Button
 							type="submit"
-							name={`${
-								transactionId ? 'Update' : 'Create'
-							} Transaction`}
+							name={`${typeId ? 'Update' : 'Create'} Type`}
 							loading={addIsLoading || editIsLoading}
 							mutation={true}
 							extraClassNames={`!bg-white !text-black font-semibold`}
@@ -164,4 +141,4 @@ const TransactionForm = ({ setModalType, modalType, transactionId }: any) => {
 	);
 };
 
-export default TransactionForm;
+export default TypeForm;
