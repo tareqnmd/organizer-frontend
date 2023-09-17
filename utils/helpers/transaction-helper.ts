@@ -1,42 +1,5 @@
-import dayjs from 'dayjs';
-import {
-	ITransaction,
-	ITransactionTitle,
-	ITransactions,
-} from '../types/transaction-types';
-
-export const getColumnData = (
-	transaction: ITransaction,
-	title: ITransactionTitle
-) => {
-	const dataIndex = title.dataIndex;
-	const value: any = transaction[dataIndex as keyof ITransaction];
-	const modifiedValue =
-		title.type === 'number'
-			? millionNumberFormat(value)
-			: title.type === 'date'
-			? dateFormat(value)
-			: value;
-	return modifiedValue;
-};
-
-export const dateFormat = (date: Date) => {
-	return dayjs(date).format('DD-MM-YYYY');
-};
-
-export const dateInputFormat = (date: Date) => {
-	return dayjs(date).format('YYYY-MM-DD');
-};
-
-export const millionNumberFormat = (
-	amount: number,
-	currency = 'BDT',
-	format = 'en-US'
-) => {
-	const number = amount ? Number(amount.toFixed(2)) : 0;
-	const result = Intl.NumberFormat(format).format(number);
-	return `${result} ${currency}`;
-};
+import { ITransaction, ITransactions } from '../types/transaction-types';
+import { millionNumberFormat } from './index';
 
 export const totalTransactionAmount = (transactions: ITransactions) => {
 	const totalAmount = transactions?.reduce(
@@ -49,7 +12,7 @@ export const totalTransactionAmount = (transactions: ITransactions) => {
 				: 0),
 		0
 	);
-	return millionNumberFormat(totalAmount);
+	return millionNumberFormat(totalAmount, 'amount');
 };
 
 export const incomeTransactionAmount = (transactions: ITransactions) => {
@@ -58,7 +21,7 @@ export const incomeTransactionAmount = (transactions: ITransactions) => {
 			acc + (transaction.type === 'Income' ? transaction.amount : 0),
 		0
 	);
-	return millionNumberFormat(totalAmount);
+	return millionNumberFormat(totalAmount, 'amount');
 };
 
 export const expenseTransactionAmount = (transactions: ITransactions) => {
@@ -67,7 +30,7 @@ export const expenseTransactionAmount = (transactions: ITransactions) => {
 			acc + (transaction.type === 'Expense' ? transaction.amount : 0),
 		0
 	);
-	return millionNumberFormat(totalAmount);
+	return millionNumberFormat(totalAmount, 'amount');
 };
 
 const monthEqual = (transaction: ITransaction) =>
@@ -117,13 +80,16 @@ export const getFilteredTransactionType = (
 						: getWeek(transaction.date)
 			  );
 
-	return timeFiltered;
+	return timeFiltered.map((item) => ({
+		...item,
+		extra_class: item?.type === 'Expense' ? '!bg-[#CD181850]' : '',
+	}));
 };
 
 export const transactionTableColumns = [
 	{ title: 'Date', dataIndex: 'date', type: 'date' },
 	{ title: 'Type', dataIndex: 'typeName', type: 'text' },
-	{ title: 'Amount', dataIndex: 'amount', type: 'number' },
+	{ title: 'Amount', dataIndex: 'amount', type: 'amount' },
 	{ title: 'Description', dataIndex: 'description', type: 'text' },
 ];
 

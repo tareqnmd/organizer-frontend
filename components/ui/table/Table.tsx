@@ -1,4 +1,6 @@
+import { getColumnData } from '@/utils/helpers';
 import style from './Table.module.scss';
+
 const Table = ({ columns, data, actions }: any) => {
 	return (
 		<table className={style.table}>
@@ -11,35 +13,46 @@ const Table = ({ columns, data, actions }: any) => {
 				</tr>
 			</thead>
 			<tbody>
-				{data?.map((item: any) => (
-					<tr
-						className={style[item.extra_class]}
-						key={item?._id}
-					>
-						{columns?.map((column: any) => (
-							<td key={column.dataIndex}>
-								{item[column.dataIndex]}
-							</td>
-						))}
-						{actions?.length > 0 && (
-							<td className={style['action-btns']}>
-								{actions?.map((action: any) => (
-									<button
-										key={action.type}
-										onClick={() =>
-											action.clickHandler(
-												action.type,
-												item
-											)
-										}
-									>
-										{action.icon}
-									</button>
-								))}
-							</td>
-						)}
+				{data?.length > 0 ? (
+					data?.map((item: any) => (
+						<tr
+							className={item?.extra_class ?? ''}
+							key={item?._id}
+						>
+							{columns?.map((column: any) => (
+								<td key={column.dataIndex}>
+									{getColumnData(item, column)}
+								</td>
+							))}
+							{actions?.length > 0 && (
+								<td className={style['action-btns']}>
+									{actions?.map((action: any) => (
+										<button
+											key={action.type}
+											onClick={() =>
+												action.clickHandler(
+													action.type,
+													item
+												)
+											}
+										>
+											{action.icon}
+										</button>
+									))}
+								</td>
+							)}
+						</tr>
+					))
+				) : (
+					<tr>
+						<td
+							colSpan={100}
+							className="!text-center !p-5"
+						>
+							No Data Found!!
+						</td>
 					</tr>
-				))}
+				)}
 			</tbody>
 		</table>
 	);
