@@ -28,28 +28,8 @@ const TransactionFilter = ({
 	};
 
 	return (
-		<div className={styles['transaction-filter']}>
-			<div className={styles['transaction-filter-btns']}>
-				<button
-					onClick={() => filterTimeHandler('all')}
-					className={getFilterClass(filterTime, 'all')}
-				>
-					All
-				</button>
-				<button
-					onClick={() => filterTimeHandler('month')}
-					className={getFilterClass(filterTime, 'month')}
-				>
-					Current Month
-				</button>
-				<button
-					onClick={() => filterTimeHandler('week')}
-					className={getFilterClass(filterTime, 'week')}
-				>
-					Current Week
-				</button>
-			</div>
-			<div className={styles['transaction-filter-btns']}>
+		<div>
+			<div className={styles['type-filter']}>
 				<button
 					onClick={() => filterTypeHandler('all')}
 					className={getFilterClass(filterType, 'all')}

@@ -29,7 +29,8 @@
 		"**/*.tsx",
 		".next/types/**/*.ts",
 		"build/types/**/*.ts",
-		"components/transactions/form/TransactionForm.tsx"
+		"components/transactions/form/TransactionForm.tsx",
+		"components/user/UserInfoData.tsx"
 	],
 	"exclude": ["node_modules"]
 }

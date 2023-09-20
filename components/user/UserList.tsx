@@ -20,6 +20,9 @@ const UserList = ({ users }: any) => {
 				modalType={modalType}
 				setModalType={setModalType}
 			/>
+			<div className="flex items-center justify-between border-b-2 border-stone-950 mb-2">
+				<h3 className="font-semibold text-lg">Users</h3>
+			</div>
 			<Table
 				columns={userTableColumns}
 				data={users}

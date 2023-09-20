@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { BiLogOut } from 'react-icons/bi';
-import { RxDashboard } from 'react-icons/rx';
 import { useSelector } from 'react-redux';
 import styles from './Navbar.module.scss';
 
@@ -29,9 +28,11 @@ const Navbar = () => {
 			<div>
 				<Link href="/">Hisab</Link>
 				<div>
+					<Link href="/transactions">
+						<span>Transactions</span>
+					</Link>
 					{user?.role === 32 && (
 						<Link href="/dashboard">
-							<RxDashboard />
 							<span>Dashboard</span>
 						</Link>
 					)}

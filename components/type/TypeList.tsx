@@ -4,10 +4,10 @@ import { useState } from 'react';
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
 import { BsFillEyeFill } from 'react-icons/bs';
 import Table from '../ui/table/Table';
+import TypeButton from './button/TypeButton';
 import TypeDelete from './delete/TypeDelete';
 import TypeForm from './form/TypeForm';
 import TypeStatus from './status/TypeStatus';
-import TypeButton from './button/TypeButton';
 
 const TypeList = ({ types }: any) => {
 	const [modalType, setModalType] = useState('');
@@ -35,7 +35,10 @@ const TypeList = ({ types }: any) => {
 				setModalType={setModalType}
 				typeId={typeId}
 			/>
-			<TypeButton />
+			<div className="flex items-end justify-between border-b-2 border-stone-950 mb-2 pb-2">
+				<h3 className="font-semibold text-lg">Types</h3>
+				<TypeButton />
+			</div>
 			<Table
 				columns={typeTableColumns}
 				data={types}

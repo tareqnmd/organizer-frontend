@@ -5,7 +5,7 @@ import { BiEditAlt } from 'react-icons/bi';
 import Modal from '../modal/Modal';
 import UserEditData from './UserEditData';
 import styles from './UserInfo.module.scss';
-import UserViewData from './UserViewData';
+import UserInfoData from './UserInfoData';
 
 const UserInfo = ({ setModalType, modalType }: any) => {
 	const [mode, setMode] = useState('view');
@@ -32,7 +32,7 @@ const UserInfo = ({ setModalType, modalType }: any) => {
 					<BiEditAlt /> Edit
 				</button>
 			</div>
-			{mode === 'view' && <UserViewData />}
+			{mode === 'view' && <UserInfoData />}
 			{mode === 'edit' && <UserEditData closeModal={closeModal} />}
 		</Modal>
 	);

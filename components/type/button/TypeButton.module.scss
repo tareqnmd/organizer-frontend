@@ -1,5 +1,5 @@
 .type-btns {
-	@apply flex items-center justify-end my-3 gap-2 font-bold;
+	@apply flex items-center justify-end gap-2 font-bold;
 	button {
 		@apply flex items-center gap-1 rounded-md bg-[#0B2447] px-3 py-2 text-white text-sm font-bold;
 		svg {

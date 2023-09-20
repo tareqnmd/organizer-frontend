@@ -1,34 +1,10 @@
-.transaction-filter {
-	@apply flex justify-between overflow-hidden;
-}
-
-.transaction-filter-btns {
-	@apply border rounded-md bg-white overflow-hidden border-[#0B2447];
-}
-
 .transaction-filter-btn {
-	@apply px-2 sm:px-4 py-2 text-xs sm:text-sm font-medium text-gray-600 transition-colors duration-200;
+	@apply px-2 py-1 rounded-lg text-base font-medium transition-all;
 	&.active {
 		@apply text-white bg-[#0B2447];
 	}
 }
 
-.transaction-cards {
-	@apply flex gap-4;
-}
-
-.transaction-card {
-	@apply grid place-items-center w-full h-full p-2  rounded-md shadow-md;
-}
-
-.transaction-card-income {
-	@apply bg-[#17594A] text-white font-semibold text-xl;
-}
-
-.transaction-card-expense {
-	@apply bg-[#CD1818] text-white font-semibold text-xl;
-}
-
-.transaction-card-total {
-	@apply bg-[#0B2447] text-white font-extrabold text-2xl  md:text-xl lg:text-3xl xl:text-4xl;
+.type-filter {
+	@apply w-max rounded-lg p-1 bg-[#ececec];
 }

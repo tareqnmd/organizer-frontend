@@ -8,7 +8,7 @@
 		> div {
 			@apply flex gap-2;
 			a {
-				@apply flex items-center gap-1 rounded-md bg-[#0B2447] px-3 py-2 text-white text-sm font-bold;
+				@apply flex items-center gap-1 rounded-md px-3 py-2 text-[#0B2447] text-sm font-bold;
 				svg {
 					width: 16px;
 					height: 16px;
