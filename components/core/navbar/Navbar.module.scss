@@ -6,20 +6,15 @@
 			@apply text-2xl font-bold mr-auto;
 		}
 		> div {
-			@apply flex gap-2;
+			@apply flex items-center gap-2;
 			a {
-				@apply flex items-center gap-1 rounded-md px-3 py-2 text-[#0B2447] text-sm font-bold;
-				svg {
-					width: 16px;
-					height: 16px;
+				@apply text-[#0B2447] text-sm font-bold;
+				&.active {
+					@apply border-b-2 border-[#0B2447];
 				}
 			}
 			button {
-				@apply flex items-center gap-1 rounded-md bg-[#0B2447] px-3 py-2 text-white text-sm font-bold;
-				svg {
-					width: 20px;
-					height: 20px;
-				}
+				@apply rounded-md bg-[#0B2447] text-white py-1 px-2 text-sm font-bold;
 			}
 		}
 	}

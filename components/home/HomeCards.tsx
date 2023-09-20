@@ -1,26 +1,14 @@
 'use client';
 import Card from '@/components/ui/card/Card';
 import Taka from '@/components/ui/icons/Taka';
-import { getTransactionsState } from '@/features/transactions/transactions-slice';
-import {
-	expenseTransactionAmount,
-	getFilteredTransactionType,
-	incomeTransactionAmount,
-	totalTransactionAmount,
-} from '@/utils/helpers/transaction-helper';
-import { useMemo } from 'react';
+import { useGetTransactionsOverviewQuery } from '@/features/transactions/transactions-api';
 import { MdFormatListNumbered } from 'react-icons/md';
-import { useSelector } from 'react-redux';
 const outside_wrap = 'col-span-12 lg:col-span-6 grid grid-cols-12 gap-4';
 const inside_wrap = 'col-span-12 sm:col-span-6';
 
 const HomeCards = () => {
-	const { transactions, filterType, filterTime } =
-		useSelector(getTransactionsState);
-
-	const modified_transactions = useMemo(() => {
-		return getFilteredTransactionType(transactions, filterTime, filterType);
-	}, [transactions, filterTime, filterType]);
+	const { data } = useGetTransactionsOverviewQuery({});
+	const { all, current_month } = data || {};
 
 	return (
 		<div className="grid grid-cols-12 gap-4">
@@ -32,25 +20,25 @@ const HomeCards = () => {
 					extra_class={inside_wrap}
 					title="Current Balance"
 					icon={<Taka />}
-					value={totalTransactionAmount(modified_transactions)}
+					value={current_month?.amount ?? 0}
 				/>
 				<Card
 					extra_class={inside_wrap}
 					title="Income"
 					icon={<Taka />}
-					value={incomeTransactionAmount(modified_transactions)}
+					value={current_month?.income_amount ?? 0}
 				/>
 				<Card
 					extra_class={inside_wrap}
 					title="Expense"
 					icon={<Taka />}
-					value={expenseTransactionAmount(modified_transactions)}
+					value={current_month?.expense_amount ?? 0}
 				/>
 				<Card
 					extra_class={inside_wrap}
 					title="Transactions"
 					icon={<MdFormatListNumbered />}
-					value={String(modified_transactions?.length)}
+					value={current_month?.transactions ?? 0}
 				/>
 			</div>
 			<div className={outside_wrap}>
@@ -61,25 +49,25 @@ const HomeCards = () => {
 					extra_class={inside_wrap}
 					title="Current Balance"
 					icon={<Taka />}
-					value={totalTransactionAmount(modified_transactions)}
+					value={all?.amount ?? 0}
 				/>
 				<Card
 					extra_class={inside_wrap}
 					title="Income"
 					icon={<Taka />}
-					value={incomeTransactionAmount(modified_transactions)}
+					value={all?.income_amount ?? 0}
 				/>
 				<Card
 					extra_class={inside_wrap}
 					title="Expense"
 					icon={<Taka />}
-					value={expenseTransactionAmount(modified_transactions)}
+					value={all?.expense_amount ?? 0}
 				/>
 				<Card
 					extra_class={inside_wrap}
 					title="Transactions"
 					icon={<MdFormatListNumbered />}
-					value={String(modified_transactions?.length)}
+					value={all?.transactions ?? 0}
 				/>
 			</div>
 		</div>

@@ -1,15 +1,15 @@
 import { useLogoutMutation } from '@/features/user/user-api';
 import { getUserState } from '@/features/user/user-slice';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { BiLogOut } from 'react-icons/bi';
 import { useSelector } from 'react-redux';
 import styles from './Navbar.module.scss';
 
 const Navbar = () => {
 	const user = useSelector(getUserState);
 	const router = useRouter();
+	const pathname = usePathname();
 
 	const [logout, { isSuccess }] = useLogoutMutation();
 
@@ -28,17 +28,30 @@ const Navbar = () => {
 			<div>
 				<Link href="/">Hisab</Link>
 				<div>
-					<Link href="/transactions">
+					<Link
+						href="/transactions"
+						className={
+							pathname.includes('/transactions')
+								? styles['active']
+								: ''
+						}
+					>
 						<span>Transactions</span>
 					</Link>
 					{user?.role === 32 && (
-						<Link href="/dashboard">
+						<Link
+							href="/dashboard"
+							className={
+								pathname.includes('/dashboard')
+									? styles['active']
+									: ''
+							}
+						>
 							<span>Dashboard</span>
 						</Link>
 					)}
 					<button onClick={logoutHandler}>
-						<BiLogOut />
-						<span>{user?.name}, Logout</span>
+						<span>Logout</span>
 					</button>
 				</div>
 			</div>
