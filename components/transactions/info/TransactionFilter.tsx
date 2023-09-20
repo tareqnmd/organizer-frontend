@@ -1,8 +1,9 @@
+'use client';
 import {
-	setFilterTime,
+	getTransactionsState,
 	setFilterType,
 } from '@/features/transactions/transactions-slice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './TransactionFilter.module.scss';
 
 const getActiveFilter = (filter: string, name: string) => filter === name;
@@ -12,19 +13,12 @@ const getFilterClass = (filter: string, name: string) =>
 		getActiveFilter(filter, name) ? styles['active'] : ''
 	}`;
 
-const TransactionFilter = ({
-	filterTime,
-	filterType,
-}: {
-	filterType: string;
-	filterTime: string;
-}) => {
+const TransactionFilter = () => {
+	const { filterType } = useSelector(getTransactionsState);
+
 	const dispatch = useDispatch();
 	const filterTypeHandler = (type: string) => {
 		dispatch(setFilterType(type));
-	};
-	const filterTimeHandler = (type: string) => {
-		dispatch(setFilterTime(type));
 	};
 
 	return (

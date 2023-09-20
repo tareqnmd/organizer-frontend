@@ -4,7 +4,6 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: ITransactionsStore = {
 	transactions: [],
-	filterTime: 'all',
 	filterType: 'all',
 };
 
@@ -34,9 +33,6 @@ const transactionsSlice = createSlice({
 		setFilterType: (state, action) => {
 			state.filterType = action.payload;
 		},
-		setFilterTime: (state, action) => {
-			state.filterTime = action.payload;
-		},
 	},
 });
 
@@ -45,7 +41,6 @@ export const {
 	addTransaction,
 	updateTransaction,
 	deleteTransaction,
-	setFilterTime,
 	setFilterType,
 } = transactionsSlice.actions;
 export const getTransactionsState = (state: AppState): typeof initialState =>

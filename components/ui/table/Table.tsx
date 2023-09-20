@@ -16,7 +16,7 @@ const Table = ({ columns, data, actions }: any) => {
 				{data?.length > 0 ? (
 					data?.map((item: any) => (
 						<tr
-							className={item?.extra_class ?? ''}
+							className={style[item?.extra_class]}
 							key={item?._id}
 						>
 							{columns?.map((column: any) => (

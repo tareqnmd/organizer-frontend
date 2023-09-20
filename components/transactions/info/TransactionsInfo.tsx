@@ -1,14 +1,11 @@
-'use client';
-import { getTransactionsState } from '@/features/transactions/transactions-slice';
-import { useSelector } from 'react-redux';
 import TransactionFilter from './TransactionFilter';
+import TransactionMonthWise from './TransactionMonthWise';
 const TransactionsInfo = () => {
-	const { filterType, filterTime } = useSelector(getTransactionsState);
 	return (
-		<TransactionFilter
-			filterType={filterType}
-			filterTime={filterTime}
-		/>
+		<div className="flex justify-between">
+			<TransactionFilter />
+			<TransactionMonthWise />
+		</div>
 	);
 };
 

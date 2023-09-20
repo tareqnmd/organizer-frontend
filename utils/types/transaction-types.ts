@@ -1,6 +1,5 @@
 export interface ITransactionsStore {
 	transactions: ITransaction[];
-	filterTime: string;
 	filterType: string;
 }
 export interface ITransaction {

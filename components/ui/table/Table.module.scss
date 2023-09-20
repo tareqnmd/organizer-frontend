@@ -11,6 +11,9 @@
 		@apply bg-white divide-y divide-gray-200;
 		tr {
 			background: #17594a50;
+			&.expense-row {
+				background: #cd181850;
+			}
 		}
 	}
 	td {
