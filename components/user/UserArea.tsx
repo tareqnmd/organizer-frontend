@@ -11,11 +11,13 @@ const UserArea = () => {
 				modalType={modalType}
 				setModalType={setModalType}
 			/>
-			<div
-				onClick={() => setModalType('profile')}
-				className="cursor-pointer w-max p-1 border-2 rounded-lg border-[##0B2447]"
-			>
-				<FaUserAlt />
+			<div className="flex justify-end">
+				<div
+					onClick={() => setModalType('profile')}
+					className="cursor-pointer w-max p-1 border-2 rounded-lg border-[##0B2447]"
+				>
+					<FaUserAlt />
+				</div>
 			</div>
 		</>
 	);
