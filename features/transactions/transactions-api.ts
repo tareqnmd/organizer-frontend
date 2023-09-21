@@ -32,6 +32,7 @@ export const transactionApi = apiSlice.injectEndpoints({
 			query: () => ({
 				url: `/transaction/overview`,
 			}),
+			providesTags: () => ['home_cards'],
 		}),
 		addTransaction: builder.mutation({
 			query: (payload) => ({
@@ -39,6 +40,7 @@ export const transactionApi = apiSlice.injectEndpoints({
 				method: 'POST',
 				body: payload,
 			}),
+			invalidatesTags: () => ['home_cards'],
 			async onQueryStarted(arg, { queryFulfilled, dispatch }) {
 				try {
 					const { data } = await queryFulfilled;
@@ -54,6 +56,7 @@ export const transactionApi = apiSlice.injectEndpoints({
 				method: 'PUT',
 				body: payload?.data,
 			}),
+			invalidatesTags: () => ['home_cards'],
 			async onQueryStarted(arg, { queryFulfilled, dispatch }) {
 				try {
 					const { data } = await queryFulfilled;
@@ -68,6 +71,7 @@ export const transactionApi = apiSlice.injectEndpoints({
 				url: `/transaction/${id}`,
 				method: 'DELETE',
 			}),
+			invalidatesTags: () => ['home_cards'],
 			async onQueryStarted(arg, { queryFulfilled, dispatch }) {
 				try {
 					const { data } = await queryFulfilled;

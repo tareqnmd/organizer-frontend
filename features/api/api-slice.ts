@@ -15,7 +15,7 @@ const apiSlice = createApi({
 		}
 		return result;
 	},
-	tagTypes: [],
+	tagTypes: ['home_cards'],
 	endpoints: () => ({}),
 });
 
