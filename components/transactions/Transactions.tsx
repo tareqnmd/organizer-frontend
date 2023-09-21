@@ -3,7 +3,9 @@ import TransactionsDetails from '../transactions/TransactionsDetails';
 
 async function getTransactionData() {
 	try {
-		const response = await fetchServerData('transaction');
+		const response = await fetchServerData('transaction', {
+			month: new Date().getMonth() + 1,
+		});
 		return response.data;
 	} catch (error) {
 		return [];

@@ -2,6 +2,7 @@ import apiSlice from '../api/api-slice';
 import {
 	addTransaction,
 	deleteTransaction,
+	setTransactions,
 	updateTransaction,
 } from './transactions-slice';
 
@@ -11,6 +12,21 @@ export const transactionApi = apiSlice.injectEndpoints({
 			query: (id) => ({
 				url: `/transaction/${id}`,
 			}),
+		}),
+		getTransactions: builder.mutation({
+			query: (month) => ({
+				url: `/transaction/month`,
+				method: 'POST',
+				body: month >= 1 && month <= 12 ? { month } : {},
+			}),
+			async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+				try {
+					const { data } = await queryFulfilled;
+					if (data) {
+						dispatch(setTransactions(data));
+					}
+				} catch (error) {}
+			},
 		}),
 		getTransactionsOverview: builder.query({
 			query: () => ({
@@ -68,6 +84,7 @@ export const {
 	useAddTransactionMutation,
 	useDeleteTransactionMutation,
 	useEditTransactionMutation,
+	useGetTransactionsMutation,
 	useGetTransactionQuery,
 	useGetTransactionsOverviewQuery,
 } = transactionApi;
