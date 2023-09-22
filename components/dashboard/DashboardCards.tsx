@@ -1,4 +1,4 @@
-import { fetchServerData } from '@/utils/fetch/axios-fetch';
+import { basicFetchData } from '@/utils/fetch/basic-fetch';
 import Link from 'next/link';
 import { FiUsers } from 'react-icons/fi';
 import { VscTypeHierarchy } from 'react-icons/vsc';
@@ -6,8 +6,10 @@ import Card from '../ui/card/Card';
 
 async function getDashboardInfo() {
 	try {
-		const response = await fetchServerData('dashboard');
-		return response.data;
+		const response = await basicFetchData('dashboard', {
+			next: { tags: ['dashboard_cards'] },
+		});
+		return response.json();
 	} catch (error) {
 		return [];
 	}
