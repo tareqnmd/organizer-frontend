@@ -62,6 +62,15 @@ export const transactionApi = apiSlice.injectEndpoints({
 					const { data } = await queryFulfilled;
 					if (data) {
 						dispatch(updateTransaction(data));
+						dispatch(
+							apiSlice.util.updateQueryData(
+								'getTransaction',
+								data._id,
+								(draft) => {
+									Object.assign(draft, data);
+								}
+							)
+						);
 					}
 				} catch (error) {}
 			},

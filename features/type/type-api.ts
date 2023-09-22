@@ -22,6 +22,16 @@ export const typeApi = apiSlice.injectEndpoints({
 				try {
 					const { data } = await queryFulfilled;
 					if (data) {
+						dispatch(
+							apiSlice.util.updateQueryData(
+								'getTypes',
+								{},
+								(draft: any) => {
+									console.log('data', data);
+									draft.push(data);
+								}
+							)
+						);
 					}
 				} catch (error) {}
 			},
@@ -36,6 +46,28 @@ export const typeApi = apiSlice.injectEndpoints({
 				try {
 					const { data } = await queryFulfilled;
 					if (data) {
+						dispatch(
+							apiSlice.util.updateQueryData(
+								'getType',
+								data._id,
+								(draft) => {
+									Object.assign(draft, data);
+								}
+							)
+						);
+						dispatch(
+							apiSlice.util.updateQueryData(
+								'getTypes',
+								{},
+								(draft: any) => {
+									const editTask: any = draft?.find(
+										(type: any) =>
+											String(type._id) === String(arg.id)
+									);
+									Object.assign(editTask, arg?.data);
+								}
+							)
+						);
 					}
 				} catch (error) {}
 			},
@@ -46,12 +78,21 @@ export const typeApi = apiSlice.injectEndpoints({
 				method: 'DELETE',
 			}),
 			async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+				const typeDelete = dispatch(
+					apiSlice.util.updateQueryData(
+						'getTypes',
+						{},
+						(draft: any) =>
+							draft?.filter(
+								(type: any) => String(type._id) !== String(arg)
+							)
+					)
+				);
 				try {
-					const { data } = await queryFulfilled;
-					console.log('data', data);
-					if (data) {
-					}
-				} catch (error) {}
+					await queryFulfilled;
+				} catch (error) {
+					typeDelete.undo();
+				}
 			},
 		}),
 	}),
