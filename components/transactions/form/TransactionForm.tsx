@@ -78,7 +78,6 @@ const TransactionForm = ({ setModalType, modalType, transactionId }: any) => {
 
 	const closeModal = () => {
 		setModalType('');
-		reset();
 	};
 
 	useEffect(() => {
