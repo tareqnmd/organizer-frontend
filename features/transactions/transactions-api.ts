@@ -63,7 +63,7 @@ export const transactionApi = apiSlice.injectEndpoints({
 					if (data) {
 						dispatch(updateTransaction(data));
 						dispatch(
-							apiSlice.util.updateQueryData(
+							transactionApi.util.updateQueryData(
 								'getTransaction',
 								data._id,
 								(draft) => {

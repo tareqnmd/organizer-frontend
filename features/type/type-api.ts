@@ -23,11 +23,10 @@ export const typeApi = apiSlice.injectEndpoints({
 					const { data } = await queryFulfilled;
 					if (data) {
 						dispatch(
-							apiSlice.util.updateQueryData(
+							typeApi.util.updateQueryData(
 								'getTypes',
 								{},
-								(draft: any) => {
-									console.log('data', data);
+								(draft) => {
 									draft.push(data);
 								}
 							)
@@ -47,7 +46,7 @@ export const typeApi = apiSlice.injectEndpoints({
 					const { data } = await queryFulfilled;
 					if (data) {
 						dispatch(
-							apiSlice.util.updateQueryData(
+							typeApi.util.updateQueryData(
 								'getType',
 								data._id,
 								(draft) => {
@@ -56,11 +55,11 @@ export const typeApi = apiSlice.injectEndpoints({
 							)
 						);
 						dispatch(
-							apiSlice.util.updateQueryData(
+							typeApi.util.updateQueryData(
 								'getTypes',
 								{},
-								(draft: any) => {
-									const editTask: any = draft?.find(
+								(draft) => {
+									const editTask = draft?.find(
 										(type: any) =>
 											String(type._id) === String(arg.id)
 									);
@@ -79,13 +78,10 @@ export const typeApi = apiSlice.injectEndpoints({
 			}),
 			async onQueryStarted(arg, { queryFulfilled, dispatch }) {
 				const typeDelete = dispatch(
-					apiSlice.util.updateQueryData(
-						'getTypes',
-						{},
-						(draft: any) =>
-							draft?.filter(
-								(type: any) => String(type._id) !== String(arg)
-							)
+					typeApi.util.updateQueryData('getTypes', {}, (draft) =>
+						draft?.filter(
+							(type: any) => String(type._id) !== String(arg)
+						)
 					)
 				);
 				try {
