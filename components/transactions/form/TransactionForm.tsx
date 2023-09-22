@@ -12,6 +12,7 @@ import { getUserState } from '@/features/user/user-slice';
 import { dateInputFormat, getError } from '@/utils/helpers';
 import { transactionFormInputs } from '@/utils/helpers/transaction-helper';
 import { yupResolver } from '@hookform/resolvers/yup';
+import dayjs from 'dayjs';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
@@ -32,6 +33,7 @@ const TransactionForm = ({ setModalType, modalType, transactionId }: any) => {
 		register,
 		setValue,
 		handleSubmit,
+		watch,
 		formState: { errors },
 		reset,
 	} = useForm<any>({
@@ -63,9 +65,20 @@ const TransactionForm = ({ setModalType, modalType, transactionId }: any) => {
 		},
 	] = useEditTransactionMutation();
 
+	watch('date', (value: Date) => {
+		return dayjs(value).format('YYYY-MM-DD');
+	});
+
 	const transactionMutation = (data: any) => {
 		transactionId
-			? editTransaction({ id: transactionId, data: { ...data, userId } })
+			? editTransaction({
+					id: transactionId,
+					data: {
+						...data,
+						date: dayjs(data.date).format('YYYY-MM-DD'),
+						userId,
+					},
+			  })
 			: addTransaction({ ...data, userId });
 	};
 
