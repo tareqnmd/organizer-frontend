@@ -7,7 +7,7 @@ import Card from '../ui/card/Card';
 async function getDashboardInfo() {
 	try {
 		const response = await basicFetchData('dashboard', {
-			next: { tags: ['dashboard_cards'] },
+			cache: 'no-store',
 		});
 		return response.json();
 	} catch (error) {
