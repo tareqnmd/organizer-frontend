@@ -79,7 +79,11 @@ const TransactionForm = ({ setModalType, modalType, transactionId }: any) => {
 						userId,
 					},
 			  })
-			: addTransaction({ ...data, userId });
+			: addTransaction({
+					...data,
+					date: dayjs(data.date).format('YYYY-MM-DD'),
+					userId,
+			  });
 	};
 
 	const getColumnWidth = (name: string) => {

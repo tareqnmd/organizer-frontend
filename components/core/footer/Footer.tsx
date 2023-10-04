@@ -7,7 +7,7 @@ const Footer = () => {
 				target="_blank"
 				href="https://tareqnmd.com/"
 			>
-				Tareqnmd
+				Tareq
 			</a>
 		</footer>
 	);
