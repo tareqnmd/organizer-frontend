@@ -15,7 +15,8 @@ import TransactionView from '../view/TransactionView';
 const TransactionTable = () => {
 	const [modalType, setModalType] = useState('');
 	const [transactionId, setTransactionId] = useState('');
-	const { transactions, filterType } = useSelector(getTransactionsState);
+	const { transactions, filterType, filter } =
+		useSelector(getTransactionsState);
 
 	const transactionAction = (type: string, item: any) => {
 		setTransactionId(item._id);
@@ -41,7 +42,11 @@ const TransactionTable = () => {
 			/>
 			<Table
 				columns={transactionTableColumns}
-				data={getFilteredTransactionType(transactions, filterType)}
+				data={getFilteredTransactionType(
+					transactions,
+					filterType,
+					filter
+				)}
 				actions={[
 					{
 						type: 'view',

@@ -60,7 +60,8 @@ const getWeek = (date: Date) => {
 
 export const getFilteredTransactionType = (
 	transactions: ITransactions,
-	type: string
+	type: string,
+	filter: string
 ) => {
 	const typeFiltered =
 		type === 'all'
@@ -71,7 +72,14 @@ export const getFilteredTransactionType = (
 						(type === 'income' ? 'Income' : 'Expense')
 			  );
 
-	return typeFiltered.map((item) => ({
+	const selectFiltered =
+		filter === 'all'
+			? typeFiltered
+			: typeFiltered?.filter(
+					(transaction) => transaction?.typeId === filter
+			  );
+
+	return selectFiltered.map((item) => ({
 		...item,
 		extra_class: item?.type === 'Expense' ? 'expense-row' : '',
 	}));

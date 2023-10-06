@@ -12,3 +12,7 @@
 .input-btn {
 	@apply px-1 cursor-pointer bg-gray-50 border border-gray-900 text-gray-900 text-sm rounded-lg select-none;
 }
+
+.type-select {
+	@apply w-max rounded-lg p-1 bg-[#ececec] w-[140px] focus:outline-none;
+}

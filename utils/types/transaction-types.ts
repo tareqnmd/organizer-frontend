@@ -1,6 +1,7 @@
 export interface ITransactionsStore {
 	transactions: ITransaction[];
 	filterType: string;
+	filter: string;
 }
 export interface ITransaction {
 	_id: string;
@@ -8,6 +9,7 @@ export interface ITransaction {
 	name: string;
 	type: string;
 	typeName: string;
+	typeId: string;
 	amount: number;
 	details: string;
 }
