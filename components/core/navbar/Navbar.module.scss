@@ -1,5 +1,5 @@
 .nav-links {
-	@apply shadow-sm shadow-gray-300;
+	@apply shadow-sm shadow-gray-300 bg-[#fff];
 	> div {
 		@apply container mx-auto flex items-center justify-end py-3 px-2 gap-6 md:gap-4;
 		a {

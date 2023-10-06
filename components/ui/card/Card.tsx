@@ -13,7 +13,7 @@ const Card = ({
 }) => {
 	return (
 		<div
-			className={`${extra_class} rounded-xl border bg-card text-card-foreground shadow p-3`}
+			className={`${extra_class} rounded-xl border bg-card text-card-foreground shadow p-3 bg-[#fff]`}
 		>
 			<div className="flex flex-row items-center justify-between space-y-0 pb-2">
 				<h4 className="text-sm font-medium">{title}</h4>

@@ -6,13 +6,13 @@
 }
 
 .type-filter {
-	@apply w-max rounded-lg p-1 bg-[#ececec];
+	@apply w-max rounded-lg p-1 bg-[#fff];
 }
 
 .input-btn {
-	@apply px-1 cursor-pointer bg-gray-50 border border-gray-900 text-gray-900 text-sm rounded-lg select-none;
+	@apply px-1 cursor-pointer  focus:outline-none text-gray-900 rounded-lg select-none font-medium;
 }
 
 .type-select {
-	@apply w-max rounded-lg p-1 bg-[#ececec] w-[140px] focus:outline-none;
+	@apply w-max rounded-lg p-1 bg-[#fff] w-[140px] font-medium focus:outline-none;
 }

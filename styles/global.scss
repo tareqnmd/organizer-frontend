@@ -14,11 +14,11 @@ html {
 }
 
 #mainRoot main {
-	@apply container mx-auto my-4 px-2;
+	@apply container mx-auto py-4 px-2;
 }
 
 .bg-global {
-	background: #ffffff;
+	background: #ececec;
 }
 
 .input-label-white {

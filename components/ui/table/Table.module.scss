@@ -3,7 +3,9 @@
 	thead {
 		@apply bg-[#0B2447] text-white;
 	}
-	th,
+	th {
+		@apply p-2 text-sm font-bold text-left;
+	}
 	td {
 		@apply p-2 text-sm font-normal text-left;
 	}
