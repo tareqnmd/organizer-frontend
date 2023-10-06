@@ -53,7 +53,9 @@ const Table = ({ columns, data, actions, footer }: any) => {
 						</td>
 					</tr>
 				)}
-				{footer ?? null}
+				{footer ? (
+					<tr className={style['footer-td']}>{footer}</tr>
+				) : null}
 			</tbody>
 		</table>
 	);

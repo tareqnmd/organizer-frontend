@@ -82,7 +82,7 @@ const TransactionTable = () => {
 					},
 				]}
 				footer={
-					<tr>
+					<>
 						<td
 							className="!font-bold"
 							colSpan={2}
@@ -91,7 +91,7 @@ const TransactionTable = () => {
 						</td>
 						<td className="!font-bold">{data?.total_price}</td>
 						<td colSpan={2}></td>
-					</tr>
+					</>
 				}
 			/>
 		</>

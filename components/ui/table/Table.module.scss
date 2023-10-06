@@ -7,6 +7,9 @@
 	td {
 		@apply p-2 text-sm font-normal text-left;
 	}
+	.footer-td {
+		@apply bg-[#0B2447] text-white;
+	}
 	tbody {
 		@apply bg-white divide-y divide-gray-200;
 		tr {
