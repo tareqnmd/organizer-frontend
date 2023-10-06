@@ -15,6 +15,24 @@ export const totalTransactionAmount = (transactions: ITransactions) => {
 	return millionNumberFormat(totalAmount, 'amount');
 };
 
+export const footerTransactionAmount = (transactions: ITransactions) => {
+	let total = 0;
+	let income = 0;
+	let expense = 0;
+
+	const totalAmount = transactions?.map((transaction) => {
+		total +=
+			transaction.type === 'Income'
+				? transaction.amount
+				: transaction.type === 'Expense'
+				? -transaction.amount
+				: 0;
+		income += transaction.type === 'Income' ? transaction.amount : 0;
+		expense += transaction.type === 'Expense' ? transaction.amount : 0;
+	});
+	return `${total} ( ${income} - ${expense} ) BDT`;
+};
+
 export const incomeTransactionAmount = (transactions: ITransactions) => {
 	const totalAmount = transactions?.reduce(
 		(acc: number, transaction: ITransaction) =>

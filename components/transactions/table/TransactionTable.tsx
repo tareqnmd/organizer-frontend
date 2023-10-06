@@ -2,10 +2,11 @@
 import Table from '@/components/ui/table/Table';
 import { getTransactionsState } from '@/features/transactions/transactions-slice';
 import {
+	footerTransactionAmount,
 	getFilteredTransactionType,
 	transactionTableColumns,
 } from '@/utils/helpers/transaction-helper';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
 import { BsFillEyeFill } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
@@ -18,10 +19,30 @@ const TransactionTable = () => {
 	const { transactions, filterType, filter } =
 		useSelector(getTransactionsState);
 
+	const [data, setData] = useState<any>({
+		updated_transactions: [],
+		total_price: '',
+	});
+
 	const transactionAction = (type: string, item: any) => {
 		setTransactionId(item._id);
 		setModalType(type);
 	};
+
+	useEffect(() => {
+		if (transactions && filterType && filter) {
+			const updated_transactions = getFilteredTransactionType(
+				transactions,
+				filterType,
+				filter
+			);
+			const total_price = footerTransactionAmount(updated_transactions);
+			setData({
+				updated_transactions,
+				total_price,
+			});
+		}
+	}, [transactions, filterType, filter]);
 
 	return (
 		<>
@@ -42,11 +63,7 @@ const TransactionTable = () => {
 			/>
 			<Table
 				columns={transactionTableColumns}
-				data={getFilteredTransactionType(
-					transactions,
-					filterType,
-					filter
-				)}
+				data={data?.updated_transactions}
 				actions={[
 					{
 						type: 'view',
@@ -64,6 +81,18 @@ const TransactionTable = () => {
 						clickHandler: transactionAction,
 					},
 				]}
+				footer={
+					<tr>
+						<td
+							className="!font-bold"
+							colSpan={2}
+						>
+							Total
+						</td>
+						<td className="!font-bold">{data?.total_price}</td>
+						<td colSpan={2}></td>
+					</tr>
+				}
 			/>
 		</>
 	);

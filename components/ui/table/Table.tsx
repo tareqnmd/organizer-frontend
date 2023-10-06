@@ -1,7 +1,7 @@
 import { getColumnData } from '@/utils/helpers';
 import style from './Table.module.scss';
 
-const Table = ({ columns, data, actions }: any) => {
+const Table = ({ columns, data, actions, footer }: any) => {
 	return (
 		<table className={style.table}>
 			<thead>
@@ -53,6 +53,7 @@ const Table = ({ columns, data, actions }: any) => {
 						</td>
 					</tr>
 				)}
+				{footer ?? null}
 			</tbody>
 		</table>
 	);
