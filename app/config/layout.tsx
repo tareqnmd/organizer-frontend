@@ -2,8 +2,8 @@ import ConfigLinks from '@/components/config/ConfigLinks';
 import RootContentLayout from '@/components/core/layout/RootContentLayout';
 
 export const metadata = {
-	title: 'Hisab',
-	description: 'Dashboard - Hisab By Tareqnmd',
+	title: 'M32T - Config',
+	description: 'M32T - Config By Tareqnmd',
 };
 
 export default function RootLayout({

@@ -27,7 +27,7 @@ const Modules = () => {
 				</Link>
 				<Link
 					className="w-full"
-					href="/planner"
+					href="/notepad"
 				>
 					<ModuleCard
 						text="Notepad"
