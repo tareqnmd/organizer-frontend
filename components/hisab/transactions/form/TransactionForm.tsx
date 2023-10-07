@@ -103,6 +103,8 @@ const TransactionForm = ({ setModalType, modalType, transactionId }: any) => {
 			setValue('amount', transaction.amount);
 			setValue('typeId', transaction.typeId);
 			setValue('description', transaction.description);
+		} else {
+			setValue('date', dateInputFormat(new Date()));
 		}
 	}, [setValue, transaction]);
 
