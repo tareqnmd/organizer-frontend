@@ -13,7 +13,10 @@
 					@apply border-b-2 border-[#0B2447];
 				}
 			}
-			button {
+			.profile-btn {
+				@apply text-[#0B2447] text-sm font-bold;
+			}
+			.logout-btn {
 				@apply rounded-md bg-[#0B2447] text-white py-1 px-2 text-sm font-bold;
 			}
 		}

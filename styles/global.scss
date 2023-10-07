@@ -13,7 +13,7 @@ html {
 	@apply bg-global;
 }
 
-#mainRoot main {
+#mainRoot .main-content {
 	@apply container mx-auto py-4 px-2;
 }
 
@@ -25,4 +25,8 @@ html {
 	label {
 		color: white !important;
 	}
+}
+
+.active-path {
+	@apply border-b-2 border-[#0B2447];
 }

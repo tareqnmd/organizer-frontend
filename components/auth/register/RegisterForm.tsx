@@ -1,6 +1,6 @@
 'use client';
-import Button from '@/components/shared/button/Button';
-import FormInput from '@/components/shared/input/FormItem';
+import Button from '@/components/ui/button/Button';
+import FormInput from '@/components/ui/input/FormItem';
 import { useRegisterMutation } from '@/features/user/user-api';
 import { getError } from '@/utils/helpers';
 import { registerFormInputs } from '@/utils/helpers/auth-helper';
@@ -37,17 +37,16 @@ const RegisterForm = () => {
 	const router = useRouter();
 	const [registerHandler, { isSuccess, isLoading, isError, error }] =
 		useRegisterMutation();
-	const registerMutation = (data:any) => {
+	const registerMutation = (data: any) => {
 		const { password, confirmPassword, ...rest } = data;
-			if (password === confirmPassword) {
-				registerHandler({ ...rest, password });
-			} else {
-				toast.error('Password miss match', {
-					position: 'top-center',
-					autoClose: 1000,
-				});
-			}
-		
+		if (password === confirmPassword) {
+			registerHandler({ ...rest, password });
+		} else {
+			toast.error('Password miss match', {
+				position: 'top-center',
+				autoClose: 1000,
+			});
+		}
 	};
 
 	useEffect(() => {
