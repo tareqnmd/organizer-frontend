@@ -10,7 +10,15 @@ const Submenu = ({ links }: any) => {
 				<Link
 					key={index}
 					href={link?.path}
-					className={pathname === link?.path ? 'active-path' : ''}
+					className={
+						(
+							link?.exact
+								? pathname === link?.path
+								: pathname.includes(link?.path)
+						)
+							? 'active-path'
+							: ''
+					}
 				>
 					<span>{link?.name}</span>
 				</Link>

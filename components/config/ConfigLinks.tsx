@@ -1,6 +1,6 @@
 import Submenu from '../core/navbar/Submenu';
 const links = [
-	{ path: '/config', name: 'Global' },
+	{ path: '/config', name: 'Global', exact: true },
 	{ path: '/config/hisab', name: 'Hisab' },
 ];
 
