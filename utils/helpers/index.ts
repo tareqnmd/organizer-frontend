@@ -35,4 +35,4 @@ export const millionNumberFormat = (
 	return type === 'amount' ? `${result} ${currency}` : result;
 };
 
-export const publicPaths = ['/login', '/register'];
+export const publicPaths = ['/auth/login', '/auth/register'];

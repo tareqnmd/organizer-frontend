@@ -56,7 +56,7 @@ const RegisterForm = () => {
 				autoClose: 1000,
 				hideProgressBar: true,
 			});
-			router.push('/login');
+			router.push('/auth/login');
 		}
 		if (isError) {
 			toast.error(getError(error), { position: 'top-center' });

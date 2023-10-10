@@ -22,7 +22,7 @@ const AuthWrapper = ({
 						<>Don&apos;t have an account?</>
 					)}
 					<Link
-						href={authType ? '/login' : '/register'}
+						href={authType ? '/auth/login' : '/auth/register'}
 						className="ml-1 font-medium text-gray-700 hover:underline"
 					>
 						{authType ? 'Login' : 'Create One'}
