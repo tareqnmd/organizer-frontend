@@ -2,6 +2,7 @@
 import Card from '@/components/ui/card/Card';
 import Taka from '@/components/ui/icons/Taka';
 import { useGetTransactionsOverviewQuery } from '@/features/hisab/transactions/transactions-api';
+import { currentMonthYear } from '@/utils/helpers';
 import { MdFormatListNumbered } from 'react-icons/md';
 const outside_wrap = 'col-span-12 lg:col-span-6 grid grid-cols-12 gap-4';
 const inside_wrap = 'col-span-12 sm:col-span-6';
@@ -14,7 +15,7 @@ const HisabCards = () => {
 		<div className="grid grid-cols-12 gap-4">
 			<div className={outside_wrap}>
 				<h3 className="col-span-12 font-semibold border-b border-slate-700">
-					Current Month
+					Current Month ( {currentMonthYear} )
 				</h3>
 				<Card
 					extra_class={inside_wrap}
@@ -43,7 +44,7 @@ const HisabCards = () => {
 			</div>
 			<div className={outside_wrap}>
 				<h3 className="col-span-12 font-semibold border-b border-slate-700">
-					All Time
+					All Time ( From September 23 )
 				</h3>
 				<Card
 					extra_class={inside_wrap}

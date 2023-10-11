@@ -36,3 +36,8 @@ export const millionNumberFormat = (
 };
 
 export const publicPaths = ['/auth/login', '/auth/register'];
+
+export const currentMonthYear = new Date().toLocaleString('en-US', {
+	month: 'long',
+	year: '2-digit',
+});
