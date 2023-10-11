@@ -3,7 +3,7 @@ import ModalFooterButtons from '@/components/ui/modal/ModalFooterButtons';
 import {
 	useDeleteTypeMutation,
 	useGetTypeQuery,
-} from '@/features/type/type-api';
+} from '@/features/hisab/type/type-api';
 import { getError } from '@/utils/helpers';
 import { useEffect } from 'react';
 import { AiFillDelete } from 'react-icons/ai';

@@ -1,5 +1,5 @@
-import { ITransaction, ITransactions } from '../types/transaction-types';
-import { millionNumberFormat } from './index';
+import { ITransaction, ITransactions } from '../../types/transaction-types';
+import { millionNumberFormat } from '../index';
 
 export const totalTransactionAmount = (transactions: ITransactions) => {
 	const totalAmount = transactions?.reduce(

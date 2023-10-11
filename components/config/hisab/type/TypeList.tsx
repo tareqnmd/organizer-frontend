@@ -1,6 +1,6 @@
 'use client';
 import Table from '@/components/ui/table/Table';
-import { typeTableColumns } from '@/utils/helpers/type-helper';
+import { typeTableColumns } from '@/utils/helpers/hisab/type-helper';
 import { useState } from 'react';
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
 import { BsFillEyeFill } from 'react-icons/bs';

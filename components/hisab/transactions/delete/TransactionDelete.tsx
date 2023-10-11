@@ -1,6 +1,6 @@
 import Modal from '@/components/ui/modal/Modal';
 import ModalFooterButtons from '@/components/ui/modal/ModalFooterButtons';
-import { useDeleteTransactionMutation } from '@/features/transactions/transactions-api';
+import { useDeleteTransactionMutation } from '@/features/hisab/transactions/transactions-api';
 import { getError } from '@/utils/helpers';
 import { useEffect } from 'react';
 import { AiFillDelete } from 'react-icons/ai';

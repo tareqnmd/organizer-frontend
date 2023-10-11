@@ -1,5 +1,5 @@
 import Loading from '@/components/ui/loader/Loading';
-import { useGetTransactionQuery } from '@/features/transactions/transactions-api';
+import { useGetTransactionQuery } from '@/features/hisab/transactions/transactions-api';
 import { dateFormat, millionNumberFormat } from '@/utils/helpers';
 
 const TransactionsDetail = ({ transactionId }: { transactionId: string }) => {

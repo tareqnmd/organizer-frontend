@@ -1,5 +1,5 @@
 'use client';
-import { useGetTypesQuery } from '@/features/type/type-api';
+import { useGetTypesQuery } from '@/features/hisab/type/type-api';
 import TypeList from './TypeList';
 
 const TypeDetails = () => {

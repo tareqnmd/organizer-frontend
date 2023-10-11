@@ -1,11 +1,11 @@
 'use client';
 import Table from '@/components/ui/table/Table';
-import { getTransactionsState } from '@/features/transactions/transactions-slice';
+import { getTransactionsState } from '@/features/hisab/transactions/transactions-slice';
 import {
 	footerTransactionAmount,
 	getFilteredTransactionType,
 	transactionTableColumns,
-} from '@/utils/helpers/transaction-helper';
+} from '@/utils/helpers/hisab/transaction-helper';
 import { useEffect, useState } from 'react';
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
 import { BsFillEyeFill } from 'react-icons/bs';

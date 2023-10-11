@@ -3,8 +3,8 @@ import {
 	getTransactionsState,
 	setFilter,
 	setFilterType,
-} from '@/features/transactions/transactions-slice';
-import { useGetTypesQuery } from '@/features/type/type-api';
+} from '@/features/hisab/transactions/transactions-slice';
+import { useGetTypesQuery } from '@/features/hisab/type/type-api';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './TransactionFilter.module.scss';
 

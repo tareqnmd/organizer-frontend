@@ -1,4 +1,5 @@
 import UserInfo from '@/components/profile/UserInfo';
+import PrimaryLogo from '@/components/ui/logo/PrimaryLogo';
 import { useLogoutMutation } from '@/features/user/user-api';
 import { getUserState } from '@/features/user/user-slice';
 import Link from 'next/link';
@@ -33,7 +34,9 @@ const Navbar = () => {
 			/>
 			<nav className={styles['nav-links']}>
 				<div>
-					<Link href="/">M32T</Link>
+					<Link href="/">
+						<PrimaryLogo />
+					</Link>
 					<div>
 						{user?.role === 32 && (
 							<Link

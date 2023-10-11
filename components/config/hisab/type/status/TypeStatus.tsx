@@ -1,6 +1,9 @@
 import Modal from '@/components/ui/modal/Modal';
 import ModalFooterButtons from '@/components/ui/modal/ModalFooterButtons';
-import { useEditTypeMutation, useGetTypeQuery } from '@/features/type/type-api';
+import {
+	useEditTypeMutation,
+	useGetTypeQuery,
+} from '@/features/hisab/type/type-api';
 import { getError } from '@/utils/helpers';
 import { useEffect } from 'react';
 import { AiFillCheckCircle, AiFillCloseCircle } from 'react-icons/ai';

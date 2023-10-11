@@ -1,7 +1,7 @@
 import { useUserUpdateMutation } from '@/features/user/user-api';
 import { getUserState } from '@/features/user/user-slice';
 import { getError } from '@/utils/helpers';
-import { userUpdateFormInputs } from '@/utils/helpers/auth-helper';
+import { userUpdateFormInputs } from '@/utils/helpers/user/auth-helper';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';

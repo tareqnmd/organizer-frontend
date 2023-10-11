@@ -6,9 +6,9 @@ import {
 	useAddTypeMutation,
 	useEditTypeMutation,
 	useGetTypeQuery,
-} from '@/features/type/type-api';
+} from '@/features/hisab/type/type-api';
 import { getError } from '@/utils/helpers';
-import { typeFormInputs } from '@/utils/helpers/type-helper';
+import { typeFormInputs } from '@/utils/helpers/hisab/type-helper';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
