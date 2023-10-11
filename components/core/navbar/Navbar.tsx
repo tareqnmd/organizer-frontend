@@ -44,7 +44,7 @@ const Navbar = () => {
 										: ''
 								}
 							>
-								<span>Admin</span>
+								<span>Config</span>
 							</Link>
 						)}
 						<button
