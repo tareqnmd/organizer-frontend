@@ -15,35 +15,6 @@ const HisabCards = () => {
 		<div className="grid grid-cols-12 gap-4">
 			<div className={outside_wrap}>
 				<h3 className="col-span-12 font-semibold border-b border-slate-700">
-					Current Month ( {currentMonthYear} )
-				</h3>
-				<Card
-					extra_class={inside_wrap}
-					title="Current Balance"
-					icon={<Taka />}
-					value={current_month?.amount ?? 0}
-				/>
-				<Card
-					extra_class={inside_wrap}
-					title="Income"
-					icon={<Taka />}
-					value={current_month?.income_amount ?? 0}
-				/>
-				<Card
-					extra_class={inside_wrap}
-					title="Expense"
-					icon={<Taka />}
-					value={current_month?.expense_amount ?? 0}
-				/>
-				<Card
-					extra_class={inside_wrap}
-					title="Transactions"
-					icon={<MdFormatListNumbered />}
-					value={current_month?.transactions ?? 0}
-				/>
-			</div>
-			<div className={outside_wrap}>
-				<h3 className="col-span-12 font-semibold border-b border-slate-700">
 					All Time ( From September 23 )
 				</h3>
 				<Card
@@ -69,6 +40,35 @@ const HisabCards = () => {
 					title="Transactions"
 					icon={<MdFormatListNumbered />}
 					value={all?.transactions ?? 0}
+				/>
+			</div>
+			<div className={outside_wrap}>
+				<h3 className="col-span-12 font-semibold border-b border-slate-700">
+					Current Month ( {currentMonthYear} )
+				</h3>
+				<Card
+					extra_class={inside_wrap}
+					title="Current Balance"
+					icon={<Taka />}
+					value={current_month?.amount ?? 0}
+				/>
+				<Card
+					extra_class={inside_wrap}
+					title="Income"
+					icon={<Taka />}
+					value={current_month?.income_amount ?? 0}
+				/>
+				<Card
+					extra_class={inside_wrap}
+					title="Expense"
+					icon={<Taka />}
+					value={current_month?.expense_amount ?? 0}
+				/>
+				<Card
+					extra_class={inside_wrap}
+					title="Transactions"
+					icon={<MdFormatListNumbered />}
+					value={current_month?.transactions ?? 0}
 				/>
 			</div>
 		</div>

@@ -1,5 +1,9 @@
-import ConfigLinks from '@/components/config/ConfigLinks';
 import RootContentLayout from '@/components/core/layout/RootContentLayout';
+
+const subMenuLinks = [
+	{ path: '/config', name: 'Global', exact: true },
+	{ path: '/config/hisab', name: 'Hisab' },
+];
 
 export const metadata = {
 	title: 'M32T - Config',
@@ -12,9 +16,8 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<>
-			<ConfigLinks />
-			<RootContentLayout>{children}</RootContentLayout>
-		</>
+		<RootContentLayout subMenuLinks={subMenuLinks}>
+			{children}
+		</RootContentLayout>
 	);
 }

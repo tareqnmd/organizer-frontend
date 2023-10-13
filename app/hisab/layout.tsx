@@ -1,5 +1,9 @@
 import RootContentLayout from '@/components/core/layout/RootContentLayout';
-import HisabLinks from '@/components/hisab/HisabLinks';
+
+const subMenuLinks = [
+	{ path: '/hisab', name: 'Hisab', exact: true },
+	{ path: '/hisab/transactions', name: 'Transactions' },
+];
 
 export const metadata = {
 	title: 'M32T - Hisab',
@@ -12,9 +16,8 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<>
-			<HisabLinks />
-			<RootContentLayout>{children}</RootContentLayout>
-		</>
+		<RootContentLayout subMenuLinks={subMenuLinks}>
+			{children}
+		</RootContentLayout>
 	);
 }
