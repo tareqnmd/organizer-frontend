@@ -8,9 +8,11 @@ import {
 	useGetNoteQuery,
 } from '@/features/note/api';
 import { getUserState } from '@/features/user/slice';
+import { PageHeader } from '@/styles/globalStyledComponent';
 import { getError } from '@/utils/helpers';
 import { noteFormInputs } from '@/utils/helpers/note';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
@@ -34,6 +36,7 @@ const NoteForm = ({ noteId }: any) => {
 	} = useForm<any>({
 		resolver: yupResolver(schema),
 	});
+	const router = useRouter();
 	const { userId } = useSelector(getUserState);
 	const { data: note, isFetching } = useGetNoteQuery(noteId, {
 		skip: !noteId,
@@ -57,7 +60,7 @@ const NoteForm = ({ noteId }: any) => {
 		},
 	] = useEditNoteMutation();
 
-	const transactionMutation = (data: any) => {
+	const noteMutation = (data: any) => {
 		noteId
 			? editNote({
 					id: noteId,
@@ -87,11 +90,12 @@ const NoteForm = ({ noteId }: any) => {
 				hideProgressBar: true,
 			});
 			reset();
+			router.push('/note');
 		}
 		if (addIsError) {
 			toast.error(getError(addError), { position: 'top-center' });
 		}
-	}, [addIsSuccess, addIsError, addError, reset]);
+	}, [addIsSuccess, addIsError, addError, router, reset]);
 
 	useEffect(() => {
 		if (editIsSuccess) {
@@ -101,40 +105,39 @@ const NoteForm = ({ noteId }: any) => {
 				hideProgressBar: true,
 			});
 			reset();
+			router.push('/note');
 		}
 		if (editIsError) {
 			toast.error(getError(editError), { position: 'top-center' });
 		}
-	}, [editIsSuccess, editIsError, editError, reset]);
+	}, [editIsSuccess, editIsError, editError, router, reset]);
 
 	return (
-		<Loading loading={isFetching}>
-			<form
-				className="p-3 bg-[#0b2447] rounded-md shadow-md"
-				onSubmit={handleSubmit(transactionMutation)}
-			>
-				<div className="grid gap-6">
-					{noteFormInputs?.map((input) => (
-						<FormInput
-							key={input?.name}
-							input={input}
-							register={register}
-							errors={errors}
-							extraClass={`input-label-white`}
+		<>
+			<PageHeader>Note {noteId ? 'Update' : 'Create'}:</PageHeader>
+			<Loading loading={isFetching}>
+				<form onSubmit={handleSubmit(noteMutation)}>
+					<div className="grid gap-6">
+						{noteFormInputs?.map((input) => (
+							<FormInput
+								key={input?.name}
+								input={input}
+								register={register}
+								errors={errors}
+							/>
+						))}
+					</div>
+					<div className="flex justify-end mt-4">
+						<Button
+							type="submit"
+							name={`${noteId ? 'Update' : 'Create'} Note`}
+							loading={addIsLoading || editIsLoading}
+							mutation={true}
 						/>
-					))}
-				</div>
-				<div className="flex justify-end mt-4">
-					<Button
-						type="submit"
-						name={`${noteId ? 'Update' : 'Create'} Note`}
-						loading={addIsLoading || editIsLoading}
-						mutation={true}
-						extraClassNames={`!bg-white !text-black font-semibold`}
-					/>
-				</div>
-			</form>
-		</Loading>
+					</div>
+				</form>
+			</Loading>
+		</>
 	);
 };
 
