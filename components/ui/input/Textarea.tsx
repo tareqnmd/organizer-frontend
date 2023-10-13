@@ -1,5 +1,5 @@
 const Textarea = ({ input, register }: any) => {
-	const { name, required, placeholder } = input;
+	const { name, placeholder } = input;
 	return (
 		<textarea
 			name={name}

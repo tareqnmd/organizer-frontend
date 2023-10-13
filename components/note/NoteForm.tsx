@@ -3,15 +3,14 @@ import Button from '@/components/ui/button/Button';
 import FormInput from '@/components/ui/input/FormItem';
 import Loading from '@/components/ui/loader/Loading';
 import {
-	useAddTransactionMutation,
-	useEditTransactionMutation,
-	useGetTransactionQuery,
-} from '@/features/hisab/transactions/api';
+	useAddNoteMutation,
+	useEditNoteMutation,
+	useGetNoteQuery,
+} from '@/features/note/api';
 import { getUserState } from '@/features/user/slice';
 import { getError } from '@/utils/helpers';
 import { noteFormInputs } from '@/utils/helpers/note';
 import { yupResolver } from '@hookform/resolvers/yup';
-import dayjs from 'dayjs';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
@@ -30,62 +29,55 @@ const NoteForm = ({ noteId }: any) => {
 		register,
 		setValue,
 		handleSubmit,
-		watch,
 		formState: { errors },
 		reset,
 	} = useForm<any>({
 		resolver: yupResolver(schema),
 	});
 	const { userId } = useSelector(getUserState);
-	const { data: transaction, isFetching } = useGetTransactionQuery(noteId, {
+	const { data: note, isFetching } = useGetNoteQuery(noteId, {
 		skip: !noteId,
 	});
 	const [
-		addTransaction,
+		addNote,
 		{
 			isLoading: addIsLoading,
 			isSuccess: addIsSuccess,
 			isError: addIsError,
 			error: addError,
 		},
-	] = useAddTransactionMutation();
+	] = useAddNoteMutation();
 	const [
-		editTransaction,
+		editNote,
 		{
 			isLoading: editIsLoading,
 			isSuccess: editIsSuccess,
 			isError: editIsError,
 			error: editError,
 		},
-	] = useEditTransactionMutation();
-
-	watch('date', (value: Date) => {
-		return dayjs(value).format('YYYY-MM-DD');
-	});
+	] = useEditNoteMutation();
 
 	const transactionMutation = (data: any) => {
 		noteId
-			? editTransaction({
+			? editNote({
 					id: noteId,
 					data: {
 						...data,
-						date: dayjs(data.date).format('YYYY-MM-DD'),
 						userId,
 					},
 			  })
-			: addTransaction({
+			: addNote({
 					...data,
-					date: dayjs(data.date).format('YYYY-MM-DD'),
 					userId,
 			  });
 	};
 
 	useEffect(() => {
-		if (transaction?._id) {
-			setValue('name', transaction.name);
-			setValue('details', transaction.details);
+		if (note?._id) {
+			setValue('name', note.name);
+			setValue('details', note.details);
 		}
-	}, [setValue, transaction]);
+	}, [setValue, note]);
 
 	useEffect(() => {
 		if (addIsSuccess) {
