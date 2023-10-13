@@ -7,8 +7,8 @@ import {
 	useAddTransactionMutation,
 	useEditTransactionMutation,
 	useGetTransactionQuery,
-} from '@/features/hisab/transactions/transactions-api';
-import { getUserState } from '@/features/user/user-slice';
+} from '@/features/hisab/transactions/api';
+import { getUserState } from '@/features/user/slice';
 import { dateInputFormat, getError } from '@/utils/helpers';
 import { transactionFormInputs } from '@/utils/helpers/hisab/transaction-helper';
 import { yupResolver } from '@hookform/resolvers/yup';

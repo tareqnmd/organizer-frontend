@@ -27,10 +27,10 @@ const Modules = () => {
 				</Link>
 				<Link
 					className="w-full"
-					href="/notepad"
+					href="/note"
 				>
 					<ModuleCard
-						text="Notepad"
+						text="Note"
 						icon={<GrNotes />}
 					/>
 				</Link>

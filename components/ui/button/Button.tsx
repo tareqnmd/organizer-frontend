@@ -1,4 +1,4 @@
-import { ButtonProps } from '@/utils/types/button-types';
+import { ButtonProps } from '@/utils/types/ui/button-types';
 import { FC } from 'react';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { FiLogIn, FiSave } from 'react-icons/fi';

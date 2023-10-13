@@ -1,4 +1,4 @@
-import NotepadView from '@/components/notepad/NotepadView';
+import NotepadView from '@/components/note/NoteView';
 
 const page = () => {
 	return <NotepadView />;

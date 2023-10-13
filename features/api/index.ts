@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { removeUser } from '../user/user-slice';
+import { removeUser } from '../user/slice';
 
 const baseQuery = fetchBaseQuery({
 	baseUrl: process.env.NEXT_PUBLIC_API_URL,
@@ -15,7 +15,7 @@ const apiSlice = createApi({
 		}
 		return result;
 	},
-	tagTypes: ['home_cards'],
+	tagTypes: ['notes', 'transactions'],
 	endpoints: () => ({}),
 });
 

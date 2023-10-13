@@ -3,7 +3,7 @@ import ModalFooterButtons from '@/components/ui/modal/ModalFooterButtons';
 import {
 	useGetUserQuery,
 	useUserStatusUpdateMutation,
-} from '@/features/user/user-api';
+} from '@/features/user/api';
 import { getError } from '@/utils/helpers';
 import { useEffect } from 'react';
 import { AiFillCheckCircle, AiFillCloseCircle } from 'react-icons/ai';

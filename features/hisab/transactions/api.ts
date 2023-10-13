@@ -1,10 +1,10 @@
-import apiSlice from '../../api/api-slice';
+import apiSlice from '../../api';
 import {
 	addTransaction,
 	deleteTransaction,
 	setTransactions,
 	updateTransaction,
-} from './transactions-slice';
+} from './slice';
 
 export const transactionApi = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
@@ -32,7 +32,7 @@ export const transactionApi = apiSlice.injectEndpoints({
 			query: () => ({
 				url: `/transaction/overview`,
 			}),
-			providesTags: () => ['home_cards'],
+			providesTags: () => ['transactions'],
 		}),
 		addTransaction: builder.mutation({
 			query: (payload) => ({
@@ -40,7 +40,7 @@ export const transactionApi = apiSlice.injectEndpoints({
 				method: 'POST',
 				body: payload,
 			}),
-			invalidatesTags: () => ['home_cards'],
+			invalidatesTags: () => ['transactions'],
 			async onQueryStarted(arg, { queryFulfilled, dispatch }) {
 				try {
 					const { data } = await queryFulfilled;
@@ -56,7 +56,7 @@ export const transactionApi = apiSlice.injectEndpoints({
 				method: 'PUT',
 				body: payload?.data,
 			}),
-			invalidatesTags: () => ['home_cards'],
+			invalidatesTags: () => ['transactions'],
 			async onQueryStarted(arg, { queryFulfilled, dispatch }) {
 				try {
 					const { data } = await queryFulfilled;
@@ -80,7 +80,7 @@ export const transactionApi = apiSlice.injectEndpoints({
 				url: `/transaction/${id}`,
 				method: 'DELETE',
 			}),
-			invalidatesTags: () => ['home_cards'],
+			invalidatesTags: () => ['transactions'],
 			async onQueryStarted(arg, { queryFulfilled, dispatch }) {
 				try {
 					const { data } = await queryFulfilled;

@@ -1,7 +1,7 @@
 'use client';
 import Button from '@/components/ui/button/Button';
 import FormInput from '@/components/ui/input/FormItem';
-import { useLoginMutation } from '@/features/user/user-api';
+import { useLoginMutation } from '@/features/user/api';
 import { getError } from '@/utils/helpers';
 import { loginFormInputs } from '@/utils/helpers/user/auth-helper';
 import { yupResolver } from '@hookform/resolvers/yup';

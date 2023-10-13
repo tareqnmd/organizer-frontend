@@ -1,7 +1,7 @@
 import UserInfo from '@/components/profile/UserInfo';
 import PrimaryLogo from '@/components/ui/logo/PrimaryLogo';
-import { useLogoutMutation } from '@/features/user/user-api';
-import { getUserState } from '@/features/user/user-slice';
+import { useLogoutMutation } from '@/features/user/api';
+import { getUserState } from '@/features/user/slice';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';

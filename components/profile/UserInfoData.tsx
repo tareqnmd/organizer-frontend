@@ -1,4 +1,4 @@
-import { getUserState } from '@/features/user/user-slice';
+import { getUserState } from '@/features/user/slice';
 import { useSelector } from 'react-redux';
 
 const UserInfoData = () => {

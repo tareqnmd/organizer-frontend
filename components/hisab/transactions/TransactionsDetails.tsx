@@ -1,6 +1,6 @@
 'use client';
-import { setTransactions } from '@/features/hisab/transactions/transactions-slice';
-import { ITransactions } from '@/utils/types/transaction-types';
+import { setTransactions } from '@/features/hisab/transactions/slice';
+import { ITransactions } from '@/utils/types/hisab/transaction-types';
 import { useDispatch } from 'react-redux';
 import TransactionButton from './buttons/TransactionButton';
 import TransactionsInfo from './info/TransactionsInfo';

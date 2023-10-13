@@ -1,5 +1,5 @@
-import { useUserUpdateMutation } from '@/features/user/user-api';
-import { getUserState } from '@/features/user/user-slice';
+import { useUserUpdateMutation } from '@/features/user/api';
+import { getUserState } from '@/features/user/slice';
 import { getError } from '@/utils/helpers';
 import { userUpdateFormInputs } from '@/utils/helpers/user/auth-helper';
 import { yupResolver } from '@hookform/resolvers/yup';

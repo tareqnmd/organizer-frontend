@@ -1,5 +1,5 @@
 import { AppState } from '@/app/store';
-import { ITransactionsStore } from '@/utils/types/transaction-types';
+import { ITransactionsStore } from '@/utils/types/hisab/transaction-types';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: ITransactionsStore = {

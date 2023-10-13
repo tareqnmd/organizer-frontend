@@ -1,5 +1,5 @@
 import { AppState } from '@/app/store';
-import { IThemeStore } from '@/utils/types/theme-types';
+import { IThemeStore } from '@/utils/types/theme/theme-types';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: IThemeStore = {

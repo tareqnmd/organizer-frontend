@@ -1,6 +1,6 @@
 'use client';
-import { setThemeLoading } from '@/features/theme/theme-slice';
-import { getUserState } from '@/features/user/user-slice';
+import { setThemeLoading } from '@/features/theme/slice';
+import { getUserState } from '@/features/user/slice';
 import { publicPaths } from '@/utils/helpers';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';

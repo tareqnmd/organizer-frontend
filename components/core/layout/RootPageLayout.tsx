@@ -1,5 +1,5 @@
 import RootLoading from '@/components/ui/loader/RootLoading';
-import { getThemeState } from '@/features/theme/theme-slice';
+import { getThemeState } from '@/features/theme/slice';
 import useAuthCheck from '@/hooks/user/useAuthCheck';
 import { useRouter } from 'next/navigation';
 import { useSelector } from 'react-redux';

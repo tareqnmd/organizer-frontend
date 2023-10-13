@@ -1,6 +1,6 @@
 'use client';
 import Table from '@/components/ui/table/Table';
-import { getTransactionsState } from '@/features/hisab/transactions/transactions-slice';
+import { getTransactionsState } from '@/features/hisab/transactions/slice';
 import {
 	footerTransactionAmount,
 	getFilteredTransactionType,

@@ -1,5 +1,5 @@
 'use client';
-import { useGetTransactionsMutation } from '@/features/hisab/transactions/transactions-api';
+import { useGetTransactionsMutation } from '@/features/hisab/transactions/api';
 import { useState } from 'react';
 import styles from './TransactionFilter.module.scss';
 

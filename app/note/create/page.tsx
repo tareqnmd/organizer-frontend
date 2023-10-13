@@ -1,4 +1,4 @@
-import NotepadForm from '@/components/notepad/NotepadForm';
+import NotepadForm from '@/components/note/NoteForm';
 
 const page = () => {
 	return <NotepadForm />;

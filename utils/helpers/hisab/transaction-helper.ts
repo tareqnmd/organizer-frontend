@@ -1,4 +1,7 @@
-import { ITransaction, ITransactions } from '../../types/transaction-types';
+import {
+	ITransaction,
+	ITransactions,
+} from '../../types/hisab/transaction-types';
 import { millionNumberFormat } from '../index';
 
 export const totalTransactionAmount = (transactions: ITransactions) => {
@@ -20,7 +23,7 @@ export const footerTransactionAmount = (transactions: ITransactions) => {
 	let income = 0;
 	let expense = 0;
 
-	const totalAmount = transactions?.map((transaction) => {
+	transactions?.map((transaction) => {
 		total +=
 			transaction.type === 'Income'
 				? transaction.amount
@@ -49,31 +52,6 @@ export const expenseTransactionAmount = (transactions: ITransactions) => {
 		0
 	);
 	return millionNumberFormat(totalAmount, 'amount');
-};
-
-const monthEqual = (transaction: ITransaction) =>
-	new Date(transaction.date).getMonth() === new Date().getMonth();
-
-const getWeek = (date: Date) => {
-	const currentDate: any = new Date();
-	const transactionDate: any = new Date(date);
-
-	const currentYear: any = new Date(currentDate.getFullYear(), 0, 1);
-	const transactionYear: any = new Date(transactionDate.getFullYear(), 0, 1);
-
-	const currentDays = Math.floor(
-		(currentDate - currentYear) / (24 * 60 * 60 * 1000)
-	);
-	const transactionDays = Math.floor(
-		(transactionDate - transactionYear) / (24 * 60 * 60 * 1000)
-	);
-
-	const currentWeek = Math.ceil((new Date().getDay() + 1 + currentDays) / 7);
-	const transactionWeek = Math.ceil(
-		(new Date().getDay() + 1 + transactionDays) / 7
-	);
-
-	return currentWeek === transactionWeek;
 };
 
 export const getFilteredTransactionType = (

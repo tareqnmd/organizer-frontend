@@ -1,7 +1,7 @@
 'use client';
 import Card from '@/components/ui/card/Card';
 import Taka from '@/components/ui/icons/Taka';
-import { useGetTransactionsOverviewQuery } from '@/features/hisab/transactions/transactions-api';
+import { useGetTransactionsOverviewQuery } from '@/features/hisab/transactions/api';
 import { currentMonthYear } from '@/utils/helpers';
 import { MdFormatListNumbered } from 'react-icons/md';
 const outside_wrap = 'col-span-12 lg:col-span-6 grid grid-cols-12 gap-4';
