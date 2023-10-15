@@ -3,21 +3,16 @@ import { removeUser, setUser } from './slice';
 
 export const loginApi = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
-		getUser: builder.query({
-			query: (id) => ({
-				url: `/user/${id}`,
-			}),
-		}),
 		register: builder.mutation({
 			query: (data) => ({
-				url: 'user/register',
+				url: 'auth/register',
 				method: 'POST',
 				body: data,
 			}),
 		}),
 		login: builder.mutation({
 			query: (data) => ({
-				url: 'user/login',
+				url: 'auth/login',
 				method: 'POST',
 				body: data,
 			}),
@@ -37,9 +32,27 @@ export const loginApi = apiSlice.injectEndpoints({
 				} catch (error) {}
 			},
 		}),
+		logout: builder.mutation({
+			query: (data) => ({
+				url: 'auth/logout',
+				method: 'POST',
+				body: data,
+			}),
+			async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+				try {
+					await queryFulfilled;
+					dispatch(removeUser());
+				} catch (error) {}
+			},
+		}),
+		getUser: builder.query({
+			query: (id) => ({
+				url: `auth/user/${id}`,
+			}),
+		}),
 		userUpdate: builder.mutation({
 			query: ({ id, data }) => ({
-				url: `user/${id}`,
+				url: `auth/user/${id}`,
 				method: 'PUT',
 				body: data,
 			}),
@@ -61,7 +74,7 @@ export const loginApi = apiSlice.injectEndpoints({
 		}),
 		userStatusUpdate: builder.mutation({
 			query: ({ id, data }) => ({
-				url: `user/${id}`,
+				url: `auth/user/${id}`,
 				method: 'PUT',
 				body: data,
 			}),
@@ -69,19 +82,6 @@ export const loginApi = apiSlice.injectEndpoints({
 				try {
 					const result = await queryFulfilled;
 					const data = {};
-				} catch (error) {}
-			},
-		}),
-		logout: builder.mutation({
-			query: (data) => ({
-				url: 'user/logout',
-				method: 'POST',
-				body: data,
-			}),
-			async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-				try {
-					await queryFulfilled;
-					dispatch(removeUser());
 				} catch (error) {}
 			},
 		}),
