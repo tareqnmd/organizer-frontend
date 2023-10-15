@@ -1,7 +1,7 @@
 import RootContentLayout from '@/components/core/layout/RootContentLayout';
 
 const subMenuLinks = [
-	{ path: '/note', name: 'Note', exact: true },
+	{ path: '/note', name: 'Notes', exact: true },
 	{ path: '/note/create', name: 'Create' },
 ];
 

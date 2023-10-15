@@ -5,7 +5,7 @@ import { FiUsers } from 'react-icons/fi';
 
 async function getDashboardInfo() {
 	try {
-		const response = await basicFetchData('dashboard', {
+		const response = await basicFetchData('config', {
 			cache: 'no-store',
 		});
 		return response.json();
@@ -15,7 +15,7 @@ async function getDashboardInfo() {
 }
 
 const ConfigCards = async () => {
-	const { types, users } = await getDashboardInfo();
+	const { users } = await getDashboardInfo();
 	return (
 		<div className="grid grid-cols-12 gap-4">
 			<Link
