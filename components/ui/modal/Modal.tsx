@@ -9,6 +9,7 @@ export default function Modal({
 	open,
 	footer = null,
 	title = 'Title',
+	width = null,
 }: any) {
 	const [mounted, setMounted] = useState(false);
 	useLayoutEffect(() => setMounted(true), []);
@@ -26,7 +27,11 @@ export default function Modal({
 							id="modal-root-area"
 							className={styles['modal-overlay']}
 						>
-							<div className={styles['modal-container']}>
+							<div
+								className={`${styles['modal-container']} ${
+									width ? `w-[${width}]` : 'w-[50%]'
+								}`}
+							>
 								<div className={styles['modal-header']}>
 									<h6 className="font-bold">{title}</h6>
 									<button onClick={onCancel}>
