@@ -1,4 +1,5 @@
 import { PageHeader } from '@/styles/globalStyledComponent';
+import NoDataFound from '../NoDataFound';
 import NoteCard from './NoteCard';
 
 const NoteDetails = ({ notes }: any) => {
@@ -13,6 +14,7 @@ const NoteDetails = ({ notes }: any) => {
 					/>
 				))}
 			</div>
+			{notes?.length === 0 && <NoDataFound />}
 		</>
 	);
 };
