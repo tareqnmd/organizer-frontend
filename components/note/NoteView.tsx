@@ -2,6 +2,7 @@
 import { useGetNoteQuery } from '@/features/note/api';
 import { PageHeader } from '@/styles/globalStyledComponent';
 import Loading from '../ui/loader/Loading';
+import NoteDetailView from './NoteDetailView';
 
 const NoteView = ({ noteId }: { noteId: string }) => {
 	const { data: note, isFetching } = useGetNoteQuery(noteId, {
@@ -11,9 +12,7 @@ const NoteView = ({ noteId }: { noteId: string }) => {
 		<>
 			<PageHeader>Note View:</PageHeader>
 			<Loading loading={isFetching}>
-				<p>Name : {note?.name}</p>
-				<p>Details : </p>
-				<div>{note?.details}</div>
+				<NoteDetailView note={note} />
 			</Loading>
 		</>
 	);

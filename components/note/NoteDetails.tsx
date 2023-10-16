@@ -1,12 +1,18 @@
+import { PageHeader } from '@/styles/globalStyledComponent';
+import NoteCard from './NoteCard';
+
 const NoteDetails = ({ notes }: any) => {
 	return (
 		<>
-			{notes?.map((note: any) => (
-				<>
-					<>{note.name}</>
-					<>{note.details}</>
-				</>
-			))}
+			<PageHeader>Notes:</PageHeader>
+			<div className="grid grid-cols-2 gap-6">
+				{notes?.map((note: any) => (
+					<NoteCard
+						key={note?._id}
+						note={note}
+					/>
+				))}
+			</div>
 		</>
 	);
 };
