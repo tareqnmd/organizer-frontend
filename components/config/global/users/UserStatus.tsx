@@ -8,7 +8,7 @@ import { getError } from '@/utils/helpers';
 import { useEffect } from 'react';
 import { AiFillCheckCircle, AiFillCloseCircle } from 'react-icons/ai';
 import { toast } from 'react-toastify';
-import UserDetail from '../UserDetail';
+import UserDetail from './UserDetail';
 
 const UserStatus = ({ modalType, setModalType, userId }: any) => {
 	const { data: user, isFetching } = useGetUserQuery(userId, {

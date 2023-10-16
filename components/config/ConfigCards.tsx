@@ -20,7 +20,7 @@ const ConfigCards = async () => {
 		<div className="grid grid-cols-12 gap-4">
 			<Link
 				className="col-span-3"
-				href="config/users"
+				href="config/global/users"
 			>
 				<Card
 					title="Users"

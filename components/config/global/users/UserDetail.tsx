@@ -1,4 +1,4 @@
-import Loading from '../ui/loader/Loading';
+import Loading from '../../../ui/loader/Loading';
 
 const UserDetail = ({ user, isFetching }: any) => {
 	return (

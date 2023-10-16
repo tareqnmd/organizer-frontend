@@ -1,7 +1,7 @@
 import RootContentLayout from '@/components/core/layout/RootContentLayout';
 
 const subMenuLinks = [
-	{ path: '/config', name: 'Global', exact: true },
+	{ path: '/config', name: 'Global' },
 	{ path: '/config/hisab', name: 'Hisab' },
 ];
 
