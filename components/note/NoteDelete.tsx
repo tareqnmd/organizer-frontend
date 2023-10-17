@@ -1,5 +1,5 @@
 'use client';
-import { useDeleteTypeMutation } from '@/features/hisab/type/type-api';
+import { useDeleteNoteMutation } from '@/features/note/api';
 import { getError } from '@/utils/helpers';
 import { useEffect } from 'react';
 import { AiFillDelete } from 'react-icons/ai';
@@ -7,7 +7,6 @@ import { FaTimesCircle } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import Loading from '../ui/loader/Loading';
 import Modal from '../ui/modal/Modal';
-import { useDeleteNoteMutation } from '@/features/note/api';
 
 const NoteDelete = ({ id, modalType, setModalType }: any) => {
 	const [deleteNote, { isSuccess, isLoading, isError, error }] =

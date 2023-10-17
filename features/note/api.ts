@@ -28,6 +28,23 @@ export const noteApi = apiSlice.injectEndpoints({
 				body: payload?.data,
 			}),
 			invalidatesTags: () => ['notes'],
+			async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+				try {
+					const { data } = await queryFulfilled;
+					if (data) {
+						dispatch(
+							noteApi.util.updateQueryData(
+								'getNote',
+								data._id,
+								(draft) => {
+									console.log('data', data);
+									Object.assign(draft, data);
+								}
+							)
+						);
+					}
+				} catch (error) {}
+			},
 		}),
 		deleteNote: builder.mutation({
 			query: (id) => ({

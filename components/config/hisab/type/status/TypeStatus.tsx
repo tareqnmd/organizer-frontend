@@ -3,7 +3,7 @@ import ModalFooterButtons from '@/components/ui/modal/ModalFooterButtons';
 import {
 	useEditTypeMutation,
 	useGetTypeQuery,
-} from '@/features/hisab/type/type-api';
+} from '@/features/hisab/type/api';
 import { getError } from '@/utils/helpers';
 import { useEffect } from 'react';
 import { AiFillCheckCircle, AiFillCloseCircle } from 'react-icons/ai';

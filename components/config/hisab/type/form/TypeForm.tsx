@@ -6,7 +6,7 @@ import {
 	useAddTypeMutation,
 	useEditTypeMutation,
 	useGetTypeQuery,
-} from '@/features/hisab/type/type-api';
+} from '@/features/hisab/type/api';
 import { getError } from '@/utils/helpers';
 import { typeFormInputs } from '@/utils/helpers/hisab/type-helper';
 import { yupResolver } from '@hookform/resolvers/yup';

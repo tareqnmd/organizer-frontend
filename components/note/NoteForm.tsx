@@ -77,6 +77,7 @@ const NoteForm = ({ noteId }: any) => {
 
 	useEffect(() => {
 		if (note?._id) {
+			console.log('note', note);
 			setValue('name', note.name);
 			setValue('details', note.details);
 		}
