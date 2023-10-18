@@ -37,7 +37,6 @@ export const noteApi = apiSlice.injectEndpoints({
 								'getNote',
 								data._id,
 								(draft) => {
-									console.log('data', data);
 									Object.assign(draft, data);
 								}
 							)
