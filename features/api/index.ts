@@ -15,7 +15,7 @@ const apiSlice = createApi({
 		}
 		return result;
 	},
-	tagTypes: ['notes', 'transactions'],
+	tagTypes: ['notes', 'transactions', 'single-note'],
 	endpoints: () => ({}),
 });
 

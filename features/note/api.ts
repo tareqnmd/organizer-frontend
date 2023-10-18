@@ -6,6 +6,9 @@ export const noteApi = apiSlice.injectEndpoints({
 			query: (id) => ({
 				url: `/note/${id}`,
 			}),
+			providesTags: (result) => [
+				{ type: 'single-note', id: result?._id },
+			],
 		}),
 		getNotes: builder.query({
 			query: () => ({
@@ -27,23 +30,10 @@ export const noteApi = apiSlice.injectEndpoints({
 				method: 'PUT',
 				body: payload?.data,
 			}),
-			invalidatesTags: () => ['notes'],
-			async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-				try {
-					const { data } = await queryFulfilled;
-					if (data) {
-						dispatch(
-							noteApi.util.updateQueryData(
-								'getNote',
-								data._id,
-								(draft) => {
-									Object.assign(draft, data);
-								}
-							)
-						);
-					}
-				} catch (error) {}
-			},
+			invalidatesTags: (result) => [
+				{ type: 'single-note', id: result?._id },
+				'notes',
+			],
 		}),
 		deleteNote: builder.mutation({
 			query: (id) => ({
