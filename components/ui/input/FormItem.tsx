@@ -1,8 +1,9 @@
 import Date from './Date';
+import styles from './FormItem.module.scss';
 import Input from './Input';
-import styles from './Input.module.scss';
 import Radio from './Radio';
 import Select from './Select';
+import TextEditor from './TextEditor';
 import Textarea from './Textarea';
 
 const FormInput = ({ register, input, errors, extraClass }: any) => {
@@ -27,6 +28,11 @@ const FormInput = ({ register, input, errors, extraClass }: any) => {
 				input={input}
 				register={register}
 			/>
+		) : type === 'editor' ? (
+			<TextEditor
+				input={input}
+				register={register}
+			/>
 		) : (
 			<Input
 				input={input}
@@ -35,7 +41,9 @@ const FormInput = ({ register, input, errors, extraClass }: any) => {
 		);
 	};
 	return (
-		<div className={`${styles['input-area']} ${extraClass}`}>
+		<div
+			className={`${styles['input-area']} form-item ${extraClass ?? ''}`}
+		>
 			<div>
 				<label htmlFor={input?.name}>
 					{input?.label}

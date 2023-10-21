@@ -2,6 +2,10 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+@import './variable';
+
+@import './formitem.scss';
+
 html {
 	scroll-behavior: smooth;
 }
@@ -18,15 +22,11 @@ html {
 }
 
 .bg-global {
-	background: #ececec;
+	background: $base-bg-color;
 }
 
-.input-label-white {
-	label {
-		color: white !important;
-	}
-}
+
 
 .active-path {
-	@apply border-b-2 border-[#0B2447];
+	border-bottom: 2px solid $base-color;
 }

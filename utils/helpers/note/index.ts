@@ -8,8 +8,7 @@ export const noteFormInputs = [
 	{
 		name: 'details',
 		label: 'Details',
-		type: 'textarea',
-		rows: 8,
+		type: 'editor',
 		required: true,
 	},
 ];
