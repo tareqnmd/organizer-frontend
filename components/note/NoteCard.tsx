@@ -35,7 +35,9 @@ const NoteCard = ({ note }: any) => {
 						</button>
 					</div>
 				</div>
-				<div className={styles['details']}>{note?.details}</div>
+				<div className={styles['details']}>
+					<div dangerouslySetInnerHTML={{ __html: note?.details }} />
+				</div>
 			</div>
 		</>
 	);

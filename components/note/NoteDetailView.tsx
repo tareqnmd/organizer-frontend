@@ -7,7 +7,9 @@ const NoteDetailView = ({ note }: any) => {
 			<div className={styles['header']}>
 				<Link href={`/note/view/${note?._id}`}>{note?.name}</Link>
 			</div>
-			<div className={styles['details']}>{note?.details}</div>
+			<div className={styles['details']}>
+				<div dangerouslySetInnerHTML={{ __html: note?.details }} />
+			</div>
 		</div>
 	);
 };
