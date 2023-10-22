@@ -6,7 +6,7 @@ import Select from './Select';
 import TextEditor from './TextEditor';
 import Textarea from './Textarea';
 
-const FormInput = ({ register, input, errors, extraClass }: any) => {
+const FormInput = ({ register, input, errors, extraClass, control }: any) => {
 	const getTypes = (type: string) => {
 		return type === 'select' ? (
 			<Select
@@ -31,7 +31,7 @@ const FormInput = ({ register, input, errors, extraClass }: any) => {
 		) : type === 'editor' ? (
 			<TextEditor
 				input={input}
-				register={register}
+				control={control}
 			/>
 		) : (
 			<Input

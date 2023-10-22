@@ -33,6 +33,7 @@ const NoteForm = ({ noteId }: any) => {
 		handleSubmit,
 		formState: { errors },
 		reset,
+		control,
 	} = useForm<any>({
 		resolver: yupResolver(schema),
 	});
@@ -118,14 +119,23 @@ const NoteForm = ({ noteId }: any) => {
 			<Loading loading={isFetching}>
 				<form onSubmit={handleSubmit(noteMutation)}>
 					<div className="grid gap-6">
-						{noteFormInputs?.map((input) => (
-							<FormInput
-								key={input?.name}
-								input={input}
-								register={register}
-								errors={errors}
-							/>
-						))}
+						{noteFormInputs?.map((input) =>
+							input?.type === 'editor' ? (
+								<FormInput
+									key={input?.name}
+									input={input}
+									errors={errors}
+									control={control}
+								/>
+							) : (
+								<FormInput
+									key={input?.name}
+									input={input}
+									register={register}
+									errors={errors}
+								/>
+							)
+						)}
 					</div>
 					<div className="flex justify-end mt-4">
 						<Button
