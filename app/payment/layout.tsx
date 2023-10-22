@@ -1,8 +1,8 @@
 import RootContentLayout from '@/components/core/layout/RootContentLayout';
 
 export const metadata = {
-	title: 'M32T - Video Player',
-	description: 'M32T - Video Player By Tareqnmd',
+	title: 'M32T - Payment',
+	description: 'M32T - Payment By Tareqnmd',
 };
 
 export default function RootLayout({

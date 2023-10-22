@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { BsCreditCardFill } from 'react-icons/bs';
 import { FcPlanner } from 'react-icons/fc';
 import { GrMoney, GrNotes } from 'react-icons/gr';
 import { MdOutlineVideoLibrary } from 'react-icons/md';
@@ -42,6 +43,15 @@ const Modules = () => {
 					<ModuleCard
 						text="Video Player"
 						icon={<MdOutlineVideoLibrary />}
+					/>
+				</Link>
+				<Link
+					className="w-full"
+					href="/payment"
+				>
+					<ModuleCard
+						text="Payment"
+						icon={<BsCreditCardFill />}
 					/>
 				</Link>
 			</div>
