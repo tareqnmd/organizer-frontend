@@ -1,5 +1,5 @@
 const page = () => {
-	return <>Planner Coming</>;
+	return <>Video Player Coming</>;
 };
 
 export default page;

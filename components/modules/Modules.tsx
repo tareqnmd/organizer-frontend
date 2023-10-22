@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { FcPlanner } from 'react-icons/fc';
 import { GrMoney, GrNotes } from 'react-icons/gr';
+import { MdOutlineVideoLibrary } from 'react-icons/md';
 import ModuleCard from '../ui/card/ModuleCard';
 
 const Modules = () => {
@@ -32,6 +33,15 @@ const Modules = () => {
 					<ModuleCard
 						text="Note"
 						icon={<GrNotes />}
+					/>
+				</Link>
+				<Link
+					className="w-full"
+					href="/video-player"
+				>
+					<ModuleCard
+						text="Video Player"
+						icon={<MdOutlineVideoLibrary />}
 					/>
 				</Link>
 			</div>
