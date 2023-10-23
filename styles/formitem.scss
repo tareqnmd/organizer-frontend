@@ -1,5 +1,5 @@
 .form-item {
-	.input-label-white {
+	&.input-label-white {
 		label {
 			color: white !important;
 		}
@@ -12,6 +12,7 @@
 	.ql-toolbar.ql-snow {
 		border-bottom: 1px solid #0b2447 !important;
 	}
+
 	.ql-container.ql-snow .ql-editor {
 		@apply min-h-[300px];
 	}
