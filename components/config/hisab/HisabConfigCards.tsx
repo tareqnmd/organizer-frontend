@@ -20,7 +20,7 @@ const HisabConfigCards = async () => {
 		<div className="grid grid-cols-12 gap-4">
 			<Link
 				className="col-span-3"
-				href="config/hisab/types"
+				href="/config/hisab/types"
 			>
 				<Card
 					title="Types"
