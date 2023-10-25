@@ -22,7 +22,7 @@ const Navbar = () => {
 
 	useEffect(() => {
 		if (isSuccess) {
-			router.push('/auth/login');
+			router.push('/login');
 		}
 	}, [isSuccess, router]);
 

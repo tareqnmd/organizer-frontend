@@ -16,7 +16,7 @@ const RootPageLayout = ({ children }: { children: React.ReactNode }) => {
 	}
 
 	if (!authChecked && !publicPath) {
-		router.push('/auth/login');
+		router.push('/login');
 		return null;
 	}
 	if (authChecked && publicPath) {
