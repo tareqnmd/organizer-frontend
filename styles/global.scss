@@ -2,9 +2,7 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-@import './variable';
-
-@import './formitem.scss';
+@import './form-item.scss';
 
 html {
 	scroll-behavior: smooth;
@@ -17,14 +15,14 @@ html {
 	@apply bg-global;
 }
 
-#mainRoot .main-content {
+#mainRoot main {
 	@apply container mx-auto py-4 px-2;
 }
 
 .bg-global {
-	background: $base-bg-color;
+	@apply bg-primary_background;
 }
 
 .active-path {
-	border-bottom: 2px solid $base-color;
+	@apply border-b-2 border-primary;
 }

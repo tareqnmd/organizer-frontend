@@ -1,4 +1,8 @@
 export interface IThemeStore {
 	loading: boolean;
-	module_links: any[];
+	module: {
+		id: '';
+		links: any[];
+		name: string;
+	};
 }

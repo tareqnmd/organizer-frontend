@@ -1,21 +1,48 @@
 'use client';
 import Modal from '@/components/ui/modal/Modal';
-import { useState } from 'react';
+import { useLogoutMutation } from '@/features/user/api';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { AiOutlineEye } from 'react-icons/ai';
-import { BiEditAlt } from 'react-icons/bi';
+import { BiEditAlt, BiLogOut } from 'react-icons/bi';
 import UserEditData from './UserEditData';
 import styles from './UserInfo.module.scss';
 import UserInfoData from './UserInfoData';
 
 const UserInfo = ({ setModalType, modalType }: any) => {
 	const [mode, setMode] = useState('view');
+	const router = useRouter();
+	const [logout, { isLoading, isSuccess }] = useLogoutMutation();
+
 	const closeModal = () => {
 		setModalType('');
 	};
+
+	const logoutHandler = () => {
+		logout({});
+	};
+
+	useEffect(() => {
+		if (isSuccess) {
+			router.push('/login');
+		}
+	}, [isSuccess, router]);
+
 	return (
 		<Modal
 			title="User Info"
 			open={modalType === 'profile'}
+			footer={
+				<div>
+					<button
+						disabled={isLoading}
+						className={styles['logout-btn']}
+						onClick={logoutHandler}
+					>
+						<BiLogOut /> Logout
+					</button>
+				</div>
+			}
 			onCancel={closeModal}
 		>
 			<div className={styles['header']}>

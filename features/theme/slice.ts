@@ -4,7 +4,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: IThemeStore = {
 	loading: true,
-	module_links: [],
+	module: {
+		id: '',
+		name: '',
+		links: [],
+	},
 };
 
 const themeSlice = createSlice({
@@ -15,7 +19,7 @@ const themeSlice = createSlice({
 			state.loading = action.payload;
 		},
 		setModuleLinks: (state, action) => {
-			state.module_links = action.payload;
+			state.module = action.payload;
 		},
 	},
 });

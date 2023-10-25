@@ -7,3 +7,7 @@
 		}
 	}
 }
+
+.logout-btn {
+	@apply ml-auto rounded-md flex items-center gap-1 bg-[red] text-white py-1 px-2 text-sm font-bold;
+}

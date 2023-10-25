@@ -20,7 +20,7 @@ const persistConfig = {
 	key: 'hisab',
 	version: 1,
 	storage,
-	whitelist: ['user'],
+	whitelist: ['user', 'theme'],
 };
 
 const rootReducer = combineReducers({

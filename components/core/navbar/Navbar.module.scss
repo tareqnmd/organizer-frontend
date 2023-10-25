@@ -1,24 +1,18 @@
 .nav-links {
 	@apply shadow-sm shadow-gray-300 bg-[#fff];
 	> div {
-		@apply container mx-auto flex items-center justify-end py-3 px-2 gap-6 md:gap-4;
+		@apply mx-auto flex items-center py-3 px-2 gap-2;
 		a {
-			@apply text-2xl font-bold mr-auto;
+			@apply text-primary text-sm font-bold;
+			&.active {
+				@apply border-b-2 border-primary;
+			}
+			&:first-child {
+				margin-right: auto;
+			}
 		}
-		> div {
-			@apply flex items-center gap-2;
-			a {
-				@apply text-[#0B2447] text-sm font-bold;
-				&.active {
-					@apply border-b-2 border-[#0B2447];
-				}
-			}
-			.profile-btn {
-				@apply text-[#0B2447] text-sm font-bold;
-			}
-			.logout-btn {
-				@apply rounded-md bg-[#0B2447] text-white py-1 px-2 text-sm font-bold;
-			}
+		button {
+			@apply text-xl text-primary;
 		}
 	}
 }
