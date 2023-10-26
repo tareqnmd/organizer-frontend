@@ -1,6 +1,5 @@
 'use client';
 import Modal from '@/components/ui/modal/Modal';
-import { useLogoutMutation } from '@/features/user/api';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { AiOutlineEye } from 'react-icons/ai';
@@ -8,6 +7,7 @@ import { BiEditAlt, BiLogOut } from 'react-icons/bi';
 import UserEditData from './UserEditData';
 import styles from './UserInfo.module.scss';
 import UserInfoData from './UserInfoData';
+import { useLogoutMutation } from '@/features/auth/api';
 
 const UserInfo = ({ setModalType, modalType }: any) => {
 	const [mode, setMode] = useState('view');
