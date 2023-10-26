@@ -1,4 +1,4 @@
-import TypeDetails from "@/components/config/hisab/type/TypeDetails";
+import TypeDetails from "@/components/hisab/type/TypeDetails";
 
 const page = () => {
 	return <TypeDetails />;

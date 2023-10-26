@@ -12,7 +12,7 @@ const modules = [
 		module_links: [
 			{ path: '/hisab', name: 'Hisab', exact: true },
 			{ path: '/hisab/transactions', name: 'Transactions' },
-			{ path: '/hisab/config', name: 'Config' },
+			{ path: '/hisab/types', name: 'Types' },
 		],
 	},
 	{
