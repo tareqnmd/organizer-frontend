@@ -21,10 +21,19 @@ const themeSlice = createSlice({
 		setModuleLinks: (state, action) => {
 			state.module = action.payload;
 		},
+		resetTheme: (state) => {
+			state.loading = false;
+			state.module = {
+				id: '',
+				name: '',
+				links: [],
+			};
+		},
 	},
 });
 
-export const { setThemeLoading, setModuleLinks } = themeSlice.actions;
+export const { resetTheme, setThemeLoading, setModuleLinks } =
+	themeSlice.actions;
 export const getThemeState = (state: AppState): typeof initialState =>
 	state.theme;
 export default themeSlice;

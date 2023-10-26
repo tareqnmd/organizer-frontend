@@ -1,4 +1,5 @@
 import apiSlice from '../api';
+import { resetTheme } from '../theme/slice';
 import { removeUser, setUser } from '../user/slice';
 
 export const loginApi = apiSlice.injectEndpoints({
@@ -42,6 +43,7 @@ export const loginApi = apiSlice.injectEndpoints({
 				try {
 					await queryFulfilled;
 					dispatch(removeUser());
+					dispatch(resetTheme());
 				} catch (error) {}
 			},
 		}),
