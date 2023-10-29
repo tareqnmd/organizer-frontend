@@ -19,8 +19,8 @@ const ModuleCard = ({ module }: any) => {
 			onClick={() => module_change(link)}
 		>
 			<div className="flex items-center justify-between">
-				<p className="text-2xl ">{name}</p>
-				<span className="text-4xl">{icon}</span>
+				<p className="text-xl font-medium text-primary">{name}</p>
+				<span className="text-2xl text-primary">{icon}</span>
 			</div>
 		</div>
 	);

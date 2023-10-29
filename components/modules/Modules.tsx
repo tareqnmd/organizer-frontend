@@ -1,7 +1,7 @@
-// import { BsCreditCardFill } from 'react-icons/bs';
-// import { FcPlanner } from 'react-icons/fc';
-// import { GrMoney, GrNotes } from 'react-icons/gr';
-// import { MdOutlineVideoLibrary } from 'react-icons/md';
+import { BiSolidNotepad } from 'react-icons/bi';
+import { BsCalendarDateFill, BsCreditCardFill } from 'react-icons/bs';
+import { FaDollarSign } from 'react-icons/fa';
+import { MdVideoLibrary } from 'react-icons/md';
 import ModuleCard from '../ui/card/ModuleCard';
 
 const modules = [
@@ -14,6 +14,7 @@ const modules = [
 			{ path: '/hisab/transactions', name: 'Transactions' },
 			{ path: '/hisab/types', name: 'Types' },
 		],
+		icon: <FaDollarSign />,
 	},
 	{
 		id: 2,
@@ -23,21 +24,25 @@ const modules = [
 			{ path: '/note', name: 'Notes', exact: true },
 			{ path: '/note/create', name: 'Create' },
 		],
+		icon: <BiSolidNotepad />,
 	},
 	{
 		id: 3,
 		name: 'Planner',
 		link: '/planner',
+		icon: <BsCalendarDateFill />,
 	},
 	{
 		id: 4,
 		name: 'Video Player',
 		link: '/video-player',
+		icon: <MdVideoLibrary />,
 	},
 	{
 		id: 5,
 		name: 'Payment',
 		link: '/payment',
+		icon: <BsCreditCardFill />,
 	},
 ];
 
