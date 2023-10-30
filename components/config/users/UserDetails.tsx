@@ -3,7 +3,7 @@ import UserList from './UserList';
 
 async function getTransactionData() {
 	try {
-		const response = await fetchServerData('auth/user');
+		const response = await fetchServerData('user');
 		return response.data;
 	} catch (error) {
 		return [];
