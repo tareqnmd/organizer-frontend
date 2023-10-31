@@ -1,21 +1,9 @@
 import Card from '@/components/ui/card/Card';
-import { basicFetchData } from '@/utils/fetch/basic-fetch';
 import Link from 'next/link';
 import { FiUsers } from 'react-icons/fi';
 
-async function getDashboardInfo() {
-	try {
-		const response = await basicFetchData('config', {
-			cache: 'no-store',
-		});
-		return response.json();
-	} catch (error) {
-		return [];
-	}
-}
-
-const ConfigCards = async () => {
-	const { users } = await getDashboardInfo();
+const ConfigCards = async ({ data }: any) => {
+	const { users } = data;
 	return (
 		<div className="grid grid-cols-12 gap-4">
 			<Link
