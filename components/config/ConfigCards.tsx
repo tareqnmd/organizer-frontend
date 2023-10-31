@@ -10,7 +10,7 @@ async function getDashboardInfo() {
 		});
 		return response.json();
 	} catch (error) {
-		throw new Error('Failed to fetch data');
+		return [];
 	}
 }
 
