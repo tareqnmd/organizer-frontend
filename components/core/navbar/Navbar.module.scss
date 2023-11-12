@@ -1,18 +1,15 @@
 .nav-links {
-	@apply shadow-sm shadow-gray-300 bg-[#fff];
+	@apply sticky top-0 z-50 w-full border-b backdrop-blur bg-background/50;
 	> div {
 		@apply mx-auto flex items-center py-3 px-2 gap-2;
 		a {
-			@apply text-primary text-sm font-bold;
-			&.active {
-				@apply border-b-2 border-primary;
-			}
+			@apply text-black text-sm font-semibold;
 			&:first-child {
 				margin-right: auto;
 			}
 		}
 		button {
-			@apply text-xl text-primary;
+			@apply text-xl text-black;
 		}
 	}
 }

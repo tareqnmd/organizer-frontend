@@ -1,9 +1,9 @@
 const Footer = () => {
 	return (
-		<footer className="flex items-center justify-center p-3 border-t-2 border-gray-200 bg-[#fff]">
-			Developed by
+		<footer className="flex-center gap-1 p-3 border-t border-gray-200 bg-[#fff]">
+			<span>Developed by</span>
 			<a
-				className="ml-1 font-bold"
+				className="font-bold"
 				target="_blank"
 				href="https://tareqnmd.com/"
 			>

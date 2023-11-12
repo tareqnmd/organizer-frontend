@@ -1,6 +1,6 @@
 import { BiSolidNotepad } from 'react-icons/bi';
 import { BsCalendarDateFill, BsCreditCardFill } from 'react-icons/bs';
-import { FaDollarSign } from 'react-icons/fa';
+import { FaCode, FaDollarSign } from 'react-icons/fa';
 import { MdVideoLibrary } from 'react-icons/md';
 import ModuleCard from '../ui/card/ModuleCard';
 
@@ -43,6 +43,12 @@ const modules = [
 		name: 'Payment',
 		link: '/payment',
 		icon: <BsCreditCardFill />,
+	},
+	{
+		id: 6,
+		name: 'Frontend Code',
+		link: '/frontend-code',
+		icon: <FaCode />,
 	},
 ];
 

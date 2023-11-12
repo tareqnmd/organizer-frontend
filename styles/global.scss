@@ -22,9 +22,13 @@ html {
 }
 
 .bg-global {
-	@apply bg-primary_background;
+	@apply bg-background;
 }
 
 .active-path {
-	@apply border-b-2 border-primary;
+	@apply border-b border-primary;
+}
+
+.flex-center {
+	@apply flex items-center justify-center;
 }
