@@ -1,7 +1,7 @@
 import CommonFooter from '@/components/core/CommonFooter';
 
-const HisabFooter = () => {
+const VideoPlayerFooter = () => {
 	return <CommonFooter />;
 };
 
-export default HisabFooter;
+export default VideoPlayerFooter;

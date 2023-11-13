@@ -3,12 +3,11 @@ import PrimaryLogo from '@/components/ui/logo/PrimaryLogo';
 import Link from 'next/link';
 
 const links = [
-	{ path: '/hisab', name: 'Hisab', exact: true },
-	{ path: '/hisab/transactions', name: 'Transactions' },
-	{ path: '/hisab/types', name: 'Types' },
+	{ path: '/note', name: 'Notes', exact: true },
+	{ path: '/note/create', name: 'Create' },
 ];
 
-const HisabNavbar = () => {
+const NoteNavbar = () => {
 	return (
 		<CommonNavWrapper>
 			<Link href="/">
@@ -26,4 +25,4 @@ const HisabNavbar = () => {
 	);
 };
 
-export default HisabNavbar;
+export default NoteNavbar;

@@ -9,21 +9,12 @@ const modules = [
 		id: 1,
 		name: 'Hisab',
 		link: '/hisab',
-		module_links: [
-			{ path: '/hisab', name: 'Hisab', exact: true },
-			{ path: '/hisab/transactions', name: 'Transactions' },
-			{ path: '/hisab/types', name: 'Types' },
-		],
 		icon: <FaDollarSign />,
 	},
 	{
 		id: 2,
 		name: 'Note',
 		link: '/note',
-		module_links: [
-			{ path: '/note', name: 'Notes', exact: true },
-			{ path: '/note/create', name: 'Create' },
-		],
 		icon: <BiSolidNotepad />,
 	},
 	{

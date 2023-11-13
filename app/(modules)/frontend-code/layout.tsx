@@ -1,4 +1,6 @@
-import ModuleTabs from '@/components/ui/tab/ModuleTabs';
+import '@/styles/frontend-code.scss';
+
+import FrontendCodeLayout from '@/components/frontend-code/core/FrontendCodeLayout';
 
 export const metadata = {
 	title: 'M32T - Frontend Code',
@@ -10,17 +12,5 @@ export default function RootLayout({
 }: {
 	children: React.ReactNode;
 }) {
-	return (
-		<>
-			<ModuleTabs
-				links={[
-					{ path: '/frontend-code', name: 'Basic' },
-					{ path: '/frontend-code/a-b-testing', name: 'A/b Testing' },
-				]}
-			/>
-			<div className="overflow-hidden rounded-lg border bg-background shadow mt-2">
-				{children}
-			</div>
-		</>
-	);
+	return <FrontendCodeLayout>{children}</FrontendCodeLayout>;
 }

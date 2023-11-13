@@ -2,13 +2,9 @@ import CommonNavWrapper from '@/components/core/navbar/CommonNavWrapper';
 import PrimaryLogo from '@/components/ui/logo/PrimaryLogo';
 import Link from 'next/link';
 
-const links = [
-	{ path: '/hisab', name: 'Hisab', exact: true },
-	{ path: '/hisab/transactions', name: 'Transactions' },
-	{ path: '/hisab/types', name: 'Types' },
-];
+const links = [{ path: '/planner', name: 'Planner', exact: true }];
 
-const HisabNavbar = () => {
+const PlannerNavbar = () => {
 	return (
 		<CommonNavWrapper>
 			<Link href="/">
@@ -26,4 +22,4 @@ const HisabNavbar = () => {
 	);
 };
 
-export default HisabNavbar;
+export default PlannerNavbar;

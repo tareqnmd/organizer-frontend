@@ -17,3 +17,15 @@ html {
 .flex-center {
 	@apply flex items-center justify-center;
 }
+
+.nav-links {
+	a {
+		@apply text-black text-sm font-semibold;
+		&:first-child {
+			margin-right: auto;
+		}
+	}
+	button {
+		@apply text-xl text-black;
+	}
+}
