@@ -1,4 +1,4 @@
-import Modules from './modules/Modules';
+import Modules from './Modules';
 
 const Home = () => {
 	return <Modules />;

@@ -1,6 +1,6 @@
 import PrimaryLogo from '@/components/ui/logo/PrimaryLogo';
 import Link from 'next/link';
-import ModuleWiseNav from './ModuleWiseNav';
+import DashboardLinks from './DashboardLinks';
 import styles from './Navbar.module.scss';
 import UserNav from './UserNav';
 
@@ -11,7 +11,7 @@ const Navbar = () => {
 				<Link href="/">
 					<PrimaryLogo />
 				</Link>
-				<ModuleWiseNav />
+				<DashboardLinks />
 				<UserNav />
 			</div>
 		</nav>

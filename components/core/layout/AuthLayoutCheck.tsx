@@ -1,11 +1,11 @@
-'use client'
+'use client';
 import RootLoading from '@/components/ui/loader/RootLoading';
 import { getThemeState } from '@/features/theme/slice';
 import useAuthCheck from '@/hooks/user/useAuthCheck';
 import { useRouter } from 'next/navigation';
 import { useSelector } from 'react-redux';
 
-const AuthLayout = ({ children }: { children: React.ReactNode }) => {
+const AuthLayoutCheck = () => {
 	const router = useRouter();
 	const { authChecked, publicPath } = useAuthCheck();
 	const { loading } = useSelector(getThemeState);
@@ -22,8 +22,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
 		router.push('/');
 		return null;
 	}
-
-	return <main>{children}</main>;
+	return null;
 };
 
-export default AuthLayout;
+export default AuthLayoutCheck;
