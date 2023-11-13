@@ -2,7 +2,7 @@ import { BiSolidNotepad } from 'react-icons/bi';
 import { BsCalendarDateFill, BsCreditCardFill } from 'react-icons/bs';
 import { FaCode, FaDollarSign } from 'react-icons/fa';
 import { MdVideoLibrary } from 'react-icons/md';
-import ModuleCard from '../ui/card/ModuleCard';
+import ModuleCard from './Module';
 
 const modules = [
 	{

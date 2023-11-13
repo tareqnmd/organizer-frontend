@@ -10,21 +10,6 @@ html {
 	scroll-behavior: smooth;
 }
 
-#mainRoot {
-	display: grid;
-	min-height: 100vh;
-	grid-template-rows: auto 1fr auto;
-	@apply bg-global;
-}
-
-#mainRoot main {
-	@apply container mx-auto py-4 px-2;
-}
-
-.bg-global {
-	@apply bg-background;
-}
-
 .active-path {
 	@apply border-b border-primary;
 }
