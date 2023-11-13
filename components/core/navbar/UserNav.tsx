@@ -1,3 +1,4 @@
+'use client'
 import UserInfo from '@/components/profile/UserInfo';
 import { useState } from 'react';
 import { BiSolidUserCircle, BiUserCircle } from 'react-icons/bi';
