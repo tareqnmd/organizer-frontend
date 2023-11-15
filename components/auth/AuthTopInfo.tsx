@@ -1,4 +1,4 @@
-import PrimaryLogo from '../ui/logo/PrimaryLogo';
+import PrimaryLogo from '../core/logo/PrimaryLogo';
 
 const AuthTopInfo = ({ type }: { type: string }) => {
 	return (

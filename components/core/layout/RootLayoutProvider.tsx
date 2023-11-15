@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { PersistGate } from 'redux-persist/integration/react';
-import RootPageLayout from './RootPageLayout';
+import AuthLayoutCheck from './AuthLayoutCheck';
 
 const RootLayoutProvider = ({ children }: { children: React.ReactNode }) => {
 	return (
@@ -14,7 +14,8 @@ const RootLayoutProvider = ({ children }: { children: React.ReactNode }) => {
 				persistor={persistor}
 			>
 				<ToastContainer />
-				<RootPageLayout>{children}</RootPageLayout>
+				<AuthLayoutCheck />
+				{children}
 			</PersistGate>
 		</Provider>
 	);

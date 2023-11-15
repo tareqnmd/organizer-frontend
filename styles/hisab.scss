@@ -1,0 +1,10 @@
+#hisab {
+	display: grid;
+	min-height: 100vh;
+	grid-template-rows: auto 1fr auto;
+	@apply bg-background;
+}
+
+#hisab main {
+	@apply container mx-auto py-4 px-2;
+}
