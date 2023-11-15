@@ -19,13 +19,13 @@ html {
 }
 
 .nav-links {
+	@apply text-black text-sm;
 	a {
-		@apply text-black text-sm font-semibold;
-		&:first-child {
+		&.logo {
 			margin-right: auto;
 		}
 	}
-	button {
-		@apply text-xl text-black;
+	.active {
+		@apply font-semibold;
 	}
 }
