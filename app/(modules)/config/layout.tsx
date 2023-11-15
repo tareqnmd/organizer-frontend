@@ -1,3 +1,6 @@
+import ConfigLayout from "@/components/config/core/ConfigLayout";
+import '@/styles/config.scss';
+
 export const metadata = {
 	title: 'M32T - Config',
 	description: 'M32T - Config By Tareqnmd',
@@ -8,5 +11,5 @@ export default function RootLayout({
 }: {
 	children: React.ReactNode;
 }) {
-	return children;
+	return <ConfigLayout>{children}</ConfigLayout>;
 }

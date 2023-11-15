@@ -1,7 +1,7 @@
 import CommonFooter from '@/components/core/CommonFooter';
 
-const Footer = () => {
+const ConfigFooter = () => {
 	return <CommonFooter />;
 };
 
-export default Footer;
+export default ConfigFooter;

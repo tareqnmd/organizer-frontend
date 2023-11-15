@@ -1,7 +1,7 @@
-'use client'
+'use client';
 import UserInfo from '@/components/profile/UserInfo';
 import { useState } from 'react';
-import { BiSolidUserCircle, BiUserCircle } from 'react-icons/bi';
+import { BiSolidUserCircle } from 'react-icons/bi';
 
 const UserNav = () => {
 	const [modalType, setModalType] = useState('');

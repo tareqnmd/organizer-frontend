@@ -1,12 +1,12 @@
-import Footer from './Footer';
-import Navbar from './navbar/Navbar';
+import DashboardFooter from './DashboardFooter';
+import DashboardNavbar from './navbar/DashboardNavbar';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<div id="dashboard">
-			<Navbar />
+			<DashboardNavbar />
 			<main>{children}</main>
-			<Footer />
+			<DashboardFooter />
 		</div>
 	);
 };
