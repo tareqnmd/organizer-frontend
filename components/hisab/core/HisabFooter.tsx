@@ -1,4 +1,4 @@
-import CommonFooter from '@/components/core/CommonFooter';
+import CommonFooter from '@/components/core/Footer';
 
 const HisabFooter = () => {
 	return <CommonFooter />;

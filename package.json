@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "rm -rf .next && next dev",
+    "dev": "rm -rf .next && next dev -p 3200",
     "build": "rm -rf .next && next build",
     "start": "next start",
     "lint": "next lint"
@@ -13,6 +13,7 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@reduxjs/toolkit": "^2.0.0",
+    "@tareqnmd/react-icon-lib": "^1.1.11",
     "antd": "^5.11.5",
     "axios": "^1.6.2",
     "framer-motion": "^10.16.12",

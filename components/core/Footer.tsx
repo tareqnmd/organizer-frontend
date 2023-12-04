@@ -1,4 +1,4 @@
-const CommonFooter = () => {
+const Footer = () => {
 	return (
 		<footer className="flex-center gap-1 p-3 border-t border-gray-200 bg-[#fff]">
 			<span>Developed by</span>
@@ -13,4 +13,4 @@ const CommonFooter = () => {
 	);
 };
 
-export default CommonFooter;
+export default Footer;

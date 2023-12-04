@@ -1,7 +1,7 @@
-import Home from '@/components/dashboard/Home';
+import Dashboard from '@/components/dashboard/Dashboard';
 
 const page = async () => {
-	return <Home />;
+	return <Dashboard />;
 };
 
 export default page;

@@ -1,6 +1,6 @@
 import RootLayoutProvider from '@/components/core/layout/RootLayoutProvider';
-import '@/styles/global.scss';
 import StyledComponentsRegistry from '@/lib/AntdRegistry';
+import '@/styles/global.scss';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
 	title: 'Organizer',
-	description: 'Organizer By Tareqnmd',
+	description: 'Organizer By Tareq',
 };
 
 export default function RootLayout({

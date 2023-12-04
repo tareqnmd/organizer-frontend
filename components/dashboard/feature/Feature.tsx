@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-const Module = ({ module }: any) => {
+const Feature = ({ module }: any) => {
 	const { link, name, extra_class, icon } = module;
 	return (
 		<Link
@@ -17,4 +17,4 @@ const Module = ({ module }: any) => {
 	);
 };
 
-export default Module;
+export default Feature;
