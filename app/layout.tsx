@@ -1,12 +1,14 @@
 import RootLayoutProvider from '@/components/core/layout/RootLayoutProvider';
 import '@/styles/global.scss';
+import StyledComponentsRegistry from '@/lib/AntdRegistry';
+import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const metadata = {
-	title: 'M32T',
-	description: 'M32T By Tareqnmd',
+export const metadata: Metadata = {
+	title: 'Organizer',
+	description: 'Organizer By Tareqnmd',
 };
 
 export default function RootLayout({
@@ -17,7 +19,9 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={inter.className}>
-				<RootLayoutProvider>{children}</RootLayoutProvider>
+				<StyledComponentsRegistry>
+					<RootLayoutProvider>{children}</RootLayoutProvider>
+				</StyledComponentsRegistry>
 			</body>
 		</html>
 	);
