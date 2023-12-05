@@ -1,4 +1,3 @@
-import { Dollar, NotepadFill } from '@tareqnmd/react-icon-lib';
 import Feature from './Feature';
 
 const features = [
@@ -6,13 +5,13 @@ const features = [
 		id: 1,
 		name: 'Hisab',
 		link: '/hisab',
-		icon: <Dollar />,
+		icon: 'H',
 	},
 	{
 		id: 2,
 		name: 'Note',
 		link: '/note',
-		icon: <NotepadFill />,
+		icon: 'N',
 	},
 ];
 
