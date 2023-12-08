@@ -1,5 +1,4 @@
-import RootLayoutProvider from '@/components/core/layout/RootLayoutProvider';
-import StyledComponentsRegistry from '@/lib/AntdRegistry';
+import RootLayoutProvider from '@/components/provider/RootLayoutProvider';
 import '@/styles/global.scss';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
@@ -19,9 +18,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={inter.className}>
-				<StyledComponentsRegistry>
-					<RootLayoutProvider>{children}</RootLayoutProvider>
-				</StyledComponentsRegistry>
+				<RootLayoutProvider>{children}</RootLayoutProvider>
 			</body>
 		</html>
 	);

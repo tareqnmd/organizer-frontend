@@ -1,24 +1,12 @@
-import Link from 'next/link';
-import PrimaryLogoLink from './logo/PrimaryLogoLink';
-
-const links = [
-	{ path: '/hisab', name: 'Hisab' },
-	{ path: '/note', name: 'Note' },
-];
+import Links from './Links';
+import Logo from './Logo';
 
 const Navbar = () => {
 	return (
-		<nav className="nav-links sticky top-0 z-50 w-full border-b backdrop-blur bg-background/50">
-			<div className="container mx-auto flex items-center py-3 px-2 gap-2">
-				<PrimaryLogoLink />
-				{links.map((link) => (
-					<Link
-						key={link.path}
-						href={link.path}
-					>
-						{link.name}
-					</Link>
-				))}
+		<nav className="sticky top-0 z-50 shadow-md bg-white transition duration-500 ">
+			<div className="container py-4 mx-auto flex flex-wrap items-center justify-between">
+				<Logo />
+				<Links />
 			</div>
 		</nav>
 	);

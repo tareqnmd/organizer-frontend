@@ -4,28 +4,13 @@
 
 @import 'react-quill/dist/quill.snow.css';
 
-@import './form-item.scss';
-
 html {
 	scroll-behavior: smooth;
 }
 
-.active-path {
-	@apply border-b border-primary;
+#organizer {
+	display: grid;
+	min-height: 100vh;
+	grid-template-rows: auto 1fr auto;
 }
 
-.flex-center {
-	@apply flex items-center justify-center;
-}
-
-.nav-links {
-	@apply text-black text-sm;
-	a {
-		&.logo {
-			margin-right: auto;
-		}
-	}
-	.active {
-		@apply font-semibold;
-	}
-}
