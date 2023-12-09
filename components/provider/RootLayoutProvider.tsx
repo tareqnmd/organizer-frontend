@@ -9,7 +9,7 @@ const RootLayoutProvider = ({ children }: { children: React.ReactNode }) => {
 			<StoreProvider>
 				<div id="organizer">
 					<Navbar />
-					<main className="container mx-auto">{children}</main>
+					<main className="container mx-auto my-4">{children}</main>
 					<Footer />
 				</div>
 			</StoreProvider>
