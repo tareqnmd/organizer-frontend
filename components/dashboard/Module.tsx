@@ -1,11 +1,12 @@
 import { Card } from 'antd';
 import Link from 'next/link';
-import { Module } from './Dashboard';
+import { ModuleType } from './Dashboard';
 
-const ModuleCard = ({ module }: { module: Module }) => {
+const Module = ({ module }: { module: ModuleType }) => {
 	return (
 		<Link href={module.path}>
 			<Card
+				className="hover:shadow-md transition"
 				extra={module.icon}
 				title={module.name}
 				size="small"
@@ -16,4 +17,4 @@ const ModuleCard = ({ module }: { module: Module }) => {
 	);
 };
 
-export default ModuleCard;
+export default Module;
