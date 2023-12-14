@@ -10,7 +10,12 @@ const Links = () => {
 		<ul className="flex gap-2 text-sm">
 			{links.map((link) => (
 				<li key={link.path}>
-					<Link href={link.path}>{link.name}</Link>
+					<Link
+						className="transition hover:underline"
+						href={link.path}
+					>
+						{link.name}
+					</Link>
 				</li>
 			))}
 		</ul>

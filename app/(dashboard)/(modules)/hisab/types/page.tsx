@@ -1,5 +1,5 @@
 const Page = () => {
-	return <>registration</>;
+	return <>types</>;
 };
 
 export default Page;
