@@ -13,7 +13,11 @@ async function getData() {
 
 const page = async () => {
 	const { data } = await getData();
-	return <Dashboard modules={data} />;
+	return (
+		<main className="container mx-auto py-4">
+			<Dashboard modules={data} />
+		</main>
+	);
 };
 
 export default page;

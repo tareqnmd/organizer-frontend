@@ -1,4 +1,4 @@
-import RootLayoutProvider from '@/components/provider/RootLayoutProvider';
+import RootProvider from '@/components/provider/RootProvider';
 import '@/styles/global.scss';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
@@ -18,7 +18,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={inter.className}>
-				<RootLayoutProvider>{children}</RootLayoutProvider>
+				<RootProvider>{children}</RootProvider>
 			</body>
 		</html>
 	);

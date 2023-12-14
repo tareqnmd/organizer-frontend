@@ -1,8 +1,8 @@
 'use client';
 
-import GlobalError from '@/components/core/GlobalError';
+import Error from '@/components/core/GlobalError';
 
-export default function GlobalErrorArea({
+export default function GlobalError({
 	error,
 	reset,
 }: {
@@ -10,7 +10,7 @@ export default function GlobalErrorArea({
 	reset: () => void;
 }) {
 	return (
-		<GlobalError
+		<Error
 			error={error}
 			reset={reset}
 		/>

@@ -1,4 +1,4 @@
-import NotFound from '@/components/core/NotFound';
+import NotFound from '@/components/core/RootNotFound';
 
 const NotFoundArea = () => {
 	return <NotFound />;

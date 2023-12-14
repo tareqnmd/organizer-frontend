@@ -1,4 +1,4 @@
-const Error = ({
+const ModuleError = ({
 	error,
 	reset,
 }: {
@@ -15,4 +15,4 @@ const Error = ({
 	);
 };
 
-export default Error;
+export default ModuleError;

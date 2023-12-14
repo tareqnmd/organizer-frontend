@@ -1,6 +1,6 @@
 'use client';
 
-import Error from '@/components/core/Error';
+import RootError from '@/components/core/RootError';
 
 const ErrorArea = ({
 	error,
@@ -10,7 +10,7 @@ const ErrorArea = ({
 	reset: () => void;
 }) => {
 	return (
-		<Error
+		<RootError
 			error={error}
 			reset={reset}
 		/>

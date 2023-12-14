@@ -1,5 +1,7 @@
+import AppLayout from '@/components/provider/AppLayout';
+
 const Layout = ({ children }: { children: React.ReactNode }) => {
-	return <main className="container mx-auto my-5">{children}</main>;
+	return <AppLayout>{children}</AppLayout>;
 };
 
 export default Layout;

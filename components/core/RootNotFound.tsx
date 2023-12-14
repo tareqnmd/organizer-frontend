@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
-const NotFound = () => {
+const RootNotFound = () => {
 	return (
-		<div className="grid place-items-center h-full">
+		<div className="grid place-items-center h-screen">
 			<div className="text-center">
 				<h2>Not Found</h2>
 				<Link href="/">Return Home</Link>
@@ -11,4 +11,4 @@ const NotFound = () => {
 	);
 };
 
-export default NotFound;
+export default RootNotFound;
