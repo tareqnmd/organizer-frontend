@@ -1,5 +1,5 @@
 const Page = () => {
-	return <>hisab</>;
+	return <>account</>;
 };
 
 export default Page;

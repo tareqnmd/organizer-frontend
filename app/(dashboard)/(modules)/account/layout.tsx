@@ -1,8 +1,8 @@
 import ModuleLayout from '@/components/provider/ModuleLayout';
 const links = [
-	{ name: 'Transactions', path: '/hisab/transactions' },
-	{ name: 'Create', path: '/hisab/create' },
-	{ name: 'Types', path: '/hisab/types' },
+	{ name: 'Transactions', path: '/account/transactions' },
+	{ name: 'Create', path: '/account/create' },
+	{ name: 'Types', path: '/account/types' },
 ];
 const Layout = ({ children }: { children: React.ReactNode }) => {
 	return <ModuleLayout links={links}>{children}</ModuleLayout>;

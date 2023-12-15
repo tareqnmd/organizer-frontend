@@ -1,9 +1,9 @@
 export async function GET() {
 	const modules = [
 		{
-			name: 'Hisab',
-			path: '/hisab',
-			icon: 'hisab',
+			name: 'Account',
+			path: '/account',
+			icon: 'account',
 			description: 'Personal Financial Management',
 		},
 		{
