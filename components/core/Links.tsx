@@ -3,6 +3,8 @@ import Link from 'next/link';
 const links = [
 	{ name: 'Account', path: '/account' },
 	{ name: 'Note', path: '/note' },
+	{ name: 'Login', path: '/login' },
+	{ name: 'Profile', path: '/profile' },
 ];
 
 const Links = () => {
