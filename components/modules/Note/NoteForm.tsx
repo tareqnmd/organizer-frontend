@@ -1,6 +1,7 @@
 'use client';
-import TextEditor from '@/components/common/input/TextEditor';
-import { Button, Form, Input } from 'antd';
+import FormInput from '@/components/common/input/FormInput';
+import { note_form_items } from '@/lib/form-items';
+import { Button, Form } from 'antd';
 
 type NoteInput = {
 	subject: string;
@@ -11,38 +12,20 @@ const onFinish = (values: NoteInput) => {
 	console.log('values', values);
 };
 
-type FieldType = {
-	subject?: string;
-	details?: string;
-};
-
 const NoteForm = () => {
 	return (
 		<Form
-			name="basic"
+			name="note-create"
 			onFinish={onFinish}
 			layout="vertical"
 		>
-			<Form.Item<FieldType>
-				label="Subject"
-				name="subject"
-				rules={[{ required: true, message: 'Please input note subject!' }]}
-			>
-				<Input />
-			</Form.Item>
-			<Form.Item<FieldType>
-				label="Details"
-				name="details"
-				rules={[{ required: true, message: 'Please input note details!' }]}
-			>
-				<TextEditor value={'lorem100'} />
-			</Form.Item>
-			<Button
-				type="primary"
-				htmlType="submit"
-			>
-				Submit
-			</Button>
+			{note_form_items.map((input) => (
+				<FormInput
+					key={input.name}
+					input={input}
+				/>
+			))}
+			<Button htmlType="submit">Submit</Button>
 		</Form>
 	);
 };

@@ -14,3 +14,13 @@ html {
 	grid-template-rows: auto 1fr auto;
 }
 
+.ql-toolbar.ql-snow {
+	border-radius: 6px 6px 0 0;
+}
+
+.ql-container.ql-snow {
+	border-radius: 0 0 6px 6px;
+	.ql-editor {
+		min-height: 300px;
+	}
+}
