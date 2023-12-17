@@ -1,10 +1,14 @@
 import { OnChangeHandler } from '@/lib/common-types';
-type TextEditorInput = { value: string; onChange: OnChangeHandler };
 
-const TextEditor = ({ input }: { input: TextEditorInput }) => {
+const TextEditor = ({
+	value,
+	onChange,
+}: {
+	value?: string;
+	onChange?: OnChangeHandler;
+}) => {
 	const ReactQuill =
 		typeof window === 'object' ? require('react-quill') : () => false;
-	const { value, onChange } = input;
 	const quillEditorOptions = [
 		[{ header: [] }],
 		[{ font: [] }, { color: [] }, { background: [] }],

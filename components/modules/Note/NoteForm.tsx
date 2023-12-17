@@ -1,7 +1,15 @@
 'use client';
-import { Form, Input } from 'antd';
+import TextEditor from '@/components/common/input/TextEditor';
+import { Button, Form, Input } from 'antd';
 
-const onFinish = () => {};
+type NoteInput = {
+	subject: string;
+	details: string;
+};
+
+const onFinish = (values: NoteInput) => {
+	console.log('values', values);
+};
 
 type FieldType = {
 	subject?: string;
@@ -27,8 +35,14 @@ const NoteForm = () => {
 				name="details"
 				rules={[{ required: true, message: 'Please input note details!' }]}
 			>
-				<Input.TextArea />
+				<TextEditor value={'lorem100'} />
 			</Form.Item>
+			<Button
+				type="primary"
+				htmlType="submit"
+			>
+				Submit
+			</Button>
 		</Form>
 	);
 };
