@@ -1,5 +1,5 @@
 import Dashboard from '@/components/dashboard/Dashboard';
-import { baseFetch } from '@/utils/fetch';
+import { baseFetch } from '@/lib/fetch';
 
 export const dynamic = 'force-dynamic';
 
