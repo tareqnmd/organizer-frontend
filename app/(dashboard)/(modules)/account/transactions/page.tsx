@@ -1,5 +1,7 @@
+import Transaction from '@/components/modules/Account/Transactions';
+
 const Page = () => {
-	return <>transactions</>;
+	return <Transaction />;
 };
 
 export default Page;

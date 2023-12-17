@@ -1,5 +1,7 @@
+import AllNotes from '@/components/modules/Note/AllNotes';
+
 const Page = () => {
-	return <>Note</>;
+	return <AllNotes />;
 };
 
 export default Page;

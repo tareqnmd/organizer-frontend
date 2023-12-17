@@ -1,5 +1,7 @@
+import TransactionCreate from '@/components/modules/Account/TransactionCreate';
+
 const Page = () => {
-	return <>transactions-create</>;
+	return <TransactionCreate />;
 };
 
 export default Page;

@@ -1,5 +1,7 @@
+import Account from '@/components/modules/Account/Account';
+
 const Page = () => {
-	return <>account</>;
+	return <Account />;
 };
 
 export default Page;

@@ -1,5 +1,7 @@
+import Note from '@/components/modules/Note/Note';
+
 const Page = () => {
-	return <>note</>;
+	return <Note />;
 };
 
 export default Page;
