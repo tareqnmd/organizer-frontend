@@ -1,12 +1,12 @@
 import { Card } from 'antd';
 import Link from 'next/link';
-export type NoteType = {
+export type NoteSnippetType = {
 	_id: string;
 	subject: string;
 	details: string;
 	created_at: string;
 };
-const RecentNote = ({ note }: { note: NoteType }) => {
+const NoteSnippets = ({ note }: { note: NoteSnippetType }) => {
 	return (
 		<Link href={`/note/detail/${note._id}`}>
 			<Card
@@ -21,4 +21,4 @@ const RecentNote = ({ note }: { note: NoteType }) => {
 	);
 };
 
-export default RecentNote;
+export default NoteSnippets;

@@ -15,14 +15,14 @@ export const getRecentNotes = async () => {
 	}
 };
 
-const RecentNotes = async () => {
+const PinnedNotes = async () => {
 	const recent_notes = await getRecentNotes();
 	return (
 		<Notes
-			title="Recent Notes"
+			title="Pinned Notes"
 			notes={recent_notes}
 		/>
 	);
 };
 
-export default RecentNotes;
+export default PinnedNotes;
