@@ -2,16 +2,16 @@ import NoteSmallInfo, { NoteSnippetType } from './NoteSnippet';
 
 type NotesType = NoteSnippetType[];
 
-const Notes = ({
+const NoteSnippets = ({
 	notes,
-	title = 'Notes',
+	title,
 }: {
 	notes: NotesType;
-	title: string;
+	title?: string;
 }) => {
 	return (
 		<div className="flex flex-col gap-2 w-full">
-			<h3 className="text-lg font-medium">{title} :</h3>
+			{title && <h3 className="text-lg font-medium">{title} :</h3>}
 			{notes.map((note) => (
 				<NoteSmallInfo
 					key={note._id}
@@ -22,4 +22,4 @@ const Notes = ({
 	);
 };
 
-export default Notes;
+export default NoteSnippets;

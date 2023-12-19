@@ -6,19 +6,22 @@ export type NoteSnippetType = {
 	details: string;
 	created_at: string;
 };
-const NoteSnippets = ({ note }: { note: NoteSnippetType }) => {
+const NoteSnippet = ({ note }: { note: NoteSnippetType }) => {
 	return (
 		<Link href={`/note/detail/${note._id}`}>
 			<Card
-				className="hover:shadow transition"
-				extra={<small>{note.created_at}</small>}
-				title={note.subject}
+				className="h-full hover:shadow transition"
+				extra={<small>{note?.created_at}</small>}
+				title={note?.subject}
 				size="small"
 			>
-				<p className="truncate">{note.details}</p>
+				<div
+					dangerouslySetInnerHTML={{ __html: note?.details }}
+					className="truncate max-h-10"
+				/>
 			</Card>
 		</Link>
 	);
 };
 
-export default NoteSnippets;
+export default NoteSnippet;
