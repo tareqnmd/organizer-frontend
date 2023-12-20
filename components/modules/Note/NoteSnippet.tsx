@@ -8,7 +8,7 @@ export type NoteSnippetType = {
 };
 const NoteSnippet = ({ note }: { note: NoteSnippetType }) => {
 	return (
-		<Link href={`/note/detail/${note._id}`}>
+		<Link href={`/note/${note._id}`}>
 			<Card
 				className="h-full hover:shadow transition"
 				extra={<small>{note?.created_at}</small>}
