@@ -1,23 +1,27 @@
+import { authFetch } from '@/lib/fetch';
+
+export const dynamic = 'force-dynamic';
+
 export const getFeaturedNote = async () => {
-	try {
-		return {
-			_id: '55',
-			subject: 'Test 1',
-			details:
-				'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum et laudantium omnis quas optio alias quia illo, necessitatibus id incidunt, doloremque inventore, earum laborum sed nesciunt a hic iusto autem quibusdam reiciendis eaque assumenda consectetur? Illo, maiores! Praesentium, aliquid ad.',
-			created_at: '10-10-10',
-		};
-	} catch (error) {
-		return {};
+	const res = await authFetch('note/feature');
+	if (!res.ok) {
+		throw new Error('Failed to fetch data');
 	}
+	return res.json();
 };
 
 const FeaturedNote = async () => {
 	const note = await getFeaturedNote();
 	return (
-		<div>
-			<h4>{note.subject}</h4>
-			<div>{note.details}</div>
+		<div className="flex flex-col gap-2 w-full">
+			<h3 className="text-lg font-medium">Featured Note:</h3>
+			<div className="border rounded-md">
+				<h3 className="p-2 border-b">{note.subject}</h3>
+				<div
+					className="p-2"
+					dangerouslySetInnerHTML={{ __html: note?.details }}
+				/>
+			</div>
 		</div>
 	);
 };
