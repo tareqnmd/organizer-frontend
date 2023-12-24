@@ -1,43 +1,43 @@
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 
-const check_admin = (email: string) => {
+const check_admin = (email: string, other_type: string) => {
 	const admins = process.env.ORGANIZER_ADMINS?.split(',');
 	if (admins && admins.includes(email)) {
-		return true;
+		return 'admin';
 	}
-	return false;
+	return other_type;
 };
+
+const {
+	GITHUB_ID = '',
+	GITHUB_SECRET = '',
+	GOOGLE_SECRET = '',
+	GOOGLE_ID = '',
+} = process.env;
 
 export const options = {
 	providers: [
 		GitHubProvider({
-			profile(profile) {
-				console.log('Profile GitHub: ', profile);
-
-				let userRole = 'GitHub User';
-
+			profile(profile: any) {
 				return {
 					...profile,
-					role: check_admin(profile?.email) ? 'admin' : userRole,
+					role: check_admin(profile?.email ?? '', 'GitHub User'),
 				};
 			},
-			clientId: process.env.GITHUB_ID,
-			clientSecret: process.env.GITHUB_SECRET,
+			clientId: GITHUB_ID,
+			clientSecret: GITHUB_SECRET,
 		}),
 		GoogleProvider({
 			profile(profile) {
-				console.log('Profile Google: ', profile);
-
-				let userRole = 'Google User';
 				return {
 					...profile,
 					id: profile.sub,
-					role: userRole,
+					role: check_admin(profile?.email ?? '', 'Google User'),
 				};
 			},
-			clientId: process.env.GOOGLE_ID,
-			clientSecret: process.env.GOOGLE_SECRET,
+			clientId: GOOGLE_ID,
+			clientSecret: GOOGLE_SECRET,
 		}),
 		// CredentialsProvider({
 		// 	name: 'Credentials',
@@ -84,11 +84,11 @@ export const options = {
 		// }),
 	],
 	callbacks: {
-		async jwt({ token, user }) {
+		async jwt({ token, user }: any) {
 			if (user) token.role = user.role;
 			return token;
 		},
-		async session({ session, token }) {
+		async session({ session, token }: any) {
 			if (session?.user) session.user.role = token.role;
 			return session;
 		},
