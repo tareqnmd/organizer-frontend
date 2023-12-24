@@ -20,21 +20,23 @@ export const options = {
 	providers: [
 		GitHubProvider({
 			profile(profile: any) {
-				return {
+				const updated_profile = {
 					...profile,
 					role: check_admin(profile?.email ?? '', 'GitHub User'),
 				};
+				return updated_profile;
 			},
 			clientId: GITHUB_ID,
 			clientSecret: GITHUB_SECRET,
 		}),
 		GoogleProvider({
 			profile(profile) {
-				return {
+				const updated_profile = {
 					...profile,
 					id: profile.sub,
 					role: check_admin(profile?.email ?? '', 'Google User'),
 				};
+				return updated_profile;
 			},
 			clientId: GOOGLE_ID,
 			clientSecret: GOOGLE_SECRET,
