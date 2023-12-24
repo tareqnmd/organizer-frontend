@@ -3,8 +3,8 @@ import { NextResponse } from 'next/server';
 
 export default withAuth(
 	function middleware(req) {
-		if (req?.nextauth?.token?.role === 'admin') {
-			return NextResponse.rewrite(new URL('/', req.url));
+		if (req?.nextauth?.token?.role !== 'admin') {
+			return NextResponse.rewrite(new URL('/unauthorized', req.url));
 		}
 	},
 	{
