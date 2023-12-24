@@ -1,13 +1,16 @@
 import AntdProvider from '@/components/provider/AntdProvider';
 import StoreProvider from '@/components/provider/StoreProvider';
+import AuthProvider from './AuthProvider';
 
 const RootProvider = ({ children }: { children: React.ReactNode }) => {
 	return (
-		<AntdProvider>
-			<StoreProvider>
-				<div id="organizer">{children}</div>
-			</StoreProvider>
-		</AntdProvider>
+		<AuthProvider>
+			<AntdProvider>
+				<StoreProvider>
+					<div id="organizer">{children}</div>
+				</StoreProvider>
+			</AntdProvider>
+		</AuthProvider>
 	);
 };
 
