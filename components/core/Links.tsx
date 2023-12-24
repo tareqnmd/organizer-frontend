@@ -1,13 +1,14 @@
+import { auth_options } from '@/lib/auth-options';
+import { getServerSession } from 'next-auth';
 import Link from 'next/link';
 
 const links = [
 	{ name: 'Account', path: '/account' },
 	{ name: 'Note', path: '/note' },
-	{ name: 'Login', path: '/login' },
-	{ name: 'Profile', path: '/profile' },
 ];
 
-const Links = () => {
+const Links = async () => {
+	const session = await getServerSession(auth_options);
 	return (
 		<ul className="flex gap-2 text-sm">
 			{links.map((link) => (
@@ -20,6 +21,20 @@ const Links = () => {
 					</Link>
 				</li>
 			))}
+			{session ? (
+				<>
+					<li>
+						<Link href="/profile">Profile</Link>
+					</li>
+					<li>
+						<Link href="/api/auth/signout?callbackUrl=/">Logout</Link>
+					</li>
+				</>
+			) : (
+				<li>
+					<Link href="/api/auth/signin">Login</Link>
+				</li>
+			)}
 		</ul>
 	);
 };

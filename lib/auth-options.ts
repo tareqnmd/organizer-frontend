@@ -16,7 +16,7 @@ const {
 	GOOGLE_ID = '',
 } = process.env;
 
-export const options = {
+export const auth_options = {
 	providers: [
 		GitHubProvider({
 			profile(profile: any) {
