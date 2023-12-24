@@ -23,6 +23,11 @@ const Links = async () => {
 			))}
 			{session ? (
 				<>
+					{session?.user?.role === 'admin' && (
+						<li>
+							<Link href="/admin">Admin</Link>
+						</li>
+					)}
 					<li>
 						<Link href="/profile">Profile</Link>
 					</li>
