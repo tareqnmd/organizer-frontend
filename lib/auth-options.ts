@@ -1,5 +1,7 @@
+import CredentialsProvider from 'next-auth/providers/credentials';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
+import { axiosInstance } from './fetch';
 
 const check_admin = (email: string, other_type: string) => {
 	const admins = process.env.ORGANIZER_ADMINS?.split(',');
@@ -41,49 +43,28 @@ export const auth_options = {
 			clientId: GOOGLE_ID,
 			clientSecret: GOOGLE_SECRET,
 		}),
-		// CredentialsProvider({
-		// 	name: 'Credentials',
-		// 	credentials: {
-		// 		email: {
-		// 			label: 'email:',
-		// 			type: 'text',
-		// 			placeholder: 'your-email',
-		// 		},
-		// 		password: {
-		// 			label: 'password:',
-		// 			type: 'password',
-		// 			placeholder: 'your-password',
-		// 		},
-		// 	},
-		// 	async authorize(credentials) {
-		// 		try {
-		// 			const foundUser = await User.findOne({
-		// 				email: credentials.email,
-		// 			})
-		// 				.lean()
-		// 				.exec();
-
-		// 			if (foundUser) {
-		// 				console.log('User Exists');
-		// 				const match = await bcrypt.compare(
-		// 					credentials.password,
-		// 					foundUser.password
-		// 				);
-
-		// 				if (match) {
-		// 					console.log('Good Pass');
-		// 					delete foundUser.password;
-
-		// 					foundUser['role'] = 'Unverified Email';
-		// 					return foundUser;
-		// 				}
-		// 			}
-		// 		} catch (error) {
-		// 			console.log(error);
-		// 		}
-		// 		return null;
-		// 	},
-		// }),
+		CredentialsProvider({
+			name: 'Credentials',
+			credentials: {
+				email: {
+					label: 'email:',
+					type: 'text',
+					placeholder: 'your-email',
+				},
+				password: {
+					label: 'password:',
+					type: 'password',
+					placeholder: 'your-password',
+				},
+			},
+			async authorize(credentials) {
+				try {
+					const user = await axiosInstance.post('/login', credentials);
+					return user;
+				} catch (error) {}
+				return null;
+			},
+		}),
 	],
 	callbacks: {
 		async jwt({ token, user }: any) {
