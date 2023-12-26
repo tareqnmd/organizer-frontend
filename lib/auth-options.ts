@@ -1,3 +1,4 @@
+import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
@@ -18,7 +19,7 @@ const {
 	GOOGLE_ID = '',
 } = process.env;
 
-export const auth_options = {
+export const auth_options: NextAuthOptions = {
 	providers: [
 		GitHubProvider({
 			profile(profile: any) {
@@ -47,20 +48,20 @@ export const auth_options = {
 			name: 'Credentials',
 			credentials: {
 				email: {
-					label: 'email:',
-					type: 'text',
-					placeholder: 'your-email',
+					label: 'Email:',
+					type: 'email',
+					placeholder: 'Your Email',
 				},
 				password: {
-					label: 'password:',
+					label: 'Password:',
 					type: 'password',
-					placeholder: 'your-password',
+					placeholder: 'Your Password',
 				},
 			},
 			async authorize(credentials) {
 				try {
-					const user = await axiosInstance.post('/login', credentials);
-					return user;
+					const user: any = await axiosInstance.post('/login', credentials);
+					return user ?? null;
 				} catch (error) {}
 				return null;
 			},
