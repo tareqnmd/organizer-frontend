@@ -5,6 +5,8 @@ import Link from 'next/link';
 const links = [
 	{ name: 'Account', path: '/account' },
 	{ name: 'Note', path: '/note' },
+	{ name: 'Profile', path: '/profile' },
+	{ name: 'Log Out', path: '/api/auth/signout?callbackUrl=/' },
 ];
 
 const Links = async () => {
@@ -21,23 +23,9 @@ const Links = async () => {
 					</Link>
 				</li>
 			))}
-			{session ? (
-				<>
-					{session?.user?.role === 'admin' && (
-						<li>
-							<Link href="/admin">Admin</Link>
-						</li>
-					)}
-					<li>
-						<Link href="/profile">Profile</Link>
-					</li>
-					<li>
-						<Link href="/api/auth/signout?callbackUrl=/">Logout</Link>
-					</li>
-				</>
-			) : (
+			{session?.user?.role === 'admin' && (
 				<li>
-					<Link href="/api/auth/signin">Login</Link>
+					<Link href="/admin">Admin</Link>
 				</li>
 			)}
 		</ul>

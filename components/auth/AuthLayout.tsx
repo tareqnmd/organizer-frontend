@@ -1,7 +1,14 @@
+import { auth_options } from '@/lib/auth-options';
 import { Card } from 'antd';
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
 import LargeLogo from '../core/LargeLogo';
 
-const AuthLayout = ({ children }: { children: React.ReactNode }) => {
+const AuthLayout = async ({ children }: { children: React.ReactNode }) => {
+	const session = await getServerSession(auth_options);
+	if (session !== null) {
+		return redirect('/');
+	}
 	return (
 		<Card className="shadow">
 			<div className="flex flex-col items-center gap-3">

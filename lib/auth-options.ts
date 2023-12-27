@@ -61,9 +61,18 @@ export const auth_options: NextAuthOptions = {
 			async authorize(credentials) {
 				try {
 					const user: any = await axiosInstance.post('/login', credentials);
-					return user ?? null;
-				} catch (error) {}
-				return null;
+					if (user) {
+						const updated_user = {
+							...user,
+							role: check_admin(user?.email ?? '', 'Credential User'),
+						};
+						return updated_user;
+					} else {
+						return null;
+					}
+				} catch (error) {
+					return null;
+				}
 			},
 		}),
 	],
