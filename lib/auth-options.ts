@@ -24,6 +24,7 @@ export const auth_options = {
 			profile(profile: any) {
 				const updated_profile = {
 					...profile,
+					image: profile.avatar_url,
 					role: check_admin(profile?.email ?? '', 'GitHub User'),
 				};
 				return updated_profile;
@@ -36,6 +37,7 @@ export const auth_options = {
 				const updated_profile = {
 					...profile,
 					id: profile.sub,
+					image: profile.picture,
 					role: check_admin(profile?.email ?? '', 'Google User'),
 				};
 				return updated_profile;
@@ -59,10 +61,14 @@ export const auth_options = {
 			},
 			async authorize(credentials) {
 				try {
-					const user: any = await axiosInstance.post('/login', credentials);
+					const { data: user } = await axiosInstance.post(
+						'/login',
+						credentials
+					);
 					if (user) {
 						const updated_user = {
 							...user,
+							image: user.avatar,
 							role: check_admin(user?.email ?? '', 'Credential User'),
 						};
 						return updated_user;

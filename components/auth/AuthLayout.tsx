@@ -6,7 +6,7 @@ import LargeLogo from '../core/LargeLogo';
 
 const AuthLayout = async ({ children }: { children: React.ReactNode }) => {
 	const session = await getServerSession(auth_options);
-	if (session !== null) {
+	if (session?.user?.email) {
 		return redirect('/');
 	}
 	return (
