@@ -19,6 +19,9 @@ const {
 } = process.env;
 
 export const auth_options = {
+	pages: {
+		signIn: '/login',
+	},
 	providers: [
 		GitHubProvider({
 			profile(profile: any) {
