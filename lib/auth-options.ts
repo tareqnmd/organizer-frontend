@@ -1,4 +1,3 @@
-import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
@@ -19,7 +18,7 @@ const {
 	GOOGLE_ID = '',
 } = process.env;
 
-export const auth_options: NextAuthOptions = {
+export const auth_options = {
 	providers: [
 		GitHubProvider({
 			profile(profile: any) {

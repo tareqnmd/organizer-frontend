@@ -13,6 +13,11 @@ const Links = async () => {
 	const session = await getServerSession(auth_options);
 	return (
 		<ul className="flex gap-2 text-sm">
+			{session?.user?.role === 'admin' && (
+				<li>
+					<Link href="/admin">Admin</Link>
+				</li>
+			)}
 			{links.map((link) => (
 				<li key={link.path}>
 					<Link
@@ -23,11 +28,6 @@ const Links = async () => {
 					</Link>
 				</li>
 			))}
-			{session?.user?.role === 'admin' && (
-				<li>
-					<Link href="/admin">Admin</Link>
-				</li>
-			)}
 		</ul>
 	);
 };
