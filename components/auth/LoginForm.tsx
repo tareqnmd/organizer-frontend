@@ -45,6 +45,25 @@ const LoginForm = () => {
 			>
 				Login
 			</Button>
+			<div className="grid grid-cols-2 gap-2 mt-2">
+				<Button
+					onClick={() =>
+						signIn('google', {
+							callbackUrl: `${window.location.origin}`,
+						})
+					}
+				>
+					Google
+				</Button>
+				<Button
+					onClick={() =>
+						signIn('github', {
+							callbackUrl: `${window.location.origin}`,
+						})
+					}
+				>Github
+				</Button>
+			</div>
 		</Form>
 	);
 };
