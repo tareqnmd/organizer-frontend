@@ -8,8 +8,7 @@ const Logout = () => {
 			className="transition hover:underline"
 			onClick={() =>
 				signOut({
-					redirect: true,
-					callbackUrl: '/',
+					callbackUrl: `${window.location.origin}/login`,
 				})
 			}
 		>
