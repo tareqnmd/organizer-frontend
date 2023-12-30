@@ -7,7 +7,7 @@ import Navbar from '../core/Navbar';
 const AppLayout = async ({ children }: { children: React.ReactNode }) => {
 	const session = await getServerSession(auth_options);
 	if (!session?.user?.email) {
-		return redirect('api/auth/signin');
+		return redirect('/login');
 	}
 	return (
 		<>

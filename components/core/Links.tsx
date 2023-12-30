@@ -1,12 +1,12 @@
 import { auth_options } from '@/lib/auth-options';
 import { getServerSession } from 'next-auth';
 import Link from 'next/link';
+import Logout from './Logout';
 
 const links = [
 	{ name: 'Account', path: '/account' },
 	{ name: 'Note', path: '/note' },
 	{ name: 'Profile', path: '/profile' },
-	{ name: 'Log Out', path: '/api/auth/signout?callbackUrl=/' },
 ];
 
 const Links = async () => {
@@ -28,6 +28,7 @@ const Links = async () => {
 					</Link>
 				</li>
 			))}
+			<Logout />
 		</ul>
 	);
 };
