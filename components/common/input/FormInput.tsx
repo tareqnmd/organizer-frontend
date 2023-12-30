@@ -9,7 +9,13 @@ type FormInputType = {
 	rules: { required: boolean; message: string }[];
 };
 
-const FormInput = ({ input }: { input: FormInputType }) => {
+const FormInput = ({
+	input,
+	extraClassName,
+}: {
+	input: FormInputType;
+	extraClassName?: string;
+}) => {
 	const { label, name, rules, type, placeholder = '' } = input;
 
 	const renderInputType = (type: string) => {
@@ -28,6 +34,7 @@ const FormInput = ({ input }: { input: FormInputType }) => {
 			label={label}
 			name={name}
 			rules={rules}
+			className={extraClassName}
 		>
 			{renderInputType(type)}
 		</Form.Item>

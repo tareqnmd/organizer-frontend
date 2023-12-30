@@ -14,3 +14,20 @@ export const note_form_items = [
 		rules: [{ required: true, message: 'Details Required!' }],
 	},
 ];
+
+export const login_form_items = [
+	{
+		name: 'email',
+		label: 'Email',
+		type: 'email',
+		placeholder: 'Email',
+		rules: [{ required: true, message: 'Email Required!' }],
+	},
+	{
+		name: 'password',
+		label: 'Password',
+		type: 'password',
+		placeholder: 'Password',
+		rules: [{ required: true, message: 'Password Required!' }],
+	},
+];
