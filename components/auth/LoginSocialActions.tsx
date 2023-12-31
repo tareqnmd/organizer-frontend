@@ -2,6 +2,7 @@
 import { Badge, Github } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 import { Button } from '../ui/button';
+import Google from '../icons/Google';
 
 const LoginSocialActions = () => {
 	return (
@@ -14,7 +15,7 @@ const LoginSocialActions = () => {
 					})
 				}
 			>
-				<Badge />
+				<Google />
 				Google
 			</Button>
 			<Button
