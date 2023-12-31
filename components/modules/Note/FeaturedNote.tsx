@@ -15,7 +15,7 @@ const FeaturedNote = async () => {
 	return (
 		<div className="flex flex-col gap-2 w-full">
 			<h3 className="text-lg font-medium">Featured Note:</h3>
-			<div className="border rounded-md">
+			<div className="border rounded-md overflow-hidden">
 				<h3 className="p-2 border-b">{note.subject}</h3>
 				<div
 					className="p-2"

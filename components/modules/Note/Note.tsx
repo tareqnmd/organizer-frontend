@@ -1,21 +1,20 @@
-import { Col, Row } from 'antd';
 import FeaturedNote from './FeaturedNote';
 import PinnedNotes from './PinnedNotes';
 import RecentNotes from './RecentNotes';
 
 const Note = () => {
 	return (
-		<Row gutter={24}>
-			<Col span={12}>
+		<div className="grid gap-4 grid-cols-4">
+			<div className='col-span-2'>
 				<FeaturedNote />
-			</Col>
-			<Col span={6}>
+			</div>
+			<div>
 				<RecentNotes />
-			</Col>
-			<Col span={6}>
+			</div>
+			<div>
 				<PinnedNotes />
-			</Col>
-		</Row>
+			</div>
+		</div>
 	);
 };
 

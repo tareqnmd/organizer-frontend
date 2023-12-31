@@ -1,55 +1,78 @@
 'use client';
-import FormInput from '@/components/common/input/CustomFormInput';
+import CustomFormInput from '@/components/common/input/CustomFormInput';
+import ErrorMessage from '@/components/common/message/ErrorMessage';
+import SuccessMessage from '@/components/common/message/SuccessMessage';
+import { Button } from '@/components/ui/button';
+import { Form } from '@/components/ui/form';
 import { getError } from '@/lib/common-func';
 import { note_form_items } from '@/lib/form-items';
 import { useCreateNoteMutation } from '@/store/features/note/api';
-import { Button, Form, message } from 'antd';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import * as z from 'zod';
 
 type NoteInput = {
 	subject: string;
 	details: string;
 };
 
+const FormSchema = z.object({
+	subject: z.string().min(3, {
+		message: 'Subject must be at least 3 characters.',
+	}),
+	details: z.string().min(6, {
+		message: 'Details must be at least 6 characters.',
+	}),
+});
+
 const NoteForm = () => {
+	const form = useForm<z.infer<typeof FormSchema>>({
+		resolver: zodResolver(FormSchema),
+		defaultValues: {
+			subject: '',
+			details: '',
+		},
+	});
 	const [createNote, { isLoading, isError, isSuccess, error }] =
 		useCreateNoteMutation();
-	const [messageApi, contextHolder] = message.useMessage();
-	const onFinish = (values: NoteInput) => {
+	const onSubmit = (values: NoteInput) => {
 		createNote(values);
 	};
 
 	useEffect(() => {
 		if (isError || isSuccess) {
-			messageApi.open({
-				type: isError ? 'error' : isSuccess ? 'success' : 'loading',
-				content: isError
-					? getError(error)
-					: isSuccess
-					? 'Note successfully created'
-					: 'Creating Note',
-			});
+			toast(
+				isError ? (
+					<ErrorMessage message={getError(error)} />
+				) : (
+					<SuccessMessage message="Note successfully created" />
+				)
+			);
 		}
-	}, [isError, isSuccess, error, messageApi]);
+	}, [isError, isSuccess, error]);
+
 	return (
-		<Form
-			name="note-create"
-			onFinish={onFinish}
-			layout="vertical"
-		>
-			{contextHolder}
-			{note_form_items.map((input) => (
-				<FormInput
-					key={input.name}
-					input={input}
-				/>
-			))}
-			<Button
-				disabled={isLoading}
-				htmlType="submit"
+		<Form {...form}>
+			<form
+				onSubmit={form.handleSubmit(onSubmit)}
+				className="w-full min-w-[300px] grid gap-3"
 			>
-				Submit
-			</Button>
+				{note_form_items.map((input) => (
+					<CustomFormInput
+						key={input.name}
+						input={input}
+						control={form?.control}
+					/>
+				))}
+				<Button
+					disabled={isLoading}
+					type="submit"
+				>
+					Submit
+				</Button>
+			</form>
 		</Form>
 	);
 };

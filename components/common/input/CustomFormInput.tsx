@@ -6,7 +6,7 @@ import {
 	FormLabel,
 	FormMessage,
 } from '@/components/ui/form';
-import { Input } from 'antd';
+import { Input } from '@/components/ui/input';
 
 type FormInputType = {
 	label: string;

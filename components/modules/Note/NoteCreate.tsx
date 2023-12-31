@@ -1,17 +1,16 @@
-import { Col, Row } from 'antd';
 import NoteForm from './NoteForm';
 import RecentNotes from './RecentNotes';
 
 const NoteCreate = () => {
 	return (
-		<Row gutter={24}>
-			<Col span={8}>
+		<div className="grid gap-4 grid-cols-3">
+			<div>
 				<RecentNotes />
-			</Col>
-			<Col span={16}>
+			</div>
+			<div className="col-span-2">
 				<NoteForm />
-			</Col>
-		</Row>
+			</div>
+		</div>
 	);
 };
 
