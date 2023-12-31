@@ -1,13 +1,12 @@
 import { auth_options } from '@/lib/auth-options';
 import { getServerSession } from 'next-auth';
 import Link from 'next/link';
-import Logout from './Logout';
 import { ModeToggle } from './ModeToggle';
+import { UserOptions } from './UserOptions';
 
 const links = [
 	{ name: 'Account', path: '/account' },
 	{ name: 'Note', path: '/note' },
-	{ name: 'Profile', path: '/profile' },
 ];
 
 const Links = async () => {
@@ -34,7 +33,7 @@ const Links = async () => {
 					</Link>
 				</li>
 			))}
-			<Logout />
+			<UserOptions image={session?.user?.image} />
 			<ModeToggle />
 		</ul>
 	);

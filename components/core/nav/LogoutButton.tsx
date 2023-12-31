@@ -1,11 +1,12 @@
 'use client';
 
+import { cn } from '@/lib/utils';
 import { signOut } from 'next-auth/react';
 
-const Logout = () => {
+const LogoutButton = ({ extraClass }: { extraClass: string }) => {
 	return (
 		<button
-			className="transition hover:underline"
+			className={cn('transition hover:underline', extraClass)}
 			onClick={() =>
 				signOut({
 					callbackUrl: `${window.location.origin}/login`,
@@ -17,4 +18,4 @@ const Logout = () => {
 	);
 };
 
-export default Logout;
+export default LogoutButton;
