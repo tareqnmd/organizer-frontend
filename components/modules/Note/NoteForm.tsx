@@ -1,5 +1,5 @@
 'use client';
-import FormInput from '@/components/common/input/FormInput';
+import FormInput from '@/components/common/input/CustomFormInput';
 import { getError } from '@/lib/common-func';
 import { note_form_items } from '@/lib/form-items';
 import { useCreateNoteMutation } from '@/store/features/note/api';

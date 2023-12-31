@@ -22,6 +22,7 @@ export const login_form_items = [
 		type: 'email',
 		placeholder: 'Email',
 		rules: [{ required: true, message: 'Email Required!' }],
+		description: '',
 	},
 	{
 		name: 'password',
@@ -29,5 +30,6 @@ export const login_form_items = [
 		type: 'password',
 		placeholder: 'Password',
 		rules: [{ required: true, message: 'Password Required!' }],
+		description: '',
 	},
 ];

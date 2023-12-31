@@ -1,71 +1,64 @@
 'use client';
+
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
+
+import { Button } from '@/components/ui/button';
+import { Form } from '@/components/ui/form';
 import { login_form_items } from '@/lib/form-items';
-import { Button, Form, message } from 'antd';
+import { LogIn } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import FormInput from '../common/input/FormInput';
+import { toast } from 'sonner';
+import CustomFormInput from '../common/input/CustomFormInput';
 
-type LoginInputs = {
-	email: string;
-	password: string;
-};
+const FormSchema = z.object({
+	email: z.string().email(),
+	password: z.string().min(6, {
+		message: 'Password must be at least 6 characters.',
+	}),
+});
 
-const LoginForm = () => {
-	const [messageApi, contextHolder] = message.useMessage();
+export function LoginForm() {
 	const router = useRouter();
-	const onFinish = async (values: LoginInputs) => {
-		const data = await signIn('credentials', { ...values });
-		messageApi.open({
-			type: data?.error ? 'error' : 'success',
-			content: data?.error ? 'Error Found' : 'Successfully Logged In',
-		});
-		if (data?.status === 200) {
+	const form = useForm<z.infer<typeof FormSchema>>({
+		resolver: zodResolver(FormSchema),
+		defaultValues: {
+			email: '',
+			password: '',
+		},
+	});
+
+	const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+		const res = await signIn('credentials', { ...data });
+		toast(res?.error ? 'Error Found' : 'Successfully Logged In');
+		if (res?.status === 200) {
 			router.push('/');
 		}
 	};
 
 	return (
-		<Form
-			name="login"
-			onFinish={onFinish}
-			layout="vertical"
-			className="min-w-[300px] mb-4 grid gap-2"
-		>
-			{contextHolder}
-			{login_form_items.map((input) => (
-				<FormInput
-					key={input.name}
-					input={input}
-					extraClassName="m-0"
-				/>
-			))}
-			<Button
-				className="w-full mt-3"
-				htmlType="submit"
+		<Form {...form}>
+			<form
+				onSubmit={form.handleSubmit(onSubmit)}
+				className="w-full min-w-[300px] grid gap-3"
 			>
-				Login
-			</Button>
-			<div className="grid grid-cols-2 gap-2 mt-2">
+				{login_form_items.map((input) => (
+					<CustomFormInput
+						key={input.name}
+						input={input}
+						control={form?.control}
+					/>
+				))}
+
 				<Button
-					onClick={() =>
-						signIn('google', {
-							callbackUrl: `${window.location.origin}`,
-						})
-					}
+					className="w-full flex gap-2 mt-2"
+					type="submit"
 				>
-					Google
+					<LogIn /> Login
 				</Button>
-				<Button
-					onClick={() =>
-						signIn('github', {
-							callbackUrl: `${window.location.origin}`,
-						})
-					}
-				>Github
-				</Button>
-			</div>
+			</form>
 		</Form>
 	);
-};
-
-export default LoginForm;
+}

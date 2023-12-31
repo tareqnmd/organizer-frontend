@@ -1,10 +1,12 @@
-import LoginForm from './LoginForm';
+import { LoginForm } from './LoginForm';
+import LoginSocialActions from './LoginSocialActions';
 
 const Login = () => {
 	return (
 		<>
-			<p className="font-medium">Login your Account</p>
+			<p className="font-medium">Welcome</p>
 			<LoginForm />
+			<LoginSocialActions />
 			<p className="text-xs">
 				Don&apos;t have an account?
 				<a
