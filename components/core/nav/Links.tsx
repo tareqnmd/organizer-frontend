@@ -2,6 +2,7 @@ import { auth_options } from '@/lib/auth-options';
 import { getServerSession } from 'next-auth';
 import Link from 'next/link';
 import Logout from './Logout';
+import { ModeToggle } from './ModeToggle';
 
 const links = [
 	{ name: 'Account', path: '/account' },
@@ -12,10 +13,15 @@ const links = [
 const Links = async () => {
 	const session = await getServerSession(auth_options);
 	return (
-		<ul className="flex gap-2 text-sm">
+		<ul className="flex items-center gap-2 text-sm">
 			{session?.user?.role === 'admin' && (
 				<li>
-					<Link href="/admin">Admin</Link>
+					<Link
+						className="transition hover:underline"
+						href="/admin"
+					>
+						Admin
+					</Link>
 				</li>
 			)}
 			{links.map((link) => (
@@ -29,6 +35,7 @@ const Links = async () => {
 				</li>
 			))}
 			<Logout />
+			<ModeToggle />
 		</ul>
 	);
 };
