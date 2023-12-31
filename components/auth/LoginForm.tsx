@@ -12,6 +12,8 @@ import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import CustomFormInput from '../common/input/CustomFormInput';
+import ErrorMessage from '../common/message/ErrorMessage';
+import SuccessMessage from '../common/message/SuccessMessage';
 
 const FormSchema = z.object({
 	email: z.string().email(),
@@ -31,8 +33,8 @@ export function LoginForm() {
 	});
 
 	const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-		const res = await signIn('credentials', { ...data });
-		toast(res?.error ? 'Error Found' : 'Successfully Logged In');
+		const res = await signIn('credentials', { ...data, redirect: false });
+		toast(res?.error ? <ErrorMessage /> : <SuccessMessage />);
 		if (res?.status === 200) {
 			router.push('/');
 		}
