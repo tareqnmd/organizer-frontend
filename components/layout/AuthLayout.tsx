@@ -12,7 +12,7 @@ const AuthLayout = async ({ children }: { children: React.ReactNode }) => {
 	}
 	return (
 		<>
-			<div className="absolute top-10 right-10">
+			<div className="absolute top-4 right-4">
 				<ModeToggle />
 			</div>
 			<Card className="shadow">
