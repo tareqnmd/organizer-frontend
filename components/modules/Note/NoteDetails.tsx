@@ -13,7 +13,7 @@ export const getNoteDetails = async (id: string) => {
 const NoteDetails = async ({ id }: { id: string }) => {
 	const note = await getNoteDetails(id);
 	return (
-		<div className="border rounded-md">
+		<div className="border rounded-md overflow-hidden">
 			<h3 className="p-2 border-b">{note.subject}</h3>
 			<div
 				className="p-2"

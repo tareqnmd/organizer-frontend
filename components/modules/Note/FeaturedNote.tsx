@@ -13,9 +13,9 @@ export const getFeaturedNote = async () => {
 const FeaturedNote = async () => {
 	const note = await getFeaturedNote();
 	return (
-		<div className="flex flex-col gap-2 w-full">
+		<div className="flex flex-col gap-2 w-full overflow-hidden">
 			<h3 className="text-lg font-medium">Featured Note:</h3>
-			<div className="border rounded-md overflow-hidden">
+			<div className="border rounded-md">
 				<h3 className="p-2 border-b">{note.subject}</h3>
 				<div
 					className="p-2"

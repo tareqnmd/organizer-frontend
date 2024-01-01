@@ -15,7 +15,7 @@ export type NoteSnippetType = {
 const NoteSnippet = ({ note }: { note: NoteSnippetType }) => {
 	return (
 		<Link href={`/note/${note._id}`}>
-			<Card className="h-full hover:shadow transition">
+			<Card className="h-full hover:shadow transition overflow-hidden">
 				<CardHeader className="p-2 border-b">
 					<CardTitle className="text-md w-full flex justify-between">
 						<span>{note?.subject}</span>

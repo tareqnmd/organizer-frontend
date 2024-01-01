@@ -10,7 +10,12 @@ const GlobalError = ({
 			<body className="grid place-content-center h-screen">
 				<div className="text-center">
 					<h2>{error?.message ?? 'Error Found'}</h2>
-					<button onClick={() => reset()}>Try again</button>
+					<button
+						className="underline"
+						onClick={() => reset()}
+					>
+						Try again
+					</button>
 				</div>
 			</body>
 		</html>

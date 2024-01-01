@@ -11,6 +11,7 @@ const links = [
 
 const Links = async () => {
 	const session = await getServerSession(auth_options);
+	console.log('session',session);
 	return (
 		<ul className="flex items-center gap-2 text-sm">
 			{session?.user?.role === 'admin' && (
