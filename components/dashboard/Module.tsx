@@ -8,7 +8,7 @@ const Module = ({ module }: { module: ModuleType }) => {
 		<Link href={module.path}>
 			<Card className="hover:shadow-md transition p-0">
 				<CardHeader className="p-2">
-					<CardTitle className="text-lg w-full flex justify-between">
+					<CardTitle className="text-lg w-full flex items-center justify-between">
 						<span>{module.name}</span>
 						{module.icon === 'note' ? (
 							<StickyNote />
