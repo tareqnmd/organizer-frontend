@@ -7,6 +7,7 @@ import {
 	FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import ReactQuill from 'react-quill';
 
 type FormInputType = {
 	label: string;
@@ -16,7 +17,17 @@ type FormInputType = {
 	description: string;
 	rules: { required: boolean; message: string }[];
 };
-
+const quillEditorOptions = [
+	[{ header: [] }],
+	[{ font: [] }, { color: [] }, { background: [] }],
+	['bold', 'italic', 'underline', 'strike'],
+	['blockquote', 'code-block'],
+	[{ script: 'sub' }, { script: 'super' }],
+	[{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
+	[{ align: [] }, { direction: 'rtl' }],
+	['link', 'image', 'video', 'formula'],
+	['clean'],
+];
 const CustomFormInput = ({
 	input,
 	control,
@@ -28,6 +39,21 @@ const CustomFormInput = ({
 }) => {
 	const { label, name, type, placeholder = '', description } = input;
 
+	const getTypes = (type: string, field: any) => {
+		return type === 'editor' ? (
+			<ReactQuill
+				{...field}
+				modules={{ toolbar: quillEditorOptions }}
+			/>
+		) : (
+			<Input
+				type={type}
+				placeholder={placeholder}
+				{...field}
+			/>
+		);
+	};
+
 	return (
 		<FormField
 			key={name}
@@ -36,13 +62,7 @@ const CustomFormInput = ({
 			render={({ field }) => (
 				<FormItem className={extraClassName}>
 					<FormLabel>{label}</FormLabel>
-					<FormControl>
-						<Input
-							type={type}
-							placeholder={placeholder}
-							{...field}
-						/>
-					</FormControl>
+					<FormControl>{getTypes(type, field)}</FormControl>
 					{description && <FormDescription>{description}</FormDescription>}
 					<FormMessage />
 				</FormItem>
