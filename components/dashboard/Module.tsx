@@ -18,6 +18,7 @@ const Module = ({ module }: { module: ModuleType }) => {
 									? 'sticky-note'
 									: 'badge'
 							}
+							size={20}
 						/>
 					</CardTitle>
 					<CardDescription className="!m-0">
