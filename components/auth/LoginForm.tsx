@@ -10,6 +10,7 @@ import { login_form_items } from '@/lib/form-items';
 import { LogIn } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { toast } from 'sonner';
 import CustomFormInput from '../common/input/CustomFormInput';
 import ErrorMessage from '../common/message/ErrorMessage';
@@ -24,6 +25,7 @@ const FormSchema = z.object({
 
 export function LoginForm() {
 	const router = useRouter();
+	const [loading, setLoading] = useState(false);
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
@@ -33,10 +35,18 @@ export function LoginForm() {
 	});
 
 	const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-		const res = await signIn('credentials', { ...data, redirect: false });
-		toast(res?.error ? <ErrorMessage /> : <SuccessMessage />);
-		if (res?.status === 200) {
-			router.push('/');
+		try {
+			setLoading(true);
+			const res = await signIn('credentials', { ...data, redirect: false });
+			if (res?.error) throw new Error();
+			toast(<SuccessMessage />);
+			if (res?.status === 200) {
+				router.push('/');
+			}
+		} catch (error) {
+			toast(<ErrorMessage />);
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -53,10 +63,10 @@ export function LoginForm() {
 						control={form?.control}
 					/>
 				))}
-
 				<Button
 					className="w-full flex gap-2 mt-2"
 					type="submit"
+					disabled={loading}
 				>
 					<LogIn /> Login
 				</Button>

@@ -14,7 +14,7 @@ const Module = ({ module }: { module: ModuleType }) => {
 							name={
 								module.icon === 'account'
 									? 'badge-dollar-sign'
-									: module.icon === 'account'
+									: module.icon === 'note'
 									? 'sticky-note'
 									: 'badge'
 							}
