@@ -23,7 +23,7 @@ const AllNotes = async ({
 	const notes = await getAllNote(searchOptions);
 	return (
 		<>
-			<NotesAction />
+			<NotesAction params={searchOptions} />
 			<div className="grid grid-cols-3 gap-4">
 				{notes.map((note: NoteSnippetType) => (
 					<NoteSnippet
