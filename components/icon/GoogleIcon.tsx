@@ -1,7 +1,7 @@
-const Google = () => {
+const GoogleIcon = () => {
 	return (
 		<svg
-            className="shrink-0 w-[24px] h-[24px]"
+			className="shrink-0 w-[24px] h-[24px]"
 			stroke="currentColor"
 			fill="currentColor"
 			stroke-width="0"
@@ -15,4 +15,4 @@ const Google = () => {
 	);
 };
 
-export default Google;
+export default GoogleIcon;

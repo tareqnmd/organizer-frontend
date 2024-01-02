@@ -1,10 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+	spilePackages: ['lucide-react'],
 	images: {
-		domains: [
-			'www.gravatar.com',
-			'github.com',
-			'avatars.githubusercontent.com',
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: 'www.gravatar.com',
+			},
+			{
+				protocol: 'https',
+				hostname: 'github.com',
+			},
+			{
+				protocol: 'https',
+				hostname: 'avatars.githubusercontent.com',
+			},
 		],
 	},
 };

@@ -10,15 +10,17 @@ const NoteSnippets = ({
 	title?: string;
 }) => {
 	return (
-		<div className="flex flex-col gap-2 w-full">
-			{title && <h3 className="text-lg font-medium">{title} :</h3>}
-			{notes.map((note) => (
-				<NoteSmallInfo
-					key={note._id}
-					note={note}
-				/>
-			))}
-		</div>
+		<>
+			{title && <h3 className="text-lg font-medium mb-2">{title} :</h3>}
+			<div className="grid grid-cols-1 gap-4">
+				{notes.map((note) => (
+					<NoteSmallInfo
+						key={note._id}
+						note={note}
+					/>
+				))}
+			</div>
+		</>
 	);
 };
 

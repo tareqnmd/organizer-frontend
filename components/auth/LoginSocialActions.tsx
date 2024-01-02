@@ -1,8 +1,8 @@
 'use client';
-import { Badge, Github } from 'lucide-react';
+import { Github } from 'lucide-react';
 import { signIn } from 'next-auth/react';
+import Google from '../icon/GoogleIcon';
 import { Button } from '../ui/button';
-import Google from '../icons/Google';
 
 const LoginSocialActions = () => {
 	return (
