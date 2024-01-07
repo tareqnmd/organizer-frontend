@@ -22,7 +22,7 @@ export function TransactionTypeEdit({ type }: { type: Type }) {
 				<DialogHeader>
 					<DialogTitle>Type Update</DialogTitle>
 				</DialogHeader>
-				<TransactionTypeForm />
+				<TransactionTypeForm type={type} />
 			</DialogContent>
 		</Dialog>
 	);

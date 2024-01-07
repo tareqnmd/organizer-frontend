@@ -13,6 +13,7 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
+import { Type } from './TransactionTypes';
 
 type TypeInput = {
 	name: string;
@@ -28,7 +29,7 @@ const FormSchema = z.object({
 	}),
 });
 
-const TransactionTypeForm = () => {
+const TransactionTypeForm = ({ type }: { type: Type }) => {
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
@@ -53,6 +54,11 @@ const TransactionTypeForm = () => {
 			);
 		}
 	}, [isError, isSuccess, error]);
+
+	useEffect(() => {
+		form.setValue('name', type.name);
+		form.setValue('type', type.type);
+	}, [form, type]);
 
 	return (
 		<Form {...form}>

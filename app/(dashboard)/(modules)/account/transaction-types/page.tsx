@@ -1,4 +1,4 @@
-import TransactionTypes from '@/components/modules/Account/TransactionTypes';
+import TransactionTypes from '@/components/modules/Account/type/TransactionTypes';
 
 const Page = () => {
 	return <TransactionTypes />;
