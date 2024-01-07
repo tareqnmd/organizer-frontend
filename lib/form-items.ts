@@ -1,3 +1,13 @@
+export const type_form_items = [
+	{
+		name: 'name',
+		label: 'Name',
+		type: 'text',
+		placeholder: 'Name',
+		description: '',
+	},
+];
+
 export const note_form_items = [
 	{
 		name: 'subject',
@@ -5,7 +15,6 @@ export const note_form_items = [
 		type: 'text',
 		placeholder: 'Subject',
 		description: '',
-		rules: [{ required: true, message: 'Subject Required!' }],
 	},
 	{
 		name: 'details',
@@ -13,7 +22,6 @@ export const note_form_items = [
 		type: 'editor',
 		placeholder: 'Details',
 		description: '',
-		rules: [{ required: true, message: 'Details Required!' }],
 	},
 ];
 
@@ -24,7 +32,6 @@ export const login_form_items = [
 		type: 'email',
 		placeholder: 'Email',
 		description: '',
-		rules: [{ required: true, message: 'Email Required!' }],
 	},
 	{
 		name: 'password',
@@ -32,6 +39,5 @@ export const login_form_items = [
 		type: 'password',
 		placeholder: 'Password',
 		description: '',
-		rules: [{ required: true, message: 'Password Required!' }],
 	},
 ];

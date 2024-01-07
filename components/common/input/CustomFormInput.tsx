@@ -15,7 +15,6 @@ type FormInputType = {
 	name: string;
 	type: string;
 	description: string;
-	rules: { required: boolean; message: string }[];
 };
 const quillEditorOptions = [
 	[{ header: [] }],
