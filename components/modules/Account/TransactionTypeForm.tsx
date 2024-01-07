@@ -7,7 +7,7 @@ import { DialogFooter } from '@/components/ui/dialog';
 import { Form } from '@/components/ui/form';
 import { getError } from '@/lib/common-func';
 import { type_form_items } from '@/lib/form-items';
-import { useCreateNoteMutation } from '@/store/features/note/api';
+import { useEditTypeMutation } from '@/store/features/account/type/api';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -16,11 +16,15 @@ import * as z from 'zod';
 
 type TypeInput = {
 	name: string;
+	type: string;
 };
 
 const FormSchema = z.object({
 	name: z.string().min(3, {
 		message: 'Subject must be at least 3 characters.',
+	}),
+	type: z.enum(['Income', 'Expense'], {
+		required_error: 'Type is required!',
 	}),
 });
 
@@ -29,12 +33,13 @@ const TransactionTypeForm = () => {
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
 			name: '',
+			type: undefined,
 		},
 	});
-	const [createNote, { isLoading, isError, isSuccess, error }] =
-		useCreateNoteMutation();
+	const [editType, { isLoading, isError, isSuccess, error }] =
+		useEditTypeMutation();
 	const onSubmit = (values: TypeInput) => {
-		createNote(values);
+		console.log('values', values);
 	};
 
 	useEffect(() => {
@@ -62,10 +67,13 @@ const TransactionTypeForm = () => {
 						control={form?.control}
 					/>
 				))}
-                <DialogFooter>
-					<Button 
-					disabled={isLoading}
-                    type="submit">Save changes</Button>
+				<DialogFooter>
+					<Button
+						disabled={isLoading}
+						type="submit"
+					>
+						Save changes
+					</Button>
 				</DialogFooter>
 			</form>
 		</Form>

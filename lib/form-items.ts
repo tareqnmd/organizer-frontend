@@ -6,6 +6,16 @@ export const type_form_items = [
 		placeholder: 'Name',
 		description: '',
 	},
+	{
+		name: 'type',
+		label: 'Type',
+		type: 'radio',
+		options: [
+			{ label: 'Income', value: 'Income', id: 'income' },
+			{ label: 'Expense', value: 'Expense', id: 'expense' },
+		],
+		description: '',
+	},
 ];
 
 export const note_form_items = [
