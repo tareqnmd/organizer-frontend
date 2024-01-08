@@ -1,6 +1,7 @@
 import { authFetch } from '@/lib/fetch';
 import TransactionType from './TransactionType';
 import TransactionTypeAction from './TransactionTypeAction';
+import { TransactionTypeCreate } from './TransactionTypeCreate';
 
 export type Type = {
 	_id: string;
@@ -10,10 +11,11 @@ export type Type = {
 	status_name: string;
 };
 
-export type TypesParamType = { expense?: string; income?: string };
+export type TypesParamType = { type?: 'Income' | 'Expense' };
 
-const getTransactionTypes = async () => {
-	const res = await authFetch('type');
+const getTransactionTypes = async (params: TypesParamType) => {
+	const queryParams = new URLSearchParams(params);
+	const res = await authFetch(`type?${queryParams}`);
 	if (!res.ok) {
 		throw new Error('Failed to fetch data');
 	}
@@ -25,10 +27,13 @@ const TransactionTypes = async ({
 }: {
 	searchOptions: TypesParamType;
 }) => {
-	const types = await getTransactionTypes();
+	const types = await getTransactionTypes(searchOptions);
 	return (
 		<>
-			<TransactionTypeAction params={searchOptions} />
+			<div className="flex justify-end">
+				<TransactionTypeAction params={searchOptions} />
+				<TransactionTypeCreate />
+			</div>
 			<div
 				className="grid grid-cols-2
 			 lg:grid-cols-3 xl:grid-cols-4 gap-2"

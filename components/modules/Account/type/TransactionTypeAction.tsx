@@ -18,18 +18,18 @@ const TransactionTypeAction = ({ params }: { params: TypesParamType }) => {
 			<Link
 				className={cn(
 					'border rounded px-3 py-1 text-sm',
-					params?.income === '1' && 'border-gray-950'
+					params?.type === 'Income' && 'border-gray-950'
 				)}
-				href="/account/transaction-types?income=1"
+				href="/account/transaction-types?type=Income"
 			>
 				Income
 			</Link>
 			<Link
 				className={cn(
 					'border rounded px-3 py-1 text-sm',
-					params?.expense === '1' && 'border-gray-950'
+					params?.type === 'Expense' && 'border-gray-950'
 				)}
-				href="/account/transaction-types?expense=1"
+				href="/account/transaction-types?type=Expense"
 			>
 				Expense
 			</Link>

@@ -20,6 +20,10 @@ type TypeInput = {
 	type: string;
 };
 
+type EditType = {
+	type?: Type;
+};
+
 const FormSchema = z.object({
 	name: z.string().min(3, {
 		message: 'Subject must be at least 3 characters.',
@@ -29,7 +33,7 @@ const FormSchema = z.object({
 	}),
 });
 
-const TransactionTypeForm = ({ type }: { type: Type }) => {
+const TransactionTypeForm = ({ type }: EditType) => {
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
@@ -56,8 +60,10 @@ const TransactionTypeForm = ({ type }: { type: Type }) => {
 	}, [isError, isSuccess, error]);
 
 	useEffect(() => {
-		form.setValue('name', type.name);
-		form.setValue('type', type.type);
+		if (type?.name) {
+			form.setValue('name', type.name);
+			form.setValue('type', type.type);
+		}
 	}, [form, type]);
 
 	return (
