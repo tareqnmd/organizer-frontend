@@ -5,7 +5,7 @@ import { TypesParamType } from './TransactionTypes';
 
 const TransactionTypeAction = ({ params }: { params: TypesParamType }) => {
 	return (
-		<div className="flex item-center justify-end gap-2 mb-3">
+		<div className="flex item-center justify-end gap-2">
 			<Link
 				className={cn(
 					'border rounded px-3 py-1 text-sm',

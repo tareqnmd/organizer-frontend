@@ -30,7 +30,7 @@ const TransactionTypes = async ({
 	const types = await getTransactionTypes(searchOptions);
 	return (
 		<>
-			<div className="flex justify-end">
+			<div className="flex justify-end gap-2 mb-3">
 				<TransactionTypeAction params={searchOptions} />
 				<TransactionTypeCreate />
 			</div>

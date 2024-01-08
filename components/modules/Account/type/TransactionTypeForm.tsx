@@ -84,7 +84,7 @@ const TransactionTypeForm = ({ type }: EditType) => {
 						disabled={isLoading}
 						type="submit"
 					>
-						Save changes
+						{!type?.name ? 'Create' : 'Update'}
 					</Button>
 				</DialogFooter>
 			</form>

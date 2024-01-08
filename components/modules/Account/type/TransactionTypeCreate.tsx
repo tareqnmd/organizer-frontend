@@ -5,21 +5,19 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-import { EditIcon } from 'lucide-react';
 import TransactionTypeForm from './TransactionTypeForm';
 
 export function TransactionTypeCreate() {
 	return (
 		<Dialog>
-			<DialogTrigger
-				asChild
-				className="cursor-pointer"
-			>
-				<EditIcon size={16} />
+			<DialogTrigger asChild>
+				<div className="cursor-pointer bg-black text-sm px-3 py-1 text-white border rounded flex items-center gap-1">
+					Create Type
+				</div>
 			</DialogTrigger>
 			<DialogContent className="sm:max-w-[425px]">
 				<DialogHeader>
-					<DialogTitle>Type Update</DialogTitle>
+					<DialogTitle>Type Create</DialogTitle>
 				</DialogHeader>
 				<TransactionTypeForm />
 			</DialogContent>
