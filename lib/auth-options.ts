@@ -2,6 +2,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import { axiosInstance } from './fetch';
+import { generateToken } from './generate-token';
 
 const check_admin = (email: string, other_type: string) => {
 	const admins = process.env.ORGANIZER_ADMINS?.split(',');
@@ -25,25 +26,25 @@ export const auth_options = {
 	providers: [
 		GitHubProvider({
 			profile(profile: any) {
-				const updated_profile = {
+				const user = {
 					...profile,
 					image: profile.avatar_url,
 					role: check_admin(profile?.email ?? '', 'GitHub User'),
 				};
-				return updated_profile;
+				return user;
 			},
 			clientId: GITHUB_ID,
 			clientSecret: GITHUB_SECRET,
 		}),
 		GoogleProvider({
 			profile(profile) {
-				const updated_profile = {
+				const user = {
 					...profile,
 					id: profile.sub,
 					image: profile.picture,
 					role: check_admin(profile?.email ?? '', 'Google User'),
 				};
-				return updated_profile;
+				return user;
 			},
 			clientId: GOOGLE_ID,
 			clientSecret: GOOGLE_SECRET,
@@ -64,17 +65,14 @@ export const auth_options = {
 			},
 			async authorize(credentials) {
 				try {
-					const { data: user } = await axiosInstance.post(
-						'/login',
-						credentials
-					);
-					if (user) {
-						const updated_user = {
-							...user,
-							image: user.avatar,
-							role: check_admin(user?.email ?? '', 'Credential User'),
+					const { data } = await axiosInstance.post('/login', credentials);
+					if (data) {
+						const user = {
+							...data,
+							image: data.avatar,
+							role: check_admin(data?.email ?? '', 'Credential User'),
 						};
-						return updated_user;
+						return user;
 					} else {
 						return null;
 					}
@@ -85,12 +83,20 @@ export const auth_options = {
 		}),
 	],
 	callbacks: {
+		async signIn({ user }: any) {
+			await generateToken(user);
+			return true;
+		},
 		async jwt({ token, user }: any) {
-			if (user) token.role = user.role;
+			if (user) {
+				token.role = user.role;
+			}
 			return token;
 		},
 		async session({ session, token }: any) {
-			if (session?.user) session.user.role = token.role;
+			if (session?.user) {
+				session.user.role = token.role;
+			}
 			return session;
 		},
 	},

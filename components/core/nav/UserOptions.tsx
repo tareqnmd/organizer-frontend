@@ -12,7 +12,7 @@ export function UserOptions({ image }: { image: string }) {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Avatar className="cursor-pointer h-6 w-6">
+				<Avatar className="cursor-pointer h-6 w-6 select-none">
 					<AvatarImage src={image} />
 					<AvatarFallback>MD</AvatarFallback>
 				</Avatar>
