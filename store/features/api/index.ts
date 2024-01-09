@@ -1,4 +1,4 @@
-import { clearCookie } from '@/lib/common-func';
+import { clearCookie } from '@/lib/server-func';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { signOut } from 'next-auth/react';
 
@@ -12,8 +12,8 @@ const apiSlice = createApi({
 	baseQuery: async (args, api, extraOptions) => {
 		let result = await baseQuery(args, api, extraOptions);
 		if (result?.error?.status === 401) {
-			clearCookie();
-			signOut({
+			await clearCookie();
+			await signOut({
 				callbackUrl: `${window.location.origin}/login`,
 			});
 		}

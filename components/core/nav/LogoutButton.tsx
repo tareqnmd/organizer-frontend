@@ -1,19 +1,20 @@
 'use client';
 
-import { clearCookie } from '@/lib/common-func';
+import { clearCookie } from '@/lib/server-func';
 import { cn } from '@/lib/utils';
 import { signOut } from 'next-auth/react';
 
 const LogoutButton = ({ extraClass }: { extraClass: string }) => {
+	const logoutHandler = async () => {
+		await clearCookie();
+		await signOut({
+			callbackUrl: `${window.location.origin}/login`,
+		});
+	};
 	return (
 		<button
 			className={cn('transition hover:underline', extraClass)}
-			onClick={() => {
-				clearCookie();
-				signOut({
-					callbackUrl: `${window.location.origin}/login`,
-				});
-			}}
+			onClick={logoutHandler}
 		>
 			Logout
 		</button>
