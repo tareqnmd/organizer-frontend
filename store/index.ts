@@ -1,5 +1,4 @@
 import apiSlice from '@/store/features/api';
-import themeSlice from '@/store/features/theme/slice';
 import storage from '@/store/storage';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
@@ -13,8 +12,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
 	[apiSlice.reducerPath]: apiSlice.reducer,
-	[themeSlice.name]: themeSlice.reducer,
 });
+
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({

@@ -20,7 +20,7 @@ const jwt_default_value: JwtValueType = {
 
 export const generateToken = async (user: any) => {
 	const token = jwt.sign(user, secret_key!, {
-		expiresIn: '1d',
+		expiresIn: '30d',
 	});
 	cookies().set('token', token, jwt_default_value);
 };
