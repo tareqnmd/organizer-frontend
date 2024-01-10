@@ -22,6 +22,7 @@ const {
 export const auth_options = {
 	pages: {
 		signIn: '/login',
+		error: '/login',
 	},
 	providers: [
 		GitHubProvider({
