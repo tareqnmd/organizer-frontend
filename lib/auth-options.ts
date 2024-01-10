@@ -84,7 +84,7 @@ export const auth_options = {
 	],
 	callbacks: {
 		async signIn({ user }: any) {
-			await generateToken(user);
+			await generateToken({ email: user.email });
 			return true;
 		},
 		async jwt({ token, user }: any) {
