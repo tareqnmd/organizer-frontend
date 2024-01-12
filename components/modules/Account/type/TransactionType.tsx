@@ -2,7 +2,9 @@ import { Card } from '@/components/ui/card';
 import { auth_options } from '@/lib/auth-options';
 import { cn } from '@/lib/utils';
 import { getServerSession } from 'next-auth';
+import TransactionTypeDelete from './TransactionTypeDelete';
 import { TransactionTypeEdit } from './TransactionTypeEdit';
+import TransactionTypeToggle from './TransactionTypeToggle';
 import { Type } from './TransactionTypes';
 
 const TransactionType = async ({ type }: { type: Type }) => {
@@ -22,7 +24,13 @@ const TransactionType = async ({ type }: { type: Type }) => {
 			)}
 		>
 			<span>{type.name}</span>
-			{session?.user?.role === 'admin' && <TransactionTypeEdit type={type} />}
+			{session?.user?.role === 'admin' && (
+				<div className='flex items-center gap-1'>
+					<TransactionTypeEdit type={type} />
+					<TransactionTypeDelete type={type} />
+					<TransactionTypeToggle type={type} />
+				</div>
+			)}
 		</Card>
 	);
 };
