@@ -1,18 +1,31 @@
 import Link from 'next/link';
+import DynamicLucideIcon from '../icon/DynamicLucideIcon';
+import { Card, CardDescription, CardHeader, CardTitle } from '../ui/card';
+import { ModuleType } from './Dashboard';
 
-const Module = ({ module }: any) => {
-	const { link, name, extra_class, icon } = module;
+const Module = ({ module }: { module: ModuleType }) => {
 	return (
-		<Link
-			href={link}
-			className={`${
-				extra_class ?? ''
-			} rounded-xl border bg-card text-card-foreground shadow p-4 bg-[#fff] cursor-pointer`}
-		>
-			<div className="flex items-center justify-between">
-				<p className="text-xl font-medium text-primary">{name}</p>
-				<span className="text-2xl text-primary">{icon}</span>
-			</div>
+		<Link href={module.path}>
+			<Card className="hover:shadow-md transition p-0">
+				<CardHeader className="p-2">
+					<CardTitle className="text-lg w-full flex items-center justify-between">
+						<span>{module.name}</span>
+						<DynamicLucideIcon
+							name={
+								module.icon === 'account'
+									? 'badge-dollar-sign'
+									: module.icon === 'note'
+									? 'sticky-note'
+									: 'badge'
+							}
+							size={20}
+						/>
+					</CardTitle>
+					<CardDescription className="!m-0">
+						{module.description}
+					</CardDescription>
+				</CardHeader>
+			</Card>
 		</Link>
 	);
 };

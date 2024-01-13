@@ -1,10 +1,7 @@
-import DashboardLayout from '@/components/dashboard/core/DashboardLayout';
-import '@/styles/dashboard.scss';
+import AppLayout from '@/components/layout/AppLayout';
 
-export default function RootLayout({
-	children,
-}: {
-	children: React.ReactNode;
-}) {
-	return <DashboardLayout>{children}</DashboardLayout>;
-}
+const Layout = ({ children }: { children: React.ReactNode }) => {
+	return <AppLayout>{children}</AppLayout>;
+};
+
+export default Layout;
