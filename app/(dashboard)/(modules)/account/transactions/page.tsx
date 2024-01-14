@@ -1,7 +1,9 @@
-import Transaction from '@/components/modules/Account/Transactions';
+import Transaction, {
+	TransactionParamType,
+} from '@/components/modules/Account/transactions/Transactions';
 
-const Page = () => {
-	return <Transaction />;
+const Page = ({ searchParams }: { searchParams: TransactionParamType }) => {
+	return <Transaction searchOptions={searchParams} />;
 };
 
 export default Page;
