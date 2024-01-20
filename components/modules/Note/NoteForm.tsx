@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
+import { NoteSnippetType } from './NoteSnippet';
 
 type NoteInput = {
 	subject: string;
@@ -27,7 +28,7 @@ const FormSchema = z.object({
 	}),
 });
 
-const NoteForm = () => {
+const NoteForm = ({ note }: { note?: NoteSnippetType }) => {
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
@@ -53,6 +54,13 @@ const NoteForm = () => {
 		}
 	}, [isError, isSuccess, error]);
 
+	useEffect(() => {
+		if (note?.subject) {
+			form.setValue('subject', note.subject);
+			form.setValue('details', note.details);
+		}
+	}, [form, note]);
+
 	return (
 		<Form {...form}>
 			<form
@@ -69,8 +77,9 @@ const NoteForm = () => {
 				<Button
 					disabled={isLoading}
 					type="submit"
+					className="w-max ml-auto"
 				>
-					Submit
+					{note?.subject ? 'Update' : 'Submit'}
 				</Button>
 			</form>
 		</Form>
