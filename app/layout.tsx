@@ -2,12 +2,9 @@ import RootProvider from '@/components/provider/RootProvider';
 import { cn } from '@/lib/utils';
 import '@/styles/global.scss';
 import type { Metadata } from 'next';
-import { Inter as FontSans } from 'next/font/google';
+import { Inter } from 'next/font/google';
 
-export const fontSans = FontSans({
-	subsets: ['latin'],
-	variable: '--font-sans',
-});
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
 	title: 'Organizer',
@@ -21,7 +18,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<body className={cn('font-sans antialiased', fontSans.variable)}>
+			<body className={cn('antialiased', inter.className)}>
 				<RootProvider>{children}</RootProvider>
 			</body>
 		</html>

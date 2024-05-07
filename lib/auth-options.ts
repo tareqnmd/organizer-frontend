@@ -66,7 +66,7 @@ export const auth_options = {
 			},
 			async authorize(credentials) {
 				try {
-					const { data } = await axiosInstance.post('/login', credentials);
+					const { data } = await axiosInstance.post('/user/login', credentials);
 					if (data) {
 						const user = {
 							...data,
