@@ -70,9 +70,9 @@ export const auth_options = {
 					if (data) {
 						const user = {
 							...data,
-							image: data.avatar,
 							role: check_admin(data?.email ?? '', 'Credential User'),
 						};
+						console.log('user', user);
 						return user;
 					} else {
 						return null;
