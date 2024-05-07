@@ -72,7 +72,6 @@ export const auth_options = {
 							...data,
 							role: check_admin(data?.email ?? '', 'Credential User'),
 						};
-						console.log('user', user);
 						return user;
 					} else {
 						return null;
