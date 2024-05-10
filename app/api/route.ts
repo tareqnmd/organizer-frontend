@@ -1,9 +1,9 @@
 export async function GET() {
 	const modules = [
 		{
-			name: 'Account',
-			path: '/account',
-			icon: 'account',
+			name: 'Budget',
+			path: '/budget',
+			icon: 'budget',
 			description: 'Personal Financial Management',
 		},
 		{

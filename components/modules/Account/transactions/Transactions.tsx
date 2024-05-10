@@ -7,6 +7,7 @@ export type TransactionType = {
 	typeId: string;
 	type: string;
 	typeName: string;
+	categoryName: string;
 	date: Date;
 	amount: number;
 	description: string;
@@ -16,12 +17,16 @@ export type TransactionType = {
 export type TransactionParamType = { type?: 'Income' | 'Expense' };
 
 const getTransactions = async (params: TransactionParamType) => {
-	const queryParams = new URLSearchParams(params);
-	const res = await authFetch(`budget/transactions?${queryParams}`);
-	if (!res.ok) {
-		throw new Error('Failed to fetch data');
+	try {
+		const queryParams = new URLSearchParams(params);
+		const res = await authFetch(`budget/transactions?${queryParams}`);
+		if (!res.ok) {
+			throw new Error('Failed to fetch data');
+		}
+		return res.json();
+	} catch (error) {
+		console.log('error', error);
 	}
-	return res.json();
 };
 
 const Transactions = async ({

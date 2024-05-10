@@ -12,7 +12,7 @@ const Module = ({ module }: { module: ModuleType }) => {
 						<span>{module.name}</span>
 						<DynamicLucideIcon
 							name={
-								module.icon === 'account'
+								module.icon === 'budget'
 									? 'badge-dollar-sign'
 									: module.icon === 'note'
 									? 'sticky-note'

@@ -19,7 +19,7 @@ const TransactionSnippet = ({
 				<CardHeader className="p-2 border-b bg-gray-200">
 					<CardTitle className="text-md w-full flex justify-between">
 						<span>
-							{transaction.typeName}({transaction.type})
+							{transaction.categoryName}({transaction.typeName})
 						</span>
 					</CardTitle>
 					<CardDescription className="!m-0 text-gray-900">
