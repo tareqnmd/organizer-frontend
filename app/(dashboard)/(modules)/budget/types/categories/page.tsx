@@ -1,5 +1,11 @@
+import TransactionTypeCategories from '@/components/modules/Account/category/TransactionTypeCategories';
+
 const Page = () => {
-	return <></>;
+	return (
+		<>
+			<TransactionTypeCategories />
+		</>
+	);
 };
 
 export default Page;

@@ -5,7 +5,7 @@ import { ModeToggle } from './ModeToggle';
 import { UserOptions } from './UserOptions';
 
 const links = [
-	{ name: 'Account', path: '/account' },
+	{ name: 'Budget', path: '/budget' },
 	{ name: 'Note', path: '/note' },
 ];
 

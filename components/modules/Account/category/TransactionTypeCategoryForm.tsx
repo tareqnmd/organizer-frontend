@@ -13,10 +13,11 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
-import { Type } from './TransactionTypes';
+import { Type } from '../type/TransactionTypes';
 
 type TypeInput = {
 	name: string;
+	type: string;
 };
 
 type EditType = {
@@ -27,13 +28,17 @@ const FormSchema = z.object({
 	name: z.string().min(3, {
 		message: 'Subject must be at least 3 characters.',
 	}),
+	type: z.enum(['Income', 'Expense'], {
+		required_error: 'Type is required!',
+	}),
 });
 
-const TransactionTypeForm = ({ type }: EditType) => {
+const TransactionTypeCategoryForm = ({ type }: EditType) => {
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
 			name: '',
+			type: undefined,
 		},
 	});
 	const [editType, { isLoading, isError, isSuccess, error }] =
@@ -57,6 +62,7 @@ const TransactionTypeForm = ({ type }: EditType) => {
 	useEffect(() => {
 		if (type?.name) {
 			form.setValue('name', type.name);
+			form.setValue('type', type.type);
 		}
 	}, [form, type]);
 
@@ -86,4 +92,4 @@ const TransactionTypeForm = ({ type }: EditType) => {
 	);
 };
 
-export default TransactionTypeForm;
+export default TransactionTypeCategoryForm;

@@ -6,6 +6,16 @@ export const type_form_items = [
 		placeholder: 'Name',
 		description: '',
 	},
+];
+
+export const type_categories_form_items = [
+	{
+		name: 'name',
+		label: 'Name',
+		type: 'text',
+		placeholder: 'Name',
+		description: '',
+	},
 	{
 		name: 'type',
 		label: 'Type',
