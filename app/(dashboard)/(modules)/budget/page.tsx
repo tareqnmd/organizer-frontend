@@ -1,7 +1,7 @@
-import Account from '@/components/modules/Account/Account';
+import Budget from '@/components/modules/budget/Budget';
 
 const Page = () => {
-	return <Account />;
+	return <Budget />;
 };
 
 export default Page;

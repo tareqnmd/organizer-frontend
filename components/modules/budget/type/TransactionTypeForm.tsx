@@ -7,7 +7,10 @@ import { DialogFooter } from '@/components/ui/dialog';
 import { Form } from '@/components/ui/form';
 import { getError } from '@/lib/common-func';
 import { type_form_items } from '@/lib/form-items';
-import { useEditTypeMutation } from '@/store/features/account/type/api';
+import {
+	useCreateTypeMutation,
+	useEditTypeMutation,
+} from '@/store/features/budget/type/api';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -17,6 +20,7 @@ import { Type } from './TransactionTypes';
 
 type TypeInput = {
 	name: string;
+	_id?: string;
 };
 
 type EditType = {
@@ -30,6 +34,7 @@ const FormSchema = z.object({
 });
 
 const TransactionTypeForm = ({ type }: EditType) => {
+	console.log('type', type);
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
@@ -38,8 +43,9 @@ const TransactionTypeForm = ({ type }: EditType) => {
 	});
 	const [editType, { isLoading, isError, isSuccess, error }] =
 		useEditTypeMutation();
+	const [createType] = useCreateTypeMutation();
 	const onSubmit = (values: TypeInput) => {
-		console.log('values', values);
+		type?.name ? editType({ ...values, id: type._id }) : createType(values);
 	};
 
 	useEffect(() => {
@@ -48,11 +54,13 @@ const TransactionTypeForm = ({ type }: EditType) => {
 				isError ? (
 					<ErrorMessage message={getError(error)} />
 				) : (
-					<SuccessMessage message="Note successfully created" />
+					<SuccessMessage
+						message={`Note successfully ${type?._id ? 'updated' : 'created'}`}
+					/>
 				)
 			);
 		}
-	}, [isError, isSuccess, error]);
+	}, [isError, isSuccess, error, type?._id]);
 
 	useEffect(() => {
 		if (type?.name) {
