@@ -10,7 +10,7 @@ const TransactionAction = ({ params }: { params: TransactionParamType }) => {
 					'border rounded px-3 py-1 text-sm',
 					Object.keys(params).length === 0 && 'border-gray-950'
 				)}
-				href="/budget/transactions"
+				href="/budget/transaction"
 			>
 				All
 			</Link>
@@ -19,7 +19,7 @@ const TransactionAction = ({ params }: { params: TransactionParamType }) => {
 					'border rounded px-3 py-1 text-sm',
 					params?.type === 'Income' && 'border-gray-950'
 				)}
-				href="/budget/transactions?type=Income"
+				href="/budget/transaction?type=Income"
 			>
 				Income
 			</Link>
@@ -28,7 +28,7 @@ const TransactionAction = ({ params }: { params: TransactionParamType }) => {
 					'border rounded px-3 py-1 text-sm',
 					params?.type === 'Expense' && 'border-gray-950'
 				)}
-				href="/budget/transactions?type=Expense"
+				href="/budget/transaction?type=Expense"
 			>
 				Expense
 			</Link>

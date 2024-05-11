@@ -17,7 +17,7 @@ const BudgetCategoryAdd = () => {
 				</DialogTrigger>
 				<DialogContent className="sm:max-w-[425px]">
 					<DialogHeader>
-						<DialogTitle>Type Create</DialogTitle>
+						<DialogTitle>Create Category</DialogTitle>
 					</DialogHeader>
 					<BudgetCategoryForm />
 				</DialogContent>

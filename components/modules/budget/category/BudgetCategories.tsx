@@ -1,8 +1,8 @@
 import { authFetch } from '@/lib/fetch';
+import { BudgetCategory } from '../../../../types/modules/budget/budget-category-types';
 import BudgetCategoriesFilter from './BudgetCategoriesFilter';
 import BudgetCategoryAdd from './BudgetCategoryAdd';
 import BudgetCategoryCard from './BudgetCategoryCard';
-import { BudgetCategory } from './budget-category-types';
 
 const getBudgetCategories = async () => {
 	try {

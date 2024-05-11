@@ -16,7 +16,7 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
-import { BudgetCategory } from './budget-category-types';
+import { BudgetCategory } from '../../../../types/modules/budget/budget-category-types';
 const FormSchema = z.object({
 	name: z.string().min(3, {
 		message: 'Subject must be at least 3 characters.',
