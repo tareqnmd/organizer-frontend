@@ -1,3 +1,6 @@
+'use client';
+import ErrorMessage from '@/components/common/message/ErrorMessage';
+import SuccessMessage from '@/components/common/message/SuccessMessage';
 import { Button } from '@/components/ui/button';
 import {
 	Dialog,
@@ -7,12 +10,45 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
+import { getError } from '@/lib/common-func';
 import { cn } from '@/lib/utils';
+import { useEditBudgetCategoryMutation } from '@/store/features/budget/category/api';
 import { BudgetCategory } from '@/types/modules/budget/budget-category-types';
-import { BadgeCheck, BadgeMinus } from 'lucide-react';
+import { BadgeCheck, BadgeMinus, Loader } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 const BudgetCategoryStatus = ({ category }: { category: BudgetCategory }) => {
+	const [open, setOpen] = useState(false);
+	const [statusToggle, { isLoading, isError, isSuccess, error }] =
+		useEditBudgetCategoryMutation();
+	const statusHandler = () => {
+		statusToggle({
+			id: category.id,
+			data: { status: category.status === 1 ? 0 : 1 },
+		});
+	};
+
+	useEffect(() => {
+		if (isError || isSuccess) {
+			toast(
+				isError ? (
+					<ErrorMessage message={getError(error)} />
+				) : (
+					<SuccessMessage
+						message={`Category successfully ${
+							category.status === 1 ? 'inactivated' : 'activated'
+						}`}
+					/>
+				)
+			);
+			setOpen(false);
+		}
+	}, [category.status, error, isError, isSuccess]);
 	return (
-		<Dialog>
+		<Dialog
+			open={open}
+			onOpenChange={setOpen}
+		>
 			<DialogTrigger asChild>
 				{category.status === 1 ? (
 					<BadgeCheck
@@ -37,10 +73,19 @@ const BudgetCategoryStatus = ({ category }: { category: BudgetCategory }) => {
 				Category?
 				<DialogFooter>
 					<Button
+						onClick={statusHandler}
 						className={cn(
+							'flex items-center gap-1',
 							category.status === 0 ? 'bg-green-500' : 'bg-red-900'
 						)}
+						disabled={isLoading}
 					>
+						{isLoading ? (
+							<Loader
+								className="animate-spin"
+								size={16}
+							/>
+						) : null}
 						{category.status === 0 ? 'Active' : 'Inactive'}
 					</Button>
 				</DialogFooter>
