@@ -2,9 +2,8 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import { axiosInstance } from './fetch';
-import { generateToken } from './generate-token';
 
-const check_admin = (email: string, other_type: string) => {
+const check_admin = (email: string, other_type = 'standard') => {
 	const admins = process.env.ORGANIZER_ADMINS?.split(',');
 	if (admins && admins.includes(email)) {
 		return 'admin';
@@ -27,25 +26,26 @@ export const auth_options = {
 	providers: [
 		GitHubProvider({
 			profile(profile: any) {
-				const user = {
-					...profile,
+				return {
+					id: String(profile.id),
+					email: profile.email,
 					image: profile.avatar_url,
-					role: check_admin(profile?.email ?? '', 'GitHub User'),
+					name: profile.name,
+					role: check_admin(profile?.email),
 				};
-				return user;
 			},
 			clientId: GITHUB_ID,
 			clientSecret: GITHUB_SECRET,
 		}),
 		GoogleProvider({
 			profile(profile) {
-				const user = {
-					...profile,
-					id: profile.sub,
+				return {
+					id: String(profile.sub),
+					email: profile.email,
 					image: profile.picture,
-					role: check_admin(profile?.email ?? '', 'Google User'),
+					name: profile.name,
+					role: check_admin(profile?.email),
 				};
-				return user;
 			},
 			clientId: GOOGLE_ID,
 			clientSecret: GOOGLE_SECRET,
@@ -83,9 +83,19 @@ export const auth_options = {
 		}),
 	],
 	callbacks: {
-		async signIn({ user }: any) {
-			await generateToken({ email: user.email });
-			return true;
+		async signIn({ user, account }: any) {
+			if (['google', 'github'].includes(account.provider)) {
+				const { data } = await axiosInstance.post('/user/social-auth', {
+					...user,
+					from: account.provider,
+				});
+				if (data) {
+					return true;
+				}
+				return false;
+			} else {
+				return true;
+			}
 		},
 		async jwt({ token, user }: any) {
 			if (user) {
