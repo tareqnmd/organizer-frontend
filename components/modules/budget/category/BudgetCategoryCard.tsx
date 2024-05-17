@@ -1,5 +1,5 @@
 import { Card } from '@/components/ui/card';
-import { auth_options } from '@/lib/auth-options';
+import { authOptions } from '@/lib/auth-options';
 import { cn } from '@/lib/utils';
 import { getServerSession } from 'next-auth';
 import { BudgetCategory } from '../../../../types/modules/budget/budget-category-types';
@@ -10,7 +10,7 @@ const BudgetCategoryCard = async ({
 }: {
 	category: BudgetCategory;
 }) => {
-	const session = await getServerSession(auth_options);
+	const session = await getServerSession(authOptions);
 	return (
 		<Card
 			className={cn(

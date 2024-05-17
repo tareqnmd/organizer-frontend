@@ -1,6 +1,7 @@
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
+import { cookies } from 'next/headers';
 import { axiosInstance } from './fetch';
 
 const {
@@ -10,7 +11,7 @@ const {
 	GOOGLE_ID = '',
 } = process.env;
 
-export const auth_options = {
+export const authOptions = {
 	pages: {
 		signIn: '/login',
 		error: '/login',
@@ -56,10 +57,9 @@ export const auth_options = {
 			},
 			async authorize(credentials) {
 				try {
-					const { data: user } = await axiosInstance.post(
-						'/user/login',
-						credentials
-					);
+					const { data } = await axiosInstance.post('/user/login', credentials);
+					const { token, tokenOptions, ...user } = data;
+					cookies().set('token', token, JSON.parse(tokenOptions));
 					return user ?? null;
 				} catch (error) {
 					return null;
@@ -74,15 +74,17 @@ export const auth_options = {
 					...user,
 					from: account.provider,
 				});
+				const { token, tokenOptions, ...userData } = data;
 				if (data) {
-					user.id = data.id;
-					user.email = data.email;
-					user.name = data.name;
-					user.image = data.image;
-					user.role = data.role;
-					user.status = data.status;
+					user.id = userData.id;
+					user.email = userData.email;
+					user.name = userData.name;
+					user.image = userData.image;
+					user.role = userData.role;
+					user.status = userData.status;
 					return true;
 				}
+				cookies().set('token', token, JSON.parse(tokenOptions));
 				return false;
 			} else {
 				return true;

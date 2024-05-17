@@ -1,4 +1,4 @@
-import { auth_options } from '@/lib/auth-options';
+import { authOptions } from '@/lib/auth-options';
 import { getServerSession } from 'next-auth';
 import Link from 'next/link';
 import { ModeToggle } from './ModeToggle';
@@ -10,7 +10,7 @@ const links = [
 ];
 
 const Links = async () => {
-	const session = await getServerSession(auth_options);
+	const session = await getServerSession(authOptions);
 	return (
 		<ul className="flex items-center gap-2 text-sm">
 			{session?.user?.role === 'admin' && (

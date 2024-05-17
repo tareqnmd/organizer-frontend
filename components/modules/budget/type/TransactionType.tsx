@@ -1,5 +1,5 @@
 import { Card } from '@/components/ui/card';
-import { auth_options } from '@/lib/auth-options';
+import { authOptions } from '@/lib/auth-options';
 import { cn } from '@/lib/utils';
 import { getServerSession } from 'next-auth';
 import TransactionTypeDelete from './TransactionTypeDelete';
@@ -8,7 +8,7 @@ import TransactionTypeToggle from './TransactionTypeToggle';
 import { Type } from './TransactionTypes';
 
 const TransactionType = async ({ type }: { type: Type }) => {
-	const session = await getServerSession(auth_options);
+	const session = await getServerSession(authOptions);
 
 	return (
 		<Card
@@ -25,7 +25,7 @@ const TransactionType = async ({ type }: { type: Type }) => {
 		>
 			<span>{type.name}</span>
 			{session?.user?.role === 'admin' && (
-				<div className='flex items-center gap-1'>
+				<div className="flex items-center gap-1">
 					<TransactionTypeEdit type={type} />
 					<TransactionTypeDelete type={type} />
 					<TransactionTypeToggle type={type} />
