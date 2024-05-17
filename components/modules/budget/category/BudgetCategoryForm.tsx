@@ -56,7 +56,7 @@ const BudgetCategoryForm = ({
 		},
 	] = useCreateBudgetCategoryMutation();
 	const onSubmit = (values: any) => {
-		category?.id ? edit(values) : create(values);
+		category?.id ? edit({ ...values, id: category.id }) : create(values);
 	};
 
 	useEffect(() => {
