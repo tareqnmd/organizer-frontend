@@ -82,9 +82,9 @@ export const authOptions = {
 					user.image = userData.image;
 					user.role = userData.role;
 					user.status = userData.status;
+					cookies().set('token', token, JSON.parse(tokenOptions));
 					return true;
 				}
-				cookies().set('token', token, JSON.parse(tokenOptions));
 				return false;
 			} else {
 				return true;
