@@ -2,15 +2,6 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import { axiosInstance } from './fetch';
-import { generateToken } from './generate-token';
-
-const check_admin = (email: string, other_type: string) => {
-	const admins = process.env.ORGANIZER_ADMINS?.split(',');
-	if (admins && admins.includes(email)) {
-		return 'admin';
-	}
-	return other_type;
-};
 
 const {
 	GITHUB_ID = '',
@@ -27,25 +18,24 @@ export const auth_options = {
 	providers: [
 		GitHubProvider({
 			profile(profile: any) {
-				const user = {
-					...profile,
+				return {
+					id: String(profile.id),
+					email: profile.email,
 					image: profile.avatar_url,
-					role: check_admin(profile?.email ?? '', 'GitHub User'),
+					name: profile.name,
 				};
-				return user;
 			},
 			clientId: GITHUB_ID,
 			clientSecret: GITHUB_SECRET,
 		}),
 		GoogleProvider({
 			profile(profile) {
-				const user = {
-					...profile,
-					id: profile.sub,
+				return {
+					id: String(profile.sub),
+					email: profile.email,
 					image: profile.picture,
-					role: check_admin(profile?.email ?? '', 'Google User'),
+					name: profile.name,
 				};
-				return user;
 			},
 			clientId: GOOGLE_ID,
 			clientSecret: GOOGLE_SECRET,
@@ -66,16 +56,11 @@ export const auth_options = {
 			},
 			async authorize(credentials) {
 				try {
-					const { data } = await axiosInstance.post('/user/login', credentials);
-					if (data) {
-						const user = {
-							...data,
-							role: check_admin(data?.email ?? '', 'Credential User'),
-						};
-						return user;
-					} else {
-						return null;
-					}
+					const { data: user } = await axiosInstance.post(
+						'/user/login',
+						credentials
+					);
+					return user ?? null;
 				} catch (error) {
 					return null;
 				}
@@ -83,21 +68,35 @@ export const auth_options = {
 		}),
 	],
 	callbacks: {
-		async signIn({ user }: any) {
-			await generateToken({ email: user.email });
-			return true;
+		async signIn({ user, account }: any) {
+			if (['google', 'github'].includes(account.provider)) {
+				const { data } = await axiosInstance.post('/user/social-auth', {
+					...user,
+					from: account.provider,
+				});
+				if (data) {
+					user.id = data.id;
+					user.email = data.email;
+					user.name = data.name;
+					user.image = data.image;
+					user.role = data.role;
+					user.status = data.status;
+					return true;
+				}
+				return false;
+			} else {
+				return true;
+			}
 		},
 		async jwt({ token, user }: any) {
 			if (user) {
-				token.role = user.role;
+				token = { ...user, iat: token.iat, exp: token.exp, jti: token.jti };
 			}
 			return token;
 		},
 		async session({ session, token }: any) {
-			if (session?.user) {
-				session.user.role = token.role;
-			}
-			return session;
+			const { iat, exp, jti, ...rest } = token;
+			return { expires: session.expires, user: rest };
 		},
 	},
 };

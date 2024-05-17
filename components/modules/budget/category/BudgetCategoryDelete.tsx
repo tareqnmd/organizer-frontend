@@ -1,3 +1,6 @@
+'use client';
+import ErrorMessage from '@/components/common/message/ErrorMessage';
+import SuccessMessage from '@/components/common/message/SuccessMessage';
 import { Button } from '@/components/ui/button';
 import {
 	Dialog,
@@ -7,12 +10,39 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
+import { getError } from '@/lib/common-func';
+import { useDeleteBudgetCategoryMutation } from '@/store/features/budget/category/api';
 import { BudgetCategory } from '@/types/modules/budget/budget-category-types';
-import { Trash } from 'lucide-react';
+import { Loader, Trash } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 const BudgetCategoryDelete = ({ category }: { category: BudgetCategory }) => {
+	const [open, setOpen] = useState(false);
+	const [deleteCategory, { isLoading, isError, isSuccess, error }] =
+		useDeleteBudgetCategoryMutation();
+
+	const deleteHandler = () => {
+		deleteCategory(category.id);
+	};
+
+	useEffect(() => {
+		if (isError || isSuccess) {
+			toast(
+				isError ? (
+					<ErrorMessage message={getError(error)} />
+				) : (
+					<SuccessMessage message={`Category successfully deleted`} />
+				)
+			);
+			setOpen(false);
+		}
+	}, [error, isError, isSuccess]);
 	return (
-		<Dialog>
+		<Dialog
+			open={open}
+			onOpenChange={setOpen}
+		>
 			<DialogTrigger asChild>
 				<Trash
 					className="cursor-pointer"
@@ -25,7 +55,19 @@ const BudgetCategoryDelete = ({ category }: { category: BudgetCategory }) => {
 				</DialogHeader>
 				Do you want to delete the type?
 				<DialogFooter>
-					<Button className="bg-red-900">Delete</Button>
+					<Button
+						onClick={deleteHandler}
+						className="bg-red-900 flex items-center gap-1"
+						disabled={isLoading}
+					>
+						{isLoading ? (
+							<Loader
+								className="animate-spin"
+								size={16}
+							/>
+						) : null}
+						Delete
+					</Button>
 				</DialogFooter>
 			</DialogContent>
 		</Dialog>

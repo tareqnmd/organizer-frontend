@@ -15,16 +15,20 @@ export const type_categories_form_items = [
 		type: 'text',
 		placeholder: 'Name',
 		description: '',
+		required: true,
 	},
 	{
-		name: 'type',
+		name: 'typeId',
 		label: 'Type',
-		type: 'radio',
-		options: [
-			{ label: 'Income', value: 'Income', id: 'income' },
-			{ label: 'Expense', value: 'Expense', id: 'expense' },
-		],
+		type: 'select',
+		placeholder: 'Type',
+		optionUrl: '/budget/type-select',
+		// staticOption: [
+		// 	{ label: 'Income', value: 'Income', id: 'income' },
+		// 	{ label: 'Expense', value: 'Expense', id: 'expense' },
+		// ],
 		description: '',
+		required: true,
 	},
 ];
 

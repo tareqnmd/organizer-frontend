@@ -12,6 +12,7 @@ import {
 	useEditBudgetCategoryMutation,
 } from '@/store/features/budget/category/api';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Loader } from 'lucide-react';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -19,10 +20,17 @@ import { z } from 'zod';
 import { BudgetCategory } from '../../../../types/modules/budget/budget-category-types';
 const FormSchema = z.object({
 	name: z.string().min(3, {
-		message: 'Subject must be at least 3 characters.',
+		message: 'Name must be at least 3 characters.',
 	}),
+	typeId: z.string(),
 });
-const BudgetCategoryForm = ({ category }: { category?: BudgetCategory }) => {
+const BudgetCategoryForm = ({
+	category,
+	setModalClose,
+}: {
+	category?: BudgetCategory;
+	setModalClose: any;
+}) => {
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
@@ -48,12 +56,13 @@ const BudgetCategoryForm = ({ category }: { category?: BudgetCategory }) => {
 		},
 	] = useCreateBudgetCategoryMutation();
 	const onSubmit = (values: any) => {
-		category?.id ? create(values) : edit(values);
+		category?.id ? edit(values) : create(values);
 	};
 
 	useEffect(() => {
 		if (category?.name) {
 			form.setValue('name', category.name);
+			form.setValue('typeId', category.typeId);
 		}
 	}, [form, category]);
 
@@ -66,12 +75,13 @@ const BudgetCategoryForm = ({ category }: { category?: BudgetCategory }) => {
 					/>
 				) : (
 					<SuccessMessage
-						message={`Note successfully ${
+						message={`Category successfully ${
 							category?.id ? 'updated' : 'created'
 						}`}
 					/>
 				)
 			);
+			setModalClose(false);
 		}
 	}, [
 		category?.id,
@@ -81,6 +91,7 @@ const BudgetCategoryForm = ({ category }: { category?: BudgetCategory }) => {
 		isCreateSuccess,
 		isEditError,
 		isEditSuccess,
+		setModalClose,
 	]);
 	return (
 		<Form {...form}>
@@ -98,8 +109,15 @@ const BudgetCategoryForm = ({ category }: { category?: BudgetCategory }) => {
 				<DialogFooter>
 					<Button
 						disabled={isCreateLoading || isEditLoading}
+						className="flex items-center gap-1"
 						type="submit"
 					>
+						{isCreateLoading || isEditLoading ? (
+							<Loader
+								className="animate-spin"
+								size={16}
+							/>
+						) : null}
 						{category?.id ? 'Update' : 'Create'}
 					</Button>
 				</DialogFooter>

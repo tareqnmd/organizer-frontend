@@ -1,3 +1,4 @@
+'use client';
 import {
 	Dialog,
 	DialogContent,
@@ -7,9 +8,11 @@ import {
 } from '@/components/ui/dialog';
 import { BudgetCategory } from '@/types/modules/budget/budget-category-types';
 import { EditIcon } from 'lucide-react';
+import { useState } from 'react';
 import BudgetCategoryForm from './BudgetCategoryForm';
 
 const BudgetCategoryEdit = ({ category }: { category: BudgetCategory }) => {
+	const [modalClose, setModalClose] = useState(false);
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
@@ -22,7 +25,10 @@ const BudgetCategoryEdit = ({ category }: { category: BudgetCategory }) => {
 				<DialogHeader>
 					<DialogTitle>Edit Category</DialogTitle>
 				</DialogHeader>
-				<BudgetCategoryForm category={category} />
+				<BudgetCategoryForm
+					setModalClose={setModalClose}
+					category={category}
+				/>
 			</DialogContent>
 		</Dialog>
 	);

@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import ReactQuill from 'react-quill';
+import FormSelect from './Select';
 
 type FormInputType = {
 	label: string;
@@ -58,7 +59,10 @@ const CustomFormInput = ({
 						key={option.id}
 						className="flex gap-1"
 					>
-						<RadioGroupItem id={option.id} value={option.value} />
+						<RadioGroupItem
+							id={option.id}
+							value={option.value}
+						/>
 						<Label
 							htmlFor={option.id}
 							className="font-normal !m-0"
@@ -68,6 +72,11 @@ const CustomFormInput = ({
 					</div>
 				))}
 			</RadioGroup>
+		) : type === 'select' ? (
+			<FormSelect
+				input={input}
+				field={field}
+			/>
 		) : (
 			<Input
 				type={type}
