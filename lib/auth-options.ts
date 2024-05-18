@@ -42,7 +42,8 @@ export const authOptions = {
 			clientSecret: GOOGLE_SECRET,
 		}),
 		CredentialsProvider({
-			name: 'Credentials',
+			id: 'login',
+			name: 'Login',
 			credentials: {
 				email: {
 					label: 'Email:',
@@ -58,6 +59,37 @@ export const authOptions = {
 			async authorize(credentials) {
 				try {
 					const { data } = await axiosInstance.post('/user/login', credentials);
+					const { token, tokenOptions, ...user } = data;
+					cookies().set('token', token, JSON.parse(tokenOptions));
+					return user ?? null;
+				} catch (error) {
+					return null;
+				}
+			},
+		}),
+		CredentialsProvider({
+			id: 'register',
+			name: 'Register',
+			credentials: {
+				name: {
+					label: 'Name:',
+					type: 'text',
+					placeholder: 'Your Name',
+				},
+				email: {
+					label: 'Email:',
+					type: 'email',
+					placeholder: 'Your Email',
+				},
+				password: {
+					label: 'Password:',
+					type: 'password',
+					placeholder: 'Your Password',
+				},
+			},
+			async authorize(credentials) {
+				try {
+					const { data } = await axiosInstance.post('/user/register', credentials);
 					const { token, tokenOptions, ...user } = data;
 					cookies().set('token', token, JSON.parse(tokenOptions));
 					return user ?? null;

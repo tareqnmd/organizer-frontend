@@ -37,7 +37,7 @@ export function LoginForm() {
 	const onSubmit = async (data: z.infer<typeof FormSchema>) => {
 		try {
 			setLoading(true);
-			const res = await signIn('credentials', { ...data, redirect: false });
+			const res = await signIn('login', { ...data, redirect: false });
 			if (res?.error) throw new Error();
 			toast(<SuccessMessage />);
 			if (res?.status === 200) {
