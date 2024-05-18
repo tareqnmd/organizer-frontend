@@ -1,12 +1,12 @@
+import AuthSocialActions from '../common/AuthSocialActions';
 import { LoginForm } from './LoginForm';
-import LoginSocialActions from './LoginSocialActions';
 
 const Login = () => {
 	return (
 		<>
 			<p className="font-medium">Welcome</p>
 			<LoginForm />
-			<LoginSocialActions />
+			<AuthSocialActions />
 			<p className="text-xs">
 				Don&apos;t have an account?
 				<a

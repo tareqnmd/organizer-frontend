@@ -1,3 +1,4 @@
+import AuthSocialActions from '../common/AuthSocialActions';
 import RegistrationForm from './ResitrationForm';
 
 const Registration = () => {
@@ -5,6 +6,7 @@ const Registration = () => {
 		<>
 			<p className="font-medium text-lg">Create your account</p>
 			<RegistrationForm />
+			<AuthSocialActions />
 			<p>
 				Already have an account?
 				<a

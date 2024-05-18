@@ -65,3 +65,27 @@ export const login_form_items = [
 		description: '',
 	},
 ];
+
+export const registration_form_items = [
+	{
+		name: 'name',
+		label: 'Name',
+		type: 'text',
+		placeholder: 'Name',
+		description: '',
+	},
+	{
+		name: 'email',
+		label: 'Email',
+		type: 'email',
+		placeholder: 'Email',
+		description: '',
+	},
+	{
+		name: 'password',
+		label: 'Password',
+		type: 'password',
+		placeholder: 'Password',
+		description: '',
+	},
+];

@@ -4,7 +4,7 @@ import { signIn } from 'next-auth/react';
 import Google from '../icon/GoogleIcon';
 import { Button } from '../ui/button';
 
-const LoginSocialActions = () => {
+const AuthSocialActions = () => {
 	const socialLogin = async (type: string) => {
 		await signIn(type, {
 			redirect: false,
@@ -30,4 +30,4 @@ const LoginSocialActions = () => {
 	);
 };
 
-export default LoginSocialActions;
+export default AuthSocialActions;
