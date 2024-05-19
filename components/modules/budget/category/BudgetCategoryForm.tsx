@@ -35,6 +35,7 @@ const BudgetCategoryForm = ({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
 			name: '',
+			typeId: '',
 		},
 	});
 	const [
