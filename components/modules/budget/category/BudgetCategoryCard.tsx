@@ -1,10 +1,7 @@
 import { Card } from '@/components/ui/card';
-import { authOptions } from '@/lib/auth-options';
 import { cn } from '@/lib/utils';
-import { getServerSession } from 'next-auth';
 import { BudgetCategory } from '../../../../types/modules/budget/budget-category-types';
 import BudgetCategoryAction from './BudgetCategoryAction';
-
 const BudgetCategoryCard = async ({
 	category,
 	admin,

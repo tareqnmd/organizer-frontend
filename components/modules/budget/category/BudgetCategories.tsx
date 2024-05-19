@@ -24,7 +24,7 @@ const BudgetCategories = async () => {
 
 	return (
 		<>
-			<div className="flex justify-end items-center gap-2 mb-3">
+			<div className="flex items-center gap-2 mb-4 sm:w-[80%] md:w-[60%] xl:w-[40%] ml-auto">
 				<BudgetCategoriesFilter />
 				{session?.user?.role === 'admin' && <BudgetCategoryAdd />}
 			</div>

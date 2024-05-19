@@ -7,6 +7,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
+import { PlusIcon } from 'lucide-react';
 import { useState } from 'react';
 import BudgetCategoryForm from './BudgetCategoryForm';
 
@@ -18,7 +19,12 @@ const BudgetCategoryAdd = () => {
 			onOpenChange={setOpen}
 		>
 			<DialogTrigger asChild>
-				<Button size="sm">Create Category</Button>
+				<Button className="h-8 px-1 md:px-4 text-xs md:text-sm">
+					<span className="hidden md:block">Create Category</span>
+					<span className="block md:hidden">
+						<PlusIcon />
+					</span>
+				</Button>
 			</DialogTrigger>
 			<DialogContent className="sm:max-w-[425px]">
 				<DialogHeader>

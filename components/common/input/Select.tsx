@@ -9,7 +9,7 @@ import {
 import { useGetOptionsQuery } from '@/store/features/common/options-api';
 import { useEffect, useState } from 'react';
 
-const FormSelect = ({ input, field }: any) => {
+const FormSelect = ({ input, field, extraTriggerClassName = '' }: any) => {
 	const [options, setOptions] = useState([]);
 	const [value, setValue] = useState('');
 	const { placeholder, staticOption = [], optionUrl } = input;
@@ -30,7 +30,7 @@ const FormSelect = ({ input, field }: any) => {
 			onValueChange={field.onChange}
 			value={value}
 		>
-			<SelectTrigger>
+			<SelectTrigger className={extraTriggerClassName}>
 				<SelectValue placeholder={placeholder} />
 			</SelectTrigger>
 			<SelectContent>

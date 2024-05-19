@@ -16,8 +16,10 @@ type FormInputType = {
 	placeholder?: string;
 	name: string;
 	type: string;
+	optionUrl?: string;
 	options?: { value: string; id: string; label: string }[];
 	description: string;
+	required?: boolean;
 };
 
 const CustomFormInput = ({

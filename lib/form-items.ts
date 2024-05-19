@@ -21,7 +21,7 @@ export const type_categories_form_items = [
 		name: 'typeId',
 		label: 'Type',
 		type: 'select',
-		placeholder: 'Type',
+		placeholder: 'Select a Type',
 		optionUrl: '/budget/type-select',
 		// staticOption: [
 		// 	{ label: 'Income', value: 'Income' },
