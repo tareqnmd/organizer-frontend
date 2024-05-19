@@ -8,23 +8,20 @@ import { Form } from '@/components/ui/form';
 import { getError } from '@/lib/common-func';
 import { type_form_items } from '@/lib/form-items';
 import {
-	useCreateTypeMutation,
-	useEditTypeMutation,
+	useCreateBudgetTypeMutation,
+	useEditBudgetTypeMutation,
 } from '@/store/features/budget/type/api';
+import { BudgetType } from '@/types/modules/budget/budget-types';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
-import { Type } from './TransactionTypes';
 
 type TypeInput = {
 	name: string;
-	_id?: string;
-};
-
-type EditType = {
-	type?: Type;
+	id?: string;
 };
 
 const FormSchema = z.object({
@@ -33,19 +30,25 @@ const FormSchema = z.object({
 	}),
 });
 
-const TransactionTypeForm = ({ type }: EditType) => {
-	console.log('type', type);
+const BudgetTypeForm = ({
+	type,
+	setOpen,
+}: {
+	type?: BudgetType;
+	setOpen: (arg: boolean) => void;
+}) => {
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
 			name: '',
 		},
 	});
+	const router = useRouter();
 	const [editType, { isLoading, isError, isSuccess, error }] =
-		useEditTypeMutation();
-	const [createType] = useCreateTypeMutation();
+		useEditBudgetTypeMutation();
+	const [createType] = useCreateBudgetTypeMutation();
 	const onSubmit = (values: TypeInput) => {
-		type?.name ? editType({ ...values, id: type._id }) : createType(values);
+		type?.name ? editType({ ...values, id: type.id }) : createType(values);
 	};
 
 	useEffect(() => {
@@ -55,12 +58,14 @@ const TransactionTypeForm = ({ type }: EditType) => {
 					<ErrorMessage message={getError(error)} />
 				) : (
 					<SuccessMessage
-						message={`Note successfully ${type?._id ? 'updated' : 'created'}`}
+						message={`Note successfully ${type?.id ? 'updated' : 'created'}`}
 					/>
 				)
 			);
+			router.refresh();
+			setOpen(false);
 		}
-	}, [isError, isSuccess, error, type?._id]);
+	}, [isError, isSuccess, error, type?.id, router, setOpen]);
 
 	useEffect(() => {
 		if (type?.name) {
@@ -86,7 +91,7 @@ const TransactionTypeForm = ({ type }: EditType) => {
 						disabled={isLoading}
 						type="submit"
 					>
-						{!type?.name ? 'Create' : 'Update'}
+						{!type?.id ? 'Create' : 'Update'}
 					</Button>
 				</DialogFooter>
 			</form>
@@ -94,4 +99,4 @@ const TransactionTypeForm = ({ type }: EditType) => {
 	);
 };
 
-export default TransactionTypeForm;
+export default BudgetTypeForm;

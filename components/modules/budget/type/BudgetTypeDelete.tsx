@@ -1,4 +1,3 @@
-'use client';
 import ErrorMessage from '@/components/common/message/ErrorMessage';
 import SuccessMessage from '@/components/common/message/SuccessMessage';
 import { Button } from '@/components/ui/button';
@@ -11,23 +10,20 @@ import {
 	DialogTrigger,
 } from '@/components/ui/dialog';
 import { getError } from '@/lib/common-func';
-import { useDeleteBudgetCategoryMutation } from '@/store/features/budget/category/api';
-import { BudgetCategory } from '@/types/modules/budget/budget-category-types';
+import { useDeleteBudgetTypeMutation } from '@/store/features/budget/type/api';
+import { BudgetType as BType } from '@/types/modules/budget/budget-types';
 import { Loader, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
-
-const BudgetCategoryDelete = ({ category }: { category: BudgetCategory }) => {
+const BudgetTypeDelete = ({ type }: { type: BType }) => {
 	const [open, setOpen] = useState(false);
 	const router = useRouter();
-	const [deleteCategory, { isLoading, isError, isSuccess, error }] =
-		useDeleteBudgetCategoryMutation();
-
+	const [deleteType, { isLoading, isError, isSuccess, error }] =
+		useDeleteBudgetTypeMutation();
 	const deleteHandler = () => {
-		deleteCategory(category.id);
+		deleteType(type.id);
 	};
-
 	useEffect(() => {
 		if (isError || isSuccess) {
 			toast(
@@ -54,9 +50,9 @@ const BudgetCategoryDelete = ({ category }: { category: BudgetCategory }) => {
 			</DialogTrigger>
 			<DialogContent className="sm:max-w-[425px]">
 				<DialogHeader>
-					<DialogTitle>Delete Category ({category.name})</DialogTitle>
+					<DialogTitle>Delete Type ({type.name})</DialogTitle>
 				</DialogHeader>
-				Do you want to delete the Category?
+				Do you want to delete the type?
 				<DialogFooter>
 					<Button
 						onClick={deleteHandler}
@@ -77,4 +73,4 @@ const BudgetCategoryDelete = ({ category }: { category: BudgetCategory }) => {
 	);
 };
 
-export default BudgetCategoryDelete;
+export default BudgetTypeDelete;
