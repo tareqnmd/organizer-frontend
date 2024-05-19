@@ -24,7 +24,7 @@ const BudgetCategoryAdd = () => {
 				<DialogHeader>
 					<DialogTitle>Create Category</DialogTitle>
 				</DialogHeader>
-				<BudgetCategoryForm setModalClose={setOpen} />
+				<BudgetCategoryForm setOpen={setOpen} />
 			</DialogContent>
 		</Dialog>
 	);

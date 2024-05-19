@@ -8,7 +8,9 @@ import BudgetCategoryCard from './BudgetCategoryCard';
 
 const getBudgetCategories = async () => {
 	try {
-		const res = await authFetch(`budget/type-categories`);
+		const res = await authFetch(`budget/type-categories`, {
+			cache: 'no-store',
+		});
 		if (!res.ok) {
 			throw new Error('Failed to fetch data');
 		}

@@ -13,6 +13,7 @@ import {
 } from '@/store/features/budget/category/api';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -31,6 +32,7 @@ const BudgetCategoryForm = ({
 	category?: BudgetCategory;
 	setOpen: (arg: boolean) => void;
 }) => {
+	const router = useRouter();
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
@@ -82,6 +84,7 @@ const BudgetCategoryForm = ({
 					/>
 				)
 			);
+			router.refresh();
 			setOpen(false);
 		}
 	}, [
@@ -92,6 +95,7 @@ const BudgetCategoryForm = ({
 		isCreateSuccess,
 		isEditError,
 		isEditSuccess,
+		router,
 		setOpen,
 	]);
 	return (

@@ -15,10 +15,12 @@ import { cn } from '@/lib/utils';
 import { useEditBudgetCategoryMutation } from '@/store/features/budget/category/api';
 import { BudgetCategory } from '@/types/modules/budget/budget-category-types';
 import { BadgeCheck, BadgeMinus, Loader } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 const BudgetCategoryStatus = ({ category }: { category: BudgetCategory }) => {
 	const [open, setOpen] = useState(false);
+	const router = useRouter();
 	const [statusToggle, { isLoading, isError, isSuccess, error }] =
 		useEditBudgetCategoryMutation();
 	const statusHandler = () => {
@@ -41,9 +43,10 @@ const BudgetCategoryStatus = ({ category }: { category: BudgetCategory }) => {
 					/>
 				)
 			);
+			router.refresh();
 			setOpen(false);
 		}
-	}, [category.status, error, isError, isSuccess]);
+	}, [category.status, error, isError, isSuccess, router]);
 	return (
 		<Dialog
 			open={open}
