@@ -6,3 +6,5 @@ export type BudgetCategory = {
 	status: number;
 };
 export type BudgetCategories = BudgetCategory[];
+
+export type BudgetCategoryParamType = { category?: string; type: string };

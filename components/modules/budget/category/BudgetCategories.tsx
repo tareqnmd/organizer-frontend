@@ -1,14 +1,18 @@
 import { authOptions } from '@/lib/auth-options';
 import { authFetch } from '@/lib/fetch';
+import {
+	BudgetCategory,
+	BudgetCategoryParamType,
+} from '@/types/modules/budget/budget-category-types';
 import { getServerSession } from 'next-auth';
-import { BudgetCategory } from '../../../../types/modules/budget/budget-category-types';
 import BudgetCategoriesFilter from './BudgetCategoriesFilter';
 import BudgetCategoryAdd from './BudgetCategoryAdd';
 import BudgetCategoryCard from './BudgetCategoryCard';
 
-const getBudgetCategories = async () => {
+const getBudgetCategories = async (searchParams: BudgetCategoryParamType) => {
 	try {
-		const res = await authFetch(`budget/type-categories`, {
+		const queryParams = new URLSearchParams(searchParams);
+		const res = await authFetch(`budget/type-categories?${queryParams}`, {
 			cache: 'no-store',
 		});
 		if (!res.ok) {
@@ -18,14 +22,17 @@ const getBudgetCategories = async () => {
 	} catch (error) {}
 };
 
-const BudgetCategories = async () => {
-	const categories = await getBudgetCategories();
+const BudgetCategories = async ({
+	searchParams,
+}: {
+	searchParams: BudgetCategoryParamType;
+}) => {
+	const categories = await getBudgetCategories(searchParams);
 	const session = await getServerSession(authOptions);
-
 	return (
 		<>
 			<div className="flex items-center gap-2 mb-4 sm:w-[80%] md:w-[60%] xl:w-[40%] ml-auto">
-				<BudgetCategoriesFilter />
+				<BudgetCategoriesFilter searchParams={searchParams} />
 				{session?.user?.role === 'admin' && <BudgetCategoryAdd />}
 			</div>
 			<div
