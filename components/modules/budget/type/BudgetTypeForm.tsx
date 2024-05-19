@@ -13,6 +13,7 @@ import {
 } from '@/store/features/budget/type/api';
 import { BudgetType } from '@/types/modules/budget/budget-types';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -44,28 +45,56 @@ const BudgetTypeForm = ({
 		},
 	});
 	const router = useRouter();
-	const [editType, { isLoading, isError, isSuccess, error }] =
-		useEditBudgetTypeMutation();
-	const [createType] = useCreateBudgetTypeMutation();
+	const [
+		edit,
+		{
+			isLoading: isEditLoading,
+			isError: isEditError,
+			isSuccess: isEditSuccess,
+			error: editError,
+		},
+	] = useEditBudgetTypeMutation();
+	const [
+		create,
+		{
+			isLoading: isCreateLoading,
+			isError: isCreateError,
+			isSuccess: isCreateSuccess,
+			error: createError,
+		},
+	] = useCreateBudgetTypeMutation();
+
 	const onSubmit = (values: TypeInput) => {
-		type?.name ? editType({ ...values, id: type.id }) : createType(values);
+		type?.name ? edit({ data: values, id: type.id }) : create(values);
 	};
 
 	useEffect(() => {
-		if (isError || isSuccess) {
+		if (isEditError || isCreateError || isEditSuccess || isCreateSuccess) {
 			toast(
-				isError ? (
-					<ErrorMessage message={getError(error)} />
+				isEditError || isCreateError ? (
+					<ErrorMessage
+						message={getError(type?.id ? editError : createError)}
+					/>
 				) : (
 					<SuccessMessage
-						message={`Note successfully ${type?.id ? 'updated' : 'created'}`}
+						message={`Type successfully ${type?.id ? 'updated' : 'created'}`}
 					/>
 				)
 			);
 			router.refresh();
 			setOpen(false);
 		}
-	}, [isError, isSuccess, error, type?.id, router, setOpen]);
+	}, [
+		type?.id,
+		createError,
+		editError,
+		isCreateError,
+		isCreateSuccess,
+		isEditError,
+		isEditSuccess,
+		router,
+		setOpen,
+	]);
 
 	useEffect(() => {
 		if (type?.name) {
@@ -88,10 +117,17 @@ const BudgetTypeForm = ({
 				))}
 				<DialogFooter>
 					<Button
-						disabled={isLoading}
+						disabled={isCreateLoading || isEditLoading}
+						className="flex items-center gap-1"
 						type="submit"
 					>
-						{!type?.id ? 'Create' : 'Update'}
+						{isCreateLoading || isEditLoading ? (
+							<Loader
+								className="animate-spin"
+								size={16}
+							/>
+						) : null}
+						{type?.id ? 'Update' : 'Create'}
 					</Button>
 				</DialogFooter>
 			</form>

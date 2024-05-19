@@ -38,7 +38,7 @@ const BudgetTypeStatus = ({ type }: { type: BudgetType }) => {
 					<ErrorMessage message={getError(error)} />
 				) : (
 					<SuccessMessage
-						message={`Category successfully ${
+						message={`Type successfully ${
 							type.status === 1 ? 'inactivated' : 'activated'
 						}`}
 					/>
@@ -69,10 +69,10 @@ const BudgetTypeStatus = ({ type }: { type: BudgetType }) => {
 			<DialogContent className="sm:max-w-[425px]">
 				<DialogHeader>
 					<DialogTitle>
-						{type.status === 0 ? 'Active' : 'Inactive'} Category ({type.name})
+						{type.status === 0 ? 'Active' : 'Inactive'} Type ({type.name})
 					</DialogTitle>
 				</DialogHeader>
-				Do you want to {type.status === 0 ? 'active' : 'inactive'} the Category?
+				Do you want to {type.status === 0 ? 'active' : 'inactive'} the Type?
 				<DialogFooter>
 					<Button
 						onClick={statusHandler}

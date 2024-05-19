@@ -1,3 +1,4 @@
+'use client';
 import {
 	Dialog,
 	DialogContent,
@@ -25,7 +26,7 @@ export function BudgetTypeEdit({ type }: { type: BudgetType }) {
 			</DialogTrigger>
 			<DialogContent className="sm:max-w-[425px]">
 				<DialogHeader>
-					<DialogTitle>Edit Category</DialogTitle>
+					<DialogTitle>Edit Type</DialogTitle>
 				</DialogHeader>
 				<BudgetTypeForm
 					setOpen={setOpen}

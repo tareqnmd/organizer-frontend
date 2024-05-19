@@ -1,3 +1,4 @@
+'use client';
 import ErrorMessage from '@/components/common/message/ErrorMessage';
 import SuccessMessage from '@/components/common/message/SuccessMessage';
 import { Button } from '@/components/ui/button';
@@ -30,7 +31,7 @@ const BudgetTypeDelete = ({ type }: { type: BType }) => {
 				isError ? (
 					<ErrorMessage message={getError(error)} />
 				) : (
-					<SuccessMessage message={`Category successfully deleted`} />
+					<SuccessMessage message={`Type successfully deleted`} />
 				)
 			);
 			setOpen(false);
