@@ -1,6 +1,6 @@
 import apiSlice from '../api';
 
-export const typeApi = apiSlice.injectEndpoints({
+export const optionsApi = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
 		getOptions: builder.query({
 			query: (url) => ({
@@ -10,4 +10,4 @@ export const typeApi = apiSlice.injectEndpoints({
 	}),
 });
 
-export const { useGetOptionsQuery } = typeApi;
+export const { useGetOptionsQuery } = optionsApi;

@@ -7,10 +7,11 @@ import BudgetCategoryAction from './BudgetCategoryAction';
 
 const BudgetCategoryCard = async ({
 	category,
+	admin,
 }: {
 	category: BudgetCategory;
+	admin: boolean;
 }) => {
-	const session = await getServerSession(authOptions);
 	return (
 		<Card
 			className={cn(
@@ -28,9 +29,7 @@ const BudgetCategoryCard = async ({
 				<strong>{category.name}</strong>
 				<span>({category.type})</span>
 			</div>
-			{session?.user?.role === 'admin' && (
-				<BudgetCategoryAction category={category} />
-			)}
+			{admin && <BudgetCategoryAction category={category} />}
 		</Card>
 	);
 };

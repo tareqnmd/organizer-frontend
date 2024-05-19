@@ -1,4 +1,6 @@
+import { authOptions } from '@/lib/auth-options';
 import { authFetch } from '@/lib/fetch';
+import { getServerSession } from 'next-auth';
 import { BudgetCategory } from '../../../../types/modules/budget/budget-category-types';
 import BudgetCategoriesFilter from './BudgetCategoriesFilter';
 import BudgetCategoryAdd from './BudgetCategoryAdd';
@@ -16,11 +18,13 @@ const getBudgetCategories = async () => {
 
 const BudgetCategories = async () => {
 	const categories = await getBudgetCategories();
+	const session = await getServerSession(authOptions);
+
 	return (
 		<>
 			<div className="flex justify-end items-center gap-2 mb-3">
 				<BudgetCategoriesFilter />
-				<BudgetCategoryAdd />
+				{session?.user?.role === 'admin' && <BudgetCategoryAdd />}
 			</div>
 			<div
 				className="grid grid-cols-1 sm:grid-cols-2
@@ -30,6 +34,7 @@ const BudgetCategories = async () => {
 					<BudgetCategoryCard
 						key={category.id}
 						category={category}
+						admin={session?.user?.role === 'admin'}
 					/>
 				))}
 			</div>

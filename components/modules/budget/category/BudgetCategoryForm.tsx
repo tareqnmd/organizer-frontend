@@ -60,7 +60,7 @@ const BudgetCategoryForm = ({
 	};
 
 	useEffect(() => {
-		if (category?.name) {
+		if (category?.name && category.typeId) {
 			form.setValue('name', category.name);
 			form.setValue('typeId', category.typeId);
 		}

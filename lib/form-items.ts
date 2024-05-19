@@ -24,8 +24,8 @@ export const type_categories_form_items = [
 		placeholder: 'Type',
 		optionUrl: '/budget/type-select',
 		// staticOption: [
-		// 	{ label: 'Income', value: 'Income', id: 'income' },
-		// 	{ label: 'Expense', value: 'Expense', id: 'expense' },
+		// 	{ label: 'Income', value: 'Income' },
+		// 	{ label: 'Expense', value: 'Expense' },
 		// ],
 		description: '',
 		required: true,
