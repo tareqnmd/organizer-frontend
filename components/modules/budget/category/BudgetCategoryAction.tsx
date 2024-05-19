@@ -6,7 +6,9 @@ import BudgetCategoryStatus from './BudgetCategoryStatus';
 const BudgetCategoryAction = ({ category }: { category: BudgetCategory }) => {
 	return (
 		<div className="flex items-center gap-1">
-			<BudgetCategoryEdit category={category} />
+			{category.status === 1 ? (
+				<BudgetCategoryEdit category={category} />
+			) : null}
 			<BudgetCategoryDelete category={category} />
 			<BudgetCategoryStatus category={category} />
 		</div>

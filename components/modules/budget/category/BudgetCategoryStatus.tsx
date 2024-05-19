@@ -50,7 +50,7 @@ const BudgetCategoryStatus = ({ category }: { category: BudgetCategory }) => {
 			onOpenChange={setOpen}
 		>
 			<DialogTrigger asChild>
-				{category.status === 1 ? (
+				{category.status === 0 ? (
 					<BadgeCheck
 						className="cursor-pointer"
 						size={16}

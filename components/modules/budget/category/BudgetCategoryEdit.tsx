@@ -12,9 +12,12 @@ import { useState } from 'react';
 import BudgetCategoryForm from './BudgetCategoryForm';
 
 const BudgetCategoryEdit = ({ category }: { category: BudgetCategory }) => {
-	const [modalClose, setModalClose] = useState(false);
+	const [open, setOpen] = useState(false);
 	return (
-		<Dialog>
+		<Dialog
+			open={open}
+			onOpenChange={setOpen}
+		>
 			<DialogTrigger asChild>
 				<EditIcon
 					className="cursor-pointer"
@@ -26,7 +29,7 @@ const BudgetCategoryEdit = ({ category }: { category: BudgetCategory }) => {
 					<DialogTitle>Edit Category</DialogTitle>
 				</DialogHeader>
 				<BudgetCategoryForm
-					setModalClose={setModalClose}
+					setOpen={setOpen}
 					category={category}
 				/>
 			</DialogContent>

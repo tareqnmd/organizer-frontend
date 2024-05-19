@@ -26,10 +26,10 @@ const FormSchema = z.object({
 });
 const BudgetCategoryForm = ({
 	category,
-	setModalClose,
+	setOpen,
 }: {
 	category?: BudgetCategory;
-	setModalClose: any;
+	setOpen: (arg: boolean) => void;
 }) => {
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
@@ -82,7 +82,7 @@ const BudgetCategoryForm = ({
 					/>
 				)
 			);
-			setModalClose(false);
+			setOpen(false);
 		}
 	}, [
 		category?.id,
@@ -92,7 +92,7 @@ const BudgetCategoryForm = ({
 		isCreateSuccess,
 		isEditError,
 		isEditSuccess,
-		setModalClose,
+		setOpen,
 	]);
 	return (
 		<Form {...form}>
