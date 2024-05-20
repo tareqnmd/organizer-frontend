@@ -20,7 +20,7 @@ const BudgetTransactionAdd = () => {
 		>
 			<DialogTrigger asChild>
 				<Button className="h-8 px-1 md:px-4 text-xs md:text-sm">
-					<span className="hidden md:block">Create Category</span>
+					<span className="hidden md:block">New Transaction</span>
 					<span className="block md:hidden">
 						<PlusIcon />
 					</span>
@@ -28,7 +28,7 @@ const BudgetTransactionAdd = () => {
 			</DialogTrigger>
 			<DialogContent className="sm:max-w-[425px]">
 				<DialogHeader>
-					<DialogTitle>Create Category</DialogTitle>
+					<DialogTitle>New Transaction</DialogTitle>
 				</DialogHeader>
 				<BudgetTransactionForm setOpen={setOpen} />
 			</DialogContent>

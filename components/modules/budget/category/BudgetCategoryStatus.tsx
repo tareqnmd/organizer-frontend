@@ -13,12 +13,12 @@ import {
 import { getError } from '@/lib/common-func';
 import { cn } from '@/lib/utils';
 import { useEditBudgetCategoryMutation } from '@/store/features/budget/category/api';
-import { BudgetCategory } from '@/types/modules/budget/budget-category-types';
+import { BudgetCategoryType } from '@/types/modules/budget/budget-category-types';
 import { BadgeCheck, BadgeMinus, Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
-const BudgetCategoryStatus = ({ category }: { category: BudgetCategory }) => {
+const BudgetCategoryStatus = ({ category }: { category: BudgetCategoryType }) => {
 	const [open, setOpen] = useState(false);
 	const router = useRouter();
 	const [statusToggle, { isLoading, isError, isSuccess, error }] =

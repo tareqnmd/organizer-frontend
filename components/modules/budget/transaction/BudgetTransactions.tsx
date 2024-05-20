@@ -1,13 +1,11 @@
-import { authOptions } from '@/lib/auth-options';
 import { authFetch } from '@/lib/fetch';
 import {
 	BudgetTransactionParamType,
 	BudgetTransactionType,
 } from '@/types/modules/budget/budget-transaction-types';
-import { getServerSession } from 'next-auth';
-import BudgetTransactionAction from './BudgetTransactionAction';
 import BudgetTransactionAdd from './BudgetTransactionAdd';
 import BudgetTransactionCard from './BudgetTransactionCard';
+import BudgetTransactionFilter from './BudgetTransactionFilter';
 
 const getTransactions = async (params: BudgetTransactionParamType) => {
 	try {
@@ -28,12 +26,11 @@ const Transactions = async ({
 	searchOptions: BudgetTransactionParamType;
 }) => {
 	const transactions = await getTransactions(searchOptions);
-	const session = await getServerSession(authOptions);
 	return (
 		<>
 			<div className="flex items-center justify-end gap-2 mb-4">
-				<BudgetTransactionAction params={searchOptions} />
-				{session?.user?.role === 'admin' && <BudgetTransactionAdd />}
+				<BudgetTransactionFilter searchParams={searchOptions} />
+				<BudgetTransactionAdd />
 			</div>
 			<div
 				className="grid grid-cols-1 sm:grid-cols-2

@@ -6,12 +6,12 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-import { BudgetCategory } from '@/types/modules/budget/budget-category-types';
+import { BudgetCategoryType } from '@/types/modules/budget/budget-category-types';
 import { EditIcon } from 'lucide-react';
 import { useState } from 'react';
 import BudgetCategoryForm from './BudgetCategoryForm';
 
-const BudgetCategoryEdit = ({ category }: { category: BudgetCategory }) => {
+const BudgetCategoryEdit = ({ category }: { category: BudgetCategoryType }) => {
 	const [open, setOpen] = useState(false);
 	return (
 		<Dialog

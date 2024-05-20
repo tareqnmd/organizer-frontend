@@ -20,7 +20,7 @@ const BudgetCategoryAdd = () => {
 		>
 			<DialogTrigger asChild>
 				<Button className="h-8 px-1 md:px-4 text-xs md:text-sm">
-					<span className="hidden md:block">Create Category</span>
+					<span className="hidden md:block">New Category</span>
 					<span className="block md:hidden">
 						<PlusIcon />
 					</span>

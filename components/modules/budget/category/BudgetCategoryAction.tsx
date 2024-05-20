@@ -1,9 +1,13 @@
-import { BudgetCategory } from '../../../../types/modules/budget/budget-category-types';
+import { BudgetCategoryType } from '@/types/modules/budget/budget-category-types';
 import BudgetCategoryDelete from './BudgetCategoryDelete';
 import BudgetCategoryEdit from './BudgetCategoryEdit';
 import BudgetCategoryStatus from './BudgetCategoryStatus';
 
-const BudgetCategoryAction = ({ category }: { category: BudgetCategory }) => {
+const BudgetCategoryAction = ({
+	category,
+}: {
+	category: BudgetCategoryType;
+}) => {
 	return (
 		<div className="flex items-center gap-1">
 			{category.status === 1 ? (

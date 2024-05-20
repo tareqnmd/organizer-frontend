@@ -11,7 +11,10 @@ import {
 	useCreateBudgetTypeMutation,
 	useEditBudgetTypeMutation,
 } from '@/store/features/budget/type/api';
-import { BudgetType } from '@/types/modules/budget/budget-type-types';
+import {
+	BudgetTypeSubmitType,
+	BudgetTypeType,
+} from '@/types/modules/budget/budget-type-types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -19,11 +22,6 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
-
-type TypeInput = {
-	name: string;
-	id?: string;
-};
 
 const FormSchema = z.object({
 	name: z.string().min(3, {
@@ -35,7 +33,7 @@ const BudgetTypeForm = ({
 	type,
 	setOpen,
 }: {
-	type?: BudgetType;
+	type?: BudgetTypeType;
 	setOpen: (arg: boolean) => void;
 }) => {
 	const form = useForm<z.infer<typeof FormSchema>>({
@@ -64,7 +62,7 @@ const BudgetTypeForm = ({
 		},
 	] = useCreateBudgetTypeMutation();
 
-	const onSubmit = (values: TypeInput) => {
+	const onSubmit = (values: BudgetTypeSubmitType) => {
 		type?.name ? edit({ data: values, id: type.id }) : create(values);
 	};
 

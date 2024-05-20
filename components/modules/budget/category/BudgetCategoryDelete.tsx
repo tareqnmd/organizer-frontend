@@ -12,13 +12,13 @@ import {
 } from '@/components/ui/dialog';
 import { getError } from '@/lib/common-func';
 import { useDeleteBudgetCategoryMutation } from '@/store/features/budget/category/api';
-import { BudgetCategory } from '@/types/modules/budget/budget-category-types';
+import { BudgetCategoryType } from '@/types/modules/budget/budget-category-types';
 import { Loader, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
-const BudgetCategoryDelete = ({ category }: { category: BudgetCategory }) => {
+const BudgetCategoryDelete = ({ category }: { category: BudgetCategoryType }) => {
 	const [open, setOpen] = useState(false);
 	const router = useRouter();
 	const [deleteCategory, { isLoading, isError, isSuccess, error }] =

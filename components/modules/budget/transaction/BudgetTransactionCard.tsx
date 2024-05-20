@@ -7,6 +7,7 @@ import {
 } from '@/components/ui/card';
 import { BudgetTransactionType } from '@/types/modules/budget/budget-transaction-types';
 import Link from 'next/link';
+import BudgetTransactionAction from './BudgetTransactionAction';
 
 const BudgetTransactionCard = ({
 	transaction,
@@ -31,6 +32,7 @@ const BudgetTransactionCard = ({
 						dangerouslySetInnerHTML={{ __html: transaction?.description }}
 						className="truncate max-h-10"
 					/>
+					<BudgetTransactionAction transaction={transaction} />
 				</CardContent>
 			</Card>
 		</Link>

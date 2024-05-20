@@ -3,3 +3,7 @@ export type BudgetTypeType = {
 	name: string;
 	status: number;
 };
+export type BudgetTypeSubmitType = {
+	name: string;
+	id?: string;
+};

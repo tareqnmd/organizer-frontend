@@ -1,41 +1,20 @@
-import { cn } from '@/lib/utils';
-import { BudgetTransactionParamType } from '@/types/modules/budget/budget-transaction-types';
-import Link from 'next/link';
+import { BudgetTransactionType } from '@/types/modules/budget/budget-transaction-types';
+import BudgetTransactionEdit from './BudgetTransactionEdit';
+import BudgetTransactionDelete from './BudgetTransactionDelete';
+import BudgetTransactionStatus from './BudgetTransactionStatus';
 
 const BudgetTransactionAction = ({
-	params,
+	transaction,
 }: {
-	params: BudgetTransactionParamType;
+	transaction: BudgetTransactionType;
 }) => {
 	return (
-		<div className="flex item-center justify-end gap-2">
-			<Link
-				className={cn(
-					'border rounded px-3 py-1 text-sm',
-					Object.keys(params).length === 0 && 'border-gray-950'
-				)}
-				href="/budget/transaction"
-			>
-				All
-			</Link>
-			<Link
-				className={cn(
-					'border rounded px-3 py-1 text-sm',
-					params?.type === 'Income' && 'border-gray-950'
-				)}
-				href="/budget/transaction?type=Income"
-			>
-				Income
-			</Link>
-			<Link
-				className={cn(
-					'border rounded px-3 py-1 text-sm',
-					params?.type === 'Expense' && 'border-gray-950'
-				)}
-				href="/budget/transaction?type=Expense"
-			>
-				Expense
-			</Link>
+		<div className="flex items-center gap-1">
+			{transaction.status === 1 ? (
+				<BudgetTransactionEdit transaction={transaction} />
+			) : null}
+			<BudgetTransactionDelete transaction={transaction} />
+			<BudgetTransactionStatus transaction={transaction} />
 		</div>
 	);
 };
