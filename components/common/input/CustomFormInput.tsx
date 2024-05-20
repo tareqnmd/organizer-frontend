@@ -7,6 +7,8 @@ import {
 	FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import FormDate from './Date';
 import FormRadio from './Radio';
 import FormSelect from './Select';
 import FormTextEditor from './TextEditor';
@@ -45,6 +47,13 @@ const CustomFormInput = ({
 			<FormSelect
 				input={input}
 				field={field}
+			/>
+		) : type === 'date' ? (
+			<FormDate field={field} />
+		) : type === 'textarea' ? (
+			<Textarea
+				placeholder={placeholder}
+				{...field}
 			/>
 		) : (
 			<Input
