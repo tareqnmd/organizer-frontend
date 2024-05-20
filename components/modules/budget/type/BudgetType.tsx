@@ -5,7 +5,13 @@ import BudgetTypeDelete from './BudgetTypeDelete';
 import { BudgetTypeEdit } from './BudgetTypeEdit';
 import BudgetTypeStatus from './BudgetTypeStatus';
 
-const BudgetType = async ({ type, admin }: { type: BudgetTypeType; admin: boolean }) => {
+const BudgetType = async ({
+	type,
+	admin,
+}: {
+	type: BudgetTypeType;
+	admin: boolean;
+}) => {
 	return (
 		<Card
 			className={cn(
@@ -19,7 +25,7 @@ const BudgetType = async ({ type, admin }: { type: BudgetTypeType; admin: boolea
 					: null
 			)}
 		>
-			<span>{type.name}</span>
+			<strong>{type.name}</strong>
 			{admin && (
 				<div className="flex items-center gap-1">
 					<BudgetTypeEdit type={type} />

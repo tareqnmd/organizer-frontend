@@ -1,11 +1,8 @@
 import { authFetch } from '@/lib/fetch';
-import {
-	BudgetTransactionParamType,
-	BudgetTransactionType,
-} from '@/types/modules/budget/budget-transaction-types';
+import { BudgetTransactionParamType } from '@/types/modules/budget/budget-transaction-types';
 import BudgetTransactionAdd from './BudgetTransactionAdd';
-import BudgetTransactionCard from './BudgetTransactionCard';
 import BudgetTransactionFilter from './BudgetTransactionFilter';
+import BudgetTransactionsTable from './BudgetTransactionsTable';
 
 const getTransactions = async (params: BudgetTransactionParamType) => {
 	try {
@@ -32,16 +29,7 @@ const Transactions = async ({
 				<BudgetTransactionFilter searchParams={searchOptions} />
 				<BudgetTransactionAdd />
 			</div>
-			<div
-				className="grid grid-cols-1 sm:grid-cols-2 gap-2"
-			>
-				{transactions?.map((transaction: BudgetTransactionType) => (
-					<BudgetTransactionCard
-						key={transaction.id}
-						transaction={transaction}
-					/>
-				))}
-			</div>
+			<BudgetTransactionsTable transactions={transactions} />
 		</>
 	);
 };

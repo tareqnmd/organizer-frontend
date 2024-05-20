@@ -10,4 +10,6 @@ export type BudgetTransactionType = {
 	status: number;
 };
 
+export type BudgetTransactionsType = BudgetTransactionType[];
+
 export type BudgetTransactionParamType = { type?: string; category?: string };
