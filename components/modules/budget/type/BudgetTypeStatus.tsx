@@ -22,7 +22,7 @@ import { toast } from 'sonner';
 const BudgetTypeStatus = ({ type }: { type: BudgetTypeType }) => {
 	const [open, setOpen] = useState(false);
 	const router = useRouter();
-	const [statusToggle, { isLoading, isError, isSuccess, error }] =
+	const [statusToggle, { isLoading, isError, isSuccess, error, data = {} }] =
 		useEditBudgetTypeMutation();
 	const statusHandler = () => {
 		statusToggle({
@@ -39,7 +39,7 @@ const BudgetTypeStatus = ({ type }: { type: BudgetTypeType }) => {
 				) : (
 					<SuccessMessage
 						message={`Type successfully ${
-							type.status === 1 ? 'inactivated' : 'activated'
+							data.status === 1 ? 'inactivated' : 'activated'
 						}`}
 					/>
 				)
@@ -47,7 +47,7 @@ const BudgetTypeStatus = ({ type }: { type: BudgetTypeType }) => {
 			router.refresh();
 			setOpen(false);
 		}
-	}, [type.status, error, isError, isSuccess, router]);
+	}, [data.status, error, isError, isSuccess, router]);
 	return (
 		<Dialog
 			open={open}

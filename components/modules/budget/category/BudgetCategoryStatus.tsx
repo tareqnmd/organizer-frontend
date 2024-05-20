@@ -18,10 +18,14 @@ import { BadgeCheck, BadgeMinus, Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
-const BudgetCategoryStatus = ({ category }: { category: BudgetCategoryType }) => {
+const BudgetCategoryStatus = ({
+	category,
+}: {
+	category: BudgetCategoryType;
+}) => {
 	const [open, setOpen] = useState(false);
 	const router = useRouter();
-	const [statusToggle, { isLoading, isError, isSuccess, error }] =
+	const [statusToggle, { isLoading, isError, isSuccess, error, data = {} }] =
 		useEditBudgetCategoryMutation();
 	const statusHandler = () => {
 		statusToggle({
@@ -38,7 +42,7 @@ const BudgetCategoryStatus = ({ category }: { category: BudgetCategoryType }) =>
 				) : (
 					<SuccessMessage
 						message={`Category successfully ${
-							category.status === 1 ? 'inactivated' : 'activated'
+							data?.status === 0 ? 'inactivated' : 'activated'
 						}`}
 					/>
 				)
@@ -46,7 +50,7 @@ const BudgetCategoryStatus = ({ category }: { category: BudgetCategoryType }) =>
 			router.refresh();
 			setOpen(false);
 		}
-	}, [category.status, error, isError, isSuccess, router]);
+	}, [data.status, error, isError, isSuccess, router]);
 	return (
 		<Dialog
 			open={open}

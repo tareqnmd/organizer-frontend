@@ -27,7 +27,7 @@ const BudgetTransactionStatus = ({
 }) => {
 	const [open, setOpen] = useState(false);
 	const router = useRouter();
-	const [statusToggle, { isLoading, isError, isSuccess, error }] =
+	const [statusToggle, { isLoading, isError, isSuccess, error, data = {} }] =
 		useEditBudgetTransactionMutation();
 	const statusHandler = () => {
 		statusToggle({
@@ -44,7 +44,7 @@ const BudgetTransactionStatus = ({
 				) : (
 					<SuccessMessage
 						message={`Transaction successfully ${
-							transaction.status === 1 ? 'inactivated' : 'activated'
+							data.status === 1 ? 'inactivated' : 'activated'
 						}`}
 					/>
 				)
@@ -52,7 +52,7 @@ const BudgetTransactionStatus = ({
 			router.refresh();
 			setOpen(false);
 		}
-	}, [transaction.status, error, isError, isSuccess, router]);
+	}, [data.status, error, isError, isSuccess, router]);
 	return (
 		<Dialog
 			open={open}
