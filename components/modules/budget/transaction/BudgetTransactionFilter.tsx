@@ -1,4 +1,5 @@
 'use client';
+import FormDateRange from '@/components/common/input/DateRange';
 import FormSelect from '@/components/common/input/Select';
 import { Input } from '@/components/ui/input';
 import { useDebounce } from '@/hooks/useDebounce';
@@ -37,10 +38,11 @@ const BudgetTransactionFilter = ({
 		<>
 			<Input
 				className="h-8"
-				placeholder="Search Category"
+				placeholder="Search Transaction"
 				value={filterData.category}
 				onChange={changeInputHandler}
 			/>
+			<FormDateRange className="h-8" />
 			<FormSelect
 				extraTriggerClassName="h-8"
 				input={{
@@ -49,6 +51,15 @@ const BudgetTransactionFilter = ({
 					optionUrl: '/budget/type-select',
 				}}
 				field={{ onChange: changeTypeHandler, value: filterData.type }}
+			/>
+			<FormSelect
+				extraTriggerClassName="h-8"
+				input={{
+					type: 'select',
+					placeholder: 'Select Category',
+					optionUrl: '/budget/type-category-select',
+				}}
+				field={{ onChange: changeTypeHandler, value: filterData.category }}
 			/>
 		</>
 	);
