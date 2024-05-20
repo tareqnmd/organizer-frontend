@@ -12,12 +12,12 @@ import {
 } from '@/components/ui/dialog';
 import { getError } from '@/lib/common-func';
 import { useDeleteBudgetTypeMutation } from '@/store/features/budget/type/api';
-import { BudgetType as BType } from '@/types/modules/budget/budget-types';
+import { BudgetTypeType } from '@/types/modules/budget/budget-type-types';
 import { Loader, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
-const BudgetTypeDelete = ({ type }: { type: BType }) => {
+const BudgetTypeDelete = ({ type }: { type: BudgetTypeType }) => {
 	const [open, setOpen] = useState(false);
 	const router = useRouter();
 	const [deleteType, { isLoading, isError, isSuccess, error }] =

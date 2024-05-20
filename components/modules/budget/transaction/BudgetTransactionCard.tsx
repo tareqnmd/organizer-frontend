@@ -5,16 +5,16 @@ import {
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/card';
+import { BudgetTransactionType } from '@/types/modules/budget/budget-transaction-types';
 import Link from 'next/link';
-import { TransactionType } from './Transactions';
 
-const TransactionSnippet = ({
+const BudgetTransactionCard = ({
 	transaction,
 }: {
-	transaction: TransactionType;
+	transaction: BudgetTransactionType;
 }) => {
 	return (
-		<Link href={`/note/${transaction._id}`}>
+		<Link href={`/note/${transaction.id}`}>
 			<Card className="h-full hover:shadow transition overflow-hidden">
 				<CardHeader className="p-2 border-b bg-gray-200">
 					<CardTitle className="text-md w-full flex justify-between">
@@ -37,4 +37,4 @@ const TransactionSnippet = ({
 	);
 };
 
-export default TransactionSnippet;
+export default BudgetTransactionCard;

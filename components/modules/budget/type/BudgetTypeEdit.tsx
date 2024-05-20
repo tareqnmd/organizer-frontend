@@ -6,12 +6,12 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-import { BudgetType } from '@/types/modules/budget/budget-types';
+import { BudgetTypeType } from '@/types/modules/budget/budget-type-types';
 import { EditIcon } from 'lucide-react';
 import { useState } from 'react';
 import BudgetTypeForm from './BudgetTypeForm';
 
-export function BudgetTypeEdit({ type }: { type: BudgetType }) {
+export function BudgetTypeEdit({ type }: { type: BudgetTypeType }) {
 	const [open, setOpen] = useState(false);
 	return (
 		<Dialog

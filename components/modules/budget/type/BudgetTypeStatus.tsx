@@ -13,13 +13,13 @@ import {
 import { getError } from '@/lib/common-func';
 import { cn } from '@/lib/utils';
 import { useEditBudgetTypeMutation } from '@/store/features/budget/type/api';
-import { BudgetType } from '@/types/modules/budget/budget-types';
+import { BudgetTypeType } from '@/types/modules/budget/budget-type-types';
 import { BadgeCheck, BadgeMinus, Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
-const BudgetTypeStatus = ({ type }: { type: BudgetType }) => {
+const BudgetTypeStatus = ({ type }: { type: BudgetTypeType }) => {
 	const [open, setOpen] = useState(false);
 	const router = useRouter();
 	const [statusToggle, { isLoading, isError, isSuccess, error }] =

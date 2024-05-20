@@ -1,8 +1,12 @@
 import { cn } from '@/lib/utils';
+import { BudgetTransactionParamType } from '@/types/modules/budget/budget-transaction-types';
 import Link from 'next/link';
-import { TransactionParamType } from './Transactions';
 
-const TransactionAction = ({ params }: { params: TransactionParamType }) => {
+const BudgetTransactionAction = ({
+	params,
+}: {
+	params: BudgetTransactionParamType;
+}) => {
 	return (
 		<div className="flex item-center justify-end gap-2">
 			<Link
@@ -36,4 +40,4 @@ const TransactionAction = ({ params }: { params: TransactionParamType }) => {
 	);
 };
 
-export default TransactionAction;
+export default BudgetTransactionAction;

@@ -1,11 +1,11 @@
 import { Card } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-import { BudgetType as BType } from '@/types/modules/budget/budget-types';
+import { BudgetTypeType } from '@/types/modules/budget/budget-type-types';
 import BudgetTypeDelete from './BudgetTypeDelete';
 import { BudgetTypeEdit } from './BudgetTypeEdit';
 import BudgetTypeStatus from './BudgetTypeStatus';
 
-const BudgetType = async ({ type, admin }: { type: BType; admin: boolean }) => {
+const BudgetType = async ({ type, admin }: { type: BudgetTypeType; admin: boolean }) => {
 	return (
 		<Card
 			className={cn(

@@ -1,8 +1,8 @@
 import { authOptions } from '@/lib/auth-options';
 import { authFetch } from '@/lib/fetch';
 import {
-	BudgetCategory,
 	BudgetCategoryParamType,
+	BudgetCategoryType,
 } from '@/types/modules/budget/budget-category-types';
 import { getServerSession } from 'next-auth';
 import BudgetCategoriesFilter from './BudgetCategoriesFilter';
@@ -39,7 +39,7 @@ const BudgetCategories = async ({
 				className="grid grid-cols-1 sm:grid-cols-2
      lg:grid-cols-3 xl:grid-cols-4 gap-2"
 			>
-				{categories?.map((category: BudgetCategory) => (
+				{categories?.map((category: BudgetCategoryType) => (
 					<BudgetCategoryCard
 						key={category.id}
 						category={category}

@@ -11,7 +11,7 @@ import {
 	useCreateBudgetTypeMutation,
 	useEditBudgetTypeMutation,
 } from '@/store/features/budget/type/api';
-import { BudgetType } from '@/types/modules/budget/budget-types';
+import { BudgetType } from '@/types/modules/budget/budget-type-types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';

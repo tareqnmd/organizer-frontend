@@ -1,9 +1,12 @@
-import Transaction, {
-	TransactionParamType,
-} from '@/components/modules/budget/transaction/Transactions';
+import Transactions from '@/components/modules/budget/transaction/BudgetTransactions';
+import { BudgetTransactionParamType } from '@/types/modules/budget/budget-transaction-types';
 
-const Page = ({ searchParams }: { searchParams: TransactionParamType }) => {
-	return <Transaction searchOptions={searchParams} />;
+const Page = ({
+	searchParams,
+}: {
+	searchParams: BudgetTransactionParamType;
+}) => {
+	return <Transactions searchOptions={searchParams} />;
 };
 
 export default Page;
