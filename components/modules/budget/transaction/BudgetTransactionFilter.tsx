@@ -6,7 +6,7 @@ import { useDebounce } from '@/hooks/useDebounce';
 import { toQueryString } from '@/lib/common-func';
 import { BudgetTransactionParamType } from '@/types/modules/budget/budget-transaction-types';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const BudgetTransactionFilter = ({
 	searchParams,
@@ -14,22 +14,31 @@ const BudgetTransactionFilter = ({
 	searchParams: BudgetTransactionParamType;
 }) => {
 	const router = useRouter();
+	const hasRendered = useRef(false);
 	const [filterData, setFilterData] = useState({
 		category: searchParams.category ?? '',
 		type: searchParams.type ?? '',
 		transaction: searchParams.transaction ?? '',
 	});
-	const debouncedText = useDebounce(filterData.category, 500);
+	const debouncedText = useDebounce(filterData.transaction, 500);
 
 	const changeHandler = (value: string, name: string) => {
 		setFilterData((prev) => ({ ...prev, [name]: value }));
 	};
 
 	useEffect(() => {
-		if (debouncedText || Object.keys(filterData).length > 0) {
-			router.push(`/budget/transaction${toQueryString(filterData)}`);
+		if (hasRendered.current) {
+			router.push(
+				`/budget/transaction${toQueryString({
+					type: filterData.type,
+					category: filterData.category,
+					transaction: debouncedText,
+				})}`
+			);
+		} else {
+			hasRendered.current = true;
 		}
-	}, [debouncedText, filterData, router]);
+	}, [debouncedText, filterData.type, filterData.category, router]);
 
 	return (
 		<>

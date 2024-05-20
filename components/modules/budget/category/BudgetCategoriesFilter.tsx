@@ -5,7 +5,7 @@ import { useDebounce } from '@/hooks/useDebounce';
 import { toQueryString } from '@/lib/common-func';
 import { BudgetCategoryParamType } from '@/types/modules/budget/budget-category-types';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const BudgetCategoriesFilter = ({
 	searchParams,
@@ -18,16 +18,23 @@ const BudgetCategoriesFilter = ({
 		type: searchParams.type ?? '',
 	});
 	const debouncedText = useDebounce(filterData.category, 500);
-
+	const hasRendered = useRef(false);
 	const changeHandler = (value: string, name: string) => {
 		setFilterData((prev) => ({ ...prev, [name]: value }));
 	};
 
 	useEffect(() => {
-		if (debouncedText || Object.keys(filterData).length > 0) {
-			router.push(`/budget/type-category${toQueryString(filterData)}`);
+		if (hasRendered.current) {
+			router.push(
+				`/budget/type-category${toQueryString({
+					type: filterData.type,
+					category: debouncedText,
+				})}`
+			);
+		} else {
+			hasRendered.current = true;
 		}
-	}, [debouncedText, filterData, router]);
+	}, [debouncedText, filterData.type, router]);
 
 	return (
 		<>
