@@ -12,4 +12,8 @@ export type BudgetTransactionType = {
 
 export type BudgetTransactionsType = BudgetTransactionType[];
 
-export type BudgetTransactionParamType = { type?: string; category?: string };
+export type BudgetTransactionParamType = {
+	type?: string;
+	category?: string;
+	transaction?: string;
+};

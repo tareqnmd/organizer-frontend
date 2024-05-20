@@ -5,7 +5,7 @@ import { useDebounce } from '@/hooks/useDebounce';
 import { toQueryString } from '@/lib/common-func';
 import { BudgetCategoryParamType } from '@/types/modules/budget/budget-category-types';
 import { useRouter } from 'next/navigation';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const BudgetCategoriesFilter = ({
 	searchParams,
@@ -19,12 +19,8 @@ const BudgetCategoriesFilter = ({
 	});
 	const debouncedText = useDebounce(filterData.category, 500);
 
-	const changeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-		setFilterData((prev) => ({ ...prev, category: e.target.value }));
-	};
-
-	const changeTypeHandler = (value: string) => {
-		setFilterData((prev) => ({ ...prev, type: value }));
+	const changeHandler = (value: string, name: string) => {
+		setFilterData((prev) => ({ ...prev, [name]: value }));
 	};
 
 	useEffect(() => {
@@ -39,7 +35,7 @@ const BudgetCategoriesFilter = ({
 				className="h-8"
 				placeholder="Search Category"
 				value={filterData.category}
-				onChange={changeInputHandler}
+				onChange={(e) => changeHandler(e.target.value, 'category')}
 			/>
 			<FormSelect
 				extraTriggerClassName="h-8"
@@ -48,7 +44,10 @@ const BudgetCategoriesFilter = ({
 					placeholder: 'Select Type',
 					optionUrl: '/budget/type-select',
 				}}
-				field={{ onChange: changeTypeHandler, value: filterData.type }}
+				field={{
+					onChange: (value: string) => changeHandler(value, 'type'),
+					value: filterData.type,
+				}}
 			/>
 		</>
 	);
