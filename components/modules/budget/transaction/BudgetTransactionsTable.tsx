@@ -1,11 +1,12 @@
 'use client';
 
+import { Pagination } from '@/components/common/pagination/Pagination';
 import { DataTable } from '@/components/common/table/DataTable';
 import { Button } from '@/components/ui/button';
 import { moneyFormat } from '@/lib/common-func';
 import {
-    BudgetTransactionType,
-    BudgetTransactionsType,
+	BudgetTransactionType,
+	BudgetTransactionsType,
 } from '@/types/modules/budget/budget-transaction-types';
 import { CaretSortIcon } from '@radix-ui/react-icons';
 import { ColumnDef } from '@tanstack/react-table';
@@ -22,7 +23,7 @@ const BudgetTransactionsTable = ({
 			header: ({ column }) => (
 				<Button
 					variant="ghost"
-                    className="flex justify-between items-center p-0 w-full"
+					className="flex justify-between items-center p-0 w-full"
 					onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
 				>
 					Category
@@ -56,7 +57,7 @@ const BudgetTransactionsTable = ({
 			header: ({ column }) => (
 				<Button
 					variant="ghost"
-                    className="flex justify-between items-center p-0 w-full"
+					className="flex justify-between items-center p-0 w-full"
 					onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
 				>
 					Amount
@@ -79,6 +80,8 @@ const BudgetTransactionsTable = ({
 				columns={columns}
 				data={transactions}
 			/>
+			<br />
+			<Pagination extraClassName="justify-end" />
 		</>
 	);
 };
