@@ -28,7 +28,7 @@ const BudgetCategoriesFilter = ({
 	};
 
 	useEffect(() => {
-		if (debouncedText || filterData) {
+		if (debouncedText || Object.keys(filterData).length > 0) {
 			router.push(`/budget/type-category${toQueryString(filterData)}`);
 		}
 	}, [debouncedText, filterData, router]);
