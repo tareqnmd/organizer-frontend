@@ -14,9 +14,9 @@ const apiSlice = createApi({
 		console.log('result', result);
 		if (result?.error?.status === 401) {
 			// await clearCookie();
-			await signOut({
-				callbackUrl: `${window.location.origin}/login`,
-			});
+			// await signOut({
+			// 	callbackUrl: `${window.location.origin}/login`,
+			// });
 		}
 		return result;
 	},
