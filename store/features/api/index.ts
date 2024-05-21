@@ -4,9 +4,6 @@ import { signOut } from 'next-auth/react';
 
 const baseQuery = fetchBaseQuery({
 	baseUrl: process.env.NEXT_PUBLIC_API_URL,
-	prepareHeaders(headers) {
-		return headers;
-	},
 	credentials: 'include',
 });
 
