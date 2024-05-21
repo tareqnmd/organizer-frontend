@@ -36,30 +36,35 @@ const BudgetTransactionFilter = ({
 
 	return (
 		<>
-			<Input
-				className="h-8"
-				placeholder="Search Transaction"
-				value={filterData.category}
-				onChange={changeInputHandler}
-			/>
-			<FormDateRange className="h-8" />
-			<FormSelect
-				extraTriggerClassName="h-8"
-				input={{
-					type: 'select',
-					placeholder: 'Select Type',
-					optionUrl: '/budget/type-select',
-				}}
-				field={{ onChange: changeTypeHandler, value: filterData.type }}
-			/>
-			<FormSelect
-				extraTriggerClassName="h-8"
-				input={{
-					type: 'select',
-					placeholder: 'Select Category',
-					optionUrl: '/budget/type-category-select',
-				}}
-				field={{ onChange: changeTypeHandler, value: filterData.category }}
+			<div className="flex gap-2 col-span-4">
+				<Input
+					className="h-8"
+					placeholder="Search Transaction"
+					value={filterData.category}
+					onChange={changeInputHandler}
+				/>
+				<FormSelect
+					extraTriggerClassName="h-8"
+					input={{
+						type: 'select',
+						placeholder: 'Select Type',
+						optionUrl: '/budget/type-select',
+					}}
+					field={{ onChange: changeTypeHandler, value: filterData.type }}
+				/>
+				<FormSelect
+					extraTriggerClassName="h-8"
+					input={{
+						type: 'select',
+						placeholder: 'Select Category',
+						optionUrl: '/budget/type-category-select',
+					}}
+					field={{ onChange: changeTypeHandler, value: filterData.category }}
+				/>
+			</div>
+			<FormDateRange
+				triggerClassName="h-8"
+				className="w-full col-span-3 xl:col-span-1 xl:col-start-3"
 			/>
 		</>
 	);

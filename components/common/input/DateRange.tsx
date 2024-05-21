@@ -14,7 +14,13 @@ import {
 import { cn } from '@/lib/utils';
 import { CalendarIcon } from 'lucide-react';
 
-const FormDateRange = ({ className }: React.HTMLAttributes<HTMLDivElement>) => {
+const FormDateRange = ({
+	className,
+	triggerClassName = '',
+}: {
+	className: string;
+	triggerClassName: string;
+}) => {
 	const [date, setDate] = React.useState<DateRange | undefined>({
 		from: new Date(2022, 0, 20),
 		to: addDays(new Date(2022, 0, 20), 20),
@@ -28,8 +34,9 @@ const FormDateRange = ({ className }: React.HTMLAttributes<HTMLDivElement>) => {
 						id="date"
 						variant={'outline'}
 						className={cn(
-							'w-[300px] justify-start text-left font-normal',
-							!date && 'text-muted-foreground'
+							'justify-start text-left font-normal',
+							!date && 'text-muted-foreground',
+							triggerClassName
 						)}
 					>
 						<CalendarIcon className="mr-2 h-4 w-4" />
