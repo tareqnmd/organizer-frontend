@@ -3,6 +3,7 @@
 import { Pagination } from '@/components/common/pagination/Pagination';
 import { DataTable } from '@/components/common/table/DataTable';
 import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { moneyFormat } from '@/lib/common-func';
 import {
 	BudgetTransactionType,
@@ -10,6 +11,7 @@ import {
 } from '@/types/modules/budget/budget-transaction-types';
 import { CaretSortIcon } from '@radix-ui/react-icons';
 import { ColumnDef } from '@tanstack/react-table';
+import { format } from 'date-fns';
 import BudgetTransactionAction from './BudgetTransactionAction';
 
 const BudgetTransactionsTable = ({
@@ -47,6 +49,20 @@ const BudgetTransactionsTable = ({
 			cell: ({ row }) => row.getValue('typeName'),
 		},
 		{
+			accessorKey: 'date',
+			header: ({ column }) => (
+				<Button
+					variant="ghost"
+					className="flex justify-between items-center p-0 w-full"
+					onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+				>
+					Date
+					<CaretSortIcon />
+				</Button>
+			),
+			cell: ({ row }) => format(row.getValue('date'), 'dd-MM-yyyy'),
+		},
+		{
 			accessorKey: 'description',
 			header: 'Description',
 			enableHiding: false,
@@ -76,10 +92,12 @@ const BudgetTransactionsTable = ({
 
 	return (
 		<>
-			<DataTable
-				columns={columns}
-				data={transactions}
-			/>
+			<ScrollArea>
+				<DataTable
+					columns={columns}
+					data={transactions}
+				/>
+			</ScrollArea>
 			<br />
 			<Pagination extraClassName="justify-end" />
 		</>

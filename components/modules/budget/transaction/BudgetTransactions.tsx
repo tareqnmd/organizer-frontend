@@ -25,7 +25,7 @@ const Transactions = async ({
 	const transactions = await getTransactions(searchOptions);
 	return (
 		<>
-			<div className="flex items-center justify-end gap-2 mb-4">
+			<div className="grid grid-cols-4 gap-2 mb-4">
 				<BudgetTransactionFilter searchParams={searchOptions} />
 				<BudgetTransactionAdd />
 			</div>

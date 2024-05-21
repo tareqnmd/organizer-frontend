@@ -49,8 +49,7 @@ const BudgetTransactionForm = ({
 		defaultValues: {
 			categoryId: '',
 			description: '',
-			date: new Date(),
-			amount: 0,
+			// date: new Date(),
 		},
 	});
 	const [

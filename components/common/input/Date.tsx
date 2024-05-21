@@ -1,4 +1,3 @@
-import { format } from 'date-fns';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import {
@@ -7,18 +6,23 @@ import {
 	PopoverTrigger,
 } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
+import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
+import { useState } from 'react';
 
-const FormDate = ({field }: any) => {
+const FormDate = ({ field }: any) => {
+	const [popUp, setPopUp] = useState(false);
 	return (
-		<Popover>
-			<PopoverTrigger asChild>
+		<Popover
+			onOpenChange={setPopUp}
+			open={popUp}
+		>
+			<PopoverTrigger className="w-full">
 				<Button
+					onClick={() => setPopUp(true)}
 					variant={'outline'}
-					className={cn(
-						'flex w-full text-left font-normal',
-						!field.value && 'text-muted-foreground'
-					)}
+					type="button"
+					className={cn('w-full font-normal', !field.value && 'text-slate-500')}
 				>
 					{field.value ? format(field.value, 'PPP') : <span>Pick a date</span>}
 					<CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
@@ -30,12 +34,14 @@ const FormDate = ({field }: any) => {
 			>
 				<Calendar
 					mode="single"
-					selected={field.value}
-					onSelect={field.onChange}
+					selected={new Date(field?.value ?? '')}
+					onSelect={(value) => {
+						field.onChange(value);
+						setPopUp(false);
+					}}
 					disabled={(date) =>
 						date > new Date() || date < new Date('1900-01-01')
 					}
-					initialFocus
 				/>
 			</PopoverContent>
 		</Popover>

@@ -42,36 +42,42 @@ const BudgetTransactionFilter = ({
 
 	return (
 		<>
-			<Input
-				className="h-8"
-				placeholder="Search Transaction"
-				value={filterData.transaction}
-				onChange={(e) => changeHandler(e.target.value, 'transaction')}
-			/>
-			<FormDateRange className="h-8" />
-			<FormSelect
-				extraTriggerClassName="h-8"
-				input={{
-					type: 'select',
-					placeholder: 'Select Type',
-					optionUrl: '/budget/type-select',
-				}}
-				field={{
-					onChange: (value: string) => changeHandler(value, 'type'),
-					value: filterData.type,
-				}}
-			/>
-			<FormSelect
-				extraTriggerClassName="h-8"
-				input={{
-					type: 'select',
-					placeholder: 'Select Category',
-					optionUrl: '/budget/type-category-select',
-				}}
-				field={{
-					onChange: (value: string) => changeHandler(value, 'category'),
-					value: filterData.category,
-				}}
+			<div className="flex gap-2 col-span-4">
+				<Input
+					className="h-8"
+					placeholder="Search Transaction"
+					value={filterData.transaction}
+					onChange={(e) => changeHandler(e.target.value, 'transaction')}
+				/>
+
+				<FormSelect
+					extraTriggerClassName="h-8"
+					input={{
+						type: 'select',
+						placeholder: 'Select Type',
+						optionUrl: '/budget/type-select',
+					}}
+					field={{
+						onChange: (value: string) => changeHandler(value, 'type'),
+						value: filterData.type,
+					}}
+				/>
+				<FormSelect
+					extraTriggerClassName="h-8"
+					input={{
+						type: 'select',
+						placeholder: 'Select Category',
+						optionUrl: '/budget/type-category-select',
+					}}
+					field={{
+						onChange: (value: string) => changeHandler(value, 'category'),
+						value: filterData.category,
+					}}
+				/>
+			</div>
+			<FormDateRange
+				triggerClassName="h-8"
+				className="w-full col-span-3 xl:col-span-1 xl:col-start-3"
 			/>
 		</>
 	);
