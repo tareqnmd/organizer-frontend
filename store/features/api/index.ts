@@ -1,9 +1,9 @@
 import { clearCookie } from '@/lib/server-func';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { signOut } from 'next-auth/react';
-console.log('process.env.NEXT_PUBLIC_API_URL', process.env.NEXT_PUBLIC_API_URL);
+
 const baseQuery = fetchBaseQuery({
-	baseUrl: 'https://organizer-api.tareqnmd.com/',
+	baseUrl: process.env.NEXT_PUBLIC_API_URL,
 	credentials: 'include',
 });
 
