@@ -6,11 +6,15 @@ import BudgetType from './BudgetType';
 import { BudgetTypeAdd } from './BudgetTypeAdd';
 
 const getBudgetTypes = async () => {
-	const res = await authFetch(`budget/types`);
-	if (!res.ok) {
-		throw new Error('Failed to fetch data');
+	try {
+		const res = await authFetch(`budget/types`);
+		if (!res.ok) {
+			throw new Error('Failed to fetch data');
+		}
+		return res.json();
+	} catch (error) {
+		console.log('error', error);
 	}
-	return res.json();
 };
 
 const BudgetTypes = async ({}) => {

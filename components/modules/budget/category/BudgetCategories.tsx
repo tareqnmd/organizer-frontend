@@ -19,7 +19,9 @@ const getBudgetCategories = async (searchParams: BudgetCategoryParamType) => {
 			throw new Error('Failed to fetch data');
 		}
 		return res.json();
-	} catch (error) {}
+	} catch (error) {
+		console.log('error', error);
+	}
 };
 
 const BudgetCategories = async ({
