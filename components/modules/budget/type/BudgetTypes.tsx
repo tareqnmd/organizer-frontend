@@ -1,5 +1,5 @@
 import { authOptions } from '@/lib/auth-options';
-import { authFetch } from '@/lib/fetch';
+import { serverAuthFetch } from '@/lib/fetch';
 import { BudgetTypeType } from '@/types/modules/budget/budget-type-types';
 import { getServerSession } from 'next-auth';
 import BudgetType from './BudgetType';
@@ -7,7 +7,7 @@ import { BudgetTypeAdd } from './BudgetTypeAdd';
 
 const getBudgetTypes = async () => {
 	try {
-		const res = await authFetch(`budget/types`);
+		const res = await serverAuthFetch(`budget/types`);
 		if (!res.ok) {
 			throw new Error('Failed to fetch data');
 		}

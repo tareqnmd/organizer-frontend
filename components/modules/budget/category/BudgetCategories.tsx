@@ -1,5 +1,5 @@
 import { authOptions } from '@/lib/auth-options';
-import { authFetch } from '@/lib/fetch';
+import { serverAuthFetch } from '@/lib/fetch';
 import {
 	BudgetCategoryParamType,
 	BudgetCategoryType,
@@ -12,7 +12,7 @@ import BudgetCategoryCard from './BudgetCategoryCard';
 const getBudgetCategories = async (searchParams: BudgetCategoryParamType) => {
 	try {
 		const queryParams = new URLSearchParams(searchParams);
-		const res = await authFetch(`budget/type-categories?${queryParams}`, {
+		const res = await serverAuthFetch(`budget/type-categories?${queryParams}`, {
 			cache: 'no-store',
 		});
 		if (!res.ok) {

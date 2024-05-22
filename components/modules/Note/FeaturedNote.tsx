@@ -1,11 +1,11 @@
 import { Badge } from '@/components/ui/badge';
-import { authFetch } from '@/lib/fetch';
+import { serverAuthFetch } from '@/lib/fetch';
 import { Pin } from 'lucide-react';
 
 export const dynamic = 'force-dynamic';
 
 export const getFeaturedNote = async () => {
-	const res = await authFetch('note/feature');
+	const res = await serverAuthFetch('note/feature');
 	if (!res.ok) {
 		throw new Error('Failed to fetch data');
 	}

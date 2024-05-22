@@ -1,4 +1,4 @@
-import { authFetch } from '@/lib/fetch';
+import { serverAuthFetch } from '@/lib/fetch';
 import { BudgetTransactionParamType } from '@/types/modules/budget/budget-transaction-types';
 import BudgetTransactionAdd from './BudgetTransactionAdd';
 import BudgetTransactionFilter from './BudgetTransactionFilter';
@@ -7,7 +7,7 @@ import BudgetTransactionsTable from './BudgetTransactionsTable';
 const getTransactions = async (params: BudgetTransactionParamType) => {
 	try {
 		const queryParams = new URLSearchParams(params);
-		const res = await authFetch(`budget/transactions?${queryParams}`);
+		const res = await serverAuthFetch(`budget/transactions?${queryParams}`);
 		if (!res.ok) {
 			throw new Error('Failed to fetch data');
 		}

@@ -5,7 +5,7 @@ export const axiosInstance = axios.create({
 	baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
-export const authFetch = async (url: string, next_options = {}) => {
+export const serverAuthFetch = async (url: string, next_options = {}) => {
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
 	const path = `${baseURL}/${url}`;
 	return fetch(path, {

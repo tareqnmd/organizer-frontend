@@ -1,15 +1,14 @@
-import { authFetch } from '@/lib/fetch';
+import { serverAuthFetch } from '@/lib/fetch';
 import Notes from './NoteSnippets';
 export const dynamic = 'force-dynamic';
 
 export const getRecentNotes = async () => {
-	const res = await authFetch('note/recent');
+	const res = await serverAuthFetch('note/recent');
 	if (!res.ok) {
 		throw new Error('Failed to fetch data');
 	}
 	return res.json();
 };
-
 
 const RecentNotes = async () => {
 	const recent_notes = await getRecentNotes();
