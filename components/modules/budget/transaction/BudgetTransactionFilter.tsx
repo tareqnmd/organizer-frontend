@@ -45,7 +45,7 @@ const BudgetTransactionFilter = ({
 			<div className="flex gap-2 col-span-4">
 				<Input
 					className="h-8"
-					placeholder="Search Transaction"
+					placeholder="Search By Description"
 					value={filterData.transaction}
 					onChange={(e) => changeHandler(e.target.value, 'transaction')}
 				/>
