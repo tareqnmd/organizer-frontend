@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getCookie } from './server-func';
+import { getCookie, getCookieValue } from './server-func';
 
 export const axiosInstance = axios.create({
 	baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -7,10 +7,9 @@ export const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(
-	(config) => {
-		const authToken = '11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111';
-		config.headers['Cookie'] = `auth_token=${authToken}`;
-		config.headers['Auth'] = `auth_token=${authToken}`;
+	async (config) => {
+		const authToken = await getCookieValue('token');
+		config.headers['Authorization'] = authToken;
 		return config;
 	},
 	(error) => {

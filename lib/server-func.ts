@@ -11,3 +11,9 @@ export const getCookie = async () => {
 	const cookie: any = headersList.get('cookie');
 	return cookie;
 };
+
+export const getCookieValue = async (name: string) => {
+	const cookieStore = cookies();
+	const cookie: any = cookieStore.get(name);
+	return cookie.value ?? '';
+};
