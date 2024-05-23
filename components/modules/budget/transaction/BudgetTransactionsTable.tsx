@@ -1,9 +1,7 @@
 'use client';
 
-import { Pagination } from '@/components/common/pagination/Pagination';
 import { DataTable } from '@/components/common/table/DataTable';
 import { Button } from '@/components/ui/button';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { moneyFormat } from '@/lib/common-func';
 import {
 	BudgetTransactionType,
@@ -92,14 +90,12 @@ const BudgetTransactionsTable = ({
 
 	return (
 		<>
-			<ScrollArea>
-				<DataTable
-					columns={columns}
-					data={transactions}
-				/>
-			</ScrollArea>
-			<br />
-			<Pagination extraClassName="justify-end" />
+			<DataTable
+				columns={columns}
+				data={transactions}
+			/>
+			{/* <br />
+			<Pagination extraClassName="justify-end" /> */}
 		</>
 	);
 };
