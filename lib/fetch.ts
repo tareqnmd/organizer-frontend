@@ -6,6 +6,18 @@ export const axiosInstance = axios.create({
 	withCredentials: true,
 });
 
+axiosInstance.interceptors.request.use(
+	(config) => {
+		const authToken = '11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111';
+		config.headers['Cookie'] = `auth_token=${authToken}`;
+		config.headers['Auth'] = `auth_token=${authToken}`;
+		return config;
+	},
+	(error) => {
+		return Promise.reject(error);
+	}
+);
+
 export const serverAuthFetch = async (url: string, next_options = {}) => {
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
 	const path = `${baseURL}/${url}`;
