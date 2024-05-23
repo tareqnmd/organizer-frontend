@@ -35,14 +35,18 @@ const FormSelect = ({ input, field, extraTriggerClassName = '' }: any) => {
 			</SelectTrigger>
 			<SelectContent>
 				<SelectGroup>
-					{options?.map((item: any, index: number) => (
-						<SelectItem
-							key={index}
-							value={item?.value}
-						>
-							{item?.label}
-						</SelectItem>
-					))}
+					{options?.length > 0 ? (
+						options?.map((item: any, index: number) => (
+							<SelectItem
+								key={index}
+								value={item?.value}
+							>
+								{item?.label}
+							</SelectItem>
+						))
+					) : (
+						<span className="text-center text-sm px-2">No Data Found</span>
+					)}
 				</SelectGroup>
 			</SelectContent>
 		</Select>
