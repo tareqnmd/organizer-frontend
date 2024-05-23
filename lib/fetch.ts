@@ -3,6 +3,7 @@ import { getCookie } from './server-func';
 
 export const axiosInstance = axios.create({
 	baseURL: process.env.NEXT_PUBLIC_API_URL,
+	withCredentials: true,
 });
 
 export const serverAuthFetch = async (url: string, next_options = {}) => {
