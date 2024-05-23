@@ -26,7 +26,6 @@ axiosInstance.interceptors.request.use(
 export const serverAuthFetch = async (url: string, next_options = {}) => {
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
 	const path = `${baseURL}/${url}`;
-	console.log('path', path);
 	return fetch(path, {
 		headers: { cookie: await getCookie() },
 		...next_options,
