@@ -5,7 +5,7 @@ import { Pin } from 'lucide-react';
 export const dynamic = 'force-dynamic';
 
 export const getFeaturedNote = async () => {
-	const res = await serverAuthFetch('note/feature');
+	const res = await serverAuthFetch('note/featured');
 	if (!res.ok) {
 		throw new Error('Failed to fetch data');
 	}

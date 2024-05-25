@@ -3,7 +3,7 @@ import Notes from './NoteSnippets';
 export const dynamic = 'force-dynamic';
 
 export const getRecentNotes = async () => {
-	const res = await serverAuthFetch('note/recent');
+	const res = await serverAuthFetch('note/all?type=recent');
 	if (!res.ok) {
 		throw new Error('Failed to fetch data');
 	}
