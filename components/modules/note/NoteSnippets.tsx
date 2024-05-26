@@ -1,6 +1,5 @@
-import NoteSmallInfo, { NoteSnippetType } from './NoteSnippet';
-
-type NotesType = NoteSnippetType[];
+import { NotesType } from '@/types/modules/note/budget-note-types';
+import NoteSmallInfo from './NoteSnippet';
 
 const NoteSnippets = ({
 	notes,

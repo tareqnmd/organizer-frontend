@@ -1,7 +1,5 @@
 import Dashboard from '@/components/dashboard/Dashboard';
-import { baseFetch } from '@/lib/fetch';
-
-export const dynamic = 'force-dynamic';
+import { baseFetch } from '@/lib/helper/fetch';
 
 async function getData() {
 	const res = await baseFetch('api');

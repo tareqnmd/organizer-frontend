@@ -33,3 +33,37 @@ export const transactionFormItems = [
 		required: true,
 	},
 ];
+
+export const typeFormItems = [
+	{
+		name: 'name',
+		label: 'Name',
+		type: 'text',
+		placeholder: 'Name',
+		description: '',
+	},
+];
+
+export const categoryFormItems = [
+	{
+		name: 'name',
+		label: 'Name',
+		type: 'text',
+		placeholder: 'Name',
+		description: '',
+		required: true,
+	},
+	{
+		name: 'typeId',
+		label: 'Type',
+		type: 'select',
+		placeholder: 'Select a Type',
+		optionUrl: '/budget/type-select',
+		// staticOption: [
+		// 	{ label: 'Income', value: 'Income' },
+		// 	{ label: 'Expense', value: 'Expense' },
+		// ],
+		description: '',
+		required: true,
+	},
+];

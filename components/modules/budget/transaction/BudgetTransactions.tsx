@@ -1,4 +1,4 @@
-import { serverAuthFetch } from '@/lib/fetch';
+import { serverAuthFetch } from '@/lib/helper/fetch';
 import { BudgetTransactionParamType } from '@/types/modules/budget/budget-transaction-types';
 import BudgetTransactionAdd from './BudgetTransactionAdd';
 import BudgetTransactionFilter from './BudgetTransactionFilter';

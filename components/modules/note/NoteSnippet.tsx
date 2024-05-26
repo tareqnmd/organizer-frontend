@@ -5,14 +5,10 @@ import {
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/card';
+import { NoteType } from '@/types/modules/note/budget-note-types';
 import Link from 'next/link';
-export type NoteSnippetType = {
-	id: string;
-	subject: string;
-	details: string;
-	created_at: string;
-};
-const NoteSnippet = ({ note }: { note: NoteSnippetType }) => {
+
+const NoteSnippet = ({ note }: { note: NoteType }) => {
 	return (
 		<Link href={`/note/${note.id}`}>
 			<Card className="h-full hover:shadow transition overflow-hidden">
@@ -21,7 +17,7 @@ const NoteSnippet = ({ note }: { note: NoteSnippetType }) => {
 						<span>{note?.subject}</span>
 					</CardTitle>
 					<CardDescription className="!m-0 text-gray-900">
-						{note?.created_at}
+						{note?.createdAt}
 					</CardDescription>
 				</CardHeader>
 				<CardContent className="p-2">

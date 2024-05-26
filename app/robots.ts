@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
 			allow: '/',
 			disallow: '/private/',
 		},
-		sitemap: 'https://organizer.vercel.com/sitemap.xml',
+		sitemap: 'https://organizer.tareqnmd.com/sitemap.xml',
 	};
 }

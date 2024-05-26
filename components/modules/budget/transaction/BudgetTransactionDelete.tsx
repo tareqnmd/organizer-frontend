@@ -10,7 +10,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-import { getError } from '@/lib/common-func';
+import { getError } from '@/lib/helper/common';
 import { useDeleteBudgetTransactionMutation } from '@/store/features/budget/transaction/api';
 import { BudgetTransactionType } from '@/types/modules/budget/budget-transaction-types';
 import { Loader, Trash } from 'lucide-react';

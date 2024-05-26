@@ -1,4 +1,4 @@
-import { clearCookie, getCookieValue } from '@/lib/server-func';
+import { clearCookie, getCookieValue } from '@/lib/helper/server-func';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { signOut } from 'next-auth/react';
 

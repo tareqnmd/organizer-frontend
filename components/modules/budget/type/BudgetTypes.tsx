@@ -1,5 +1,5 @@
 import { authOptions } from '@/lib/auth-options';
-import { serverAuthFetch } from '@/lib/fetch';
+import { serverAuthFetch } from '@/lib/helper/fetch';
 import { BudgetTypeType } from '@/types/modules/budget/budget-type-types';
 import { getServerSession } from 'next-auth';
 import BudgetType from './BudgetType';

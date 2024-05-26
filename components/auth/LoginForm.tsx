@@ -6,7 +6,7 @@ import * as z from 'zod';
 
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
-import { login_form_items } from '@/lib/form-items';
+import { loginFormItems } from '@/lib/form-items/auth';
 import { LogIn } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
@@ -56,7 +56,7 @@ export function LoginForm() {
 				onSubmit={form.handleSubmit(onSubmit)}
 				className="w-full min-w-[300px] grid gap-3"
 			>
-				{login_form_items.map((input) => (
+				{loginFormItems.map((input) => (
 					<CustomFormInput
 						key={input.name}
 						input={input}

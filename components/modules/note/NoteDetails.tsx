@@ -1,7 +1,7 @@
-import { serverAuthFetch } from '@/lib/fetch';
+import { serverAuthFetch } from '@/lib/helper/fetch';
 import NoteForm from './NoteForm';
 
-export const dynamic = 'force-dynamic';
+
 
 export const getNoteDetails = async (id: string) => {
 	try {

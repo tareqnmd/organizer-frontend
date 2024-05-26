@@ -10,7 +10,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-import { getError } from '@/lib/common-func';
+import { getError } from '@/lib/helper/common';
 import { cn } from '@/lib/utils';
 import { useEditBudgetCategoryMutation } from '@/store/features/budget/category/api';
 import { BudgetCategoryType } from '@/types/modules/budget/budget-category-types';

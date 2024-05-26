@@ -1,10 +1,5 @@
-import ModuleLink from './ModuleLink';
-
-export type LinksType = LinkType[];
-export type LinkType = {
-	name: string;
-	path: string;
-};
+import { LinkType, LinksType } from '@/types/link';
+import ModuleLink from './NavLink';
 
 const ModuleLayout = ({
 	links,

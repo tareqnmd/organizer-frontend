@@ -10,7 +10,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-import { getError } from '@/lib/common-func';
+import { getError } from '@/lib/helper/common';
 import { useDeleteBudgetCategoryMutation } from '@/store/features/budget/category/api';
 import { BudgetCategoryType } from '@/types/modules/budget/budget-category-types';
 import { Loader, Trash } from 'lucide-react';
@@ -18,7 +18,11 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
-const BudgetCategoryDelete = ({ category }: { category: BudgetCategoryType }) => {
+const BudgetCategoryDelete = ({
+	category,
+}: {
+	category: BudgetCategoryType;
+}) => {
 	const [open, setOpen] = useState(false);
 	const router = useRouter();
 	const [deleteCategory, { isLoading, isError, isSuccess, error }] =

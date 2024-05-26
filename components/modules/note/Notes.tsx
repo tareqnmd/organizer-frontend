@@ -1,10 +1,10 @@
-import { serverAuthFetch } from '@/lib/fetch';
-import NoteSnippet, { NoteSnippetType } from './NoteSnippet';
+import { serverAuthFetch } from '@/lib/helper/fetch';
+import {
+	NoteType,
+	NotesParamType,
+} from '@/types/modules/note/budget-note-types';
+import NoteSnippet from './NoteSnippet';
 import NotesAction from './NotesAction';
-
-export type NotesParamType = { pinned?: string };
-
-export const dynamic = 'force-dynamic';
 
 export const getAllNote = async (params: NotesParamType) => {
 	try {
@@ -19,17 +19,13 @@ export const getAllNote = async (params: NotesParamType) => {
 	}
 };
 
-const AllNotes = async ({
-	searchOptions,
-}: {
-	searchOptions: NotesParamType;
-}) => {
+const Notes = async ({ searchOptions }: { searchOptions: NotesParamType }) => {
 	const notes = await getAllNote(searchOptions);
 	return (
 		<>
 			<NotesAction params={searchOptions} />
 			<div className="grid grid-cols-3 gap-4">
-				{notes.map((note: NoteSnippetType) => (
+				{notes.map((note: NoteType) => (
 					<NoteSnippet
 						key={note?.id}
 						note={note}
@@ -40,4 +36,4 @@ const AllNotes = async ({
 	);
 };
 
-export default AllNotes;
+export default Notes;

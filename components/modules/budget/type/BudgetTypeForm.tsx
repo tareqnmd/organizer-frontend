@@ -5,8 +5,8 @@ import SuccessMessage from '@/components/common/message/SuccessMessage';
 import { Button } from '@/components/ui/button';
 import { DialogFooter } from '@/components/ui/dialog';
 import { Form } from '@/components/ui/form';
-import { getError } from '@/lib/common-func';
-import { type_form_items } from '@/lib/form-items';
+import { typeFormItems } from '@/lib/form-items/modules/budget';
+import { getError } from '@/lib/helper/common';
 import {
 	useCreateBudgetTypeMutation,
 	useEditBudgetTypeMutation,
@@ -106,7 +106,7 @@ const BudgetTypeForm = ({
 				onSubmit={form.handleSubmit(onSubmit)}
 				className="w-full min-w-[300px] grid gap-3"
 			>
-				{type_form_items.map((input) => (
+				{typeFormItems.map((input) => (
 					<CustomFormInput
 						key={input.name}
 						input={input}

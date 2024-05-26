@@ -1,5 +1,5 @@
 'use client';
-import { registration_form_items } from '@/lib/form-items';
+import { registrationFormItems } from '@/lib/form-items/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LogIn } from 'lucide-react';
 import { signIn } from 'next-auth/react';
@@ -59,7 +59,7 @@ const RegistrationForm = () => {
 				onSubmit={form.handleSubmit(onSubmit)}
 				className="w-full min-w-[300px] grid gap-3"
 			>
-				{registration_form_items.map((input) => (
+				{registrationFormItems.map((input) => (
 					<CustomFormInput
 						key={input.name}
 						input={input}

@@ -4,15 +4,15 @@ import ErrorMessage from '@/components/common/message/ErrorMessage';
 import SuccessMessage from '@/components/common/message/SuccessMessage';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
-import { getError } from '@/lib/common-func';
-import { note_form_items } from '@/lib/form-items';
+import { noteFormItems } from '@/lib/form-items/modules/note';
+import { getError } from '@/lib/helper/common';
 import { useCreateNoteMutation } from '@/store/features/note/api';
+import { NoteType } from '@/types/modules/note/budget-note-types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
-import { NoteSnippetType } from './NoteSnippet';
 
 type NoteInput = {
 	subject: string;
@@ -28,7 +28,7 @@ const FormSchema = z.object({
 	}),
 });
 
-const NoteForm = ({ note }: { note?: NoteSnippetType }) => {
+const NoteForm = ({ note }: { note?: NoteType }) => {
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
@@ -69,7 +69,7 @@ const NoteForm = ({ note }: { note?: NoteSnippetType }) => {
 				onSubmit={form.handleSubmit(onSubmit)}
 				className="w-full min-w-[300px] grid gap-3"
 			>
-				{note_form_items.map((input) => (
+				{noteFormItems.map((input) => (
 					<CustomFormInput
 						key={input.name}
 						input={input}

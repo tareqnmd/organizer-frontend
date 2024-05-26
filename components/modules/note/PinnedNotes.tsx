@@ -1,6 +1,6 @@
-import { serverAuthFetch } from '@/lib/fetch';
+import { serverAuthFetch } from '@/lib/helper/fetch';
 import Notes from './NoteSnippets';
-export const dynamic = 'force-dynamic';
+
 
 export const getRecentNotes = async () => {
 	try {

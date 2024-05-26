@@ -1,8 +1,8 @@
 import { Badge } from '@/components/ui/badge';
-import { serverAuthFetch } from '@/lib/fetch';
+import { serverAuthFetch } from '@/lib/helper/fetch';
 import { Pin } from 'lucide-react';
 
-export const dynamic = 'force-dynamic';
+
 
 export const getFeaturedNote = async () => {
 	try {

@@ -1,6 +1,6 @@
 'use client';
 import { Skeleton } from '@/components/ui/skeleton';
-import { axiosInstance } from '@/lib/fetch';
+import { axiosInstance } from '@/lib/helper/fetch';
 import { useEffect, useState } from 'react';
 import BudgetInfoCard from './BudgetInfoCard';
 

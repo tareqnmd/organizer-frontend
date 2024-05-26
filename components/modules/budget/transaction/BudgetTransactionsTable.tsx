@@ -2,7 +2,7 @@
 
 import { DataTable } from '@/components/common/table/DataTable';
 import { Button } from '@/components/ui/button';
-import { moneyFormat } from '@/lib/common-func';
+import { moneyFormat } from '@/lib/helper/common';
 import {
 	BudgetTransactionType,
 	BudgetTransactionsType,

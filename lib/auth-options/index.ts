@@ -2,7 +2,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import { cookies } from 'next/headers';
-import { axiosInstance } from './fetch';
+import { axiosInstance } from '../helper/fetch';
 
 const {
 	GITHUB_ID = '',
@@ -89,7 +89,10 @@ export const authOptions = {
 			},
 			async authorize(credentials) {
 				try {
-					const { data } = await axiosInstance.post('/user/register', credentials);
+					const { data } = await axiosInstance.post(
+						'/user/register',
+						credentials
+					);
 					const { token, tokenOptions, ...user } = data;
 					cookies().set('token', token, JSON.parse(tokenOptions));
 					return user ?? null;

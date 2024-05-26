@@ -1,6 +1,6 @@
 'use client';
 
-import { clearCookie } from '@/lib/server-func';
+import { clearCookie } from '@/lib/helper/server-func';
 import { cn } from '@/lib/utils';
 import { signOut } from 'next-auth/react';
 

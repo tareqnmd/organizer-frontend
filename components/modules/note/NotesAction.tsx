@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
+import { NotesParamType } from '@/types/modules/note/budget-note-types';
 import Link from 'next/link';
-import { NotesParamType } from './AllNotes';
 
 const NotesAction = ({ params }: { params: NotesParamType }) => {
 	return (

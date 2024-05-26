@@ -1,5 +1,5 @@
 import { authOptions } from '@/lib/auth-options';
-import { serverAuthFetch } from '@/lib/fetch';
+import { serverAuthFetch } from '@/lib/helper/fetch';
 import {
 	BudgetCategoryParamType,
 	BudgetCategoryType,
