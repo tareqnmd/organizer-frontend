@@ -6,9 +6,14 @@ import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { noteFormItems } from '@/lib/form-items/modules/note';
 import { getError } from '@/lib/helper/common';
-import { useCreateNoteMutation } from '@/store/features/note/api';
+import {
+	useCreateNoteMutation,
+	useEditNoteMutation,
+} from '@/store/features/note/api';
 import { NoteType } from '@/types/modules/note/budget-note-types';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Loader } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -29,6 +34,7 @@ const FormSchema = z.object({
 });
 
 const NoteForm = ({ note }: { note?: NoteType }) => {
+	const router = useRouter();
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
@@ -36,28 +42,56 @@ const NoteForm = ({ note }: { note?: NoteType }) => {
 			details: '',
 		},
 	});
-	const [createNote, { isLoading, isError, isSuccess, error }] =
-		useCreateNoteMutation();
+	const [
+		editNote,
+		{
+			isLoading: isEditLoading,
+			isError: isEditError,
+			isSuccess: isEditSuccess,
+			error: editError,
+		},
+	] = useEditNoteMutation();
+	const [
+		createNote,
+		{
+			isLoading: isCreateLoading,
+			isError: isCreateError,
+			isSuccess: isCreateSuccess,
+			error: createError,
+		},
+	] = useCreateNoteMutation();
 	const onSubmit = (values: NoteInput) => {
-		createNote(values);
+		note?.id ? editNote({ data: values, id: note.id }) : createNote(values);
 	};
 
 	useEffect(() => {
-		if (isError || isSuccess) {
+		if (isEditError || isCreateError || isEditSuccess || isCreateSuccess) {
 			toast(
-				isError ? (
-					<ErrorMessage message={getError(error)} />
+				isEditError || isCreateError ? (
+					<ErrorMessage
+						message={getError(note?.id ? editError : createError)}
+					/>
 				) : (
 					<SuccessMessage
 						message={`Note successfully ${note?.id ? 'updated' : 'created'}`}
 					/>
 				)
 			);
+			router.refresh();
 		}
-	}, [isError, isSuccess, error, note?.id]);
+	}, [
+		note?.id,
+		createError,
+		editError,
+		isCreateError,
+		isCreateSuccess,
+		isEditError,
+		isEditSuccess,
+		router,
+	]);
 
 	useEffect(() => {
-		if (note?.subject) {
+		if (note?.id) {
 			form.setValue('subject', note.subject);
 			form.setValue('details', note.details);
 		}
@@ -77,11 +111,17 @@ const NoteForm = ({ note }: { note?: NoteType }) => {
 					/>
 				))}
 				<Button
-					disabled={isLoading}
+					disabled={isCreateLoading || isEditLoading}
+					className="flex items-center gap-1"
 					type="submit"
-					className="w-max ml-auto"
 				>
-					{note?.subject ? 'Update' : 'Submit'}
+					{isCreateLoading || isEditLoading ? (
+						<Loader
+							className="animate-spin"
+							size={16}
+						/>
+					) : null}
+					{note?.id ? 'Update' : 'Create'}
 				</Button>
 			</form>
 		</Form>
