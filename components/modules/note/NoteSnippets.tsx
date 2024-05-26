@@ -15,7 +15,7 @@ const NoteSnippets = ({
 			<div className="grid grid-cols-1 gap-4">
 				{notes.map((note) => (
 					<NoteSmallInfo
-						key={note._id}
+						key={note.id}
 						note={note}
 					/>
 				))}
