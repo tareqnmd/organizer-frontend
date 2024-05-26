@@ -1,4 +1,4 @@
-import Note from '@/components/modules/note-m/Note';
+import Note from '@/components/modules/note/Note';
 
 const Page = () => {
 	return <Note />;

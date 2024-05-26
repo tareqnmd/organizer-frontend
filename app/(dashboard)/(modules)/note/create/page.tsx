@@ -1,4 +1,4 @@
-import NoteCreate from '@/components/modules/note-m/NoteCreate';
+import NoteCreate from '@/components/modules/note/NoteCreate';
 
 const Page = () => {
 	return <NoteCreate />;
