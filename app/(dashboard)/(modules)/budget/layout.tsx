@@ -1,5 +1,6 @@
 import ModuleLayout from '@/components/layout/ModuleLayout';
 const links = [
+	{ name: 'Dashboard', path: '/budget' },
 	{ name: 'Transaction', path: '/budget/transaction' },
 	{ name: 'Type', path: '/budget/type' },
 	{ name: 'Category', path: '/budget/type-category' },

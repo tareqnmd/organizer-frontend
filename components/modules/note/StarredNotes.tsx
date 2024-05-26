@@ -4,7 +4,7 @@ import NoteCard from './NoteCard';
 
 export const getRecentNotes = async () => {
 	try {
-		const res = await serverAuthFetch('note/all?type=recent');
+		const res = await serverAuthFetch('note/all?starred=true');
 		if (!res.ok) {
 			throw new Error('Failed to fetch data');
 		}
@@ -14,13 +14,13 @@ export const getRecentNotes = async () => {
 	}
 };
 
-const RecentNotes = async () => {
-	const recentNotes = await getRecentNotes();
+const StarredNotes = async () => {
+	const starredNotes = await getRecentNotes();
 	return (
 		<div className="grid gap-2">
-			<h3 className="font-bold">Recent :</h3>
+			<h3 className="font-bold">Starred :</h3>
 			<div className="grid grid-cols-2 gap-4">
-				{recentNotes.map((note: NoteType) => (
+				{starredNotes.map((note: NoteType) => (
 					<NoteCard
 						key={note.id}
 						note={note}
@@ -31,4 +31,4 @@ const RecentNotes = async () => {
 	);
 };
 
-export default RecentNotes;
+export default StarredNotes;

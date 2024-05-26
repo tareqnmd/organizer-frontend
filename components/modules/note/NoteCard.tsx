@@ -8,7 +8,7 @@ import {
 import { NoteType } from '@/types/modules/note/budget-note-types';
 import Link from 'next/link';
 
-const NoteSnippet = ({ note }: { note: NoteType }) => {
+const NoteCard = ({ note }: { note: NoteType }) => {
 	return (
 		<Link href={`/note/${note.id}`}>
 			<Card className="h-full hover:shadow transition overflow-hidden">
@@ -31,4 +31,4 @@ const NoteSnippet = ({ note }: { note: NoteType }) => {
 	);
 };
 
-export default NoteSnippet;
+export default NoteCard;

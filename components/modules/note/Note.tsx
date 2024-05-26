@@ -1,19 +1,13 @@
 import FeaturedNote from './FeaturedNote';
-import PinnedNotes from './PinnedNotes';
 import RecentNotes from './RecentNotes';
+import StarredNotes from './StarredNotes';
 
 const Note = () => {
 	return (
-		<div className="grid gap-4 grid-cols-4">
-			<div className='col-span-2'>
-				<FeaturedNote />
-			</div>
-			<div>
-				<RecentNotes />
-			</div>
-			<div>
-				<PinnedNotes />
-			</div>
+		<div className="grid gap-4">
+			<FeaturedNote />
+			<RecentNotes />
+			<StarredNotes />
 		</div>
 	);
 };
