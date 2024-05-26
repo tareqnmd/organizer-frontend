@@ -3,11 +3,15 @@ import Notes from './NoteSnippets';
 export const dynamic = 'force-dynamic';
 
 export const getRecentNotes = async () => {
-	const res = await serverAuthFetch('note/all?type=pinned');
-	if (!res.ok) {
-		throw new Error('Failed to fetch data');
+	try {
+		const res = await serverAuthFetch('note/all?type=pinned');
+		if (!res.ok) {
+			throw new Error('Failed to fetch data');
+		}
+		return res.json();
+	} catch (error) {
+		console.log('error', error);
 	}
-	return res.json();
 };
 
 const PinnedNotes = async () => {

@@ -4,11 +4,15 @@ import NoteForm from './NoteForm';
 export const dynamic = 'force-dynamic';
 
 export const getNoteDetails = async (id: string) => {
-	const res = await serverAuthFetch(`note/${id}`);
-	if (!res.ok) {
-		throw new Error('Failed to fetch data');
+	try {
+		const res = await serverAuthFetch(`note/${id}`);
+		if (!res.ok) {
+			throw new Error('Failed to fetch data');
+		}
+		return res.json();
+	} catch (error) {
+		console.log('error', error);
 	}
-	return res.json();
 };
 
 const NoteDetails = async ({ id }: { id: string }) => {

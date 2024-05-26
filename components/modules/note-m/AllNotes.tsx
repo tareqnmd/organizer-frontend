@@ -7,12 +7,16 @@ export type NotesParamType = { pinned?: string };
 export const dynamic = 'force-dynamic';
 
 export const getAllNote = async (params: NotesParamType) => {
-	const queryParams = new URLSearchParams(params);
-	const res = await serverAuthFetch(`note/all?${queryParams}`);
-	if (!res.ok) {
-		throw new Error('Failed to fetch data');
+	try {
+		const queryParams = new URLSearchParams(params);
+		const res = await serverAuthFetch(`note/all?${queryParams}`);
+		if (!res.ok) {
+			throw new Error('Failed to fetch data');
+		}
+		return res.json();
+	} catch (error) {
+		console.log('error', error);
 	}
-	return res.json();
 };
 
 const AllNotes = async ({
