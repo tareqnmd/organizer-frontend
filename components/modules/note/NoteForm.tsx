@@ -48,11 +48,13 @@ const NoteForm = ({ note }: { note?: NoteSnippetType }) => {
 				isError ? (
 					<ErrorMessage message={getError(error)} />
 				) : (
-					<SuccessMessage message="Note successfully created" />
+					<SuccessMessage
+						message={`Note successfully ${note?.id ? 'updated' : 'created'}`}
+					/>
 				)
 			);
 		}
-	}, [isError, isSuccess, error]);
+	}, [isError, isSuccess, error, note?.id]);
 
 	useEffect(() => {
 		if (note?.subject) {

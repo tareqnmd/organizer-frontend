@@ -7,14 +7,14 @@ import {
 } from '@/components/ui/card';
 import Link from 'next/link';
 export type NoteSnippetType = {
-	_id: string;
+	id: string;
 	subject: string;
 	details: string;
 	created_at: string;
 };
 const NoteSnippet = ({ note }: { note: NoteSnippetType }) => {
 	return (
-		<Link href={`/note/${note._id}`}>
+		<Link href={`/note/${note.id}`}>
 			<Card className="h-full hover:shadow transition overflow-hidden">
 				<CardHeader className="p-2 border-b bg-gray-200">
 					<CardTitle className="text-md w-full flex justify-between">

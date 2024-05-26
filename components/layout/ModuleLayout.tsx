@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import ModuleLink from './ModuleLink';
 
 export type LinksType = LinkType[];
 export type LinkType = {
@@ -17,14 +17,11 @@ const ModuleLayout = ({
 		<>
 			<header className="border-b py-2">
 				<div className="container gap-2 mx-auto flex items-center justify-end text-sm">
-					{links.map((link) => (
-						<Link
-							href={link.path}
+					{links.map((link: LinkType) => (
+						<ModuleLink
 							key={link.path}
-							className="transition hover:underline"
-						>
-							{link.name}
-						</Link>
+							link={link}
+						/>
 					))}
 				</div>
 			</header>

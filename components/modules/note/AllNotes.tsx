@@ -31,7 +31,7 @@ const AllNotes = async ({
 			<div className="grid grid-cols-3 gap-4">
 				{notes.map((note: NoteSnippetType) => (
 					<NoteSnippet
-						key={note?._id}
+						key={note?.id}
 						note={note}
 					/>
 				))}
