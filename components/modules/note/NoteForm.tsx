@@ -2,14 +2,12 @@
 import CustomFormInput from '@/components/common/input/CustomFormInput';
 import ErrorMessage from '@/components/common/message/ErrorMessage';
 import SuccessMessage from '@/components/common/message/SuccessMessage';
-import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { noteFormItems } from '@/lib/form-items/modules/note';
 import { getError } from '@/lib/helper/common';
 import { useEditNoteMutation } from '@/store/features/note/api';
 import { NoteType } from '@/types/modules/note/budget-note-types';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -85,19 +83,6 @@ const NoteForm = ({ note }: { note: NoteType }) => {
 						control={form?.control}
 					/>
 				))}
-				<Button
-					disabled={isEditLoading}
-					className="flex items-center gap-1"
-					type="submit"
-				>
-					{isEditLoading ? (
-						<Loader
-							className="animate-spin"
-							size={16}
-						/>
-					) : null}
-					{note?.id ? 'Update' : 'Create'}
-				</Button>
 			</form>
 		</Form>
 	);
