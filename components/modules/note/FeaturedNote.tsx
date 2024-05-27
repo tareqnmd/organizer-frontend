@@ -16,10 +16,10 @@ export const getFeaturedNote = async () => {
 
 const FeaturedNote = async () => {
 	const note = await getFeaturedNote();
-	return (
+	return note?.id ? (
 		<div className="border rounded-md overflow-hidden">
 			<div className="p-2 bg-gray-200 border-b flex items-center gap-2">
-				<span className="font-medium">{note.subject}</span>
+				<span className="font-medium">{note?.subject}</span>
 				<Badge className="ml-auto">New</Badge>
 				{note?.starred && (
 					<Star
@@ -30,10 +30,10 @@ const FeaturedNote = async () => {
 			</div>
 			<div
 				className="p-2"
-				dangerouslySetInnerHTML={{ __html: note?.details }}
+				dangerouslySetInnerHTML={{ __html: note?.details ?? `` }}
 			/>
 		</div>
-	);
+	) : null;
 };
 
 export default FeaturedNote;

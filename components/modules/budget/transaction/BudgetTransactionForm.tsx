@@ -72,10 +72,10 @@ const BudgetTransactionForm = ({
 		},
 	] = useCreateBudgetTransactionMutation();
 
-	const onSubmit = (values: any) => {
+	const onSubmit = async (values: any) => {
 		transaction?.id
-			? edit({ data: values, id: transaction.id })
-			: create(values);
+			? await edit({ data: values, id: transaction.id })
+			: await create(values);
 	};
 
 	useEffect(() => {

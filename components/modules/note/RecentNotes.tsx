@@ -20,7 +20,7 @@ const RecentNotes = async () => {
 		<div className="grid gap-2">
 			<h3 className="font-bold">Recent :</h3>
 			<div className="grid grid-cols-2 gap-4">
-				{recentNotes.map((note: NoteType) => (
+				{recentNotes?.map((note: NoteType) => (
 					<NoteCard
 						key={note.id}
 						note={note}

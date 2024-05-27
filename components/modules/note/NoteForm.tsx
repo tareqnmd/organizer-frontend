@@ -6,10 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { noteFormItems } from '@/lib/form-items/modules/note';
 import { getError } from '@/lib/helper/common';
-import {
-	useCreateNoteMutation,
-	useEditNoteMutation,
-} from '@/store/features/note/api';
+import { useEditNoteMutation } from '@/store/features/note/api';
 import { NoteType } from '@/types/modules/note/budget-note-types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader } from 'lucide-react';
@@ -28,17 +25,15 @@ const FormSchema = z.object({
 	subject: z.string().min(3, {
 		message: 'Subject must be at least 3 characters.',
 	}),
-	details: z.string().min(6, {
-		message: 'Details must be at least 6 characters.',
-	}),
+	details: z.string(),
 });
 
-const NoteForm = ({ note }: { note?: NoteType }) => {
+const NoteForm = ({ note }: { note: NoteType }) => {
 	const router = useRouter();
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
-			subject: '',
+			subject: 'Untitled',
 			details: '',
 		},
 	});
@@ -51,26 +46,15 @@ const NoteForm = ({ note }: { note?: NoteType }) => {
 			error: editError,
 		},
 	] = useEditNoteMutation();
-	const [
-		createNote,
-		{
-			isLoading: isCreateLoading,
-			isError: isCreateError,
-			isSuccess: isCreateSuccess,
-			error: createError,
-		},
-	] = useCreateNoteMutation();
-	const onSubmit = (values: NoteInput) => {
-		note?.id ? editNote({ data: values, id: note.id }) : createNote(values);
+	const onSubmit = async (values: NoteInput) => {
+		await editNote({ data: values, id: note.id });
 	};
 
 	useEffect(() => {
-		if (isEditError || isCreateError || isEditSuccess || isCreateSuccess) {
+		if (isEditError || isEditSuccess) {
 			toast(
-				isEditError || isCreateError ? (
-					<ErrorMessage
-						message={getError(note?.id ? editError : createError)}
-					/>
+				isEditError ? (
+					<ErrorMessage message={getError(editError)} />
 				) : (
 					<SuccessMessage
 						message={`Note successfully ${note?.id ? 'updated' : 'created'}`}
@@ -79,16 +63,7 @@ const NoteForm = ({ note }: { note?: NoteType }) => {
 			);
 			router.refresh();
 		}
-	}, [
-		note?.id,
-		createError,
-		editError,
-		isCreateError,
-		isCreateSuccess,
-		isEditError,
-		isEditSuccess,
-		router,
-	]);
+	}, [note?.id, editError, isEditError, isEditSuccess, router]);
 
 	useEffect(() => {
 		if (note?.id) {
@@ -111,11 +86,11 @@ const NoteForm = ({ note }: { note?: NoteType }) => {
 					/>
 				))}
 				<Button
-					disabled={isCreateLoading || isEditLoading}
+					disabled={isEditLoading}
 					className="flex items-center gap-1"
 					type="submit"
 				>
-					{isCreateLoading || isEditLoading ? (
+					{isEditLoading ? (
 						<Loader
 							className="animate-spin"
 							size={16}

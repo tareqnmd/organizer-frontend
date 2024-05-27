@@ -4,6 +4,7 @@ import {
 	NotesParamType,
 } from '@/types/modules/note/budget-note-types';
 import NoteCard from './NoteCard';
+import NoteCreate from './NoteCreate';
 
 export const getAllNote = async (params: NotesParamType) => {
 	try {
@@ -25,16 +26,17 @@ const Notes = async ({
 }) => {
 	const notes = await getAllNote(searchOptions);
 	return (
-		<>
+		<div className="grid gap-4">
+			<NoteCreate />
 			<div className="grid grid-cols-3 gap-4">
-				{notes.map((note: NoteType) => (
+				{notes?.map((note: NoteType) => (
 					<NoteCard
 						key={note?.id}
 						note={note}
 					/>
 				))}
 			</div>
-		</>
+		</div>
 	);
 };
 

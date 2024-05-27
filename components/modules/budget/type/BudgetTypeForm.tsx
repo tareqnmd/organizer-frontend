@@ -62,8 +62,8 @@ const BudgetTypeForm = ({
 		},
 	] = useCreateBudgetTypeMutation();
 
-	const onSubmit = (values: BudgetTypeSubmitType) => {
-		type?.name ? edit({ data: values, id: type.id }) : create(values);
+	const onSubmit = async (values: BudgetTypeSubmitType) => {
+		type?.id ? await edit({ data: values, id: type.id }) : await create(values);
 	};
 
 	useEffect(() => {
