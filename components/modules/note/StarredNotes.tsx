@@ -16,7 +16,7 @@ export const getRecentNotes = async () => {
 
 const StarredNotes = async () => {
 	const starredNotes = await getRecentNotes();
-	return (
+	return starredNotes?.length > 0 ? (
 		<div className="grid gap-2">
 			<h3 className="font-bold">Starred :</h3>
 			<div className="grid grid-cols-2 gap-4">
@@ -28,7 +28,7 @@ const StarredNotes = async () => {
 				))}
 			</div>
 		</div>
-	);
+	) : null;
 };
 
 export default StarredNotes;
