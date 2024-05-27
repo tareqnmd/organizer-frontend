@@ -35,6 +35,7 @@ const NoteForm = ({ note }: { note: NoteType }) => {
 			details: '',
 		},
 	});
+
 	const [
 		editNote,
 		{
@@ -44,6 +45,7 @@ const NoteForm = ({ note }: { note: NoteType }) => {
 			error: editError,
 		},
 	] = useEditNoteMutation();
+
 	const onSubmit = async (values: NoteInput) => {
 		await editNote({ data: values, id: note.id });
 	};
