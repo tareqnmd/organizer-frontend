@@ -39,7 +39,6 @@ const NoteForm = ({ note }: { note: NoteType }) => {
 	const {
 		handleSubmit,
 		setValue,
-		getValues,
 		watch,
 		formState: { isValid },
 	} = form;
@@ -55,7 +54,7 @@ const NoteForm = ({ note }: { note: NoteType }) => {
 	] = useEditNoteMutation();
 
 	const onSubmit = async (values: NoteInput) => {
-		await editNote({ data: values, id: note.id });
+		await editNote({ data: values, id: note?.id });
 	};
 
 	useEffect(() => {
