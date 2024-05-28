@@ -30,11 +30,19 @@ const NoteForm = ({ note }: { note: NoteType }) => {
 	const router = useRouter();
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
+		mode: 'onChange',
 		defaultValues: {
 			subject: 'Untitled',
 			details: '',
 		},
 	});
+	const {
+		handleSubmit,
+		setValue,
+		getValues,
+		watch,
+		formState: { isValid },
+	} = form;
 
 	const [
 		editNote,
@@ -67,21 +75,25 @@ const NoteForm = ({ note }: { note: NoteType }) => {
 
 	useEffect(() => {
 		if (note?.id) {
-			form.setValue('subject', note.subject);
-			form.setValue('details', note.details);
+			setValue('subject', note.subject);
+			setValue('details', note.details);
 		}
-	}, [form, note]);
+	}, [setValue, note]);
 
 	useEffect(() => {
-		console.log('form', form.register);
-	}, [form.register]);
+		let timer: any;
+		const subscription = watch(() => {
+			if (timer) clearTimeout(timer);
+			timer = setTimeout(() => {
+				handleSubmit(onSubmit)();
+			}, 1000);
+		});
+		return () => subscription.unsubscribe();
+	}, [handleSubmit, watch]);
 
 	return (
 		<Form {...form}>
-			<form
-				onSubmit={form.handleSubmit(onSubmit)}
-				className="w-full min-w-[300px] grid gap-3"
-			>
+			<div className="w-full min-w-[300px] grid gap-3">
 				{noteFormItems.map((input) => (
 					<CustomFormInput
 						key={input.name}
@@ -89,7 +101,7 @@ const NoteForm = ({ note }: { note: NoteType }) => {
 						control={form?.control}
 					/>
 				))}
-			</form>
+			</div>
 		</Form>
 	);
 };
