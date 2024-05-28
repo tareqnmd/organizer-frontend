@@ -1,7 +1,6 @@
 'use client';
 import CustomFormInput from '@/components/common/input/CustomFormInput';
 import ErrorMessage from '@/components/common/message/ErrorMessage';
-import SuccessMessage from '@/components/common/message/SuccessMessage';
 import { Form } from '@/components/ui/form';
 import { noteFormItems } from '@/lib/form-items/modules/note';
 import { getError } from '@/lib/helper/common';
@@ -59,16 +58,8 @@ const NoteForm = ({ note }: { note: NoteType }) => {
 
 	useEffect(() => {
 		if (isEditError || (isEditSuccess && !isEditLoading)) {
-			toast(
-				isEditError ? (
-					<ErrorMessage message={getError(editError)} />
-				) : (
-					<SuccessMessage
-						message={`Note successfully ${note?.id ? 'updated' : 'created'}`}
-					/>
-				)
-			);
-			router.refresh();
+			toast(isEditError && <ErrorMessage message={getError(editError)} />);
+			isEditSuccess && !isEditLoading && router.refresh();
 		}
 	}, [note?.id, editError, isEditError, isEditSuccess, router, isEditLoading]);
 
