@@ -51,7 +51,7 @@ const NoteForm = ({ note }: { note: NoteType }) => {
 	};
 
 	useEffect(() => {
-		if (isEditError || isEditSuccess) {
+		if (isEditError || (isEditSuccess && !isEditLoading)) {
 			toast(
 				isEditError ? (
 					<ErrorMessage message={getError(editError)} />
@@ -63,7 +63,7 @@ const NoteForm = ({ note }: { note: NoteType }) => {
 			);
 			router.refresh();
 		}
-	}, [note?.id, editError, isEditError, isEditSuccess, router]);
+	}, [note?.id, editError, isEditError, isEditSuccess, router, isEditLoading]);
 
 	useEffect(() => {
 		if (note?.id) {
@@ -71,6 +71,10 @@ const NoteForm = ({ note }: { note: NoteType }) => {
 			form.setValue('details', note.details);
 		}
 	}, [form, note]);
+
+	useEffect(() => {
+		console.log('form', form.register);
+	}, [form.register]);
 
 	return (
 		<Form {...form}>

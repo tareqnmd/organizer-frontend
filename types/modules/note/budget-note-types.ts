@@ -8,4 +8,4 @@ export type NoteType = {
 
 export type NotesType = NoteType[];
 
-export type NotesParamType = { pinned?: string };
+export type NotesParamType = { starred?: string };
