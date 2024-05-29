@@ -4,7 +4,9 @@ import NoteCard from './NoteCard';
 
 export const getRecentNotes = async () => {
 	try {
-		const res = await serverAuthFetch('note/all?limit=6');
+		const res = await serverAuthFetch('note/all?limit=6', {
+			next: { revalidate: 0 },
+		});
 		if (!res.ok) {
 			throw new Error('Failed to fetch data');
 		}

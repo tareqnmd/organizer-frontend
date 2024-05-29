@@ -9,7 +9,9 @@ import NoteCreate from './NoteCreate';
 export const getAllNote = async (params: NotesParamType) => {
 	try {
 		const queryParams = new URLSearchParams(params);
-		const res = await serverAuthFetch(`note/all?${queryParams}`);
+		const res = await serverAuthFetch(`note/all?${queryParams}`, {
+			next: { revalidate: 0 },
+		});
 		if (!res.ok) {
 			throw new Error('Failed to fetch data');
 		}

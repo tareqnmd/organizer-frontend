@@ -8,8 +8,8 @@ const Note = () => {
 		<div className="grid gap-4">
 			<NoteCreate />
 			<FeaturedNote />
-			<RecentNotes />
 			<StarredNotes />
+			<RecentNotes />
 		</div>
 	);
 };

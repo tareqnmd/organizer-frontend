@@ -1,5 +1,6 @@
 'use server';
 
+import { revalidateTag } from 'next/cache';
 import { cookies, headers } from 'next/headers';
 
 export const clearCookie = async () => {
@@ -16,4 +17,8 @@ export const getCookieValue = async (name: string) => {
 	const cookieStore = cookies();
 	const cookie: any = cookieStore.get(name);
 	return cookie.value ?? '';
+};
+
+export const notesRevalidate = () => {
+	revalidateTag('collection');
 };
