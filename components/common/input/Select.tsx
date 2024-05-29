@@ -15,6 +15,7 @@ const FormSelect = ({ input, field, extraTriggerClassName = '' }: any) => {
 	const { placeholder, staticOption = [], optionUrl } = input;
 	const { data: dynamicOption } = useGetOptionsQuery(optionUrl, {
 		skip: staticOption?.length > 0,
+		refetchOnMountOrArgChange: true,
 	});
 
 	useEffect(() => {
