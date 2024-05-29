@@ -13,11 +13,6 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
 
-type NoteInput = {
-	subject: string;
-	details: string;
-};
-
 const FormSchema = z.object({
 	subject: z.string().min(3, {
 		message: 'Subject must be at least 3 characters.',
@@ -60,16 +55,15 @@ const NoteForm = ({ note }: { note: NoteType }) => {
 	}, [setValue, note]);
 
 	useEffect(() => {
-		if (isValid) {
-			const handler = setTimeout(async () => {
-				await editNote({
-					data: values,
+		const handler = setTimeout(async () => {
+			isValid &&
+				(await editNote({
+					data: { subject: values.subject, details: values.details },
 					id: note.id,
-				});
-			}, 1000);
-			return () => clearTimeout(handler);
-		}
-	}, [values, isValid, editNote, note.id]);
+				}));
+		}, 1000);
+		return () => clearTimeout(handler);
+	}, [values.subject, values.details, isValid, editNote, note.id]);
 
 	return (
 		<Form {...form}>
