@@ -8,7 +8,7 @@ import { useEditNoteMutation } from '@/store/features/note/api';
 import { NoteType } from '@/types/modules/note/budget-note-types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
-import { memo, useEffect, useMemo } from 'react';
+import { memo, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
@@ -38,32 +38,17 @@ const NoteForm = ({ note }: { note: NoteType }) => {
 	const {
 		watch,
 		setValue,
-		handleSubmit,
 		formState: { isValid },
 	} = form;
 
-	const [
-		editNote,
-		{
-			isLoading: isEditLoading,
-			isError: isEditError,
-			isSuccess: isEditSuccess,
-			error: editError,
-		},
-	] = useEditNoteMutation();
-
-	const onSubmit = async (values: NoteInput) => {
-		await editNote({ data: values, id: note.id });
-	};
+	const [editNote, { isError: isEditError, error: editError }] =
+		useEditNoteMutation();
 
 	const values = watch();
-	const memoValue = useMemo(() => ({ ...values }), [values]);
-	console.log('values', memoValue);
 
 	useEffect(() => {
 		if (isEditError) {
 			toast(<ErrorMessage message={getError(editError)} />);
-			// router.refresh();
 		}
 	}, [editError, isEditError, router]);
 
@@ -75,11 +60,16 @@ const NoteForm = ({ note }: { note: NoteType }) => {
 	}, [setValue, note]);
 
 	useEffect(() => {
-		editNote({
-			data: { subject: memoValue.subject, details: memoValue.details },
-			id: note.id,
-		});
-	}, [memoValue.subject, memoValue.details, editNote, note.id]);
+		if (isValid) {
+			const handler = setTimeout(async () => {
+				await editNote({
+					data: values,
+					id: note.id,
+				});
+			}, 1000);
+			return () => clearTimeout(handler);
+		}
+	}, [values, isValid, editNote, note.id]);
 
 	return (
 		<Form {...form}>
