@@ -56,7 +56,7 @@ const BudgetCategoryDelete = ({
 					size={16}
 				/>
 			</DialogTrigger>
-			<DialogContent className="sm:max-w-[425px]">
+			<DialogContent className="basic-modal">
 				<DialogHeader>
 					<DialogTitle>Delete Category ({category.name})</DialogTitle>
 				</DialogHeader>

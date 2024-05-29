@@ -69,7 +69,7 @@ const BudgetCategoryStatus = ({
 					/>
 				)}
 			</DialogTrigger>
-			<DialogContent className="sm:max-w-[425px]">
+			<DialogContent className="basic-modal">
 				<DialogHeader>
 					<DialogTitle>
 						{category.status === 0 ? 'Active' : 'Inactive'} Category (

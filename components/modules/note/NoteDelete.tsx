@@ -49,7 +49,7 @@ const NoteDelete = ({ note }: { note: NoteType }) => {
 					size={16}
 				/>
 			</DialogTrigger>
-			<DialogContent className="sm:max-w-[425px]">
+			<DialogContent className="basic-modal">
 				<DialogHeader>
 					<DialogTitle>Delete Note ({note.subject})</DialogTitle>
 				</DialogHeader>

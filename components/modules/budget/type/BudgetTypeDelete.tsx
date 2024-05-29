@@ -49,7 +49,7 @@ const BudgetTypeDelete = ({ type }: { type: BudgetTypeType }) => {
 					size={16}
 				/>
 			</DialogTrigger>
-			<DialogContent className="sm:max-w-[425px]">
+			<DialogContent className="basic-modal">
 				<DialogHeader>
 					<DialogTitle>Delete Type ({type.name})</DialogTitle>
 				</DialogHeader>

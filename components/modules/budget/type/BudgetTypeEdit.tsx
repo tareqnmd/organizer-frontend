@@ -24,7 +24,7 @@ export function BudgetTypeEdit({ type }: { type: BudgetTypeType }) {
 					size={16}
 				/>
 			</DialogTrigger>
-			<DialogContent className="sm:max-w-[425px]">
+			<DialogContent className="basic-modal">
 				<DialogHeader>
 					<DialogTitle>Edit Type</DialogTitle>
 				</DialogHeader>

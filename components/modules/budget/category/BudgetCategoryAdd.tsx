@@ -26,7 +26,7 @@ const BudgetCategoryAdd = () => {
 					</span>
 				</Button>
 			</DialogTrigger>
-			<DialogContent className="sm:max-w-[425px]">
+			<DialogContent className="basic-modal">
 				<DialogHeader>
 					<DialogTitle>Create Category</DialogTitle>
 				</DialogHeader>
