@@ -57,7 +57,7 @@ const RegistrationForm = () => {
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className="w-full min-w-[300px] grid gap-3"
+				className="w-full grid gap-3"
 			>
 				{registrationFormItems.map((input) => (
 					<CustomFormInput

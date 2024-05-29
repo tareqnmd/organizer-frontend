@@ -67,7 +67,7 @@ const NoteForm = ({ note }: { note: NoteType }) => {
 
 	return (
 		<Form {...form}>
-			<div className="w-full min-w-[300px] grid gap-3">
+			<div className="w-full grid gap-3">
 				{noteFormItems.map((input) => (
 					<CustomFormInput
 						key={input.name}
