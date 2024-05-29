@@ -1,6 +1,6 @@
 import { Badge } from '@/components/ui/badge';
 import { serverAuthFetch } from '@/lib/helper/fetch';
-import { Star } from 'lucide-react';
+import NoteAction from './NoteAction';
 
 export const getFeaturedNote = async () => {
 	try {
@@ -21,12 +21,7 @@ const FeaturedNote = async () => {
 			<div className="p-2 bg-gray-200 border-b flex items-center gap-2">
 				<span className="font-medium">{note?.subject}</span>
 				<Badge className="ml-auto">New</Badge>
-				{note?.starred && (
-					<Star
-						size={20}
-						fill="black"
-					/>
-				)}
+				<NoteAction note={note} />
 			</div>
 			<div
 				className="p-2"

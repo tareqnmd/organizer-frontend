@@ -4,7 +4,7 @@ import NoteCard from './NoteCard';
 
 export const getRecentNotes = async () => {
 	try {
-		const res = await serverAuthFetch('note/all?type=recent');
+		const res = await serverAuthFetch('note/all?limit=6');
 		if (!res.ok) {
 			throw new Error('Failed to fetch data');
 		}
@@ -19,7 +19,7 @@ const RecentNotes = async () => {
 	return recentNotes?.length > 0 ? (
 		<div className="grid gap-2">
 			<h3 className="font-bold">Recent :</h3>
-			<div className="grid grid-cols-2 gap-4">
+			<div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
 				{recentNotes?.map((note: NoteType) => (
 					<NoteCard
 						key={note.id}

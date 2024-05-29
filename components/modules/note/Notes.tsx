@@ -28,7 +28,7 @@ const Notes = async ({
 	return (
 		<div className="grid gap-4">
 			<NoteCreate />
-			<div className="grid grid-cols-3 gap-4">
+			<div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
 				{notes?.map((note: NoteType) => (
 					<NoteCard
 						key={note?.id}
