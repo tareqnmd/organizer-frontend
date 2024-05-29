@@ -66,7 +66,7 @@ const BudgetTypeStatus = ({ type }: { type: BudgetTypeType }) => {
 					/>
 				)}
 			</DialogTrigger>
-			<DialogContent className="sm:max-w-[425px]">
+			<DialogContent className="basic-modal">
 				<DialogHeader>
 					<DialogTitle>
 						{type.status === 0 ? 'Active' : 'Inactive'} Type ({type.name})

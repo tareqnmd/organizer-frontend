@@ -11,33 +11,27 @@ import {
 	DialogTrigger,
 } from '@/components/ui/dialog';
 import { getError } from '@/lib/helper/common';
-import { useDeleteBudgetTransactionMutation } from '@/store/features/budget/transaction/api';
-import { BudgetTransactionType } from '@/types/modules/budget/budget-transaction-types';
+import { useDeleteNoteMutation } from '@/store/features/note/api';
+import { NoteType } from '@/types/modules/note/budget-note-types';
 import { Loader, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
-const BudgetTransactionDelete = ({
-	transaction,
-}: {
-	transaction: BudgetTransactionType;
-}) => {
+const NoteDelete = ({ note }: { note: NoteType }) => {
 	const [open, setOpen] = useState(false);
 	const router = useRouter();
-	const [deleteCategory, { isLoading, isError, isSuccess, error }] =
-		useDeleteBudgetTransactionMutation();
-
+	const [deleteNote, { isLoading, isError, isSuccess, error }] =
+		useDeleteNoteMutation();
 	const deleteHandler = () => {
-		deleteCategory(transaction.id);
+		deleteNote(note.id);
 	};
-
 	useEffect(() => {
 		if (isError || isSuccess) {
 			toast(
 				isError ? (
 					<ErrorMessage message={getError(error)} />
 				) : (
-					<SuccessMessage message={`Transaction successfully deleted`} />
+					<SuccessMessage message={`Type successfully deleted`} />
 				)
 			);
 			setOpen(false);
@@ -57,11 +51,9 @@ const BudgetTransactionDelete = ({
 			</DialogTrigger>
 			<DialogContent className="basic-modal">
 				<DialogHeader>
-					<DialogTitle>
-						Delete Transaction ({transaction.description})
-					</DialogTitle>
+					<DialogTitle>Delete Note ({note.subject})</DialogTitle>
 				</DialogHeader>
-				Do you want to delete the Transaction?
+				Do you want to delete the note?
 				<DialogFooter>
 					<Button
 						onClick={deleteHandler}
@@ -82,4 +74,4 @@ const BudgetTransactionDelete = ({
 	);
 };
 
-export default BudgetTransactionDelete;
+export default NoteDelete;

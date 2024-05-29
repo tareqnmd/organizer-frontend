@@ -26,7 +26,7 @@ const BudgetTransactionAdd = () => {
 					</span>
 				</Button>
 			</DialogTrigger>
-			<DialogContent className="sm:max-w-[425px]">
+			<DialogContent className="basic-modal">
 				<DialogHeader>
 					<DialogTitle>New Transaction</DialogTitle>
 				</DialogHeader>

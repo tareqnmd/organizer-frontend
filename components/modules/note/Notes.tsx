@@ -9,7 +9,9 @@ import NoteCreate from './NoteCreate';
 export const getAllNote = async (params: NotesParamType) => {
 	try {
 		const queryParams = new URLSearchParams(params);
-		const res = await serverAuthFetch(`note/all?${queryParams}`);
+		const res = await serverAuthFetch(`note/all?${queryParams}`, {
+			next: { revalidate: 0 },
+		});
 		if (!res.ok) {
 			throw new Error('Failed to fetch data');
 		}
@@ -28,7 +30,7 @@ const Notes = async ({
 	return (
 		<div className="grid gap-4">
 			<NoteCreate />
-			<div className="grid grid-cols-3 gap-4">
+			<div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
 				{notes?.map((note: NoteType) => (
 					<NoteCard
 						key={note?.id}

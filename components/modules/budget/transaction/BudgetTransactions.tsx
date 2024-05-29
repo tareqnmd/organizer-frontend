@@ -7,7 +7,9 @@ import BudgetTransactionsTable from './BudgetTransactionsTable';
 const getTransactions = async (params: BudgetTransactionParamType) => {
 	try {
 		const queryParams = new URLSearchParams(params);
-		const res = await serverAuthFetch(`budget/transactions?${queryParams}`);
+		const res = await serverAuthFetch(`budget/transactions?${queryParams}`, {
+			next: { revalidate: 0 },
+		});
 		if (!res.ok) {
 			throw new Error('Failed to fetch data');
 		}

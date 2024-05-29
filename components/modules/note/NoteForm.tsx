@@ -8,15 +8,10 @@ import { useEditNoteMutation } from '@/store/features/note/api';
 import { NoteType } from '@/types/modules/note/budget-note-types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
-
-type NoteInput = {
-	subject: string;
-	details: string;
-};
 
 const FormSchema = z.object({
 	subject: z.string().min(3, {
@@ -36,32 +31,21 @@ const NoteForm = ({ note }: { note: NoteType }) => {
 		},
 	});
 	const {
-		handleSubmit,
-		setValue,
 		watch,
+		setValue,
 		formState: { isValid },
 	} = form;
 
-	const [
-		editNote,
-		{
-			isLoading: isEditLoading,
-			isError: isEditError,
-			isSuccess: isEditSuccess,
-			error: editError,
-		},
-	] = useEditNoteMutation();
+	const [editNote, { isError: isEditError, error: editError }] =
+		useEditNoteMutation();
 
-	const onSubmit = async (values: NoteInput) => {
-		await editNote({ data: values, id: note?.id });
-	};
+	const values = watch();
 
 	useEffect(() => {
-		if (isEditError || (isEditSuccess && !isEditLoading)) {
-			toast(isEditError && <ErrorMessage message={getError(editError)} />);
-			isEditSuccess && !isEditLoading && router.refresh();
+		if (isEditError) {
+			toast(<ErrorMessage message={getError(editError)} />);
 		}
-	}, [note?.id, editError, isEditError, isEditSuccess, router, isEditLoading]);
+	}, [editError, isEditError, router]);
 
 	useEffect(() => {
 		if (note?.id) {
@@ -71,19 +55,19 @@ const NoteForm = ({ note }: { note: NoteType }) => {
 	}, [setValue, note]);
 
 	useEffect(() => {
-		let timer: any;
-		const subscription = watch(() => {
-			if (timer) clearTimeout(timer);
-			timer = setTimeout(() => {
-				handleSubmit(onSubmit)();
-			}, 1000);
-		});
-		return () => subscription.unsubscribe();
-	}, [handleSubmit, watch]);
+		const handler = setTimeout(async () => {
+			isValid &&
+				(await editNote({
+					data: { subject: values.subject, details: values.details },
+					id: note.id,
+				}));
+		}, 1000);
+		return () => clearTimeout(handler);
+	}, [values.subject, values.details, isValid, editNote, note.id]);
 
 	return (
 		<Form {...form}>
-			<div className="w-full min-w-[300px] grid gap-3">
+			<div className="w-full grid gap-3">
 				{noteFormItems.map((input) => (
 					<CustomFormInput
 						key={input.name}
@@ -96,4 +80,4 @@ const NoteForm = ({ note }: { note: NoteType }) => {
 	);
 };
 
-export default NoteForm;
+export default memo(NoteForm);
