@@ -7,7 +7,9 @@ import { BudgetTypeAdd } from './BudgetTypeAdd';
 
 const getBudgetTypes = async () => {
 	try {
-		const res = await serverAuthFetch(`budget/types`);
+		const res = await serverAuthFetch(`budget/types`, {
+			next: { revalidate: 0 },
+		});
 		if (!res.ok) {
 			throw new Error('Failed to fetch data');
 		}

@@ -13,7 +13,7 @@ const getBudgetCategories = async (searchParams: BudgetCategoryParamType) => {
 	try {
 		const queryParams = new URLSearchParams(searchParams);
 		const res = await serverAuthFetch(`budget/type-categories?${queryParams}`, {
-			cache: 'no-store',
+			next: { revalidate: 0 },
 		});
 		if (!res.ok) {
 			throw new Error('Failed to fetch data');
