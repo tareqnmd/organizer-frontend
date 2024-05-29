@@ -3,6 +3,7 @@ export type NoteType = {
 	subject: string;
 	details: string;
 	createdAt: string;
+	starred: boolean;
 	status: number;
 };
 
