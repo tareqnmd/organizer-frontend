@@ -1,7 +1,6 @@
 'use client';
 import CustomFormInput from '@/components/common/input/CustomFormInput';
 import ErrorMessage from '@/components/common/message/ErrorMessage';
-import SuccessMessage from '@/components/common/message/SuccessMessage';
 import { Form } from '@/components/ui/form';
 import { noteFormItems } from '@/lib/form-items/modules/note';
 import { getError } from '@/lib/helper/common';
@@ -9,7 +8,7 @@ import { useEditNoteMutation } from '@/store/features/note/api';
 import { NoteType } from '@/types/modules/note/budget-note-types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { memo, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
@@ -30,11 +29,18 @@ const NoteForm = ({ note }: { note: NoteType }) => {
 	const router = useRouter();
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
+		mode: 'onChange',
 		defaultValues: {
 			subject: 'Untitled',
 			details: '',
 		},
 	});
+	const {
+		watch,
+		setValue,
+		handleSubmit,
+		formState: { isValid },
+	} = form;
 
 	const [
 		editNote,
@@ -50,38 +56,34 @@ const NoteForm = ({ note }: { note: NoteType }) => {
 		await editNote({ data: values, id: note.id });
 	};
 
+	const values = watch();
+	const memoValue = useMemo(() => ({ ...values }), [values]);
+	console.log('values', memoValue);
+
 	useEffect(() => {
-		if (isEditError || (isEditSuccess && !isEditLoading)) {
-			toast(
-				isEditError ? (
-					<ErrorMessage message={getError(editError)} />
-				) : (
-					<SuccessMessage
-						message={`Note successfully ${note?.id ? 'updated' : 'created'}`}
-					/>
-				)
-			);
-			router.refresh();
+		if (isEditError) {
+			toast(<ErrorMessage message={getError(editError)} />);
+			// router.refresh();
 		}
-	}, [note?.id, editError, isEditError, isEditSuccess, router, isEditLoading]);
+	}, [editError, isEditError, router]);
 
 	useEffect(() => {
 		if (note?.id) {
-			form.setValue('subject', note.subject);
-			form.setValue('details', note.details);
+			setValue('subject', note.subject);
+			setValue('details', note.details);
 		}
-	}, [form, note]);
+	}, [setValue, note]);
 
 	useEffect(() => {
-		console.log('form', form.register);
-	}, [form.register]);
+		editNote({
+			data: { subject: memoValue.subject, details: memoValue.details },
+			id: note.id,
+		});
+	}, [memoValue.subject, memoValue.details, editNote, note.id]);
 
 	return (
 		<Form {...form}>
-			<form
-				onSubmit={form.handleSubmit(onSubmit)}
-				className="w-full min-w-[300px] grid gap-3"
-			>
+			<div className="w-full min-w-[300px] grid gap-3">
 				{noteFormItems.map((input) => (
 					<CustomFormInput
 						key={input.name}
@@ -89,9 +91,9 @@ const NoteForm = ({ note }: { note: NoteType }) => {
 						control={form?.control}
 					/>
 				))}
-			</form>
+			</div>
 		</Form>
 	);
 };
 
-export default NoteForm;
+export default memo(NoteForm);
