@@ -11,6 +11,8 @@ html {
 #organizer {
 	display: grid;
 	min-height: 100dvh;
+	width: 100dvw;
+	overflow: hidden;
 	grid-template-rows: auto 1fr auto;
 }
 
