@@ -30,7 +30,9 @@ const BudgetTransactionsTable = ({
 					<CaretSortIcon className="ml-2 h-4 w-4" />
 				</Button>
 			),
-			cell: ({ row }) => row.getValue('categoryName'),
+			cell: ({ row }) => (
+				<span className="text-nowrap">{row.getValue('categoryName')}</span>
+			),
 		},
 		{
 			accessorKey: 'typeName',
@@ -44,7 +46,9 @@ const BudgetTransactionsTable = ({
 					<CaretSortIcon />
 				</Button>
 			),
-			cell: ({ row }) => row.getValue('typeName'),
+			cell: ({ row }) => (
+				<span className="text-nowrap">{row.getValue('typeName')}</span>
+			),
 		},
 		{
 			accessorKey: 'date',
@@ -58,13 +62,19 @@ const BudgetTransactionsTable = ({
 					<CaretSortIcon />
 				</Button>
 			),
-			cell: ({ row }) => format(row.getValue('date'), 'dd-MM-yyyy'),
+			cell: ({ row }) => (
+				<span className="text-nowrap">
+					{format(row.getValue('date'), 'dd-MM-yyyy')}
+				</span>
+			),
 		},
 		{
 			accessorKey: 'description',
 			header: 'Description',
 			enableHiding: false,
-			cell: ({ row }) => row.getValue('description'),
+			cell: ({ row }) => (
+				<span className="text-nowrap">{row.getValue('description')}</span>
+			),
 		},
 		{
 			accessorKey: 'amount',
@@ -79,7 +89,11 @@ const BudgetTransactionsTable = ({
 				</Button>
 			),
 			enableHiding: false,
-			cell: ({ row }) => moneyFormat(row.getValue('amount'), 'BDT'),
+			cell: ({ row }) => (
+				<span className="text-nowrap">
+					{moneyFormat(row.getValue('amount'), 'BDT')}
+				</span>
+			),
 		},
 		{
 			id: 'actions',
