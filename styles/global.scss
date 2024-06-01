@@ -30,3 +30,15 @@ html {
 .basic-modal {
 	@apply max-w-[90%] sm:max-w-[450px] rounded-lg overflow-hidden;
 }
+
+.inactive {
+	@apply bg-gray-200 text-gray-400;
+}
+
+.income {
+	@apply bg-green-200;
+}
+
+.expense {
+	@apply bg-red-200;
+}

@@ -14,18 +14,15 @@ const BudgetCategoryCard = async ({
 			className={cn(
 				'p-3 flex justify-between items-center',
 				category.status === 0
-					? 'bg-gray-200 text-gray-400'
+					? 'inactive'
 					: category.type === 'Expense'
-					? 'bg-red-200'
+					? 'expense'
 					: category.type === 'Income'
-					? 'bg-green-200'
+					? 'income'
 					: null
 			)}
 		>
-			<div className="category-info flex gap-1">
-				<strong>{category.name}</strong>
-				<span>({category.type})</span>
-			</div>
+			<strong>{category.name}</strong>
 			{admin && <BudgetCategoryAction category={category} />}
 		</Card>
 	);

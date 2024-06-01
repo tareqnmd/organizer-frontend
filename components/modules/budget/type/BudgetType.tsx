@@ -17,11 +17,11 @@ const BudgetType = async ({
 			className={cn(
 				'p-3 flex justify-between items-center',
 				type.status === 0
-					? 'bg-gray-200 text-gray-400'
+					? 'inactive'
 					: type.name === 'Expense'
-					? 'bg-red-200'
+					? 'expense'
 					: type.name === 'Income'
-					? 'bg-green-200'
+					? 'income'
 					: null
 			)}
 		>
