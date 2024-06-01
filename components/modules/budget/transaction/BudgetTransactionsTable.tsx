@@ -12,6 +12,8 @@ import { ColumnDef } from '@tanstack/react-table';
 import { format } from 'date-fns';
 import BudgetTransactionAction from './BudgetTransactionAction';
 
+const typeClass = (type: string) => (type === 'Expense' ? 'expense' : 'income');
+
 const BudgetTransactionsTable = ({
 	transactions,
 }: {
@@ -47,7 +49,13 @@ const BudgetTransactionsTable = ({
 				</Button>
 			),
 			cell: ({ row }) => (
-				<span className="text-nowrap">{row.getValue('typeName')}</span>
+				<div
+					className={`text-nowrap p-1 text-center rounded ${typeClass(
+						row.getValue('typeName')
+					)}`}
+				>
+					{row.getValue('typeName')}
+				</div>
 			),
 		},
 		{
