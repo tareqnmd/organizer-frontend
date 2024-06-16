@@ -83,7 +83,7 @@ const BudgetTransactionForm = ({
 			form.setValue('amount', transaction.amount);
 			form.setValue('categoryId', transaction.categoryId);
 			form.setValue('description', transaction.description);
-			form.setValue('date', transaction.date);
+			form.setValue('date', new Date(transaction.date));
 		}
 	}, [form, transaction]);
 
