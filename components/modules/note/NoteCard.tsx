@@ -27,7 +27,7 @@ const NoteCard = ({ note }: { note: NoteType }) => {
 			<CardContent className="p-2">
 				<div
 					dangerouslySetInnerHTML={{ __html: note?.details ?? `` }}
-					className="truncate max-h-10"
+					className="truncate max-h-12"
 				/>
 			</CardContent>
 		</Card>
