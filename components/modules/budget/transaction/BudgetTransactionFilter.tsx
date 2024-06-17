@@ -19,6 +19,7 @@ const BudgetTransactionFilter = ({
 		category: searchParams.category ?? '',
 		type: searchParams.type ?? '',
 		transaction: searchParams.transaction ?? '',
+		dateRange: searchParams.dateRange ?? '',
 	});
 	const debouncedText = useDebounce(filterData.transaction, 500);
 
@@ -39,6 +40,10 @@ const BudgetTransactionFilter = ({
 			hasRendered.current = true;
 		}
 	}, [debouncedText, filterData.type, filterData.category, router]);
+
+	const dateRangeUpdate = (value: { from: Date; to: Date }) => {
+		setFilterData((prev) => ({ ...prev, dateRange: value }));
+	};
 
 	return (
 		<>
@@ -76,6 +81,7 @@ const BudgetTransactionFilter = ({
 				/>
 			</div>
 			<FormDateRange
+				onUpdate={dateRangeUpdate}
 				triggerClassName="h-8"
 				className="w-full col-span-3 xl:col-span-1 xl:col-start-3"
 			/>
