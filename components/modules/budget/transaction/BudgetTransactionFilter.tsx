@@ -4,6 +4,7 @@ import FormSelect from '@/components/common/input/Select';
 import { Input } from '@/components/ui/input';
 import { useDebounce } from '@/hooks/useDebounce';
 import { toQueryString } from '@/lib/helper/common';
+import { baseDateFormat } from '@/lib/helper/date';
 import { BudgetTransactionParamType } from '@/types/modules/budget/budget-transaction-types';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
@@ -19,7 +20,8 @@ const BudgetTransactionFilter = ({
 		category: searchParams.category ?? '',
 		type: searchParams.type ?? '',
 		transaction: searchParams.transaction ?? '',
-		dateRange: searchParams.dateRange ?? '',
+		from: searchParams.from ?? '',
+		to: searchParams.to ?? '',
 	});
 	const debouncedText = useDebounce(filterData.transaction, 500);
 
@@ -29,20 +31,36 @@ const BudgetTransactionFilter = ({
 
 	useEffect(() => {
 		if (hasRendered.current) {
+			const dateRange: any = {};
+			if (filterData?.from && filterData?.to) {
+			}
 			router.push(
 				`/budget/transaction${toQueryString({
 					type: filterData.type,
 					category: filterData.category,
 					transaction: debouncedText,
+					from: filterData.from,
+					to: filterData.to,
 				})}`
 			);
 		} else {
 			hasRendered.current = true;
 		}
-	}, [debouncedText, filterData.type, filterData.category, router]);
+	}, [
+		debouncedText,
+		filterData.type,
+		filterData.category,
+		filterData.from,
+		filterData.to,
+		router,
+	]);
 
 	const dateRangeUpdate = (value: { from: Date; to: Date }) => {
-		setFilterData((prev) => ({ ...prev, dateRange: value }));
+		setFilterData((prev) => ({
+			...prev,
+			from: value?.from ? baseDateFormat(value.from) : '',
+			to: value?.to ? baseDateFormat(value.to) : '',
+		}));
 	};
 
 	return (

@@ -1,6 +1,6 @@
 'use client';
 
-import { addDays, format } from 'date-fns';
+import { format } from 'date-fns';
 import * as React from 'react';
 import { DateRange } from 'react-day-picker';
 
@@ -41,10 +41,7 @@ const FormDateRange = ({
 	onUpdate: (values: any) => void;
 }) => {
 	const [open, setOpen] = React.useState(false);
-	const [date, setDate] = React.useState<DateRange | undefined>({
-		from: new Date(),
-		to: addDays(new Date(), 7),
-	});
+	const [date, setDate] = React.useState<DateRange | undefined>();
 
 	const getPresetRange = (presetName: string): any => {
 		const preset = PRESETS.find(({ name }) => name === presetName);
@@ -125,7 +122,7 @@ const FormDateRange = ({
 				to: new Date(initialValues.to),
 			});
 		}
-	}, [initialValues]);
+	}, [initialValues?.from, initialValues?.to]);
 
 	return (
 		<div className={cn('grid gap-2', className)}>

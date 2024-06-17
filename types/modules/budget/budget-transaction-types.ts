@@ -16,5 +16,6 @@ export type BudgetTransactionParamType = {
 	type?: string;
 	category?: string;
 	transaction?: string;
-	dateRange?: { from: Date; to: Date };
+	from: string;
+	to: string;
 };
