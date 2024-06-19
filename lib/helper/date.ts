@@ -4,4 +4,4 @@ export const baseDateFormat = (date: string | Date) =>
 	format(date, 'dd-MM-yyyy');
 
 export const stringToNewDate = (date: string) =>
-	new Date(date.split('-').reverse().join(','));
+	new Date(date?.split('-').reverse().join(',')) ?? date ?? null;
