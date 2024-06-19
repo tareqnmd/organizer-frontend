@@ -25,11 +25,11 @@ const BudgetTransactionPagination = ({
 		<Page className="justify-end gap-2 items-center">
 			<div className="per-page-show flex gap-1 items-center text-sm">
 				Showing
-				<span className="font-semibold"> {currentPage * 10 - 9}</span>
+				<span className="font-semibold"> {currentPage * perPage - (perPage - 1)}</span>
 				to
-				<span className="font-semibold"> {currentPage * 10}</span>
+				<span className="font-semibold"> {currentPage * perPage}</span>
 			</div>
-			<div className="divider w-[1px] h-5 bg-black"></div>
+			<div className="divider w-[1px] h-3 bg-black"></div>
 			<div className="per-page-change flex gap-1 items-center text-sm">
 				<span className="text-sm">Per Page</span>
 				<input
@@ -40,7 +40,7 @@ const BudgetTransactionPagination = ({
 					className="w-12 rounded border p-1"
 				/>
 			</div>
-			<div className="divider w-[1px] h-5 bg-black"></div>
+			<div className="divider w-[1px] h-3 bg-black"></div>
 			<PaginationContent>
 				<PaginationItem>
 					<PaginationPrevious
