@@ -23,6 +23,15 @@ axiosInstance.interceptors.request.use(
 	}
 );
 
+axiosInstance.interceptors.response.use(
+	async (res) => {
+		return await res.data;
+	},
+	(error) => {
+		return Promise.reject(error);
+	}
+);
+
 export const serverAuthFetch = async (url: string, next_options = {}) => {
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
 	const path = `${baseURL}/${url}`;
