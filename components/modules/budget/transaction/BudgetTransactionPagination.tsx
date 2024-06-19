@@ -6,6 +6,7 @@ import {
 	PaginationNext,
 	PaginationPrevious,
 } from '@/components/ui/pagination';
+import { cn } from '@/lib/utils';
 
 const BudgetTransactionPagination = ({
 	currentPage,
@@ -20,11 +21,18 @@ const BudgetTransactionPagination = ({
 		<Page className="justify-end">
 			<PaginationContent>
 				<PaginationItem>
-					<PaginationPrevious onClick={() => changePaginate('prev')} />
+					<PaginationPrevious
+						className={cn(
+							'cursor-pointe',
+							currentPage <= 1 && 'pointer-events-none opacity-50'
+						)}
+						onClick={() => changePaginate('prev')}
+					/>
 				</PaginationItem>
 				{pages?.map((paginate, index) => (
 					<PaginationItem key={index}>
 						<PaginationLink
+							className="cursor-pointer"
 							onClick={() => changePaginate(paginate)}
 							isActive={currentPage === paginate}
 						>
@@ -33,7 +41,12 @@ const BudgetTransactionPagination = ({
 					</PaginationItem>
 				))}
 				<PaginationItem>
-					<PaginationNext onClick={() => changePaginate('next')} />
+					<PaginationNext
+						className={cn(
+							'cursor-pointe',currentPage >= pages?.length && 'pointer-events-none opacity-50'
+						)}
+						onClick={() => changePaginate('next')}
+					/>
 				</PaginationItem>
 			</PaginationContent>
 		</Page>
