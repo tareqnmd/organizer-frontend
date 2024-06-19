@@ -8,9 +8,9 @@ import {
 	PaginationPrevious,
 } from '@/components/ui/pagination';
 
-export function Pagination({ extraClassName = '' }) {
+const BudgetTransactionPagination = ({}) => {
 	return (
-		<Page className={extraClassName}>
+		<Page className="justify-end">
 			<PaginationContent>
 				<PaginationItem>
 					<PaginationPrevious href="#" />
@@ -38,4 +38,6 @@ export function Pagination({ extraClassName = '' }) {
 			</PaginationContent>
 		</Page>
 	);
-}
+};
+
+export default BudgetTransactionPagination;

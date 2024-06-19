@@ -1,8 +1,7 @@
 import { generateDataFromServer } from '@/lib/helper/fetch';
 import { BudgetTransactionParamType } from '@/types/modules/budget/budget-transaction-types';
-import BudgetTransactionAdd from './BudgetTransactionAdd';
-import BudgetTransactionFilter from './BudgetTransactionFilter';
 import BudgetTransactionsTable from './BudgetTransactionsTable';
+import BudgetTransactionsWrapper from './BudgetTransactionsWrapper';
 
 const Transactions = async ({
 	searchOptions,
@@ -15,13 +14,9 @@ const Transactions = async ({
 		next: { revalidate: 0 },
 	});
 	return (
-		<>
-			<div className="grid grid-cols-4 gap-2 mb-4">
-				<BudgetTransactionFilter searchParams={searchOptions} />
-				<BudgetTransactionAdd />
-			</div>
+		<BudgetTransactionsWrapper searchOptions={searchOptions}>
 			<BudgetTransactionsTable transactions={transactions} />
-		</>
+		</BudgetTransactionsWrapper>
 	);
 };
 

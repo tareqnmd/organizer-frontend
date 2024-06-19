@@ -111,14 +111,10 @@ const BudgetTransactionsTable = ({
 	];
 
 	return (
-		<>
-			<DataTable
-				columns={columns}
-				data={transactions}
-			/>
-			{/* <br />
-			<Pagination extraClassName="justify-end" /> */}
-		</>
+		<DataTable
+			columns={columns}
+			data={transactions}
+		/>
 	);
 };
 
