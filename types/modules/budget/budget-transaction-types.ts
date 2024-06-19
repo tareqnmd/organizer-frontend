@@ -18,4 +18,6 @@ export type BudgetTransactionParamType = {
 	transaction?: string;
 	from: string;
 	to: string;
+	page?: string;
+	perPage?: string;
 };

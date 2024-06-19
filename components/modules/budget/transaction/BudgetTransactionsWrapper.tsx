@@ -29,6 +29,8 @@ const BudgetTransactionsWrapper = ({
 		transaction: searchOptions.transaction ?? '',
 		from: searchOptions.from ?? '',
 		to: searchOptions.to ?? '',
+		page: searchOptions.page ?? '1',
+		perPage: searchOptions.perPage ?? '10',
 	});
 	const debouncedText = useDebounce(filterData.transaction, 500);
 
@@ -37,13 +39,14 @@ const BudgetTransactionsWrapper = ({
 	};
 
 	const changePaginate = (value: string | number) => {
-		setCurrentPage(
+		const updatedCurrentPage =
 			value === 'next'
 				? currentPage + 1
 				: value === 'prev'
 				? currentPage - 1
-				: Number(value)
-		);
+				: Number(value);
+		setCurrentPage(updatedCurrentPage);
+		setFilterData((prev) => ({ ...prev, page: String(updatedCurrentPage) }));
 	};
 
 	const dateRangeUpdate = (value: { from: Date; to: Date }) => {
@@ -52,6 +55,12 @@ const BudgetTransactionsWrapper = ({
 			from: value?.from ? baseDateFormat(value.from) : '',
 			to: value?.to ? baseDateFormat(value.to) : '',
 		}));
+	};
+
+	const changePerPage = (value: number) => {
+		setCurrentPage(1);
+		setPerPage(value);
+		setFilterData((prev) => ({ ...prev, perPage: String(value), page: '1' }));
 	};
 
 	useEffect(() => {
@@ -98,6 +107,8 @@ const BudgetTransactionsWrapper = ({
 			<BudgetTransactionPagination
 				currentPage={currentPage}
 				changePaginate={changePaginate}
+				perPage={perPage}
+				changePerPage={changePerPage}
 				pages={pages}
 			/>
 		</div>
