@@ -10,7 +10,10 @@ const font = Poppins({
 });
 
 export const metadata: Metadata = {
-	title: 'Organizer',
+	title: {
+		template: '%s | Organizer',
+		default: 'Organizer',
+	},
 	description: 'Organizer By Tareq',
 };
 
