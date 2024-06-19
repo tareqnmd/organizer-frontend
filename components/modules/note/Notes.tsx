@@ -1,4 +1,4 @@
-import { serverAuthFetch } from '@/lib/helper/fetch';
+import { generateDataFromServer } from '@/lib/helper/fetch';
 import {
 	NoteType,
 	NotesParamType,
@@ -6,27 +6,17 @@ import {
 import NoteCard from './NoteCard';
 import NoteCreate from './NoteCreate';
 
-export const getAllNote = async (params: NotesParamType) => {
-	try {
-		const queryParams = new URLSearchParams(params);
-		const res = await serverAuthFetch(`note/all?${queryParams}`, {
-			next: { revalidate: 0 },
-		});
-		if (!res.ok) {
-			throw new Error('Failed to fetch data');
-		}
-		return res.json();
-	} catch (error) {
-		console.log('error', error);
-	}
-};
-
 const Notes = async ({
 	searchOptions = {},
 }: {
 	searchOptions?: NotesParamType;
 }) => {
-	const notes = await getAllNote(searchOptions);
+	const queryParams = new URLSearchParams(searchOptions);
+	const url = `note/all?${queryParams}`;
+	const { data: notes } = await generateDataFromServer(url, {
+		next: { revalidate: 0 },
+	});
+
 	return (
 		<div className="grid gap-4">
 			<NoteCreate />

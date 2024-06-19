@@ -1,5 +1,5 @@
 import { authOptions } from '@/lib/auth-options';
-import { serverAuthFetch } from '@/lib/helper/fetch';
+import { generateDataFromServer } from '@/lib/helper/fetch';
 import {
 	BudgetCategoryParamType,
 	BudgetCategoryType,
@@ -9,27 +9,17 @@ import BudgetCategoriesFilter from './BudgetCategoriesFilter';
 import BudgetCategoryAdd from './BudgetCategoryAdd';
 import BudgetCategoryCard from './BudgetCategoryCard';
 
-const getBudgetCategories = async (searchParams: BudgetCategoryParamType) => {
-	try {
-		const queryParams = new URLSearchParams(searchParams);
-		const res = await serverAuthFetch(`budget/type-categories?${queryParams}`, {
-			next: { revalidate: 0 },
-		});
-		if (!res.ok) {
-			throw new Error('Failed to fetch data');
-		}
-		return res.json();
-	} catch (error) {
-		console.log('error', error);
-	}
-};
-
 const BudgetCategories = async ({
 	searchParams,
 }: {
 	searchParams: BudgetCategoryParamType;
 }) => {
-	const categories = await getBudgetCategories(searchParams);
+	const queryParams = new URLSearchParams(searchParams);
+	const url = `budget/type-categories?${queryParams}`;
+	const { data: categories } = await generateDataFromServer(url, {
+		next: { revalidate: 0 },
+	});
+
 	const session = await getServerSession(authOptions);
 	return (
 		<>

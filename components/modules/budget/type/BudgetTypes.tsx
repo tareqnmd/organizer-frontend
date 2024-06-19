@@ -1,26 +1,14 @@
 import { authOptions } from '@/lib/auth-options';
-import { serverAuthFetch } from '@/lib/helper/fetch';
+import { generateDataFromServer } from '@/lib/helper/fetch';
 import { BudgetTypeType } from '@/types/modules/budget/budget-type-types';
 import { getServerSession } from 'next-auth';
 import BudgetType from './BudgetType';
 import { BudgetTypeAdd } from './BudgetTypeAdd';
 
-const getBudgetTypes = async () => {
-	try {
-		const res = await serverAuthFetch(`budget/types`, {
-			next: { revalidate: 0 },
-		});
-		if (!res.ok) {
-			throw new Error('Failed to fetch data');
-		}
-		return res.json();
-	} catch (error) {
-		console.log('error', error);
-	}
-};
-
 const BudgetTypes = async ({}) => {
-	const types = await getBudgetTypes();
+	const { data: types } = await generateDataFromServer('budget/types', {
+		next: { revalidate: 0 },
+	});
 	const session = await getServerSession(authOptions);
 	return (
 		<>

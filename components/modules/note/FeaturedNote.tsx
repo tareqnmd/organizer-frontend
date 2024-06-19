@@ -1,24 +1,12 @@
 import { Badge } from '@/components/ui/badge';
-import { serverAuthFetch } from '@/lib/helper/fetch';
-import NoteAction from './NoteAction';
+import { generateDataFromServer } from '@/lib/helper/fetch';
 import Link from 'next/link';
-
-export const getFeaturedNote = async () => {
-	try {
-		const res = await serverAuthFetch('note/featured', {
-			next: { revalidate: 0 },
-		});
-		if (!res.ok) {
-			throw new Error('Failed to fetch data');
-		}
-		return res.json();
-	} catch (error) {
-		console.log('error', error);
-	}
-};
+import NoteAction from './NoteAction';
 
 const FeaturedNote = async () => {
-	const note = await getFeaturedNote();
+	const { data: note } = await generateDataFromServer('note/featured', {
+		next: { revalidate: 0 },
+	});
 	return note?.id ? (
 		<div className="border rounded-md overflow-hidden">
 			<div className="p-2 bg-gray-200 border-b flex items-center gap-2">

@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<body className={cn('antialiased', inter.className)}>
+			<body className={cn(inter.className)}>
 				<RootProvider>{children}</RootProvider>
 			</body>
 		</html>

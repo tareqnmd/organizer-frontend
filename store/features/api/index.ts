@@ -15,14 +15,14 @@ const baseQuery = fetchBaseQuery({
 const apiSlice = createApi({
 	reducerPath: 'api',
 	baseQuery: async (args, api, extraOptions) => {
-		let result = await baseQuery(args, api, extraOptions);
+		let result: any = await baseQuery(args, api, extraOptions);
 		if (result?.error?.status === 401) {
 			await clearCookie();
 			await signOut({
 				callbackUrl: `${window.location.origin}/login`,
 			});
 		}
-		return result;
+		return { ...result, data: result?.data?.data };
 	},
 	tagTypes: [],
 	endpoints: () => ({}),

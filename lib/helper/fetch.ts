@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { getCookie, getCookieValue } from './server-func';
+import { signOut } from 'next-auth/react';
+import { toast } from 'sonner';
+import { clearCookie, getCookie, getCookieValue } from './server-func';
 
 export const axiosInstance = axios.create({
 	baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -25,6 +27,12 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
 	async (res) => {
+		if (res?.data?.statusCode === 401) {
+			await clearCookie();
+			await signOut({
+				callbackUrl: `${window.location.origin}/login`,
+			});
+		}
 		return await res.data;
 	},
 	(error) => {
@@ -47,4 +55,22 @@ export const baseFetch = (url: string, next_options = {}) => {
 	return fetch(path, {
 		...next_options,
 	});
+};
+
+export const generateDataFromServer = async (
+	url: string,
+	options?: {
+		next: { revalidate: number };
+	}
+) => {
+	try {
+		const res = await serverAuthFetch(url, options);
+		if (!res.ok) {
+			throw new Error('Failed to fetch data');
+		}
+		const data = await res.json();
+		return data;
+	} catch (error: any) {
+		toast.error(error?.message ?? 'Error Found');
+	}
 };

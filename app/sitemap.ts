@@ -15,7 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 			priority: 0.8,
 		},
 		{
-			url: 'https://organizer.tareqnmd.com/account',
+			url: 'https://organizer.tareqnmd.com/budget',
 			lastModified: new Date(),
 			changeFrequency: 'weekly',
 			priority: 0.5,
