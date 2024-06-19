@@ -14,14 +14,12 @@ const BudgetTransactionPagination = ({
 	currentPage: number;
 	pages: number[];
 }) => {
-	return (
+	return pages?.length > 1 ? (
 		<Page className="justify-end">
 			<PaginationContent>
-				{pages?.length > 1 && (
-					<PaginationItem>
-						<PaginationPrevious />
-					</PaginationItem>
-				)}
+				<PaginationItem>
+					<PaginationPrevious />
+				</PaginationItem>
 				{pages?.map((paginate, index) => (
 					<PaginationItem key={index}>
 						<PaginationLink isActive={currentPage === paginate}>
@@ -29,14 +27,12 @@ const BudgetTransactionPagination = ({
 						</PaginationLink>
 					</PaginationItem>
 				))}
-				{pages?.length > 1 && (
-					<PaginationItem>
-						<PaginationNext />
-					</PaginationItem>
-				)}
+				<PaginationItem>
+					<PaginationNext />
+				</PaginationItem>
 			</PaginationContent>
 		</Page>
-	);
+	) : null;
 };
 
 export default BudgetTransactionPagination;

@@ -12,16 +12,17 @@ import BudgetTransactionPagination from './BudgetTransactionPagination';
 const BudgetTransactionsWrapper = ({
 	children,
 	searchOptions,
+	totalTransactions,
 }: {
 	children: ReactNode;
 	searchOptions: BudgetTransactionParamType;
+	totalTransactions: number;
 }) => {
 	const router = useRouter();
 	const hasRendered = useRef(false);
 	const [perPage, setPerPage] = useState(10);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pages, setPages] = useState<number[]>([]);
-	const [totalTransactions, setTotalTransactions] = useState(40);
 	const [filterData, setFilterData] = useState({
 		category: searchOptions.category ?? '',
 		type: searchOptions.type ?? '',
