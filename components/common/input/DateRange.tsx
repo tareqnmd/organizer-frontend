@@ -1,7 +1,6 @@
 'use client';
 
-import { format } from 'date-fns';
-import * as React from 'react';
+import { endOfMonth, format, startOfMonth } from 'date-fns';
 import { DateRange } from 'react-day-picker';
 
 import { Button } from '@/components/ui/button';
@@ -11,8 +10,10 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from '@/components/ui/popover';
+import { stringToNewDate } from '@/lib/helper/date';
 import { cn } from '@/lib/utils';
 import { CalendarIcon } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 const PRESETS: {
 	name: string;
@@ -40,8 +41,11 @@ const FormDateRange = ({
 	initialValues?: any;
 	onUpdate: (values: any) => void;
 }) => {
-	const [open, setOpen] = React.useState(false);
-	const [date, setDate] = React.useState<DateRange | undefined>();
+	const [open, setOpen] = useState(false);
+	const [date, setDate] = useState<DateRange | undefined>({
+		from: startOfMonth(new Date()),
+		to: endOfMonth(new Date()),
+	});
 
 	const getPresetRange = (presetName: string): any => {
 		const preset = PRESETS.find(({ name }) => name === presetName);
@@ -115,11 +119,11 @@ const FormDateRange = ({
 		setOpen(false);
 	};
 
-	React.useEffect(() => {
+	useEffect(() => {
 		if (initialValues?.from && initialValues?.to) {
 			setDate({
-				from: new Date(initialValues.from),
-				to: new Date(initialValues.to),
+				from: stringToNewDate(initialValues.from),
+				to: stringToNewDate(initialValues.to),
 			});
 		}
 	}, [initialValues?.from, initialValues?.to]);

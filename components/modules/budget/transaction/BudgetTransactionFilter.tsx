@@ -31,9 +31,6 @@ const BudgetTransactionFilter = ({
 
 	useEffect(() => {
 		if (hasRendered.current) {
-			const dateRange: any = {};
-			if (filterData?.from && filterData?.to) {
-			}
 			router.push(
 				`/budget/transaction${toQueryString({
 					type: filterData.type,
@@ -102,6 +99,10 @@ const BudgetTransactionFilter = ({
 				onUpdate={dateRangeUpdate}
 				triggerClassName="h-8"
 				className="w-full col-span-3 xl:col-span-1 xl:col-start-3"
+				initialValues={{
+					from: filterData.from,
+					to: filterData.to,
+				}}
 			/>
 		</>
 	);
