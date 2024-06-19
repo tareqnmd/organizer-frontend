@@ -110,6 +110,7 @@ const BudgetTransactionsWrapper = ({
 				perPage={perPage}
 				changePerPage={changePerPage}
 				pages={pages}
+				total={totalTransactions}
 			/>
 		</div>
 	);

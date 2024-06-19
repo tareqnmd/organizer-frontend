@@ -14,20 +14,29 @@ const BudgetTransactionPagination = ({
 	changePaginate,
 	changePerPage,
 	perPage,
+	total,
 }: {
 	currentPage: number;
 	perPage: number;
 	pages: number[];
 	changePaginate: (agr: string | number) => void;
 	changePerPage: (agr: number) => void;
+	total: number;
 }) => {
 	return pages?.length > 1 ? (
 		<Page className="justify-end gap-2 items-center">
 			<div className="per-page-show flex gap-1 items-center text-sm">
 				Showing
-				<span className="font-semibold"> {currentPage * perPage - (perPage - 1)}</span>
+				<span className="font-semibold">
+					{' '}
+					{currentPage * perPage - (perPage - 1)}
+				</span>
 				to
-				<span className="font-semibold"> {currentPage * perPage}</span>
+				<span className="font-semibold">
+					{' '}
+					{currentPage * perPage -
+						(currentPage === pages.length ? total % perPage : 0)}
+				</span>
 			</div>
 			<div className="divider w-[1px] h-3 bg-black"></div>
 			<div className="per-page-change flex gap-1 items-center text-sm">
