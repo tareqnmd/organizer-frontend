@@ -17,3 +17,9 @@ export const moneyFormat = (amount: number, currency = 'USD', type = 'en-US') =>
 		style: 'currency',
 		currency,
 	}).format(amount);
+
+export const getPageNumbers = (totalTransactions: number, perPage: number) => {
+	const totalPages = Math.ceil(totalTransactions / perPage);
+	const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+	return pageNumbers;
+};

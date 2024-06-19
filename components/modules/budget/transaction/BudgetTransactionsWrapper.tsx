@@ -1,6 +1,6 @@
 'use client';
 import { useDebounce } from '@/hooks/useDebounce';
-import { toQueryString } from '@/lib/helper/common';
+import { getPageNumbers, toQueryString } from '@/lib/helper/common';
 import { baseDateFormat } from '@/lib/helper/date';
 import { BudgetTransactionParamType } from '@/types/modules/budget/budget-transaction-types';
 import { useRouter } from 'next/navigation';
@@ -18,6 +18,10 @@ const BudgetTransactionsWrapper = ({
 }) => {
 	const router = useRouter();
 	const hasRendered = useRef(false);
+	const [perPage, setPerPage] = useState(10);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [pages, setPages] = useState<number[]>([]);
+	const [totalTransactions, setTotalTransactions] = useState(40);
 	const [filterData, setFilterData] = useState({
 		category: searchOptions.category ?? '',
 		type: searchOptions.type ?? '',
@@ -61,6 +65,14 @@ const BudgetTransactionsWrapper = ({
 			to: value?.to ? baseDateFormat(value.to) : '',
 		}));
 	};
+
+	useEffect(() => {
+		if (totalTransactions > 0 && perPage > 0) {
+			setPages(getPageNumbers(totalTransactions, perPage));
+			setCurrentPage(1);
+		}
+	}, [totalTransactions, perPage]);
+
 	return (
 		<div className="grid gap-4">
 			<div className="grid grid-cols-4 gap-2">
@@ -72,7 +84,10 @@ const BudgetTransactionsWrapper = ({
 				<BudgetTransactionAdd />
 			</div>
 			{children}
-			<BudgetTransactionPagination />
+			<BudgetTransactionPagination
+				currentPage={currentPage}
+				pages={pages}
+			/>
 		</div>
 	);
 };

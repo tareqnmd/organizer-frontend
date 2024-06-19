@@ -1,40 +1,39 @@
 import {
 	Pagination as Page,
 	PaginationContent,
-	PaginationEllipsis,
 	PaginationItem,
 	PaginationLink,
 	PaginationNext,
 	PaginationPrevious,
 } from '@/components/ui/pagination';
 
-const BudgetTransactionPagination = ({}) => {
+const BudgetTransactionPagination = ({
+	currentPage,
+	pages,
+}: {
+	currentPage: number;
+	pages: number[];
+}) => {
 	return (
 		<Page className="justify-end">
 			<PaginationContent>
-				<PaginationItem>
-					<PaginationPrevious href="#" />
-				</PaginationItem>
-				<PaginationItem>
-					<PaginationLink href="#">1</PaginationLink>
-				</PaginationItem>
-				<PaginationItem>
-					<PaginationLink
-						href="#"
-						isActive
-					>
-						2
-					</PaginationLink>
-				</PaginationItem>
-				<PaginationItem>
-					<PaginationLink href="#">3</PaginationLink>
-				</PaginationItem>
-				<PaginationItem>
-					<PaginationEllipsis />
-				</PaginationItem>
-				<PaginationItem>
-					<PaginationNext href="#" />
-				</PaginationItem>
+				{pages?.length > 1 && (
+					<PaginationItem>
+						<PaginationPrevious />
+					</PaginationItem>
+				)}
+				{pages?.map((paginate, index) => (
+					<PaginationItem key={index}>
+						<PaginationLink isActive={currentPage === paginate}>
+							{paginate}
+						</PaginationLink>
+					</PaginationItem>
+				))}
+				{pages?.length > 1 && (
+					<PaginationItem>
+						<PaginationNext />
+					</PaginationItem>
+				)}
 			</PaginationContent>
 		</Page>
 	);
