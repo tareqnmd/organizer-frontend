@@ -1,4 +1,5 @@
 'use client';
+import Pagination from '@/components/common/paginate/Pagination';
 import { useDebounce } from '@/hooks/useDebounce';
 import { getPageNumbers, toQueryString } from '@/lib/helper/common';
 import { baseDateFormat } from '@/lib/helper/date';
@@ -7,7 +8,6 @@ import { useRouter } from 'next/navigation';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import BudgetTransactionAdd from './BudgetTransactionAdd';
 import BudgetTransactionFilter from './BudgetTransactionFilter';
-import BudgetTransactionPagination from './BudgetTransactionPagination';
 
 const BudgetTransactionsWrapper = ({
 	children,
@@ -104,7 +104,7 @@ const BudgetTransactionsWrapper = ({
 				<BudgetTransactionAdd />
 			</div>
 			{children}
-			<BudgetTransactionPagination
+			<Pagination
 				currentPage={currentPage}
 				changePaginate={changePaginate}
 				perPage={perPage}

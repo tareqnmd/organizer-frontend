@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/pagination';
 import { cn } from '@/lib/utils';
 
-const BudgetTransactionPagination = ({
+const Pagination = ({
 	currentPage,
 	pages,
 	changePaginate,
@@ -28,14 +28,12 @@ const BudgetTransactionPagination = ({
 			<div className="per-page-show flex gap-1 items-center text-sm">
 				Showing
 				<span className="font-semibold">
-					{' '}
 					{currentPage * perPage - (perPage - 1)}
 				</span>
 				to
 				<span className="font-semibold">
-					{' '}
 					{currentPage * perPage -
-						(currentPage === pages.length ? total % perPage : 0)}
+						(currentPage === pages.length ? (total % perPage) + 1 : 0)}
 				</span>
 			</div>
 			<div className="divider w-[1px] h-3 bg-black"></div>
@@ -85,4 +83,4 @@ const BudgetTransactionPagination = ({
 	) : null;
 };
 
-export default BudgetTransactionPagination;
+export default Pagination;
