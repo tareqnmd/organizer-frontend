@@ -36,6 +36,24 @@ const BudgetTransactionsWrapper = ({
 		setFilterData((prev) => ({ ...prev, [name]: value }));
 	};
 
+	const changePaginate = (value: string | number) => {
+		setCurrentPage(
+			value === 'next'
+				? currentPage + 1
+				: value === 'prev'
+				? currentPage - 1
+				: Number(value)
+		);
+	};
+
+	const dateRangeUpdate = (value: { from: Date; to: Date }) => {
+		setFilterData((prev) => ({
+			...prev,
+			from: value?.from ? baseDateFormat(value.from) : '',
+			to: value?.to ? baseDateFormat(value.to) : '',
+		}));
+	};
+
 	useEffect(() => {
 		if (hasRendered.current) {
 			router.push(
@@ -59,14 +77,6 @@ const BudgetTransactionsWrapper = ({
 		router,
 	]);
 
-	const dateRangeUpdate = (value: { from: Date; to: Date }) => {
-		setFilterData((prev) => ({
-			...prev,
-			from: value?.from ? baseDateFormat(value.from) : '',
-			to: value?.to ? baseDateFormat(value.to) : '',
-		}));
-	};
-
 	useEffect(() => {
 		if (totalTransactions > 0 && perPage > 0) {
 			setPages(getPageNumbers(totalTransactions, perPage));
@@ -87,6 +97,7 @@ const BudgetTransactionsWrapper = ({
 			{children}
 			<BudgetTransactionPagination
 				currentPage={currentPage}
+				changePaginate={changePaginate}
 				pages={pages}
 			/>
 		</div>

@@ -10,25 +10,30 @@ import {
 const BudgetTransactionPagination = ({
 	currentPage,
 	pages,
+	changePaginate,
 }: {
 	currentPage: number;
 	pages: number[];
+	changePaginate: (agr: string | number) => void;
 }) => {
 	return pages?.length > 1 ? (
 		<Page className="justify-end">
 			<PaginationContent>
 				<PaginationItem>
-					<PaginationPrevious />
+					<PaginationPrevious onClick={() => changePaginate('prev')} />
 				</PaginationItem>
 				{pages?.map((paginate, index) => (
 					<PaginationItem key={index}>
-						<PaginationLink isActive={currentPage === paginate}>
+						<PaginationLink
+							onClick={() => changePaginate(paginate)}
+							isActive={currentPage === paginate}
+						>
 							{paginate}
 						</PaginationLink>
 					</PaginationItem>
 				))}
 				<PaginationItem>
-					<PaginationNext />
+					<PaginationNext onClick={() => changePaginate('next')} />
 				</PaginationItem>
 			</PaginationContent>
 		</Page>
