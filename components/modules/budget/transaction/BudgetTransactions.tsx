@@ -18,7 +18,15 @@ const Transactions = async ({
 	);
 	return (
 		<BudgetTransactionsWrapper
-			searchOptions={searchOptions}
+			searchOptions={{
+				category: searchOptions.category ?? '',
+				type: searchOptions.type ?? '',
+				transaction: searchOptions.transaction ?? '',
+				from: searchOptions.from ?? '',
+				to: searchOptions.to ?? '',
+				page: searchOptions.page ?? '1',
+				perPage: searchOptions.perPage ?? '10',
+			}}
 			totalTransactions={total}
 		>
 			<BudgetTransactionsTable transactions={transactions} />

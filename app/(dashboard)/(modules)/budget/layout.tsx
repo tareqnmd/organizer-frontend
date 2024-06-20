@@ -8,7 +8,10 @@ const links = [
 ];
 
 export const metadata: Metadata = {
-	title: 'Budget',
+	title: {
+		template: '%s | Budget',
+		default: 'Budget',
+	},
 };
 
 const Layout = ({ children }: { children: React.ReactNode }) => {

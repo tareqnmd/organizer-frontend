@@ -5,7 +5,7 @@ import { getPageNumbers, toQueryString } from '@/lib/helper/common';
 import { baseDateFormat } from '@/lib/helper/date';
 import { BudgetTransactionParamType } from '@/types/modules/budget/budget-transaction-types';
 import { useRouter } from 'next/navigation';
-import { ReactNode, useEffect, useRef, useState } from 'react';
+import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import BudgetTransactionAdd from './BudgetTransactionAdd';
 import BudgetTransactionFilter from './BudgetTransactionFilter';
 
@@ -22,15 +22,7 @@ const BudgetTransactionsWrapper = ({
 	const hasRendered = useRef(false);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pages, setPages] = useState<number[]>([]);
-	const [filterData, setFilterData] = useState({
-		category: searchOptions.category ?? '',
-		type: searchOptions.type ?? '',
-		transaction: searchOptions.transaction ?? '',
-		from: searchOptions.from ?? '',
-		to: searchOptions.to ?? '',
-		page: searchOptions.page ?? '1',
-		perPage: searchOptions.perPage ?? '10',
-	});
+	const [filterData, setFilterData] = useState(searchOptions);
 	const debouncedText = useDebounce(filterData.transaction, 500);
 
 	const changeHandler = (value: string, name: string) => {
@@ -71,32 +63,27 @@ const BudgetTransactionsWrapper = ({
 		}));
 	};
 
+	const handleSubmit = useCallback(() => {
+		router.push(
+			`/budget/transaction${toQueryString({
+				type: filterData.type,
+				category: filterData.category,
+				transaction: debouncedText,
+				from: filterData.from,
+				to: filterData.to,
+				perPage: filterData.perPage,
+				page: filterData.page,
+			})}`
+		);
+	}, [debouncedText, filterData, router]);
+
 	useEffect(() => {
 		if (hasRendered.current) {
-			router.push(
-				`/budget/transaction${toQueryString({
-					type: filterData.type,
-					category: filterData.category,
-					transaction: debouncedText,
-					from: filterData.from,
-					to: filterData.to,
-					perPage: filterData.perPage,
-					page: filterData.page,
-				})}`
-			);
+			handleSubmit();
 		} else {
 			hasRendered.current = true;
 		}
-	}, [
-		debouncedText,
-		filterData.type,
-		filterData.category,
-		filterData.from,
-		filterData.to,
-		filterData.perPage,
-		filterData.page,
-		router,
-	]);
+	}, [filterData, debouncedText, debouncedText]);
 
 	useEffect(() => {
 		if (totalTransactions > 0 && Number(filterData.perPage) > 0) {
