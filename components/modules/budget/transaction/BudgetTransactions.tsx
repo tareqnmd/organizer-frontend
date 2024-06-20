@@ -10,11 +10,17 @@ const Transactions = async ({
 }) => {
 	const queryParams = new URLSearchParams(searchOptions);
 	const url = `budget/transactions?${queryParams}`;
-	const { data: transactions, total } = await generateDataFromServer(url, {
-		next: { revalidate: 0 },
-	});
+	const { data: transactions = [], total = 0 } = await generateDataFromServer(
+		url,
+		{
+			next: { revalidate: 0 },
+		}
+	);
 	return (
-		<BudgetTransactionsWrapper searchOptions={searchOptions} totalTransactions={total}>
+		<BudgetTransactionsWrapper
+			searchOptions={searchOptions}
+			totalTransactions={total}
+		>
 			<BudgetTransactionsTable transactions={transactions} />
 		</BudgetTransactionsWrapper>
 	);

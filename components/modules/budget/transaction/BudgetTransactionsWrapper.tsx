@@ -20,7 +20,6 @@ const BudgetTransactionsWrapper = ({
 }) => {
 	const router = useRouter();
 	const hasRendered = useRef(false);
-	const [perPage, setPerPage] = useState(10);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pages, setPages] = useState<number[]>([]);
 	const [filterData, setFilterData] = useState({
@@ -59,7 +58,6 @@ const BudgetTransactionsWrapper = ({
 
 	const changePerPage = (value: number) => {
 		setCurrentPage(1);
-		setPerPage(value);
 		setFilterData((prev) => ({ ...prev, perPage: String(value), page: '1' }));
 	};
 
@@ -91,11 +89,11 @@ const BudgetTransactionsWrapper = ({
 	]);
 
 	useEffect(() => {
-		if (totalTransactions > 0 && perPage > 0) {
-			setPages(getPageNumbers(totalTransactions, perPage));
+		if (totalTransactions > 0 && Number(filterData.perPage) > 0) {
+			setPages(getPageNumbers(totalTransactions, Number(filterData.perPage)));
 			setCurrentPage(1);
 		}
-	}, [totalTransactions, perPage]);
+	}, [totalTransactions, filterData.perPage]);
 
 	return (
 		<div className="grid gap-4">
@@ -111,7 +109,7 @@ const BudgetTransactionsWrapper = ({
 			<Pagination
 				currentPage={currentPage}
 				changePaginate={changePaginate}
-				perPage={perPage}
+				perPage={Number(filterData?.perPage)}
 				changePerPage={changePerPage}
 				pages={pages}
 				total={totalTransactions}
