@@ -23,7 +23,7 @@ const Pagination = ({
 	changePerPage: (agr: number) => void;
 	total: number;
 }) => {
-	return pages?.length > 1 ? (
+	return (
 		<Page className="justify-end gap-2 items-center">
 			<div className="per-page-show flex gap-1 items-center text-sm">
 				Showing
@@ -82,7 +82,7 @@ const Pagination = ({
 				</PaginationItem>
 			</PaginationContent>
 		</Page>
-	) : null;
+	);
 };
 
 export default Pagination;
