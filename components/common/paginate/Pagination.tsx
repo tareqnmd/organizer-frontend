@@ -24,8 +24,8 @@ const Pagination = ({
 	total: number;
 }) => {
 	return (
-		<Page className="justify-end gap-2 items-center">
-			<div className="per-page-show flex gap-1 items-center text-sm">
+		<Page className="justify-end gap-4 sm:gap-2 items-center flex-wrap sm:flex-nowrap">
+			<div className="per-page-show flex gap-2 items-center text-sm">
 				Showing
 				<span className="font-semibold">
 					{currentPage * perPage - (perPage - 1)}
@@ -39,18 +39,17 @@ const Pagination = ({
 				</span>
 			</div>
 			<div className="divider w-[1px] h-3 bg-black"></div>
-			<div className="per-page-change flex gap-1 items-center text-sm">
+			<div className="per-page-change flex gap-2 items-center text-sm">
 				<span className="text-sm">Per Page</span>
 				<input
-					type="number"
 					defaultValue={perPage}
 					onChange={(e: any) => changePerPage(e.target.value)}
 					min={10}
-					className="w-12 rounded border p-1"
+					className="text-center w-8 rounded border-2 border-black p-1"
 				/>
 			</div>
-			<div className="divider w-[1px] h-3 bg-black"></div>
-			<PaginationContent>
+			<div className="hidden sm:block divider w-[1px] h-3 bg-black"></div>
+			<PaginationContent className="justify-end">
 				<PaginationItem>
 					<PaginationPrevious
 						className={cn(
