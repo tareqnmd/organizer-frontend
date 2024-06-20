@@ -72,6 +72,8 @@ const BudgetTransactionsWrapper = ({
 					transaction: debouncedText,
 					from: filterData.from,
 					to: filterData.to,
+					perPage: filterData.perPage,
+					page: filterData.page,
 				})}`
 			);
 		} else {
@@ -83,6 +85,8 @@ const BudgetTransactionsWrapper = ({
 		filterData.category,
 		filterData.from,
 		filterData.to,
+		filterData.perPage,
+		filterData.page,
 		router,
 	]);
 

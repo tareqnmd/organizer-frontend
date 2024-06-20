@@ -33,7 +33,9 @@ const Pagination = ({
 				to
 				<span className="font-semibold">
 					{currentPage * perPage -
-						(currentPage === pages.length ? (total % perPage) + 1 : 0)}
+						(currentPage === pages.length
+							? (currentPage * perPage) % total
+							: 0)}
 				</span>
 			</div>
 			<div className="divider w-[1px] h-3 bg-black"></div>
