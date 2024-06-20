@@ -43,7 +43,7 @@ const Pagination = ({
 				<span className="text-sm">Per Page</span>
 				<input
 					type="number"
-					value={perPage}
+					defaultValue={perPage}
 					onChange={(e: any) => changePerPage(e.target.value)}
 					min={10}
 					className="w-12 rounded border p-1"
