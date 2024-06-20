@@ -63,27 +63,32 @@ const BudgetTransactionsWrapper = ({
 		}));
 	};
 
-	const handleSubmit = useCallback(() => {
-		router.push(
-			`/budget/transaction${toQueryString({
-				type: filterData.type,
-				category: filterData.category,
-				transaction: debouncedText,
-				from: filterData.from,
-				to: filterData.to,
-				perPage: filterData.perPage,
-				page: filterData.page,
-			})}`
-		);
-	}, [debouncedText, filterData, router]);
-
 	useEffect(() => {
 		if (hasRendered.current) {
-			handleSubmit();
+			router.push(
+				`/budget/transaction${toQueryString({
+					type: filterData.type,
+					category: filterData.category,
+					transaction: debouncedText,
+					from: filterData.from,
+					to: filterData.to,
+					perPage: filterData.perPage,
+					page: filterData.page,
+				})}`
+			);
 		} else {
 			hasRendered.current = true;
 		}
-	}, [filterData, debouncedText, debouncedText]);
+	}, [
+		debouncedText,
+		filterData.type,
+		filterData.category,
+		filterData.from,
+		filterData.to,
+		filterData.perPage,
+		filterData.page,
+		router,
+	]);
 
 	useEffect(() => {
 		if (totalTransactions > 0 && Number(filterData.perPage) > 0) {
