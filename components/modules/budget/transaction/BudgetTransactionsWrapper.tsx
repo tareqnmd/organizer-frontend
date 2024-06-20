@@ -58,7 +58,17 @@ const BudgetTransactionsWrapper = ({
 
 	const changePerPage = (value: number) => {
 		setCurrentPage(1);
-		setFilterData((prev) => ({ ...prev, perPage: String(value), page: '1' }));
+		const updatedPerPage =
+			Number(value) < 10
+				? 10
+				: Number(value) > totalTransactions && Number(value) > 10
+				? totalTransactions
+				: Number(value);
+		setFilterData((prev) => ({
+			...prev,
+			perPage: String(updatedPerPage),
+			page: '1',
+		}));
 	};
 
 	useEffect(() => {
