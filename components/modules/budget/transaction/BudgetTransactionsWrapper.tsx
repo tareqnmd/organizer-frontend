@@ -5,7 +5,7 @@ import { getPageNumbers, toQueryString } from '@/lib/helper/common';
 import { baseDateFormat } from '@/lib/helper/date';
 import { BudgetTransactionParamType } from '@/types/modules/budget/budget-transaction-types';
 import { useRouter } from 'next/navigation';
-import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 import BudgetTransactionAdd from './BudgetTransactionAdd';
 import BudgetTransactionFilter from './BudgetTransactionFilter';
 
@@ -48,32 +48,54 @@ const BudgetTransactionsWrapper = ({
 		}));
 	};
 
+	let timeout: any;
 	const changePerPage = (value: number) => {
-		setCurrentPage(1);
-		const updatedPerPage =
-			Number(value) < 10
-				? 10
-				: Number(value) > totalTransactions && Number(value) > 10
-				? totalTransactions
-				: Number(value);
-		setFilterData((prev) => ({
-			...prev,
-			perPage: String(updatedPerPage),
-			page: '1',
-		}));
+		if (timeout) clearTimeout(timeout);
+		timeout = setTimeout(() => {
+			setCurrentPage(1);
+			const updatedPerPage =
+				Number(value) < 10
+					? 10
+					: Number(value) > totalTransactions && totalTransactions > 10
+					? totalTransactions
+					: Number(value);
+			setFilterData((prev) => ({
+				...prev,
+				perPage: String(updatedPerPage),
+				page: '1',
+			}));
+		}, 500);
 	};
 
 	useEffect(() => {
 		if (hasRendered.current) {
+			const pagination: {
+				page?: string;
+				perPage?: string;
+			} = {};
+			const dateRange: {
+				from?: string;
+				to?: string;
+			} = {};
+			if (filterData?.from && filterData?.to) {
+				dateRange['from'] = filterData?.from;
+				dateRange['to'] = filterData?.to;
+			}
+			if (
+				filterData?.page &&
+				filterData?.perPage &&
+				filterData?.perPage !== '10'
+			) {
+				pagination['page'] = filterData?.page;
+				pagination['perPage'] = filterData?.perPage;
+			}
 			router.push(
 				`/budget/transaction${toQueryString({
 					type: filterData.type,
 					category: filterData.category,
 					transaction: debouncedText,
-					from: filterData.from,
-					to: filterData.to,
-					perPage: filterData.perPage,
-					page: filterData.page,
+					...dateRange,
+					...pagination,
 				})}`
 			);
 		} else {
