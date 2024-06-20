@@ -120,7 +120,7 @@ const BudgetTransactionsWrapper = ({
 	}, [totalTransactions, filterData.perPage]);
 
 	return (
-		<div className="grid gap-4">
+		<div className="flex flex-col gap-4">
 			<div className="grid grid-cols-4 gap-2">
 				<BudgetTransactionFilter
 					filterData={filterData}
