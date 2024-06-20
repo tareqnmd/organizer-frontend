@@ -23,7 +23,7 @@ const BudgetTransactionsWrapper = ({
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pages, setPages] = useState<number[]>([]);
 	const [filterData, setFilterData] = useState(searchOptions);
-	const debouncedText = useDebounce(filterData.transaction, 500);
+	const debouncedText = useDebounce(filterData?.transaction ?? '', 500);
 
 	const changeHandler = (value: string, name: string) => {
 		setFilterData((prev) => ({ ...prev, [name]: value }));
