@@ -84,7 +84,7 @@ const BudgetTransactionsWrapper = ({
 			if (
 				filterData?.page &&
 				filterData?.perPage &&
-				filterData?.perPage !== '10'
+				!(filterData?.perPage === '10' && filterData?.page === '1')
 			) {
 				pagination['page'] = filterData?.page;
 				pagination['perPage'] = filterData?.perPage;
