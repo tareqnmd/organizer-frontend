@@ -42,10 +42,11 @@ const Pagination = ({
 			<div className="per-page-change flex gap-2 items-center text-sm">
 				<span className="text-sm">Per Page</span>
 				<input
+					type="number"
 					defaultValue={perPage}
 					onChange={(e: any) => changePerPage(e.target.value)}
 					min={10}
-					className="text-center w-8 rounded border-2 border-black p-1"
+					className="inp-wpn text-center w-8 rounded border-2 border-black p-1"
 				/>
 			</div>
 			<div className="hidden sm:block divider w-[1px] h-3 bg-black"></div>

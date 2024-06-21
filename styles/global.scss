@@ -8,6 +8,16 @@ html {
 	scroll-behavior: smooth;
 }
 
+.inp-wpn::-webkit-outer-spin-button,
+.inp-wpn::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.inp-wpn[type='number'] {
+	-moz-appearance: textfield;
+}
+
 #organizer {
 	display: grid;
 	min-height: 100dvh;
