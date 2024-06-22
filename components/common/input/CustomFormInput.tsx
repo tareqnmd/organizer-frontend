@@ -8,6 +8,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { cn } from '@/lib/utils';
 import FormDate from './Date';
 import FormRadio from './Radio';
 import FormSelect from './Select';
@@ -70,7 +71,7 @@ const CustomFormInput = ({
 			control={control}
 			name={name}
 			render={({ field }) => (
-				<FormItem className={extraClassName}>
+				<FormItem className={cn(extraClassName)}>
 					<FormLabel>{label}</FormLabel>
 					<FormControl>{getTypes(type, field)}</FormControl>
 					{description && <FormDescription>{description}</FormDescription>}
