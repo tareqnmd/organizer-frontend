@@ -1,4 +1,5 @@
 import { authOptions } from '@/lib/auth-options';
+import { cn } from '@/lib/utils';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import LargeLogo from '../core/LargeLogo';
@@ -15,7 +16,7 @@ const AuthLayout = async ({ children }: { children: React.ReactNode }) => {
 			<div className="absolute top-4 right-4">
 				<ModeToggle />
 			</div>
-			<Card className="shadow-md p-6 min-w-[320px]">
+			<Card className={cn('shadow-md p-6 min-w-[320px]', 'card-design')}>
 				<div className="flex flex-col items-center gap-1">
 					<LargeLogo />
 					<div className="grid gap-3 place-items-center">{children}</div>

@@ -14,6 +14,10 @@ html {
 	margin: 0;
 }
 
+.card-design {
+	@apply bg-card-light dark:bg-card-dark;
+}
+
 .inp-wpn[type='number'] {
 	-moz-appearance: textfield;
 }

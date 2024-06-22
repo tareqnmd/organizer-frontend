@@ -18,6 +18,14 @@ const config = {
       },
     },
     extend: {
+      colors: {
+				dark: '#020617',
+				light: '#ffffff',
+				card: {
+					light: '#ffffff',
+					dark: '#2c2936',
+				},
+			},
       keyframes: {
         "accordion-down": {
           from: { height: "0" },

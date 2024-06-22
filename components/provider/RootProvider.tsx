@@ -13,7 +13,12 @@ const RootProvider = ({ children }: { children: React.ReactNode }) => {
 				disableTransitionOnChange
 			>
 				<StoreProvider>
-					<div id="organizer">{children}</div>
+					<div
+						id="organizer"
+						className="bg-light dark:bg-dark"
+					>
+						{children}
+					</div>
 					<Toaster />
 				</StoreProvider>
 			</ThemeProvider>
