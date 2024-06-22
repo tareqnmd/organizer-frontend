@@ -16,9 +16,9 @@ const NavLink = ({
 		<Link
 			href={link.path}
 			className={cn(
-				'transition hover:underline',
+				'transition hover:font-semibold',
 				(exact ? pathName === link.path : pathName.includes(link.path)) &&
-					'underline'
+					'font-semibold'
 			)}
 		>
 			{link.name}
