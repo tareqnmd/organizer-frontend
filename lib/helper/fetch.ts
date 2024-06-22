@@ -1,7 +1,10 @@
 import axios from 'axios';
 import { signOut } from 'next-auth/react';
-import { toast } from 'sonner';
 import { clearCookie, getCookie, getCookieValue } from './server-func';
+
+export const nextProperties = (revalidate: number) => {
+	return { next: { revalidate } };
+};
 
 export const axiosInstance = axios.create({
 	baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -71,6 +74,6 @@ export const generateDataFromServer = async (
 		const data = await res.json();
 		return data;
 	} catch (error: any) {
-		toast.error(error?.message ?? 'Error Found');
+		return error?.message ?? 'Error Found';
 	}
 };
