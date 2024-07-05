@@ -1,7 +1,8 @@
 'use client';
 import { axiosInstance } from '@/lib/helper/fetch';
 import { useEffect, useState } from 'react';
-import BudgetStatsCards from './BudgetStatsCards';
+import BudgetHistory from './BudgetHistory';
+import BudgetOverview from './BudgetOverview';
 
 const Budget = () => {
 	const [data, setData] = useState<any>({});
@@ -12,9 +13,11 @@ const Budget = () => {
 		};
 		fetchData();
 	}, []);
+
 	return (
 		<>
-			<BudgetStatsCards />
+			<BudgetOverview />
+			<BudgetHistory />
 		</>
 	);
 };
