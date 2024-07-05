@@ -23,3 +23,16 @@ export const getPageNumbers = (totalTransactions: number, perPage: number) => {
 	const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 	return pageNumbers;
 };
+
+export const Currencies = [
+	{ value: 'BDT', label: '৳ Taka', locale: 'bn-BD' },
+	{ value: 'USD', label: '$ Dollar', locale: 'en-US' },
+];
+
+export function GetFormatterForCurrency(currency: string) {
+	const locale = Currencies.find((c) => c.value === currency)?.locale;
+	return new Intl.NumberFormat(locale, {
+		style: 'currency',
+		currency,
+	});
+}
