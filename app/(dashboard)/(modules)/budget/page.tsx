@@ -1,4 +1,4 @@
-import Budget from '@/components/modules/budget/Budget';
+import Budget from '@/components/modules/budget/dashboard/Budget';
 
 const Page = () => {
 	return <Budget />;

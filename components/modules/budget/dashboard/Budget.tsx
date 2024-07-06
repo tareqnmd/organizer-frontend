@@ -1,8 +1,8 @@
 'use client';
 import { axiosInstance } from '@/lib/helper/fetch';
 import { useEffect, useState } from 'react';
-import BudgetHistory from './BudgetHistory';
-import BudgetOverview from './BudgetOverview';
+import BudgetHistory from './history/BudgetHistory';
+import BudgetOverview from './overview/BudgetOverview';
 
 const Budget = () => {
 	const [data, setData] = useState<any>({});

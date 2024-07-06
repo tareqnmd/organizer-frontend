@@ -10,7 +10,7 @@ async function getData() {
 }
 
 const page = async () => {
-	const { data } = await getData();
+	const { data = [] } = await getData();
 	return (
 		<main className="container mx-auto py-4">
 			<Dashboard modules={data} />
