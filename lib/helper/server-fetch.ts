@@ -30,7 +30,7 @@ export const generateDataFromServer = async (
 ) => {
 	try {
 		const res = await serverAuthFetch(url, options);
-		if (res?.status !== 401) {
+		if (res?.status === 401) {
 			throw new Error('Unauthorized');
 		}
 		if (!res.ok) {

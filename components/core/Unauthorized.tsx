@@ -1,11 +1,12 @@
 'use client';
 import { useAuthCheckQuery } from '@/store/features/auth/api';
-import { redirect, useRouter } from 'next/navigation';
+import { useAppSelector } from '@/store/hooks';
+import { redirect } from 'next/navigation';
 
 const Unauthorized = () => {
-	const router = useRouter();
+	const { prevLink = '/' } = useAppSelector((state) => state.theme);
 	const { data } = useAuthCheckQuery({});
-	data && redirect('/');
+	data && redirect(prevLink);
 	return null;
 };
 

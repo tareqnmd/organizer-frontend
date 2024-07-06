@@ -2,6 +2,7 @@ import apiSlice from '@/store/features/api';
 import storage from '@/store/storage';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
+import themeSlice from './features/theme/slice';
 
 const persistConfig = {
 	key: 'organizer',
@@ -12,6 +13,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
 	[apiSlice.reducerPath]: apiSlice.reducer,
+	[themeSlice.name]: themeSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
