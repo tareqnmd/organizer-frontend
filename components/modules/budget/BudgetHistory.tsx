@@ -1,10 +1,9 @@
 'use client';
 
-import HistoryPeriodSelector from '@/app/(dashboard)/_components/HistoryPeriodSelector';
-import SkeletonWrapper from '@/components/SkeletonWrapper';
+import SkeletonWrapper from '@/components/common/SkeletonWrapper';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { GetFormatterForCurrency } from '@/lib/helpers';
+import { GetFormatterForCurrency } from '@/lib/helper/common';
 import { Period, Timeframe } from '@/types';
 import { useMemo, useState } from 'react';
 import {
@@ -17,6 +16,7 @@ import {
 	YAxis,
 } from 'recharts';
 import BudgetCustomTooltip from './BudgetCustomTooltip';
+import BudgetHistoryPeriodSelector from './BudgetHistoryPeriodSelector';
 
 const BudgetHistory = () => {
 	const [timeframe, setTimeframe] = useState<Timeframe>('month');
@@ -42,7 +42,7 @@ const BudgetHistory = () => {
 			<Card className="col-span-12 mt-2 w-full">
 				<CardHeader className="gap-2">
 					<CardTitle className="grid grid-flow-row justify-between gap-2 md:grid-flow-col">
-						<HistoryPeriodSelector
+						<BudgetHistoryPeriodSelector
 							period={period}
 							setPeriod={setPeriod}
 							timeframe={timeframe}
