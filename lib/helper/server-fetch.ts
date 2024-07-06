@@ -1,6 +1,7 @@
+import { redirect } from 'next/navigation';
 import { getCookie } from './server-func';
 
-export const nextProperties = (revalidate = 0) => {
+export const nextProperties = ({ revalidate = 0 }) => {
 	return { next: { revalidate } };
 };
 
@@ -29,6 +30,9 @@ export const generateDataFromServer = async (
 ) => {
 	try {
 		const res = await serverAuthFetch(url, options);
+		if (res?.status !== 401) {
+			redirect('/unauthorized');
+		}
 		if (!res.ok) {
 			throw new Error('Failed to fetch data');
 		}

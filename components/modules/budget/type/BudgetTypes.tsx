@@ -11,7 +11,7 @@ import { BudgetTypeAdd } from './BudgetTypeAdd';
 const BudgetTypes = async ({}) => {
 	const { data: types } = await generateDataFromServer(
 		'budget/types',
-		nextProperties()
+		nextProperties({})
 	);
 	const session = await getServerSession(authOptions);
 	return (

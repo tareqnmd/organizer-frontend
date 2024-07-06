@@ -1,4 +1,7 @@
-import { generateDataFromServer, nextProperties } from '@/lib/helper/server-fetch';
+import {
+	generateDataFromServer,
+	nextProperties,
+} from '@/lib/helper/server-fetch';
 import { BudgetTransactionParamType } from '@/types/modules/budget/budget-transaction-types';
 import BudgetTransactionsTable from './BudgetTransactionsTable';
 import BudgetTransactionsWrapper from './BudgetTransactionsWrapper';
@@ -12,7 +15,7 @@ const Transactions = async ({
 	const url = `budget/transactions?${queryParams}`;
 	const { data: transactions = [], total = 0 } = await generateDataFromServer(
 		url,
-		nextProperties()
+		nextProperties({})
 	);
 	return (
 		<BudgetTransactionsWrapper

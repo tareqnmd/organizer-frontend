@@ -9,7 +9,7 @@ import NoteAction from './NoteAction';
 const FeaturedNote = async () => {
 	const { data: note } = await generateDataFromServer(
 		'note/featured',
-		nextProperties()
+		nextProperties({})
 	);
 	return note?.id ? (
 		<div className="border rounded-md overflow-hidden">

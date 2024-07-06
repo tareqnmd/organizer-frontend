@@ -8,7 +8,7 @@ import NoteCard from './NoteCard';
 const RecentNotes = async () => {
 	const { data: recentNotes } = await generateDataFromServer(
 		'note/all?limit=6',
-		nextProperties()
+		nextProperties({})
 	);
 	return recentNotes?.length > 0 ? (
 		<div className="grid gap-2">

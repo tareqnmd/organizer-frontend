@@ -21,7 +21,7 @@ const BudgetCategories = async ({
 	const url = `budget/type-categories?${queryParams}`;
 	const { data: categories } = await generateDataFromServer(
 		url,
-		nextProperties()
+		nextProperties({})
 	);
 
 	const session = await getServerSession(authOptions);

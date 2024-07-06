@@ -1,14 +1,11 @@
-import Link from 'next/link';
+'use client';
+import { useAuthCheckQuery } from '@/store/features/auth/api';
+import { redirect } from 'next/navigation';
 
 const Unauthorized = () => {
-	return (
-		<div className="grid place-content-center h-full">
-			<div className="text-center">
-				<h2>Unauthorized</h2>
-				<Link href="/">Home</Link>
-			</div>
-		</div>
-	);
+	const { data } = useAuthCheckQuery({});
+	data && redirect('/');
+	return null;
 };
 
 export default Unauthorized;

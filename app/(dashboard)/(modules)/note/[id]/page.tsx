@@ -7,7 +7,7 @@ import {
 export async function generateMetadata({ params }: { params: { id: string } }) {
 	const { data: note } = await generateDataFromServer(
 		`note/${params.id}`,
-		nextProperties()
+		nextProperties({})
 	);
 	return {
 		title: note.subject,

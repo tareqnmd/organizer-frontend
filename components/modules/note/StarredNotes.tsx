@@ -8,7 +8,7 @@ import NoteCard from './NoteCard';
 const StarredNotes = async () => {
 	const { data: starredNotes } = await generateDataFromServer(
 		'note/all?starred=true',
-		nextProperties()
+		nextProperties({})
 	);
 	return starredNotes?.length > 0 ? (
 		<div className="grid gap-2">

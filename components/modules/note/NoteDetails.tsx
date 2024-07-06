@@ -7,7 +7,7 @@ import NoteForm from './NoteForm';
 const NoteDetails = async ({ id }: { id: string }) => {
 	const { data: note } = await generateDataFromServer(
 		`note/${id}`,
-		nextProperties()
+		nextProperties({})
 	);
 	return <NoteForm note={note} />;
 };

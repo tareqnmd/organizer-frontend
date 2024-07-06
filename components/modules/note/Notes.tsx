@@ -16,7 +16,7 @@ const Notes = async ({
 }) => {
 	const queryParams = new URLSearchParams(searchOptions);
 	const url = `note/all?${queryParams}`;
-	const { data: notes } = await generateDataFromServer(url, nextProperties());
+	const { data: notes } = await generateDataFromServer(url, nextProperties({}));
 
 	return (
 		<div className="grid gap-4">
