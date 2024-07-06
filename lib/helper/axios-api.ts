@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { signOut } from 'next-auth/react';
-import { clearCookie, getCookieValue } from './server-func';
+import { logoutHandler } from './auth';
+import { getCookieValue } from './server-func';
 
 export const axiosInstance = axios.create({
 	baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -27,14 +27,14 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
 	async (res) => {
 		if (res?.data?.statusCode === 401) {
-			await clearCookie();
-			await signOut({
-				callbackUrl: `${window.location.origin}/login`,
-			});
+			await logoutHandler();
 		}
 		return await res.data;
 	},
-	(error) => {
+	async (error) => {
+		if (error?.response?.data?.statusCode === 401) {
+			await logoutHandler();
+		}
 		return Promise.reject(error);
 	}
 );
