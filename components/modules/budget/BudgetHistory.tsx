@@ -164,7 +164,7 @@ const BudgetHistory = () => {
 									/>
 									<Tooltip
 										cursor={{ opacity: 0.1 }}
-										content={(props) => (
+										content={(props: any) => (
 											<BudgetCustomTooltip
 												formatter={formatter}
 												{...props}
