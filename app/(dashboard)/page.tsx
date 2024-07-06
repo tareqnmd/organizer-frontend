@@ -1,19 +1,10 @@
 import Dashboard from '@/components/dashboard/Dashboard';
-import { baseFetch } from '@/lib/helper/fetch';
-
-async function getData() {
-	const res = await baseFetch('api');
-	if (!res.ok) {
-		throw new Error('Failed to fetch data');
-	}
-	return res.json();
-}
+import { modules } from '../../lib/helper/modules';
 
 const page = async () => {
-	const { data = [] } = await getData();
 	return (
 		<main className="container mx-auto py-4">
-			<Dashboard modules={data} />
+			<Dashboard modules={modules} />
 		</main>
 	);
 };
