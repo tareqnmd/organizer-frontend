@@ -31,7 +31,7 @@ export const generateDataFromServer = async (
 	try {
 		const res = await serverAuthFetch(url, options);
 		if (res?.status !== 401) {
-			redirect('/unauthorized');
+			throw new Error('Unauthorized');
 		}
 		if (!res.ok) {
 			throw new Error('Failed to fetch data');
@@ -39,6 +39,9 @@ export const generateDataFromServer = async (
 		const data = await res.json();
 		return data;
 	} catch (error: any) {
+		if (error?.message === 'Unauthorized') {
+			redirect('/unauthorized');
+		}
 		return error?.message ?? 'Error Found';
 	}
 };
