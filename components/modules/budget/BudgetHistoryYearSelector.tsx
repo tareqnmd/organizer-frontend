@@ -10,7 +10,7 @@ import { Period } from '@/types';
 const BudgetHistoryYearSelector = ({
 	period,
 	setPeriod,
-	years,
+	years = [],
 }: {
 	period: Period;
 	setPeriod: (period: Period) => void;

@@ -19,7 +19,7 @@ const BudgetHistoryPeriodSelector = ({
 	timeframe,
 	setTimeframe,
 }: Props) => {
-	const historyPeriods = { data: {} };
+	const historyPeriods = { data: [] };
 
 	return (
 		<div className="flex flex-wrap items-center gap-4">

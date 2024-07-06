@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 import { useCallback } from 'react';
-import CountUp from 'react-countup/build/CountUp';
+import CountUp from 'react-countup';
 
 const BudgetCustomTooltipRow = ({
 	label,
