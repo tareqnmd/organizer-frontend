@@ -1,5 +1,5 @@
 'use client';
-import { axiosInstance } from '@/lib/helper/fetch';
+import { axiosInstance } from '@/lib/helper/axios-api';
 import { useEffect, useState } from 'react';
 import BudgetHistory from './history/BudgetHistory';
 import BudgetOverview from './overview/BudgetOverview';

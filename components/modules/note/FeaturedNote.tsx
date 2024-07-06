@@ -1,12 +1,16 @@
 import { Badge } from '@/components/ui/badge';
-import { generateDataFromServer } from '@/lib/helper/fetch';
+import {
+	generateDataFromServer,
+	nextProperties,
+} from '@/lib/helper/server-fetch';
 import Link from 'next/link';
 import NoteAction from './NoteAction';
 
 const FeaturedNote = async () => {
-	const { data: note } = await generateDataFromServer('note/featured', {
-		next: { revalidate: 0 },
-	});
+	const { data: note } = await generateDataFromServer(
+		'note/featured',
+		nextProperties()
+	);
 	return note?.id ? (
 		<div className="border rounded-md overflow-hidden">
 			<div className="p-2 bg-gray-200 border-b flex items-center gap-2">

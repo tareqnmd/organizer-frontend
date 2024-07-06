@@ -1,10 +1,14 @@
 import NoteDetails from '@/components/modules/note/NoteDetails';
-import { generateDataFromServer } from '@/lib/helper/fetch';
+import {
+	generateDataFromServer,
+	nextProperties,
+} from '@/lib/helper/server-fetch';
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
-	const { data: note } = await generateDataFromServer(`note/${params.id}`, {
-		next: { revalidate: 0 },
-	});
+	const { data: note } = await generateDataFromServer(
+		`note/${params.id}`,
+		nextProperties()
+	);
 	return {
 		title: note.subject,
 		description: note.subject,

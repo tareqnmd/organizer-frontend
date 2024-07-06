@@ -1,4 +1,7 @@
-import { generateDataFromServer } from '@/lib/helper/fetch';
+import {
+	generateDataFromServer,
+	nextProperties,
+} from '@/lib/helper/server-fetch';
 import {
 	NoteType,
 	NotesParamType,
@@ -13,9 +16,7 @@ const Notes = async ({
 }) => {
 	const queryParams = new URLSearchParams(searchOptions);
 	const url = `note/all?${queryParams}`;
-	const { data: notes } = await generateDataFromServer(url, {
-		next: { revalidate: 0 },
-	});
+	const { data: notes } = await generateDataFromServer(url, nextProperties());
 
 	return (
 		<div className="grid gap-4">

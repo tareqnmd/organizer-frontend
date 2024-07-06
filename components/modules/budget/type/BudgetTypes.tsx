@@ -1,14 +1,18 @@
 import { authOptions } from '@/lib/auth-options';
-import { generateDataFromServer } from '@/lib/helper/fetch';
+import {
+	generateDataFromServer,
+	nextProperties,
+} from '@/lib/helper/server-fetch';
 import { BudgetTypeType } from '@/types/modules/budget/budget-type-types';
 import { getServerSession } from 'next-auth';
 import BudgetType from './BudgetType';
 import { BudgetTypeAdd } from './BudgetTypeAdd';
 
 const BudgetTypes = async ({}) => {
-	const { data: types } = await generateDataFromServer('budget/types', {
-		next: { revalidate: 0 },
-	});
+	const { data: types } = await generateDataFromServer(
+		'budget/types',
+		nextProperties()
+	);
 	const session = await getServerSession(authOptions);
 	return (
 		<>

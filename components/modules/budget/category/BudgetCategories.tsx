@@ -1,5 +1,8 @@
 import { authOptions } from '@/lib/auth-options';
-import { generateDataFromServer } from '@/lib/helper/fetch';
+import {
+	generateDataFromServer,
+	nextProperties,
+} from '@/lib/helper/server-fetch';
 import {
 	BudgetCategoryParamType,
 	BudgetCategoryType,
@@ -16,9 +19,10 @@ const BudgetCategories = async ({
 }) => {
 	const queryParams = new URLSearchParams(searchParams);
 	const url = `budget/type-categories?${queryParams}`;
-	const { data: categories } = await generateDataFromServer(url, {
-		next: { revalidate: 0 },
-	});
+	const { data: categories } = await generateDataFromServer(
+		url,
+		nextProperties()
+	);
 
 	const session = await getServerSession(authOptions);
 	return (

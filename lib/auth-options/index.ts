@@ -2,7 +2,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import { cookies } from 'next/headers';
-import { axiosInstance } from '../helper/fetch';
+import { axiosInstance } from '../helper/axios-api';
 
 const {
 	GITHUB_ID = '',

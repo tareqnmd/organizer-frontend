@@ -1,13 +1,14 @@
-import { generateDataFromServer } from '@/lib/helper/fetch';
+import {
+	generateDataFromServer,
+	nextProperties,
+} from '@/lib/helper/server-fetch';
 import { NoteType } from '@/types/modules/note/budget-note-types';
 import NoteCard from './NoteCard';
 
 const StarredNotes = async () => {
 	const { data: starredNotes } = await generateDataFromServer(
 		'note/all?starred=true',
-		{
-			next: { revalidate: 0 },
-		}
+		nextProperties()
 	);
 	return starredNotes?.length > 0 ? (
 		<div className="grid gap-2">
