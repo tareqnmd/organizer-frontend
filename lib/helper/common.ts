@@ -40,7 +40,6 @@ export function GetFormatterForCurrency(currency: string) {
 }
 
 export const getYearsInRange = (start: string, end: string) => {
-	console.log('', start, end);
 	getYear(end);
 	const startYear = getYear(start.split('-').reverse().join(','));
 	const endYear = getYear(end.split('-').reverse().join(','));

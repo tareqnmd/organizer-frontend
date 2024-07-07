@@ -25,29 +25,39 @@ const BudgetHistory = ({
 	history: any;
 	searchParams: any;
 }) => {
+	const { month = [], year = [] } = history;
 	const [timeFrame, setTimeFrame] = useState<TimeFrame>('month');
 	const [years, setYears] = useState<any>([]);
 	const [period, setPeriod] = useState<Period>({
 		month: new Date().getMonth(),
 		year: new Date().getFullYear(),
 	});
+	const [chartData, setChartData] = useState<any>([]);
+
+	console.log('period', chartData);
 
 	const formatter = useMemo(() => {
 		return GetFormatterForCurrency('BDT');
 	}, []);
-
-	const historyDataQuery = {
-		data: [],
-	};
-
-	const dataAvailable =
-		historyDataQuery.data && historyDataQuery.data.length > 0;
 
 	useEffect(() => {
 		if (searchParams?.from && searchParams?.to) {
 			setYears(getYearsInRange(searchParams.from, searchParams.to));
 		}
 	}, [searchParams.from, searchParams.to]);
+
+	useEffect(() => {
+		if (timeFrame === 'month') {
+			setChartData(
+				month.filter(
+					(item: any) =>
+						item.month === period.month && item.year === period.year
+				)
+			);
+		} else if (timeFrame === 'year') {
+			setChartData(year.filter((item: any) => item.year === period.year));
+		}
+	}, [month, period, timeFrame, year]);
 
 	return (
 		<>
@@ -83,14 +93,14 @@ const BudgetHistory = ({
 				</CardHeader>
 				<CardContent>
 					<SkeletonWrapper isLoading={false}>
-						{dataAvailable && (
+						{chartData?.length > 0 ? (
 							<ResponsiveContainer
 								width={'100%'}
 								height={300}
 							>
 								<BarChart
 									height={300}
-									data={historyDataQuery.data}
+									data={chartData}
 									barCategoryGap={5}
 								>
 									<defs>
@@ -187,8 +197,7 @@ const BudgetHistory = ({
 									/>
 								</BarChart>
 							</ResponsiveContainer>
-						)}
-						{!dataAvailable && (
+						) : (
 							<Card className="flex h-[300px] flex-col items-center justify-center bg-background">
 								No data for the selected period
 								<p className="text-sm text-muted-foreground">
