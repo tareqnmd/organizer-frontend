@@ -4,7 +4,7 @@ import SkeletonWrapper from '@/components/common/SkeletonWrapper';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { GetFormatterForCurrency } from '@/lib/helper/common';
-import { Period, Timeframe } from '@/types';
+import { Period, TimeFrame } from '@/types';
 import { useMemo, useState } from 'react';
 import {
 	Bar,
@@ -19,7 +19,7 @@ import BudgetCustomTooltip from './BudgetCustomTooltip';
 import BudgetHistoryPeriodSelector from './BudgetHistoryPeriodSelector';
 
 const BudgetHistory = ({ history }: { history: any }) => {
-	const [timeframe, setTimeframe] = useState<Timeframe>('month');
+	const [timeFrame, setTimeFrame] = useState<TimeFrame>('month');
 	const [period, setPeriod] = useState<Period>({
 		month: new Date().getMonth(),
 		year: new Date().getFullYear(),
@@ -45,8 +45,8 @@ const BudgetHistory = ({ history }: { history: any }) => {
 						<BudgetHistoryPeriodSelector
 							period={period}
 							setPeriod={setPeriod}
-							timeframe={timeframe}
-							setTimeframe={setTimeframe}
+							timeFrame={timeFrame}
+							setTimeFrame={setTimeFrame}
 						/>
 
 						<div className="flex h-10 gap-2">
@@ -132,7 +132,7 @@ const BudgetHistory = ({ history }: { history: any }) => {
 										dataKey={(data: any) => {
 											const { year, month, day } = data;
 											const date = new Date(year, month, day || 1);
-											if (timeframe === 'year') {
+											if (timeFrame === 'year') {
 												return date.toLocaleDateString('default', {
 													month: 'long',
 												});
