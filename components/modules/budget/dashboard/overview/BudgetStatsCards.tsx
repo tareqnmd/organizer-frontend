@@ -21,7 +21,7 @@ function BudgetStatsCards({
 	const { income = 0, expense = 0, balance = 0 } = amount;
 
 	return (
-		<div className="relative flex w-full flex-wrap gap-2 md:flex-nowrap">
+		<div className="relative flex w-full flex-wrap gap-4 lg:flex-nowrap">
 			<SkeletonWrapper isLoading={false}>
 				<BudgetStatsCard
 					formatter={formatter}
