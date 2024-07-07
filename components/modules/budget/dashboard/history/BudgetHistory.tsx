@@ -37,8 +37,8 @@ const BudgetHistory = ({ history }: { history: any }) => {
 		historyDataQuery.data && historyDataQuery.data.length > 0;
 
 	return (
-		<div className="container">
-			<h2 className="mt-12 text-3xl font-bold">History</h2>
+		<>
+			<h2 className="mt-6 text-3xl font-bold">History</h2>
 			<Card className="col-span-12 mt-2 w-full">
 				<CardHeader className="gap-2">
 					<CardTitle className="grid grid-flow-row justify-between gap-2 md:grid-flow-col">
@@ -185,7 +185,7 @@ const BudgetHistory = ({ history }: { history: any }) => {
 					</SkeletonWrapper>
 				</CardContent>
 			</Card>
-		</div>
+		</>
 	);
 };
 
