@@ -18,7 +18,7 @@ function BudgetStatsCards({
 		return GetFormatterForCurrency('BDT');
 	}, []);
 
-	const { income, expense, balance } = amount;
+	const { income = 0, expense = 0, balance = 0 } = amount;
 
 	return (
 		<div className="relative flex w-full flex-wrap gap-2 md:flex-nowrap">

@@ -16,7 +16,7 @@ const Budget = async ({ searchParams = {} }: { searchParams?: any }) => {
 		nextProperties({})
 	);
 
-	const { overview, history } = budget;
+	const { overview = {}, history = {} } = budget;
 
 	return (
 		<div className="flex flex-col gap-4">
