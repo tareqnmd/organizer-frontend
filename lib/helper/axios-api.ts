@@ -35,6 +35,6 @@ axiosInstance.interceptors.response.use(
 		if (error?.response?.data?.statusCode === 401) {
 			await logoutHandler();
 		}
-		return Promise.reject(error);
+		return Promise.reject(error?.response?.data);
 	}
 );
