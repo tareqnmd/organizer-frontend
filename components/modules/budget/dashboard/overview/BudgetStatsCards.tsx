@@ -1,8 +1,9 @@
+'use client';
 import SkeletonWrapper from '@/components/common/SkeletonWrapper';
 import { GetFormatterForCurrency } from '@/lib/helper/common';
-import { Wallet } from 'lucide-react';
 import { useMemo } from 'react';
-import { IoIosTrendingDown, IoIosTrendingUp } from 'react-icons/io';import { MdOutlineAccountBalanceWallet } from "react-icons/md";
+import { IoIosTrendingDown, IoIosTrendingUp } from 'react-icons/io';
+import { MdOutlineAccountBalanceWallet } from 'react-icons/md';
 import BudgetStatsCard from './BudgetStatsCard';
 function BudgetStatsCards() {
 	const formatter = useMemo(() => {
@@ -44,7 +45,7 @@ function BudgetStatsCards() {
 					value={balance}
 					title="Balance"
 					icon={
-						<MdOutlineAccountBalanceWallet  className="h-12 w-12 items-center rounded-lg p-2 text-violet-500 bg-violet-400/10" />
+						<MdOutlineAccountBalanceWallet className="h-12 w-12 items-center rounded-lg p-2 text-violet-500 bg-violet-400/10" />
 					}
 				/>
 			</SkeletonWrapper>
