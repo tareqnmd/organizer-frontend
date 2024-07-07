@@ -36,3 +36,18 @@ export function GetFormatterForCurrency(currency: string) {
 		currency,
 	});
 }
+
+function getYearsInRange(start: string, end: string) {
+	const startDate = new Date(start);
+	const endDate = new Date(end);
+	if (startDate > endDate) {
+		throw new Error('Start date cannot be after end date');
+	}
+	const years = [];
+	let currentYear = startDate.getFullYear();
+	while (currentYear <= endDate.getFullYear()) {
+		years.push(currentYear);
+		currentYear++;
+	}
+	return years;
+}
