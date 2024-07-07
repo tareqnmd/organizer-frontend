@@ -55,9 +55,7 @@ const BudgetCategoryCard = ({
 											</div>
 											<Progress
 												value={item.percentage}
-												indicator={
-													type === 'income' ? 'bg-emerald-500' : 'bg-red-500'
-												}
+												indicator={type}
 											/>
 										</div>
 									</div>

@@ -28,7 +28,7 @@ function BudgetStatsCards({
 					value={income}
 					title="Income"
 					icon={
-						<IoIosTrendingUp className="h-12 w-12 items-center rounded-lg p-2 text-emerald-500 bg-emerald-400/10" />
+						<IoIosTrendingUp className="h-12 w-12 items-center rounded-lg p-2 income bg-emerald-400/10" />
 					}
 				/>
 			</SkeletonWrapper>
@@ -39,7 +39,7 @@ function BudgetStatsCards({
 					value={expense}
 					title="Expense"
 					icon={
-						<IoIosTrendingDown className="h-12 w-12 items-center rounded-lg p-2 text-red-500 bg-red-400/10" />
+						<IoIosTrendingDown className="h-12 w-12 items-center rounded-lg p-2 expense bg-red-400/10" />
 					}
 				/>
 			</SkeletonWrapper>
@@ -50,7 +50,7 @@ function BudgetStatsCards({
 					value={balance}
 					title="Balance"
 					icon={
-						<MdOutlineAccountBalanceWallet className="h-12 w-12 items-center rounded-lg p-2 text-violet-500 bg-violet-400/10" />
+						<MdOutlineAccountBalanceWallet className="h-12 w-12 items-center rounded-lg p-2 balance bg-violet-400/10" />
 					}
 				/>
 			</SkeletonWrapper>
