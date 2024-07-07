@@ -1,12 +1,13 @@
 import BudgetCategoryStats from './BudgetCategoryStats';
 import BudgetStatsCards from './BudgetStatsCards';
 
-const BudgetOverview = () => {
+const BudgetOverview = ({ overview }: { overview: any }) => {
+	const { amount_info = {}, category = {} } = overview;
 	return (
-		<div className="container flex w-full flex-col gap-2">
-			<BudgetStatsCards />
-			<BudgetCategoryStats />
-		</div>
+		<>
+			<BudgetStatsCards amount={amount_info} />
+			<BudgetCategoryStats category={category} />
+		</>
 	);
 };
 

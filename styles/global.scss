@@ -50,9 +50,13 @@ html {
 }
 
 .income {
-	@apply bg-green-200;
+	@apply bg-green-500 text-white;
 }
 
 .expense {
-	@apply bg-red-200;
+	@apply bg-red-500 text-white;
+}
+
+.balance {
+	@apply bg-violet-500 text-white;
 }

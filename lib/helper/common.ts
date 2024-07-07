@@ -1,3 +1,5 @@
+import { getYear } from 'date-fns';
+
 export const getError = (error: any, defaultMessage = 'Error Found') => {
 	return error?.data?.message ?? defaultMessage;
 };
@@ -25,7 +27,7 @@ export const getPageNumbers = (totalTransactions: number, perPage: number) => {
 };
 
 export const Currencies = [
-	{ value: 'BDT', label: '৳ Taka', locale: 'bn-BD' },
+	{ value: 'BDT', label: '৳ Taka', locale: 'en-US' },
 	{ value: 'USD', label: '$ Dollar', locale: 'en-US' },
 ];
 
@@ -36,3 +38,19 @@ export function GetFormatterForCurrency(currency: string) {
 		currency,
 	});
 }
+
+export const getYearsInRange = (start: string, end: string) => {
+	getYear(end);
+	const startYear = getYear(start.split('-').reverse().join(','));
+	const endYear = getYear(end.split('-').reverse().join(','));
+	if (startYear > endYear) {
+		throw new Error('Start date cannot be after end date');
+	}
+	const years = [];
+	let currentYear = startYear;
+	while (currentYear <= endYear) {
+		years.push(currentYear);
+		currentYear++;
+	}
+	return years;
+};

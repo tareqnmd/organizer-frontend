@@ -3,9 +3,10 @@
 import SkeletonWrapper from '@/components/common/SkeletonWrapper';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { GetFormatterForCurrency } from '@/lib/helper/common';
-import { Period, Timeframe } from '@/types';
-import { useMemo, useState } from 'react';
+import { GetFormatterForCurrency, getYearsInRange } from '@/lib/helper/common';
+import { monthWiseData, yearWiseData } from '@/lib/helper/date';
+import { Period, TimeFrame } from '@/types';
+import { useEffect, useMemo, useState } from 'react';
 import {
 	Bar,
 	BarChart,
@@ -18,65 +19,89 @@ import {
 import BudgetCustomTooltip from './BudgetCustomTooltip';
 import BudgetHistoryPeriodSelector from './BudgetHistoryPeriodSelector';
 
-const BudgetHistory = () => {
-	const [timeframe, setTimeframe] = useState<Timeframe>('month');
+const BudgetHistory = ({
+	history,
+	searchParams,
+}: {
+	history: any;
+	searchParams: any;
+}) => {
+	const { month = [], year = [] } = history;
+	const [timeFrame, setTimeFrame] = useState<TimeFrame>('month');
+	const [years, setYears] = useState<any>([]);
 	const [period, setPeriod] = useState<Period>({
 		month: new Date().getMonth(),
 		year: new Date().getFullYear(),
 	});
+	const [chartData, setChartData] = useState<any>([]);
 
 	const formatter = useMemo(() => {
 		return GetFormatterForCurrency('BDT');
 	}, []);
 
-	const historyDataQuery = {
-		data: [],
-	};
+	useEffect(() => {
+		if (searchParams?.from && searchParams?.to) {
+			setYears(getYearsInRange(searchParams.from, searchParams.to));
+		}
+	}, [searchParams.from, searchParams.to]);
 
-	const dataAvailable =
-		historyDataQuery.data && historyDataQuery.data.length > 0;
+	useEffect(() => {
+		if (timeFrame === 'month') {
+			const monthData = month.filter(
+				(item: any) => item.month === period.month && item.year === period.year
+			);
+			const data = monthWiseData(monthData, period);
+			setChartData(data);
+		} else if (timeFrame === 'year') {
+			const yearData = year.filter((item: any) => item.year === period.year);
+			const data = yearWiseData(yearData, period);
+			setChartData(data);
+		}
+	}, [month, period, timeFrame, year]);
 
 	return (
-		<div className="container">
-			<h2 className="mt-12 text-3xl font-bold">History</h2>
-			<Card className="col-span-12 mt-2 w-full">
-				<CardHeader className="gap-2">
-					<CardTitle className="grid grid-flow-row justify-between gap-2 md:grid-flow-col">
+		<>
+			<h2 className="mt-6 text-xl font-bold">History</h2>
+			<Card className="col-span-12 w-full p-2">
+				<CardHeader className="p-0 gap-2 mb-4">
+					<CardTitle className="flex justify-between items-center gap-2 flex-wrap">
 						<BudgetHistoryPeriodSelector
 							period={period}
 							setPeriod={setPeriod}
-							timeframe={timeframe}
-							setTimeframe={setTimeframe}
+							timeFrame={timeFrame}
+							setTimeFrame={setTimeFrame}
+							years={years}
 						/>
-
 						<div className="flex h-10 gap-2">
 							<Badge
 								variant={'outline'}
 								className="flex items-center gap-2 text-sm"
 							>
-								<div className="h-4 w-4 rounded-full bg-emerald-500"></div>
+								<div className="h-4 w-4 rounded-full income"></div>
 								Income
 							</Badge>
 							<Badge
 								variant={'outline'}
 								className="flex items-center gap-2 text-sm"
 							>
-								<div className="h-4 w-4 rounded-full bg-red-500"></div>
+								<div className="h-4 w-4 rounded-full expense"></div>
 								Expense
 							</Badge>
 						</div>
 					</CardTitle>
 				</CardHeader>
-				<CardContent>
+				<CardContent className="p-0">
 					<SkeletonWrapper isLoading={false}>
-						{dataAvailable && (
+						{chartData?.some(
+							(item: any) => item.expense > 0 || item.income > 0
+						) ? (
 							<ResponsiveContainer
 								width={'100%'}
 								height={300}
 							>
 								<BarChart
 									height={300}
-									data={historyDataQuery.data}
+									data={chartData}
 									barCategoryGap={5}
 								>
 									<defs>
@@ -128,13 +153,13 @@ const BudgetHistory = () => {
 										fontSize={12}
 										tickLine={false}
 										axisLine={false}
-										padding={{ left: 5, right: 5 }}
+										padding={{ left: 0, right: 0 }}
 										dataKey={(data: any) => {
 											const { year, month, day } = data;
 											const date = new Date(year, month, day || 1);
-											if (timeframe === 'year') {
+											if (timeFrame === 'year') {
 												return date.toLocaleDateString('default', {
-													month: 'long',
+													month: 'short',
 												});
 											}
 											return date.toLocaleDateString('default', {
@@ -173,8 +198,7 @@ const BudgetHistory = () => {
 									/>
 								</BarChart>
 							</ResponsiveContainer>
-						)}
-						{!dataAvailable && (
+						) : (
 							<Card className="flex h-[300px] flex-col items-center justify-center bg-background">
 								No data for the selected period
 								<p className="text-sm text-muted-foreground">
@@ -185,7 +209,7 @@ const BudgetHistory = () => {
 					</SkeletonWrapper>
 				</CardContent>
 			</Card>
-		</div>
+		</>
 	);
 };
 
