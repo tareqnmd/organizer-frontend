@@ -8,15 +8,23 @@ export const clearCookie = async () => {
 };
 
 export const getCookie = async () => {
-	const headersList = headers();
-	const cookie: any = headersList.get('cookie');
-	return cookie;
+	try {
+		const headersList = headers();
+		const cookie: any = headersList.get('cookie');
+		return cookie;
+	} catch (error) {
+		return '';
+	}
 };
 
 export const getCookieValue = async (name: string) => {
-	const cookieStore = cookies();
-	const cookie: any = cookieStore.get(name);
-	return cookie.value ?? '';
+	try {
+		const cookieStore = cookies();
+		const cookie: any = cookieStore.get(name);
+		return cookie.value ?? '';
+	} catch (error) {
+		return '';
+	}
 };
 
 export const notesRevalidate = () => {
