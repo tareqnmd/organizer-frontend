@@ -11,6 +11,7 @@ interface Props {
 	setPeriod: (period: Period) => void;
 	timeFrame: TimeFrame;
 	setTimeFrame: (timeFrame: TimeFrame) => void;
+	years: any;
 }
 
 const BudgetHistoryPeriodSelector = ({
@@ -18,6 +19,7 @@ const BudgetHistoryPeriodSelector = ({
 	setPeriod,
 	timeFrame,
 	setTimeFrame,
+	years
 }: Props) => {
 	const historyPeriods = { data: [] };
 
@@ -45,7 +47,7 @@ const BudgetHistoryPeriodSelector = ({
 					<BudgetHistoryYearSelector
 						period={period}
 						setPeriod={setPeriod}
-						years={historyPeriods.data || []}
+						years={years}
 					/>
 				</SkeletonWrapper>
 				{timeFrame === 'month' && (

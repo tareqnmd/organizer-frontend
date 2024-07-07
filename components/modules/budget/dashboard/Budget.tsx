@@ -1,3 +1,4 @@
+import { getYearsInRange } from '@/lib/helper/common';
 import { baseDateFormat } from '@/lib/helper/date';
 import {
 	generateDataFromServer,
@@ -17,6 +18,7 @@ const Budget = async ({ searchParams = {} }: { searchParams?: any }) => {
 	);
 
 	const { overview = {}, history = {} } = budget;
+	const years = getYearsInRange(searchParams.from, searchParams.to);
 
 	return (
 		<div className="flex flex-col gap-4">
@@ -30,7 +32,10 @@ const Budget = async ({ searchParams = {} }: { searchParams?: any }) => {
 				/>
 			</div>
 			<BudgetOverview overview={overview} />
-			<BudgetHistory history={history} />
+			<BudgetHistory
+				history={history}
+				years={years}
+			/>
 		</div>
 	);
 };

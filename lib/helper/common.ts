@@ -37,7 +37,7 @@ export function GetFormatterForCurrency(currency: string) {
 	});
 }
 
-function getYearsInRange(start: string, end: string) {
+export const getYearsInRange = (start: string, end: string) => {
 	const startDate = new Date(start);
 	const endDate = new Date(end);
 	if (startDate > endDate) {
@@ -50,4 +50,4 @@ function getYearsInRange(start: string, end: string) {
 		currentYear++;
 	}
 	return years;
-}
+};

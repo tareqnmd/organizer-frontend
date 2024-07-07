@@ -18,7 +18,7 @@ import {
 import BudgetCustomTooltip from './BudgetCustomTooltip';
 import BudgetHistoryPeriodSelector from './BudgetHistoryPeriodSelector';
 
-const BudgetHistory = ({ history }: { history: any }) => {
+const BudgetHistory = ({ history, years }: { history: any; years: any }) => {
 	const [timeFrame, setTimeFrame] = useState<TimeFrame>('month');
 	const [period, setPeriod] = useState<Period>({
 		month: new Date().getMonth(),
@@ -47,6 +47,7 @@ const BudgetHistory = ({ history }: { history: any }) => {
 							setPeriod={setPeriod}
 							timeFrame={timeFrame}
 							setTimeFrame={setTimeFrame}
+							years={years}
 						/>
 
 						<div className="flex h-10 gap-2">
