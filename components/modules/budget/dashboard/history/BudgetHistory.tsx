@@ -4,6 +4,7 @@ import SkeletonWrapper from '@/components/common/SkeletonWrapper';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { GetFormatterForCurrency, getYearsInRange } from '@/lib/helper/common';
+import { monthWiseData, yearWiseData } from '@/lib/helper/date';
 import { Period, TimeFrame } from '@/types';
 import { useEffect, useMemo, useState } from 'react';
 import {
@@ -34,8 +35,6 @@ const BudgetHistory = ({
 	});
 	const [chartData, setChartData] = useState<any>([]);
 
-	console.log('period', chartData);
-
 	const formatter = useMemo(() => {
 		return GetFormatterForCurrency('BDT');
 	}, []);
@@ -48,14 +47,15 @@ const BudgetHistory = ({
 
 	useEffect(() => {
 		if (timeFrame === 'month') {
-			setChartData(
-				month.filter(
-					(item: any) =>
-						item.month === period.month && item.year === period.year
-				)
+			const monthData = month.filter(
+				(item: any) => item.month === period.month && item.year === period.year
 			);
+			const data = monthWiseData(monthData, period);
+			setChartData(data);
 		} else if (timeFrame === 'year') {
-			setChartData(year.filter((item: any) => item.year === period.year));
+			const yearData = year.filter((item: any) => item.year === period.year);
+			const data = yearWiseData(yearData, period);
+			setChartData(data);
 		}
 	}, [month, period, timeFrame, year]);
 
@@ -158,7 +158,7 @@ const BudgetHistory = ({
 											const date = new Date(year, month, day || 1);
 											if (timeFrame === 'year') {
 												return date.toLocaleDateString('default', {
-													month: 'long',
+													month: 'short',
 												});
 											}
 											return date.toLocaleDateString('default', {
