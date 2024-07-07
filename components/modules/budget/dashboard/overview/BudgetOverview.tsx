@@ -1,10 +1,11 @@
 import BudgetCategoryStats from './BudgetCategoryStats';
 import BudgetStatsCards from './BudgetStatsCards';
 
-const BudgetOverview = () => {
+const BudgetOverview = ({ overview }: { overview: any }) => {
+	const { amount_info } = overview;
 	return (
 		<div className="container flex w-full flex-col gap-2">
-			<BudgetStatsCards />
+			<BudgetStatsCards amount={amount_info} />
 			<BudgetCategoryStats />
 		</div>
 	);

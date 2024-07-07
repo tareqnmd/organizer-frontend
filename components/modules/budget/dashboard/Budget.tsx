@@ -16,7 +16,7 @@ const Budget = async ({ searchParams = {} }: { searchParams?: any }) => {
 		nextProperties({})
 	);
 
-	console.log('budget', budget);
+	const { overview, history } = budget;
 
 	return (
 		<>
@@ -27,8 +27,8 @@ const Budget = async ({ searchParams = {} }: { searchParams?: any }) => {
 					to: searchParams.to ?? baseDateFormat(endOfMonth(new Date())),
 				}}
 			/>
-			<BudgetOverview />
-			<BudgetHistory />
+			<BudgetOverview overview={overview} />
+			<BudgetHistory history={history} />
 		</>
 	);
 };

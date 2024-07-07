@@ -5,15 +5,20 @@ import { useMemo } from 'react';
 import { IoIosTrendingDown, IoIosTrendingUp } from 'react-icons/io';
 import { MdOutlineAccountBalanceWallet } from 'react-icons/md';
 import BudgetStatsCard from './BudgetStatsCard';
-function BudgetStatsCards() {
+function BudgetStatsCards({
+	amount,
+}: {
+	amount: {
+		income: number;
+		expense: number;
+		balance: number;
+	};
+}) {
 	const formatter = useMemo(() => {
 		return GetFormatterForCurrency('BDT');
 	}, []);
 
-	const income = 0;
-	const expense = 0;
-
-	const balance = income - expense;
+	const { income, expense, balance } = amount;
 
 	return (
 		<div className="relative flex w-full flex-wrap gap-2 md:flex-nowrap">

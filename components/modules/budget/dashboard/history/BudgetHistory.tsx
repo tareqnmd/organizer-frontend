@@ -18,7 +18,7 @@ import {
 import BudgetCustomTooltip from './BudgetCustomTooltip';
 import BudgetHistoryPeriodSelector from './BudgetHistoryPeriodSelector';
 
-const BudgetHistory = () => {
+const BudgetHistory = ({ history }: { history: any }) => {
 	const [timeframe, setTimeframe] = useState<Timeframe>('month');
 	const [period, setPeriod] = useState<Period>({
 		month: new Date().getMonth(),
