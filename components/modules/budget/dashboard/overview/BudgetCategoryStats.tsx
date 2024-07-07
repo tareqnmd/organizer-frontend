@@ -30,7 +30,7 @@ function BudgetCategoryStats({
 			<SkeletonWrapper isLoading={false}>
 				<BudgetCategoryCard
 					type="expense"
-					data={expense}
+					data={[]}
 				/>
 			</SkeletonWrapper>
 		</div>
