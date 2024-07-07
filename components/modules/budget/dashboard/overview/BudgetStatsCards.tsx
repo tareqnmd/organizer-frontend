@@ -1,9 +1,9 @@
 import SkeletonWrapper from '@/components/common/SkeletonWrapper';
 import { GetFormatterForCurrency } from '@/lib/helper/common';
-import { TrendingDown, TrendingUp, Wallet } from 'lucide-react';
+import { Wallet } from 'lucide-react';
 import { useMemo } from 'react';
+import { IoIosTrendingDown, IoIosTrendingUp } from 'react-icons/io';import { MdOutlineAccountBalanceWallet } from "react-icons/md";
 import BudgetStatsCard from './BudgetStatsCard';
-
 function BudgetStatsCards() {
 	const formatter = useMemo(() => {
 		return GetFormatterForCurrency('BDT');
@@ -22,7 +22,7 @@ function BudgetStatsCards() {
 					value={income}
 					title="Income"
 					icon={
-						<TrendingUp className="h-12 w-12 items-center rounded-lg p-2 text-emerald-500 bg-emerald-400/10" />
+						<IoIosTrendingUp className="h-12 w-12 items-center rounded-lg p-2 text-emerald-500 bg-emerald-400/10" />
 					}
 				/>
 			</SkeletonWrapper>
@@ -33,7 +33,7 @@ function BudgetStatsCards() {
 					value={expense}
 					title="Expense"
 					icon={
-						<TrendingDown className="h-12 w-12 items-center rounded-lg p-2 text-red-500 bg-red-400/10" />
+						<IoIosTrendingDown className="h-12 w-12 items-center rounded-lg p-2 text-red-500 bg-red-400/10" />
 					}
 				/>
 			</SkeletonWrapper>
@@ -44,7 +44,7 @@ function BudgetStatsCards() {
 					value={balance}
 					title="Balance"
 					icon={
-						<Wallet className="h-12 w-12 items-center rounded-lg p-2 text-violet-500 bg-violet-400/10" />
+						<MdOutlineAccountBalanceWallet  className="h-12 w-12 items-center rounded-lg p-2 text-violet-500 bg-violet-400/10" />
 					}
 				/>
 			</SkeletonWrapper>

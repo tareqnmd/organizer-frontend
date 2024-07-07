@@ -25,7 +25,7 @@ export const getPageNumbers = (totalTransactions: number, perPage: number) => {
 };
 
 export const Currencies = [
-	{ value: 'BDT', label: '৳ Taka', locale: 'bn-BD' },
+	{ value: 'BDT', label: '৳ Taka', locale: 'en-US' },
 	{ value: 'USD', label: '$ Dollar', locale: 'en-US' },
 ];
 
