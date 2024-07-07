@@ -1,21 +1,32 @@
-'use client';
-import { axiosInstance } from '@/lib/helper/axios-api';
-import { useEffect, useState } from 'react';
+import { baseDateFormat } from '@/lib/helper/date';
+import {
+	generateDataFromServer,
+	nextProperties,
+} from '@/lib/helper/server-fetch';
+import { endOfMonth, startOfMonth } from 'date-fns';
+import BudgetFilter from './BudgetFilter';
 import BudgetHistory from './history/BudgetHistory';
 import BudgetOverview from './overview/BudgetOverview';
 
-const Budget = () => {
-	const [data, setData] = useState<any>({});
-	useEffect(() => {
-		const fetchData = async () => {
-			const { data } = await axiosInstance('budget/transactions-overview');
-			setData(data);
-		};
-		fetchData();
-	}, []);
+const Budget = async ({ searchParams = {} }: { searchParams?: any }) => {
+	const queryParams = new URLSearchParams(searchParams);
+	const url = `budget?${queryParams}`;
+	const { data: budget = {} } = await generateDataFromServer(
+		url,
+		nextProperties({})
+	);
+
+	console.log('budget', budget);
 
 	return (
 		<>
+			<BudgetFilter
+				searchParams={{
+					...searchParams,
+					from: searchParams.from ?? baseDateFormat(startOfMonth(new Date())),
+					to: searchParams.to ?? baseDateFormat(endOfMonth(new Date())),
+				}}
+			/>
 			<BudgetOverview />
 			<BudgetHistory />
 		</>
