@@ -1,3 +1,5 @@
+import { getYear } from 'date-fns';
+
 export const getError = (error: any, defaultMessage = 'Error Found') => {
 	return error?.data?.message ?? defaultMessage;
 };
@@ -38,14 +40,16 @@ export function GetFormatterForCurrency(currency: string) {
 }
 
 export const getYearsInRange = (start: string, end: string) => {
-	const startDate = new Date(start);
-	const endDate = new Date(end);
-	if (startDate > endDate) {
+	console.log('', start, end);
+	getYear(end);
+	const startYear = getYear(start.split('-').reverse().join(','));
+	const endYear = getYear(end.split('-').reverse().join(','));
+	if (startYear > endYear) {
 		throw new Error('Start date cannot be after end date');
 	}
 	const years = [];
-	let currentYear = startDate.getFullYear();
-	while (currentYear <= endDate.getFullYear()) {
+	let currentYear = startYear;
+	while (currentYear <= endYear) {
 		years.push(currentYear);
 		currentYear++;
 	}

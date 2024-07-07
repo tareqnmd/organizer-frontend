@@ -3,9 +3,9 @@
 import SkeletonWrapper from '@/components/common/SkeletonWrapper';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { GetFormatterForCurrency } from '@/lib/helper/common';
+import { GetFormatterForCurrency, getYearsInRange } from '@/lib/helper/common';
 import { Period, TimeFrame } from '@/types';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
 	Bar,
 	BarChart,
@@ -18,8 +18,15 @@ import {
 import BudgetCustomTooltip from './BudgetCustomTooltip';
 import BudgetHistoryPeriodSelector from './BudgetHistoryPeriodSelector';
 
-const BudgetHistory = ({ history, years }: { history: any; years: any }) => {
+const BudgetHistory = ({
+	history,
+	searchParams,
+}: {
+	history: any;
+	searchParams: any;
+}) => {
 	const [timeFrame, setTimeFrame] = useState<TimeFrame>('month');
+	const [years, setYears] = useState<any>([]);
 	const [period, setPeriod] = useState<Period>({
 		month: new Date().getMonth(),
 		year: new Date().getFullYear(),
@@ -35,6 +42,12 @@ const BudgetHistory = ({ history, years }: { history: any; years: any }) => {
 
 	const dataAvailable =
 		historyDataQuery.data && historyDataQuery.data.length > 0;
+
+	useEffect(() => {
+		if (searchParams?.from && searchParams?.to) {
+			setYears(getYearsInRange(searchParams.from, searchParams.to));
+		}
+	}, [searchParams.from, searchParams.to]);
 
 	return (
 		<>
