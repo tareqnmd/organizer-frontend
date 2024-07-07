@@ -61,10 +61,10 @@ const BudgetHistory = ({
 
 	return (
 		<>
-			<h2 className="mt-6 text-3xl font-bold">History</h2>
-			<Card className="col-span-12 mt-2 w-full">
-				<CardHeader className="gap-2">
-					<CardTitle className="grid grid-flow-row justify-between gap-2 md:grid-flow-col">
+			<h2 className="mt-6 text-xl font-bold">History</h2>
+			<Card className="col-span-12 w-full p-2">
+				<CardHeader className="p-0 gap-2 mb-4">
+					<CardTitle className="flex justify-between items-center gap-2 flex-wrap">
 						<BudgetHistoryPeriodSelector
 							period={period}
 							setPeriod={setPeriod}
@@ -72,7 +72,6 @@ const BudgetHistory = ({
 							setTimeFrame={setTimeFrame}
 							years={years}
 						/>
-
 						<div className="flex h-10 gap-2">
 							<Badge
 								variant={'outline'}
@@ -91,9 +90,11 @@ const BudgetHistory = ({
 						</div>
 					</CardTitle>
 				</CardHeader>
-				<CardContent>
+				<CardContent className="p-0">
 					<SkeletonWrapper isLoading={false}>
-						{chartData?.length > 0 ? (
+						{chartData?.some(
+							(item: any) => item.expense > 0 || item.income > 0
+						) ? (
 							<ResponsiveContainer
 								width={'100%'}
 								height={300}
@@ -152,7 +153,7 @@ const BudgetHistory = ({
 										fontSize={12}
 										tickLine={false}
 										axisLine={false}
-										padding={{ left: 5, right: 5 }}
+										padding={{ left: 0, right: 0 }}
 										dataKey={(data: any) => {
 											const { year, month, day } = data;
 											const date = new Date(year, month, day || 1);

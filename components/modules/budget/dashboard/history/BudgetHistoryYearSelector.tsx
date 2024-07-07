@@ -26,7 +26,7 @@ const BudgetHistoryYearSelector = ({
 				});
 			}}
 		>
-			<SelectTrigger className="w-[180px]">
+			<SelectTrigger className="w-[80px]">
 				<SelectValue />
 			</SelectTrigger>
 			<SelectContent>

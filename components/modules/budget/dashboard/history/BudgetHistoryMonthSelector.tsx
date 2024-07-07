@@ -24,7 +24,7 @@ const BudgetHistoryMonthSelector = ({
 				});
 			}}
 		>
-			<SelectTrigger className="w-[180px]">
+			<SelectTrigger className="w-[120px]">
 				<SelectValue />
 			</SelectTrigger>
 			<SelectContent>

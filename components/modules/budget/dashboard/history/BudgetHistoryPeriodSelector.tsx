@@ -24,7 +24,7 @@ const BudgetHistoryPeriodSelector = ({
 	const historyPeriods = { data: [] };
 
 	return (
-		<div className="flex flex-wrap items-center gap-4">
+		<div className="flex flex-wrap items-center gap-2">
 			<SkeletonWrapper
 				isLoading={false}
 				fullWidth={false}
