@@ -7,7 +7,14 @@ export const authAPi = apiSlice.injectEndpoints({
 				url: 'user/authorization-check',
 			}),
 		}),
+		userUpdate: builder.mutation({
+			query: (data) => ({
+				url: 'user/update',
+				method: 'POST',
+				body: data,
+			}),
+		}),
 	}),
 });
 
-export const { useAuthCheckQuery } = authAPi;
+export const { useAuthCheckQuery, useUserUpdateMutation } = authAPi;
