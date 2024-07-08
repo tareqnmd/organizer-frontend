@@ -9,7 +9,7 @@ const LogoutButton = ({ extraClass }: { extraClass: string }) => {
 	};
 	return (
 		<button
-			className={cn('transition hover:underline', extraClass)}
+			className={cn('transition hover:font-semibold', extraClass)}
 			onClick={logout}
 		>
 			Logout
