@@ -28,7 +28,7 @@ const BudgetCategoryCard = ({
 				{data?.length === 0 && (
 					<div className="flex h-20 w-full flex-col items-center justify-center">
 						No data for the selected period
-						<p className="text-sm text-muted-foreground">
+						<p className="text-center text-sm text-muted-foreground">
 							Try selecting a different period or try adding new{' '}
 							{type === 'income' ? 'incomes' : 'expenses'}
 						</p>
