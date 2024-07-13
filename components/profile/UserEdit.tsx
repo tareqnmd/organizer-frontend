@@ -1,9 +1,12 @@
 'use client';
-import { userUpdateFormInputs } from '@/lib/form-items/profile';
+import {
+	userUpdateFormInputs,
+	userUpdateFormInputsWithPassword,
+} from '@/lib/form-items/profile';
 import { getError } from '@/lib/helper/common';
 import { useUserUpdateMutation } from '@/store/features/auth/api';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useSession } from 'next-auth/react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaSpinner } from 'react-icons/fa';
@@ -12,52 +15,53 @@ import * as z from 'zod';
 import CustomFormInput from '../common/input/CustomFormInput';
 import { Button } from '../ui/button';
 import { Form } from '../ui/form';
+import UserPasswordChange from './UserPasswordChange';
 
-const UserEdit = ({ closeModal }: any) => {
+const FormSchema = (passwordChange = false) =>
+	z.object(
+		passwordChange
+			? {
+					name: z
+						.string({ required_error: 'Name password is required.' })
+						.min(3, 'Name must be at least 3 characters'),
+					email: z.string().email(),
+					password: z
+						.string({
+							required_error: 'Password is required.',
+						})
+						.min(6, 'Password is too short - should be 6 chars minimum.'),
+					confirmPassword: z
+						.string({ required_error: 'Confirm password is required.' })
+						.min(6, 'Password is too short - should be 6 chars minimum.'),
+					currentPassword: z
+						.string({ required_error: 'Current password is required.' })
+						.min(6, 'Password is too short - should be 6 chars minimum.'),
+			  }
+			: {
+					name: z.string().min(3, 'Name must be at least 3 characters'),
+					email: z.string().email(),
+			  }
+	);
+
+const UserEdit = ({ user }: any) => {
 	const [passwordChange, setPasswordChange] = useState(true);
-	const schema = z
-		.object(
-			passwordChange
-				? {
-						name: z.string().min(3, 'Name must be at least 3 characters'),
-						email: z.string().email(),
-						password: z
-							.string()
-							.min(6, 'Password is too short - should be 6 chars minimum.'),
-						confirmPassword: z
-							.string()
-							.min(6, 'Password is too short - should be 6 chars minimum.'),
-						currentPassword: z
-							.string()
-							.min(6, 'Password is too short - should be 6 chars minimum.'),
-				  }
-				: {
-						name: z.string().min(3, 'Name must be at least 3 characters'),
-						email: z.string().email(),
-				  }
-		)
-		.required();
-	const form = useForm<any>({
-		resolver: yupResolver(schema),
+	const router = useRouter();
+	const form = useForm({
+		resolver: zodResolver(FormSchema(passwordChange)),
+		defaultValues: {
+			name: user.name,
+			email: user.email,
+		},
 	});
-	const {
-		control,
-		setValue,
-		handleSubmit,
-		formState: { errors },
-		reset,
-	} = form;
-	const session: any = useSession();
-	const user = session.data.user;
 	const [update, { isSuccess, isLoading, isError, error }] =
 		useUserUpdateMutation();
 
-	const updateMutation = (data: any) => {
+	const updateMutation = async (data: any) => {
 		const { password, currentPassword, confirmPassword, ...rest } = data;
 		if (passwordChange) {
 			if (password === confirmPassword) {
-				update({
-					id: user.userId,
+				await update({
+					id: user.id,
 					data: {
 						...rest,
 						passwordChange,
@@ -69,72 +73,49 @@ const UserEdit = ({ closeModal }: any) => {
 				toast.error('Password miss match');
 			}
 		} else if (!passwordChange) {
-			update({ id: user.userId, data: { ...rest, passwordChange } });
+			await update({ id: user.id, data: { ...rest, passwordChange } });
 		}
 	};
 
 	useEffect(() => {
 		if (isSuccess) {
 			toast.success('Successfully Updated');
-			reset();
-			closeModal();
+			router.refresh();
+			form.reset();
 		}
 		if (isError) {
 			toast.error(getError(error));
 		}
-	}, [isSuccess, isError, error, reset, closeModal]);
-
-	useEffect(() => {
-		if (user?.email) {
-			setValue('name', user?.name);
-			setValue('email', user?.email);
-		}
-	}, [user, setValue]);
+	}, [isSuccess, isError, error, form, router]);
 
 	return (
 		<Form {...form}>
-			<form onSubmit={handleSubmit(updateMutation)}>
-				<div className="flex justify-end items-center gap-1 ">
-					<input
-						id="passwordChange"
-						type="checkbox"
-						checked={passwordChange}
-						onChange={(e) => setPasswordChange(e.target.checked)}
-						className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded cursor-pointer"
-					/>
-					<label
-						htmlFor="passwordChange"
-						className="text-sm font-medium text-white select-none cursor-pointer"
-					>
-						Change Password?
-					</label>
+			<form onSubmit={form.handleSubmit(updateMutation)}>
+				<UserPasswordChange
+					passwordChange={passwordChange}
+					setPasswordChange={setPasswordChange}
+				/>
+				<div className="grid md:grid-cols-2 gap-2 mb-4">
+					{[
+						...(passwordChange
+							? userUpdateFormInputsWithPassword
+							: userUpdateFormInputs),
+					].map((input) => (
+						<CustomFormInput
+							key={input.name}
+							input={input}
+							control={form.control}
+						/>
+					))}
 				</div>
-				<div className="grid md:grid-cols-2 gap-2">
-					{userUpdateFormInputs?.map((input: any) =>
-						input?.type === 'password' && !passwordChange ? null : (
-							<CustomFormInput
-								key={input.name}
-								input={input}
-								control={control}
-							/>
-						)
-					)}
-				</div>
-				<div className="flex justify-end mt-6">
-					<Button
-						className="w-full flex gap-2 mt-2"
-						type="submit"
-						disabled={isLoading}
-					>
-						{isLoading ? (
-							<FaSpinner
-								className="animate-spin"
-								size={16}
-							/>
-						) : null}{' '}
-						Update
-					</Button>
-				</div>
+				<Button
+					className="w-full flex gap-1 items-center"
+					type="submit"
+					disabled={isLoading}
+				>
+					{isLoading ? <FaSpinner className="animate-spin" /> : null}
+					Update
+				</Button>
 			</form>
 		</Form>
 	);

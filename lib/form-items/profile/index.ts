@@ -16,6 +16,26 @@ export const userUpdateFormInputs = [
 		required: true,
 		disabled: true,
 	},
+];
+
+export const userUpdateFormInputsWithPassword = [
+	{
+		name: 'name',
+		label: 'Name',
+		type: 'text',
+		placeholder: 'Name',
+		description: '',
+		required: true,
+	},
+	{
+		name: 'email',
+		label: 'Email',
+		type: 'email',
+		placeholder: 'Email',
+		description: '',
+		required: true,
+		disabled: true,
+	},
 	{
 		name: 'currentPassword',
 		label: 'Current Password',

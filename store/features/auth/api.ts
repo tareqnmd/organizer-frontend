@@ -8,9 +8,9 @@ export const authAPi = apiSlice.injectEndpoints({
 			}),
 		}),
 		userUpdate: builder.mutation({
-			query: (data) => ({
-				url: 'user/update',
-				method: 'POST',
+			query: ({ id, data }) => ({
+				url: `user/${id}`,
+				method: 'PUT',
 				body: data,
 			}),
 		}),
