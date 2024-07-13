@@ -49,10 +49,6 @@ const UserEdit = ({ user }: any) => {
 	const router = useRouter();
 	const form = useForm({
 		resolver: zodResolver(FormSchema(passwordChange)),
-		defaultValues: {
-			name: user.name,
-			email: user.email,
-		},
 	});
 
 	const { update } = useSession();
@@ -61,38 +57,48 @@ const UserEdit = ({ user }: any) => {
 		useUserUpdateMutation();
 
 	const updateMutation = async (data: any) => {
-		const { password, currentPassword, confirmPassword, ...rest } = data;
-		if (passwordChange) {
-			if (password === confirmPassword) {
-				await updateUser({
-					id: user.id,
-					data: {
-						...rest,
-						passwordChange,
-						currentPassword,
-						password,
-					},
-				});
+		try {
+			const { password, currentPassword, confirmPassword, ...rest } = data;
+			if (passwordChange) {
+				if (password === confirmPassword) {
+					await updateUser({
+						id: user.id,
+						data: {
+							...rest,
+							passwordChange,
+							currentPassword,
+							password,
+						},
+					});
+					await update({ name: data.name });
+					router.refresh();
+				} else {
+					toast.error('Password miss match');
+				}
+			} else if (!passwordChange) {
+				await updateUser({ id: user.id, data: { ...rest, passwordChange } });
 				await update({ name: data.name });
-			} else {
-				toast.error('Password miss match');
+				router.refresh();
 			}
-		} else if (!passwordChange) {
-			await updateUser({ id: user.id, data: { ...rest, passwordChange } });
-			await update({ name: data.name });
-		}
+		} catch (error) {}
 	};
 
 	useEffect(() => {
 		if (isSuccess) {
 			toast.success('Successfully Updated');
-			router.refresh();
 			form.reset();
 		}
 		if (isError) {
 			toast.error(getError(error));
 		}
 	}, [isSuccess, isError, error, form, router]);
+
+	useEffect(() => {
+		if (user?.id) {
+			form.setValue('name', user.name);
+			form.setValue('email', user.email);
+		}
+	}, [form, user]);
 
 	return (
 		<Form {...form}>
