@@ -29,7 +29,7 @@ const Links = async () => {
 					/>
 				</li>
 			))}
-			<UserOptions image={session?.user?.image} />
+			<UserOptions user={session?.user} />
 			<ModeToggle />
 		</ul>
 	);

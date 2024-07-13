@@ -16,7 +16,7 @@ const AuthLayout = async ({ children }: { children: React.ReactNode }) => {
 			<div className="absolute top-4 right-4">
 				<ModeToggle />
 			</div>
-			<Card className={cn('shadow-md p-6 min-w-[320px]', 'card-design')}>
+			<Card className={cn('shadow-md p-6 w-full max-w-[320px] transition-all', 'card-design')}>
 				<div className="flex flex-col items-center gap-1">
 					<LargeLogo />
 					<div className="grid gap-3 place-items-center">{children}</div>

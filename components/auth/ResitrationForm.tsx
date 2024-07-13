@@ -1,5 +1,6 @@
 'use client';
 import { registrationFormItems } from '@/lib/form-items/auth';
+import { getError } from '@/lib/helper/common';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LogIn } from 'lucide-react';
 import { signIn } from 'next-auth/react';
@@ -9,8 +10,6 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 import CustomFormInput from '../common/input/CustomFormInput';
-import ErrorMessage from '../common/message/ErrorMessage';
-import SuccessMessage from '../common/message/SuccessMessage';
 import { Button } from '../ui/button';
 import { Form } from '../ui/form';
 
@@ -42,13 +41,14 @@ const RegistrationForm = () => {
 		try {
 			setLoading(true);
 			const res = await signIn('register', { ...data, redirect: false });
-			if (res?.error) throw new Error();
-			toast(<SuccessMessage />);
-			if (res?.status === 200) {
+			if (res?.ok) {
+				toast.success('Registration Successful');
 				router.push('/');
+			} else {
+				toast.error(getError(res?.error));
 			}
 		} catch (error) {
-			toast(<ErrorMessage />);
+			toast.error(getError(error));
 		} finally {
 			setLoading(false);
 		}

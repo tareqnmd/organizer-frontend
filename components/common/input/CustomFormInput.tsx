@@ -60,7 +60,7 @@ const CustomFormInput = ({
 			<Input
 				type={type}
 				placeholder={placeholder}
-				{...field}
+				{...{ ...input, ...field }}
 			/>
 		);
 	};
