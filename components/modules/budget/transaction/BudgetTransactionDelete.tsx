@@ -1,6 +1,4 @@
 'use client';
-import ErrorMessage from '@/components/common/message/ErrorMessage';
-import SuccessMessage from '@/components/common/message/SuccessMessage';
 import { Button } from '@/components/ui/button';
 import {
 	Dialog,
@@ -32,16 +30,12 @@ const BudgetTransactionDelete = ({
 	};
 
 	useEffect(() => {
-		if (isError || isSuccess) {
-			toast(
-				isError ? (
-					<ErrorMessage message={getError(error)} />
-				) : (
-					<SuccessMessage message={`Transaction successfully deleted`} />
-				)
-			);
+		if (isSuccess) {
+			toast.success(`Transaction successfully deleted`);
 			setOpen(false);
 			router.refresh();
+		} else if (isError) {
+			toast.error(getError(error));
 		}
 	}, [error, isError, isSuccess, router]);
 	return (
