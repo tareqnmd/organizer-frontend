@@ -6,25 +6,30 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
-import { useGetOptionsQuery } from '@/store/features/common/options-api';
+import { axiosInstance } from '@/lib/helper/axios-api';
 import { useEffect, useState } from 'react';
 
 const FormSelect = ({ input, field, extraTriggerClassName = '' }: any) => {
+	const [dynamicOptions, setDynamicOptions] = useState([]);
 	const [options, setOptions] = useState([]);
 	const [value, setValue] = useState('');
-	const { placeholder, staticOption = [], optionUrl } = input;
-	const { data: dynamicOption } = useGetOptionsQuery(optionUrl, {
-		skip: staticOption?.length > 0,
-		refetchOnMountOrArgChange: true,
-	});
+	const { placeholder, staticOptions = [], optionUrl } = input;
 
 	useEffect(() => {
-		setOptions(staticOption?.length > 0 ? staticOption : dynamicOption);
-	}, [staticOption, dynamicOption]);
+		setOptions(staticOptions?.length > 0 ? staticOptions : dynamicOptions);
+	}, [staticOptions, dynamicOptions]);
 
 	useEffect(() => {
 		field?.value && setValue(field?.value);
 	}, [field]);
+
+	useEffect(() => {
+		const getDynamicData = async (url: string) => {
+			const { data = [] } = await axiosInstance(url);
+			setDynamicOptions(data);
+		};
+		optionUrl && getDynamicData(optionUrl);
+	}, [optionUrl]);
 
 	return (
 		<Select
