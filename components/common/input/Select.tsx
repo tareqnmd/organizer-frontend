@@ -20,8 +20,10 @@ const FormSelect = ({ input, field, extraTriggerClassName = '' }: any) => {
 	}, [staticOptions, dynamicOptions]);
 
 	useEffect(() => {
-		field?.value && setValue(field?.value);
-	}, [field]);
+		if (field?.value) {
+			setValue(field?.value);
+		}
+	}, [field?.value]);
 
 	useEffect(() => {
 		const getDynamicData = async (url: string) => {
