@@ -52,6 +52,6 @@ export const getYearsInRange = (start: string, end: string) => {
 		years.push(currentYear);
 		currentYear++;
 	}
-	console.log('years', years);
+	console.log('years', start, end, startYear, endYear, years);
 	return years;
 };
