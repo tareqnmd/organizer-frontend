@@ -37,9 +37,11 @@ export function LoginForm() {
 		try {
 			setLoading(true);
 			const res = await signIn('login', { ...data, redirect: false });
-			if (res?.status === 200) {
+			if (res?.ok) {
 				toast.success('Login Successful');
 				router.push('/');
+			} else {
+				toast.error(getError(res?.error));
 			}
 		} catch (error) {
 			toast.error(getError(error));
