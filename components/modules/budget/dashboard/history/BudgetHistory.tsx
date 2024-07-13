@@ -201,7 +201,7 @@ const BudgetHistory = ({
 						) : (
 							<Card className="flex h-[300px] flex-col items-center justify-center bg-background">
 								No data for the selected period
-								<p className="text-sm text-muted-foreground">
+								<p className="text-sm text-center text-muted-foreground">
 									Try selecting a different period or adding new transactions
 								</p>
 							</Card>
