@@ -7,14 +7,13 @@ import * as z from 'zod';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { loginFormItems } from '@/lib/form-items/auth';
+import { getError } from '@/lib/helper/common';
 import { LogIn } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import CustomFormInput from '../common/input/CustomFormInput';
-import ErrorMessage from '../common/message/ErrorMessage';
-import SuccessMessage from '../common/message/SuccessMessage';
 
 const FormSchema = z.object({
 	email: z.string().email(),
@@ -38,13 +37,12 @@ export function LoginForm() {
 		try {
 			setLoading(true);
 			const res = await signIn('login', { ...data, redirect: false });
-			if (res?.error) throw new Error();
-			toast(<SuccessMessage />);
 			if (res?.status === 200) {
+				toast.success('Login Successful');
 				router.push('/');
 			}
 		} catch (error) {
-			toast(<ErrorMessage />);
+			toast.error(getError(error));
 		} finally {
 			setLoading(false);
 		}
