@@ -6,6 +6,7 @@ import {
 import { getError } from '@/lib/helper/common';
 import { useUserUpdateMutation } from '@/store/features/auth/api';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -53,14 +54,17 @@ const UserEdit = ({ user }: any) => {
 			email: user.email,
 		},
 	});
-	const [update, { isSuccess, isLoading, isError, error }] =
+
+	const { update } = useSession();
+
+	const [updateUser, { isSuccess, isLoading, isError, error, data }] =
 		useUserUpdateMutation();
 
 	const updateMutation = async (data: any) => {
 		const { password, currentPassword, confirmPassword, ...rest } = data;
 		if (passwordChange) {
 			if (password === confirmPassword) {
-				await update({
+				await updateUser({
 					id: user.id,
 					data: {
 						...rest,
@@ -69,11 +73,13 @@ const UserEdit = ({ user }: any) => {
 						password,
 					},
 				});
+				await update({ name: data.name });
 			} else {
 				toast.error('Password miss match');
 			}
 		} else if (!passwordChange) {
-			await update({ id: user.id, data: { ...rest, passwordChange } });
+			await updateUser({ id: user.id, data: { ...rest, passwordChange } });
+			await update({ name: data.name });
 		}
 	};
 

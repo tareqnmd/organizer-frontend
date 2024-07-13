@@ -125,9 +125,12 @@ export const authOptions = {
 				return true;
 			}
 		},
-		async jwt({ token, user }: any) {
+		async jwt({ token, trigger, session, user }: any) {
 			if (user) {
 				token = { ...user, iat: token.iat, exp: token.exp, jti: token.jti };
+			}
+			if (trigger === 'update' && session?.name) {
+				token.name = session.name;
 			}
 			return token;
 		},
