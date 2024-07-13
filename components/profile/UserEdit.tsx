@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { MdUpdate } from 'react-icons/md';
+import { FaSpinner } from 'react-icons/fa';
 import { toast } from 'sonner';
 import * as z from 'zod';
 import CustomFormInput from '../common/input/CustomFormInput';
@@ -126,7 +126,13 @@ const UserEdit = ({ closeModal }: any) => {
 						type="submit"
 						disabled={isLoading}
 					>
-						<MdUpdate /> Update
+						{isLoading ? (
+							<FaSpinner
+								className="animate-spin"
+								size={16}
+							/>
+						) : null}{' '}
+						Update
 					</Button>
 				</div>
 			</form>

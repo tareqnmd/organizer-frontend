@@ -19,7 +19,7 @@ const config = {
     },
     extend: {
       colors: {
-				dark: '#020617',
+				dark: '#0B2447',
 				light: '#ffffff',
 				card: {
 					light: '#ffffff',
