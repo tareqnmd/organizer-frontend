@@ -1,11 +1,11 @@
 'use client';
-import ErrorMessage from '@/components/common/message/ErrorMessage';
 import { Button } from '@/components/ui/button';
 import { getError } from '@/lib/helper/common';
 import { useCreateNoteMutation } from '@/store/features/note/api';
 import { Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import { toast } from 'sonner';
 
 const NoteCreate = () => {
 	const router = useRouter();
@@ -28,7 +28,7 @@ const NoteCreate = () => {
 		if (isCreateSuccess && data?.id) {
 			router.push(`/note/${data.id}`);
 		} else if (isCreateError) {
-			<ErrorMessage message={getError(createError)} />;
+			toast.error(getError(createError));
 		}
 	}, [createError, data, isCreateError, isCreateSuccess, router]);
 

@@ -20,13 +20,7 @@ const Budget = async ({ searchParams = {} }: { searchParams?: any }) => {
 	return (
 		<div className="flex flex-col gap-4">
 			<div className="grid justify-end">
-				<BudgetFilter
-					searchParams={{
-						...searchParams,
-						from: searchParams.from ?? baseDateFormat(startOfMonth(new Date())),
-						to: searchParams.to ?? baseDateFormat(endOfMonth(new Date())),
-					}}
-				/>
+				<BudgetFilter searchParams={searchParams} />
 			</div>
 			<BudgetOverview overview={overview} />
 			<BudgetHistory

@@ -19,10 +19,8 @@ const BudgetHistoryPeriodSelector = ({
 	setPeriod,
 	timeFrame,
 	setTimeFrame,
-	years
+	years,
 }: Props) => {
-	const historyPeriods = { data: [] };
-
 	return (
 		<div className="flex flex-wrap items-center gap-2">
 			<SkeletonWrapper

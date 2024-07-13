@@ -1,6 +1,5 @@
 'use client';
 import CustomFormInput from '@/components/common/input/CustomFormInput';
-import ErrorMessage from '@/components/common/message/ErrorMessage';
 import { Form } from '@/components/ui/form';
 import { noteFormItems } from '@/lib/form-items/modules/note';
 import { getError } from '@/lib/helper/common';
@@ -43,7 +42,7 @@ const NoteForm = ({ note }: { note: NoteType }) => {
 
 	useEffect(() => {
 		if (isEditError) {
-			toast(<ErrorMessage message={getError(editError)} />);
+			toast.error(getError(editError));
 		}
 	}, [editError, isEditError, router]);
 

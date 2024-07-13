@@ -1,7 +1,5 @@
 'use client';
 import CustomFormInput from '@/components/common/input/CustomFormInput';
-import ErrorMessage from '@/components/common/message/ErrorMessage';
-import SuccessMessage from '@/components/common/message/SuccessMessage';
 import { Button } from '@/components/ui/button';
 import { DialogFooter } from '@/components/ui/dialog';
 import { Form } from '@/components/ui/form';
@@ -88,22 +86,14 @@ const BudgetTransactionForm = ({
 	}, [form, transaction]);
 
 	useEffect(() => {
-		if (isEditError || isCreateError || isEditSuccess || isCreateSuccess) {
-			toast(
-				isEditError || isCreateError ? (
-					<ErrorMessage
-						message={getError(transaction?.id ? editError : createError)}
-					/>
-				) : (
-					<SuccessMessage
-						message={`Transaction successfully ${
-							transaction?.id ? 'updated' : 'created'
-						}`}
-					/>
-				)
+		if (isCreateSuccess || isEditSuccess) {
+			toast.success(
+				`Transaction successfully ${transaction?.id ? 'updated' : 'created'}`
 			);
-			router.refresh();
 			setOpen(false);
+			router.refresh();
+		} else if (isEditError || isCreateError) {
+			toast.error(getError(editError || createError));
 		}
 	}, [
 		transaction?.id,

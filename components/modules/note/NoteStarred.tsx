@@ -1,6 +1,4 @@
 'use client';
-import ErrorMessage from '@/components/common/message/ErrorMessage';
-import SuccessMessage from '@/components/common/message/SuccessMessage';
 import { getError } from '@/lib/helper/common';
 import { useEditNoteMutation } from '@/store/features/note/api';
 import { NoteType } from '@/types/modules/note/budget-note-types';
@@ -22,19 +20,15 @@ const NoteStarred = ({ note }: { note: NoteType }) => {
 	};
 
 	useEffect(() => {
-		if (isError || isSuccess) {
-			toast(
-				isError ? (
-					<ErrorMessage message={getError(error)} />
-				) : (
-					<SuccessMessage
-						message={`Note successfully ${
-							data.starred === false ? 'remove from starred' : 'starred'
-						}`}
-					/>
-				)
+		if (isSuccess) {
+			toast.success(
+				`Note successfully ${
+					data.starred === false ? 'remove from starred' : 'starred'
+				}`
 			);
 			router.refresh();
+		} else if (isError) {
+			toast.error(getError(error));
 		}
 	}, [data.starred, error, isError, isSuccess, router]);
 

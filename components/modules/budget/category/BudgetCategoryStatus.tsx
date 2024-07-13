@@ -1,6 +1,4 @@
 'use client';
-import ErrorMessage from '@/components/common/message/ErrorMessage';
-import SuccessMessage from '@/components/common/message/SuccessMessage';
 import { Button } from '@/components/ui/button';
 import {
 	Dialog,
@@ -35,20 +33,16 @@ const BudgetCategoryStatus = ({
 	};
 
 	useEffect(() => {
-		if (isError || isSuccess) {
-			toast(
-				isError ? (
-					<ErrorMessage message={getError(error)} />
-				) : (
-					<SuccessMessage
-						message={`Category successfully ${
-							data?.status === 0 ? 'inactivated' : 'activated'
-						}`}
-					/>
-				)
+		if (isSuccess) {
+			toast.success(
+				`Category successfully ${
+					data?.status === 0 ? 'inactivated' : 'activated'
+				}`
 			);
-			router.refresh();
 			setOpen(false);
+			router.refresh();
+		} else if (isError) {
+			toast.error(getError(error));
 		}
 	}, [data.status, error, isError, isSuccess, router]);
 	return (
