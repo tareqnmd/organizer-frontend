@@ -46,13 +46,13 @@ const BudgetHistory = ({
 	}, [searchParams.from, searchParams.to]);
 
 	useEffect(() => {
-		if (timeFrame === 'month') {
+		if (timeFrame === 'month' && month?.length > 0) {
 			const monthData = month.filter(
 				(item: any) => item.month === period.month && item.year === period.year
 			);
 			const data = monthWiseData(monthData, period);
 			setChartData(data);
-		} else if (timeFrame === 'year') {
+		} else if (timeFrame === 'year' && year?.length > 0) {
 			const yearData = year.filter((item: any) => item.year === period.year);
 			const data = yearWiseData(yearData, period);
 			setChartData(data);
