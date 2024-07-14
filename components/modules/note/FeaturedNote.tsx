@@ -15,7 +15,7 @@ const FeaturedNote = async () => {
 		<div className="border rounded-md overflow-hidden">
 			<div className="p-2 bg-gray-200 border-b flex items-center gap-2">
 				<Link href={`/note/${note.id}`}>
-					<span className="font-medium">{note?.subject}</span>
+					<span className="font-bold">{note?.subject}</span>
 				</Link>
 				<Badge className="ml-auto">New</Badge>
 				<NoteAction note={note} />
