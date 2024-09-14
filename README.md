@@ -7,7 +7,7 @@
 ### Technology
 - Next.js
 - React
-- Javascript
+- Typescript
 - Tailwind CSS
 - Sass
 - Shadcn
