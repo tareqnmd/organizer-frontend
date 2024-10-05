@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Logo from '../Logo';
 import Links from './Links';
+import Sidebar from './SIdebar';
 
 const Navbar = () => {
 	return (
@@ -10,7 +11,7 @@ const Navbar = () => {
 					<Logo />
 				</Link>
 				<Links />
-				<Sidebar/>
+				<Sidebar />
 			</div>
 		</nav>
 	);
