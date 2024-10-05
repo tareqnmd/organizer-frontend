@@ -1,5 +1,7 @@
+import TaskManager from '@/components/modules/task/TaskManager';
+
 const page = () => {
-	return <div className="text-xl m-4 text-center">Task Manager</div>;
+	return <TaskManager />;
 };
 
 export default page;
