@@ -91,7 +91,7 @@ const BoardView = () => {
 		});
 	}
 	return (
-		<div className="w-full h-full overflow-x-auto border">
+		<div className="w-full overflow-x-auto border">
 			<DnDContextLayout handleDragEnd={handleDragEnd}>
 				<div className="flex gap-4 w-max">
 					{lists.map((list: any) => (
