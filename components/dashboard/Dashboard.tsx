@@ -3,14 +3,14 @@ import Module from './Module';
 export type ModuleType = {
 	name: string;
 	path: string;
-	icon: string;
+	icon: any;
 	description: string;
 };
 type ModulesType = ModuleType[];
 
 const Dashboard = ({ modules }: { modules: ModulesType }) => {
 	return (
-		<div className="flex gap-4 items-center justify-center h-full">
+		<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 place-content-center gap-4 h-full">
 			{modules.map((module) => (
 				<Module
 					key={module.path}

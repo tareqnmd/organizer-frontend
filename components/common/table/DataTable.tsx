@@ -1,6 +1,5 @@
 'use client';
 
-import { ChevronDownIcon } from '@radix-ui/react-icons';
 import {
 	ColumnFiltersState,
 	SortingState,
@@ -8,7 +7,6 @@ import {
 	flexRender,
 	getCoreRowModel,
 	getFilteredRowModel,
-	getPaginationRowModel,
 	getSortedRowModel,
 	useReactTable,
 } from '@tanstack/react-table';
@@ -29,6 +27,7 @@ import {
 	TableHeader,
 	TableRow,
 } from '@/components/ui/table';
+import { ChevronDown } from 'lucide-react';
 
 export function DataTable({ columns = [], data = [] }: any) {
 	const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -67,7 +66,7 @@ export function DataTable({ columns = [], data = [] }: any) {
 							variant="outline"
 							className="ml-auto h-8"
 						>
-							View <ChevronDownIcon className="ml-2 h-4 w-4" />
+							View <ChevronDown className="ml-2 h-4 w-4" />
 						</Button>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent align="end">

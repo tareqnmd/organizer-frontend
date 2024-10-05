@@ -7,9 +7,9 @@ import {
 	BudgetTransactionType,
 	BudgetTransactionsType,
 } from '@/types/modules/budget/budget-transaction-types';
-import { CaretSortIcon } from '@radix-ui/react-icons';
 import { ColumnDef } from '@tanstack/react-table';
 import { format } from 'date-fns';
+import { ArrowDownUp } from 'lucide-react';
 import BudgetTransactionAction from './BudgetTransactionAction';
 
 const typeClass = (type: string) => (type === 'Expense' ? 'expense' : 'income');
@@ -29,7 +29,7 @@ const BudgetTransactionsTable = ({
 					onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
 				>
 					Category
-					<CaretSortIcon className="ml-2 h-4 w-4" />
+					<ArrowDownUp className="shrink-0 ml-2 h-4 w-4" />
 				</Button>
 			),
 			cell: ({ row }) => (
@@ -45,7 +45,7 @@ const BudgetTransactionsTable = ({
 					onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
 				>
 					Type
-					<CaretSortIcon />
+					<ArrowDownUp className="shrink-0 ml-2 h-4 w-4" />
 				</Button>
 			),
 			cell: ({ row }) => (
@@ -67,7 +67,7 @@ const BudgetTransactionsTable = ({
 					onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
 				>
 					Date
-					<CaretSortIcon />
+					<ArrowDownUp className="shrink-0 ml-2 h-4 w-4" />
 				</Button>
 			),
 			cell: ({ row }) => (
@@ -93,7 +93,7 @@ const BudgetTransactionsTable = ({
 					onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
 				>
 					Amount
-					<CaretSortIcon className="ml-2 h-4 w-4" />
+					<ArrowDownUp className="shrink-0 ml-2 h-4 w-4" />
 				</Button>
 			),
 			enableHiding: false,

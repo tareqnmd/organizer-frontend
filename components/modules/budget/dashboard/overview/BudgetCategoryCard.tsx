@@ -2,6 +2,7 @@ import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { GetFormatterForCurrency } from '@/lib/helper/common';
+import { cn } from '@/lib/utils';
 import { TransactionType } from '@/types/modules/budget';
 import { useMemo } from 'react';
 
@@ -19,7 +20,9 @@ const BudgetCategoryCard = ({
 	return (
 		<Card className="w-full flex flex-col gap-2 p-2">
 			<CardHeader className="p-0">
-				<CardTitle className="text-lg">
+				<CardTitle
+					className={(cn('text-lg'), data?.length === 0 ? 'text-center' : '')}
+				>
 					{type === 'income' ? 'Incomes' : 'Expenses'} by category
 				</CardTitle>
 			</CardHeader>
