@@ -10,6 +10,7 @@ const Navbar = () => {
 					<Logo />
 				</Link>
 				<Links />
+				<Sidebar/>
 			</div>
 		</nav>
 	);
