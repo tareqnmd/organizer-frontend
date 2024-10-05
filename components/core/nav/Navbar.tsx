@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Logo from '../Logo';
+import Sidebar from '../Sidebar';
 import Links from './Links';
-import RSidebar from './RSidebar';
 
 const Navbar = () => {
 	return (
@@ -11,7 +11,7 @@ const Navbar = () => {
 					<Logo />
 				</Link>
 				<Links />
-				<RSidebar />
+				<Sidebar />
 			</div>
 		</nav>
 	);
