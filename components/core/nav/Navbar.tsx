@@ -19,7 +19,7 @@ const Navbar = async () => {
 				<div className="flex gap-4">
 					<UserOptions user={session?.user} />
 					<ModeToggle />
-					<Sidebar />
+					<Sidebar user={session?.user} />
 				</div>
 			</div>
 		</nav>

@@ -7,9 +7,11 @@ import { usePathname } from 'next/navigation';
 const NavLink = ({
 	link,
 	exact = true,
+	extraClass = '',
 }: {
 	link: LinkType;
 	exact?: boolean;
+	extraClass?: string;
 }) => {
 	const pathName = usePathname();
 	return (
@@ -18,7 +20,8 @@ const NavLink = ({
 			className={cn(
 				'transition hover:font-semibold',
 				(exact ? pathName === link.path : pathName.includes(link.path)) &&
-					'font-semibold'
+					'font-semibold',
+				extraClass
 			)}
 		>
 			{link.name}
