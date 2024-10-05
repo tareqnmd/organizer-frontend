@@ -14,8 +14,8 @@ const DnDContextLayout = ({
 	handleDragOver,
 }: {
 	children: React.ReactNode;
-	handleDragEnd: any;
-	handleDragOver: any;
+	handleDragEnd?: any;
+	handleDragOver?: any;
 }) => {
 	const sensors = useSensors(
 		useSensor(PointerSensor),
