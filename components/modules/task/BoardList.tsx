@@ -27,10 +27,12 @@ const BoardList = ({ list }: any) => {
 		>
 			<div className="flex items-center justify-between">
 				{list?.title ?? ''}
-				<GripVertical
+				<button
 					{...listeners}
 					{...attributes}
-				/>
+				>
+					<GripVertical className="active:cursor-grabbing cursor-grab" />
+				</button>
 			</div>
 			<div className="flex flex-col gap-2">
 				<SortableContext items={list.cards}>
