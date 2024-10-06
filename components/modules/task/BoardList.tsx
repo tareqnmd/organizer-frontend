@@ -1,6 +1,6 @@
 import { SortableContext, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { GripVertical } from 'lucide-react';
+import { Grip } from 'lucide-react';
 import BoardListCard from './BoardListCard';
 const BoardList = ({ list }: any) => {
 	const {
@@ -25,13 +25,16 @@ const BoardList = ({ list }: any) => {
 				isDragging ? 'z-20' : 'z-0'
 			}`}
 		>
-			<div className="flex items-center justify-between">
-				{list?.title ?? ''}
+			<div className="flex items-center justify-between m-2">
+				<strong>{list?.title ?? ''}</strong>
 				<button
 					{...listeners}
 					{...attributes}
 				>
-					<GripVertical className="active:cursor-grabbing cursor-grab" />
+					<Grip
+						size={18}
+						className="active:cursor-grabbing cursor-grab"
+					/>
 				</button>
 			</div>
 			<div className="flex flex-col gap-2">
