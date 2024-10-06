@@ -115,15 +115,14 @@ const BoardView = () => {
 	};
 
 	return (
-		<div className="w-full overflow-x-auto border">
+		<div className="w-full overflow-x-auto">
 			<DnDContextLayout handleDragEnd={onDragEnd}>
 				<div className="flex gap-4 w-max">
 					<SortableContext
 						id={'d'}
 						items={lists}
-						// strategy={rectSortingStrategy}
 					>
-						<div className="flex gap-2 border p-2 shadow">
+						<div className="flex gap-2 shadow">
 							<SortableContext items={lists}>
 								{lists.map((list: any) => (
 									<BoardList
