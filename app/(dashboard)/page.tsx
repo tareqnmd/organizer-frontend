@@ -1,10 +1,10 @@
 import Dashboard from '@/components/dashboard/Dashboard';
-import { modules } from '../../lib/helper/modules';
+import { Routes } from '@/lib/helper/routes';
 
 const page = async () => {
 	return (
 		<main className="container mx-auto py-4">
-			<Dashboard modules={modules} />
+			<Dashboard modules={Routes.modules} />
 		</main>
 	);
 };

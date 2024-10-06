@@ -6,11 +6,11 @@ import {
 import { getError } from '@/lib/helper/common';
 import { useUserUpdateMutation } from '@/store/features/auth/api';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Loader } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FaSpinner } from 'react-icons/fa';
 import { toast } from 'sonner';
 import * as z from 'zod';
 import CustomFormInput from '../common/input/CustomFormInput';
@@ -125,7 +125,7 @@ const UserEdit = ({ user }: any) => {
 					type="submit"
 					disabled={isLoading}
 				>
-					{isLoading ? <FaSpinner className="animate-spin" /> : null}
+					{isLoading ? <Loader className="animate-spin" /> : null}
 					Update
 				</Button>
 			</form>

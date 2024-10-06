@@ -6,9 +6,10 @@ interface IconProps extends LucideProps {
 	name: keyof typeof dynamicIconImports;
 }
 
-const DynamicLucideIcon = ({ name, ...props }: IconProps) => {
-	const LucideIcon = dynamic(dynamicIconImports[name]);
-	return <LucideIcon {...props} />;
+const DynamicIcon = ({ name, ...props }: IconProps) => {
+	console.log('name', name);
+	const Icon = dynamic(dynamicIconImports[name]);
+	return <Icon {...props} />;
 };
 
-export default DynamicLucideIcon;
+export default DynamicIcon;
