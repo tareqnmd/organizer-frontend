@@ -50,20 +50,18 @@ const BoardView = () => {
 				handleDragStart={onDragStart}
 				handleDragEnd={onDragEnd}
 			>
-				<div className="flex gap-4 w-max">
-					<SortableContext items={lists}>
-						<div className="flex gap-2">
-							<SortableContext items={lists}>
-								{lists.map((list: any) => (
-									<BoardList
-										list={list}
-										key={list.id}
-									/>
-								))}
-							</SortableContext>
-						</div>
-					</SortableContext>
-				</div>
+				<SortableContext items={lists}>
+					<div className="flex gap-2 items-start w-max">
+						<SortableContext items={lists}>
+							{lists.map((list: any) => (
+								<BoardList
+									list={list}
+									key={list.id}
+								/>
+							))}
+						</SortableContext>
+					</div>
+				</SortableContext>
 			</DnDContextLayout>
 		</div>
 	);
