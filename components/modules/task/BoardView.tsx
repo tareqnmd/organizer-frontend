@@ -51,7 +51,7 @@ const BoardView = () => {
 				handleDragEnd={onDragEnd}
 			>
 				<SortableContext items={lists}>
-					<div className="flex gap-2 items-start w-max">
+					<div className="flex gap-2 w-max">
 						<SortableContext items={lists}>
 							{lists.map((list: any) => (
 								<BoardList

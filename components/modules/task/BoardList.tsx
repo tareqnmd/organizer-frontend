@@ -21,31 +21,31 @@ const BoardList = ({ list }: any) => {
 			ref={setNodeRef}
 			key={list.id}
 			style={style}
-			className={`border shadow rounded p-2 w-[280px] bg-white relative ${
-				isDragging ? 'z-20' : 'z-0'
-			}`}
+			className={`w-[280px] bg-white relative ${isDragging ? 'z-20' : 'z-0'}`}
 		>
-			<div className="flex items-center justify-between m-2">
-				<strong>{list?.title ?? ''}</strong>
-				<button
-					{...listeners}
-					{...attributes}
-				>
-					<Grip
-						size={18}
-						className="active:cursor-grabbing cursor-grab"
-					/>
-				</button>
-			</div>
-			<div className="flex flex-col gap-2">
-				<SortableContext items={list.cards}>
-					{list?.cards.map((card: any) => (
-						<BoardListCard
-							key={card.id}
-							card={card}
+			<div className={`border shadow rounded p-2`}>
+				<div className="flex items-center justify-between m-2">
+					<strong>{list?.title ?? ''}</strong>
+					<button
+						{...listeners}
+						{...attributes}
+					>
+						<Grip
+							size={18}
+							className="active:cursor-grabbing cursor-grab"
 						/>
-					))}
-				</SortableContext>
+					</button>
+				</div>
+				<div className="flex flex-col gap-2">
+					<SortableContext items={list.cards}>
+						{list?.cards.map((card: any) => (
+							<BoardListCard
+								key={card.id}
+								card={card}
+							/>
+						))}
+					</SortableContext>
+				</div>
 			</div>
 		</div>
 	);
