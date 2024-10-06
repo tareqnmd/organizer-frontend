@@ -12,10 +12,12 @@ const DnDContextLayout = ({
 	children,
 	handleDragEnd,
 	handleDragOver,
+	handleDragStart,
 }: {
 	children: React.ReactNode;
 	handleDragEnd?: any;
 	handleDragOver?: any;
+	handleDragStart?: any;
 }) => {
 	const sensors = useSensors(
 		useSensor(PointerSensor),
@@ -29,6 +31,7 @@ const DnDContextLayout = ({
 			collisionDetection={closestCorners}
 			onDragEnd={handleDragEnd}
 			onDragOver={handleDragOver}
+			onDragStart={handleDragStart}
 		>
 			{children}
 		</DndContext>
