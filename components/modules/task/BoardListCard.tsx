@@ -14,6 +14,7 @@ const BoardListCard = ({ card }: { card: any }) => {
 		transition,
 		transformOrigin: 'center',
 		transform: CSS.Transform.toString(transform),
+		touchAction: 'none',
 	};
 	return (
 		<div

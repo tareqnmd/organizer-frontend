@@ -15,6 +15,7 @@ const BoardList = ({ list }: any) => {
 		transition,
 		transformOrigin: 'center',
 		transform: CSS.Transform.toString(transform),
+		touchAction: 'none',
 	};
 	return (
 		<div
