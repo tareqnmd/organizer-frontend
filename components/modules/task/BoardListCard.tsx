@@ -15,10 +15,11 @@ const BoardListCard = ({ card }: { card: any }) => {
 		transformOrigin: 'center',
 		transform: CSS.Transform.toString(transform),
 		touchAction: 'none',
+		zIndex: isDragging ? 50 : 0,
 	};
 	return (
 		<div
-			className="border shadow w-full rounded p-2 active:cursor-grabbing cursor-grab"
+			className="border bg-white shadow w-full rounded p-2 relative active:cursor-grabbing cursor-grab"
 			key={card.id}
 			ref={setNodeRef}
 			{...attributes}

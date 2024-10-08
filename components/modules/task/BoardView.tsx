@@ -1,67 +1,166 @@
 'use client';
 
 import DnDContextLayout from '@/components/layout/DnDContextLayout';
-import { TASK_DATA } from '@/lib/task-data';
-import { DragEndEvent, DragStartEvent } from '@dnd-kit/core';
+import { getListTaskData, TASK_DATA } from '@/lib/dnd';
+import { DragEndEvent, DragOverEvent } from '@dnd-kit/core';
 import { arrayMove, SortableContext } from '@dnd-kit/sortable';
+import { Check, Plus, X } from 'lucide-react';
 import { useState } from 'react';
 import BoardList from './BoardList';
 
 const BoardView = () => {
-	const [lists, setLists] = useState(TASK_DATA);
-	const [activeList, setActiveList] = useState(null);
-	const [activeTask, setActiveTask] = useState(null);
+	const { listItems = [], cardItems = [] } = getListTaskData(TASK_DATA as any);
 
-	function onDragStart(event: DragStartEvent) {
-		const current: any = event?.active?.data?.current ?? '';
-		const type = event?.active?.data?.current?.type ?? '';
-		if (type === 'List') {
-			setActiveList(current?.list ?? {});
-			return;
-		} else if (type === 'Card') {
-			setActiveTask(current?.card ?? {});
-			return;
+	const [lists, setLists] = useState(listItems);
+	const [cards, setCards] = useState(cardItems);
+
+	const [listName, setListName] = useState('');
+	const [cardForm, setListForm] = useState(false);
+
+	const onDragEnd = (event: DragEndEvent) => {
+		try {
+			const { active, over } = event;
+			if (!over) return;
+
+			const activeId = active.id;
+			const overId = over.id;
+
+			if (activeId === overId) return;
+
+			const isActiveAColumn = active.data.current?.type === 'List';
+			if (!isActiveAColumn) return;
+			setLists((lists: any) => {
+				const activeColumnIndex = lists.findIndex(
+					(list: any) => list.id === activeId
+				);
+				const overColumnIndex = lists.findIndex(
+					(list: any) => list.id === overId
+				);
+
+				return arrayMove(lists, activeColumnIndex, overColumnIndex);
+			});
+		} catch (e: any) {
+			console.log('e', e);
+		}
+	};
+
+	function onDragOver(event: DragOverEvent) {
+		try {
+			const { active, over } = event;
+			if (!over) return;
+
+			const activeId = active.id;
+			const overId = over.id;
+
+			if (activeId === overId) return;
+
+			const isActiveATask = active.data.current?.type === 'Card';
+			const isOverATask = over.data.current?.type === 'Card';
+
+			if (!isActiveATask) return;
+
+			if (isActiveATask && isOverATask) {
+				setCards((cards: any) => {
+					const activeIndex = cards.findIndex(
+						(card: any) => card.id === activeId
+					);
+					const overIndex = cards.findIndex((card: any) => card.id === overId);
+					if (cards[activeIndex].listId !== cards[overIndex].listId) {
+						cards[activeIndex].listId = cards[overIndex].listId;
+						return arrayMove(cards, activeIndex, overIndex - 1);
+					}
+					return arrayMove(cards, activeIndex, overIndex);
+				});
+			}
+
+			const isOverAColumn = over.data.current?.type === 'List';
+
+			if (isActiveATask && isOverAColumn) {
+				setCards((cards: any) => {
+					const activeIndex = cards.findIndex(
+						(card: any) => card.id === activeId
+					);
+					if (cards[activeIndex]?.listId) {
+						cards[activeIndex].listId = overId;
+					}
+					return arrayMove(cards, activeIndex, activeIndex);
+				});
+			}
+		} catch (e: any) {
+			console.log('e', e);
 		}
 	}
 
-	const onDragEnd = (event: DragEndEvent) => {
-		const { active, over } = event;
-		const activeId = String(active.id);
-		const overId = over ? String(over.id) : null;
-		const type = active.data.current?.type;
-		if (activeId === overId) {
-			return;
+	const addList = () => {
+		try {
+			setLists((prev: any) => [
+				...prev,
+				{ id: Math.random().toString(), title: listName },
+			]);
+			clearList();
+		} catch (error) {
+			clearList();
 		}
-		if (type === 'List') {
-			setLists((users) => {
-				const itemOriginalPos = users.findIndex(
-					(item) => item.id === active.id
-				);
-				const itemNewPos = users.findIndex((item) => item.id === over?.id);
-				return arrayMove(users, itemOriginalPos, itemNewPos);
-			});
-		} else if (type === 'Card') {
-		}
+	};
+
+	const clearList = () => {
+		setListForm(false);
+		setListName('');
 	};
 
 	return (
 		<div className="w-full overflow-x-auto h-full">
 			<DnDContextLayout
-				handleDragStart={onDragStart}
+				handleDragOver={onDragOver}
 				handleDragEnd={onDragEnd}
 			>
-				<SortableContext items={lists}>
-					<div className="flex gap-2 w-max">
-						<SortableContext items={lists}>
-							{lists.map((list: any) => (
-								<BoardList
-									list={list}
-									key={list.id}
-								/>
-							))}
-						</SortableContext>
+				<div className="flex gap-2 w-max">
+					<SortableContext items={lists}>
+						{lists?.map((list: any) => (
+							<BoardList
+								list={list}
+								key={list.id}
+								listCards={cards.filter((card: any) => card.listId === list.id)}
+								setCards={setCards}
+							/>
+						))}
+					</SortableContext>
+					<div>
+						<div className="w-[280px] border bg-white shadow rounded p-2">
+							{!cardForm ? (
+								<button
+									className="border flex items-center justify-center rounded p-2 gap-2 w-full text-sm"
+									onClick={() => setListForm(true)}
+								>
+									<Plus size={14} />
+									Add Card
+								</button>
+							) : (
+								<div className="flex items-center justify-between gap-1 p-2">
+									<input
+										className="grow border-b focus-visible:outline-none"
+										type="text"
+										value={listName}
+										autoFocus
+										onChange={(e) => setListName(e.target.value)}
+									/>
+									<button
+										className="border p-1"
+										onClick={addList}
+									>
+										<Check size={16} />
+									</button>
+									<button
+										className="border p-1"
+										onClick={clearList}
+									>
+										<X size={16} />
+									</button>
+								</div>
+							)}
+						</div>
 					</div>
-				</SortableContext>
+				</div>
 			</DnDContextLayout>
 		</div>
 	);
