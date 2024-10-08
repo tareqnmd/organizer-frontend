@@ -4,6 +4,7 @@ import DnDContextLayout from '@/components/layout/DnDContextLayout';
 import { getListTaskData, TASK_DATA } from '@/lib/dnd';
 import { DragEndEvent, DragOverEvent } from '@dnd-kit/core';
 import { arrayMove, SortableContext } from '@dnd-kit/sortable';
+import { Check, Plus, X } from 'lucide-react';
 import { useState } from 'react';
 import BoardList from './BoardList';
 
@@ -12,6 +13,9 @@ const BoardView = () => {
 
 	const [lists, setLists] = useState(listItems);
 	const [cards, setCards] = useState(cardItems);
+
+	const [listName, setListName] = useState('');
+	const [cardForm, setListForm] = useState(false);
 
 	const onDragEnd = (event: DragEndEvent) => {
 		try {
@@ -87,6 +91,23 @@ const BoardView = () => {
 		}
 	}
 
+	const addList = () => {
+		try {
+			setLists((prev: any) => [
+				...prev,
+				{ id: Math.random().toString(), title: listName },
+			]);
+			clearList();
+		} catch (error) {
+			clearList();
+		}
+	};
+
+	const clearList = () => {
+		setListForm(false);
+		setListName('');
+	};
+
 	return (
 		<div className="w-full overflow-x-auto h-full">
 			<DnDContextLayout
@@ -100,9 +121,45 @@ const BoardView = () => {
 								list={list}
 								key={list.id}
 								listCards={cards.filter((card: any) => card.listId === list.id)}
+								setCards={setCards}
 							/>
 						))}
 					</SortableContext>
+					<div>
+						<div className="w-[280px] border bg-white shadow rounded p-2">
+							{!cardForm ? (
+								<button
+									className="border flex items-center justify-center rounded p-2 gap-2 w-full text-sm"
+									onClick={() => setListForm(true)}
+								>
+									<Plus size={14} />
+									Add Card
+								</button>
+							) : (
+								<div className="flex items-center justify-between gap-1 p-2">
+									<input
+										className="grow border-b focus-visible:outline-none"
+										type="text"
+										value={listName}
+										autoFocus
+										onChange={(e) => setListName(e.target.value)}
+									/>
+									<button
+										className="border p-1"
+										onClick={addList}
+									>
+										<Check size={16} />
+									</button>
+									<button
+										className="border p-1"
+										onClick={clearList}
+									>
+										<X size={16} />
+									</button>
+								</div>
+							)}
+						</div>
+					</div>
 				</div>
 			</DnDContextLayout>
 		</div>
