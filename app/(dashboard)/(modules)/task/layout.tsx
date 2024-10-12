@@ -1,4 +1,5 @@
-import ModuleLayout from '@/components/layout/ModuleLayout';
+import CustomModuleLayout from '@/components/layout/CustomModuleLayout.tsx';
+import TaskModuleLayout from '@/components/modules/task/TaskModuleLayout';
 import { Metadata } from 'next';
 const links = [{ name: 'Tasks', path: '/task' }];
 
@@ -10,7 +11,11 @@ export const metadata: Metadata = {
 };
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-	return <ModuleLayout links={links}>{children}</ModuleLayout>;
+	return (
+		<CustomModuleLayout extraSection={<TaskModuleLayout />}>
+			{children}
+		</CustomModuleLayout>
+	);
 };
 
 export default Layout;
