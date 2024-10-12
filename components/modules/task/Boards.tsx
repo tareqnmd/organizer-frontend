@@ -2,7 +2,13 @@ import { cn } from '@/lib/utils';
 import { Star } from 'lucide-react';
 import Link from 'next/link';
 
-const Boards = ({ boards }: { boards: any[] }) => {
+const Boards = ({
+	boards,
+	workspaceId,
+}: {
+	boards: any[];
+	workspaceId: string;
+}) => {
 	return (
 		<div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 lg:gap-4">
 			{boards.map((board) => (
@@ -12,7 +18,7 @@ const Boards = ({ boards }: { boards: any[] }) => {
 						board.bg,
 						board.status === 'active' && 'cursor-pointer'
 					)}
-					href={`/task/${board.id}`}
+					href={`/task/${workspaceId}/${board.id}`}
 					key={board.id}
 				>
 					<strong>{board.name} </strong>

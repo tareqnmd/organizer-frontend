@@ -40,7 +40,12 @@ const getBoards = async (workspaceId: string) => {
 
 const page = async ({ params }: { params: { workspace: string } }) => {
 	const data = await getBoards(params.workspace);
-	return <Boards boards={data} />;
+	return (
+		<Boards
+			workspaceId={params.workspace}
+			boards={data}
+		/>
+	);
 };
 
 export default page;
