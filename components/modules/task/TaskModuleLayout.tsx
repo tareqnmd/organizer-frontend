@@ -1,5 +1,6 @@
 'use client';
 import FormSelect from '@/components/common/input/Select';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 const WORKSPACES = [
 	{
@@ -13,6 +14,7 @@ const WORKSPACES = [
 ];
 const TaskModuleLayout = () => {
 	const [workspaceId, setWorkspaceId] = useState<string>('');
+	const router = useRouter();
 	return (
 		<FormSelect
 			extraTriggerClassName="py-0 border-t-0 border-l-0 border-r-0 rounded-none overflow-hidden w-[200px] focus-visible:ring-0 focus-visible:outline-none
@@ -30,8 +32,9 @@ const TaskModuleLayout = () => {
 			}}
 			field={{
 				value: workspaceId,
-				onChange: (e: any) => {
+				onChange: (e: string) => {
 					setWorkspaceId(e);
+					router.push(`/task/${e}`);
 				},
 			}}
 		/>
