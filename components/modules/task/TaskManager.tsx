@@ -1,11 +1,5 @@
-import Link from 'next/link';
-
 const TaskManager = () => {
-	return (
-		<>
-			<Link href="/task/board">Board</Link>
-		</>
-	);
+	return <div>TaskManager</div>;
 };
 
 export default TaskManager;

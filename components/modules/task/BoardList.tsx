@@ -79,22 +79,22 @@ const BoardList = ({ list, listCards, setCards }: any) => {
 									Add Card
 								</button>
 							) : (
-								<div className="flex items-center justify-between gap-1 p-2">
+								<div className="flex items-center justify-between gap-2">
 									<input
-										className="grow border-b focus-visible:outline-none"
+										className="w-full p-1 border-b focus-visible:outline-none"
 										type="text"
 										value={cardName}
 										autoFocus
 										onChange={(e) => setCardName(e.target.value)}
 									/>
 									<button
-										className="border p-1"
+										className="border p-1.5"
 										onClick={addCard}
 									>
 										<Check size={16} />
 									</button>
 									<button
-										className="border p-1"
+										className="border p-1.5"
 										onClick={clearCard}
 									>
 										<X size={16} />
