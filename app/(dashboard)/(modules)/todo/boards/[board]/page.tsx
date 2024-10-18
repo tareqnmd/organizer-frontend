@@ -1,4 +1,4 @@
-import BoardView from '@/components/modules/task/BoardView';
+import BoardView from '@/components/modules/todo/boards/BoardView';
 
 const page = () => {
 	return <BoardView />;

@@ -43,7 +43,7 @@ const RegistrationForm = () => {
 			const res = await signIn('register', { ...data, redirect: false });
 			if (res?.ok) {
 				toast.success('Registration Successful');
-				router.push('/');
+				router.refresh();
 			} else {
 				toast.error(getError(res?.error));
 			}
