@@ -1,4 +1,4 @@
-import Boards from '@/components/modules/task/Boards';
+import Boards from '@/components/modules/todo/boards/Boards';
 const BOARDS = [
 	{
 		id: 1,
@@ -40,12 +40,7 @@ const getBoards = async (workspaceId: string) => {
 
 const page = async ({ params }: { params: { workspace: string } }) => {
 	const data = await getBoards(params.workspace);
-	return (
-		<Boards
-			workspaceId={params.workspace}
-			boards={data}
-		/>
-	);
+	return <Boards boards={data} />;
 };
 
 export default page;

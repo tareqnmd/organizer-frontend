@@ -13,8 +13,8 @@ export const Routes = {
 			description: 'Personal Note Management',
 		},
 		{
-			name: 'Tasks',
-			path: '/task',
+			name: 'Todo',
+			path: '/todo',
 			icon: 'list-todo',
 			description: 'Personal Task Management',
 		},
