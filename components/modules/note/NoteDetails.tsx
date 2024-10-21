@@ -1,7 +1,7 @@
 import {
 	generateDataFromServer,
 	nextProperties,
-} from '@/lib/helper/server-fetch';
+} from '@/helper/shared/server-fetch';
 import NoteForm from './NoteForm';
 
 const NoteDetails = async ({ id }: { id: string }) => {

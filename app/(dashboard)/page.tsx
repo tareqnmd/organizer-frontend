@@ -1,5 +1,5 @@
 import Dashboard from '@/components/dashboard/Dashboard';
-import { Routes } from '@/lib/helper/routes';
+import { Routes } from '@/helper/routes';
 
 const page = async () => {
 	return (

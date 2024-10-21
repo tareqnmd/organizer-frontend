@@ -1,8 +1,8 @@
 import { getServerSession } from 'next-auth';
 
 import NavLink from '@/components/layout/NavLink';
+import { getRoutes } from '@/helper/shared/routes';
 import { authOptions } from '@/lib/auth-options';
-import { Routes } from '@/lib/helper/routes';
 const Links = async () => {
 	const session = await getServerSession(authOptions);
 	return (
@@ -15,7 +15,7 @@ const Links = async () => {
 					/>
 				</li>
 			)}
-			{Routes.modules.map((link) => (
+			{getRoutes('modules').map((link) => (
 				<li key={link.path}>
 					<NavLink
 						exact={false}

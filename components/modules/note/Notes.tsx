@@ -1,11 +1,8 @@
+import { NoteType, NotesParamType } from '@/helper/modules/note';
 import {
 	generateDataFromServer,
 	nextProperties,
-} from '@/lib/helper/server-fetch';
-import {
-	NoteType,
-	NotesParamType,
-} from '@/types/modules/note/budget-note-types';
+} from '@/helper/shared/server-fetch';
 import NoteCard from './NoteCard';
 import NoteCreate from './NoteCreate';
 

@@ -1,7 +1,7 @@
 'use client';
 import { Github } from 'lucide-react';
 import { signIn } from 'next-auth/react';
-import Google from '../icon/GoogleIcon';
+import Google from '../icons/GoogleIcon';
 import { Button } from '../ui/button';
 
 const AuthSocialActions = () => {

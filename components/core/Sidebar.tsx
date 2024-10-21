@@ -1,7 +1,7 @@
 'use client';
 
+import { getRoutes } from '@/helper/shared/routes';
 import useOutsideClick from '@/hooks/useOutsideClick';
-import { Routes } from '@/lib/helper/routes';
 import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
 import { useRef, useState } from 'react';
@@ -44,7 +44,7 @@ const Sidebar = ({ user }: any) => {
 							/>
 						</li>
 					)}
-					{Routes.modules.map((link) => (
+					{getRoutes('modules').map((link) => (
 						<li
 							className="border-b dark:border-slate-700 w-full py-2"
 							key={link.path}

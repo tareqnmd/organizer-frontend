@@ -8,9 +8,9 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-import { getError } from '@/lib/helper/common';
+import { getError } from '@/helper/shared/common';
 import { useDeleteBudgetCategoryMutation } from '@/store/features/budget/category/api';
-import { BudgetCategoryType } from '@/types/modules/budget/budget-category-types';
+import { BudgetCategoryType } from '@/helper/modules/budget';
 import { Loader, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';

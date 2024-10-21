@@ -1,9 +1,9 @@
-import { authOptions } from '@/lib/auth-options';
+import { BudgetTypeType } from '@/helper/modules/budget';
 import {
 	generateDataFromServer,
 	nextProperties,
-} from '@/lib/helper/server-fetch';
-import { BudgetTypeType } from '@/types/modules/budget/budget-type-types';
+} from '@/helper/shared/server-fetch';
+import { authOptions } from '@/lib/auth-options';
 import { getServerSession } from 'next-auth';
 import BudgetType from './BudgetType';
 import { BudgetTypeAdd } from './BudgetTypeAdd';

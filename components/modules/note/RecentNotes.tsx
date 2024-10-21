@@ -1,8 +1,8 @@
 import {
 	generateDataFromServer,
 	nextProperties,
-} from '@/lib/helper/server-fetch';
-import { NoteType } from '@/types/modules/note/budget-note-types';
+} from '@/helper/shared/server-fetch';
+import { NoteType } from '@/helper/modules/note';
 import NoteCard from './NoteCard';
 
 const RecentNotes = async () => {

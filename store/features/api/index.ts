@@ -1,5 +1,5 @@
-import { logoutHandler } from '@/lib/helper/auth';
-import { getCookieValue } from '@/lib/helper/server-func';
+import { logoutHandler } from '@/helper/auth';
+import { getCookieValue } from '@/helper/server-func';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const baseQuery = fetchBaseQuery({

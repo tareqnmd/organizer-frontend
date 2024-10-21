@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import DynamicIcon from '../icon/DynamicLucideIcon';
+import DynamicIcon from '../icons/DynamicLucideIcon';
 import { ModuleType } from './Dashboard';
 
 const Module = ({ module }: { module: ModuleType }) => {

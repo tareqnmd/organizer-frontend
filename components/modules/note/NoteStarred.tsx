@@ -1,7 +1,7 @@
 'use client';
-import { getError } from '@/lib/helper/common';
+import { NoteType } from '@/helper/modules/note';
+import { getError } from '@/helper/shared/common';
 import { useEditNoteMutation } from '@/store/features/note/api';
-import { NoteType } from '@/types/modules/note/budget-note-types';
 import { StarIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
