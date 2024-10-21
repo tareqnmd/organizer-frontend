@@ -1,4 +1,4 @@
-import { LinkType, LinksType } from '@/types/link';
+import { RouteType } from '@/helper/shared/types';
 import ModuleLink from './NavLink';
 
 const ModuleLayout = ({
@@ -6,13 +6,13 @@ const ModuleLayout = ({
 	children,
 }: {
 	children: React.ReactNode;
-	links: LinksType;
+	links: RouteType[];
 }) => {
 	return (
 		<>
 			<header className="border-b dark:border-slate-700 py-2">
 				<div className="container gap-2 mx-auto flex items-center justify-end text-sm">
-					{links.map((link: LinkType) => (
+					{links.map((link) => (
 						<ModuleLink
 							key={link.path}
 							link={link}
@@ -20,9 +20,7 @@ const ModuleLayout = ({
 					))}
 				</div>
 			</header>
-			<div className="container mx-auto py-4 h-full">
-				{children}
-			</div>
+			<div className="container mx-auto py-4 h-full">{children}</div>
 		</>
 	);
 };

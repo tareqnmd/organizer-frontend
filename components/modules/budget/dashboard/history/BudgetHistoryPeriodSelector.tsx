@@ -2,7 +2,7 @@
 
 import SkeletonWrapper from '@/components/common/SkeletonWrapper';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Period, TimeFrame } from '@/types';
+import { Period, TimeFrame } from '@/helper/shared/types';
 import BudgetHistoryMonthSelector from './BudgetHistoryMonthSelector';
 import BudgetHistoryYearSelector from './BudgetHistoryYearSelector';
 

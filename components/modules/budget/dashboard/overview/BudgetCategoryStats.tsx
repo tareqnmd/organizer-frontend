@@ -1,4 +1,5 @@
 import SkeletonWrapper from '@/components/common/SkeletonWrapper';
+import { TransactionTypeEnum } from '@/helper/modules/budget';
 import BudgetCategoryCard from './BudgetCategoryCard';
 
 function BudgetCategoryStats({
@@ -23,15 +24,12 @@ function BudgetCategoryStats({
 		<div className="flex w-full flex-wrap gap-4 lg:flex-nowrap">
 			<SkeletonWrapper isLoading={false}>
 				<BudgetCategoryCard
-					type="income"
+					type={TransactionTypeEnum.INCOME}
 					data={income}
 				/>
 			</SkeletonWrapper>
 			<SkeletonWrapper isLoading={false}>
-				<BudgetCategoryCard
-					type="expense"
-					data={expense}
-				/>
+				<BudgetCategoryCard type={TransactionTypeEnum.EXPENSE} data={expense} />
 			</SkeletonWrapper>
 		</div>
 	);

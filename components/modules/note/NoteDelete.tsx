@@ -8,9 +8,9 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-import { getError } from '@/lib/helper/common';
+import { NoteType } from '@/helper/modules/note';
+import { getError } from '@/helper/shared/common';
 import { useDeleteNoteMutation } from '@/store/features/note/api';
-import { NoteType } from '@/types/modules/note/budget-note-types';
 import { Loader, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';

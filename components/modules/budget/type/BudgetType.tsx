@@ -1,6 +1,6 @@
 import { Card } from '@/components/ui/card';
+import { BudgetTypeType } from '@/helper/modules/budget';
 import { cn } from '@/lib/utils';
-import { BudgetTypeType } from '@/types/modules/budget/budget-type-types';
 import BudgetTypeDelete from './BudgetTypeDelete';
 import { BudgetTypeEdit } from './BudgetTypeEdit';
 import BudgetTypeStatus from './BudgetTypeStatus';

@@ -1,9 +1,9 @@
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { GetFormatterForCurrency } from '@/lib/helper/common';
+import { TransactionType } from '@/helper/modules/budget';
+import { GetFormatterForCurrency } from '@/helper/shared/common';
 import { cn } from '@/lib/utils';
-import { TransactionType } from '@/types/modules/budget';
 import { useMemo } from 'react';
 
 const BudgetCategoryCard = ({

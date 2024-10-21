@@ -8,7 +8,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-import { getError } from '@/lib/helper/common';
+import { getError } from '@/helper/shared/common';
 import { cn } from '@/lib/utils';
 import { BadgeCheck, BadgeMinus, Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -16,7 +16,7 @@ import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 import { useEditBudgetTransactionMutation } from '@/store/features/budget/transaction/api';
-import { BudgetTransactionType } from '@/types/modules/budget/budget-transaction-types';
+import { BudgetTransactionType } from '@/helper/modules/budget';
 
 const BudgetTransactionStatus = ({
 	transaction,

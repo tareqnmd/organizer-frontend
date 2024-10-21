@@ -4,8 +4,10 @@
 	"private": true,
 	"scripts": {
 		"dev": "rm -rf .next && next dev -p 3200",
+		"turbo-dev": "rm -rf .next && next dev --turbo -p 3200",
 		"build": "rm -rf .next && next build",
 		"start": "next start -p 3200",
+		"format": "prettier --write .",
 		"lint": "next lint"
 	},
 	"dependencies": {
@@ -60,6 +62,8 @@
 		"eslint": "^8",
 		"eslint-config-next": "14.0.3",
 		"postcss": "^8",
+		"prettier": "^3.3.3",
+		"prettier-plugin-tailwindcss": "^0.6.8",
 		"tailwindcss": "^3.3.0",
 		"typescript": "^5"
 	}

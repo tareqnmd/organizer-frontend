@@ -1,6 +1,6 @@
 'use client';
+import { RouteType } from '@/helper/shared/types';
 import { cn } from '@/lib/utils';
-import { LinkType } from '@/types/link';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -9,7 +9,7 @@ const NavLink = ({
 	exact = true,
 	extraClass = '',
 }: {
-	link: LinkType;
+	link: RouteType;
 	exact?: boolean;
 	extraClass?: string;
 }) => {

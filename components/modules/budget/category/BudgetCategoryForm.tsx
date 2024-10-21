@@ -3,13 +3,13 @@ import CustomFormInput from '@/components/common/input/CustomFormInput';
 import { Button } from '@/components/ui/button';
 import { DialogFooter } from '@/components/ui/dialog';
 import { Form } from '@/components/ui/form';
-import { categoryFormItems } from '@/lib/form-items/modules/budget';
-import { getError } from '@/lib/helper/common';
+import { BudgetCategoryType } from '@/helper/modules/budget';
+import { categoryFormItems } from '@/helper/modules/budget/form-items';
+import { getError } from '@/helper/shared/common';
 import {
 	useCreateBudgetCategoryMutation,
 	useEditBudgetCategoryMutation,
 } from '@/store/features/budget/category/api';
-import { BudgetCategoryType } from '@/types/modules/budget/budget-category-types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';

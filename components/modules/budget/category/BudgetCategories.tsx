@@ -1,11 +1,8 @@
-import {
-	generateDataFromServer,
-	nextProperties,
-} from '@/lib/helper/server-fetch';
+import { generateDataFromServer, nextProperties } from '@/helper/shared/server-fetch';
 import {
 	BudgetCategoryParamType,
 	BudgetCategoryType,
-} from '@/types/modules/budget/budget-category-types';
+} from '@/helper/modules/budget';
 import BudgetCategoriesFilter from './BudgetCategoriesFilter';
 import BudgetCategoryAdd from './BudgetCategoryAdd';
 import BudgetCategoryCard from './BudgetCategoryCard';
