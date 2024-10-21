@@ -1,4 +1,5 @@
 import ModuleLayout from '@/components/layout/ModuleLayout';
+import { getRoutes } from '@/helper/shared/routes';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -8,23 +9,9 @@ export const metadata: Metadata = {
 	},
 };
 
-const links = [
-	{
-		name: 'Dashboard',
-		path: '/todo',
-	},
-	{
-		name: 'Workspaces',
-		path: '/todo/workspaces',
-	},
-	{
-		name: 'Boards',
-		path: '/todo/boards',
-	},
-];
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-	return <ModuleLayout links={links}>{children} </ModuleLayout>;
+	return <ModuleLayout links={getRoutes('module_todo')}>{children}</ModuleLayout>;
 };
 
 export default Layout;

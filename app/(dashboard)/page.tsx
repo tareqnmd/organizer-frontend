@@ -1,10 +1,10 @@
 import Dashboard from '@/components/dashboard/Dashboard';
-import { Routes } from '@/helper/routes';
+import { getRoutes } from '@/helper/shared/routes';
 
 const page = async () => {
 	return (
 		<main className="container mx-auto py-4">
-			<Dashboard modules={Routes.modules} />
+			<Dashboard modules={getRoutes('modules')} />
 		</main>
 	);
 };

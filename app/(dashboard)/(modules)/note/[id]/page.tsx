@@ -1,5 +1,8 @@
 import NoteDetails from '@/components/modules/note/NoteDetails';
-import { generateDataFromServer, nextProperties } from '@/helper/server-fetch';
+import {
+	generateDataFromServer,
+	nextProperties,
+} from '@/helper/shared/server-fetch';
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
 	const { data: note } = await generateDataFromServer(

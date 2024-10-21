@@ -27,18 +27,25 @@ const routes = {
 			path: Routes.REGISTER,
 		},
 	],
+	dashboard_modules: [],
 	modules: [
 		{
 			name: 'Budget',
 			path: Routes.BUDGET,
+			icon: 'wallet',
+			description: 'Personal Financial Management',
 		},
 		{
 			name: 'Note',
 			path: Routes.NOTE,
+			icon: 'scroll-text',
+			description: 'Personal Note Management',
 		},
 		{
 			name: 'Todo',
 			path: Routes.TODO,
+			icon: 'list-todo',
+			description: 'Personal Task Management',
 		},
 	],
 	module_budget: [

@@ -1,14 +1,14 @@
+import { RouteType } from '@/helper/shared/types';
 import Link from 'next/link';
 import DynamicIcon from '../icons/DynamicLucideIcon';
-import { ModuleType } from './Dashboard';
 
-const Module = ({ module }: { module: ModuleType }) => {
+const Module = ({ module }: { module: RouteType }) => {
 	return (
 		<Link href={module.path}>
 			<div className="shadow border p-3 rounded-md flex items-center gap-2 text-dark">
 				{module?.icon ? (
 					<DynamicIcon
-						name={module.icon}
+						name={module.icon as any}
 						size={40}
 					/>
 				) : null}
