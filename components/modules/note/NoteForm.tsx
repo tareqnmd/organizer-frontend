@@ -1,10 +1,10 @@
 'use client';
 import CustomFormInput from '@/components/common/input/CustomFormInput';
 import { Form } from '@/components/ui/form';
-import { noteFormItems } from '@/lib/form-items/modules/note';
-import { getError } from '@/lib/helper/common';
+import { NoteType } from '@/helper/modules/note';
+import { noteFormItems } from '@/helper/modules/note/form-items';
+import { getError } from '@/helper/shared/common';
 import { useEditNoteMutation } from '@/store/features/note/api';
-import { NoteType } from '@/types/modules/note/budget-note-types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { memo, useEffect } from 'react';

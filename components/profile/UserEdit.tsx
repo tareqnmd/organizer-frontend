@@ -1,9 +1,5 @@
 'use client';
-import {
-	userUpdateFormInputs,
-	userUpdateFormInputsWithPassword,
-} from '@/lib/form-items/profile';
-import { getError } from '@/lib/helper/common';
+
 import { useUserUpdateMutation } from '@/store/features/auth/api';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader } from 'lucide-react';
@@ -17,6 +13,8 @@ import CustomFormInput from '../common/input/CustomFormInput';
 import { Button } from '../ui/button';
 import { Form } from '../ui/form';
 import UserPasswordChange from './UserPasswordChange';
+import { userUpdateFormInputs, userUpdateFormInputsWithPassword } from '@/helper/profile/form-items';
+import { getError } from '@/helper/shared/common';
 
 const FormSchema = (passwordChange = false) =>
 	z.object(

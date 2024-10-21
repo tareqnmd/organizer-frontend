@@ -1,7 +1,8 @@
 'use client';
 
+import { Routes } from '@/helper/shared/enum';
+import { getRoutes } from '@/helper/shared/routes';
 import useOutsideClick from '@/hooks/useOutsideClick';
-import { Routes } from '@/lib/helper/routes';
 import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
 import { useRef, useState } from 'react';
@@ -40,11 +41,11 @@ const Sidebar = ({ user }: any) => {
 						<li className="border-b dark:border-slate-700 w-full py-2">
 							<NavLink
 								exact={false}
-								link={{ name: 'Admin', path: '/admin' }}
+								link={{ name: 'Admin', path: Routes.ADMIN }}
 							/>
 						</li>
 					)}
-					{Routes.modules.map((link) => (
+					{getRoutes('modules').map((link) => (
 						<li
 							className="border-b dark:border-slate-700 w-full py-2"
 							key={link.path}

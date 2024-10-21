@@ -8,10 +8,10 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-import { getError } from '@/lib/helper/common';
+import { BudgetTypeType } from '@/helper/modules/budget';
+import { getError } from '@/helper/shared/common';
 import { cn } from '@/lib/utils';
 import { useEditBudgetTypeMutation } from '@/store/features/budget/type/api';
-import { BudgetTypeType } from '@/types/modules/budget/budget-type-types';
 import { BadgeCheck, BadgeMinus, Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';

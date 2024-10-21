@@ -1,6 +1,6 @@
 'use client';
 import { Button } from '@/components/ui/button';
-import { getError } from '@/lib/helper/common';
+import { getError } from '@/helper/shared/common';
 import { useCreateNoteMutation } from '@/store/features/note/api';
 import { Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';

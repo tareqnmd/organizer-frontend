@@ -1,6 +1,6 @@
 'use client';
-import { registrationFormItems } from '@/lib/form-items/auth';
-import { getError } from '@/lib/helper/common';
+import { registrationFormItems } from '@/helper/auth';
+import { getError } from '@/helper/shared/common';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LogIn } from 'lucide-react';
 import { signIn } from 'next-auth/react';
@@ -43,7 +43,7 @@ const RegistrationForm = () => {
 			const res = await signIn('register', { ...data, redirect: false });
 			if (res?.ok) {
 				toast.success('Registration Successful');
-				router.push('/');
+				router.refresh();
 			} else {
 				toast.error(getError(res?.error));
 			}

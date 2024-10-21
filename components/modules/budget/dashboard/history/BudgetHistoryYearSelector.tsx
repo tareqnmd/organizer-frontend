@@ -5,7 +5,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
-import { Period } from '@/types';
+import { Period } from '@/helper/shared/types';
 
 const BudgetHistoryYearSelector = ({
 	period,

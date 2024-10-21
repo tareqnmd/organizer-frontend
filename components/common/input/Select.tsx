@@ -6,7 +6,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
-import { axiosInstance } from '@/lib/helper/axios-api';
+import { axiosInstance } from '@/helper/shared/axios-api';
 import { useEffect, useState } from 'react';
 
 const FormSelect = ({ input, field, extraTriggerClassName = '' }: any) => {
