@@ -1,5 +1,6 @@
 'use client';
 
+import { Routes } from '@/helper/shared/enum';
 import { getRoutes } from '@/helper/shared/routes';
 import useOutsideClick from '@/hooks/useOutsideClick';
 import { cn } from '@/lib/utils';
@@ -40,7 +41,7 @@ const Sidebar = ({ user }: any) => {
 						<li className="border-b dark:border-slate-700 w-full py-2">
 							<NavLink
 								exact={false}
-								link={{ name: 'Admin', path: '/admin' }}
+								link={{ name: 'Admin', path: Routes.ADMIN }}
 							/>
 						</li>
 					)}

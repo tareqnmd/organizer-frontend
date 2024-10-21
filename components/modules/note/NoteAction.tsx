@@ -1,4 +1,4 @@
-import { NoteType } from '@/types/modules/note/budget-note-types';
+import { NoteType } from '@/helper/modules/note';
 import NoteDelete from './NoteDelete';
 import NoteStarred from './NoteStarred';
 

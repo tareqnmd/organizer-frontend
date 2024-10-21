@@ -2,7 +2,7 @@
 import FormDateRange from '@/components/common/input/DateRange';
 import FormSelect from '@/components/common/input/Select';
 import { Input } from '@/components/ui/input';
-import { BudgetTransactionParamType } from '@/types/modules/budget/budget-transaction-types';
+import { BudgetTransactionParamType } from '@/helper/modules/budget';
 
 const BudgetTransactionFilter = ({
 	filterData,
