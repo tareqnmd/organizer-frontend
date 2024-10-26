@@ -1,8 +1,5 @@
 import { Badge } from '@/components/ui/badge';
-import {
-	generateDataFromServer,
-	nextProperties,
-} from '@/lib/helper/shared/server-fetch';
+import { generateDataFromServer, nextProperties } from '@/lib/utils';
 import Link from 'next/link';
 import NoteAction from './NoteAction';
 

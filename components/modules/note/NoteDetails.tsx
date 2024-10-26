@@ -1,7 +1,4 @@
-import {
-	generateDataFromServer,
-	nextProperties,
-} from '@/lib/helper/shared/server-fetch';
+import { generateDataFromServer, nextProperties } from '@/lib/utils';
 import NoteForm from './NoteForm';
 
 const NoteDetails = async ({ id }: { id: string }) => {

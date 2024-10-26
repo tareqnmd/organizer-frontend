@@ -1,7 +1,4 @@
-import {
-	generateDataFromServer,
-	nextProperties,
-} from '@/lib/helper/shared/server-fetch';
+import { generateDataFromServer, nextProperties } from '@/lib/utils';
 import BudgetFilter from './BudgetFilter';
 import BudgetHistory from './history/BudgetHistory';
 import BudgetOverview from './overview/BudgetOverview';

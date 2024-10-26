@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
-import { getCookie } from './server-func';
+import { getCookie } from './server';
 
 export const nextProperties = ({ revalidate = 0 }) => {
 	return { next: { revalidate } };
@@ -26,7 +26,7 @@ export const generateDataFromServer = async (
 	url: string,
 	options?: {
 		next: { revalidate: number };
-	}
+	},
 ) => {
 	try {
 		const res = await serverAuthFetch(url, options);

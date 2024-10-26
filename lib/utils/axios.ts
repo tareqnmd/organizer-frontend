@@ -1,6 +1,5 @@
+import { getCookieValue, logoutHandler } from '@/lib/utils';
 import axios from 'axios';
-import { logoutHandler } from '../helper/shared/auth';
-import { getCookieValue } from '../helper/shared/server-func';
 
 export const axiosInstance = axios.create({
 	baseURL: process.env.NEXT_PUBLIC_API_URL,
