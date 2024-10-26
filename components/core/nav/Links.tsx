@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth';
 import NavLink from '@/components/layout/NavLink';
 import { authOptions } from '@/lib/auth-options';
 import { Routes } from '@/lib/helper/shared/enum';
-import { getRoutes } from '@/lib/helper/shared/routes';
+import { getRoutes } from '@/lib/routes';
 const Links = async () => {
 	const session = await getServerSession(authOptions);
 	return (

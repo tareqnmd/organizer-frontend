@@ -3,12 +3,9 @@
 import SkeletonWrapper from '@/components/common/SkeletonWrapper';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import {
-	GetFormatterForCurrency,
-	getYearsInRange,
-} from '@/lib/helper/shared/common';
-import { Period, TimeFrame } from '@/lib/helper/shared/types';
-import { monthWiseData, yearWiseData } from '@/lib/utils';
+import { Period, TimeFrame } from '@/lib/helper/modules/budget/types';
+import { GetFormatterForCurrency } from '@/lib/helper/shared/common';
+import { getYearsInRange, monthWiseData, yearWiseData } from '@/lib/utils';
 import { useEffect, useMemo, useState } from 'react';
 import {
 	Bar,

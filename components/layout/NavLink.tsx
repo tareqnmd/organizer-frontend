@@ -1,5 +1,5 @@
 'use client';
-import { RouteType } from '@/lib/helper/shared/types';
+import { RouteType } from '@/lib/routes/type';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';

@@ -1,5 +1,5 @@
 import ModuleLayout from '@/components/layout/ModuleLayout';
-import { getRoutes } from '@/lib/helper/shared/routes';
+import { getRoutes } from '@/lib/routes';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {

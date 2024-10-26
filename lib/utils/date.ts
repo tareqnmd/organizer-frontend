@@ -1,4 +1,4 @@
-import { format, getDaysInMonth } from 'date-fns';
+import { format, getDaysInMonth, getYear } from 'date-fns';
 
 export const baseDateFormat = (date: string | Date) =>
 	format(date, 'dd-MM-yyyy');
@@ -9,7 +9,7 @@ export const stringToNewDate = (date: string) =>
 export const monthWiseData = (monthData: any, period: any) => {
 	const updatedMonthData: any = [];
 	const daysInMonth = getDaysInMonth(
-		new Date(`${period.year},${period.month + 1},01`)
+		new Date(`${period.year},${period.month + 1},01`),
 	);
 	Array.from(Array(daysInMonth)).map((_, index) => {
 		const found = monthData.find((item: any) => item.day === index);
@@ -21,7 +21,7 @@ export const monthWiseData = (monthData: any, period: any) => {
 					year: period.year,
 					month: period.month,
 					day: index + 1,
-			  });
+				});
 	});
 	return updatedMonthData;
 };
@@ -37,7 +37,23 @@ export const yearWiseData = (yearData: any, period: any) => {
 					expense: 0,
 					year: period.year,
 					month: index,
-			  });
+				});
 	});
 	return updatedYearData;
+};
+
+export const getYearsInRange = (start: string, end: string) => {
+	getYear(end);
+	const startYear = getYear(start.split('-').reverse().join(','));
+	const endYear = getYear(end.split('-').reverse().join(','));
+	if (startYear > endYear) {
+		throw new Error('Start date cannot be after end date');
+	}
+	const years = [];
+	let currentYear = startYear;
+	while (currentYear <= endYear) {
+		years.push(currentYear);
+		currentYear++;
+	}
+	return years;
 };

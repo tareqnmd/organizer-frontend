@@ -1,4 +1,4 @@
-import { axiosInstance } from '@/lib/helper/shared/axios-api';
+import { axiosInstance } from '@/lib/utils';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';

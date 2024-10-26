@@ -10,6 +10,3 @@ export type RouteType = {
 export type RoutesType = {
 	[key: string]: RouteType[];
 };
-
-export type TimeFrame = 'month' | 'year';
-export type Period = { year: number; month: number };

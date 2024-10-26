@@ -2,7 +2,7 @@
 
 import useOutsideClick from '@/hooks/useOutsideClick';
 import { Routes } from '@/lib/helper/shared/enum';
-import { getRoutes } from '@/lib/helper/shared/routes';
+import { getRoutes } from '@/lib/routes';
 import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
 import { useRef, useState } from 'react';

@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { logoutHandler } from './auth';
-import { getCookieValue } from './server-func';
+import { logoutHandler } from '../helper/shared/auth';
+import { getCookieValue } from '../helper/shared/server-func';
 
 export const axiosInstance = axios.create({
 	baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -21,7 +21,7 @@ axiosInstance.interceptors.request.use(
 	},
 	(error) => {
 		return Promise.reject(error);
-	}
+	},
 );
 
 axiosInstance.interceptors.response.use(
@@ -36,5 +36,5 @@ axiosInstance.interceptors.response.use(
 			await logoutHandler();
 		}
 		return Promise.reject(error?.response?.data);
-	}
+	},
 );
