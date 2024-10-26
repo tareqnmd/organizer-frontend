@@ -8,7 +8,7 @@ import {
 	BudgetTypeType,
 } from '@/lib/helper/modules/budget';
 import { typeFormItems } from '@/lib/helper/modules/budget/form-items';
-import { getError } from '@/lib/helper/shared/common';
+import { getError } from '@/lib/utils';
 import {
 	useCreateBudgetTypeMutation,
 	useEditBudgetTypeMutation,

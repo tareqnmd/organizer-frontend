@@ -9,7 +9,7 @@ import {
 	DialogTrigger,
 } from '@/components/ui/dialog';
 import { NoteType } from '@/lib/helper/modules/note';
-import { getError } from '@/lib/helper/shared/common';
+import { getError } from '@/lib/utils';
 import { useDeleteNoteMutation } from '@/store/features/note/api';
 import { Loader, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';

@@ -1,4 +1,4 @@
-import { RouteType } from '@/lib/routes/type';
+import { RouteType } from '@/lib/routes/types';
 import Module from './Module';
 
 const Dashboard = ({ modules }: { modules: RouteType[] }) => {

@@ -1,6 +1,6 @@
 'use client';
 import { registrationFormItems } from '@/lib/helper/auth';
-import { getError } from '@/lib/helper/shared/common';
+import { getError } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LogIn } from 'lucide-react';
 import { signIn } from 'next-auth/react';

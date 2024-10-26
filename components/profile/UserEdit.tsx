@@ -4,7 +4,7 @@ import {
 	userUpdateFormInputs,
 	userUpdateFormInputsWithPassword,
 } from '@/lib/helper/profile/form-items';
-import { getError } from '@/lib/helper/shared/common';
+import { getError } from '@/lib/utils';
 import { useUserUpdateMutation } from '@/store/features/auth/api';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader } from 'lucide-react';

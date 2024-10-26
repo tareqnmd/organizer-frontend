@@ -6,7 +6,7 @@ import {
 	BudgetTransactionType,
 	BudgetTransactionsType,
 } from '@/lib/helper/modules/budget';
-import { moneyFormat } from '@/lib/helper/shared/common';
+import { moneyFormat } from '@/lib/utils';
 import { ColumnDef } from '@tanstack/react-table';
 import { format } from 'date-fns';
 import { ArrowDownUp } from 'lucide-react';

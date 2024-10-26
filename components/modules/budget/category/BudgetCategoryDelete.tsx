@@ -9,7 +9,7 @@ import {
 	DialogTrigger,
 } from '@/components/ui/dialog';
 import { BudgetCategoryType } from '@/lib/helper/modules/budget';
-import { getError } from '@/lib/helper/shared/common';
+import { getError } from '@/lib/utils';
 import { useDeleteBudgetCategoryMutation } from '@/store/features/budget/category/api';
 import { Loader, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';

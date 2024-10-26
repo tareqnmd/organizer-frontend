@@ -1,6 +1,6 @@
 'use client';
 import SkeletonWrapper from '@/components/common/SkeletonWrapper';
-import { GetFormatterForCurrency } from '@/lib/helper/shared/common';
+import { GetFormatterForCurrency } from '@/lib/utils';
 import { TrendingDown, TrendingUp, Wallet } from 'lucide-react';
 import { useMemo } from 'react';
 import BudgetStatsCard from './BudgetStatsCard';

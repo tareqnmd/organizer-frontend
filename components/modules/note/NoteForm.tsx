@@ -3,7 +3,7 @@ import CustomFormInput from '@/components/common/input/CustomFormInput';
 import { Form } from '@/components/ui/form';
 import { NoteType } from '@/lib/helper/modules/note';
 import { noteFormItems } from '@/lib/helper/modules/note/form-items';
-import { getError } from '@/lib/helper/shared/common';
+import { getError } from '@/lib/utils';
 import { useEditNoteMutation } from '@/store/features/note/api';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';

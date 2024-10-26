@@ -1,7 +1,7 @@
 'use client';
 
 import useOutsideClick from '@/hooks/useOutsideClick';
-import { Routes } from '@/lib/helper/shared/enum';
+import { Routes } from '@/lib/routes/enum';
 import { getRoutes } from '@/lib/routes';
 import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';

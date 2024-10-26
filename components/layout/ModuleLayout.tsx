@@ -1,4 +1,4 @@
-import { RouteType } from '@/lib/routes/type';
+import { RouteType } from '@/lib/routes/types';
 import ModuleLink from './NavLink';
 
 const ModuleLayout = ({

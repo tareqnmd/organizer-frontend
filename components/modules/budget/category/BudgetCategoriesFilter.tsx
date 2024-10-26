@@ -3,7 +3,7 @@ import FormSelect from '@/components/common/input/Select';
 import { Input } from '@/components/ui/input';
 import { useDebounce } from '@/hooks/useDebounce';
 import { BudgetCategoryParamType } from '@/lib/helper/modules/budget';
-import { toQueryString } from '@/lib/helper/shared/common';
+import { toQueryString } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 

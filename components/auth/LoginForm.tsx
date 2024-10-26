@@ -7,7 +7,7 @@ import * as z from 'zod';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { loginFormItems } from '@/lib/helper/auth';
-import { getError } from '@/lib/helper/shared/common';
+import { getError } from '@/lib/utils';
 import { LogIn } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
