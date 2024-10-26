@@ -5,7 +5,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/card';
-import { NoteType } from '@/lib/helper/modules/note';
+import { NoteType } from '@/lib/helper/note';
 import { baseDateFormat } from '@/lib/utils';
 import Link from 'next/link';
 import NoteAction from './NoteAction';

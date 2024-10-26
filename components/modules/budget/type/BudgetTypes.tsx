@@ -1,5 +1,5 @@
 import { authOptions } from '@/lib/auth-options';
-import { BudgetTypeType } from '@/lib/helper/modules/budget';
+import { BudgetTypeType } from '@/lib/helper/budget';
 import { generateDataFromServer, nextProperties } from '@/lib/utils';
 import { getServerSession } from 'next-auth';
 import BudgetType from './BudgetType';

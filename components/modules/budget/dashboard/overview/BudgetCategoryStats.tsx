@@ -1,5 +1,5 @@
 import SkeletonWrapper from '@/components/common/SkeletonWrapper';
-import { TransactionTypeEnum } from '@/lib/helper/modules/budget';
+import { TransactionTypeEnum } from '@/lib/helper/budget';
 import BudgetCategoryCard from './BudgetCategoryCard';
 
 function BudgetCategoryStats({

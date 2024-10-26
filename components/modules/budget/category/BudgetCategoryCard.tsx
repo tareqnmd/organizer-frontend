@@ -1,5 +1,5 @@
 import { Card } from '@/components/ui/card';
-import { BudgetCategoryType } from '@/lib/helper/modules/budget';
+import { BudgetCategoryType } from '@/lib/helper/budget';
 import { cn } from '@/lib/utils';
 import BudgetCategoryAction from './BudgetCategoryAction';
 const BudgetCategoryCard = async ({

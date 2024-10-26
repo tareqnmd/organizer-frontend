@@ -1,4 +1,4 @@
-import { BudgetTransactionParamType } from '@/lib/helper/modules/budget';
+import { BudgetTransactionParamType } from '@/lib/helper/budget';
 import { generateDataFromServer, nextProperties } from '@/lib/utils';
 import BudgetTransactionsTable from './BudgetTransactionsTable';
 import BudgetTransactionsWrapper from './BudgetTransactionsWrapper';

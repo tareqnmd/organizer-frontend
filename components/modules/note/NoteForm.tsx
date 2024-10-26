@@ -1,8 +1,8 @@
 'use client';
 import CustomFormInput from '@/components/common/input/CustomFormInput';
 import { Form } from '@/components/ui/form';
-import { NoteType } from '@/lib/helper/modules/note';
-import { noteFormItems } from '@/lib/helper/modules/note/form-items';
+import { NoteType } from '@/lib/helper/note';
+import { noteFormItems } from '@/lib/helper/note/form-items';
 import { getError } from '@/lib/utils';
 import { useEditNoteMutation } from '@/store/features/note/api';
 import { zodResolver } from '@hookform/resolvers/zod';

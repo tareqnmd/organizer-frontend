@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import {
 	BudgetTransactionType,
 	BudgetTransactionsType,
-} from '@/lib/helper/modules/budget';
+} from '@/lib/helper/budget';
 import { moneyFormat } from '@/lib/utils';
 import { ColumnDef } from '@tanstack/react-table';
 import { format } from 'date-fns';

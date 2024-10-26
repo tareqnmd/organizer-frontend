@@ -3,8 +3,8 @@ import CustomFormInput from '@/components/common/input/CustomFormInput';
 import { Button } from '@/components/ui/button';
 import { DialogFooter } from '@/components/ui/dialog';
 import { Form } from '@/components/ui/form';
-import { BudgetCategoryType } from '@/lib/helper/modules/budget';
-import { categoryFormItems } from '@/lib/helper/modules/budget/form-items';
+import { BudgetCategoryType } from '@/lib/helper/budget';
+import { categoryFormItems } from '@/lib/helper/budget/form-items';
 import { getError } from '@/lib/utils';
 import {
 	useCreateBudgetCategoryMutation,

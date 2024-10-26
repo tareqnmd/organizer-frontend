@@ -1,4 +1,4 @@
-import { NoteType } from '@/lib/helper/modules/note';
+import { NoteType } from '@/lib/helper/note';
 import { generateDataFromServer, nextProperties } from '@/lib/utils';
 import NoteCard from './NoteCard';
 

@@ -1,5 +1,5 @@
 import Transactions from '@/components/modules/budget/transaction/BudgetTransactions';
-import { BudgetTransactionParamType } from '@/lib/helper/modules/budget';
+import { BudgetTransactionParamType } from '@/lib/helper/budget';
 import { baseDateFormat } from '@/lib/utils';
 import { endOfMonth, startOfMonth } from 'date-fns';
 

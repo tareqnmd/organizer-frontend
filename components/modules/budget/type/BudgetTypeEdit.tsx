@@ -6,7 +6,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-import { BudgetTypeType } from '@/lib/helper/modules/budget';
+import { BudgetTypeType } from '@/lib/helper/budget';
 import { EditIcon } from 'lucide-react';
 import { useState } from 'react';
 import BudgetTypeForm from './BudgetTypeForm';

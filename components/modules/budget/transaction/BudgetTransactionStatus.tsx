@@ -14,7 +14,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
-import { BudgetTransactionType } from '@/lib/helper/modules/budget';
+import { BudgetTransactionType } from '@/lib/helper/budget';
 import { useEditBudgetTransactionMutation } from '@/store/features/budget/transaction/api';
 
 const BudgetTransactionStatus = ({

@@ -8,7 +8,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-import { BudgetTypeType } from '@/lib/helper/modules/budget';
+import { BudgetTypeType } from '@/lib/helper/budget';
 import { getError } from '@/lib/utils';
 import { useDeleteBudgetTypeMutation } from '@/store/features/budget/type/api';
 import { Loader, Trash } from 'lucide-react';

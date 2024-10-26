@@ -8,7 +8,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-import { NoteType } from '@/lib/helper/modules/note';
+import { NoteType } from '@/lib/helper/note';
 import { getError } from '@/lib/utils';
 import { useDeleteNoteMutation } from '@/store/features/note/api';
 import { Loader, Trash } from 'lucide-react';

@@ -3,7 +3,7 @@
 import SkeletonWrapper from '@/components/common/SkeletonWrapper';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Period, TimeFrame } from '@/lib/helper/modules/budget/types';
+import { Period, TimeFrame } from '@/lib/helper/budget/types';
 import {
 	GetFormatterForCurrency,
 	getYearsInRange,

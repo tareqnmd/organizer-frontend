@@ -1,7 +1,7 @@
 import {
 	BudgetCategoryParamType,
 	BudgetCategoryType,
-} from '@/lib/helper/modules/budget';
+} from '@/lib/helper/budget';
 import { generateDataFromServer, nextProperties } from '@/lib/utils';
 import BudgetCategoriesFilter from './BudgetCategoriesFilter';
 import BudgetCategoryAdd from './BudgetCategoryAdd';

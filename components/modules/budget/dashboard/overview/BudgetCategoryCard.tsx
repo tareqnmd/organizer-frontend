@@ -1,7 +1,7 @@
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { TransactionType } from '@/lib/helper/modules/budget';
+import { TransactionType } from '@/lib/helper/budget';
 import { cn, GetFormatterForCurrency } from '@/lib/utils';
 import { useMemo } from 'react';
 

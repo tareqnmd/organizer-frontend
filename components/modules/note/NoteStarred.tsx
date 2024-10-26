@@ -1,5 +1,5 @@
 'use client';
-import { NoteType } from '@/lib/helper/modules/note';
+import { NoteType } from '@/lib/helper/note';
 import { getError } from '@/lib/utils';
 import { useEditNoteMutation } from '@/store/features/note/api';
 import { StarIcon } from 'lucide-react';
