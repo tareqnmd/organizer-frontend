@@ -1,4 +1,4 @@
-import { Routes } from './enum';
+import { Routes } from './enums';
 
 export type RouteType = {
 	name: string;

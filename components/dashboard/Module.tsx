@@ -1,4 +1,4 @@
-import { RouteType } from '@/lib/routes/types';
+import { RouteType } from '@/lib/routes';
 import Link from 'next/link';
 import DynamicIcon from '../icons/DynamicLucideIcon';
 
