@@ -4,7 +4,7 @@ import { LoginForm } from './LoginForm';
 const Login = () => {
 	return (
 		<>
-			<p className="font-medium text-sm">Welcome</p>
+			<p className="text-sm font-medium">Welcome</p>
 			<LoginForm />
 			<AuthSocialActions />
 			<p className="text-xs">

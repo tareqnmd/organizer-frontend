@@ -1,6 +1,6 @@
 import AuthLayout from '@/components/layout/AuthLayout';
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const AuthenticationLayout = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<div className="grid h-screen place-items-center">
 			<AuthLayout>{children}</AuthLayout>
@@ -8,4 +8,4 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 	);
 };
 
-export default Layout;
+export default AuthenticationLayout;
