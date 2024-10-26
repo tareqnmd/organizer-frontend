@@ -1,6 +1,6 @@
 'use client';
-import { NoteType } from '@/helper/modules/note';
-import { getError } from '@/helper/shared/common';
+import { NoteType } from '@/lib/helper/modules/note';
+import { getError } from '@/lib/helper/shared/common';
 import { useEditNoteMutation } from '@/store/features/note/api';
 import { StarIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -24,7 +24,7 @@ const NoteStarred = ({ note }: { note: NoteType }) => {
 			toast.success(
 				`Note successfully ${
 					data.starred === false ? 'remove from starred' : 'starred'
-				}`
+				}`,
 			);
 			router.refresh();
 		} else if (isError) {
@@ -33,21 +33,11 @@ const NoteStarred = ({ note }: { note: NoteType }) => {
 	}, [data.starred, error, isError, isSuccess, router]);
 
 	return (
-		<button
-			onClick={statusHandler}
-			disabled={isLoading}
-		>
+		<button onClick={statusHandler} disabled={isLoading}>
 			{note.starred === false ? (
-				<StarIcon
-					className="cursor-pointer"
-					size={16}
-				/>
+				<StarIcon className="cursor-pointer" size={16} />
 			) : (
-				<StarIcon
-					className="cursor-pointer"
-					size={16}
-					fill="black"
-				/>
+				<StarIcon className="cursor-pointer" size={16} fill="black" />
 			)}
 		</button>
 	);

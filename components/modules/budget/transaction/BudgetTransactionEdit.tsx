@@ -6,7 +6,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-import { BudgetTransactionType } from '@/helper/modules/budget';
+import { BudgetTransactionType } from '@/lib/helper/modules/budget';
 import { EditIcon } from 'lucide-react';
 import { useState } from 'react';
 import BudgetTransactionForm from './BudgetTransactionForm';
@@ -17,15 +17,9 @@ const BudgetTransactionEdit = ({
 }) => {
 	const [open, setOpen] = useState(false);
 	return (
-		<Dialog
-			open={open}
-			onOpenChange={setOpen}
-		>
+		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
-				<EditIcon
-					className="cursor-pointer"
-					size={16}
-				/>
+				<EditIcon className="cursor-pointer" size={16} />
 			</DialogTrigger>
 			<DialogContent className="basic-modal">
 				<DialogHeader>

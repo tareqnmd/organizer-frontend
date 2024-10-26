@@ -1,4 +1,4 @@
-import { BudgetCategoryType } from '@/helper/modules/budget';
+import { BudgetCategoryType } from '@/lib/helper/modules/budget';
 import BudgetCategoryDelete from './BudgetCategoryDelete';
 import BudgetCategoryEdit from './BudgetCategoryEdit';
 import BudgetCategoryStatus from './BudgetCategoryStatus';

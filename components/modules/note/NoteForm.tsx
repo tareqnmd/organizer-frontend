@@ -1,9 +1,9 @@
 'use client';
 import CustomFormInput from '@/components/common/input/CustomFormInput';
 import { Form } from '@/components/ui/form';
-import { NoteType } from '@/helper/modules/note';
-import { noteFormItems } from '@/helper/modules/note/form-items';
-import { getError } from '@/helper/shared/common';
+import { NoteType } from '@/lib/helper/modules/note';
+import { noteFormItems } from '@/lib/helper/modules/note/form-items';
+import { getError } from '@/lib/helper/shared/common';
 import { useEditNoteMutation } from '@/store/features/note/api';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
@@ -66,7 +66,7 @@ const NoteForm = ({ note }: { note: NoteType }) => {
 
 	return (
 		<Form {...form}>
-			<div className="w-full grid gap-3">
+			<div className="grid w-full gap-3">
 				{noteFormItems.map((input) => (
 					<CustomFormInput
 						key={input.name}

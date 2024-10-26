@@ -5,16 +5,16 @@ import {
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/card';
-import { NoteType } from '@/helper/modules/note';
-import { baseDateFormat } from '@/helper/shared/date';
+import { NoteType } from '@/lib/helper/modules/note';
+import { baseDateFormat } from '@/lib/helper/shared/date';
 import Link from 'next/link';
 import NoteAction from './NoteAction';
 
 const NoteCard = ({ note }: { note: NoteType }) => {
 	return (
-		<Card className="h-full hover:shadow transition overflow-hidden">
-			<CardHeader className="p-2 border-b bg-gray-200">
-				<CardTitle className="text-md w-full flex justify-between">
+		<Card className="h-full overflow-hidden transition hover:shadow">
+			<CardHeader className="border-b bg-gray-200 p-2">
+				<CardTitle className="text-md flex w-full justify-between">
 					<Link href={`/note/${note.id}`}>
 						<span>{note?.subject}</span>
 					</Link>
@@ -27,7 +27,7 @@ const NoteCard = ({ note }: { note: NoteType }) => {
 			<CardContent className="p-2">
 				<div
 					dangerouslySetInnerHTML={{ __html: note?.details ?? `` }}
-					className="truncate max-h-12"
+					className="max-h-12 truncate"
 				/>
 			</CardContent>
 		</Card>

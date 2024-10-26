@@ -1,6 +1,6 @@
 'use client';
 import SkeletonWrapper from '@/components/common/SkeletonWrapper';
-import { GetFormatterForCurrency } from '@/helper/shared/common';
+import { GetFormatterForCurrency } from '@/lib/helper/shared/common';
 import { TrendingDown, TrendingUp, Wallet } from 'lucide-react';
 import { useMemo } from 'react';
 import BudgetStatsCard from './BudgetStatsCard';
@@ -27,7 +27,7 @@ function BudgetStatsCards({
 					value={income}
 					title="Income"
 					icon={
-						<TrendingUp className="h-12 w-12 items-center rounded-lg p-2 income bg-emerald-400/10" />
+						<TrendingUp className="income h-12 w-12 items-center rounded-lg bg-emerald-400/10 p-2" />
 					}
 				/>
 			</SkeletonWrapper>
@@ -38,7 +38,7 @@ function BudgetStatsCards({
 					value={expense}
 					title="Expense"
 					icon={
-						<TrendingDown className="h-12 w-12 items-center rounded-lg p-2 expense bg-red-400/10" />
+						<TrendingDown className="expense h-12 w-12 items-center rounded-lg bg-red-400/10 p-2" />
 					}
 				/>
 			</SkeletonWrapper>
@@ -49,7 +49,7 @@ function BudgetStatsCards({
 					value={balance}
 					title="Balance"
 					icon={
-						<Wallet className="h-12 w-12 items-center rounded-lg p-2 balance bg-violet-400/10" />
+						<Wallet className="balance h-12 w-12 items-center rounded-lg bg-violet-400/10 p-2" />
 					}
 				/>
 			</SkeletonWrapper>

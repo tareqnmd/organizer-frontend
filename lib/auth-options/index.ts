@@ -1,4 +1,4 @@
-import { axiosInstance } from '@/helper/shared/axios-api';
+import { axiosInstance } from '@/lib/helper/shared/axios-api';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
@@ -58,7 +58,10 @@ export const authOptions = {
 			},
 			async authorize(credentials) {
 				try {
-					const { data } = await axiosInstance.post('/user/login', credentials);
+					const { data } = await axiosInstance.post(
+						'/user/login',
+						credentials,
+					);
 					const { token, tokenOptions, ...user } = data;
 					cookies().set('token', token, JSON.parse(tokenOptions));
 					return user ?? null;
@@ -91,7 +94,7 @@ export const authOptions = {
 				try {
 					const { data } = await axiosInstance.post(
 						'/user/register',
-						credentials
+						credentials,
 					);
 					const { token, tokenOptions, ...user } = data;
 					cookies().set('token', token, JSON.parse(tokenOptions));
@@ -127,7 +130,12 @@ export const authOptions = {
 		},
 		async jwt({ token, trigger, session, user }: any) {
 			if (user) {
-				token = { ...user, iat: token.iat, exp: token.exp, jti: token.jti };
+				token = {
+					...user,
+					iat: token.iat,
+					exp: token.exp,
+					jti: token.jti,
+				};
 			}
 			if (trigger === 'update' && session?.name) {
 				token.name = session.name;

@@ -1,8 +1,8 @@
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { TransactionType } from '@/helper/modules/budget';
-import { GetFormatterForCurrency } from '@/helper/shared/common';
+import { TransactionType } from '@/lib/helper/modules/budget';
+import { GetFormatterForCurrency } from '@/lib/helper/shared/common';
 import { cn } from '@/lib/utils';
 import { useMemo } from 'react';
 
@@ -18,10 +18,12 @@ const BudgetCategoryCard = ({
 	}, []);
 
 	return (
-		<Card className="w-full flex flex-col gap-2 p-2">
+		<Card className="flex w-full flex-col gap-2 p-2">
 			<CardHeader className="p-0">
 				<CardTitle
-					className={(cn('text-lg'), data?.length === 0 ? 'text-center' : '')}
+					className={
+						(cn('text-lg'), data?.length === 0 ? 'text-center' : '')
+					}
 				>
 					{type === 'income' ? 'Incomes' : 'Expenses'} by category
 				</CardTitle>
@@ -31,7 +33,7 @@ const BudgetCategoryCard = ({
 				{data?.length === 0 && (
 					<div className="flex h-20 w-full flex-col items-center justify-center">
 						No data for the selected period
-						<p className="text-center text-sm text-muted-foreground">
+						<p className="text-muted-foreground text-center text-sm">
 							Try selecting a different period or try adding new{' '}
 							{type === 'income' ? 'incomes' : 'expenses'}
 						</p>
@@ -39,21 +41,27 @@ const BudgetCategoryCard = ({
 				)}
 
 				{data?.length > 0 && (
-					<ScrollArea className="w-full mb-2">
+					<ScrollArea className="mb-2 w-full">
 						<div className="flex w-full flex-col gap-2">
 							{data?.map((item: any) => {
 								return (
 									<div key={item.name}>
 										<div className="flex flex-col gap-2">
 											<div className="flex items-center justify-between">
-												<span className="flex items-center ">
+												<span className="flex items-center">
 													{item.name}
-													<span className="ml-2 text-xs text-muted-foreground">
-														({item.percentage.toFixed(0)}%)
+													<span className="text-muted-foreground ml-2 text-xs">
+														(
+														{item.percentage.toFixed(
+															0,
+														)}
+														%)
 													</span>
 												</span>
 												<span className="text-sm">
-													{formatter.format(item.amount)}
+													{formatter.format(
+														item.amount,
+													)}
 												</span>
 											</div>
 											<Progress

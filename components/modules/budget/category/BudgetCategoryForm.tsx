@@ -3,9 +3,9 @@ import CustomFormInput from '@/components/common/input/CustomFormInput';
 import { Button } from '@/components/ui/button';
 import { DialogFooter } from '@/components/ui/dialog';
 import { Form } from '@/components/ui/form';
-import { BudgetCategoryType } from '@/helper/modules/budget';
-import { categoryFormItems } from '@/helper/modules/budget/form-items';
-import { getError } from '@/helper/shared/common';
+import { BudgetCategoryType } from '@/lib/helper/modules/budget';
+import { categoryFormItems } from '@/lib/helper/modules/budget/form-items';
+import { getError } from '@/lib/helper/shared/common';
 import {
 	useCreateBudgetCategoryMutation,
 	useEditBudgetCategoryMutation,
@@ -74,7 +74,7 @@ const BudgetCategoryForm = ({
 	useEffect(() => {
 		if (isCreateSuccess || isEditSuccess) {
 			toast.success(
-				`Category successfully ${category?.id ? 'updated' : 'created'}`
+				`Category successfully ${category?.id ? 'updated' : 'created'}`,
 			);
 			setOpen(false);
 			router.refresh();
@@ -96,7 +96,7 @@ const BudgetCategoryForm = ({
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className="w-full grid gap-3"
+				className="grid w-full gap-3"
 			>
 				{categoryFormItems.map((input) => (
 					<CustomFormInput
@@ -112,10 +112,7 @@ const BudgetCategoryForm = ({
 						type="submit"
 					>
 						{isCreateLoading || isEditLoading ? (
-							<Loader
-								className="animate-spin"
-								size={16}
-							/>
+							<Loader className="animate-spin" size={16} />
 						) : null}
 						{category?.id ? 'Update' : 'Create'}
 					</Button>

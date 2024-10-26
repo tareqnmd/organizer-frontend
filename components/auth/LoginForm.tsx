@@ -6,8 +6,8 @@ import * as z from 'zod';
 
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
-import { loginFormItems } from '@/helper/auth';
-import { getError } from '@/helper/shared/common';
+import { loginFormItems } from '@/lib/helper/auth';
+import { getError } from '@/lib/helper/shared/common';
 import { LogIn } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
@@ -55,7 +55,7 @@ export function LoginForm() {
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className="w-full grid gap-3"
+				className="grid w-full gap-3"
 			>
 				{loginFormItems.map((input) => (
 					<CustomFormInput
@@ -65,7 +65,7 @@ export function LoginForm() {
 					/>
 				))}
 				<Button
-					className="w-full flex gap-2 mt-2"
+					className="mt-2 flex w-full gap-2"
 					type="submit"
 					disabled={loading}
 				>

@@ -1,6 +1,6 @@
 'use client';
 
-import { logoutHandler } from '@/helper/shared/auth';
+import { logoutHandler } from '@/lib/helper/shared/auth';
 import { cn } from '@/lib/utils';
 
 const LogoutButton = ({ extraClass }: { extraClass: string }) => {

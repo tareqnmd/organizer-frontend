@@ -5,7 +5,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
-import { Period } from '@/helper/shared/types';
+import { Period } from '@/lib/helper/shared/types';
 
 const BudgetHistoryYearSelector = ({
 	period,
@@ -31,10 +31,7 @@ const BudgetHistoryYearSelector = ({
 			</SelectTrigger>
 			<SelectContent>
 				{years.map((year: any) => (
-					<SelectItem
-						key={year}
-						value={year.toString()}
-					>
+					<SelectItem key={year} value={year.toString()}>
 						{year}
 					</SelectItem>
 				))}

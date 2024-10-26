@@ -6,7 +6,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
-import { axiosInstance } from '@/helper/shared/axios-api';
+import { axiosInstance } from '@/lib/helper/shared/axios-api';
 import { useEffect, useState } from 'react';
 
 const FormSelect = ({ input, field, extraTriggerClassName = '' }: any) => {
@@ -34,10 +34,7 @@ const FormSelect = ({ input, field, extraTriggerClassName = '' }: any) => {
 	}, [optionUrl]);
 
 	return (
-		<Select
-			onValueChange={field.onChange}
-			value={value}
-		>
+		<Select onValueChange={field.onChange} value={value}>
 			<SelectTrigger className={extraTriggerClassName}>
 				<SelectValue placeholder={placeholder} />
 			</SelectTrigger>
@@ -45,15 +42,14 @@ const FormSelect = ({ input, field, extraTriggerClassName = '' }: any) => {
 				<SelectGroup>
 					{options?.length > 0 ? (
 						options?.map((item: any, index: number) => (
-							<SelectItem
-								key={index}
-								value={item?.value}
-							>
+							<SelectItem key={index} value={item?.value}>
 								{item?.label}
 							</SelectItem>
 						))
 					) : (
-						<span className="text-center text-sm px-2">No Data Found</span>
+						<span className="px-2 text-center text-sm">
+							No Data Found
+						</span>
 					)}
 				</SelectGroup>
 			</SelectContent>

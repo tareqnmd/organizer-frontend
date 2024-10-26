@@ -1,8 +1,11 @@
-import { generateDataFromServer, nextProperties } from '@/helper/shared/server-fetch';
 import {
 	BudgetCategoryParamType,
 	BudgetCategoryType,
-} from '@/helper/modules/budget';
+} from '@/lib/helper/modules/budget';
+import {
+	generateDataFromServer,
+	nextProperties,
+} from '@/lib/helper/shared/server-fetch';
 import BudgetCategoriesFilter from './BudgetCategoriesFilter';
 import BudgetCategoryAdd from './BudgetCategoryAdd';
 import BudgetCategoryCard from './BudgetCategoryCard';
@@ -16,24 +19,18 @@ const BudgetCategories = async ({
 	const url = `budget/type-categories?${queryParams}`;
 	const { data: categories } = await generateDataFromServer(
 		url,
-		nextProperties({})
+		nextProperties({}),
 	);
 
 	return (
 		<>
-			<div className="flex items-center gap-2 mb-4 sm:w-[80%] md:w-[60%] xl:w-[40%] ml-auto">
+			<div className="mb-4 ml-auto flex items-center gap-2 sm:w-[80%] md:w-[60%] xl:w-[40%]">
 				<BudgetCategoriesFilter searchParams={searchParams} />
 				<BudgetCategoryAdd />
 			</div>
-			<div
-				className="grid grid-cols-1 sm:grid-cols-2
-     lg:grid-cols-3 xl:grid-cols-4 gap-2"
-			>
+			<div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 				{categories?.map((category: BudgetCategoryType) => (
-					<BudgetCategoryCard
-						key={category.id}
-						category={category}
-					/>
+					<BudgetCategoryCard key={category.id} category={category} />
 				))}
 			</div>
 		</>

@@ -1,6 +1,6 @@
 'use client';
 import { Button } from '@/components/ui/button';
-import { getError } from '@/helper/shared/common';
+import { getError } from '@/lib/helper/shared/common';
 import { useCreateNoteMutation } from '@/store/features/note/api';
 import { Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -37,13 +37,10 @@ const NoteCreate = () => {
 			onClick={handleCreate}
 			disabled={isCreateLoading}
 			size="sm"
-			className="flex items-center gap-1 ml-auto text-sm"
+			className="ml-auto flex items-center gap-1 text-sm"
 		>
 			{isCreateLoading ? (
-				<Loader
-					className="animate-spin"
-					size={16}
-				/>
+				<Loader className="animate-spin" size={16} />
 			) : null}
 			{isCreateLoading ? 'Creating Note' : 'New Note'}
 		</Button>

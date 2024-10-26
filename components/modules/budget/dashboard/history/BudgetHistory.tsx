@@ -6,9 +6,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
 	GetFormatterForCurrency,
 	getYearsInRange,
-} from '@/helper/shared/common';
-import { monthWiseData, yearWiseData } from '@/helper/shared/date';
-import { Period, TimeFrame } from '@/helper/shared/types';
+} from '@/lib/helper/shared/common';
+import { monthWiseData, yearWiseData } from '@/lib/helper/shared/date';
+import { Period, TimeFrame } from '@/lib/helper/shared/types';
 import { useEffect, useMemo, useState } from 'react';
 import {
 	Bar,
@@ -51,12 +51,15 @@ const BudgetHistory = ({
 	useEffect(() => {
 		if (timeFrame === 'month' && month?.length > 0) {
 			const monthData = month.filter(
-				(item: any) => item.month === period.month && item.year === period.year
+				(item: any) =>
+					item.month === period.month && item.year === period.year,
 			);
 			const data = monthWiseData(monthData, period);
 			setChartData(data);
 		} else if (timeFrame === 'year' && year?.length > 0) {
-			const yearData = year.filter((item: any) => item.year === period.year);
+			const yearData = year.filter(
+				(item: any) => item.year === period.year,
+			);
 			const data = yearWiseData(yearData, period);
 			setChartData(data);
 		}
@@ -66,8 +69,8 @@ const BudgetHistory = ({
 		<>
 			<h2 className="mt-6 text-xl font-bold">History</h2>
 			<Card className="col-span-12 w-full p-2">
-				<CardHeader className="p-0 gap-2 mb-4">
-					<CardTitle className="flex justify-between items-center gap-2 flex-wrap">
+				<CardHeader className="mb-4 gap-2 p-0">
+					<CardTitle className="flex flex-wrap items-center justify-between gap-2">
 						<BudgetHistoryPeriodSelector
 							period={period}
 							setPeriod={setPeriod}
@@ -80,14 +83,14 @@ const BudgetHistory = ({
 								variant={'outline'}
 								className="flex items-center gap-2 text-sm"
 							>
-								<div className="h-4 w-4 rounded-full income"></div>
+								<div className="income h-4 w-4 rounded-full"></div>
 								Income
 							</Badge>
 							<Badge
 								variant={'outline'}
 								className="flex items-center gap-2 text-sm"
 							>
-								<div className="h-4 w-4 rounded-full expense"></div>
+								<div className="expense h-4 w-4 rounded-full"></div>
 								Expense
 							</Badge>
 						</div>
@@ -96,12 +99,9 @@ const BudgetHistory = ({
 				<CardContent className="p-0">
 					<SkeletonWrapper isLoading={false}>
 						{chartData?.some(
-							(item: any) => item.expense > 0 || item.income > 0
+							(item: any) => item.expense > 0 || item.income > 0,
 						) ? (
-							<ResponsiveContainer
-								width={'100%'}
-								height={300}
-							>
+							<ResponsiveContainer width={'100%'} height={300}>
 								<BarChart
 									height={300}
 									data={chartData}
@@ -159,15 +159,25 @@ const BudgetHistory = ({
 										padding={{ left: 0, right: 0 }}
 										dataKey={(data: any) => {
 											const { year, month, day } = data;
-											const date = new Date(year, month, day || 1);
+											const date = new Date(
+												year,
+												month,
+												day || 1,
+											);
 											if (timeFrame === 'year') {
-												return date.toLocaleDateString('default', {
-													month: 'short',
-												});
+												return date.toLocaleDateString(
+													'default',
+													{
+														month: 'short',
+													},
+												);
 											}
-											return date.toLocaleDateString('default', {
-												day: '2-digit',
-											});
+											return date.toLocaleDateString(
+												'default',
+												{
+													day: '2-digit',
+												},
+											);
 										}}
 									/>
 									<YAxis
@@ -202,10 +212,11 @@ const BudgetHistory = ({
 								</BarChart>
 							</ResponsiveContainer>
 						) : (
-							<Card className="flex h-[300px] flex-col items-center justify-center bg-background">
+							<Card className="bg-background flex h-[300px] flex-col items-center justify-center">
 								No data for the selected period
-								<p className="text-sm text-center text-muted-foreground">
-									Try selecting a different period or adding new transactions
+								<p className="text-muted-foreground text-center text-sm">
+									Try selecting a different period or adding
+									new transactions
 								</p>
 							</Card>
 						)}

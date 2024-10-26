@@ -2,7 +2,7 @@
 
 import SkeletonWrapper from '@/components/common/SkeletonWrapper';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Period, TimeFrame } from '@/helper/shared/types';
+import { Period, TimeFrame } from '@/lib/helper/shared/types';
 import BudgetHistoryMonthSelector from './BudgetHistoryMonthSelector';
 import BudgetHistoryYearSelector from './BudgetHistoryYearSelector';
 
@@ -23,13 +23,12 @@ const BudgetHistoryPeriodSelector = ({
 }: Props) => {
 	return (
 		<div className="flex flex-wrap items-center gap-2">
-			<SkeletonWrapper
-				isLoading={false}
-				fullWidth={false}
-			>
+			<SkeletonWrapper isLoading={false} fullWidth={false}>
 				<Tabs
 					value={timeFrame}
-					onValueChange={(value: string) => setTimeFrame(value as TimeFrame)}
+					onValueChange={(value: string) =>
+						setTimeFrame(value as TimeFrame)
+					}
 				>
 					<TabsList>
 						<TabsTrigger value="year">Year</TabsTrigger>
@@ -38,10 +37,7 @@ const BudgetHistoryPeriodSelector = ({
 				</Tabs>
 			</SkeletonWrapper>
 			<div className="flex flex-wrap items-center gap-2">
-				<SkeletonWrapper
-					isLoading={false}
-					fullWidth={false}
-				>
+				<SkeletonWrapper isLoading={false} fullWidth={false}>
 					<BudgetHistoryYearSelector
 						period={period}
 						setPeriod={setPeriod}
@@ -49,10 +45,7 @@ const BudgetHistoryPeriodSelector = ({
 					/>
 				</SkeletonWrapper>
 				{timeFrame === 'month' && (
-					<SkeletonWrapper
-						isLoading={false}
-						fullWidth={false}
-					>
+					<SkeletonWrapper isLoading={false} fullWidth={false}>
 						<BudgetHistoryMonthSelector
 							period={period}
 							setPeriod={setPeriod}

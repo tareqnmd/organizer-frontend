@@ -1,5 +1,5 @@
 import Dashboard from '@/components/dashboard/Dashboard';
-import { getRoutes } from '@/helper/shared/routes';
+import { getRoutes } from '@/lib/helper/shared/routes';
 
 const page = async () => {
 	return (

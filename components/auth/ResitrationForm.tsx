@@ -1,6 +1,6 @@
 'use client';
-import { registrationFormItems } from '@/helper/auth';
-import { getError } from '@/helper/shared/common';
+import { registrationFormItems } from '@/lib/helper/auth';
+import { getError } from '@/lib/helper/shared/common';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LogIn } from 'lucide-react';
 import { signIn } from 'next-auth/react';
@@ -57,7 +57,7 @@ const RegistrationForm = () => {
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className="w-full grid gap-3"
+				className="grid w-full gap-3"
 			>
 				{registrationFormItems.map((input) => (
 					<CustomFormInput
@@ -67,7 +67,7 @@ const RegistrationForm = () => {
 					/>
 				))}
 				<Button
-					className="w-full flex gap-2 mt-2"
+					className="mt-2 flex w-full gap-2"
 					type="submit"
 					disabled={loading}
 				>

@@ -1,5 +1,5 @@
 import SkeletonWrapper from '@/components/common/SkeletonWrapper';
-import { TransactionTypeEnum } from '@/helper/modules/budget';
+import { TransactionTypeEnum } from '@/lib/helper/modules/budget';
 import BudgetCategoryCard from './BudgetCategoryCard';
 
 function BudgetCategoryStats({
@@ -29,7 +29,10 @@ function BudgetCategoryStats({
 				/>
 			</SkeletonWrapper>
 			<SkeletonWrapper isLoading={false}>
-				<BudgetCategoryCard type={TransactionTypeEnum.EXPENSE} data={expense} />
+				<BudgetCategoryCard
+					type={TransactionTypeEnum.EXPENSE}
+					data={expense}
+				/>
 			</SkeletonWrapper>
 		</div>
 	);

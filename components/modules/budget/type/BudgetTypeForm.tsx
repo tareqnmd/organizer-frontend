@@ -3,16 +3,16 @@ import CustomFormInput from '@/components/common/input/CustomFormInput';
 import { Button } from '@/components/ui/button';
 import { DialogFooter } from '@/components/ui/dialog';
 import { Form } from '@/components/ui/form';
-import { typeFormItems } from '@/helper/modules/budget/form-items';
-import { getError } from '@/helper/shared/common';
+import {
+	BudgetTypeSubmitType,
+	BudgetTypeType,
+} from '@/lib/helper/modules/budget';
+import { typeFormItems } from '@/lib/helper/modules/budget/form-items';
+import { getError } from '@/lib/helper/shared/common';
 import {
 	useCreateBudgetTypeMutation,
 	useEditBudgetTypeMutation,
 } from '@/store/features/budget/type/api';
-import {
-	BudgetTypeSubmitType,
-	BudgetTypeType,
-} from '@/helper/modules/budget';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -61,12 +61,16 @@ const BudgetTypeForm = ({
 	] = useCreateBudgetTypeMutation();
 
 	const onSubmit = async (values: BudgetTypeSubmitType) => {
-		type?.id ? await edit({ data: values, id: type.id }) : await create(values);
+		type?.id
+			? await edit({ data: values, id: type.id })
+			: await create(values);
 	};
 
 	useEffect(() => {
 		if (isCreateSuccess || isEditSuccess) {
-			toast.success(`Type successfully ${type?.id ? 'updated' : 'created'}`);
+			toast.success(
+				`Type successfully ${type?.id ? 'updated' : 'created'}`,
+			);
 			setOpen(false);
 			router.refresh();
 		} else if (isEditError || isCreateError) {
@@ -94,7 +98,7 @@ const BudgetTypeForm = ({
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className="w-full grid gap-3"
+				className="grid w-full gap-3"
 			>
 				{typeFormItems.map((input) => (
 					<CustomFormInput
@@ -110,10 +114,7 @@ const BudgetTypeForm = ({
 						type="submit"
 					>
 						{isCreateLoading || isEditLoading ? (
-							<Loader
-								className="animate-spin"
-								size={16}
-							/>
+							<Loader className="animate-spin" size={16} />
 						) : null}
 						{type?.id ? 'Update' : 'Create'}
 					</Button>

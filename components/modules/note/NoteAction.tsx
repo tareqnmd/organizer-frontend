@@ -1,4 +1,4 @@
-import { NoteType } from '@/helper/modules/note';
+import { NoteType } from '@/lib/helper/modules/note';
 import NoteDelete from './NoteDelete';
 import NoteStarred from './NoteStarred';
 

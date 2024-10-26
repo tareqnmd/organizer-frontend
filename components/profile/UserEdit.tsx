@@ -1,5 +1,10 @@
 'use client';
 
+import {
+	userUpdateFormInputs,
+	userUpdateFormInputsWithPassword,
+} from '@/lib/helper/profile/form-items';
+import { getError } from '@/lib/helper/shared/common';
 import { useUserUpdateMutation } from '@/store/features/auth/api';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader } from 'lucide-react';
@@ -13,33 +18,48 @@ import CustomFormInput from '../common/input/CustomFormInput';
 import { Button } from '../ui/button';
 import { Form } from '../ui/form';
 import UserPasswordChange from './UserPasswordChange';
-import { userUpdateFormInputs, userUpdateFormInputsWithPassword } from '@/helper/profile/form-items';
-import { getError } from '@/helper/shared/common';
 
 const FormSchema = (passwordChange = false) =>
 	z.object(
 		passwordChange
 			? {
 					name: z
-						.string({ required_error: 'Name password is required.' })
+						.string({
+							required_error: 'Name password is required.',
+						})
 						.min(3, 'Name must be at least 3 characters'),
 					email: z.string().email(),
 					password: z
 						.string({
 							required_error: 'Password is required.',
 						})
-						.min(6, 'Password is too short - should be 6 chars minimum.'),
+						.min(
+							6,
+							'Password is too short - should be 6 chars minimum.',
+						),
 					confirmPassword: z
-						.string({ required_error: 'Confirm password is required.' })
-						.min(6, 'Password is too short - should be 6 chars minimum.'),
+						.string({
+							required_error: 'Confirm password is required.',
+						})
+						.min(
+							6,
+							'Password is too short - should be 6 chars minimum.',
+						),
 					currentPassword: z
-						.string({ required_error: 'Current password is required.' })
-						.min(6, 'Password is too short - should be 6 chars minimum.'),
-			  }
+						.string({
+							required_error: 'Current password is required.',
+						})
+						.min(
+							6,
+							'Password is too short - should be 6 chars minimum.',
+						),
+				}
 			: {
-					name: z.string().min(3, 'Name must be at least 3 characters'),
+					name: z
+						.string()
+						.min(3, 'Name must be at least 3 characters'),
 					email: z.string().email(),
-			  }
+				},
 	);
 
 const UserEdit = ({ user }: any) => {
@@ -56,7 +76,8 @@ const UserEdit = ({ user }: any) => {
 
 	const updateMutation = async (data: any) => {
 		try {
-			const { password, currentPassword, confirmPassword, ...rest } = data;
+			const { password, currentPassword, confirmPassword, ...rest } =
+				data;
 			if (passwordChange) {
 				if (password === confirmPassword) {
 					await updateUser({
@@ -74,7 +95,10 @@ const UserEdit = ({ user }: any) => {
 					toast.error('Password miss match');
 				}
 			} else if (!passwordChange) {
-				await updateUser({ id: user.id, data: { ...rest, passwordChange } });
+				await updateUser({
+					id: user.id,
+					data: { ...rest, passwordChange },
+				});
 				await update({ name: data.name });
 				router.refresh();
 			}
@@ -105,7 +129,7 @@ const UserEdit = ({ user }: any) => {
 					passwordChange={passwordChange}
 					setPasswordChange={setPasswordChange}
 				/>
-				<div className="grid md:grid-cols-2 gap-2 mb-4">
+				<div className="mb-4 grid gap-2 md:grid-cols-2">
 					{[
 						...(passwordChange
 							? userUpdateFormInputsWithPassword
@@ -119,7 +143,7 @@ const UserEdit = ({ user }: any) => {
 					))}
 				</div>
 				<Button
-					className="w-full flex gap-1 items-center"
+					className="flex w-full items-center gap-1"
 					type="submit"
 					disabled={isLoading}
 				>

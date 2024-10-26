@@ -8,15 +8,15 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-import { getError } from '@/helper/shared/common';
+import { getError } from '@/lib/helper/shared/common';
 import { cn } from '@/lib/utils';
 import { BadgeCheck, BadgeMinus, Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
+import { BudgetTransactionType } from '@/lib/helper/modules/budget';
 import { useEditBudgetTransactionMutation } from '@/store/features/budget/transaction/api';
-import { BudgetTransactionType } from '@/helper/modules/budget';
 
 const BudgetTransactionStatus = ({
 	transaction,
@@ -39,7 +39,7 @@ const BudgetTransactionStatus = ({
 			toast.success(
 				`Transaction successfully ${
 					data.status === 1 ? 'inactivated' : 'activated'
-				}`
+				}`,
 			);
 			setOpen(false);
 			router.refresh();
@@ -48,46 +48,37 @@ const BudgetTransactionStatus = ({
 		}
 	}, [data.status, error, isError, isSuccess, router]);
 	return (
-		<Dialog
-			open={open}
-			onOpenChange={setOpen}
-		>
+		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
 				{transaction.status === 0 ? (
-					<BadgeCheck
-						className="cursor-pointer"
-						size={16}
-					/>
+					<BadgeCheck className="cursor-pointer" size={16} />
 				) : (
-					<BadgeMinus
-						className="cursor-pointer"
-						size={16}
-					/>
+					<BadgeMinus className="cursor-pointer" size={16} />
 				)}
 			</DialogTrigger>
 			<DialogContent className="basic-modal">
 				<DialogHeader>
 					<DialogTitle>
-						{transaction.status === 0 ? 'Active' : 'Inactive'} Transaction (
-						{transaction.description})
+						{transaction.status === 0 ? 'Active' : 'Inactive'}{' '}
+						Transaction ({transaction.description})
 					</DialogTitle>
 				</DialogHeader>
-				Do you want to {transaction.status === 0 ? 'active' : 'inactive'} the
+				Do you want to{' '}
+				{transaction.status === 0 ? 'active' : 'inactive'} the
 				Transaction?
 				<DialogFooter>
 					<Button
 						onClick={statusHandler}
 						className={cn(
 							'flex items-center gap-1',
-							transaction.status === 0 ? 'bg-green-500' : 'bg-red-900'
+							transaction.status === 0
+								? 'bg-green-500'
+								: 'bg-red-900',
 						)}
 						disabled={isLoading}
 					>
 						{isLoading ? (
-							<Loader
-								className="animate-spin"
-								size={16}
-							/>
+							<Loader className="animate-spin" size={16} />
 						) : null}
 						{transaction.status === 0 ? 'Active' : 'Inactive'}
 					</Button>

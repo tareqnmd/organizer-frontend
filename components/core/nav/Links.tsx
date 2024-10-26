@@ -1,13 +1,13 @@
 import { getServerSession } from 'next-auth';
 
 import NavLink from '@/components/layout/NavLink';
-import { getRoutes } from '@/helper/shared/routes';
 import { authOptions } from '@/lib/auth-options';
-import { Routes } from '@/helper/shared/enum';
+import { Routes } from '@/lib/helper/shared/enum';
+import { getRoutes } from '@/lib/helper/shared/routes';
 const Links = async () => {
 	const session = await getServerSession(authOptions);
 	return (
-		<ul className="hidden md:flex items-center gap-2 text-sm">
+		<ul className="hidden items-center gap-2 text-sm md:flex">
 			{session?.user?.role === 'admin' && (
 				<li>
 					<NavLink
@@ -18,10 +18,7 @@ const Links = async () => {
 			)}
 			{getRoutes('modules').map((link) => (
 				<li key={link.path}>
-					<NavLink
-						exact={false}
-						link={link}
-					/>
+					<NavLink exact={false} link={link} />
 				</li>
 			))}
 		</ul>

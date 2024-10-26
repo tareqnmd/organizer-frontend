@@ -10,7 +10,7 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from '@/components/ui/popover';
-import { stringToNewDate } from '@/helper/shared/date';
+import { stringToNewDate } from '@/lib/helper/shared/date';
 import { cn } from '@/lib/utils';
 import { CalendarIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -49,7 +49,8 @@ const FormDateRange = ({
 
 	const getPresetRange = (presetName: string): any => {
 		const preset = PRESETS.find(({ name }) => name === presetName);
-		if (!preset) throw new Error(`Unknown date range preset: ${presetName}`);
+		if (!preset)
+			throw new Error(`Unknown date range preset: ${presetName}`);
 		const from = new Date();
 		const to = new Date();
 		const first = from.getDate() - from.getDay();
@@ -130,10 +131,7 @@ const FormDateRange = ({
 
 	return (
 		<div className={cn('grid gap-2', className)}>
-			<Popover
-				open={open}
-				onOpenChange={setOpen}
-			>
+			<Popover open={open} onOpenChange={setOpen}>
 				<PopoverTrigger asChild>
 					<Button
 						id="date"
@@ -141,7 +139,7 @@ const FormDateRange = ({
 						className={cn(
 							'justify-start text-left font-normal',
 							!date && 'text-muted-foreground',
-							triggerClassName
+							triggerClassName,
 						)}
 					>
 						<CalendarIcon className="mr-2 h-4 w-4" />
@@ -159,10 +157,7 @@ const FormDateRange = ({
 						)}
 					</Button>
 				</PopoverTrigger>
-				<PopoverContent
-					className="w-auto p-0"
-					align="start"
-				>
+				<PopoverContent className="w-auto p-0" align="start">
 					<div className="flex gap-2">
 						<Calendar
 							initialFocus
@@ -184,17 +179,11 @@ const FormDateRange = ({
 							))}
 						</div>
 					</div>
-					<div className="flex justify-end gap-2 py-3 px-4 border-t">
-						<Button
-							onClick={closeDateRange}
-							size={'sm'}
-						>
+					<div className="flex justify-end gap-2 border-t px-4 py-3">
+						<Button onClick={closeDateRange} size={'sm'}>
 							Close
 						</Button>
-						<Button
-							onClick={submitRange}
-							size={'sm'}
-						>
+						<Button onClick={submitRange} size={'sm'}>
 							Update
 						</Button>
 					</div>
