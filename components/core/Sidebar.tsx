@@ -25,7 +25,7 @@ const Sidebar = ({ user }: any) => {
 			<aside
 				ref={asideRef}
 				className={cn(
-					'theme fixed bottom-0 top-[57px] w-[220px] overflow-hidden border-l bg-light transition-all duration-300 dark:border-slate-700 dark:bg-dark md:hidden',
+					'theme bg-background-light dark:bg-background-dark fixed bottom-0 top-[57px] w-[220px] overflow-hidden border-l transition-all duration-300 dark:border-slate-700 md:hidden',
 					isOpen ? 'right-0' : '-right-[220px]',
 				)}
 			>
