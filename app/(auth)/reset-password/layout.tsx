@@ -1,4 +1,5 @@
 import AuthContentLayout from '@/components/auth/AuthContentLayout';
+import { getRouteName, Routes } from '@/lib/routes';
 
 const ResetPasswordLayout = ({ children }: { children: React.ReactNode }) => {
 	return (
@@ -6,8 +7,8 @@ const ResetPasswordLayout = ({ children }: { children: React.ReactNode }) => {
 			title="Reset Password"
 			socialLogin={false}
 			anotherLink={{
-				href: '/login',
-				label: 'Login',
+				href: Routes.LOGIN,
+				label: getRouteName('auth', Routes.LOGIN),
 			}}
 			anotherLinkText="Remember your password?"
 		>

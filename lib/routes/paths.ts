@@ -23,8 +23,16 @@ export const routes = {
 			path: Routes.LOGIN,
 		},
 		{
-			name: 'Register',
+			name: 'Create One',
 			path: Routes.REGISTER,
+		},
+		{
+			name: 'Forgot Password',
+			path: Routes.FORGOT_PASSWORD,
+		},
+		{
+			name: 'Reset Password',
+			path: Routes.RESET_PASSWORD,
 		},
 	],
 	dashboard_modules: [],
@@ -93,5 +101,9 @@ export const getRoutes = (type: keyof typeof routes) => {
 };
 
 export const getRouteName = (type: keyof typeof routes, path: Routes) => {
-	return routes[type].find((route) => route.path === path)?.name;
+	try {
+		return routes[type].find((route) => route.path === path)?.name ?? '';
+	} catch (error) {
+		return '';
+	}
 };

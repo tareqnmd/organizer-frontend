@@ -1,4 +1,5 @@
 import AuthContentLayout from '@/components/auth/AuthContentLayout';
+import { getRouteName, Routes } from '@/lib/routes';
 
 const RegistrationLayout = ({ children }: { children: React.ReactNode }) => {
 	return (
@@ -6,8 +7,8 @@ const RegistrationLayout = ({ children }: { children: React.ReactNode }) => {
 			title="Create an account"
 			anotherLinkText="Already have an account?"
 			anotherLink={{
-				href: '/login',
-				label: 'Login',
+				href: Routes.LOGIN,
+				label: getRouteName('auth', Routes.LOGIN),
 			}}
 		>
 			{children}

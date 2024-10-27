@@ -1,5 +1,6 @@
 'use client';
 import { registrationFormItems } from '@/lib/helper/auth';
+import { RegistrationSchema } from '@/lib/helper/auth/schemas';
 import { getError } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LogIn } from 'lucide-react';
@@ -13,23 +14,11 @@ import CustomFormInput from '../common/input/CustomFormInput';
 import { Button } from '../ui/button';
 import { Form } from '../ui/form';
 
-const FormSchema = z.object({
-	name: z.string().min(3, {
-		message: 'Name must be at least 3 characters.',
-	}),
-	email: z.string().email({
-		message: 'Valid email required',
-	}),
-	password: z.string().min(6, {
-		message: 'Password must be at least 6 characters.',
-	}),
-});
-
 const Registration = () => {
 	const router = useRouter();
 	const [loading, setLoading] = useState(false);
-	const form = useForm<z.infer<typeof FormSchema>>({
-		resolver: zodResolver(FormSchema),
+	const form = useForm<z.infer<typeof RegistrationSchema>>({
+		resolver: zodResolver(RegistrationSchema),
 		defaultValues: {
 			name: '',
 			email: '',
@@ -37,7 +26,7 @@ const Registration = () => {
 		},
 	});
 
-	const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+	const onSubmit = async (data: z.infer<typeof RegistrationSchema>) => {
 		try {
 			setLoading(true);
 			const res = await signIn('register', { ...data, redirect: false });

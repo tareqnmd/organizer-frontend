@@ -4,7 +4,9 @@ export enum Routes {
 
 	// auth
 	LOGIN = '/login',
-	REGISTER = '/register',
+	REGISTER = '/registration',
+	FORGOT_PASSWORD = '/forgot-password',
+	RESET_PASSWORD = '/reset-password',
 
 	// admin
 	ADMIN = '/admin',
