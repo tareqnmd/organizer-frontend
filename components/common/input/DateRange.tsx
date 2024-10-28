@@ -37,8 +37,8 @@ const FormDateRange = ({
 }: {
 	className: string;
 	triggerClassName: string;
-	initialValues?: any;
-	onUpdate: (values: any) => void;
+	initialValues?: { from: string; to: string };
+	onUpdate: (values: { from: Date; to: Date }) => void;
 }) => {
 	const [open, setOpen] = useState(false);
 	const [date, setDate] = useState<DateRange | undefined>({
@@ -46,7 +46,7 @@ const FormDateRange = ({
 		to: endOfMonth(new Date()),
 	});
 
-	const getPresetRange = (presetName: string): any => {
+	const getPresetRange = (presetName: string) => {
 		const preset = PRESETS.find(({ name }) => name === presetName);
 		if (!preset)
 			throw new Error(`Unknown date range preset: ${presetName}`);

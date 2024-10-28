@@ -9,6 +9,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { CustomFormInputPropsType } from '@/lib/helper/shared';
+import { FormInputType } from '@/lib/helper/shared/enum';
 import { cn } from '@/lib/utils';
 import { ControllerRenderProps } from 'react-hook-form';
 import FormDate from './Date';
@@ -23,16 +24,16 @@ const CustomFormInput = ({
 }: CustomFormInputPropsType) => {
 	const { label, name, type, placeholder = '', description } = input;
 
-	const getTypes = (type: string, field: ControllerRenderProps) => {
-		return type === 'editor' ? (
+	const getTypes = (type: FormInputType, field: ControllerRenderProps) => {
+		return type === FormInputType.EDITOR ? (
 			<FormTextEditor field={field} />
-		) : type === 'radio' ? (
+		) : type === FormInputType.RADIO ? (
 			<FormRadio input={input} field={field} />
-		) : type === 'select' ? (
+		) : type === FormInputType.SELECT ? (
 			<FormSelect input={input} field={field} />
-		) : type === 'date' ? (
+		) : type === FormInputType.DATE ? (
 			<FormDate field={field} />
-		) : type === 'textarea' ? (
+		) : type === FormInputType.TEXT_AREA ? (
 			<Textarea placeholder={placeholder} {...field} />
 		) : (
 			<Input placeholder={placeholder} {...{ ...input, ...field }} />

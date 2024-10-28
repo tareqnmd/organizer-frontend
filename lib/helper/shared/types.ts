@@ -1,4 +1,5 @@
 import { Control } from 'react-hook-form';
+import { FormInputType } from './enum';
 
 export type ChildrenType = {
 	children: React.ReactNode;
@@ -13,7 +14,7 @@ export type CustomFormInputType = {
 	label: string;
 	placeholder?: string;
 	name: string;
-	type: string;
+	type: FormInputType;
 	optionUrl?: string;
 	staticOptions?: InputOptionType[];
 	description: string;
