@@ -1,8 +1,10 @@
+import { FormInputType } from '../shared/enum';
+
 export const userUpdateFormInputs = [
 	{
 		name: 'name',
 		label: 'Name',
-		type: 'text',
+		type: FormInputType.TEXT,
 		placeholder: 'Name',
 		description: '',
 		required: true,
@@ -10,7 +12,7 @@ export const userUpdateFormInputs = [
 	{
 		name: 'email',
 		label: 'Email',
-		type: 'email',
+		type: FormInputType.EMAIL,
 		placeholder: 'Email',
 		description: '',
 		required: true,
@@ -22,42 +24,37 @@ export const userUpdateFormInputsWithPassword = [
 	{
 		name: 'name',
 		label: 'Name',
-		type: 'text',
+		type: FormInputType.TEXT,
 		placeholder: 'Name',
 		description: '',
-		required: true,
 	},
 	{
 		name: 'email',
 		label: 'Email',
-		type: 'email',
+		type: FormInputType.EMAIL,
 		placeholder: 'Email',
 		description: '',
-		required: true,
 		disabled: true,
 	},
 	{
-		name: 'currentPassword',
+		name: 'current_password',
 		label: 'Current Password',
-		type: 'password',
+		type: FormInputType.PASSWORD,
 		placeholder: 'Current Password',
 		description: '',
-		required: true,
 	},
 	{
 		name: 'password',
 		label: 'Password',
-		type: 'password',
+		type: FormInputType.PASSWORD,
 		placeholder: 'Password',
 		description: '',
-		required: true,
 	},
 	{
-		name: 'confirmPassword',
+		name: 'confirm_password',
 		label: 'Confirm Password',
-		type: 'password',
+		type: FormInputType.PASSWORD,
 		placeholder: 'Confirm Password',
 		description: '',
-		required: true,
 	},
 ];

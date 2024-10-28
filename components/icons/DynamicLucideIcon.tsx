@@ -7,7 +7,6 @@ interface IconProps extends LucideProps {
 }
 
 const DynamicIcon = ({ name, ...props }: IconProps) => {
-	console.log('name', name);
 	const Icon = dynamic(dynamicIconImports[name]);
 	return <Icon {...props} />;
 };

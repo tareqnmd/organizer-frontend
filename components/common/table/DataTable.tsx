@@ -29,11 +29,10 @@ import {
 } from '@/components/ui/table';
 import { ChevronDown } from 'lucide-react';
 
-export function DataTable({ columns = [], data = [] }: any) {
+export function DataTable({ columns = [], data = [] }) {
 	const [sorting, setSorting] = React.useState<SortingState>([]);
-	const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-		[]
-	);
+	const [columnFilters, setColumnFilters] =
+		React.useState<ColumnFiltersState>([]);
 	const [columnVisibility, setColumnVisibility] =
 		React.useState<VisibilityState>({});
 	const [rowSelection, setRowSelection] = React.useState({});
@@ -62,10 +61,7 @@ export function DataTable({ columns = [], data = [] }: any) {
 			<div className="flex items-center py-4">
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
-						<Button
-							variant="outline"
-							className="ml-auto h-8"
-						>
+						<Button variant="outline" className="ml-auto h-8">
 							View <ChevronDown className="ml-2 h-4 w-4" />
 						</Button>
 					</DropdownMenuTrigger>
@@ -101,9 +97,10 @@ export function DataTable({ columns = [], data = [] }: any) {
 											{header.isPlaceholder
 												? null
 												: flexRender(
-														header.column.columnDef.header,
-														header.getContext()
-												  )}
+														header.column.columnDef
+															.header,
+														header.getContext(),
+													)}
 										</TableHead>
 									);
 								})}
@@ -115,13 +112,15 @@ export function DataTable({ columns = [], data = [] }: any) {
 							table.getRowModel().rows.map((row) => (
 								<TableRow
 									key={row.id}
-									data-state={row.getIsSelected() && 'selected'}
+									data-state={
+										row.getIsSelected() && 'selected'
+									}
 								>
 									{row.getVisibleCells().map((cell) => (
 										<TableCell key={cell.id}>
 											{flexRender(
 												cell.column.columnDef.cell,
-												cell.getContext()
+												cell.getContext(),
 											)}
 										</TableCell>
 									))}

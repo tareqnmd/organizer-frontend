@@ -1,15 +1,16 @@
 'use client';
 
 import useOutsideClick from '@/hooks/useOutsideClick';
+import { UserType } from '@/lib/helper/profile/types';
 import { getRoutes, Routes } from '@/lib/routes';
 import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
 import { useRef, useState } from 'react';
 import NavLink from '../layout/NavLink';
 
-const Sidebar = ({ user }: any) => {
+const Sidebar = ({ user }: { user: UserType }) => {
 	const [isOpen, setIsOpen] = useState(false);
-	const asideRef: any = useRef();
+	const asideRef = useRef<HTMLElement>(null);
 	useOutsideClick(asideRef, () => setIsOpen(false), true);
 	return (
 		<>
@@ -25,7 +26,7 @@ const Sidebar = ({ user }: any) => {
 			<aside
 				ref={asideRef}
 				className={cn(
-					'theme bg-background-light dark:bg-background-dark fixed bottom-0 top-[57px] w-[220px] overflow-hidden border-l transition-all duration-300 dark:border-slate-700 md:hidden',
+					'theme fixed bottom-0 top-[57px] w-[220px] overflow-hidden border-l bg-background-light transition-all duration-300 dark:border-slate-700 dark:bg-background-dark md:hidden',
 					isOpen ? 'right-0' : '-right-[220px]',
 				)}
 			>

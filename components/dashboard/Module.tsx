@@ -1,4 +1,5 @@
 import { RouteType } from '@/lib/routes';
+import dynamicIconImports from 'lucide-react/dynamicIconImports';
 import Link from 'next/link';
 import DynamicIcon from '../icons/DynamicLucideIcon';
 
@@ -7,7 +8,10 @@ const Module = ({ module }: { module: RouteType }) => {
 		<Link href={module.path}>
 			<div className="flex items-center gap-2 rounded-md border p-3 text-dark shadow">
 				{module?.icon ? (
-					<DynamicIcon name={module.icon as any} size={40} />
+					<DynamicIcon
+						name={module.icon as keyof typeof dynamicIconImports}
+						size={40}
+					/>
 				) : null}
 				<div className="flex flex-col gap-1">
 					<h3 className="font-semibold leading-none">

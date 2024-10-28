@@ -1,7 +1,6 @@
 'use client';
 
-import { logoutHandler } from '@/lib/utils';
-import { cn } from '@/lib/utils';
+import { cn, logoutHandler } from '@/lib/utils';
 
 const LogoutButton = ({ extraClass }: { extraClass: string }) => {
 	const logout = async () => {

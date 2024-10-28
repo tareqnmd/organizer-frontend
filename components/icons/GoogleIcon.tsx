@@ -1,7 +1,7 @@
 const GoogleIcon = () => {
 	return (
 		<svg
-			className="shrink-0 w-[24px] h-[24px]"
+			className="h-[24px] w-[24px] shrink-0"
 			stroke="currentColor"
 			fill="currentColor"
 			stroke-width="0"

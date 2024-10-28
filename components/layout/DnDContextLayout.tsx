@@ -15,15 +15,15 @@ const DnDContextLayout = ({
 	handleDragStart,
 }: {
 	children: React.ReactNode;
-	handleDragEnd?: any;
-	handleDragOver?: any;
-	handleDragStart?: any;
+	handleDragEnd?: () => void;
+	handleDragOver?: () => void;
+	handleDragStart?: () => void;
 }) => {
 	const sensors = useSensors(
 		useSensor(PointerSensor),
 		useSensor(KeyboardSensor, {
 			coordinateGetter: sortableKeyboardCoordinates,
-		})
+		}),
 	);
 	return (
 		<DndContext

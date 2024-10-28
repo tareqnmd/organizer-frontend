@@ -18,6 +18,7 @@ export type CustomFormInputType = {
 	staticOptions?: InputOptionType[];
 	description: string;
 	required?: boolean;
+	disabled?: boolean;
 };
 
 export type InputFieldsType = {

@@ -1,6 +1,8 @@
-const UserInfo = ({ user }: any) => {
+import { UserType } from '@/lib/helper/profile';
+
+const UserInfo = ({ user }: { user: UserType }) => {
 	return (
-		<div className="flex flex-col rounded-lg p-3 border">
+		<div className="flex flex-col rounded-lg border p-3">
 			<p>Name : {user?.name}</p>
 			<p>Email : {user?.email}</p>
 			<p className="capitalize">Role : {user?.role}</p>

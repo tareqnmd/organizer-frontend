@@ -10,8 +10,8 @@ import { UserOptions } from './UserOptions';
 const Navbar = async () => {
 	const session = await getServerSession(authOptions);
 	return (
-		<nav className="sticky top-0 z-50 shadow dark:shadow-slate-700 bg-light dark:bg-dark transition duration-500 w-dvw">
-			<div className="container py-4 mx-auto flex flex-wrap items-center justify-between">
+		<nav className="sticky top-0 z-50 w-dvw bg-light shadow transition duration-500 dark:bg-dark dark:shadow-slate-700">
+			<div className="container mx-auto flex flex-wrap items-center justify-between py-4">
 				<Link href="/">
 					<Logo />
 				</Link>

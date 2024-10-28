@@ -16,7 +16,7 @@ export function UserOptions({
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Avatar className="cursor-pointer h-6 w-6 select-none">
+				<Avatar className="h-6 w-6 cursor-pointer select-none">
 					<AvatarImage src={user?.image} />
 					<AvatarFallback>{user?.name[0]}</AvatarFallback>
 				</Avatar>

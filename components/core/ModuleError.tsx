@@ -6,7 +6,7 @@ const ModuleError = ({
 	reset: () => void;
 }) => {
 	return (
-		<div className="grid place-content-center h-full">
+		<div className="grid h-full place-content-center">
 			<div className="text-center">
 				<h2>{error?.message ?? 'Error Found'}</h2>
 				<button onClick={() => reset()}>Try again</button>
