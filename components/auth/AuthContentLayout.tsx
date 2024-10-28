@@ -1,3 +1,4 @@
+import { AuthContentLayoutPropsType } from '@/lib/helper/auth';
 import Link from 'next/link';
 import SocialLogin from './SocialLogin';
 
@@ -7,16 +8,7 @@ const AuthContentLayout = ({
 	socialLogin = true,
 	anotherLink,
 	anotherLinkText,
-}: {
-	children: React.ReactNode;
-	title: string;
-	socialLogin?: boolean;
-	anotherLink?: {
-		href: string;
-		label: string;
-	};
-	anotherLinkText?: string;
-}) => {
+}: AuthContentLayoutPropsType) => {
 	return (
 		<>
 			<p className="text-sm font-medium">{title}</p>
