@@ -1,8 +1,10 @@
 import { axiosInstance } from '@/lib/utils';
+import { Account, Session, TokenSet, User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import { cookies } from 'next/headers';
+import { NextAuthSession, NextAuthUser } from '../helper/auth';
 
 const {
 	GITHUB_ID = '',
@@ -18,7 +20,7 @@ export const authOptions = {
 	},
 	providers: [
 		GitHubProvider({
-			profile(profile: any) {
+			profile(profile) {
 				return {
 					id: String(profile.id),
 					email: profile.email,
@@ -106,7 +108,13 @@ export const authOptions = {
 		}),
 	],
 	callbacks: {
-		async signIn({ user, account }: any) {
+		async signIn({
+			user,
+			account,
+		}: {
+			user: NextAuthUser;
+			account: Account;
+		}) {
 			if (['google', 'github'].includes(account.provider)) {
 				const { data } = await axiosInstance.post('/user/social-auth', {
 					...user,
@@ -128,7 +136,17 @@ export const authOptions = {
 				return true;
 			}
 		},
-		async jwt({ token, trigger, session, user }: any) {
+		async jwt({
+			token,
+			trigger,
+			session,
+			user,
+		}: {
+			token: TokenSet;
+			trigger: string;
+			session: NextAuthSession;
+			user: User;
+		}) {
 			if (user) {
 				token = {
 					...user,
@@ -142,7 +160,13 @@ export const authOptions = {
 			}
 			return token;
 		},
-		async session({ session, token }: any) {
+		async session({
+			session,
+			token,
+		}: {
+			session: Session;
+			token: TokenSet;
+		}) {
 			const { iat, exp, jti, ...rest } = token;
 			return { expires: session.expires, user: rest };
 		},

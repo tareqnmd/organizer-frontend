@@ -1,3 +1,4 @@
+import { Session, User } from 'next-auth';
 import { ChildrenType } from '../shared';
 
 export type AuthType =
@@ -14,4 +15,13 @@ export type AuthContentLayoutPropsType = ChildrenType & {
 		label: string;
 	};
 	anotherLinkText?: string;
+};
+
+export type NextAuthUser = User & {
+	role: string;
+	status: string;
+};
+
+export type NextAuthSession = Session & {
+	name: string;
 };
