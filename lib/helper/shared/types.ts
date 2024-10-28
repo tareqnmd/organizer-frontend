@@ -28,6 +28,4 @@ export type InputFieldsType = {
 
 export type CustomFormInputPropsType = InputFieldsType & {
 	input: CustomFormInputType;
-	control: any;
-	extraClassName?: string;
 };
