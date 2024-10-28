@@ -59,7 +59,7 @@ export const categoryFormItems = [
 		type: 'select',
 		placeholder: 'Select a Type',
 		optionUrl: '/budget/type-select',
-		// staticOption: [
+		// staticOptions: [
 		// 	{ label: 'Income', value: 'Income' },
 		// 	{ label: 'Expense', value: 'Expense' },
 		// ],

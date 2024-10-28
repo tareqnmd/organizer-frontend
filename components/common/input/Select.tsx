@@ -6,18 +6,27 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
+import {
+	CustomFormInputType,
+	InputOptionType,
+} from '@/lib/helper/shared/types';
 import { axiosInstance } from '@/lib/utils';
 import { useEffect, useState } from 'react';
+import { ControllerRenderProps } from 'react-hook-form';
 
-const FormSelect = ({ input, field, extraTriggerClassName = '' }: any) => {
+const FormSelect = ({
+	input,
+	field,
+	extraTriggerClassName = '',
+}: {
+	input: CustomFormInputType;
+	field: ControllerRenderProps;
+	extraTriggerClassName?: string;
+}) => {
 	const [dynamicOptions, setDynamicOptions] = useState([]);
-	const [options, setOptions] = useState([]);
+	const [options, setOptions] = useState<InputOptionType[]>([]);
 	const [value, setValue] = useState('');
 	const { placeholder, staticOptions = [], optionUrl } = input;
-
-	useEffect(() => {
-		setOptions(staticOptions?.length > 0 ? staticOptions : dynamicOptions);
-	}, [staticOptions, dynamicOptions]);
 
 	useEffect(() => {
 		if (field?.value && options?.length > 0) {
@@ -33,6 +42,14 @@ const FormSelect = ({ input, field, extraTriggerClassName = '' }: any) => {
 		optionUrl && getDynamicData(optionUrl);
 	}, [optionUrl]);
 
+	useEffect(() => {
+		const updatedOptions =
+			staticOptions?.length > 0 ? staticOptions : dynamicOptions;
+		if (updatedOptions?.length > 0) {
+			setOptions(updatedOptions);
+		}
+	}, [staticOptions, dynamicOptions]);
+
 	return (
 		<Select onValueChange={field.onChange} value={value}>
 			<SelectTrigger className={extraTriggerClassName}>
@@ -41,7 +58,7 @@ const FormSelect = ({ input, field, extraTriggerClassName = '' }: any) => {
 			<SelectContent>
 				<SelectGroup>
 					{options?.length > 0 ? (
-						options?.map((item: any, index: number) => (
+						options?.map((item: InputOptionType, index: number) => (
 							<SelectItem key={index} value={item?.value}>
 								{item?.label}
 							</SelectItem>

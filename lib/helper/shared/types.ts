@@ -1,7 +1,12 @@
-import { Control } from "react-hook-form";
+import { Control } from 'react-hook-form';
 
 export type ChildrenType = {
 	children: React.ReactNode;
+};
+
+export type InputOptionType = {
+	value: string;
+	label: string;
 };
 
 export type CustomFormInputType = {
@@ -10,7 +15,7 @@ export type CustomFormInputType = {
 	name: string;
 	type: string;
 	optionUrl?: string;
-	options?: { value: string; id: string; label: string }[];
+	staticOptions?: InputOptionType[];
 	description: string;
 	required?: boolean;
 };

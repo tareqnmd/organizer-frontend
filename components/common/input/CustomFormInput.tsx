@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { CustomFormInputPropsType } from '@/lib/helper/shared';
 import { cn } from '@/lib/utils';
+import { ControllerRenderProps } from 'react-hook-form';
 import FormDate from './Date';
 import FormRadio from './Radio';
 import FormSelect from './Select';
@@ -22,7 +23,7 @@ const CustomFormInput = ({
 }: CustomFormInputPropsType) => {
 	const { label, name, type, placeholder = '', description } = input;
 
-	const getTypes = (type: string, field: any) => {
+	const getTypes = (type: string, field: ControllerRenderProps) => {
 		return type === 'editor' ? (
 			<FormTextEditor field={field} />
 		) : type === 'radio' ? (
@@ -34,11 +35,7 @@ const CustomFormInput = ({
 		) : type === 'textarea' ? (
 			<Textarea placeholder={placeholder} {...field} />
 		) : (
-			<Input
-				type={type}
-				placeholder={placeholder}
-				{...{ ...input, ...field }}
-			/>
+			<Input placeholder={placeholder} {...{ ...input, ...field }} />
 		);
 	};
 
