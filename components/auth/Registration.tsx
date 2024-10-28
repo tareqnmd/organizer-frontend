@@ -1,6 +1,9 @@
 'use client';
-import { registrationFormItems } from '@/lib/helper/auth';
-import { RegistrationSchema } from '@/lib/helper/auth/schemas';
+import {
+	RegisterSchemaType,
+	registrationFormItems,
+	RegistrationSchema,
+} from '@/lib/helper/auth';
 import { getError } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LogIn } from 'lucide-react';
@@ -9,7 +12,6 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import { z } from 'zod';
 import CustomFormInput from '../common/input/CustomFormInput';
 import { Button } from '../ui/button';
 import { Form } from '../ui/form';
@@ -17,7 +19,7 @@ import { Form } from '../ui/form';
 const Registration = () => {
 	const router = useRouter();
 	const [loading, setLoading] = useState(false);
-	const form = useForm<z.infer<typeof RegistrationSchema>>({
+	const form = useForm<RegisterSchemaType>({
 		resolver: zodResolver(RegistrationSchema),
 		defaultValues: {
 			name: '',
@@ -26,7 +28,7 @@ const Registration = () => {
 		},
 	});
 
-	const onSubmit = async (data: z.infer<typeof RegistrationSchema>) => {
+	const onSubmit = async (data: RegisterSchemaType) => {
 		try {
 			setLoading(true);
 			const res = await signIn('register', { ...data, redirect: false });

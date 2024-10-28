@@ -1,4 +1,9 @@
+import * as z from 'zod';
 import { ProfileTypeEnum, UserRoleEnum } from './enums';
+import {
+	UserEditSchemaWithoutPassword,
+	UserEditSchemaWithPassword,
+} from './schemas';
 
 export type ProfileType = ProfileTypeEnum;
 
@@ -14,3 +19,10 @@ export type UserSessionType = {
 	user: UserType;
 };
 
+export type UserEditSchemaWithPasswordType = z.infer<
+	typeof UserEditSchemaWithPassword
+>;
+
+export type UserEditSchemaWithoutPasswordType = z.infer<
+	typeof UserEditSchemaWithoutPassword
+>;

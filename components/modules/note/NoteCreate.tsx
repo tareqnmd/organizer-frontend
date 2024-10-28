@@ -37,7 +37,7 @@ const NoteCreate = () => {
 			onClick={handleCreate}
 			disabled={isCreateLoading}
 			size="sm"
-			className="ml-auto flex items-center gap-1 text-sm"
+			className="ml-auto flex items-center gap-1 text-sm transition-all active:scale-95"
 		>
 			{isCreateLoading ? (
 				<Loader className="animate-spin" size={16} />

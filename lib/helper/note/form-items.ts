@@ -1,15 +1,17 @@
+import { FormInputType } from '../shared/enum';
+
 export const noteFormItems = [
 	{
 		name: 'subject',
 		label: 'Subject',
-		type: 'text',
+		type: FormInputType.TEXT,
 		placeholder: 'Subject',
 		description: '',
 	},
 	{
 		name: 'details',
 		label: 'Details',
-		type: 'editor',
+		type: FormInputType.EDITOR,
 		placeholder: 'Details',
 		description: '',
 	},

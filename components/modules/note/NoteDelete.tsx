@@ -15,6 +15,7 @@ import { Loader, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
+
 const NoteDelete = ({ note }: { note: NoteType }) => {
 	const [open, setOpen] = useState(false);
 	const router = useRouter();

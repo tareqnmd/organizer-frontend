@@ -1,14 +1,12 @@
 'use client';
 
-import { UserType } from '@/lib/helper/profile';
-import {
-	userUpdateFormInputs,
-	userUpdateFormInputsWithPassword,
-} from '@/lib/helper/profile/form-items';
 import {
 	UserEditSchemaWithoutPassword,
 	UserEditSchemaWithPassword,
-} from '@/lib/helper/profile/schemas';
+	UserType,
+	userUpdateFormInputs,
+	userUpdateFormInputsWithPassword,
+} from '@/lib/helper/profile';
 import { getError } from '@/lib/utils';
 import { useUserUpdateMutation } from '@/store/features/auth/api';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -126,7 +124,7 @@ const UserEdit = ({ user }: { user: UserType }) => {
 							))}
 						</div>
 						<Button
-							className="flex w-full items-center gap-1"
+							className="flex w-full items-center gap-1 transition-all active:scale-95"
 							type="submit"
 							disabled={isLoading}
 						>
@@ -154,7 +152,7 @@ const UserEdit = ({ user }: { user: UserType }) => {
 							))}
 						</div>
 						<Button
-							className="flex w-full items-center gap-1"
+							className="flex w-full items-center gap-1 transition-all active:scale-95"
 							type="submit"
 							disabled={isLoading}
 						>

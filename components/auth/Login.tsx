@@ -2,12 +2,14 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import * as z from 'zod';
 
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
-import { loginFormItems } from '@/lib/helper/auth';
-import { LoginSchema } from '@/lib/helper/auth/schemas';
+import {
+	loginFormItems,
+	LoginSchema,
+	LoginSchemaType,
+} from '@/lib/helper/auth';
 import { getRouteName, Routes } from '@/lib/routes';
 import { getError } from '@/lib/utils';
 import { LogIn } from 'lucide-react';
@@ -21,7 +23,7 @@ import CustomFormInput from '../common/input/CustomFormInput';
 const Login = () => {
 	const router = useRouter();
 	const [loading, setLoading] = useState(false);
-	const form = useForm<z.infer<typeof LoginSchema>>({
+	const form = useForm<LoginSchemaType>({
 		resolver: zodResolver(LoginSchema),
 		defaultValues: {
 			email: '',
@@ -29,7 +31,7 @@ const Login = () => {
 		},
 	});
 
-	const onSubmit = async (data: z.infer<typeof LoginSchema>) => {
+	const onSubmit = async (data: LoginSchemaType) => {
 		try {
 			setLoading(true);
 			const res = await signIn('login', { ...data, redirect: false });

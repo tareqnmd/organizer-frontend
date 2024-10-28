@@ -2,12 +2,14 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import * as z from 'zod';
 
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
-import { forgotPasswordFormItems } from '@/lib/helper/auth';
-import { ForgotPasswordSchema } from '@/lib/helper/auth/schemas';
+import {
+	forgotPasswordFormItems,
+	ForgotPasswordSchema,
+	ForgotPasswordSchemaType,
+} from '@/lib/helper/auth';
 import { getError } from '@/lib/utils';
 import { Send } from 'lucide-react';
 import { signIn } from 'next-auth/react';
@@ -19,14 +21,14 @@ import CustomFormInput from '../common/input/CustomFormInput';
 const ForgotPassword = () => {
 	const router = useRouter();
 	const [loading, setLoading] = useState(false);
-	const form = useForm<z.infer<typeof ForgotPasswordSchema>>({
+	const form = useForm<ForgotPasswordSchemaType>({
 		resolver: zodResolver(ForgotPasswordSchema),
 		defaultValues: {
 			email: '',
 		},
 	});
 
-	const onSubmit = async (data: z.infer<typeof ForgotPasswordSchema>) => {
+	const onSubmit = async (data: ForgotPasswordSchemaType) => {
 		try {
 			setLoading(true);
 			const res = await signIn('send-reset-link', {

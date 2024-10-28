@@ -1,5 +1,12 @@
 import { Session, User } from 'next-auth';
+import * as z from 'zod';
 import { ChildrenType } from '../shared';
+import {
+	ForgotPasswordSchema,
+	LoginSchema,
+	RegistrationSchema,
+	ResetPasswordSchema,
+} from './schemas';
 
 export type AuthType =
 	| 'login'
@@ -16,6 +23,11 @@ export type AuthContentLayoutPropsType = ChildrenType & {
 	};
 	anotherLinkText?: string;
 };
+
+export type LoginSchemaType = z.infer<typeof LoginSchema>;
+export type RegisterSchemaType = z.infer<typeof RegistrationSchema>;
+export type ResetPasswordSchemaType = z.infer<typeof ResetPasswordSchema>;
+export type ForgotPasswordSchemaType = z.infer<typeof ForgotPasswordSchema>;
 
 export type NextAuthUser = User & {
 	role: string;

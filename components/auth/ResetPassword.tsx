@@ -2,12 +2,14 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import * as z from 'zod';
 
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
-import { resetPasswordFormItems } from '@/lib/helper/auth';
-import { ResetPasswordSchema } from '@/lib/helper/auth/schemas';
+import {
+	resetPasswordFormItems,
+	ResetPasswordSchema,
+	ResetPasswordSchemaType,
+} from '@/lib/helper/auth';
 import { getError } from '@/lib/utils';
 import { Lock } from 'lucide-react';
 import { signIn } from 'next-auth/react';
@@ -19,7 +21,7 @@ import CustomFormInput from '../common/input/CustomFormInput';
 const ResetPassword = () => {
 	const router = useRouter();
 	const [loading, setLoading] = useState(false);
-	const form = useForm<z.infer<typeof ResetPasswordSchema>>({
+	const form = useForm<ResetPasswordSchemaType>({
 		resolver: zodResolver(ResetPasswordSchema),
 		defaultValues: {
 			password: '',
@@ -27,7 +29,7 @@ const ResetPassword = () => {
 		},
 	});
 
-	const onSubmit = async (data: z.infer<typeof ResetPasswordSchema>) => {
+	const onSubmit = async (data: ResetPasswordSchemaType) => {
 		try {
 			setLoading(true);
 			const res = await signIn('reset-password', {

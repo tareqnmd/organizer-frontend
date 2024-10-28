@@ -1,3 +1,5 @@
+import * as z from 'zod';
+import { NoteSchema } from './schemas';
 export type NoteType = {
 	id: string;
 	subject: string;
@@ -10,3 +12,5 @@ export type NoteType = {
 export type NotesType = NoteType[];
 
 export type NotesParamType = { starred?: string };
+
+export type NoteSchemaType = z.infer<typeof NoteSchema>;

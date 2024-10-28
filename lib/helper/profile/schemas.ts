@@ -10,23 +10,29 @@ const schemaMessage = {
 	password_match: 'Password and confirm password do not match.',
 };
 
+const nameSchema = z
+	.string()
+	.min(1, schemaMessage.name_required)
+	.min(3, schemaMessage.name_length);
+const emailSchema = z.string().email();
+const passwordSchema = z
+	.string()
+	.min(1, schemaMessage.password_required)
+	.min(6, schemaMessage.password_length);
+const confirmPasswordSchema = z
+	.string()
+	.min(1, schemaMessage.confirm_password_required);
+const currentPasswordSchema = z
+	.string()
+	.min(1, schemaMessage.current_password_required);
+
 export const UserEditSchemaWithPassword = z
 	.object({
-		name: z
-			.string()
-			.min(1, schemaMessage.name_required)
-			.min(3, schemaMessage.name_length),
-		email: z.string().email(),
-		password: z
-			.string()
-			.min(1, schemaMessage.password_required)
-			.min(6, schemaMessage.password_length),
-		confirm_password: z
-			.string()
-			.min(1, schemaMessage.confirm_password_required),
-		current_password: z
-			.string()
-			.min(1, schemaMessage.current_password_required),
+		name: nameSchema,
+		email: emailSchema,
+		password: passwordSchema,
+		confirm_password: confirmPasswordSchema,
+		current_password: currentPasswordSchema,
 	})
 	.refine((data) => data.password === data.confirm_password, {
 		path: ['confirm_password'],
@@ -34,9 +40,6 @@ export const UserEditSchemaWithPassword = z
 	});
 
 export const UserEditSchemaWithoutPassword = z.object({
-	name: z
-		.string()
-		.min(1, schemaMessage.name_required)
-		.min(3, schemaMessage.name_length),
-	email: z.string().email(),
+	name: nameSchema,
+	email: emailSchema,
 });
