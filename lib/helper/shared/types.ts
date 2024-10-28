@@ -1,4 +1,3 @@
-import { Control } from 'react-hook-form';
 import { FormInputType } from './enum';
 
 export type ChildrenType = {
@@ -22,7 +21,7 @@ export type CustomFormInputType = {
 };
 
 export type InputFieldsType = {
-	control: Control;
+	control: any;
 	extraClassName?: string;
 };
 
