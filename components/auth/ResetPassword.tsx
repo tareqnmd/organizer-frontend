@@ -11,7 +11,7 @@ import {
 	ResetPasswordSchemaType,
 } from '@/lib/helper/auth';
 import { getError } from '@/lib/utils';
-import { Lock } from 'lucide-react';
+import { Loader, Lock } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -67,7 +67,8 @@ const ResetPassword = () => {
 					type="submit"
 					disabled={loading}
 				>
-					<Lock /> Reset Password
+					{loading ? <Loader className="animate-spin" /> : <Lock />}{' '}
+					Reset Password
 				</Button>
 			</form>
 		</Form>
