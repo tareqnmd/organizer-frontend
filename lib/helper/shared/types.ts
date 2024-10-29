@@ -10,13 +10,13 @@ export type InputOptionType = {
 };
 
 export type CustomFormInputType = {
-	label: string;
+	label?: string;
 	placeholder?: string;
 	name: string;
-	type: FormInputType;
+	type?: FormInputType;
 	optionUrl?: string;
 	staticOptions?: InputOptionType[];
-	description: string;
+	description?: string;
 	required?: boolean;
 	disabled?: boolean;
 };

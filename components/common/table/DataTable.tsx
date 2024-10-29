@@ -29,7 +29,7 @@ import {
 } from '@/components/ui/table';
 import { ChevronDown } from 'lucide-react';
 
-export function DataTable({ columns = [], data = [] }) {
+export function DataTable({ columns = [], data = [] }: any) {
 	const [sorting, setSorting] = React.useState<SortingState>([]);
 	const [columnFilters, setColumnFilters] =
 		React.useState<ColumnFiltersState>([]);

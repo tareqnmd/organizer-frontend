@@ -33,7 +33,7 @@ const CustomFormInput = ({
 			<FormSelect input={input} field={field} />
 		) : type === FormInputType.DATE ? (
 			<FormDate field={field} />
-		) : type === FormInputType.TEXT_AREA ? (
+		) : type === FormInputType.TEXTAREA ? (
 			<Textarea placeholder={placeholder} {...field} />
 		) : (
 			<Input placeholder={placeholder} {...{ ...input, ...field }} />
@@ -48,7 +48,9 @@ const CustomFormInput = ({
 			render={({ field }) => (
 				<FormItem className={cn(extraClassName)}>
 					<FormLabel>{label}</FormLabel>
-					<FormControl>{getTypes(type, field)}</FormControl>
+					<FormControl>
+						{getTypes(type || FormInputType.TEXT, field)}
+					</FormControl>
 					{description && (
 						<FormDescription>{description}</FormDescription>
 					)}

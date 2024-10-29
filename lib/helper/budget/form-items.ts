@@ -1,8 +1,10 @@
+import { FormInputType } from "../shared/enum";
+
 export const transactionFormItems = [
 	{
 		name: 'categoryId',
 		label: 'Category',
-		type: 'select',
+		type: FormInputType.SELECT,
 		placeholder: 'Select a Category',
 		optionUrl: '/budget/type-category-select',
 		description: '',
@@ -11,7 +13,7 @@ export const transactionFormItems = [
 	{
 		name: 'amount',
 		label: 'Amount',
-		type: 'number',
+		type: FormInputType.NUMBER,
 		placeholder: 'Amount',
 		description: '',
 		required: true,
@@ -19,7 +21,7 @@ export const transactionFormItems = [
 	{
 		name: 'date',
 		label: 'Date',
-		type: 'date',
+		type: FormInputType.DATE,
 		placeholder: 'Date',
 		description: '',
 		required: true,
@@ -27,7 +29,7 @@ export const transactionFormItems = [
 	{
 		name: 'description',
 		label: 'Description',
-		type: 'textarea',
+		type: FormInputType.TEXTAREA,
 		placeholder: 'Description',
 		description: '',
 		required: true,
@@ -38,7 +40,7 @@ export const typeFormItems = [
 	{
 		name: 'name',
 		label: 'Name',
-		type: 'text',
+		type: FormInputType.TEXT,
 		placeholder: 'Name',
 		description: '',
 	},
@@ -48,22 +50,16 @@ export const categoryFormItems = [
 	{
 		name: 'name',
 		label: 'Name',
-		type: 'text',
+		type: FormInputType.TEXT,
 		placeholder: 'Name',
 		description: '',
-		required: true,
 	},
 	{
 		name: 'typeId',
 		label: 'Type',
-		type: 'select',
+		type: FormInputType.SELECT,
 		placeholder: 'Select a Type',
 		optionUrl: '/budget/type-select',
-		// staticOptions: [
-		// 	{ label: 'Income', value: 'Income' },
-		// 	{ label: 'Expense', value: 'Expense' },
-		// ],
 		description: '',
-		required: true,
 	},
 ];
