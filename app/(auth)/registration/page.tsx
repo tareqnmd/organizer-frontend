@@ -1,7 +1,7 @@
 import Registration from '@/components/auth/Registration';
 
-const Page = () => {
+const RegistrationPage = () => {
 	return <Registration />;
 };
 
-export default Page;
+export default RegistrationPage;

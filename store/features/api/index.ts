@@ -1,5 +1,4 @@
-import { logoutHandler } from '@/helper/shared/auth';
-import { getCookieValue } from '@/helper/shared/server-func';
+import { getCookieValue, logoutHandler } from '@/lib/utils';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const baseQuery = fetchBaseQuery({

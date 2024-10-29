@@ -1,11 +1,13 @@
 'use client';
 import FormSelect from '@/components/common/input/Select';
 import { Input } from '@/components/ui/input';
-import { toQueryString } from '@/helper/shared/common';
 import { useDebounce } from '@/hooks/useDebounce';
-import { BudgetCategoryParamType } from '@/helper/modules/budget';
+import { BudgetCategoryParamType } from '@/lib/helper/budget';
+import { FormInputType } from '@/lib/helper/shared/enum';
+import { toQueryString } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
+import { ControllerRenderProps } from 'react-hook-form';
 
 const BudgetCategoriesFilter = ({
 	searchParams,
@@ -29,7 +31,7 @@ const BudgetCategoriesFilter = ({
 				`/budget/type-category${toQueryString({
 					type: filterData.type,
 					category: debouncedText,
-				})}`
+				})}`,
 			);
 		} else {
 			hasRendered.current = true;
@@ -47,14 +49,17 @@ const BudgetCategoriesFilter = ({
 			<FormSelect
 				extraTriggerClassName="h-8"
 				input={{
-					type: 'select',
+					type: FormInputType.SELECT,
 					placeholder: 'Select Type',
 					optionUrl: '/budget/type-select',
+					name: 'type',
 				}}
-				field={{
-					onChange: (value: string) => changeHandler(value, 'type'),
-					value: filterData.type,
-				}}
+				field={
+					{
+						onChange: (value: any) => changeHandler(value, 'type'),
+						value: filterData.type,
+					} as ControllerRenderProps
+				}
 			/>
 		</>
 	);

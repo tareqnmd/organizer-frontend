@@ -7,10 +7,7 @@ import PrevRouteStore from './PrevRouteStore';
 const StoreProvider = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<Provider store={store}>
-			<PersistGate
-				loading={null}
-				persistor={persistor}
-			>
+			<PersistGate loading={null} persistor={persistor}>
 				<PrevRouteStore />
 				{children}
 			</PersistGate>

@@ -1,6 +1,10 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+@import './budget.scss';
+@import './quill.scss';
+@import './input.scss';
+@import './auth.scss';
 
 @import 'react-quill/dist/quill.snow.css';
 
@@ -22,55 +26,14 @@ html {
 	}
 }
 
-.inp-wpn::-webkit-outer-spin-button,
-.inp-wpn::-webkit-inner-spin-button {
-	-webkit-appearance: none;
-	margin: 0;
-}
-
-.card-design {
-	@apply bg-card-light dark:bg-card-dark;
-}
-
-.inp-wpn[type='number'] {
-	-moz-appearance: textfield;
-}
-
 #organizer {
 	display: grid;
 	min-height: 100dvh;
-	// min-width: 100dvw;
 	overflow: hidden;
 	grid-template-rows: auto 1fr auto;
-}
-
-.ql-toolbar.ql-snow {
-	border-radius: 6px 6px 0 0;
-}
-
-.ql-container.ql-snow {
-	border-radius: 0 0 6px 6px;
-	.ql-editor {
-		min-height: 300px;
-	}
+	@apply bg-background-light text-light-text dark:bg-background-dark dark:text-dark-text;
 }
 
 .basic-modal {
-	@apply max-w-[90%] sm:max-w-[450px] rounded-lg overflow-hidden;
-}
-
-.inactive {
-	@apply bg-gray-200 text-gray-400;
-}
-
-.income {
-	@apply bg-[#127369] text-white;
-}
-
-.expense {
-	@apply bg-[#8C1F28] text-white;
-}
-
-.balance {
-	@apply bg-[#01415B] text-white;
+	@apply max-w-[90%] overflow-hidden rounded-lg sm:max-w-[450px];
 }

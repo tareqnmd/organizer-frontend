@@ -14,12 +14,7 @@ const RootProvider = ({ children }: { children: React.ReactNode }) => {
 			>
 				<StoreProvider>
 					<Toaster richColors />
-					<div
-						id="organizer"
-						className="bg-light dark:bg-dark"
-					>
-						{children}
-					</div>
+					<div id="organizer">{children}</div>
 				</StoreProvider>
 			</ThemeProvider>
 		</AuthProvider>

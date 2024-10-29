@@ -1,5 +1,5 @@
 'use client';
-import { RouteType } from '@/helper/shared/types';
+import { RouteType } from '@/lib/routes';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -19,9 +19,10 @@ const NavLink = ({
 			href={link.path}
 			className={cn(
 				'transition hover:font-semibold',
-				(exact ? pathName === link.path : pathName.includes(link.path)) &&
-					'font-semibold',
-				extraClass
+				(exact
+					? pathName === link.path
+					: pathName.includes(link.path)) && 'font-semibold',
+				extraClass,
 			)}
 		>
 			{link.name}

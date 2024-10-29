@@ -1,7 +1,6 @@
 'use client';
 import FormDateRange from '@/components/common/input/DateRange';
-import { toQueryString } from '@/helper/shared/common';
-import { baseDateFormat } from '@/helper/shared/date';
+import { baseDateFormat, toQueryString } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
@@ -31,7 +30,7 @@ const BudgetFilter = ({ searchParams = {} }: { searchParams?: any }) => {
 			router.push(
 				`/budget${toQueryString({
 					...dateRange,
-				})}`
+				})}`,
 			);
 		} else {
 			hasRendered.current = true;
@@ -43,7 +42,7 @@ const BudgetFilter = ({ searchParams = {} }: { searchParams?: any }) => {
 			<FormDateRange
 				onUpdate={dateRangeUpdate}
 				triggerClassName="h-8"
-				className="w-full col-span-3 xl:col-span-1 xl:col-start-3"
+				className="col-span-3 w-full xl:col-span-1 xl:col-start-3"
 				initialValues={{
 					from: filterData.from,
 					to: filterData.to,

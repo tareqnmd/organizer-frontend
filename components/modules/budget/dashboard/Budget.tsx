@@ -1,7 +1,4 @@
-import {
-	generateDataFromServer,
-	nextProperties,
-} from '@/helper/shared/server-fetch';
+import { generateDataFromServer, nextProperties } from '@/lib/utils';
 import BudgetFilter from './BudgetFilter';
 import BudgetHistory from './history/BudgetHistory';
 import BudgetOverview from './overview/BudgetOverview';
@@ -11,7 +8,7 @@ const Budget = async ({ searchParams = {} }: { searchParams?: any }) => {
 	const url = `budget?${queryParams}`;
 	const { data: budget = {} } = await generateDataFromServer(
 		url,
-		nextProperties({})
+		nextProperties({}),
 	);
 	const { overview = {}, history = {} } = budget;
 
@@ -21,10 +18,7 @@ const Budget = async ({ searchParams = {} }: { searchParams?: any }) => {
 				<BudgetFilter searchParams={searchParams} />
 			</div>
 			<BudgetOverview overview={overview} />
-			<BudgetHistory
-				history={history}
-				searchParams={searchParams}
-			/>
+			<BudgetHistory history={history} searchParams={searchParams} />
 		</div>
 	);
 };

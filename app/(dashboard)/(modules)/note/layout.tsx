@@ -1,7 +1,6 @@
 import ModuleLayout from '@/components/layout/ModuleLayout';
-import { getRoutes } from '@/helper/shared/routes';
+import { getRoutes } from '@/lib/routes';
 import { Metadata } from 'next';
-
 
 export const metadata: Metadata = {
 	title: {
@@ -11,7 +10,9 @@ export const metadata: Metadata = {
 };
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-	return <ModuleLayout links={getRoutes('module_note')}>{children}</ModuleLayout>;
+	return (
+		<ModuleLayout links={getRoutes('module_note')}>{children}</ModuleLayout>
+	);
 };
 
 export default Layout;

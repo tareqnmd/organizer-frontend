@@ -3,9 +3,9 @@ import CustomFormInput from '@/components/common/input/CustomFormInput';
 import { Button } from '@/components/ui/button';
 import { DialogFooter } from '@/components/ui/dialog';
 import { Form } from '@/components/ui/form';
-import { BudgetTransactionType } from '@/helper/modules/budget';
-import { transactionFormItems } from '@/helper/modules/budget/form-items';
-import { getError } from '@/helper/shared/common';
+import { BudgetTransactionType } from '@/lib/helper/budget';
+import { transactionFormItems } from '@/lib/helper/budget/form-items';
+import { getError } from '@/lib/utils';
 import {
 	useCreateBudgetTransactionMutation,
 	useEditBudgetTransactionMutation,
@@ -87,7 +87,7 @@ const BudgetTransactionForm = ({
 	useEffect(() => {
 		if (isCreateSuccess || isEditSuccess) {
 			toast.success(
-				`Transaction successfully ${transaction?.id ? 'updated' : 'created'}`
+				`Transaction successfully ${transaction?.id ? 'updated' : 'created'}`,
 			);
 			setOpen(false);
 			router.refresh();
@@ -109,7 +109,7 @@ const BudgetTransactionForm = ({
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className="w-full grid gap-3"
+				className="grid w-full gap-3"
 			>
 				{transactionFormItems.map((input) => (
 					<CustomFormInput
@@ -125,10 +125,7 @@ const BudgetTransactionForm = ({
 						type="submit"
 					>
 						{isCreateLoading || isEditLoading ? (
-							<Loader
-								className="animate-spin"
-								size={16}
-							/>
+							<Loader className="animate-spin" size={16} />
 						) : null}
 						{transaction?.id ? 'Update' : 'Create'}
 					</Button>

@@ -8,8 +8,8 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-import { BudgetTransactionType } from '@/helper/modules/budget';
-import { getError } from '@/helper/shared/common';
+import { BudgetTransactionType } from '@/lib/helper/budget';
+import { getError } from '@/lib/utils';
 import { useDeleteBudgetTransactionMutation } from '@/store/features/budget/transaction/api';
 import { Loader, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -39,15 +39,9 @@ const BudgetTransactionDelete = ({
 		}
 	}, [error, isError, isSuccess, router]);
 	return (
-		<Dialog
-			open={open}
-			onOpenChange={setOpen}
-		>
+		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
-				<Trash
-					className="cursor-pointer"
-					size={16}
-				/>
+				<Trash className="cursor-pointer" size={16} />
 			</DialogTrigger>
 			<DialogContent className="basic-modal">
 				<DialogHeader>
@@ -59,14 +53,11 @@ const BudgetTransactionDelete = ({
 				<DialogFooter>
 					<Button
 						onClick={deleteHandler}
-						className="bg-red-900 flex items-center gap-1"
+						className="flex items-center gap-1 bg-red-900"
 						disabled={isLoading}
 					>
 						{isLoading ? (
-							<Loader
-								className="animate-spin"
-								size={16}
-							/>
+							<Loader className="animate-spin" size={16} />
 						) : null}
 						Delete
 					</Button>

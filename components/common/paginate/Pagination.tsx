@@ -24,8 +24,8 @@ const Pagination = ({
 	total: number;
 }) => {
 	return (
-		<Page className="justify-end gap-4 sm:gap-2 items-center flex-wrap sm:flex-nowrap">
-			<div className="per-page-show flex gap-2 items-center text-sm">
+		<Page className="flex-wrap items-center justify-end gap-4 sm:flex-nowrap sm:gap-2">
+			<div className="per-page-show flex items-center gap-2 text-sm">
 				Showing
 				<span className="font-semibold">
 					{currentPage * perPage - (perPage - 1)}
@@ -38,24 +38,25 @@ const Pagination = ({
 							: 0)}
 				</span>
 			</div>
-			<div className="divider w-[1px] h-3 bg-black"></div>
-			<div className="per-page-change flex gap-2 items-center text-sm">
+			<div className="divider h-3 w-[1px] bg-black"></div>
+			<div className="per-page-change flex items-center gap-2 text-sm">
 				<span className="text-sm">Per Page</span>
 				<input
 					type="number"
 					defaultValue={perPage}
-					onChange={(e: any) => changePerPage(e.target.value)}
+					onChange={(e) => changePerPage(parseInt(e.target.value))}
 					min={10}
-					className="inp-wpn text-center w-8 rounded border-2 border-black p-1"
+					className="inp-wpn w-8 rounded border-2 border-black p-1 text-center"
 				/>
 			</div>
-			<div className="hidden sm:block divider w-[1px] h-3 bg-black"></div>
+			<div className="divider hidden h-3 w-[1px] bg-black sm:block"></div>
 			<PaginationContent className="justify-end">
 				<PaginationItem>
 					<PaginationPrevious
 						className={cn(
 							'cursor-pointe pl-0',
-							currentPage <= 1 && 'pointer-events-none opacity-50'
+							currentPage <= 1 &&
+								'pointer-events-none opacity-50',
 						)}
 						onClick={() => changePaginate('prev')}
 					/>
@@ -75,7 +76,8 @@ const Pagination = ({
 					<PaginationNext
 						className={cn(
 							'cursor-pointer pr-0',
-							currentPage >= pages?.length && 'pointer-events-none opacity-50'
+							currentPage >= pages?.length &&
+								'pointer-events-none opacity-50',
 						)}
 						onClick={() => changePaginate('next')}
 					/>

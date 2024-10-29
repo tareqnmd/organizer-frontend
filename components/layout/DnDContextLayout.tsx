@@ -23,7 +23,7 @@ const DnDContextLayout = ({
 		useSensor(PointerSensor),
 		useSensor(KeyboardSensor, {
 			coordinateGetter: sortableKeyboardCoordinates,
-		})
+		}),
 	);
 	return (
 		<DndContext

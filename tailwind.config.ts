@@ -1,5 +1,4 @@
 import type { Config } from 'tailwindcss';
-
 const config = {
 	darkMode: ['class'],
 	content: [
@@ -18,13 +17,47 @@ const config = {
 			},
 		},
 		extend: {
+			screens: {
+				xs: '480px',
+			},
 			colors: {
-				dark: '#0B2447',
-				light: '#ffffff',
-				medium: '#333333',
-				card: {
-					light: '#ffffff',
-					dark: '#2c2936',
+				background: {
+					dark: {
+						DEFAULT: '#04151f',
+					},
+					light: {
+						DEFAULT: '#fafafa',
+					},
+				},
+				dark: {
+					border: {
+						DEFAULT: '#fafafa',
+					},
+					shadow: {
+						DEFAULT: '#333333',
+					},
+					text: {
+						DEFAULT: '#fafafa',
+					},
+					DEFAULT: '#04151f',
+				},
+				light: {
+					border: {
+						DEFAULT: '#04151f',
+					},
+					shadow: {
+						DEFAULT: '#cccccc',
+					},
+					text: {
+						DEFAULT: '#04151f',
+					},
+					DEFAULT: '#fafafa',
+				},
+				status: {
+					inactive: '#e5e7eb',
+					success: '#127369',
+					danger: '#8C1F28',
+					neutral: '#01415B',
 				},
 			},
 			keyframes: {

@@ -1,22 +1,23 @@
+import { Checkbox } from '../ui/checkbox';
+
 const UserPasswordChange = ({
 	setPasswordChange,
 	passwordChange,
 }: {
-	setPasswordChange: any;
-	passwordChange: any;
+	setPasswordChange: (e: boolean) => void;
+	passwordChange: boolean;
 }) => {
 	return (
-		<div className="flex justify-end items-center gap-1 ">
-			<input
-				id="passwordChange"
-				type="checkbox"
+		<div className="flex items-center justify-end gap-1">
+			<Checkbox
+				id="changePassword"
 				checked={passwordChange}
-				onChange={(e) => setPasswordChange(e.target.checked)}
-				className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded cursor-pointer"
+				className="h-4 w-4 cursor-pointer rounded"
+				onCheckedChange={(e) => setPasswordChange(e as boolean)}
 			/>
 			<label
-				htmlFor="passwordChange"
-				className="text-sm font-medium select-none cursor-pointer"
+				htmlFor="changePassword"
+				className="cursor-pointer select-none text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
 			>
 				Change Password?
 			</label>
