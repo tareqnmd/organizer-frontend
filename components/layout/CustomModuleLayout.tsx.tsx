@@ -7,12 +7,12 @@ const CustomModuleLayout = ({
 }) => {
 	return (
 		<>
-			<header className="border-b dark:border-slate-700 py-2">
-				<div className="container gap-2 mx-auto flex items-center justify-end text-sm">
+			<header className="border-b py-2 dark:border-slate-700">
+				<div className="container mx-auto flex items-center justify-end gap-2 text-sm">
 					{extraSection}
 				</div>
 			</header>
-			<div className="container mx-auto py-4 h-full">{children}</div>
+			<div className="container mx-auto h-full py-4">{children}</div>
 		</>
 	);
 };

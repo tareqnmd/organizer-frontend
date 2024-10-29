@@ -1,14 +1,11 @@
-import { RouteType } from '@/helper/shared/types';
+import { RouteType } from '@/lib/routes';
 import Module from './Module';
 
 const Dashboard = ({ modules }: { modules: RouteType[] }) => {
 	return (
-		<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 place-content-center gap-4 h-full max-w-[800px] m-auto">
+		<div className="m-auto grid h-full max-w-[800px] grid-cols-1 place-content-center gap-4 sm:grid-cols-2 lg:grid-cols-3">
 			{modules.map((module) => (
-				<Module
-					key={module.path}
-					module={module}
-				/>
+				<Module key={module.path} module={module} />
 			))}
 		</div>
 	);

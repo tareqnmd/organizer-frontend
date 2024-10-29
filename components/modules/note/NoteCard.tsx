@@ -1,3 +1,4 @@
+import { Badge } from '@/components/ui/badge';
 import {
 	Card,
 	CardContent,
@@ -5,29 +6,45 @@ import {
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/card';
-import { NoteType } from '@/helper/modules/note';
-import { baseDateFormat } from '@/helper/shared/date';
+import { NoteType } from '@/lib/helper/note';
+import { baseDateFormat, cn } from '@/lib/utils';
 import Link from 'next/link';
 import NoteAction from './NoteAction';
 
-const NoteCard = ({ note }: { note: NoteType }) => {
+const NoteCard = ({
+	note,
+	featured = false,
+}: {
+	note: NoteType;
+	featured?: boolean;
+}) => {
 	return (
-		<Card className="h-full hover:shadow transition overflow-hidden">
-			<CardHeader className="p-2 border-b bg-gray-200">
-				<CardTitle className="text-md w-full flex justify-between">
+		<Card className="h-full overflow-hidden shadow shadow-light-shadow transition-all dark:shadow-dark-shadow">
+			<CardHeader className="border-b border-light-border/25 p-2 dark:border-dark-border/25">
+				<CardTitle
+					className={cn(
+						'text-md flex w-full justify-between',
+						featured && 'p-2',
+					)}
+				>
 					<Link href={`/note/${note.id}`}>
 						<span>{note?.subject}</span>
 					</Link>
+					{featured ? (
+						<Badge className="ml-auto mr-2">New</Badge>
+					) : null}
 					<NoteAction note={note} />
 				</CardTitle>
-				<CardDescription className="!m-0 text-gray-900">
-					{baseDateFormat(note?.createdAt)}
-				</CardDescription>
+				{featured ? null : (
+					<CardDescription className="!m-0 text-gray-900">
+						{baseDateFormat(note?.createdAt)}
+					</CardDescription>
+				)}
 			</CardHeader>
 			<CardContent className="p-2">
 				<div
 					dangerouslySetInnerHTML={{ __html: note?.details ?? `` }}
-					className="truncate max-h-12"
+					className={cn(featured ? 'p-2' : 'max-h-12 truncate')}
 				/>
 			</CardContent>
 		</Card>

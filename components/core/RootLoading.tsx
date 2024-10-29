@@ -1,5 +1,5 @@
 const RootLoading = () => {
-	return <div className="grid place-items-center h-screen">loading</div>;
+	return <div className="grid h-screen place-items-center">loading</div>;
 };
 
 export default RootLoading;

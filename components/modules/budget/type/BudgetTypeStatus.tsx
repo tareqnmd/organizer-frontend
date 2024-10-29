@@ -8,9 +8,8 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-import { BudgetTypeType } from '@/helper/modules/budget';
-import { getError } from '@/helper/shared/common';
-import { cn } from '@/lib/utils';
+import { BudgetTypeType } from '@/lib/helper/budget';
+import { cn, getError } from '@/lib/utils';
 import { useEditBudgetTypeMutation } from '@/store/features/budget/type/api';
 import { BadgeCheck, BadgeMinus, Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -32,7 +31,7 @@ const BudgetTypeStatus = ({ type }: { type: BudgetTypeType }) => {
 	useEffect(() => {
 		if (isSuccess) {
 			toast.success(
-				`Type successfully ${data.status === 1 ? 'inactivated' : 'activated'}`
+				`Type successfully ${data.status === 1 ? 'inactivated' : 'activated'}`,
 			);
 			setOpen(false);
 			router.refresh();
@@ -42,44 +41,34 @@ const BudgetTypeStatus = ({ type }: { type: BudgetTypeType }) => {
 	}, [data.status, error, isError, isSuccess, router]);
 
 	return (
-		<Dialog
-			open={open}
-			onOpenChange={setOpen}
-		>
+		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
 				{type.status === 0 ? (
-					<BadgeCheck
-						className="cursor-pointer"
-						size={16}
-					/>
+					<BadgeCheck className="cursor-pointer" size={16} />
 				) : (
-					<BadgeMinus
-						className="cursor-pointer"
-						size={16}
-					/>
+					<BadgeMinus className="cursor-pointer" size={16} />
 				)}
 			</DialogTrigger>
 			<DialogContent className="basic-modal">
 				<DialogHeader>
 					<DialogTitle>
-						{type.status === 0 ? 'Active' : 'Inactive'} Type ({type.name})
+						{type.status === 0 ? 'Active' : 'Inactive'} Type (
+						{type.name})
 					</DialogTitle>
 				</DialogHeader>
-				Do you want to {type.status === 0 ? 'active' : 'inactive'} the Type?
+				Do you want to {type.status === 0 ? 'active' : 'inactive'} the
+				Type?
 				<DialogFooter>
 					<Button
 						onClick={statusHandler}
 						className={cn(
 							'flex items-center gap-1',
-							type.status === 0 ? 'bg-green-500' : 'bg-red-900'
+							type.status === 0 ? 'bg-green-500' : 'bg-red-900',
 						)}
 						disabled={isLoading}
 					>
 						{isLoading ? (
-							<Loader
-								className="animate-spin"
-								size={16}
-							/>
+							<Loader className="animate-spin" size={16} />
 						) : null}
 						{type.status === 0 ? 'Active' : 'Inactive'}
 					</Button>

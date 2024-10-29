@@ -8,60 +8,35 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { CustomFormInputPropsType } from '@/lib/helper/shared';
+import { FormInputType } from '@/lib/helper/shared/enum';
 import { cn } from '@/lib/utils';
+import { ControllerRenderProps } from 'react-hook-form';
 import FormDate from './Date';
 import FormRadio from './Radio';
 import FormSelect from './Select';
 import FormTextEditor from './TextEditor';
 
-type FormInputType = {
-	label: string;
-	placeholder?: string;
-	name: string;
-	type: string;
-	optionUrl?: string;
-	options?: { value: string; id: string; label: string }[];
-	description: string;
-	required?: boolean;
-};
-
 const CustomFormInput = ({
 	input,
 	control,
 	extraClassName = '',
-}: {
-	input: FormInputType;
-	control: any;
-	extraClassName?: string;
-}) => {
+}: CustomFormInputPropsType) => {
 	const { label, name, type, placeholder = '', description } = input;
 
-	const getTypes = (type: string, field: any) => {
-		return type === 'editor' ? (
+	const getTypes = (type: FormInputType, field: ControllerRenderProps) => {
+		return type === FormInputType.EDITOR ? (
 			<FormTextEditor field={field} />
-		) : type === 'radio' ? (
-			<FormRadio
-				input={input}
-				field={field}
-			/>
-		) : type === 'select' ? (
-			<FormSelect
-				input={input}
-				field={field}
-			/>
-		) : type === 'date' ? (
+		) : type === FormInputType.RADIO ? (
+			<FormRadio input={input} field={field} />
+		) : type === FormInputType.SELECT ? (
+			<FormSelect input={input} field={field} />
+		) : type === FormInputType.DATE ? (
 			<FormDate field={field} />
-		) : type === 'textarea' ? (
-			<Textarea
-				placeholder={placeholder}
-				{...field}
-			/>
+		) : type === FormInputType.TEXTAREA ? (
+			<Textarea placeholder={placeholder} {...field} />
 		) : (
-			<Input
-				type={type}
-				placeholder={placeholder}
-				{...{ ...input, ...field }}
-			/>
+			<Input placeholder={placeholder} {...{ ...input, ...field }} />
 		);
 	};
 
@@ -73,8 +48,12 @@ const CustomFormInput = ({
 			render={({ field }) => (
 				<FormItem className={cn(extraClassName)}>
 					<FormLabel>{label}</FormLabel>
-					<FormControl>{getTypes(type, field)}</FormControl>
-					{description && <FormDescription>{description}</FormDescription>}
+					<FormControl>
+						{getTypes(type || FormInputType.TEXT, field)}
+					</FormControl>
+					{description && (
+						<FormDescription>{description}</FormDescription>
+					)}
 					<FormMessage />
 				</FormItem>
 			)}

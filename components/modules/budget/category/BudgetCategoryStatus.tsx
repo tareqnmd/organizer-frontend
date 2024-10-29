@@ -8,10 +8,9 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-import { getError } from '@/helper/shared/common';
-import { cn } from '@/lib/utils';
+import { BudgetCategoryType } from '@/lib/helper/budget';
+import { cn, getError } from '@/lib/utils';
 import { useEditBudgetCategoryMutation } from '@/store/features/budget/category/api';
-import { BudgetCategoryType } from '@/helper/modules/budget';
 import { BadgeCheck, BadgeMinus, Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -37,7 +36,7 @@ const BudgetCategoryStatus = ({
 			toast.success(
 				`Category successfully ${
 					data?.status === 0 ? 'inactivated' : 'activated'
-				}`
+				}`,
 			);
 			setOpen(false);
 			router.refresh();
@@ -46,46 +45,36 @@ const BudgetCategoryStatus = ({
 		}
 	}, [data.status, error, isError, isSuccess, router]);
 	return (
-		<Dialog
-			open={open}
-			onOpenChange={setOpen}
-		>
+		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
 				{category.status === 0 ? (
-					<BadgeCheck
-						className="cursor-pointer"
-						size={16}
-					/>
+					<BadgeCheck className="cursor-pointer" size={16} />
 				) : (
-					<BadgeMinus
-						className="cursor-pointer"
-						size={16}
-					/>
+					<BadgeMinus className="cursor-pointer" size={16} />
 				)}
 			</DialogTrigger>
 			<DialogContent className="basic-modal">
 				<DialogHeader>
 					<DialogTitle>
-						{category.status === 0 ? 'Active' : 'Inactive'} Category (
-						{category.name})
+						{category.status === 0 ? 'Active' : 'Inactive'} Category
+						({category.name})
 					</DialogTitle>
 				</DialogHeader>
-				Do you want to {category.status === 0 ? 'active' : 'inactive'} the
-				Category?
+				Do you want to {category.status === 0 ? 'active' : 'inactive'}{' '}
+				the Category?
 				<DialogFooter>
 					<Button
 						onClick={statusHandler}
 						className={cn(
 							'flex items-center gap-1',
-							category.status === 0 ? 'bg-green-500' : 'bg-red-900'
+							category.status === 0
+								? 'bg-green-500'
+								: 'bg-red-900',
 						)}
 						disabled={isLoading}
 					>
 						{isLoading ? (
-							<Loader
-								className="animate-spin"
-								size={16}
-							/>
+							<Loader className="animate-spin" size={16} />
 						) : null}
 						{category.status === 0 ? 'Active' : 'Inactive'}
 					</Button>

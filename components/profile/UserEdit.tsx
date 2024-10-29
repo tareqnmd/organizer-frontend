@@ -1,5 +1,13 @@
 'use client';
 
+import {
+	UserEditSchemaWithoutPassword,
+	UserEditSchemaWithPassword,
+	UserType,
+	userUpdateFormInputs,
+	userUpdateFormInputsWithPassword,
+} from '@/lib/helper/profile';
+import { getError } from '@/lib/utils';
 import { useUserUpdateMutation } from '@/store/features/auth/api';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader } from 'lucide-react';
@@ -13,70 +21,64 @@ import CustomFormInput from '../common/input/CustomFormInput';
 import { Button } from '../ui/button';
 import { Form } from '../ui/form';
 import UserPasswordChange from './UserPasswordChange';
-import { userUpdateFormInputs, userUpdateFormInputsWithPassword } from '@/helper/profile/form-items';
-import { getError } from '@/helper/shared/common';
 
-const FormSchema = (passwordChange = false) =>
-	z.object(
-		passwordChange
-			? {
-					name: z
-						.string({ required_error: 'Name password is required.' })
-						.min(3, 'Name must be at least 3 characters'),
-					email: z.string().email(),
-					password: z
-						.string({
-							required_error: 'Password is required.',
-						})
-						.min(6, 'Password is too short - should be 6 chars minimum.'),
-					confirmPassword: z
-						.string({ required_error: 'Confirm password is required.' })
-						.min(6, 'Password is too short - should be 6 chars minimum.'),
-					currentPassword: z
-						.string({ required_error: 'Current password is required.' })
-						.min(6, 'Password is too short - should be 6 chars minimum.'),
-			  }
-			: {
-					name: z.string().min(3, 'Name must be at least 3 characters'),
-					email: z.string().email(),
-			  }
-	);
-
-const UserEdit = ({ user }: any) => {
+const UserEdit = ({ user }: { user: UserType }) => {
 	const [passwordChange, setPasswordChange] = useState(true);
 	const router = useRouter();
-	const form = useForm({
-		resolver: zodResolver(FormSchema(passwordChange)),
+	const formWithoutPassword = useForm<
+		z.infer<typeof UserEditSchemaWithoutPassword>
+	>({
+		resolver: zodResolver(UserEditSchemaWithoutPassword),
+		defaultValues: {
+			email: user.email,
+			name: user.name,
+		},
 	});
-
+	const formWithPassword = useForm<
+		z.infer<typeof UserEditSchemaWithPassword>
+	>({
+		resolver: zodResolver(UserEditSchemaWithPassword),
+		defaultValues: {
+			email: user.email,
+			name: user.name,
+			password: '',
+			confirm_password: '',
+			current_password: '',
+		},
+	});
 	const { update } = useSession();
-
-	const [updateUser, { isSuccess, isLoading, isError, error, data }] =
+	const [updateUser, { isSuccess, isLoading, isError, error }] =
 		useUserUpdateMutation();
 
-	const updateMutation = async (data: any) => {
+	const updateUserProfileWithoutPassword = async (
+		data: z.infer<typeof UserEditSchemaWithoutPassword>,
+	) => {
 		try {
-			const { password, currentPassword, confirmPassword, ...rest } = data;
-			if (passwordChange) {
-				if (password === confirmPassword) {
-					await updateUser({
-						id: user.id,
-						data: {
-							...rest,
-							passwordChange,
-							currentPassword,
-							password,
-						},
-					});
-					await update({ name: data.name });
-					router.refresh();
-				} else {
-					toast.error('Password miss match');
-				}
-			} else if (!passwordChange) {
-				await updateUser({ id: user.id, data: { ...rest, passwordChange } });
+			await updateUser({
+				id: user.id,
+				data: { ...data, passwordChange },
+			});
+			await update({ name: data.name });
+			router.refresh();
+		} catch (error) {}
+	};
+
+	const updateUserProfileWithPassword = async (
+		data: z.infer<typeof UserEditSchemaWithPassword>,
+	) => {
+		try {
+			if (data.password === data.confirm_password) {
+				await updateUser({
+					id: user.id,
+					data: {
+						...data,
+						passwordChange,
+					},
+				});
 				await update({ name: data.name });
 				router.refresh();
+			} else {
+				toast.error('Password miss match');
 			}
 		} catch (error) {}
 	};
@@ -84,50 +86,85 @@ const UserEdit = ({ user }: any) => {
 	useEffect(() => {
 		if (isSuccess) {
 			toast.success('Successfully Updated');
-			form.reset();
+			formWithoutPassword.reset();
+			formWithPassword.reset();
 		}
 		if (isError) {
 			toast.error(getError(error));
 		}
-	}, [isSuccess, isError, error, form, router]);
-
-	useEffect(() => {
-		if (user?.id) {
-			form.setValue('name', user.name);
-			form.setValue('email', user.email);
-		}
-	}, [form, user]);
+	}, [
+		isSuccess,
+		isError,
+		error,
+		formWithoutPassword,
+		formWithPassword,
+		router,
+	]);
 
 	return (
-		<Form {...form}>
-			<form onSubmit={form.handleSubmit(updateMutation)}>
-				<UserPasswordChange
-					passwordChange={passwordChange}
-					setPasswordChange={setPasswordChange}
-				/>
-				<div className="grid md:grid-cols-2 gap-2 mb-4">
-					{[
-						...(passwordChange
-							? userUpdateFormInputsWithPassword
-							: userUpdateFormInputs),
-					].map((input) => (
-						<CustomFormInput
-							key={input.name}
-							input={input}
-							control={form.control}
-						/>
-					))}
-				</div>
-				<Button
-					className="w-full flex gap-1 items-center"
-					type="submit"
-					disabled={isLoading}
-				>
-					{isLoading ? <Loader className="animate-spin" /> : null}
-					Update
-				</Button>
-			</form>
-		</Form>
+		<>
+			<UserPasswordChange
+				passwordChange={passwordChange}
+				setPasswordChange={setPasswordChange}
+			/>
+			{passwordChange ? (
+				<Form {...formWithPassword}>
+					<form
+						onSubmit={formWithPassword.handleSubmit(
+							updateUserProfileWithPassword,
+						)}
+					>
+						<div className="mb-4 grid gap-2 md:grid-cols-2">
+							{userUpdateFormInputsWithPassword.map((input) => (
+								<CustomFormInput
+									key={input.name}
+									input={input}
+									control={formWithPassword.control}
+								/>
+							))}
+						</div>
+						<Button
+							className="flex w-full items-center gap-1 transition-all active:scale-95"
+							type="submit"
+							disabled={isLoading}
+						>
+							{isLoading ? (
+								<Loader className="animate-spin" />
+							) : null}
+							Update
+						</Button>
+					</form>
+				</Form>
+			) : (
+				<Form {...formWithoutPassword}>
+					<form
+						onSubmit={formWithoutPassword.handleSubmit(
+							updateUserProfileWithoutPassword,
+						)}
+					>
+						<div className="mb-4 grid gap-2 md:grid-cols-2">
+							{userUpdateFormInputs.map((input) => (
+								<CustomFormInput
+									key={input.name}
+									input={input}
+									control={formWithoutPassword.control}
+								/>
+							))}
+						</div>
+						<Button
+							className="flex w-full items-center gap-1 transition-all active:scale-95"
+							type="submit"
+							disabled={isLoading}
+						>
+							{isLoading ? (
+								<Loader className="animate-spin" />
+							) : null}
+							Update
+						</Button>
+					</form>
+				</Form>
+			)}
+		</>
 	);
 };
 

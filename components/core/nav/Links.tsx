@@ -1,27 +1,27 @@
 import { getServerSession } from 'next-auth';
 
 import NavLink from '@/components/layout/NavLink';
-import { getRoutes } from '@/helper/shared/routes';
 import { authOptions } from '@/lib/auth-options';
-import { Routes } from '@/helper/shared/enum';
+import { UserRoleEnum } from '@/lib/helper/profile';
+import { getRouteName, getRoutes, Routes } from '@/lib/routes';
 const Links = async () => {
 	const session = await getServerSession(authOptions);
 	return (
-		<ul className="hidden md:flex items-center gap-2 text-sm">
-			{session?.user?.role === 'admin' && (
+		<ul className="hidden items-center gap-2 text-sm md:flex">
+			{session?.user?.role === UserRoleEnum.ADMIN && (
 				<li>
 					<NavLink
 						exact={false}
-						link={{ name: 'Admin', path: Routes.ADMIN }}
+						link={{
+							name: getRouteName('misc', Routes.ADMIN),
+							path: Routes.ADMIN,
+						}}
 					/>
 				</li>
 			)}
 			{getRoutes('modules').map((link) => (
 				<li key={link.path}>
-					<NavLink
-						exact={false}
-						link={link}
-					/>
+					<NavLink exact={false} link={link} />
 				</li>
 			))}
 		</ul>

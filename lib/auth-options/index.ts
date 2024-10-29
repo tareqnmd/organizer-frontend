@@ -1,4 +1,5 @@
-import { axiosInstance } from '@/helper/shared/axios-api';
+import { axiosInstance } from '@/lib/utils';
+import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
@@ -18,7 +19,7 @@ export const authOptions = {
 	},
 	providers: [
 		GitHubProvider({
-			profile(profile: any) {
+			profile(profile) {
 				return {
 					id: String(profile.id),
 					email: profile.email,
@@ -58,7 +59,10 @@ export const authOptions = {
 			},
 			async authorize(credentials) {
 				try {
-					const { data } = await axiosInstance.post('/user/login', credentials);
+					const { data } = await axiosInstance.post(
+						'/user/login',
+						credentials,
+					);
 					const { token, tokenOptions, ...user } = data;
 					cookies().set('token', token, JSON.parse(tokenOptions));
 					return user ?? null;
@@ -91,7 +95,7 @@ export const authOptions = {
 				try {
 					const { data } = await axiosInstance.post(
 						'/user/register',
-						credentials
+						credentials,
 					);
 					const { token, tokenOptions, ...user } = data;
 					cookies().set('token', token, JSON.parse(tokenOptions));
@@ -103,8 +107,11 @@ export const authOptions = {
 		}),
 	],
 	callbacks: {
-		async signIn({ user, account }: any) {
-			if (['google', 'github'].includes(account.provider)) {
+		async signIn({ user, account }) {
+			if (
+				account?.provider &&
+				['google', 'github'].includes(account.provider)
+			) {
 				const { data } = await axiosInstance.post('/user/social-auth', {
 					...user,
 					from: account.provider,
@@ -125,18 +132,23 @@ export const authOptions = {
 				return true;
 			}
 		},
-		async jwt({ token, trigger, session, user }: any) {
+		async jwt({ token, trigger, session, user }) {
 			if (user) {
-				token = { ...user, iat: token.iat, exp: token.exp, jti: token.jti };
+				token = {
+					...user,
+					iat: token.iat,
+					exp: token.exp,
+					jti: token.jti,
+				};
 			}
 			if (trigger === 'update' && session?.name) {
 				token.name = session.name;
 			}
 			return token;
 		},
-		async session({ session, token }: any) {
+		async session({ session, token }) {
 			const { iat, exp, jti, ...rest } = token;
 			return { expires: session.expires, user: rest };
 		},
 	},
-};
+} satisfies NextAuthOptions;

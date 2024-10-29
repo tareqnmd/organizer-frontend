@@ -1,5 +1,5 @@
 const ModuleLoading = () => {
-	return <div className="grid place-items-center h-full">loading</div>;
+	return <div className="grid h-full place-items-center">loading</div>;
 };
 
 export default ModuleLoading;

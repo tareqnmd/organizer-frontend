@@ -1,37 +1,29 @@
 'use client';
 import CustomFormInput from '@/components/common/input/CustomFormInput';
 import { Form } from '@/components/ui/form';
-import { NoteType } from '@/helper/modules/note';
-import { noteFormItems } from '@/helper/modules/note/form-items';
-import { getError } from '@/helper/shared/common';
+import { NoteSchema, NoteSchemaType, NoteType } from '@/lib/helper/note';
+import { noteFormItems } from '@/lib/helper/note/form-items';
+import { getError } from '@/lib/utils';
 import { useEditNoteMutation } from '@/store/features/note/api';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { memo, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import * as z from 'zod';
-
-const FormSchema = z.object({
-	subject: z.string().min(3, {
-		message: 'Subject must be at least 3 characters.',
-	}),
-	details: z.string(),
-});
 
 const NoteForm = ({ note }: { note: NoteType }) => {
 	const router = useRouter();
-	const form = useForm<z.infer<typeof FormSchema>>({
-		resolver: zodResolver(FormSchema),
+	const form = useForm<NoteSchemaType>({
+		resolver: zodResolver(NoteSchema),
 		mode: 'onChange',
 		defaultValues: {
-			subject: 'Untitled',
-			details: '',
+			subject: note?.subject ?? 'Untitled',
+			details: note?.details ?? '',
 		},
 	});
+
 	const {
 		watch,
-		setValue,
 		formState: { isValid },
 	} = form;
 
@@ -47,13 +39,6 @@ const NoteForm = ({ note }: { note: NoteType }) => {
 	}, [editError, isEditError, router]);
 
 	useEffect(() => {
-		if (note?.id) {
-			setValue('subject', note.subject);
-			setValue('details', note.details);
-		}
-	}, [setValue, note]);
-
-	useEffect(() => {
 		const handler = setTimeout(async () => {
 			isValid &&
 				(await editNote({
@@ -66,7 +51,7 @@ const NoteForm = ({ note }: { note: NoteType }) => {
 
 	return (
 		<Form {...form}>
-			<div className="w-full grid gap-3">
+			<div className="grid w-full gap-3">
 				{noteFormItems.map((input) => (
 					<CustomFormInput
 						key={input.name}

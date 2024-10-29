@@ -8,9 +8,9 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-import { getError } from '@/helper/shared/common';
+import { BudgetCategoryType } from '@/lib/helper/budget';
+import { getError } from '@/lib/utils';
 import { useDeleteBudgetCategoryMutation } from '@/store/features/budget/category/api';
-import { BudgetCategoryType } from '@/helper/modules/budget';
 import { Loader, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -41,15 +41,9 @@ const BudgetCategoryDelete = ({
 	}, [error, isError, isSuccess, router]);
 
 	return (
-		<Dialog
-			open={open}
-			onOpenChange={setOpen}
-		>
+		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
-				<Trash
-					className="cursor-pointer"
-					size={16}
-				/>
+				<Trash className="cursor-pointer" size={16} />
 			</DialogTrigger>
 			<DialogContent className="basic-modal">
 				<DialogHeader>
@@ -59,14 +53,11 @@ const BudgetCategoryDelete = ({
 				<DialogFooter>
 					<Button
 						onClick={deleteHandler}
-						className="bg-red-900 flex items-center gap-1"
+						className="flex items-center gap-1 bg-red-900"
 						disabled={isLoading}
 					>
 						{isLoading ? (
-							<Loader
-								className="animate-spin"
-								size={16}
-							/>
+							<Loader className="animate-spin" size={16} />
 						) : null}
 						Delete
 					</Button>

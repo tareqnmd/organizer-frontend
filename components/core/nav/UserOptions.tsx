@@ -5,18 +5,15 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { UserType } from '@/lib/helper/profile';
 import Link from 'next/link';
 import Logout from './LogoutButton';
 
-export function UserOptions({
-	user,
-}: {
-	user: { image: string; name: string };
-}) {
+export function UserOptions({ user }: { user: UserType }) {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Avatar className="cursor-pointer h-6 w-6 select-none">
+				<Avatar className="h-6 w-6 cursor-pointer select-none">
 					<AvatarImage src={user?.image} />
 					<AvatarFallback>{user?.name[0]}</AvatarFallback>
 				</Avatar>
