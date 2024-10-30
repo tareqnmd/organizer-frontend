@@ -18,7 +18,7 @@ const Transactions = async ({
 		<BudgetTransactionsWrapper
 			searchOptions={{
 				category: searchOptions.category ?? '',
-				type: searchOptions.type ?? '',
+				type: searchOptions.type,
 				transaction: searchOptions.transaction ?? '',
 				from: searchOptions.from ?? '',
 				to: searchOptions.to ?? '',
