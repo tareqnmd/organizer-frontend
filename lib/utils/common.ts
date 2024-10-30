@@ -19,16 +19,24 @@ export const logoutHandler = async () => {
 
 export const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
-export const getError = (error: any, defaultMessage = 'Error Found') => {
+export const getError = (
+	error: { data?: { message?: string } },
+	defaultMessage = 'Error Found',
+) => {
 	return error?.data?.message ?? defaultMessage;
 };
-export const toQueryString = (obj: any) => {
+export const toQueryString = (
+	obj: Record<string, string | number | boolean | null | undefined>,
+) => {
 	const filteredObj = Object.fromEntries(
-		Object.entries(obj).filter(([_, value]) => value !== ''),
+		Object.entries(obj).filter(
+			([_, value]) =>
+				value !== '' && value !== null && value !== undefined,
+		),
 	);
 	const encodedKeyValuePairs = Object.entries(filteredObj).map(
-		([key, value]: any) => {
-			return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+		([key, value]) => {
+			return `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`;
 		},
 	);
 	return `?${encodedKeyValuePairs.join('&')}`;

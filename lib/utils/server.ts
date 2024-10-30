@@ -10,7 +10,7 @@ export const clearCookie = async () => {
 export const getCookie = async () => {
 	try {
 		const headersList = headers();
-		const cookie: any = headersList.get('cookie');
+		const cookie = headersList.get('cookie');
 		return cookie;
 	} catch (error) {
 		return '';
@@ -20,8 +20,8 @@ export const getCookie = async () => {
 export const getCookieValue = async (name: string) => {
 	try {
 		const cookieStore = cookies();
-		const cookie: any = cookieStore.get(name);
-		return cookie.value ?? '';
+		const cookie = cookieStore.get(name);
+		return cookie?.value ?? '';
 	} catch (error) {
 		return '';
 	}

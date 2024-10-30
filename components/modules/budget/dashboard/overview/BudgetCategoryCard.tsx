@@ -50,7 +50,7 @@ const BudgetCategoryCard = ({
 				{data?.length > 0 && (
 					<ScrollArea className="mb-2 w-full">
 						<div className="flex w-full flex-col gap-2">
-							{data?.map((item: any) => {
+							{data?.map((item) => {
 								return (
 									<div key={item.name}>
 										<div className="flex flex-col gap-2">
