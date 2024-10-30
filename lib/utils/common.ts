@@ -19,10 +19,7 @@ export const logoutHandler = async () => {
 
 export const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
-export const getError = (
-	error: { data?: { message?: string } },
-	defaultMessage = 'Error Found',
-) => {
+export const getError = (error: any, defaultMessage = 'Error Found') => {
 	return error?.data?.message ?? defaultMessage;
 };
 export const toQueryString = (

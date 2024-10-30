@@ -67,15 +67,21 @@ const BudgetHistory = ({
 				(item: BudgetDashboardHistoryMonthType) =>
 					item.month === period.month && item.year === period.year,
 			);
-			const data = monthWiseData(monthData, period);
+			const data = monthWiseData(
+				monthData as BudgetDashboardHistoryChartDataType[],
+				period,
+			);
 			setChartData(data);
 		} else if (timeFrame === TimeFrameEnum.YEAR && year?.length > 0) {
 			const yearData = year.filter(
 				(item: BudgetDashboardHistoryYearType) =>
 					item.year === period.year,
 			);
-			const data = yearWiseData(yearData, period);
-			setChartData(data);
+			const data = yearWiseData(
+				yearData as BudgetDashboardHistoryChartDataType[],
+				period,
+			);
+			setChartData(data as BudgetDashboardHistoryChartDataType[]);
 		}
 	}, [month, period, timeFrame, year]);
 
