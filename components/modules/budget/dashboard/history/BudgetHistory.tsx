@@ -3,7 +3,15 @@
 import SkeletonWrapper from '@/components/common/SkeletonWrapper';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Period, TimeFrame } from '@/lib/helper/budget/types';
+import { TimeFrameEnum } from '@/lib/helper/budget';
+import {
+	BudgetDashboardHistoryChartDataType,
+	BudgetDashboardHistoryMonthType,
+	BudgetDashboardHistoryType,
+	BudgetDashboardHistoryYearType,
+	BudgetDashboardSearchParamsType,
+	Period,
+} from '@/lib/helper/budget/types';
 import {
 	GetFormatterForCurrency,
 	getYearsInRange,
@@ -27,17 +35,21 @@ const BudgetHistory = ({
 	history,
 	searchParams,
 }: {
-	history: any;
-	searchParams: any;
+	history: BudgetDashboardHistoryType;
+	searchParams: BudgetDashboardSearchParamsType;
 }) => {
 	const { month = [], year = [] } = history;
-	const [timeFrame, setTimeFrame] = useState<TimeFrame>('month');
-	const [years, setYears] = useState<any>([]);
+	const [timeFrame, setTimeFrame] = useState<TimeFrameEnum>(
+		TimeFrameEnum.MONTH,
+	);
+	const [years, setYears] = useState<number[]>([]);
 	const [period, setPeriod] = useState<Period>({
 		month: new Date().getMonth(),
 		year: new Date().getFullYear(),
 	});
-	const [chartData, setChartData] = useState<any>([]);
+	const [chartData, setChartData] = useState<
+		BudgetDashboardHistoryChartDataType[]
+	>([]);
 
 	const formatter = useMemo(() => {
 		return GetFormatterForCurrency('BDT');
@@ -50,16 +62,17 @@ const BudgetHistory = ({
 	}, [searchParams.from, searchParams.to]);
 
 	useEffect(() => {
-		if (timeFrame === 'month' && month?.length > 0) {
+		if (timeFrame === TimeFrameEnum.MONTH && month?.length > 0) {
 			const monthData = month.filter(
-				(item: any) =>
+				(item: BudgetDashboardHistoryMonthType) =>
 					item.month === period.month && item.year === period.year,
 			);
 			const data = monthWiseData(monthData, period);
 			setChartData(data);
-		} else if (timeFrame === 'year' && year?.length > 0) {
+		} else if (timeFrame === TimeFrameEnum.YEAR && year?.length > 0) {
 			const yearData = year.filter(
-				(item: any) => item.year === period.year,
+				(item: BudgetDashboardHistoryYearType) =>
+					item.year === period.year,
 			);
 			const data = yearWiseData(yearData, period);
 			setChartData(data);
@@ -100,7 +113,7 @@ const BudgetHistory = ({
 				<CardContent className="p-0">
 					<SkeletonWrapper isLoading={false}>
 						{chartData?.some(
-							(item: any) => item.expense > 0 || item.income > 0,
+							(item) => item.expense > 0 || item.income > 0,
 						) ? (
 							<ResponsiveContainer width={'100%'} height={300}>
 								<BarChart
@@ -158,14 +171,16 @@ const BudgetHistory = ({
 										tickLine={false}
 										axisLine={false}
 										padding={{ left: 0, right: 0 }}
-										dataKey={(data: any) => {
+										dataKey={(data) => {
 											const { year, month, day } = data;
 											const date = new Date(
 												year,
 												month,
 												day || 1,
 											);
-											if (timeFrame === 'year') {
+											if (
+												timeFrame === TimeFrameEnum.YEAR
+											) {
 												return date.toLocaleDateString(
 													'default',
 													{
@@ -203,10 +218,14 @@ const BudgetHistory = ({
 									/>
 									<Tooltip
 										cursor={{ opacity: 0.1 }}
-										content={(props: any) => (
+										content={(props) => (
 											<BudgetCustomTooltip
 												formatter={formatter}
-												{...props}
+												payload={
+													props?.payload?.[0]
+														?.payload ?? {}
+												}
+												active={props.active}
 											/>
 										)}
 									/>

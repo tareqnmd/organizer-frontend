@@ -11,11 +11,7 @@ const BudgetHistoryYearSelector = ({
 	period,
 	setPeriod,
 	years = [],
-}: {
-	period: Period;
-	setPeriod: (period: Period) => void;
-	years: any;
-}) => {
+}: BudgetDashboardHistoryYearSelectorPropsType) => {
 	return (
 		<Select
 			value={period.year.toString()}
@@ -30,7 +26,7 @@ const BudgetHistoryYearSelector = ({
 				<SelectValue />
 			</SelectTrigger>
 			<SelectContent>
-				{years.map((year: any) => (
+				{years.map((year) => (
 					<SelectItem key={year} value={year.toString()}>
 						{year}
 					</SelectItem>

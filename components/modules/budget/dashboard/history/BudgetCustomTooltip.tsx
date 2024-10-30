@@ -1,10 +1,14 @@
+import { BudgetDashboardHistoryTooltipPropsType } from '@/lib/helper/budget';
 import BudgetCustomTooltipRow from './BudgetCustomTooltipRow';
 
-const BudgetCustomTooltip = ({ active, payload, formatter }: any) => {
-	if (!active || !payload || payload.length === 0) return null;
+const BudgetCustomTooltip = ({
+	active,
+	payload,
+	formatter,
+}: BudgetDashboardHistoryTooltipPropsType) => {
+	if (!active || !payload || Object.keys(payload).length === 0) return null;
 
-	const data = payload[0].payload;
-	const { expense, income } = data;
+	const { expense, income } = payload;
 
 	return (
 		<div className="min-w-[300px] rounded border bg-white p-4">

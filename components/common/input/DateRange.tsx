@@ -37,7 +37,7 @@ const FormDateRange = ({
 }: {
 	className: string;
 	triggerClassName: string;
-	initialValues?: { from: string; to: string };
+	initialValues?: { from?: string; to?: string };
 	onUpdate: (values: { from: Date; to: Date }) => void;
 }) => {
 	const [open, setOpen] = useState(false);
