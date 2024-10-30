@@ -1,9 +1,14 @@
+import { BudgetDashboardSearchParamsType } from '@/lib/helper/budget';
 import { generateDataFromServer, nextProperties } from '@/lib/utils';
 import BudgetFilter from './BudgetFilter';
 import BudgetHistory from './history/BudgetHistory';
 import BudgetOverview from './overview/BudgetOverview';
 
-const Budget = async ({ searchParams = {} }: { searchParams?: any }) => {
+const Budget = async ({
+	searchParams = {},
+}: {
+	searchParams?: BudgetDashboardSearchParamsType;
+}) => {
 	const queryParams = new URLSearchParams(searchParams);
 	const url = `budget?${queryParams}`;
 	const { data: budget = {} } = await generateDataFromServer(

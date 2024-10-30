@@ -1,16 +1,21 @@
 'use client';
 import FormDateRange from '@/components/common/input/DateRange';
+import { BudgetDashboardSearchParamsType } from '@/lib/helper/budget';
 import { baseDateFormat, toQueryString } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
-const BudgetFilter = ({ searchParams = {} }: { searchParams?: any }) => {
+const BudgetFilter = ({
+	searchParams = {},
+}: {
+	searchParams?: BudgetDashboardSearchParamsType;
+}) => {
 	const [filterData, setFilterData] = useState(searchParams);
 	const hasRendered = useRef(false);
 	const router = useRouter();
 
 	const dateRangeUpdate = (value: { from: Date; to: Date }) => {
-		setFilterData((prev: any) => ({
+		setFilterData((prev: BudgetDashboardSearchParamsType) => ({
 			...prev,
 			from: value?.from ? baseDateFormat(value.from) : '',
 			to: value?.to ? baseDateFormat(value.to) : '',
@@ -35,7 +40,7 @@ const BudgetFilter = ({ searchParams = {} }: { searchParams?: any }) => {
 		} else {
 			hasRendered.current = true;
 		}
-	}, [filterData.from, filterData.to, router]);
+	}, [filterData?.from, filterData?.to, router]);
 
 	return (
 		<>
@@ -44,8 +49,8 @@ const BudgetFilter = ({ searchParams = {} }: { searchParams?: any }) => {
 				triggerClassName="h-8"
 				className="col-span-3 w-full xl:col-span-1 xl:col-start-3"
 				initialValues={{
-					from: filterData.from,
-					to: filterData.to,
+					from: filterData?.from,
+					to: filterData?.to,
 				}}
 			/>
 		</>

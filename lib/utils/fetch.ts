@@ -8,8 +8,9 @@ export const nextProperties = ({ revalidate = 0 }) => {
 export const serverAuthFetch = async (url: string, next_options = {}) => {
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
 	const path = `${baseURL}/${url}`;
+	const cookie = await getCookie();
 	return fetch(path, {
-		headers: { cookie: await getCookie() },
+		headers: cookie ? { cookie } : undefined,
 		...next_options,
 	});
 };
@@ -38,10 +39,13 @@ export const generateDataFromServer = async (
 		}
 		const data = await res.json();
 		return data;
-	} catch (error: any) {
-		if (error?.message === 'Unauthorized') {
+	} catch (error: unknown) {
+		if (error instanceof Error && error.message === 'Unauthorized') {
 			redirect('/unauthorized');
 		}
-		return error?.message ?? 'Error Found';
+		if (error instanceof Error) {
+			return error.message;
+		}
+		return 'Error Found';
 	}
 };

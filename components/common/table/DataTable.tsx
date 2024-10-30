@@ -1,6 +1,7 @@
 'use client';
 
 import {
+	ColumnDef,
 	ColumnFiltersState,
 	SortingState,
 	VisibilityState,
@@ -29,7 +30,13 @@ import {
 } from '@/components/ui/table';
 import { ChevronDown } from 'lucide-react';
 
-export function DataTable({ columns = [], data = [] }: any) {
+export function DataTable({
+	columns = [],
+	data = [],
+}: {
+	columns: ColumnDef<any>[];
+	data: any[];
+}) {
 	const [sorting, setSorting] = React.useState<SortingState>([]);
 	const [columnFilters, setColumnFilters] =
 		React.useState<ColumnFiltersState>([]);

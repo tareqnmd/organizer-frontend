@@ -1,4 +1,5 @@
 import { format, getDaysInMonth, getYear } from 'date-fns';
+import { Period } from '../helper/budget';
 
 export const baseDateFormat = (date: string | Date) =>
 	format(date, 'dd-MM-yyyy');
@@ -6,13 +7,30 @@ export const baseDateFormat = (date: string | Date) =>
 export const stringToNewDate = (date: string) =>
 	new Date(date?.split('-').reverse().join(',')) ?? date ?? null;
 
-export const monthWiseData = (monthData: any, period: any) => {
-	const updatedMonthData: any = [];
+export const monthWiseData = (
+	monthData: Array<{
+		income: number;
+		expense: number;
+		year: number;
+		month: number;
+		day: number;
+	}>,
+	period: Period,
+) => {
+	const updatedMonthData: Array<{
+		income: number;
+		expense: number;
+		year: number;
+		month: number;
+		day: number;
+	}> = [];
 	const daysInMonth = getDaysInMonth(
 		new Date(`${period.year},${period.month + 1},01`),
 	);
 	Array.from(Array(daysInMonth)).map((_, index) => {
-		const found = monthData.find((item: any) => item.day === index);
+		const found = monthData.find(
+			(item: { day: number }) => item.day === index,
+		);
 		found
 			? (updatedMonthData[index] = { ...found, day: index + 1 })
 			: (updatedMonthData[index] = {
@@ -25,11 +43,25 @@ export const monthWiseData = (monthData: any, period: any) => {
 	});
 	return updatedMonthData;
 };
-
-export const yearWiseData = (yearData: any, period: any) => {
-	const updatedYearData: any = [];
+export const yearWiseData = (
+	yearData: Array<{
+		income: number;
+		expense: number;
+		year: number;
+		month: number;
+	}>,
+	period: Period,
+) => {
+	const updatedYearData: Array<{
+		income: number;
+		expense: number;
+		year: number;
+		month: number;
+	}> = [];
 	Array.from(Array(12)).map((_, index) => {
-		const found = yearData.find((item: any) => item.month === index);
+		const found = yearData.find(
+			(item: { month: number }) => item.month === index,
+		);
 		found
 			? (updatedYearData[index] = found)
 			: (updatedYearData[index] = {

@@ -1,5 +1,6 @@
 'use client';
 import SkeletonWrapper from '@/components/common/SkeletonWrapper';
+import { BudgetDashboardOverviewAmountType } from '@/lib/helper/budget';
 import { GetFormatterForCurrency } from '@/lib/utils';
 import { TrendingDown, TrendingUp, Wallet } from 'lucide-react';
 import { useMemo } from 'react';
@@ -7,17 +8,13 @@ import BudgetStatsCard from './BudgetStatsCard';
 function BudgetStatsCards({
 	amount,
 }: {
-	amount: {
-		income: number;
-		expense: number;
-		balance: number;
-	};
+	amount: BudgetDashboardOverviewAmountType;
 }) {
 	const formatter = useMemo(() => {
 		return GetFormatterForCurrency('BDT');
 	}, []);
 
-	const { income = 0, expense = 0, balance = 0 } = amount;
+	const { income = 0, expense = 0, balance = 0 } = amount || {};
 
 	return (
 		<div className="relative flex w-full flex-wrap gap-4 lg:flex-nowrap">

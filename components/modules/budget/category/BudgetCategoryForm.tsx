@@ -58,7 +58,7 @@ const BudgetCategoryForm = ({
 			error: createError,
 		},
 	] = useCreateBudgetCategoryMutation();
-	const onSubmit = async (values: any) => {
+	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
 		category?.id
 			? await edit({ data: values, id: category.id })
 			: await create(values);

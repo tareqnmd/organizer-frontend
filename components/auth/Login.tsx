@@ -12,7 +12,7 @@ import {
 } from '@/lib/helper/auth';
 import { getRouteName, Routes } from '@/lib/routes';
 import { getError } from '@/lib/utils';
-import { LogIn } from 'lucide-react';
+import { Loader, LogIn } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -43,8 +43,8 @@ const Login = () => {
 			}
 		} catch (error) {
 			toast.error(getError(error));
-		} finally {
 			setLoading(false);
+		} finally {
 		}
 	};
 
@@ -73,7 +73,8 @@ const Login = () => {
 					type="submit"
 					disabled={loading}
 				>
-					<LogIn /> Login
+					{loading ? <Loader className="animate-spin" /> : <LogIn />}{' '}
+					Login
 				</Button>
 			</form>
 		</Form>

@@ -1,24 +1,16 @@
 import SkeletonWrapper from '@/components/common/SkeletonWrapper';
-import { TransactionTypeEnum } from '@/lib/helper/budget';
+import {
+	BudgetDashboardOverviewCategoryType,
+	TransactionTypeEnum,
+} from '@/lib/helper/budget';
 import BudgetCategoryCard from './BudgetCategoryCard';
 
 function BudgetCategoryStats({
 	category,
 }: {
-	category: {
-		income: {
-			name: string;
-			amount: number;
-			percentage: number;
-		}[];
-		expense: {
-			name: string;
-			amount: number;
-			percentage: number;
-		}[];
-	};
+	category: BudgetDashboardOverviewCategoryType;
 }) {
-	const { income = [], expense = [] } = category;
+	const { income = [], expense = [] } = category || {};
 
 	return (
 		<div className="flex w-full flex-wrap gap-4 lg:flex-nowrap">

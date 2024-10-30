@@ -19,7 +19,7 @@ const BudgetStatsCard = ({
 		(value: number) => {
 			return formatter.format(value);
 		},
-		[formatter]
+		[formatter],
 	);
 
 	return (

@@ -6,7 +6,7 @@ import DynamicIcon from '../icons/DynamicLucideIcon';
 const Module = ({ module }: { module: RouteType }) => {
 	return (
 		<Link href={module.path}>
-			<div className="flex items-center gap-2 rounded-md border-0 p-3 shadow shadow-light-shadow transition-all active:scale-95">
+			<div className="flex h-full items-center gap-2 rounded-md border-0 p-3 shadow-md shadow-light-shadow transition-all active:scale-95 dark:shadow-dark-shadow">
 				{module?.icon ? (
 					<DynamicIcon
 						name={module.icon as keyof typeof dynamicIconImports}

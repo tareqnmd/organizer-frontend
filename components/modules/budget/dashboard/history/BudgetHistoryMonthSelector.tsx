@@ -5,15 +5,12 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
-import { Period } from '@/lib/helper/budget/types';
+import { BudgetDashboardHistoryMonthSelectorPropsType } from '@/lib/helper/budget/types';
 
 const BudgetHistoryMonthSelector = ({
 	period,
 	setPeriod,
-}: {
-	period: Period;
-	setPeriod: (period: Period) => void;
-}) => {
+}: BudgetDashboardHistoryMonthSelectorPropsType) => {
 	return (
 		<Select
 			value={period.month.toString()}
