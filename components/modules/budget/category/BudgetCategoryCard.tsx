@@ -1,5 +1,5 @@
 import { Card } from '@/components/ui/card';
-import { BudgetCategoryType } from '@/lib/helper/budget';
+import { BudgetCategoryType, TransactionTypeEnum } from '@/lib/helper/budget';
 import { cn } from '@/lib/utils';
 import BudgetCategoryAction from './BudgetCategoryAction';
 const BudgetCategoryCard = async ({
@@ -13,9 +13,9 @@ const BudgetCategoryCard = async ({
 				'flex items-center justify-between p-3',
 				category.status === 0
 					? 'inactive'
-					: category.type === 'Expense'
+					: category.type === TransactionTypeEnum.EXPENSE
 						? 'expense'
-						: category.type === 'Income'
+						: category.type === TransactionTypeEnum.INCOME
 							? 'income'
 							: null,
 			)}

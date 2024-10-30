@@ -69,7 +69,7 @@ const BudgetTransactionForm = ({
 		},
 	] = useCreateBudgetTransactionMutation();
 
-	const onSubmit = async (values: any) => {
+	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
 		transaction?.id
 			? await edit({ data: values, id: transaction.id })
 			: await create(values);

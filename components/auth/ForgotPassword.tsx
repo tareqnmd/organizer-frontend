@@ -11,7 +11,7 @@ import {
 	ForgotPasswordSchemaType,
 } from '@/lib/helper/auth';
 import { getError } from '@/lib/utils';
-import { Send } from 'lucide-react';
+import { Loader, Send } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -66,7 +66,8 @@ const ForgotPassword = () => {
 					type="submit"
 					disabled={loading}
 				>
-					<Send /> Send Reset Link
+					{loading ? <Loader className="animate-spin" /> : <Send />}{' '}
+					Send Reset Link
 				</Button>
 			</form>
 		</Form>

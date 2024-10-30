@@ -1,8 +1,13 @@
 import Budget from '@/components/modules/budget/dashboard/Budget';
+import { BudgetDashboardSearchParamsType } from '@/lib/helper/budget';
 import { baseDateFormat } from '@/lib/utils';
 import { endOfMonth, startOfMonth } from 'date-fns';
 
-const Page = ({ searchParams }: { searchParams: any }) => {
+const Page = ({
+	searchParams,
+}: {
+	searchParams: BudgetDashboardSearchParamsType;
+}) => {
 	return (
 		<Budget
 			searchParams={{

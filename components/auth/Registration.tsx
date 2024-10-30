@@ -6,7 +6,7 @@ import {
 } from '@/lib/helper/auth';
 import { getError } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { LogIn } from 'lucide-react';
+import { Loader, LogIn } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -62,7 +62,8 @@ const Registration = () => {
 					type="submit"
 					disabled={loading}
 				>
-					<LogIn /> Registration
+					{loading ? <Loader className="animate-spin" /> : <LogIn />}{' '}
+					Registration
 				</Button>
 			</form>
 		</Form>

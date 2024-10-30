@@ -1,7 +1,10 @@
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { TransactionType } from '@/lib/helper/budget';
+import {
+	BudgetDashboardOverviewCategoryDetailType,
+	TransactionTypeEnum,
+} from '@/lib/helper/budget';
 import { cn, GetFormatterForCurrency } from '@/lib/utils';
 import { useMemo } from 'react';
 
@@ -9,8 +12,8 @@ const BudgetCategoryCard = ({
 	data,
 	type,
 }: {
-	type: TransactionType;
-	data: any;
+	type: TransactionTypeEnum;
+	data: BudgetDashboardOverviewCategoryDetailType[];
 }) => {
 	const formatter = useMemo(() => {
 		return GetFormatterForCurrency('BDT');
@@ -24,7 +27,10 @@ const BudgetCategoryCard = ({
 						(cn('text-lg'), data?.length === 0 ? 'text-center' : '')
 					}
 				>
-					{type === 'income' ? 'Incomes' : 'Expenses'} by category
+					{type === TransactionTypeEnum.INCOME
+						? 'Incomes'
+						: 'Expenses'}{' '}
+					by category
 				</CardTitle>
 			</CardHeader>
 
@@ -34,7 +40,9 @@ const BudgetCategoryCard = ({
 						No data for the selected period
 						<p className="text-muted-foreground text-center text-sm">
 							Try selecting a different period or try adding new{' '}
-							{type === 'income' ? 'incomes' : 'expenses'}
+							{type === TransactionTypeEnum.INCOME
+								? 'incomes'
+								: 'expenses'}
 						</p>
 					</div>
 				)}
@@ -42,7 +50,7 @@ const BudgetCategoryCard = ({
 				{data?.length > 0 && (
 					<ScrollArea className="mb-2 w-full">
 						<div className="flex w-full flex-col gap-2">
-							{data?.map((item: any) => {
+							{data?.map((item) => {
 								return (
 									<div key={item.name}>
 										<div className="flex flex-col gap-2">

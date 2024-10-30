@@ -50,7 +50,7 @@ const BudgetTransactionsWrapper = ({
 		}));
 	};
 
-	let timeout: any;
+	let timeout: NodeJS.Timeout;
 	const changePerPage = (value: number) => {
 		if (timeout) clearTimeout(timeout);
 		timeout = setTimeout(() => {

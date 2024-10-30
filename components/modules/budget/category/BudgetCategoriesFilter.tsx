@@ -56,7 +56,8 @@ const BudgetCategoriesFilter = ({
 				}}
 				field={
 					{
-						onChange: (value: any) => changeHandler(value, 'type'),
+						onChange: (value: string) =>
+							changeHandler(value, 'type'),
 						value: filterData.type,
 					} as ControllerRenderProps
 				}
