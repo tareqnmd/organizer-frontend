@@ -26,3 +26,4 @@ export type UserEditSchemaWithPasswordType = z.infer<
 export type UserEditSchemaWithoutPasswordType = z.infer<
 	typeof UserEditSchemaWithoutPassword
 >;
+

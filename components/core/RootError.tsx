@@ -1,3 +1,5 @@
+import { RefreshCcw } from 'lucide-react';
+
 const RootError = ({
 	error,
 	reset,
@@ -10,7 +12,7 @@ const RootError = ({
 			<div className="text-center">
 				<h2>{error?.message ?? 'Error Found'}</h2>
 				<button className="underline" onClick={() => reset()}>
-					Try again
+					<RefreshCcw className="inline-block" /> Try again
 				</button>
 			</div>
 		</div>
