@@ -22,11 +22,11 @@ const BudgetTransactionDelete = ({
 }) => {
 	const [open, setOpen] = useState(false);
 	const router = useRouter();
-	const [deleteCategory, { isLoading, isError, isSuccess, error }] =
+	const [deleteTransaction, { isLoading, isError, isSuccess, error }] =
 		useDeleteBudgetTransactionMutation();
 
 	const deleteHandler = () => {
-		deleteCategory(transaction.id);
+		deleteTransaction(transaction.id);
 	};
 
 	useEffect(() => {

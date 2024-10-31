@@ -3,7 +3,11 @@ import CustomFormInput from '@/components/common/input/CustomFormInput';
 import { Button } from '@/components/ui/button';
 import { DialogFooter } from '@/components/ui/dialog';
 import { Form } from '@/components/ui/form';
-import { BudgetTransactionType } from '@/lib/helper/budget';
+import {
+	BudgetTransactionSchema,
+	BudgetTransactionSchemaType,
+	BudgetTransactionType,
+} from '@/lib/helper/budget';
 import { transactionFormItems } from '@/lib/helper/budget/form-items';
 import { getError } from '@/lib/utils';
 import {
@@ -16,24 +20,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import { z } from 'zod';
-const FormSchema = z.object({
-	description: z.string().min(3, {
-		message: 'Description must be at least 3 characters.',
-	}),
-	categoryId: z.string().min(1, {
-		message: 'Category is required!',
-	}),
-	amount: z.coerce
-		.number({
-			required_error: 'Amount is required',
-			invalid_type_error: 'Amount must be a number',
-		})
-		.positive(),
-	date: z.date({
-		required_error: 'Date is required.',
-	}),
-});
+
 const BudgetTransactionForm = ({
 	transaction,
 	setOpen,
@@ -42,12 +29,11 @@ const BudgetTransactionForm = ({
 	setOpen: (arg: boolean) => void;
 }) => {
 	const router = useRouter();
-	const form = useForm<z.infer<typeof FormSchema>>({
-		resolver: zodResolver(FormSchema),
+	const form = useForm<BudgetTransactionSchemaType>({
+		resolver: zodResolver(BudgetTransactionSchema),
 		defaultValues: {
 			categoryId: '',
 			description: '',
-			// date: new Date(),
 		},
 	});
 	const [
@@ -69,7 +55,7 @@ const BudgetTransactionForm = ({
 		},
 	] = useCreateBudgetTransactionMutation();
 
-	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+	const onSubmit = async (values: BudgetTransactionSchemaType) => {
 		transaction?.id
 			? await edit({ data: values, id: transaction.id })
 			: await create(values);

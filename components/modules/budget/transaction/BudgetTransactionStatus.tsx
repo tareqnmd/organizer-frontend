@@ -72,7 +72,7 @@ const BudgetTransactionStatus = ({
 							'flex items-center gap-1',
 							transaction.status === 0
 								? 'bg-status-success'
-								: 'bg-red-900',
+								: 'bg-status-danger',
 						)}
 						disabled={isLoading}
 					>

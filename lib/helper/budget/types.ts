@@ -1,6 +1,10 @@
 import * as z from 'zod';
 import { TimeFrameEnum, TransactionTypeEnum } from './enums';
-import { BudgetCategorySchema, BudgetTypeSchema } from './schemas';
+import {
+	BudgetCategorySchema,
+	BudgetTransactionSchema,
+	BudgetTypeSchema,
+} from './schemas';
 
 // Budget Dashboard
 export type BudgetDashboardSearchParamsType = {
@@ -115,7 +119,7 @@ export type BudgetCategoryParamType = {
 
 export type BudgetCategorySchemaType = z.infer<typeof BudgetCategorySchema>;
 
-// need check
+// Budget Transaction
 export type BudgetTransactionType = {
 	id: string;
 	categoryName: string;
@@ -140,4 +144,6 @@ export type BudgetTransactionParamType = {
 	perPage?: string;
 };
 
-export type BudgetCategoriesType = BudgetCategoryType[];
+export type BudgetTransactionSchemaType = z.infer<
+	typeof BudgetTransactionSchema
+>;
