@@ -16,7 +16,7 @@ const BudgetCustomTooltip = ({
 				formatter={formatter}
 				label="Expense"
 				value={expense}
-				bgColor="bg-red-500"
+				bgColor="bg-status-danger"
 				textColor="text-red-500"
 			/>
 			<BudgetCustomTooltipRow

@@ -5,7 +5,7 @@ const BOARDS = [
 		workspaceId: 1,
 		name: 'Board 1',
 		starred: false,
-		bg: 'bg-red-500',
+		bg: 'bg-status-danger',
 		visibility: 'public',
 		status: 'active',
 	},
@@ -23,7 +23,7 @@ const BOARDS = [
 		workspaceId: 2,
 		name: 'Board 3',
 		starred: false,
-		bg: 'bg-green-500',
+		bg: 'bg-status-success',
 		visibility: 'public',
 		status: 'active',
 	},
@@ -31,7 +31,9 @@ const BOARDS = [
 
 const getBoards = async (workspaceId: string) => {
 	try {
-		const data = BOARDS.filter((board) => board.workspaceId === +workspaceId);
+		const data = BOARDS.filter(
+			(board) => board.workspaceId === +workspaceId,
+		);
 		return data;
 	} catch (error) {
 		return [];

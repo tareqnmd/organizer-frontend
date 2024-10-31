@@ -63,7 +63,9 @@ const BudgetTypeStatus = ({ type }: { type: BudgetTypeType }) => {
 						onClick={statusHandler}
 						className={cn(
 							'flex items-center gap-1',
-							type.status === 0 ? 'bg-green-500' : 'bg-red-900',
+							type.status === 0
+								? 'bg-status-success'
+								: 'bg-red-900',
 						)}
 						disabled={isLoading}
 					>

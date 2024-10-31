@@ -18,7 +18,7 @@ const getDashboardData = async () => {
 				workspaceId: 1,
 				name: 'Board 1',
 				starred: false,
-				bg: 'bg-red-500',
+				bg: 'bg-status-danger',
 				visibility: 'public',
 				status: 'active',
 			},

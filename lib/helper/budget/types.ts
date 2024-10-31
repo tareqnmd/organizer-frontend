@@ -1,4 +1,6 @@
+import * as z from 'zod';
 import { TimeFrameEnum, TransactionTypeEnum } from './enums';
+import { BudgetCategorySchema, BudgetTypeSchema } from './schemas';
 
 // Budget Dashboard
 export type BudgetDashboardSearchParamsType = {
@@ -32,6 +34,8 @@ export type BudgetDashboardOverviewType = {
 };
 
 // Budget Dashboard History
+export type Period = { year: number; month: number };
+
 export type BudgetDashboardHistoryMonthType = {
 	month: number;
 	year: number;
@@ -86,7 +90,32 @@ export interface BudgetDashboardHistoryYearSelectorPropsType {
 	years: number[];
 }
 
-// done
+// Budget Type
+export type BudgetTypeType = {
+	id: string;
+	name: string;
+	status: number;
+};
+
+export type BudgetTypeSchemaType = z.infer<typeof BudgetTypeSchema>;
+
+// Budget Category
+export type BudgetCategoryType = {
+	id: string;
+	typeId: string;
+	name: string;
+	type: TransactionTypeEnum;
+	status: number;
+};
+
+export type BudgetCategoryParamType = {
+	category?: string;
+	type: TransactionTypeEnum;
+};
+
+export type BudgetCategorySchemaType = z.infer<typeof BudgetCategorySchema>;
+
+// need check
 export type BudgetTransactionType = {
 	id: string;
 	categoryName: string;
@@ -111,29 +140,4 @@ export type BudgetTransactionParamType = {
 	perPage?: string;
 };
 
-export type BudgetCategoryType = {
-	id: string;
-	typeId: string;
-	name: string;
-	type: TransactionTypeEnum;
-	status: number;
-};
-
 export type BudgetCategoriesType = BudgetCategoryType[];
-
-export type BudgetCategoryParamType = {
-	category?: string;
-	type: TransactionTypeEnum;
-};
-
-export type BudgetTypeType = {
-	id: string;
-	name: string;
-	status: number;
-};
-export type BudgetTypeSubmitType = {
-	name: string;
-	id?: string;
-};
-
-export type Period = { year: number; month: number };

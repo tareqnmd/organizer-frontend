@@ -68,8 +68,8 @@ const BudgetCategoryStatus = ({
 						className={cn(
 							'flex items-center gap-1',
 							category.status === 0
-								? 'bg-green-500'
-								: 'bg-red-900',
+								? 'bg-status-success'
+								: 'bg-status-danger',
 						)}
 						disabled={isLoading}
 					>

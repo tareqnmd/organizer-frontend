@@ -43,17 +43,15 @@ const BudgetFilter = ({
 	}, [filterData?.from, filterData?.to, router]);
 
 	return (
-		<>
-			<FormDateRange
-				onUpdate={dateRangeUpdate}
-				triggerClassName="h-8"
-				className="col-span-3 w-full xl:col-span-1 xl:col-start-3"
-				initialValues={{
-					from: filterData?.from,
-					to: filterData?.to,
-				}}
-			/>
-		</>
+		<FormDateRange
+			onUpdate={dateRangeUpdate}
+			triggerClassName="h-8"
+			className="col-span-3 w-full xl:col-span-1 xl:col-start-3"
+			initialValues={{
+				from: filterData?.from,
+				to: filterData?.to,
+			}}
+		/>
 	);
 };
 

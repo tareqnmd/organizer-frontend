@@ -23,6 +23,7 @@ const BudgetTypeDelete = ({ type }: { type: BudgetTypeType }) => {
 	const deleteHandler = () => {
 		deleteType(type.id);
 	};
+
 	useEffect(() => {
 		if (isSuccess) {
 			toast.success(`Type successfully deleted`);
@@ -32,6 +33,7 @@ const BudgetTypeDelete = ({ type }: { type: BudgetTypeType }) => {
 			toast.error(getError(error));
 		}
 	}, [error, isError, isSuccess, router]);
+
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
@@ -45,7 +47,7 @@ const BudgetTypeDelete = ({ type }: { type: BudgetTypeType }) => {
 				<DialogFooter>
 					<Button
 						onClick={deleteHandler}
-						className="flex items-center gap-1 bg-red-900"
+						className="flex items-center gap-1 bg-status-danger"
 						disabled={isLoading}
 					>
 						{isLoading ? (

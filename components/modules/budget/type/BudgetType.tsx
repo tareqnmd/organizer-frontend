@@ -1,5 +1,5 @@
 import { Card } from '@/components/ui/card';
-import { BudgetTypeType } from '@/lib/helper/budget';
+import { BudgetTypeType, getBudgetTypeClassName } from '@/lib/helper/budget';
 import { cn } from '@/lib/utils';
 import BudgetTypeDelete from './BudgetTypeDelete';
 import { BudgetTypeEdit } from './BudgetTypeEdit';
@@ -16,13 +16,7 @@ const BudgetType = async ({
 		<Card
 			className={cn(
 				'flex items-center justify-between p-3',
-				type.status === 0
-					? 'inactive'
-					: type.name === 'Expense'
-						? 'expense'
-						: type.name === 'Income'
-							? 'income'
-							: null,
+				getBudgetTypeClassName(type),
 			)}
 		>
 			<strong>{type.name}</strong>

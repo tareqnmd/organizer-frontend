@@ -71,7 +71,7 @@ const BudgetTransactionStatus = ({
 						className={cn(
 							'flex items-center gap-1',
 							transaction.status === 0
-								? 'bg-green-500'
+								? 'bg-status-success'
 								: 'bg-red-900',
 						)}
 						disabled={isLoading}
