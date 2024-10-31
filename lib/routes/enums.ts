@@ -10,6 +10,7 @@ export enum Routes {
 
 	// admin
 	ADMIN = '/admin',
+	ADMIN_USERS = '/admin/user-management',
 
 	// user
 	PROFILE = '/profile',

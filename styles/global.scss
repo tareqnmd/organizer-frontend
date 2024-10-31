@@ -37,3 +37,11 @@ html {
 .basic-modal {
 	@apply max-w-[90%] overflow-hidden rounded-lg sm:max-w-[450px];
 }
+
+.basic-shadow {
+	@apply shadow-md shadow-light-shadow dark:shadow-dark-shadow;
+}
+
+.basic-card {
+	@apply basic-shadow rounded-md border-0 p-3 transition-all active:scale-95;
+}
