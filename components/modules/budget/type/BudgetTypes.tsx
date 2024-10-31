@@ -2,8 +2,8 @@ import { authOptions } from '@/lib/auth-options';
 import { BudgetTypeType } from '@/lib/helper/budget';
 import { generateDataFromServer, nextProperties } from '@/lib/utils';
 import { getServerSession } from 'next-auth';
-import BudgetType from './BudgetType';
 import { BudgetTypeAdd } from './BudgetTypeAdd';
+import BudgetType from './BudgetTypeCard';
 
 const BudgetTypes = async ({}) => {
 	const { data: types } = await generateDataFromServer(

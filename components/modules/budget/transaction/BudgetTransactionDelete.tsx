@@ -41,7 +41,10 @@ const BudgetTransactionDelete = ({
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
-				<Trash className="cursor-pointer" size={16} />
+				<Trash
+					className="cursor-pointer transition-all active:scale-75"
+					size={16}
+				/>
 			</DialogTrigger>
 			<DialogContent className="basic-modal">
 				<DialogHeader>

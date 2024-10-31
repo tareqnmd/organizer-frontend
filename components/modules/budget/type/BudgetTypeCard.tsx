@@ -5,7 +5,7 @@ import BudgetTypeDelete from './BudgetTypeDelete';
 import { BudgetTypeEdit } from './BudgetTypeEdit';
 import BudgetTypeStatus from './BudgetTypeStatus';
 
-const BudgetType = async ({
+const BudgetTypeCard = async ({
 	type,
 	admin,
 }: {
@@ -31,4 +31,4 @@ const BudgetType = async ({
 	);
 };
 
-export default BudgetType;
+export default BudgetTypeCard;
