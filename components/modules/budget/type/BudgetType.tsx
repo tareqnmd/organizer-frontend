@@ -15,7 +15,7 @@ const BudgetType = async ({
 	return (
 		<Card
 			className={cn(
-				'flex items-center justify-between p-3',
+				'basic-card flex items-center justify-between active:scale-100',
 				getBudgetTypeClassName(type),
 			)}
 		>

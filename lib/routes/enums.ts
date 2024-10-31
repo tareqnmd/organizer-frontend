@@ -23,7 +23,7 @@ export enum Routes {
 	// module budget
 	BUDGET_TRANSACTION = '/budget/transaction',
 	BUDGET_TYPE = '/budget/type',
-	BUDGET_CATEGORY = '/budget/category',
+	BUDGET_CATEGORY = '/budget/type-category',
 
 	// module note
 	NOTES = '/note/all',

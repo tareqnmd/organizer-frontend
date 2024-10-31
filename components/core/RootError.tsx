@@ -11,7 +11,10 @@ const RootError = ({
 		<div className="grid h-screen place-content-center">
 			<div className="text-center">
 				<h2>{error?.message ?? 'Error Found'}</h2>
-				<button className="underline" onClick={() => reset()}>
+				<button
+					className="flex items-center gap-1 underline"
+					onClick={() => reset()}
+				>
 					<RefreshCcw className="inline-block" /> Try again
 				</button>
 			</div>
