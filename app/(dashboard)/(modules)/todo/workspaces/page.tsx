@@ -1,18 +1,5 @@
-import Workspaces from '@/components/modules/todo/workspaces/Workspaces';
-
-const workspaces = [
-	{
-		id: 1,
-		name: 'Workspace 1',
-	},
-	{
-		id: 2,
-		name: 'Workspace 2',
-	},
-];
-
-const page = () => {
-	return <Workspaces workspaces={workspaces} />;
+const WorkspacesPage = () => {
+	return <div>Workspaces</div>;
 };
 
-export default page;
+export default WorkspacesPage;
