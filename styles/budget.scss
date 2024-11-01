@@ -1,15 +1,15 @@
 .income {
-	@apply bg-status-success text-white;
+	@apply bg-status-success text-white dark:!bg-status-success;
 }
 
 .expense {
-	@apply bg-status-danger text-white;
+	@apply bg-status-danger text-white dark:!bg-status-danger;
 }
 
 .balance {
-	@apply bg-status-neutral text-white;
+	@apply bg-status-neutral text-white dark:!bg-status-neutral;
 }
 
 .inactive {
-	@apply bg-status-inactive text-gray-400;
+	@apply bg-status-inactive text-gray-400 dark:!bg-status-inactive;
 }

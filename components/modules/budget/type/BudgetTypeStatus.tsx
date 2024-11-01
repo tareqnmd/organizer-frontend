@@ -44,9 +44,15 @@ const BudgetTypeStatus = ({ type }: { type: BudgetTypeType }) => {
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
 				{type.status === 0 ? (
-					<BadgeCheck className="cursor-pointer" size={16} />
+					<BadgeCheck
+						className="cursor-pointer transition-all active:scale-75"
+						size={16}
+					/>
 				) : (
-					<BadgeMinus className="cursor-pointer" size={16} />
+					<BadgeMinus
+						className="cursor-pointer transition-all active:scale-75"
+						size={16}
+					/>
 				)}
 			</DialogTrigger>
 			<DialogContent className="basic-modal">
@@ -63,7 +69,9 @@ const BudgetTypeStatus = ({ type }: { type: BudgetTypeType }) => {
 						onClick={statusHandler}
 						className={cn(
 							'flex items-center gap-1',
-							type.status === 0 ? 'bg-green-500' : 'bg-red-900',
+							type.status === 0
+								? 'bg-status-success'
+								: 'bg-red-900',
 						)}
 						disabled={isLoading}
 					>

@@ -22,11 +22,11 @@ const BudgetTransactionDelete = ({
 }) => {
 	const [open, setOpen] = useState(false);
 	const router = useRouter();
-	const [deleteCategory, { isLoading, isError, isSuccess, error }] =
+	const [deleteTransaction, { isLoading, isError, isSuccess, error }] =
 		useDeleteBudgetTransactionMutation();
 
 	const deleteHandler = () => {
-		deleteCategory(transaction.id);
+		deleteTransaction(transaction.id);
 	};
 
 	useEffect(() => {
@@ -41,7 +41,10 @@ const BudgetTransactionDelete = ({
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
-				<Trash className="cursor-pointer" size={16} />
+				<Trash
+					className="cursor-pointer transition-all active:scale-75"
+					size={16}
+				/>
 			</DialogTrigger>
 			<DialogContent className="basic-modal">
 				<DialogHeader>

@@ -43,8 +43,8 @@ const Login = () => {
 			}
 		} catch (error) {
 			toast.error(getError(error));
-			setLoading(false);
 		} finally {
+			setLoading(false);
 		}
 	};
 

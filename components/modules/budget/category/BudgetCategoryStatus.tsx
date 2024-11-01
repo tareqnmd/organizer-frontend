@@ -48,9 +48,15 @@ const BudgetCategoryStatus = ({
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
 				{category.status === 0 ? (
-					<BadgeCheck className="cursor-pointer" size={16} />
+					<BadgeCheck
+						className="cursor-pointer transition-all active:scale-75"
+						size={16}
+					/>
 				) : (
-					<BadgeMinus className="cursor-pointer" size={16} />
+					<BadgeMinus
+						className="cursor-pointer transition-all active:scale-75"
+						size={16}
+					/>
 				)}
 			</DialogTrigger>
 			<DialogContent className="basic-modal">
@@ -68,8 +74,8 @@ const BudgetCategoryStatus = ({
 						className={cn(
 							'flex items-center gap-1',
 							category.status === 0
-								? 'bg-green-500'
-								: 'bg-red-900',
+								? 'bg-status-success'
+								: 'bg-status-danger',
 						)}
 						disabled={isLoading}
 					>

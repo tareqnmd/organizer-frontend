@@ -1,3 +1,5 @@
+import { RefreshCcw } from 'lucide-react';
+
 const GlobalError = ({
 	error,
 	reset,
@@ -7,14 +9,11 @@ const GlobalError = ({
 }) => {
 	return (
 		<html>
-			<body className="grid place-content-center h-screen">
+			<body className="grid h-screen place-content-center">
 				<div className="text-center">
 					<h2>{error?.message ?? 'Error Found'}</h2>
-					<button
-						className="underline"
-						onClick={() => reset()}
-					>
-						Try again
+					<button className="underline" onClick={() => reset()}>
+						<RefreshCcw className="inline-block" /> Try again
 					</button>
 				</div>
 			</body>

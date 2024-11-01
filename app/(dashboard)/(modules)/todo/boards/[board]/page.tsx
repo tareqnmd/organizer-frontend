@@ -1,7 +1,5 @@
-import BoardView from '@/components/modules/todo/boards/BoardView';
-
-const page = () => {
-	return <BoardView />;
+const BoardsPage = () => {
+	return <div>Boards</div>;
 };
 
-export default page;
+export default BoardsPage;
