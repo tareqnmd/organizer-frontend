@@ -39,14 +39,14 @@ const BudgetHistoryPeriodSelector = ({
 						years={years}
 					/>
 				</SkeletonWrapper>
-				{timeFrame === 'month' && (
+				{timeFrame === TimeFrameEnum.MONTH ? (
 					<SkeletonWrapper isLoading={false} fullWidth={false}>
 						<BudgetHistoryMonthSelector
 							period={period}
 							setPeriod={setPeriod}
 						/>
 					</SkeletonWrapper>
-				)}
+				) : null}
 			</div>
 		</div>
 	);
