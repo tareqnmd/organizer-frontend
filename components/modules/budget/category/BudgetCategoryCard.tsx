@@ -13,7 +13,7 @@ const BudgetCategoryCard = async ({
 	return (
 		<Card
 			className={cn(
-				'basic-card flex items-center justify-between active:scale-100',
+				'flex items-center justify-between active:scale-100',
 				getBudgetTypeClassName({
 					id: category.typeId,
 					name: category.type,

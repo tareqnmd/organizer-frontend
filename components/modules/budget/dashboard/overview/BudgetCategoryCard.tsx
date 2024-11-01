@@ -1,12 +1,12 @@
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import {
 	BudgetDashboardOverviewCategoryDetailType,
 	TransactionTypeEnum,
 } from '@/lib/helper/budget';
 import { cn, GetFormatterForCurrency } from '@/lib/utils';
 import { useMemo } from 'react';
+import BudgetCategoryCardDetails from './BudgetCategoryCardDetails';
+import BudgetCategoryCardEmpty from './BudgetCategoryCardEmpty';
 
 const BudgetCategoryCard = ({
 	data,
@@ -20,7 +20,12 @@ const BudgetCategoryCard = ({
 	}, []);
 
 	return (
-		<Card className="flex w-full flex-col gap-2 p-2">
+		<Card
+			className={cn(
+				'flex w-full flex-col gap-2 p-2',
+				data?.length === 0 ? 'p-4' : '',
+			)}
+		>
 			<CardHeader className="p-0">
 				<CardTitle
 					className={
@@ -33,55 +38,14 @@ const BudgetCategoryCard = ({
 					by category
 				</CardTitle>
 			</CardHeader>
-
 			<div className="flex items-center justify-between gap-2">
-				{data?.length === 0 && (
-					<div className="flex h-20 w-full flex-col items-center justify-center">
-						No data for the selected period
-						<p className="text-muted-foreground text-center text-sm">
-							Try selecting a different period or try adding new{' '}
-							{type === TransactionTypeEnum.INCOME
-								? 'incomes'
-								: 'expenses'}
-						</p>
-					</div>
-				)}
+				{data?.length === 0 ? (
+					<BudgetCategoryCardEmpty type={type} />
+				) : null}
 
-				{data?.length > 0 && (
-					<ScrollArea className="mb-2 w-full">
-						<div className="flex w-full flex-col gap-2">
-							{data?.map((item) => {
-								return (
-									<div key={item.name}>
-										<div className="flex flex-col gap-2">
-											<div className="flex items-center justify-between">
-												<span className="flex items-center">
-													{item.name}
-													<span className="text-muted-foreground ml-2 text-xs">
-														(
-														{item.percentage.toFixed(
-															0,
-														)}
-														%)
-													</span>
-												</span>
-												<span className="text-sm">
-													{formatter.format(
-														item.amount,
-													)}
-												</span>
-											</div>
-											<Progress
-												value={item.percentage}
-												indicator={type}
-											/>
-										</div>
-									</div>
-								);
-							})}
-						</div>
-					</ScrollArea>
-				)}
+				{data?.length > 0 ? (
+					<BudgetCategoryCardDetails type={type} data={data} />
+				) : null}
 			</div>
 		</Card>
 	);

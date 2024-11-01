@@ -2,11 +2,12 @@ import { RouteType } from '@/lib/routes';
 import dynamicIconImports from 'lucide-react/dynamicIconImports';
 import Link from 'next/link';
 import DynamicIcon from '../icons/DynamicLucideIcon';
+import { Card } from '../ui/card';
 
 const Module = ({ module }: { module: RouteType }) => {
 	return (
 		<Link href={module.path}>
-			<div className="basic-shadow flex h-full items-center gap-2">
+			<Card className="basic-card flex h-full items-center gap-2">
 				{module?.icon ? (
 					<DynamicIcon
 						name={module.icon as keyof typeof dynamicIconImports}
@@ -19,7 +20,7 @@ const Module = ({ module }: { module: RouteType }) => {
 					</h3>
 					<p className="leading-none">{module.description}</p>
 				</div>
-			</div>
+			</Card>
 		</Link>
 	);
 };
