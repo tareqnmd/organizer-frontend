@@ -15,7 +15,7 @@ const RootError = ({
 					className="flex items-center gap-1 underline"
 					onClick={() => reset()}
 				>
-					<RefreshCcw className="inline-block" /> Try again
+					<RefreshCcw /> Try again
 				</button>
 			</div>
 		</div>
