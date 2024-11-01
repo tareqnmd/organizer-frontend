@@ -1,3 +1,5 @@
+import { RefreshCcw } from 'lucide-react';
+
 const RootError = ({
 	error,
 	reset,
@@ -9,8 +11,11 @@ const RootError = ({
 		<div className="grid h-screen place-content-center">
 			<div className="text-center">
 				<h2>{error?.message ?? 'Error Found'}</h2>
-				<button className="underline" onClick={() => reset()}>
-					Try again
+				<button
+					className="flex items-center gap-1 underline"
+					onClick={() => reset()}
+				>
+					<RefreshCcw /> Try again
 				</button>
 			</div>
 		</div>

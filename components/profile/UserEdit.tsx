@@ -2,7 +2,9 @@
 
 import {
 	UserEditSchemaWithoutPassword,
+	UserEditSchemaWithoutPasswordType,
 	UserEditSchemaWithPassword,
+	UserEditSchemaWithPasswordType,
 	UserType,
 	userUpdateFormInputs,
 	userUpdateFormInputsWithPassword,
@@ -16,7 +18,6 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import * as z from 'zod';
 import CustomFormInput from '../common/input/CustomFormInput';
 import { Button } from '../ui/button';
 import { Form } from '../ui/form';
@@ -25,18 +26,14 @@ import UserPasswordChange from './UserPasswordChange';
 const UserEdit = ({ user }: { user: UserType }) => {
 	const [passwordChange, setPasswordChange] = useState(true);
 	const router = useRouter();
-	const formWithoutPassword = useForm<
-		z.infer<typeof UserEditSchemaWithoutPassword>
-	>({
+	const formWithoutPassword = useForm<UserEditSchemaWithoutPasswordType>({
 		resolver: zodResolver(UserEditSchemaWithoutPassword),
 		defaultValues: {
 			email: user.email,
 			name: user.name,
 		},
 	});
-	const formWithPassword = useForm<
-		z.infer<typeof UserEditSchemaWithPassword>
-	>({
+	const formWithPassword = useForm<UserEditSchemaWithPasswordType>({
 		resolver: zodResolver(UserEditSchemaWithPassword),
 		defaultValues: {
 			email: user.email,
@@ -51,7 +48,7 @@ const UserEdit = ({ user }: { user: UserType }) => {
 		useUserUpdateMutation();
 
 	const updateUserProfileWithoutPassword = async (
-		data: z.infer<typeof UserEditSchemaWithoutPassword>,
+		data: UserEditSchemaWithoutPasswordType,
 	) => {
 		try {
 			await updateUser({
@@ -64,7 +61,7 @@ const UserEdit = ({ user }: { user: UserType }) => {
 	};
 
 	const updateUserProfileWithPassword = async (
-		data: z.infer<typeof UserEditSchemaWithPassword>,
+		data: UserEditSchemaWithPasswordType,
 	) => {
 		try {
 			if (data.password === data.confirm_password) {

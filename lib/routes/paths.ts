@@ -35,7 +35,6 @@ export const routes = {
 			path: Routes.RESET_PASSWORD,
 		},
 	],
-	dashboard_modules: [],
 	modules: [
 		{
 			name: 'Budget',
@@ -54,6 +53,16 @@ export const routes = {
 			path: Routes.TODO,
 			icon: 'list-todo',
 			description: 'Personal Task Management',
+		},
+	],
+	module_admin: [
+		{
+			name: 'Admin',
+			path: Routes.ADMIN,
+		},
+		{
+			name: 'User Management',
+			path: Routes.ADMIN_USERS,
 		},
 	],
 	module_budget: [

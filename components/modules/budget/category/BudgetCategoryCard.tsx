@@ -1,5 +1,8 @@
 import { Card } from '@/components/ui/card';
-import { BudgetCategoryType, TransactionTypeEnum } from '@/lib/helper/budget';
+import {
+	BudgetCategoryType,
+	getBudgetTypeClassName,
+} from '@/lib/helper/budget';
 import { cn } from '@/lib/utils';
 import BudgetCategoryAction from './BudgetCategoryAction';
 const BudgetCategoryCard = async ({
@@ -10,14 +13,12 @@ const BudgetCategoryCard = async ({
 	return (
 		<Card
 			className={cn(
-				'flex items-center justify-between p-3',
-				category.status === 0
-					? 'inactive'
-					: category.type === TransactionTypeEnum.EXPENSE
-						? 'expense'
-						: category.type === TransactionTypeEnum.INCOME
-							? 'income'
-							: null,
+				'flex items-center justify-between active:scale-100',
+				getBudgetTypeClassName({
+					id: category.typeId,
+					name: category.type,
+					status: category.status,
+				}),
 			)}
 		>
 			<strong>{category.name}</strong>

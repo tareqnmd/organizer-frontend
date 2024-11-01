@@ -14,12 +14,9 @@ import BudgetTransactionForm from './BudgetTransactionForm';
 const BudgetTransactionAdd = () => {
 	const [open, setOpen] = useState(false);
 	return (
-		<Dialog
-			open={open}
-			onOpenChange={setOpen}
-		>
+		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
-				<Button className="h-8 px-1 md:px-4 text-xs md:text-sm">
+				<Button className="h-8 px-1 text-xs md:px-4 md:text-sm">
 					<span className="hidden md:block">New Transaction</span>
 					<span className="block md:hidden">
 						<PlusIcon />

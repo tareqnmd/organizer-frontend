@@ -3,7 +3,11 @@ import CustomFormInput from '@/components/common/input/CustomFormInput';
 import { Button } from '@/components/ui/button';
 import { DialogFooter } from '@/components/ui/dialog';
 import { Form } from '@/components/ui/form';
-import { BudgetTypeSubmitType, BudgetTypeType } from '@/lib/helper/budget';
+import {
+	BudgetTypeSchema,
+	BudgetTypeSchemaType,
+	BudgetTypeType,
+} from '@/lib/helper/budget';
 import { typeFormItems } from '@/lib/helper/budget/form-items';
 import { getError } from '@/lib/utils';
 import {
@@ -16,13 +20,6 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import * as z from 'zod';
-
-const FormSchema = z.object({
-	name: z.string().min(3, {
-		message: 'Subject must be at least 3 characters.',
-	}),
-});
 
 const BudgetTypeForm = ({
 	type,
@@ -31,8 +28,8 @@ const BudgetTypeForm = ({
 	type?: BudgetTypeType;
 	setOpen: (arg: boolean) => void;
 }) => {
-	const form = useForm<z.infer<typeof FormSchema>>({
-		resolver: zodResolver(FormSchema),
+	const form = useForm<BudgetTypeSchemaType>({
+		resolver: zodResolver(BudgetTypeSchema),
 		defaultValues: {
 			name: '',
 		},
@@ -57,7 +54,7 @@ const BudgetTypeForm = ({
 		},
 	] = useCreateBudgetTypeMutation();
 
-	const onSubmit = async (values: BudgetTypeSubmitType) => {
+	const onSubmit = async (values: BudgetTypeSchemaType) => {
 		type?.id
 			? await edit({ data: values, id: type.id })
 			: await create(values);

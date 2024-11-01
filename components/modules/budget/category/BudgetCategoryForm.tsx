@@ -3,7 +3,11 @@ import CustomFormInput from '@/components/common/input/CustomFormInput';
 import { Button } from '@/components/ui/button';
 import { DialogFooter } from '@/components/ui/dialog';
 import { Form } from '@/components/ui/form';
-import { BudgetCategoryType } from '@/lib/helper/budget';
+import {
+	BudgetCategorySchema,
+	BudgetCategorySchemaType,
+	BudgetCategoryType,
+} from '@/lib/helper/budget';
 import { categoryFormItems } from '@/lib/helper/budget/form-items';
 import { getError } from '@/lib/utils';
 import {
@@ -16,15 +20,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import { z } from 'zod';
-const FormSchema = z.object({
-	name: z.string().min(3, {
-		message: 'Name must be at least 3 characters.',
-	}),
-	typeId: z.string().min(3, {
-		message: 'Type is Required!',
-	}),
-});
+
 const BudgetCategoryForm = ({
 	category,
 	setOpen,
@@ -33,8 +29,8 @@ const BudgetCategoryForm = ({
 	setOpen: (arg: boolean) => void;
 }) => {
 	const router = useRouter();
-	const form = useForm<z.infer<typeof FormSchema>>({
-		resolver: zodResolver(FormSchema),
+	const form = useForm<BudgetCategorySchemaType>({
+		resolver: zodResolver(BudgetCategorySchema),
 		defaultValues: {
 			name: '',
 			typeId: '',
@@ -58,7 +54,7 @@ const BudgetCategoryForm = ({
 			error: createError,
 		},
 	] = useCreateBudgetCategoryMutation();
-	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+	const onSubmit = async (values: BudgetCategorySchemaType) => {
 		category?.id
 			? await edit({ data: values, id: category.id })
 			: await create(values);
