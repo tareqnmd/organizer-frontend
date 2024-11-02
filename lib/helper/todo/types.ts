@@ -19,3 +19,10 @@ export type BoardType = {
 	createdBy: string;
 	starred: boolean;
 };
+
+export type ListType = {
+	id: string;
+	title: string;
+	boardId: string;
+};
+
