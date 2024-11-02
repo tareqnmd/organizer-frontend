@@ -1,23 +1,27 @@
+import { Card } from '@/components/ui/card';
+import { BoardType } from '@/lib/helper/todo';
 import { cn } from '@/lib/utils';
 import { Star } from 'lucide-react';
 
-const BoardCard = ({ board }: any) => {
+const BoardCard = ({ board }: { board: BoardType }) => {
 	return (
-		<div
+		<Card
 			className={cn(
-				'border p-2 rounded-md text-white min-h-[100px] relative',
-				board.bg,
-				board.status === 'active' && 'cursor-pointer'
+				'basic-card relative min-h-[100px] rounded-md border p-2',
+				board.boardBg,
+				board.visibility && 'cursor-pointer',
 			)}
 		>
-			<strong>{board.name} </strong>
+			<span className="font-medium">{board.title}</span>
 			<span className="absolute bottom-2 right-2">
 				<Star
 					size={16}
-					className={cn(board.starred && 'text-yellow-500 fill-yellow-500')}
+					className={cn(
+						board.starred && 'fill-yellow-500 text-yellow-500',
+					)}
 				/>
 			</span>
-		</div>
+		</Card>
 	);
 };
 

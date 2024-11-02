@@ -1,5 +1,7 @@
+import Todo from '@/components/modules/todo/Todo';
+
 const TodoPage = () => {
-	return <div>Todo</div>;
+	return <Todo />;
 };
 
 export default TodoPage;

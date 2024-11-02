@@ -1,8 +1,11 @@
-const WorkspaceCard = ({ workspace }: any) => {
+import { Card } from '@/components/ui/card';
+import { WorkspaceType } from '@/lib/helper/todo';
+
+const WorkspaceCard = ({ workspace }: { workspace: WorkspaceType }) => {
 	return (
-		<div className="bg-light dark:bg-dark p-4 rounded-md shadow border min-h-[80px] flex items-center justify-center font-medium text-xl">
-			{workspace.name}
-		</div>
+		<Card className="basic-card grid min-h-20 place-items-center">
+			<span className="font-medium">{workspace.title}</span>
+		</Card>
 	);
 };
 

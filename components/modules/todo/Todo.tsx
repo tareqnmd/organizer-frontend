@@ -1,14 +1,23 @@
+import { generateDataFromServer, nextProperties } from '@/lib/utils';
 import Boards from './boards/Boards';
 import Workspaces from './workspaces/Workspaces';
 
-const Todo = ({ data }: any) => {
-	const { workspaces, boards } = data;
+const Todo = async () => {
+	const { data: workspaces = [] } = await generateDataFromServer(
+		'todo/workspace/all',
+		nextProperties({}),
+	);
+	const { data: boards = [] } = await generateDataFromServer(
+		'todo/board/all',
+		nextProperties({}),
+	);
+
 	return (
-		<div>
-			<h1 className="text-xl font-bold mb-1">Workspaces</h1>
+		<div className="flex flex-col gap-2">
+			<h3 className="text-lg font-medium underline">Workspaces</h3>
 			<Workspaces workspaces={workspaces} />
 			<br />
-			<h1 className="text-xl font-bold mb-1">Boards</h1>
+			<h3 className="text-lg font-medium underline">Boards</h3>
 			<Boards boards={boards} />
 		</div>
 	);

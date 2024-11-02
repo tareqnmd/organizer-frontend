@@ -102,7 +102,7 @@ import { DragEndEvent, DragOverEvent } from '@dnd-kit/core';
 import { arrayMove, SortableContext } from '@dnd-kit/sortable';
 import { Check, Plus, X } from 'lucide-react';
 import { useState } from 'react';
-import BoardList from './BoardList';
+import BoardList from '../list/BoardList';
 
 const BoardView = () => {
 	const { listItems = [], cardItems = [] } = getListTaskData(

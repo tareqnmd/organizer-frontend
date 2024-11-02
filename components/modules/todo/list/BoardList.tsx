@@ -31,7 +31,11 @@ const BoardList = ({ list, listCards, setCards }: any) => {
 		try {
 			setCards((prev: any) => [
 				...prev,
-				{ id: Math.random().toString(), title: cardName, listId: list.id },
+				{
+					id: Math.random().toString(),
+					title: cardName,
+					listId: list.id,
+				},
 			]);
 			setCardForm(false);
 			setCardName('');
@@ -46,33 +50,27 @@ const BoardList = ({ list, listCards, setCards }: any) => {
 			ref={setNodeRef}
 			key={list.id}
 			style={style}
-			className={`w-[280px] relative`}
+			className={`relative w-[280px]`}
 		>
-			<div className={`border bg-white shadow rounded p-2`}>
-				<div className="flex items-center justify-between m-2">
+			<div className={`rounded border bg-white p-2 shadow`}>
+				<div className="m-2 flex items-center justify-between">
 					<strong>{list?.title ?? ''}</strong>
-					<button
-						{...listeners}
-						{...attributes}
-					>
+					<button {...listeners} {...attributes}>
 						<Grip
 							size={18}
-							className="active:cursor-grabbing cursor-grab"
+							className="cursor-grab active:cursor-grabbing"
 						/>
 					</button>
 				</div>
 				<div className="flex flex-col gap-2">
 					<SortableContext items={listCards}>
 						{listCards?.map((card: any) => (
-							<BoardListCard
-								key={card.id}
-								card={card}
-							/>
+							<BoardListCard key={card.id} card={card} />
 						))}
 						<div className="mt-2">
 							{!cardForm ? (
 								<button
-									className="border flex items-center justify-center rounded p-2 gap-2 w-full text-sm"
+									className="flex w-full items-center justify-center gap-2 rounded border p-2 text-sm"
 									onClick={() => setCardForm(true)}
 								>
 									<Plus size={14} />
@@ -81,11 +79,13 @@ const BoardList = ({ list, listCards, setCards }: any) => {
 							) : (
 								<div className="flex items-center justify-between gap-2">
 									<input
-										className="w-full p-1 border-b focus-visible:outline-none"
+										className="w-full border-b p-1 focus-visible:outline-none"
 										type="text"
 										value={cardName}
 										autoFocus
-										onChange={(e) => setCardName(e.target.value)}
+										onChange={(e) =>
+											setCardName(e.target.value)
+										}
 									/>
 									<button
 										className="border p-1.5"
