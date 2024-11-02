@@ -1,3 +1,4 @@
+import WorkspaceCreate from '@/components/modules/todo/workspaces/WorkspaceCreate';
 import Workspaces from '@/components/modules/todo/workspaces/Workspaces';
 import { generateDataFromServer, nextProperties } from '@/lib/utils';
 
@@ -6,7 +7,12 @@ const WorkspacesPage = async () => {
 		'todo/workspace/all',
 		nextProperties({}),
 	);
-	return <Workspaces workspaces={workspaces} />;
+	return (
+		<div className="flex flex-col gap-4">
+			<WorkspaceCreate />
+			<Workspaces workspaces={workspaces} />
+		</div>
+	);
 };
 
 export default WorkspacesPage;

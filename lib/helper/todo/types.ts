@@ -1,4 +1,6 @@
+import * as z from 'zod';
 import { TodoTypeEnum } from './enums';
+import { WorkspaceSchema } from './schemas';
 
 export type TodoType = TodoTypeEnum;
 
@@ -9,6 +11,7 @@ export type WorkspaceType = {
 	collaborators: string[];
 	createdBy: string;
 };
+export type WorkspaceSchemaType = z.infer<typeof WorkspaceSchema>;
 
 export type BoardType = {
 	id: string;
@@ -25,4 +28,3 @@ export type ListType = {
 	title: string;
 	boardId: string;
 };
-

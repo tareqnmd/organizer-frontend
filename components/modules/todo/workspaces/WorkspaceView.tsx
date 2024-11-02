@@ -1,12 +1,12 @@
 import { generateDataFromServer, nextProperties } from '@/lib/utils';
-import Workspaces from './Workspaces';
+import Boards from '../boards/Boards';
 
 const WorkspaceView = async ({ workspaceId }: { workspaceId: string }) => {
-	const { data: workspaces } = await generateDataFromServer(
+	const { data: boards } = await generateDataFromServer(
 		`todo/board/all?workspaceId=${workspaceId}`,
 		nextProperties({}),
 	);
-	return <Workspaces workspaces={workspaces} />;
+	return <Boards boards={boards} />;
 };
 
 export default WorkspaceView;
