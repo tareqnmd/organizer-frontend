@@ -20,8 +20,14 @@ export type BoardType = {
 	boardBg: string;
 	visibility: boolean;
 	workspaceId: string;
+	workspace?: WorkspaceType;
 	createdBy: string;
 	starred: boolean;
+};
+export type BoardWorkspaceType = {
+	workspaceId: string;
+	workspaceTitle: string;
+	workspaceCreatedAt: string;
 };
 
 export type BoardSchemaType = z.infer<typeof BoardSchema>;

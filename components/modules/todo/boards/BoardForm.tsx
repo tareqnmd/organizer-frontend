@@ -98,7 +98,8 @@ const BoardForm = ({
 						input={{
 							...input,
 							disabled:
-								input.name === 'workspaceId' && !!workspaceId,
+								input.name === 'workspaceId' &&
+								!!(workspaceId || board?.workspaceId),
 						}}
 						control={form?.control}
 					/>

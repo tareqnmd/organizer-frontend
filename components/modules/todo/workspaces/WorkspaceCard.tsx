@@ -12,7 +12,7 @@ const WorkspaceCard = ({ workspace }: { workspace: WorkspaceType }) => {
 					{workspace.title}
 				</span>
 			</Link>
-			<div className="absolute bottom-3 right-3 flex items-center gap-2 bg-background-light dark:bg-background-dark">
+			<div className="absolute bottom-3 right-3 flex items-center gap-2">
 				<WorkspaceEdit workspace={workspace} />
 				<WorkspaceDelete workspace={workspace} />
 			</div>

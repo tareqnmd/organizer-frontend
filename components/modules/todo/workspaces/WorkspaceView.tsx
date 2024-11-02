@@ -9,7 +9,7 @@ const WorkspaceView = async ({ workspaceId }: { workspaceId: string }) => {
 	);
 	return (
 		<div className="flex flex-col gap-4">
-			<WorkspaceDetails workspace={boards[0]?.workspaceId} />
+			<WorkspaceDetails boardWorkspace={boards[0]} />
 			<Boards boards={boards} />
 		</div>
 	);
