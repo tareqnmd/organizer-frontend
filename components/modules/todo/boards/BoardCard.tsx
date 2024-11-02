@@ -8,9 +8,10 @@ const BoardCard = ({ board }: { board: BoardType }) => {
 		<Card
 			className={cn(
 				'basic-card relative min-h-[100px] rounded-md border p-2',
-				board.boardBg,
-				board.visibility && 'cursor-pointer',
 			)}
+			style={{
+				backgroundColor: board.boardBg ?? '',
+			}}
 		>
 			<span className="font-medium">{board.title}</span>
 			<span className="absolute bottom-2 right-2">
