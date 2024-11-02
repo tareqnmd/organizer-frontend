@@ -14,7 +14,7 @@ const BoardCreate = ({ workspaceId }: { workspaceId?: string }) => {
 	const [open, setOpen] = useState(false);
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
-			<DialogTrigger asChild>
+			<DialogTrigger className="ml-auto w-max" asChild>
 				<Button size="sm">Create Board</Button>
 			</DialogTrigger>
 			<DialogContent className="basic-modal">

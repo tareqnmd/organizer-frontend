@@ -1,3 +1,4 @@
+import BoardCreate from '@/components/modules/todo/boards/BoardCreate';
 import Boards from '@/components/modules/todo/boards/Boards';
 import { generateDataFromServer, nextProperties } from '@/lib/utils';
 
@@ -6,7 +7,12 @@ const BoardsPage = async () => {
 		'todo/board/all',
 		nextProperties({}),
 	);
-	return <Boards boards={boards} />;
+	return (
+		<div className="flex flex-col gap-4">
+			<BoardCreate  />
+			<Boards boards={boards} />
+		</div>
+	);
 };
 
 export default BoardsPage;
