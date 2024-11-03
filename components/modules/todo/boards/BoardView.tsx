@@ -1,6 +1,6 @@
 import { generateDataFromServer, nextProperties } from '@/lib/utils';
 import BoardList from '../list/BoardList';
-import BoardDetails from './BardDetails';
+import BoardDetails from './BoardDetails';
 
 const BoardView = async ({ boardId }: { boardId: string }) => {
 	const { data: lists } = await generateDataFromServer(
