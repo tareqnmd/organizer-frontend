@@ -9,7 +9,7 @@ const RootError = ({
 }) => {
 	return (
 		<div className="grid h-screen place-content-center">
-			<div className="text-center">
+			<div className="flex flex-col items-center gap-2">
 				<h2>{error?.message ?? 'Error Found'}</h2>
 				<button
 					className="flex items-center gap-1 underline"

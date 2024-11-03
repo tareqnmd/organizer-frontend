@@ -45,3 +45,9 @@ html {
 .basic-card {
 	@apply basic-shadow rounded-md border-0 p-3 transition-all active:scale-95;
 }
+
+.board-text-stroke {
+	@apply text-dark-text;
+	letter-spacing: 0.05em;
+	text-shadow: 0.05em 0.05em 0 #000000;
+}

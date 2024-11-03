@@ -26,7 +26,7 @@ const FormSelect = ({
 	const [dynamicOptions, setDynamicOptions] = useState([]);
 	const [options, setOptions] = useState<InputOptionType[]>([]);
 	const [value, setValue] = useState('');
-	const { placeholder, staticOptions = [], optionUrl } = input;
+	const { placeholder, staticOptions = [], optionUrl, disabled } = input;
 
 	useEffect(() => {
 		if (field?.value && options?.length > 0) {
@@ -51,7 +51,11 @@ const FormSelect = ({
 	}, [staticOptions, dynamicOptions]);
 
 	return (
-		<Select onValueChange={field.onChange} value={value}>
+		<Select
+			disabled={disabled}
+			onValueChange={field.onChange}
+			value={value}
+		>
 			<SelectTrigger className={extraTriggerClassName}>
 				<SelectValue placeholder={placeholder} />
 			</SelectTrigger>
