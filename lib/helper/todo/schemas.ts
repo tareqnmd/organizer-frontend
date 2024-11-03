@@ -20,13 +20,9 @@ export const WorkspaceSchema = z.object({
 	title: titleSchema,
 });
 
-const boardBgSchema = z.union([
-	z.string().min(3, {
-		message: message.board_bg_length,
-	}),
-	z.string().length(0),
-]);
-
+const boardBgSchema = z.string().min(3, {
+	message: message.board_bg_length,
+});
 const workspaceIdSchema = z.string().min(1, {
 	message: message.workspace_required,
 });

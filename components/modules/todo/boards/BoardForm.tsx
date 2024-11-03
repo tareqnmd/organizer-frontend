@@ -6,6 +6,7 @@ import { Form } from '@/components/ui/form';
 import {
 	BoardSchemaType,
 	BoardType,
+	todoBoardBgOptions,
 	todoBoardFormInputs,
 } from '@/lib/helper/todo';
 import { BoardSchema } from '@/lib/helper/todo/schemas';
@@ -35,11 +36,13 @@ const BoardForm = ({
 		resolver: zodResolver(BoardSchema),
 		defaultValues: {
 			title: board?.title || '',
-			boardBg: board?.boardBg || '',
+			boardBg: board?.boardBg || todoBoardBgOptions[0].value,
 			workspaceId: workspaceId || board?.workspaceId || '',
 		},
 	});
-	const [bg, setBg] = useState<string>(board?.boardBg || '');
+	const [bg, setBg] = useState<string>(
+		board?.boardBg || todoBoardBgOptions[0].value,
+	);
 	const router = useRouter();
 	const [
 		edit,
@@ -104,6 +107,7 @@ const BoardForm = ({
 						key={input.name}
 						input={{
 							...input,
+							className: input.name === 'boardBg' ? 'hidden' : '',
 							disabled:
 								input.name === 'workspaceId' &&
 								!!(workspaceId || board?.workspaceId),

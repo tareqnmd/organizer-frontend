@@ -11,6 +11,11 @@ export const todoWorkspaceFormInputs = [
 
 export const todoBoardFormInputs = [
 	{
+		name: 'boardBg',
+		type: FormInputType.TEXT,
+		placeholder: 'Enter board background',
+	},
+	{
 		name: 'workspaceId',
 		type: FormInputType.SELECT,
 		placeholder: 'Select Workspace',

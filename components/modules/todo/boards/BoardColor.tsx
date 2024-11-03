@@ -67,6 +67,7 @@ const BoardColor = ({
 			<Input
 				placeholder="Select board image"
 				value={bgImage}
+				className="-mb-3"
 				onChange={(e) => {
 					setBgColor('');
 					setBgImage(e.target.value);

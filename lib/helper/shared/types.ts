@@ -19,6 +19,8 @@ export type CustomFormInputType = {
 	description?: string;
 	required?: boolean;
 	disabled?: boolean;
+	hidden?: boolean;
+	className?: string;
 };
 
 export type InputFieldsType = {
