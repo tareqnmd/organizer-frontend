@@ -7,9 +7,13 @@ const WorkspaceView = async ({ workspaceId }: { workspaceId: string }) => {
 		`todo/board/all?workspaceId=${workspaceId}`,
 		nextProperties({}),
 	);
+	const { data: workspace } = await generateDataFromServer(
+		`todo/workspace/${workspaceId}`,
+		nextProperties({}),
+	);
 	return (
 		<div className="flex flex-col gap-4">
-			<WorkspaceDetails boardWorkspace={boards[0]} />
+			<WorkspaceDetails workspace={workspace} />
 			<Boards boards={boards} />
 		</div>
 	);

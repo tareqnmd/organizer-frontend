@@ -22,6 +22,7 @@ export type BoardType = {
 	workspaceId: string;
 	workspace?: WorkspaceType;
 	createdBy: string;
+	createdAt: string;
 	starred: boolean;
 };
 export type BoardWorkspaceType = {
@@ -36,4 +37,10 @@ export type ListType = {
 	id: string;
 	title: string;
 	boardId: string;
+};
+
+export type ListBoardType = {
+	boardTitle: string;
+	boardId: string;
+	boardCreatedAt: string;
 };

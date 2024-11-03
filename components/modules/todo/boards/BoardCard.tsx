@@ -10,7 +10,7 @@ const BoardCard = ({ board }: { board: BoardType }) => {
 	return (
 		<Card
 			className={cn(
-				'basic-card relative min-h-[100px] rounded-md border p-2 active:scale-100',
+				'basic-card board-text-stroke relative min-h-[100px] rounded-md border p-2 active:scale-100',
 			)}
 			style={{
 				backgroundColor: board.boardBg ?? '',
