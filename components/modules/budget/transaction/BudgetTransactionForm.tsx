@@ -9,7 +9,7 @@ import {
 	BudgetTransactionType,
 } from '@/lib/helper/budget';
 import { transactionFormItems } from '@/lib/helper/budget/form-items';
-import { getError } from '@/lib/utils';
+import { baseInputDateFormat, getError } from '@/lib/utils';
 import {
 	useCreateBudgetTransactionMutation,
 	useEditBudgetTransactionMutation,
@@ -57,8 +57,13 @@ const BudgetTransactionForm = ({
 
 	const onSubmit = async (values: BudgetTransactionSchemaType) => {
 		transaction?.id
-			? await edit({ data: values, id: transaction.id })
-			: await create(values);
+			? await edit({
+					data: { ...values, date: baseInputDateFormat(values.date) },
+					id: transaction.id,
+				})
+			: await create({
+					data: { ...values, date: baseInputDateFormat(values.date) },
+				});
 	};
 
 	useEffect(() => {

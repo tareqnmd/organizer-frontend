@@ -1,8 +1,7 @@
-import { ListType } from "@/lib/helper/todo";
+import { ListType } from '@/lib/helper/todo';
 
 const BoardList = ({ lists }: { lists: ListType[] }) => {
-	return <div>BoardList</div>;
+	return <div className="z-10">BoardList</div>;
 };
 
 export default BoardList;
-

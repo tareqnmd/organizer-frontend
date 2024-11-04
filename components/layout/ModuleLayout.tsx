@@ -17,7 +17,9 @@ const ModuleLayout = ({
 					))}
 				</div>
 			</header>
-			<div className="container mx-auto h-full py-4">{children}</div>
+			<div className="container relative mx-auto h-full py-4">
+				{children}
+			</div>
 		</>
 	);
 };
