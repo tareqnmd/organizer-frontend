@@ -102,7 +102,7 @@ import { DragEndEvent, DragOverEvent } from '@dnd-kit/core';
 import { arrayMove, SortableContext } from '@dnd-kit/sortable';
 import { Check, Plus, X } from 'lucide-react';
 import { useState } from 'react';
-import BoardList from '../list/BoardList';
+import BoardListOld from '../list/BoardListOld';
 
 const BoardViewOld = () => {
 	const { listItems = [], cardItems = [] } = getListTaskData(
@@ -217,7 +217,7 @@ const BoardViewOld = () => {
 				<div className="flex w-max gap-2">
 					<SortableContext items={lists}>
 						{lists?.map((list: any) => (
-							<BoardList
+							<BoardListOld
 								list={list}
 								key={list.id}
 								listCards={cards.filter(

@@ -10,10 +10,10 @@ const BoardCard = ({ board }: { board: BoardType }) => {
 	return (
 		<Card
 			className={cn(
-				'basic-card board-text-stroke relative min-h-[100px] rounded-md border p-2 active:scale-100',
+				'basic-card relative min-h-[100px] rounded-md border !bg-cover !bg-center !bg-no-repeat p-2 text-white active:scale-100',
 			)}
 			style={{
-				backgroundColor: board.boardBg ?? '',
+				background: board.boardBg ?? '',
 			}}
 		>
 			<Link href={`/todo/boards/${board.id}`} key={board.id}>
