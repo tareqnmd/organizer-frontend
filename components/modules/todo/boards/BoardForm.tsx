@@ -6,6 +6,7 @@ import { Form } from '@/components/ui/form';
 import {
 	BoardSchemaType,
 	BoardType,
+	todoBoardBgOptions,
 	todoBoardFormInputs,
 } from '@/lib/helper/todo';
 import { BoardSchema } from '@/lib/helper/todo/schemas';
@@ -17,9 +18,10 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
+import BoardColor from './BoardColor';
 
 const BoardForm = ({
 	board,
@@ -34,10 +36,13 @@ const BoardForm = ({
 		resolver: zodResolver(BoardSchema),
 		defaultValues: {
 			title: board?.title || '',
-			boardBg: board?.boardBg || '#ffffff',
+			boardBg: board?.boardBg || todoBoardBgOptions[0].value,
 			workspaceId: workspaceId || board?.workspaceId || '',
 		},
 	});
+	const [bg, setBg] = useState<string>(
+		board?.boardBg || todoBoardBgOptions[0].value,
+	);
 	const router = useRouter();
 	const [
 		edit,
@@ -86,17 +91,23 @@ const BoardForm = ({
 		setOpen,
 	]);
 
+	useEffect(() => {
+		form.setValue('boardBg', bg);
+	}, [bg, form]);
+
 	return (
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
 				className="grid w-full gap-3"
 			>
+				<BoardColor bg={bg} setBg={setBg} />
 				{todoBoardFormInputs.map((input) => (
 					<CustomFormInput
 						key={input.name}
 						input={{
 							...input,
+							className: input.name === 'boardBg' ? 'hidden' : '',
 							disabled:
 								input.name === 'workspaceId' &&
 								!!(workspaceId || board?.workspaceId),
