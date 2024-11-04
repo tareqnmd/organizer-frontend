@@ -4,6 +4,9 @@ import { Period } from '../helper/budget';
 export const baseDateFormat = (date: string | Date) =>
 	format(date, 'dd-MM-yyyy');
 
+export const baseInputDateFormat = (date: string | Date) =>
+	format(date, 'yyyy-MM-dd');
+
 export const stringToNewDate = (date: string) =>
 	new Date(date?.split('-').reverse().join(',')) ?? date ?? null;
 

@@ -44,3 +44,9 @@ export type ListBoardType = {
 	boardId: string;
 	boardCreatedAt: string;
 };
+
+export type CardType = {
+	id: string;
+	title: string;
+	listId: string;
+};
