@@ -13,7 +13,7 @@ const BoardView = async ({ boardId }: { boardId: string }) => {
 		nextProperties({}),
 	);
 	const { data: cards = [] } = await generateDataFromServer(
-		`todo/card/all?lists=${lists
+		`todo/card/list-wise?listIds=${lists
 			.map((list: ListType) => list.id)
 			.join(',')}`,
 		nextProperties({}),
