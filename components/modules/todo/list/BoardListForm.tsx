@@ -6,6 +6,7 @@ import { Loader, X } from 'lucide-react';
 import { Check } from 'lucide-react';
 
 import { Plus } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
@@ -17,6 +18,7 @@ const BoardListForm = ({
 	setLists: (lists: ListType[]) => void;
 	boardId: string;
 }) => {
+	const router = useRouter();
 	const [listForm, setListForm] = useState(false);
 	const [listName, setListName] = useState('');
 
@@ -34,7 +36,7 @@ const BoardListForm = ({
 
 	useEffect(() => {
 		if (isSuccess && data?.id) {
-			console.log(data);
+			router.refresh();
 			clearList();
 		} else if (isError) {
 			toast.error(getError('Failed to create list'));
