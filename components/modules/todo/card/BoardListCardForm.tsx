@@ -1,6 +1,6 @@
-import { ListType } from '@/lib/helper/todo';
+import { CardType } from '@/lib/helper/todo';
 import { getError } from '@/lib/utils';
-import { useCreateListMutation } from '@/store/features/todo/list/api';
+import { useCreateCardMutation } from '@/store/features/todo/card/api';
 import { Loader, X } from 'lucide-react';
 
 import { Check } from 'lucide-react';
@@ -11,27 +11,27 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
-const BoardListForm = ({
-	setLists,
-	boardId,
+const BoardListCardForm = ({
+	setCards,
+	listId,
 }: {
-	setLists: (lists: ListType[]) => void;
-	boardId: string;
+	setCards: (cards: CardType[]) => void;
+	listId: string;
 }) => {
 	const router = useRouter();
-	const [listForm, setListForm] = useState(false);
-	const [listName, setListName] = useState('');
+	const [cardForm, setCardForm] = useState(false);
+	const [cardName, setCardName] = useState('');
 
-	const [createList, { isLoading, data, isError, isSuccess }] =
-		useCreateListMutation();
+	const [createCard, { isLoading, data, isError, isSuccess }] =
+		useCreateCardMutation();
 
-	const addList = async () => {
-		await createList({ title: listName, boardId });
+	const addCard = async () => {
+		await createCard({ title: cardName, listId });
 	};
 
 	const clearList = () => {
-		setListForm(false);
-		setListName('');
+		setCardForm(false);
+		setCardName('');
 	};
 
 	useEffect(() => {
@@ -41,32 +41,32 @@ const BoardListForm = ({
 		} else if (isError) {
 			toast.error(getError('Failed to create list'));
 		}
-	}, [isError, isSuccess, data, setLists, router]);
+	}, [isError, isSuccess, data, setCards, router]);
 
 	return (
-		<div className="w-[280px] rounded border bg-background-light p-2 shadow">
-			{!listForm ? (
+		<div className="mt-2">
+			{!cardForm ? (
 				<button
 					className="flex w-full items-center justify-center gap-2 rounded border p-2 text-sm"
-					onClick={() => setListForm(true)}
+					onClick={() => setCardForm(true)}
 					disabled={isLoading}
 				>
 					<Plus size={14} />
-					Add List
+					Add Card
 				</button>
 			) : (
 				<div className="flex items-center justify-between gap-1">
 					<input
 						className="w-full border-b !bg-background-light p-1 !shadow-none focus-visible:outline-none"
 						type="text"
-						value={listName}
+						value={cardName}
 						autoFocus
-						onChange={(e) => setListName(e.target.value)}
+						onChange={(e) => setCardName(e.target.value)}
 					/>
 					<button
 						disabled={isLoading}
 						className="border p-1.5"
-						onClick={addList}
+						onClick={addCard}
 					>
 						{isLoading ? (
 							<Loader className="animate-spin" size={16} />
@@ -85,4 +85,4 @@ const BoardListForm = ({
 	);
 };
 
-export default BoardListForm;
+export default BoardListCardForm;

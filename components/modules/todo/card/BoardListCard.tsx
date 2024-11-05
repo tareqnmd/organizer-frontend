@@ -1,7 +1,8 @@
+import { CardType } from '@/lib/helper/todo';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
-const BoardListCardOld = ({ card }: { card: any }) => {
+const BoardListCard = ({ card }: { card: CardType }) => {
 	const {
 		listeners,
 		transform,
@@ -19,7 +20,7 @@ const BoardListCardOld = ({ card }: { card: any }) => {
 	};
 	return (
 		<div
-			className="relative w-full cursor-grab rounded border bg-white p-2 shadow active:cursor-grabbing"
+			className="relative w-full cursor-grab rounded border p-2 shadow active:cursor-grabbing"
 			key={card.id}
 			ref={setNodeRef}
 			{...attributes}
@@ -31,4 +32,4 @@ const BoardListCardOld = ({ card }: { card: any }) => {
 	);
 };
 
-export default BoardListCardOld;
+export default BoardListCard;
