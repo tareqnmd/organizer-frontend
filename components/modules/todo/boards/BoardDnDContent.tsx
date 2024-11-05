@@ -102,7 +102,7 @@ const BoardDnDContent = ({
 				handleDragOver={onDragOver}
 				handleDragEnd={onDragEnd}
 			>
-				<div className="flex w-max gap-2">
+				<div className="flex w-max gap-2 text-light-text">
 					<SortableContext items={lists}>
 						{lists?.map((list: any) => (
 							<BoardList

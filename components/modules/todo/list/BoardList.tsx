@@ -2,7 +2,7 @@ import { CardType, ListType } from '@/lib/helper/todo';
 import { SortableContext, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { Grip } from 'lucide-react';
-import BoardListCardOld from '../card/BoardListCard';
+import BoardListCard from '../card/BoardListCard';
 import BoardListCardForm from '../card/BoardListCardForm';
 
 const BoardList = ({
@@ -38,7 +38,9 @@ const BoardList = ({
 			style={style}
 			className={`relative w-[280px]`}
 		>
-			<div className={`rounded border bg-white p-2 shadow`}>
+			<div
+				className={`rounded border bg-white p-2 shadow`}
+			>
 				<div className="m-2 flex items-center justify-between">
 					<strong>{list?.title ?? ''}</strong>
 					<button {...listeners} {...attributes}>
@@ -51,7 +53,7 @@ const BoardList = ({
 				<div className="flex flex-col gap-2">
 					<SortableContext items={listCards}>
 						{listCards?.map((card: any) => (
-							<BoardListCardOld key={card.id} card={card} />
+							<BoardListCard key={card.id} card={card} />
 						))}
 						<BoardListCardForm
 							listId={list.id}

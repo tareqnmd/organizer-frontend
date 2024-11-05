@@ -44,7 +44,7 @@ const BoardListForm = ({
 	}, [isError, isSuccess, data, setLists, router]);
 
 	return (
-		<div className="w-[280px] rounded border bg-white p-2 shadow">
+		<div className="w-[280px] rounded border bg-background-light p-2 shadow">
 			{!listForm ? (
 				<button
 					className="flex w-full items-center justify-center gap-2 rounded border p-2 text-sm"
@@ -57,7 +57,7 @@ const BoardListForm = ({
 			) : (
 				<div className="flex items-center justify-between gap-1">
 					<input
-						className="w-full border-b p-1 focus-visible:outline-none"
+						className="w-full border-b !bg-background-light p-1 focus-visible:outline-none dark:!bg-background-light"
 						type="text"
 						value={listName}
 						autoFocus
