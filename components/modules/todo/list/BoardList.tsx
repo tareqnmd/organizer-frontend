@@ -4,6 +4,7 @@ import { CSS } from '@dnd-kit/utilities';
 import { Grip } from 'lucide-react';
 import BoardListCard from '../card/BoardListCard';
 import BoardListCardForm from '../card/BoardListCardForm';
+import BoardListDelete from './BoardListDelete';
 
 const BoardList = ({
 	list,
@@ -41,12 +42,15 @@ const BoardList = ({
 			<div className={`rounded border bg-background-light p-2 shadow`}>
 				<div className="m-2 flex items-center justify-between">
 					<strong>{list?.title ?? ''}</strong>
-					<button {...listeners} {...attributes}>
+					<div className="flex items-center gap-1">
+						<BoardListDelete list={list} />
 						<Grip
+							{...listeners}
+							{...attributes}
 							size={18}
-							className="cursor-grab active:cursor-grabbing"
+							className="cursor-grab focus:outline-none active:cursor-grabbing"
 						/>
-					</button>
+					</div>
 				</div>
 				<div className="flex flex-col gap-2">
 					<SortableContext items={listCards}>

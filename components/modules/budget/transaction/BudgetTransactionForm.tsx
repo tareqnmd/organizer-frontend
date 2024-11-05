@@ -62,7 +62,8 @@ const BudgetTransactionForm = ({
 					id: transaction.id,
 				})
 			: await create({
-					data: { ...values, date: baseInputDateFormat(values.date) },
+					...values,
+					date: baseInputDateFormat(values.date),
 				});
 	};
 
