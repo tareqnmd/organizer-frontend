@@ -20,7 +20,7 @@ const BoardListCard = ({ card }: { card: CardType }) => {
 	};
 	return (
 		<div
-			className="relative w-full cursor-grab rounded border bg-white p-2 shadow active:cursor-grabbing"
+			className="relative w-full cursor-grab rounded border p-2 shadow active:cursor-grabbing"
 			key={card.id}
 			ref={setNodeRef}
 			{...attributes}

@@ -38,9 +38,7 @@ const BoardList = ({
 			style={style}
 			className={`relative w-[280px]`}
 		>
-			<div
-				className={`rounded border bg-white p-2 shadow`}
-			>
+			<div className={`rounded border bg-background-light p-2 shadow`}>
 				<div className="m-2 flex items-center justify-between">
 					<strong>{list?.title ?? ''}</strong>
 					<button {...listeners} {...attributes}>

@@ -57,7 +57,7 @@ const BoardListCardForm = ({
 			) : (
 				<div className="flex items-center justify-between gap-1">
 					<input
-						className="w-full border-b !bg-background-light p-1 focus-visible:outline-none dark:!bg-background-light"
+						className="w-full border-b !bg-background-light p-1 !shadow-none focus-visible:outline-none"
 						type="text"
 						value={cardName}
 						autoFocus
