@@ -41,7 +41,7 @@ const BoardListCardForm = ({
 		} else if (isError) {
 			toast.error(getError('Failed to create list'));
 		}
-	}, [isError, isSuccess, data, setCards]);
+	}, [isError, isSuccess, data, setCards, router]);
 
 	return (
 		<div className="mt-2">

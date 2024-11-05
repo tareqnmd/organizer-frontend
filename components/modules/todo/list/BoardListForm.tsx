@@ -41,7 +41,7 @@ const BoardListForm = ({
 		} else if (isError) {
 			toast.error(getError('Failed to create list'));
 		}
-	}, [isError, isSuccess, data, setLists]);
+	}, [isError, isSuccess, data, setLists, router]);
 
 	return (
 		<div className="w-[280px] rounded border bg-white p-2 shadow">
