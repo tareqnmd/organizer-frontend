@@ -8,7 +8,7 @@ const BoardView = async ({ boardId }: { boardId: string }) => {
 		`todo/board/${boardId}`,
 		nextProperties({}),
 	);
-	const { data: lists } = await generateDataFromServer(
+	const { data: lists = [] } = await generateDataFromServer(
 		`todo/list/all?boardId=${boardId}`,
 		nextProperties({}),
 	);
