@@ -52,7 +52,7 @@ const BoardListCardForm = ({
 					disabled={isLoading}
 				>
 					<Plus size={14} />
-					Add List
+					Add Card
 				</button>
 			) : (
 				<div className="flex items-center justify-between gap-1">
