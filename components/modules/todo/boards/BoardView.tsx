@@ -19,8 +19,6 @@ const BoardView = async ({ boardId }: { boardId: string }) => {
 		nextProperties({}),
 	);
 
-	console.log(lists, cards);
-
 	return (
 		<>
 			<div
