@@ -1,7 +1,8 @@
+import { CardType } from '@/lib/helper/todo';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
-const BoardListCardOld = ({ card }: { card: any }) => {
+const BoardListCard = ({ card }: { card: CardType }) => {
 	const {
 		listeners,
 		transform,
@@ -31,4 +32,4 @@ const BoardListCardOld = ({ card }: { card: any }) => {
 	);
 };
 
-export default BoardListCardOld;
+export default BoardListCard;
