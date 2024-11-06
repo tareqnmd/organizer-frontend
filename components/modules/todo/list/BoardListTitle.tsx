@@ -15,8 +15,10 @@ const BoardListTitle = ({ list }: { list: ListType }) => {
 	};
 
 	useEffect(() => {
-		updateTitle({ id: list.id, data: { title: debouncedUpdateTitle } });
-	}, [updateTitle, debouncedUpdateTitle, list.id]);
+		if (debouncedUpdateTitle === list.title) return;
+		debouncedUpdateTitle &&
+			updateTitle({ id: list.id, data: { title: debouncedUpdateTitle } });
+	}, [updateTitle, debouncedUpdateTitle, list.id, list.title]);
 
 	return isEditing ? (
 		<Input
@@ -35,7 +37,7 @@ const BoardListTitle = ({ list }: { list: ListType }) => {
 				inputRef.current?.focus();
 			}}
 		>
-			{list.title}
+			{newTitle}
 		</span>
 	);
 };
