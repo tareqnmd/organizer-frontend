@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 const BoardListTitle = ({ list }: { list: ListType }) => {
 	const [updateTitle] = useEditListMutation();
 	const [newTitle, setNewTitle] = useState(list.title);
-	const debouncedUpdateTitle = useDebounce(newTitle, 500);
+	const debouncedUpdateTitle = useDebounce(newTitle, 1000);
 	const [isEditing, setIsEditing] = useState(false);
 	const inputRef = useRef<HTMLInputElement>(null);
 	const titleChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
