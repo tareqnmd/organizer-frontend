@@ -34,7 +34,7 @@ const BoardListTitle = ({ list }: { list: ListType }) => {
 			className="text-md border-b border-b-[#00000000] font-bold"
 			onClick={() => {
 				setIsEditing(true);
-				inputRef.current?.focus();
+				setTimeout(() => inputRef.current?.focus(), 0);
 			}}
 		>
 			{newTitle}
