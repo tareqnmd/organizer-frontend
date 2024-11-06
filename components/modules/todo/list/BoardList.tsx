@@ -42,7 +42,7 @@ const BoardList = ({
 		>
 			<div className={`rounded border bg-background-light p-2 shadow`}>
 				<div className="my-2 flex items-center justify-between gap-2">
-					<BoardListTitle title={list?.title ?? ''} />
+					<BoardListTitle list={list} />
 					<div className="flex items-center gap-1">
 						<BoardListDelete list={list} />
 						<Grip
