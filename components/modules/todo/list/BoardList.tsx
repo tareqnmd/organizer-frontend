@@ -5,6 +5,7 @@ import { Grip } from 'lucide-react';
 import BoardListCard from '../card/BoardListCard';
 import BoardListCardForm from '../card/BoardListCardForm';
 import BoardListDelete from './BoardListDelete';
+import BoardListTitle from './BoardListTitle';
 
 const BoardList = ({
 	list,
@@ -40,8 +41,8 @@ const BoardList = ({
 			className={`relative w-[280px]`}
 		>
 			<div className={`rounded border bg-background-light p-2 shadow`}>
-				<div className="m-2 flex items-center justify-between">
-					<strong>{list?.title ?? ''}</strong>
+				<div className="my-2 flex items-center justify-between gap-2">
+					<BoardListTitle list={list} />
 					<div className="flex items-center gap-1">
 						<BoardListDelete list={list} />
 						<Grip
