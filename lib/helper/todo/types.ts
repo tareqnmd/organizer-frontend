@@ -37,6 +37,7 @@ export type ListType = {
 	id: string;
 	title: string;
 	boardId: string;
+	listOrder: number;
 };
 
 export type ListBoardType = {
@@ -48,5 +49,7 @@ export type ListBoardType = {
 export type CardType = {
 	id: string;
 	title: string;
+	description: string;
 	listId: string;
+	cardOrder: number;
 };

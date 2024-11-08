@@ -2,6 +2,8 @@
 
 import DnDContextLayout from '@/components/layout/DnDContextLayout';
 import { CardType, ListType } from '@/lib/helper/todo';
+import { useUpdateCardsOrderMutation } from '@/store/features/todo/card/api';
+import { useUpdateListsOrderMutation } from '@/store/features/todo/list/api';
 import { DragEndEvent, DragOverEvent } from '@dnd-kit/core';
 import { arrayMove, SortableContext } from '@dnd-kit/sortable';
 import { useState } from 'react';
@@ -19,6 +21,8 @@ const BoardDnDContent = ({
 }) => {
 	const [lists, setLists] = useState(listItems);
 	const [cards, setCards] = useState(cardItems);
+	const [updateListsOrder] = useUpdateListsOrderMutation();
+	const [updateCardsOrder] = useUpdateCardsOrderMutation();
 
 	const onDragEnd = (event: DragEndEvent) => {
 		try {
@@ -32,16 +36,27 @@ const BoardDnDContent = ({
 
 			const isActiveAColumn = active.data.current?.type === 'List';
 			if (!isActiveAColumn) return;
-			setLists((lists: any) => {
-				const activeColumnIndex = lists.findIndex(
-					(list: any) => list.id === activeId,
-				);
-				const overColumnIndex = lists.findIndex(
-					(list: any) => list.id === overId,
-				);
+			const activeColumnIndex = lists.findIndex(
+				(list: ListType) => list.id === activeId,
+			);
+			const overColumnIndex = lists.findIndex(
+				(list: ListType) => list.id === overId,
+			);
 
-				return arrayMove(lists, activeColumnIndex, overColumnIndex);
-			});
+			const updatedLists = arrayMove(
+				lists,
+				activeColumnIndex,
+				overColumnIndex,
+			).map((list: ListType, index: number) => ({
+				...list,
+				listOrder: index,
+			}));
+			const updatedListsOrder = updatedLists.map((item: ListType) => ({
+				id: item.id,
+				listOrder: item.listOrder,
+			}));
+			updateListsOrder(updatedListsOrder);
+			setLists(updatedLists);
 		} catch (e: any) {
 			console.log('e', e);
 		}
@@ -63,33 +78,62 @@ const BoardDnDContent = ({
 			if (!isActiveATask) return;
 
 			if (isActiveATask && isOverATask) {
-				setCards((cards: any) => {
-					const activeIndex = cards.findIndex(
-						(card: any) => card.id === activeId,
-					);
-					const overIndex = cards.findIndex(
-						(card: any) => card.id === overId,
-					);
-					if (cards[activeIndex].listId !== cards[overIndex].listId) {
-						cards[activeIndex].listId = cards[overIndex].listId;
-						return arrayMove(cards, activeIndex, overIndex - 1);
-					}
-					return arrayMove(cards, activeIndex, overIndex);
-				});
+				const previousCards = [...cards];
+				const activeIndex = previousCards.findIndex(
+					(card: any) => card.id === activeId,
+				);
+				const overIndex = previousCards.findIndex(
+					(card: any) => card.id === overId,
+				);
+				if (cards[activeIndex].listId !== cards[overIndex].listId) {
+					previousCards[activeIndex].listId =
+						previousCards[overIndex].listId;
+					return arrayMove(previousCards, activeIndex, overIndex - 1);
+				}
+				const updatedCards = arrayMove(
+					previousCards,
+					activeIndex,
+					overIndex,
+				).map((card: CardType, index: number) => ({
+					...card,
+					cardOrder: index,
+				}));
+				const updatedCardsOrder = updatedCards.map(
+					(item: CardType) => ({
+						id: item.id,
+						cardOrder: item.cardOrder,
+					}),
+				);
+				updateCardsOrder(updatedCardsOrder);
+				setCards(updatedCards);
 			}
 
 			const isOverAColumn = over.data.current?.type === 'List';
 
 			if (isActiveATask && isOverAColumn) {
-				setCards((cards: any) => {
-					const activeIndex = cards.findIndex(
-						(card: any) => card.id === activeId,
-					);
-					if (cards[activeIndex]?.listId) {
-						cards[activeIndex].listId = overId;
-					}
-					return arrayMove(cards, activeIndex, activeIndex);
-				});
+				const previousCards = [...cards];
+				const activeIndex = previousCards.findIndex(
+					(card: any) => card.id === activeId,
+				);
+				if (previousCards[activeIndex]?.listId) {
+					previousCards[activeIndex].listId = overId.toString();
+				}
+				const updatedCards = arrayMove(
+					previousCards,
+					activeIndex,
+					activeIndex,
+				).map((card: CardType, index: number) => ({
+					...card,
+					cardOrder: index,
+				}));
+				const updatedCardsOrder = updatedCards.map(
+					(item: CardType) => ({
+						id: item.id,
+						cardOrder: item.cardOrder,
+					}),
+				);
+				updateCardsOrder(updatedCardsOrder);
+				setCards(updatedCards);
 			}
 		} catch (e: any) {
 			console.log('e', e);

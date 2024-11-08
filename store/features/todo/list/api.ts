@@ -16,6 +16,13 @@ export const listApi = apiSlice.injectEndpoints({
 				body: payload?.data,
 			}),
 		}),
+		updateListsOrder: builder.mutation({
+			query: (payload) => ({
+				url: `todo/list/order`,
+				method: 'PUT',
+				body: payload,
+			}),
+		}),
 		deleteList: builder.mutation({
 			query: (id) => ({
 				url: `todo/list/${id}`,
@@ -29,4 +36,5 @@ export const {
 	useDeleteListMutation,
 	useEditListMutation,
 	useCreateListMutation,
+	useUpdateListsOrderMutation,
 } = listApi;
