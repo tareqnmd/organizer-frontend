@@ -80,10 +80,10 @@ const BoardDnDContent = ({
 			if (isActiveATask && isOverATask) {
 				const previousCards = [...cards];
 				const activeIndex = previousCards.findIndex(
-					(card: any) => card.id === activeId,
+					(card: CardType) => card.id === activeId,
 				);
 				const overIndex = previousCards.findIndex(
-					(card: any) => card.id === overId,
+					(card: CardType) => card.id === overId,
 				);
 				if (cards[activeIndex].listId !== cards[overIndex].listId) {
 					previousCards[activeIndex].listId =
@@ -94,20 +94,19 @@ const BoardDnDContent = ({
 					previousCards,
 					activeIndex,
 					overIndex,
-				).map((card: CardType, index: number) => {
-					const listId = card.listId;
-					const listCards = previousCards.filter(
-						(c) => c.listId === listId,
-					);
-					const listCardsIndex = listCards.findIndex(
-						(c) => c.id === card.id,
-					);
-					return {
+				);
+				const updatedCardOrderAndList: CardType[] = [];
+				updatedCards.forEach((card: CardType) => {
+					const existingListWiseCardItem =
+						updatedCardOrderAndList.filter(
+							(item) => item.listId === card.listId,
+						);
+					updatedCardOrderAndList.push({
 						...card,
-						cardOrder: listCardsIndex,
-					};
+						cardOrder: existingListWiseCardItem.length,
+					});
 				});
-				const updatedCardsOrder = updatedCards.map(
+				const updatedCardsOrder = updatedCardOrderAndList.map(
 					(item: CardType) => ({
 						id: item.id,
 						listId: item.listId,
@@ -123,7 +122,7 @@ const BoardDnDContent = ({
 			if (isActiveATask && isOverAColumn) {
 				const previousCards = [...cards];
 				const activeIndex = previousCards.findIndex(
-					(card: any) => card.id === activeId,
+					(card: CardType) => card.id === activeId,
 				);
 				if (previousCards[activeIndex]?.listId) {
 					previousCards[activeIndex].listId = overId.toString();
@@ -132,20 +131,19 @@ const BoardDnDContent = ({
 					previousCards,
 					activeIndex,
 					activeIndex,
-				).map((card: CardType, index: number) => {
-					const listId = card.listId;
-					const listCards = previousCards.filter(
-						(c) => c.listId === listId,
-					);
-					const listCardsIndex = listCards.findIndex(
-						(c) => c.id === card.id,
-					);
-					return {
+				);
+				const updatedCardOrderAndList: CardType[] = [];
+				updatedCards.forEach((card: CardType) => {
+					const existingListWiseCardItem =
+						updatedCardOrderAndList.filter(
+							(item) => item.listId === card.listId,
+						);
+					updatedCardOrderAndList.push({
 						...card,
-						cardOrder: listCardsIndex,
-					};
+						cardOrder: existingListWiseCardItem.length,
+					});
 				});
-				const updatedCardsOrder = updatedCards.map(
+				const updatedCardsOrder = updatedCardOrderAndList.map(
 					(item: CardType) => ({
 						id: item.id,
 						listId: item.listId,
@@ -168,12 +166,12 @@ const BoardDnDContent = ({
 			>
 				<div className="flex w-max gap-2 text-light-text">
 					<SortableContext items={lists}>
-						{lists?.map((list: any) => (
+						{lists?.map((list: ListType) => (
 							<BoardList
 								key={list.id}
 								list={list}
 								listCards={cards.filter(
-									(card: any) => card.listId === list.id,
+									(card: CardType) => card.listId === list.id,
 								)}
 								setCards={setCards}
 							/>
