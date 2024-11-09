@@ -1,15 +1,10 @@
 import { CardType } from '@/lib/helper/todo';
-import { useDeleteCardMutation } from '@/store/features/todo/card/api';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { useEffect } from 'react';
-import { toast } from 'sonner';
 import BoardListCardDelete from './BoardListCardDelete';
+import BorderListCardDetailsModal from './BorderListCardDetailsModal';
 
 const BoardListCard = ({ card }: { card: CardType }) => {
-	const [deleteCard, { isLoading: isDeleting, isSuccess: isDeleted }] =
-		useDeleteCardMutation();
-
 	const {
 		listeners,
 		transform,
@@ -27,27 +22,16 @@ const BoardListCard = ({ card }: { card: CardType }) => {
 		zIndex: isDragging ? 50 : 0,
 	};
 
-	const handleDelete = () => {
-		console.log('delete');
-		deleteCard(card.id);
-	};
-
-	useEffect(() => {
-		if (isDeleted) {
-			toast.success('Card deleted successfully');
-		}
-	}, [isDeleted]);
-
 	return (
 		<div
-			className="relative flex w-full cursor-grab items-center justify-between rounded border p-2 shadow active:cursor-grabbing"
+			className="relative flex w-full cursor-grab items-center justify-between rounded border bg-background-light p-2 shadow active:cursor-grabbing"
 			key={card.id}
 			ref={setNodeRef}
 			{...attributes}
 			{...listeners}
 			style={style}
 		>
-			<span>{card.title}</span>
+			<BorderListCardDetailsModal card={card} />
 			<BoardListCardDelete card={card} />
 		</div>
 	);
