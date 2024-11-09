@@ -101,6 +101,7 @@ const BoardDnDContent = ({
 				const updatedCardsOrder = updatedCards.map(
 					(item: CardType) => ({
 						id: item.id,
+						listId: item.listId,
 						cardOrder: item.cardOrder,
 					}),
 				);
@@ -129,6 +130,7 @@ const BoardDnDContent = ({
 				const updatedCardsOrder = updatedCards.map(
 					(item: CardType) => ({
 						id: item.id,
+						listId: item.listId,
 						cardOrder: item.cardOrder,
 					}),
 				);
