@@ -16,6 +16,13 @@ export const cardApi = apiSlice.injectEndpoints({
 				body: payload?.data,
 			}),
 		}),
+		updateCardsOrder: builder.mutation({
+			query: (payload) => ({
+				url: `todo/card/order`,
+				method: 'PUT',
+				body: payload,
+			}),
+		}),
 		deleteCard: builder.mutation({
 			query: (id) => ({
 				url: `todo/card/${id}`,
@@ -29,4 +36,5 @@ export const {
 	useDeleteCardMutation,
 	useEditCardMutation,
 	useCreateCardMutation,
+	useUpdateCardsOrderMutation,
 } = cardApi;
