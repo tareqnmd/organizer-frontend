@@ -94,10 +94,19 @@ const BoardDnDContent = ({
 					previousCards,
 					activeIndex,
 					overIndex,
-				).map((card: CardType, index: number) => ({
-					...card,
-					cardOrder: index,
-				}));
+				).map((card: CardType, index: number) => {
+					const listId = card.listId;
+					const listCards = previousCards.filter(
+						(c) => c.listId === listId,
+					);
+					const listCardsIndex = listCards.findIndex(
+						(c) => c.id === card.id,
+					);
+					return {
+						...card,
+						cardOrder: listCardsIndex,
+					};
+				});
 				const updatedCardsOrder = updatedCards.map(
 					(item: CardType) => ({
 						id: item.id,
@@ -123,10 +132,19 @@ const BoardDnDContent = ({
 					previousCards,
 					activeIndex,
 					activeIndex,
-				).map((card: CardType, index: number) => ({
-					...card,
-					cardOrder: index,
-				}));
+				).map((card: CardType, index: number) => {
+					const listId = card.listId;
+					const listCards = previousCards.filter(
+						(c) => c.listId === listId,
+					);
+					const listCardsIndex = listCards.findIndex(
+						(c) => c.id === card.id,
+					);
+					return {
+						...card,
+						cardOrder: listCardsIndex,
+					};
+				});
 				const updatedCardsOrder = updatedCards.map(
 					(item: CardType) => ({
 						id: item.id,
