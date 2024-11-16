@@ -23,13 +23,11 @@ const BorderListCardDetails = ({ card }: { card: CardType }) => {
 	const debouncedValue = useDebounce(description, 1000);
 
 	useEffect(() => {
-		if (!debouncedValue) return;
-		if (card?.id) {
-			editCard({
-				data: { description: debouncedValue },
-				id: card.id,
-			});
-		}
+		if (!debouncedValue || !card?.id) return;
+		editCard({
+			data: { description: debouncedValue },
+			id: card.id,
+		});
 	}, [debouncedValue, editCard, card.id]);
 
 	return (
