@@ -17,6 +17,7 @@ const nextConfig = {
 			},
 		],
 	},
+	reactStrictMode: process.env.NEXT_PUBLIC_NODE_ENV === 'production',
 };
 
 module.exports = nextConfig;
