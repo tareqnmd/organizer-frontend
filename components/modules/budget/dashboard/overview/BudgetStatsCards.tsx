@@ -2,7 +2,7 @@
 import SkeletonWrapper from '@/components/common/SkeletonWrapper';
 import { BudgetDashboardOverviewAmountType } from '@/lib/helper/budget';
 import { GetFormatterForCurrency } from '@/lib/utils';
-import { TrendingDown, TrendingUp, Wallet } from 'lucide-react';
+import { TrendingDown, TrendingUp, WalletMinimal } from 'lucide-react';
 import { useMemo } from 'react';
 import BudgetStatsCard from './BudgetStatsCard';
 function BudgetStatsCards({
@@ -28,7 +28,6 @@ function BudgetStatsCards({
 					}
 				/>
 			</SkeletonWrapper>
-
 			<SkeletonWrapper isLoading={false}>
 				<BudgetStatsCard
 					formatter={formatter}
@@ -39,14 +38,13 @@ function BudgetStatsCards({
 					}
 				/>
 			</SkeletonWrapper>
-
 			<SkeletonWrapper isLoading={false}>
 				<BudgetStatsCard
 					formatter={formatter}
 					value={balance}
 					title="Balance"
 					icon={
-						<Wallet className="balance h-12 w-12 items-center rounded-lg bg-violet-400/10 p-2" />
+						<WalletMinimal className="balance h-12 w-12 items-center rounded-lg bg-violet-400/10 p-2" />
 					}
 				/>
 			</SkeletonWrapper>

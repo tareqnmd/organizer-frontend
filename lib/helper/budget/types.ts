@@ -22,6 +22,7 @@ export type BudgetDashboardOverviewCategoryDetailType = {
 };
 
 export type BudgetDashboardOverviewAmountType = {
+	grandTotal: number;
 	income: number;
 	expense: number;
 	balance: number;

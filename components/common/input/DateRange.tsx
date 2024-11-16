@@ -178,7 +178,7 @@ const FormDateRange = ({
 					</Button>
 				</PopoverTrigger>
 				<PopoverContent
-					className="mr-[16px] w-[280px] max-w-screen-sm p-0 sm:w-[90vw]"
+					className="mr-[16px] w-[280px] max-w-screen-sm overflow-auto p-0 max-sm:max-h-[500px] sm:w-[90vw]"
 					align="start"
 				>
 					<div className="flex flex-col gap-2">
@@ -201,7 +201,7 @@ const FormDateRange = ({
 							{PRESETS.map((preset) => (
 								<Button
 									size={'sm'}
-									className="max-sm:h-auto max-sm:p-1 max-sm:text-xs"
+									className="max-sm:h-auto max-sm:px-3 max-sm:py-1 max-sm:text-xs"
 									key={preset.name}
 									onClick={() => getPresetRange(preset.name)}
 								>
@@ -210,11 +210,19 @@ const FormDateRange = ({
 							))}
 						</div>
 					</div>
-					<div className="flex justify-end gap-2 border-t px-4 py-3">
-						<Button onClick={closeDateRange} size={'sm'}>
+					<div className="sticky bottom-0 flex justify-end gap-2 border-t bg-background-light px-4 py-3 dark:bg-background-dark">
+						<Button
+							className="max-sm:w-full"
+							onClick={closeDateRange}
+							size={'sm'}
+						>
 							Close
 						</Button>
-						<Button onClick={submitRange} size={'sm'}>
+						<Button
+							className="max-sm:w-full"
+							onClick={submitRange}
+							size={'sm'}
+						>
 							Update
 						</Button>
 					</div>
