@@ -6,10 +6,11 @@ import { CardSchemaType, CardType } from '@/lib/helper/todo';
 import { CardSchema } from '@/lib/helper/todo/schemas';
 import { useEditCardMutation } from '@/store/features/todo/card/api';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 
 const BorderListCardDetails = ({ card }: { card: CardType }) => {
+	const isFirstRender = useRef(false);
 	const [editCard] = useEditCardMutation();
 	const form = useForm<CardSchemaType>({
 		resolver: zodResolver(CardSchema),
@@ -23,11 +24,15 @@ const BorderListCardDetails = ({ card }: { card: CardType }) => {
 	const debouncedValue = useDebounce(description, 1000);
 
 	useEffect(() => {
-		if (!debouncedValue || !card?.id) return;
-		editCard({
-			data: { description: debouncedValue },
-			id: card.id,
-		});
+		if (isFirstRender.current) {
+			if (!debouncedValue || !card?.id) return;
+			editCard({
+				data: { description: debouncedValue },
+				id: card.id,
+			});
+		} else {
+			isFirstRender.current = true;
+		}
 	}, [debouncedValue, editCard, card.id]);
 
 	return (
