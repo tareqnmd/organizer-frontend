@@ -28,7 +28,7 @@ const BoardListCardTitle = ({ card }: { card: CardType }) => {
 			value={newTitle}
 			onChange={titleChangeHandler}
 			onBlur={() => setIsEditing(false)}
-			className="h-auto rounded-none border-0 !bg-transparent p-0 text-base shadow-none focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 dark:!bg-transparent"
+			className="h-auto rounded-none border-0 !bg-transparent p-0 text-base !shadow-none focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 dark:!bg-transparent"
 		/>
 	) : (
 		<span
