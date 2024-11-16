@@ -178,7 +178,7 @@ const FormDateRange = ({
 					</Button>
 				</PopoverTrigger>
 				<PopoverContent
-					className="mr-[16px] w-[280px] max-w-screen-sm overflow-auto p-0 max-sm:max-h-[500px] sm:w-[90vw]"
+					className="mr-[16px] w-[280px] max-w-screen-sm overflow-auto p-0 max-sm:max-h-[380px] sm:w-[90vw]"
 					align="start"
 				>
 					<div className="flex flex-col gap-2">

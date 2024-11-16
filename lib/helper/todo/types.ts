@@ -1,6 +1,6 @@
 import * as z from 'zod';
 import { TodoTypeEnum } from './enums';
-import { BoardSchema, WorkspaceSchema } from './schemas';
+import { BoardSchema, CardSchema, WorkspaceSchema } from './schemas';
 
 export type TodoType = TodoTypeEnum;
 
@@ -45,6 +45,8 @@ export type ListBoardType = {
 	boardId: string;
 	boardCreatedAt: string;
 };
+
+export type CardSchemaType = z.infer<typeof CardSchema>;
 
 export type CardType = {
 	id: string;

@@ -23,7 +23,9 @@ const WorkspaceEdit = ({ workspace }: { workspace: WorkspaceType }) => {
 			</DialogTrigger>
 			<DialogContent className="basic-modal">
 				<DialogHeader>
-					<DialogTitle>Create Workspace</DialogTitle>
+					<DialogTitle>
+						{`${workspace?.id ? 'Edit' : 'Create'} Workspace`}
+					</DialogTitle>
 				</DialogHeader>
 				<WorkspaceForm setOpen={setOpen} workspace={workspace} />
 			</DialogContent>
