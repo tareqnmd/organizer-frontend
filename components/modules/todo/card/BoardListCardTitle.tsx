@@ -32,7 +32,7 @@ const BoardListCardTitle = ({ card }: { card: CardType }) => {
 		/>
 	) : (
 		<span
-			className="text-base"
+			className="block text-left text-base"
 			onClick={() => {
 				setIsEditing(true);
 				setTimeout(() => inputRef.current?.focus(), 0);
