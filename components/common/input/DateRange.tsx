@@ -21,12 +21,20 @@ const PRESETS: {
 	{ name: 'today', label: 'Today' },
 	{ name: 'yesterday', label: 'Yesterday' },
 	{ name: 'last7', label: 'Last 7 days' },
+	{ name: 'lastWeek', label: 'Last Week' },
+	{ name: 'thisWeek', label: 'This Week' },
 	{ name: 'last14', label: 'Last 14 days' },
 	{ name: 'last30', label: 'Last 30 days' },
-	{ name: 'thisWeek', label: 'This Week' },
-	{ name: 'lastWeek', label: 'Last Week' },
 	{ name: 'thisMonth', label: 'This Month' },
 	{ name: 'lastMonth', label: 'Last Month' },
+	{
+		name: 'thisYear',
+		label: 'This Year',
+	},
+	{
+		name: 'lastYear',
+		label: 'Last Year',
+	},
 ];
 
 const FormDateRange = ({
@@ -103,6 +111,19 @@ const FormDateRange = ({
 				to.setDate(0);
 				to.setHours(23, 59, 59, 999);
 				break;
+			case 'thisYear':
+				from.setMonth(0, 1);
+				from.setHours(0, 0, 0, 0);
+				to.setHours(23, 59, 59, 999);
+				break;
+			case 'lastYear':
+				from.setFullYear(from.getFullYear() - 1);
+				from.setMonth(0, 1);
+				from.setHours(0, 0, 0, 0);
+				to.setFullYear(from.getFullYear());
+				to.setMonth(11, 31);
+				to.setHours(23, 59, 59, 999);
+				break;
 		}
 		setDate({ from, to });
 	};
@@ -156,8 +177,11 @@ const FormDateRange = ({
 						)}
 					</Button>
 				</PopoverTrigger>
-				<PopoverContent className="w-auto p-0" align="start">
-					<div className="flex gap-2">
+				<PopoverContent
+					className="mr-[16px] w-[280px] max-w-screen-sm p-0 sm:w-[90vw]"
+					align="start"
+				>
+					<div className="flex flex-col gap-2">
 						<Calendar
 							initialFocus
 							mode="range"
@@ -165,11 +189,19 @@ const FormDateRange = ({
 							selected={date}
 							onSelect={setDate}
 							numberOfMonths={2}
+							className="[&>div]:justify-around"
+							modifiersClassNames={{
+								range_start:
+									'!rounded-0 !bg-background-dark !text-light dark:!bg-background-light dark:!text-dark',
+								range_end:
+									'!rounded-0 !bg-background-dark !text-light dark:!bg-background-light dark:!text-dark',
+							}}
 						/>
-						<div className="flex flex-col items-end gap-1 p-4">
+						<div className="flex flex-wrap gap-2 p-4">
 							{PRESETS.map((preset) => (
 								<Button
 									size={'sm'}
+									className="max-sm:h-auto max-sm:p-1 max-sm:text-xs"
 									key={preset.name}
 									onClick={() => getPresetRange(preset.name)}
 								>
