@@ -7,10 +7,12 @@ import {
 } from '@/components/ui/dialog';
 import { CardType } from '@/lib/helper/todo';
 import { useState } from 'react';
+import BoardListCardTitle from './BoardListCardTitle';
 import BorderListCardDetails from './BorderListCardDetails';
 
 const BorderListCardDetailsModal = ({ card }: { card: CardType }) => {
 	const [open, setOpen] = useState(false);
+
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
@@ -18,7 +20,9 @@ const BorderListCardDetailsModal = ({ card }: { card: CardType }) => {
 			</DialogTrigger>
 			<DialogContent className="basic-modal">
 				<DialogHeader>
-					<DialogTitle>{card.title}</DialogTitle>
+					<DialogTitle>
+						<BoardListCardTitle card={card} />
+					</DialogTitle>
 				</DialogHeader>
 				<BorderListCardDetails card={card} />
 			</DialogContent>

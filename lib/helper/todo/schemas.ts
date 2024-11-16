@@ -32,3 +32,8 @@ export const BoardSchema = z.object({
 	boardBg: boardBgSchema,
 	workspaceId: workspaceIdSchema,
 });
+
+export const CardSchema = z.object({
+	description: z.string(),
+});
+

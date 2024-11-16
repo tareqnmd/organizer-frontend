@@ -23,7 +23,9 @@ const BoardEdit = ({ board }: { board: BoardType }) => {
 			</DialogTrigger>
 			<DialogContent className="basic-modal">
 				<DialogHeader>
-					<DialogTitle>Create Workspace</DialogTitle>
+					<DialogTitle>
+						{`${board?.id ? 'Edit' : 'Create'} Board`}
+					</DialogTitle>
 				</DialogHeader>
 				<BoardForm setOpen={setOpen} board={board} />
 			</DialogContent>
