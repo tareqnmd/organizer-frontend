@@ -190,6 +190,12 @@ const FormDateRange = ({
 							onSelect={setDate}
 							numberOfMonths={2}
 							className="[&>div]:justify-around"
+							modifiersClassNames={{
+								range_start:
+									'!rounded-0 !bg-background-dark !text-light dark:!bg-background-light dark:!text-dark',
+								range_end:
+									'!rounded-0 !bg-background-dark !text-light dark:!bg-background-light dark:!text-dark',
+							}}
 						/>
 						<div className="flex flex-wrap gap-2 p-4">
 							{PRESETS.map((preset) => (
