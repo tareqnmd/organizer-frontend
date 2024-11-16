@@ -24,10 +24,12 @@ const BorderListCardDetails = ({ card }: { card: CardType }) => {
 
 	useEffect(() => {
 		if (!debouncedValue) return;
-		editCard({
-			data: { description: debouncedValue },
-			id: card.id,
-		});
+		if (card?.id) {
+			editCard({
+				data: { description: debouncedValue },
+				id: card.id,
+			});
+		}
 	}, [debouncedValue, editCard, card.id]);
 
 	return (
