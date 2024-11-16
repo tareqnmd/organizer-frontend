@@ -27,7 +27,7 @@ const BoardListTitle = ({ list }: { list: ListType }) => {
 			value={newTitle}
 			onChange={titleChangeHandler}
 			onBlur={() => setIsEditing(false)}
-			className="text-md h-auto rounded-none border-0 border-b border-b-light-border !bg-transparent p-0 font-bold shadow-none focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
+			className="text-md h-auto rounded-none border-0 border-b border-b-light-border !bg-transparent p-0 font-bold shadow-none focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 dark:!bg-transparent"
 		/>
 	) : (
 		<span

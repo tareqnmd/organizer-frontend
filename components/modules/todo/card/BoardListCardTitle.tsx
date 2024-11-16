@@ -28,11 +28,11 @@ const BoardListCardTitle = ({ card }: { card: CardType }) => {
 			value={newTitle}
 			onChange={titleChangeHandler}
 			onBlur={() => setIsEditing(false)}
-			className="h-auto rounded-none border-0 !bg-transparent p-0 text-base shadow-none focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
+			className="h-auto rounded-none border-0 !bg-transparent p-0 text-base shadow-none focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 dark:!bg-transparent"
 		/>
 	) : (
 		<span
-			className="text-base"
+			className="block text-left text-base"
 			onClick={() => {
 				setIsEditing(true);
 				setTimeout(() => inputRef.current?.focus(), 0);
