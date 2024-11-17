@@ -18,26 +18,10 @@ export const authOptions = {
 	},
 	providers: [
 		GitHubProvider({
-			profile(profile) {
-				return {
-					id: String(profile.id),
-					email: profile.email,
-					image: profile.avatar_url,
-					name: profile.name,
-				};
-			},
 			clientId: GITHUB_ID,
 			clientSecret: GITHUB_SECRET,
 		}),
 		GoogleProvider({
-			profile(profile) {
-				return {
-					id: String(profile.sub),
-					email: profile.email,
-					image: profile.picture,
-					name: profile.name,
-				};
-			},
 			clientId: GOOGLE_ID,
 			clientSecret: GOOGLE_SECRET,
 		}),
@@ -110,7 +94,10 @@ export const authOptions = {
 				const { data: userData } = await axiosInstance.post(
 					'/user/social-auth',
 					{
-						...user,
+						token:
+							account.provider === 'google'
+								? account.id_token
+								: account.access_token,
 						from: account.provider,
 					},
 				);
