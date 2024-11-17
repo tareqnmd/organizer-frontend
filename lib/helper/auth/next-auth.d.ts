@@ -8,5 +8,7 @@ declare module 'next-auth' {
 		image?: string;
 		role?: string;
 		status?: string;
+		token?: string;
+		refreshToken?: string;
 	}
 }

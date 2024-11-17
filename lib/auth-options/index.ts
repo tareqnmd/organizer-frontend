@@ -3,7 +3,6 @@ import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
-import { cookies } from 'next/headers';
 
 const {
 	GITHUB_ID = '',
@@ -59,12 +58,10 @@ export const authOptions = {
 			},
 			async authorize(credentials) {
 				try {
-					const { data } = await axiosInstance.post(
+					const { data: user } = await axiosInstance.post(
 						'/user/login',
 						credentials,
 					);
-					const { token, tokenOptions, ...user } = data;
-					cookies().set('token', token, JSON.parse(tokenOptions));
 					return user ?? null;
 				} catch (error) {
 					return null;
@@ -93,12 +90,10 @@ export const authOptions = {
 			},
 			async authorize(credentials) {
 				try {
-					const { data } = await axiosInstance.post(
+					const { data: user } = await axiosInstance.post(
 						'/user/register',
 						credentials,
 					);
-					const { token, tokenOptions, ...user } = data;
-					cookies().set('token', token, JSON.parse(tokenOptions));
 					return user ?? null;
 				} catch (error) {
 					return null;
@@ -112,19 +107,22 @@ export const authOptions = {
 				account?.provider &&
 				['google', 'github'].includes(account.provider)
 			) {
-				const { data } = await axiosInstance.post('/user/social-auth', {
-					...user,
-					from: account.provider,
-				});
-				const { token, tokenOptions, ...userData } = data;
-				if (data) {
+				const { data: userData } = await axiosInstance.post(
+					'/user/social-auth',
+					{
+						...user,
+						from: account.provider,
+					},
+				);
+				if (userData) {
 					user.id = userData.id;
 					user.email = userData.email;
 					user.name = userData.name;
 					user.image = userData.image;
 					user.role = userData.role;
 					user.status = userData.status;
-					cookies().set('token', token, JSON.parse(tokenOptions));
+					user.token = userData.token;
+					user.refreshToken = userData.refreshToken;
 					return true;
 				}
 				return false;
