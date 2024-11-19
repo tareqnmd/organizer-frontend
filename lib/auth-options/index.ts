@@ -3,6 +3,7 @@ import { NextAuthOptions, User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
+import { AuthErrorEnum } from '../helper/auth';
 
 const {
 	GITHUB_ID = '',
@@ -23,7 +24,9 @@ const refreshAccessToken = async (token: any) => {
 			accessTokenExpiry: user.accessTokenExpiry,
 		};
 	} catch (error) {
-		return {};
+		return {
+			error: AuthErrorEnum.REFRESH_ACCESS_TOKEN_ERROR,
+		};
 	}
 };
 

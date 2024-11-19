@@ -1,5 +1,6 @@
 'use server';
 
+import axios from 'axios';
 import { revalidateTag } from 'next/cache';
 import { cookies, headers } from 'next/headers';
 
@@ -29,4 +30,11 @@ export const getCookieValue = async (name: string) => {
 
 export const notesRevalidate = () => {
 	revalidateTag('collection');
+};
+
+export const getSessionFromNextServer = async (queryParamString?: string) => {
+	const response = await axios.get(
+		'/api/auth/session' + (queryParamString ? '?' + queryParamString : ''),
+	);
+	return response;
 };
