@@ -3,6 +3,14 @@ import { signOut } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 import { twMerge } from 'tailwind-merge';
 
+export function clearAllCookies() {
+	const cookies = document.cookie?.split('; ');
+	for (const cookie of cookies) {
+		const [name, _] = cookie?.split('=');
+		document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+	}
+}
+
 export const logoutHandler = async () => {
 	try {
 		await signOut({
@@ -10,6 +18,8 @@ export const logoutHandler = async () => {
 		});
 	} catch (error) {
 		redirect('/login');
+	} finally {
+		clearAllCookies();
 	}
 };
 
