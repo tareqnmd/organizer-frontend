@@ -1,13 +1,12 @@
-import { authOptions } from '@/lib/auth-options';
 import { logoutHandler } from '@/lib/utils';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { getServerSession } from 'next-auth';
+import { getSession } from 'next-auth/react';
 
 const baseQuery = fetchBaseQuery({
 	baseUrl: process.env.NEXT_PUBLIC_API_URL,
 	credentials: 'include',
 	prepareHeaders: async (headers) => {
-		const authToken = await getServerSession(authOptions);
+		const authToken = await getSession();
 		headers.set('Authorization', authToken?.accessToken ?? '');
 		return headers;
 	},

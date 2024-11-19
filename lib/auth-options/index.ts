@@ -135,13 +135,11 @@ export const authOptions = {
 			return refreshedToken;
 		},
 		async session({ session, token }) {
-			if (token) {
-				session.user = token.user as User;
-				session.accessToken = token.accessToken;
-				session.accessTokenExpiry = token.accessTokenExpiry;
-				session.refreshToken = token.refreshToken;
-				session.error = token.error;
-			}
+			session.user = token?.user as User;
+			session.accessToken = token?.accessToken ?? null;
+			session.accessTokenExpiry = token?.accessTokenExpiry ?? null;
+			session.refreshToken = token?.refreshToken ?? null;
+			session.error = token?.error ?? null;
 			return session;
 		},
 	},
