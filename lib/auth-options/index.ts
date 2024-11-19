@@ -44,18 +44,7 @@ export const authOptions = {
 		CredentialsProvider({
 			id: 'login',
 			name: 'Login',
-			credentials: {
-				email: {
-					label: 'Email:',
-					type: 'email',
-					placeholder: 'Your Email',
-				},
-				password: {
-					label: 'Password:',
-					type: 'password',
-					placeholder: 'Your Password',
-				},
-			},
+			credentials: {},
 			async authorize(credentials) {
 				try {
 					const { data: user } = await axiosInstance.post(
@@ -71,23 +60,7 @@ export const authOptions = {
 		CredentialsProvider({
 			id: 'register',
 			name: 'Register',
-			credentials: {
-				name: {
-					label: 'Name:',
-					type: 'text',
-					placeholder: 'Your Name',
-				},
-				email: {
-					label: 'Email:',
-					type: 'email',
-					placeholder: 'Your Email',
-				},
-				password: {
-					label: 'Password:',
-					type: 'password',
-					placeholder: 'Your Password',
-				},
-			},
+			credentials: {},
 			async authorize(credentials) {
 				try {
 					const { data: user } = await axiosInstance.post(
