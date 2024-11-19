@@ -1,5 +1,7 @@
-import { getCookieValue, logoutHandler } from '@/lib/utils';
+import { logoutHandler } from '@/lib/utils';
 import axios from 'axios';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../auth-options';
 
 export const axiosInstance = axios.create({
 	baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -9,9 +11,9 @@ export const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
 	async (config) => {
 		try {
-			const authToken = await getCookieValue('token');
-			if (authToken) {
-				config.headers['Authorization'] = authToken;
+			const session = await getServerSession(authOptions);
+			if (session?.accessToken) {
+				config.headers['Authorization'] = session.accessToken;
 			}
 			return config;
 		} catch (error) {

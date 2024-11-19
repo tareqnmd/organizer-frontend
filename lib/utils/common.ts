@@ -1,18 +1,14 @@
 import { type ClassValue, clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
-
 import { signOut } from 'next-auth/react';
 import { redirect } from 'next/navigation';
-import { clearCookie } from './server';
+import { twMerge } from 'tailwind-merge';
 
 export const logoutHandler = async () => {
 	try {
-		await clearCookie();
 		await signOut({
 			callbackUrl: `${window.location.origin}/login`,
 		});
 	} catch (error) {
-		await clearCookie();
 		redirect('/login');
 	}
 };
