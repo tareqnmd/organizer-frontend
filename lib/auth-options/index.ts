@@ -1,5 +1,5 @@
 import { axiosInstance } from '@/lib/utils';
-import { NextAuthOptions } from 'next-auth';
+import { NextAuthOptions, User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
@@ -10,6 +10,22 @@ const {
 	GOOGLE_SECRET = '',
 	GOOGLE_ID = '',
 } = process.env;
+
+const refreshAccessToken = async (token: any) => {
+	try {
+		const { data: user } = await axiosInstance.post('/user/refresh-token', {
+			refreshToken: token.refreshToken,
+		});
+		return {
+			...token,
+			accessToken: user.accessToken,
+			refreshToken: user.refreshToken,
+			accessTokenExpiry: user.accessTokenExpiry,
+		};
+	} catch (error) {
+		return {};
+	}
+};
 
 export const authOptions = {
 	pages: {
@@ -108,8 +124,9 @@ export const authOptions = {
 					user.image = userData.image;
 					user.role = userData.role;
 					user.status = userData.status;
-					user.token = userData.token;
+					user.accessToken = userData.accessToken;
 					user.refreshToken = userData.refreshToken;
+					user.accessTokenExpiry = userData.accessTokenExpiry;
 					return true;
 				}
 				return false;
@@ -119,21 +136,37 @@ export const authOptions = {
 		},
 		async jwt({ token, trigger, session, user }) {
 			if (user) {
-				token = {
-					...user,
-					iat: token.iat,
-					exp: token.exp,
-					jti: token.jti,
+				token.accessToken = user.accessToken;
+				token.refreshToken = user.refreshToken;
+				token.accessTokenExpiry = user.accessTokenExpiry;
+				token.user = {
+					id: user.id,
+					email: user.email,
+					name: user.name,
+					image: user.image,
+					role: user.role,
+					status: user.status,
 				};
 			}
 			if (trigger === 'update' && session?.name) {
 				token.name = session.name;
 			}
-			return token;
+
+			if (Date.now() < (token.accessTokenExpiry as number)) {
+				return token;
+			}
+			const refreshedToken = await refreshAccessToken(token);
+			return refreshedToken;
 		},
 		async session({ session, token }) {
-			const { iat, exp, jti, ...rest } = token;
-			return { expires: session.expires, user: rest };
+			if (token) {
+				session.user = token.user as User;
+				session.accessToken = token.accessToken;
+				session.accessTokenExpiry = token.accessTokenExpiry;
+				session.refreshToken = token.refreshToken;
+				session.error = token.error;
+			}
+			return session;
 		},
 	},
 } satisfies NextAuthOptions;

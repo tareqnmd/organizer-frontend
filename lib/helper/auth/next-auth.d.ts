@@ -8,7 +8,15 @@ declare module 'next-auth' {
 		image?: string;
 		role?: string;
 		status?: string;
-		token?: string;
+		accessToken?: string;
 		refreshToken?: string;
+		accessTokenExpiry?: number;
+	}
+	interface Session {
+		user: User;
+		accessToken?: any;
+		refreshToken?: any;
+		accessTokenExpiry?: any;
+		error?: any;
 	}
 }
