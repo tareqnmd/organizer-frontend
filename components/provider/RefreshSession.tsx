@@ -6,10 +6,13 @@ import { useEffect } from 'react';
 const RefreshSession = () => {
 	const { data: session } = useSession();
 	useEffect(() => {
-		if (session?.error === AuthErrorEnum.REFRESH_ACCESS_TOKEN_ERROR) {
+		if (
+			session?.error &&
+			session?.error === AuthErrorEnum.REFRESH_ACCESS_TOKEN_ERROR
+		) {
 			signIn();
 		}
-	}, [session]);
+	}, [session?.error]);
 
 	return null;
 };
