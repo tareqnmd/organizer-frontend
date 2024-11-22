@@ -1,4 +1,4 @@
-import { axiosInstance } from '@/lib/utils';
+import { axiosInstance, baseAxiosInstance } from '@/lib/utils';
 import { NextAuthOptions, User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GitHubProvider from 'next-auth/providers/github';
@@ -14,9 +14,12 @@ const {
 
 const refreshAccessToken = async (token: any) => {
 	try {
-		const { data: user } = await axiosInstance.post('/user/refresh-token', {
-			refreshToken: token.refreshToken,
-		});
+		const { data: user } = await baseAxiosInstance.post(
+			'/user/refresh-token',
+			{
+				refreshToken: token.refreshToken,
+			},
+		);
 		return {
 			...token,
 			accessToken: user.accessToken,
