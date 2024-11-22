@@ -14,18 +14,18 @@ const {
 
 const refreshAccessToken = async (token: any) => {
 	try {
-		const { data: user } = await baseAxiosInstance.post(
-			'/user/refresh-token',
-			{
-				refreshToken: token.refreshToken,
-			},
-		);
-		return {
+		const {
+			data: { data: user },
+		} = await baseAxiosInstance.post('/user/refresh-token', {
+			refreshToken: token.refreshToken,
+		});
+		const newToken = {
 			...token,
 			accessToken: user.accessToken,
 			refreshToken: user.refreshToken,
 			accessTokenExpiry: user.accessTokenExpiry,
 		};
+		return newToken;
 	} catch (error) {
 		return {
 			...token,
