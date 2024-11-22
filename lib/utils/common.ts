@@ -1,7 +1,18 @@
+import axios from 'axios';
 import { type ClassValue, clsx } from 'clsx';
 import { signOut } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 import { twMerge } from 'tailwind-merge';
+
+export async function fetchSession(queryParamString?: string) {
+	const { data: session } = await axios.get(
+		'/api/auth/session' + (queryParamString ? '?' + queryParamString : ''),
+	);
+	if (Object.keys(session).length) {
+		return session;
+	}
+	return null;
+}
 
 export function clearAllCookies() {
 	const cookies = document.cookie?.split('; ');

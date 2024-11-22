@@ -8,7 +8,7 @@ export const nextProperties = ({ revalidate = 0 }) => {
 export const serverAuthFetch = async (url: string, next_options = {}) => {
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
 	const path = `${baseURL}/${url}`;
-	const session = await getServerSession(authOptions);
+	const session = await getServerSession(authOptions());
 	return fetch(path, {
 		headers: session?.accessToken
 			? { Authorization: session.accessToken }
@@ -33,6 +33,7 @@ export const generateDataFromServer = async (
 ) => {
 	try {
 		const res = await serverAuthFetch(url, options);
+		console.log('res', res?.status);
 		if (res?.status === 401) {
 			throw new Error('Unauthorized');
 		}

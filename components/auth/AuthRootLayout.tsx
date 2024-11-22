@@ -7,7 +7,7 @@ import { ModeToggle } from '../core/nav/ModeToggle';
 import { Card } from '../ui/card';
 
 const AuthRootLayout = async ({ children }: ChildrenType) => {
-	const session = await getServerSession(authOptions);
+	const session = await getServerSession(authOptions());
 	if (session?.user?.email) {
 		return redirect('/');
 	}
