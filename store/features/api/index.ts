@@ -22,7 +22,7 @@ const apiSlice = createApi({
 				AuthErrorEnum.FORCE_REFRESH_QUERY_PARAM + '=true',
 			);
 			if (session?.accessToken) {
-				return baseQuery(args, api, extraOptions);
+				result = await baseQuery(args, api, extraOptions);
 			} else {
 				await logoutHandler();
 			}
