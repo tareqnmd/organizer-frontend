@@ -5,13 +5,18 @@ import { redirect } from 'next/navigation';
 import { twMerge } from 'tailwind-merge';
 
 export async function fetchSession(queryParamString?: string) {
-	const { data: session } = await axios.get(
-		'/api/auth/session' + (queryParamString ? '?' + queryParamString : ''),
-	);
-	if (Object.keys(session).length) {
-		return session;
+	try {
+		const { data: session } = await axios.get(
+			'/api/auth/session' +
+				(queryParamString ? '?' + queryParamString : ''),
+		);
+		if (Object.keys(session).length) {
+			return session;
+		}
+		return null;
+	} catch (error) {
+		return null;
 	}
-	return null;
 }
 
 export function clearAllCookies() {

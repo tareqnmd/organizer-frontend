@@ -1,5 +1,7 @@
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth-options';
+import { AuthErrorEnum } from '../helper/auth';
+import { fetchSession, logoutHandler } from './common';
 
 export const nextProperties = ({ revalidate = 0 }) => {
 	return { next: { revalidate } };
@@ -32,10 +34,16 @@ export const generateDataFromServer = async (
 	},
 ) => {
 	try {
-		const res = await serverAuthFetch(url, options);
-		console.log('res', res?.status);
+		let res = await serverAuthFetch(url, options);
 		if (res?.status === 401) {
-			throw new Error('Unauthorized');
+			const session = await fetchSession(
+				AuthErrorEnum.FORCE_REFRESH_QUERY_PARAM + '=true',
+			);
+			if (session?.accessToken) {
+				res = await serverAuthFetch(url, options);
+			} else {
+				await logoutHandler();
+			}
 		}
 		if (!res.ok) {
 			throw new Error('Failed to fetch data');
