@@ -6,7 +6,6 @@ import { useEffect } from 'react';
 
 const RefreshSession = () => {
 	const { data: session } = useSession();
-	console.log('session?.error', session?.error);
 	useEffect(() => {
 		if (
 			session?.error &&
