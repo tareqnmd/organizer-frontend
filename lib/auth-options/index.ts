@@ -25,6 +25,7 @@ const refreshAccessToken = async (token: any) => {
 		};
 	} catch (error) {
 		return {
+			...token,
 			error: AuthErrorEnum.REFRESH_ACCESS_TOKEN_ERROR,
 		};
 	}
@@ -131,14 +132,11 @@ export const authOptions = {
 			if (Date.now() < (token.accessTokenExpiry as number)) {
 				return token;
 			}
-			const refreshedToken = await refreshAccessToken(token);
-			return refreshedToken;
+			return refreshAccessToken(token);
 		},
 		async session({ session, token }) {
 			session.user = token?.user as User;
 			session.accessToken = token?.accessToken ?? null;
-			session.accessTokenExpiry = token?.accessTokenExpiry ?? null;
-			session.refreshToken = token?.refreshToken ?? null;
 			session.error = token?.error ?? null;
 			return session;
 		},
