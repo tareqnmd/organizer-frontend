@@ -5,7 +5,7 @@ import { authOptions } from '@/lib/auth-options';
 import { UserRoleEnum } from '@/lib/helper/profile';
 import { getRouteName, getRoutes, Routes } from '@/lib/routes';
 const Links = async () => {
-	const session = await getServerSession(authOptions);
+	const session = await getServerSession(authOptions());
 	return (
 		<ul className="hidden items-center gap-2 text-sm md:flex">
 			{session?.user?.role === UserRoleEnum.ADMIN && (

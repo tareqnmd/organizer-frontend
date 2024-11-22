@@ -1,5 +1,7 @@
-import { redirect } from 'next/navigation';
-import { getCookie } from './server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../auth-options';
+import { AuthErrorEnum } from '../helper/auth';
+import { fetchSession, logoutHandler } from './common';
 
 export const nextProperties = ({ revalidate = 0 }) => {
 	return { next: { revalidate } };
@@ -8,9 +10,11 @@ export const nextProperties = ({ revalidate = 0 }) => {
 export const serverAuthFetch = async (url: string, next_options = {}) => {
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
 	const path = `${baseURL}/${url}`;
-	const cookie = await getCookie();
+	const session = await getServerSession(authOptions());
 	return fetch(path, {
-		headers: cookie ? { cookie } : undefined,
+		headers: session?.accessToken
+			? { Authorization: session.accessToken }
+			: undefined,
 		...next_options,
 	});
 };
@@ -30,9 +34,16 @@ export const generateDataFromServer = async (
 	},
 ) => {
 	try {
-		const res = await serverAuthFetch(url, options);
+		let res = await serverAuthFetch(url, options);
 		if (res?.status === 401) {
-			throw new Error('Unauthorized');
+			const session = await fetchSession(
+				AuthErrorEnum.FORCE_REFRESH_QUERY_PARAM + '=true',
+			);
+			if (session?.accessToken) {
+				res = await serverAuthFetch(url, options);
+			} else {
+				await logoutHandler();
+			}
 		}
 		if (!res.ok) {
 			throw new Error('Failed to fetch data');
@@ -40,9 +51,6 @@ export const generateDataFromServer = async (
 		const data = await res.json();
 		return data;
 	} catch (error: unknown) {
-		if (error instanceof Error && error.message === 'Unauthorized') {
-			redirect('/unauthorized');
-		}
 		if (error instanceof Error) {
 			return error.message;
 		}

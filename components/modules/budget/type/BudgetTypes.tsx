@@ -10,7 +10,7 @@ const BudgetTypes = async ({}) => {
 		'budget/types',
 		nextProperties({}),
 	);
-	const session = await getServerSession(authOptions);
+	const session = await getServerSession(authOptions());
 	return (
 		<>
 			{session?.user?.role === 'admin' && (
