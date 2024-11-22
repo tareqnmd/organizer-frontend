@@ -1,19 +1,41 @@
+import axios from 'axios';
 import { type ClassValue, clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
-
 import { signOut } from 'next-auth/react';
 import { redirect } from 'next/navigation';
-import { clearCookie } from './server';
+import { twMerge } from 'tailwind-merge';
+
+export async function fetchSession(queryParamString?: string) {
+	try {
+		const { data: session } = await axios.get(
+			'/api/auth/session' +
+				(queryParamString ? '?' + queryParamString : ''),
+		);
+		if (Object.keys(session).length) {
+			return session;
+		}
+		return null;
+	} catch (error) {
+		return null;
+	}
+}
+
+export function clearAllCookies() {
+	const cookies = document.cookie?.split('; ');
+	for (const cookie of cookies) {
+		const [name, _] = cookie?.split('=');
+		document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+	}
+}
 
 export const logoutHandler = async () => {
 	try {
-		await clearCookie();
 		await signOut({
 			callbackUrl: `${window.location.origin}/login`,
 		});
 	} catch (error) {
-		await clearCookie();
 		redirect('/login');
+	} finally {
+		clearAllCookies();
 	}
 };
 

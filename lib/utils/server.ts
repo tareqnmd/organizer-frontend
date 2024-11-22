@@ -3,10 +3,6 @@
 import { revalidateTag } from 'next/cache';
 import { cookies, headers } from 'next/headers';
 
-export const clearCookie = async () => {
-	cookies().delete('token');
-};
-
 export const getCookie = async () => {
 	try {
 		const headersList = headers();
