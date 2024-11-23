@@ -13,24 +13,28 @@ const {
 } = process.env;
 
 const refreshAccessToken = async (token: any) => {
-	try {
-		const {
-			data: { data: user },
-		} = await baseAxiosInstance.post('/user/refresh-token', {
-			refreshToken: token.refreshToken,
-		});
-		const newToken = {
-			...token,
-			accessToken: user.accessToken,
-			refreshToken: user.refreshToken,
-			accessTokenExpiry: user.accessTokenExpiry,
-		};
-		return newToken;
-	} catch (error) {
-		return {
-			...token,
-			error: AuthErrorEnum.REFRESH_ACCESS_TOKEN_ERROR,
-		};
+	if (token?.refreshToken) {
+		try {
+			const {
+				data: { data: user },
+			} = await baseAxiosInstance.post('/user/refresh-token', {
+				refreshToken: token.refreshToken,
+			});
+			const newToken = {
+				...token,
+				accessToken: user.accessToken,
+				refreshToken: user.refreshToken,
+				accessTokenExpiry: user.accessTokenExpiry,
+			};
+			return newToken;
+		} catch (error) {
+			return {
+				...token,
+				error: AuthErrorEnum.REFRESH_ACCESS_TOKEN_ERROR,
+			};
+		}
+	} else {
+		return { ...token, error: AuthErrorEnum.REFRESH_ACCESS_TOKEN_ERROR };
 	}
 };
 
