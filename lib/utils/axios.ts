@@ -1,6 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '../auth-options';
+import { getSession } from 'next-auth/react';
 import { AuthErrorEnum } from '../helper/auth/enums';
 import { fetchSession, logoutHandler } from './common';
 
@@ -17,7 +16,7 @@ export const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
 	async (config) => {
 		try {
-			const session = await getServerSession(authOptions());
+			const session = await getSession();
 			if (session?.accessToken) {
 				config.headers['Authorization'] = session.accessToken;
 			}
