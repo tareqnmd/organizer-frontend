@@ -37,7 +37,10 @@ const NoteStarred = ({ note }: { note: NoteType }) => {
 			{note.starred === false ? (
 				<StarIcon className="cursor-pointer" size={16} />
 			) : (
-				<StarIcon className="cursor-pointer" size={16} fill="black" />
+				<StarIcon
+					className="cursor-pointer fill-dark dark:fill-light"
+					size={16}
+				/>
 			)}
 		</button>
 	);
