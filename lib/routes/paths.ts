@@ -34,6 +34,10 @@ export const routes = {
 			name: 'Reset Password',
 			path: Routes.RESET_PASSWORD,
 		},
+		{
+			name: 'Verify Email',
+			path: Routes.VERIFY_EMAIL,
+		},
 	],
 	modules: [
 		{
@@ -116,3 +120,11 @@ export const getRouteName = (type: keyof typeof routes, path: Routes) => {
 		return '';
 	}
 };
+
+export const publicPaths = [
+	Routes.VERIFY_EMAIL,
+	Routes.LOGIN,
+	Routes.REGISTER,
+	Routes.FORGOT_PASSWORD,
+	Routes.RESET_PASSWORD,
+];
