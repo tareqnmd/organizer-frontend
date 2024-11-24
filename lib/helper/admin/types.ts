@@ -10,5 +10,8 @@ export type AdminUserType = {
 	name: string;
 	email: string;
 	role: string;
-	googleId: string;
+	googleLinked: boolean;
+	githubLinked: boolean;
+	emailLinked: boolean;
+	image: string;
 };
