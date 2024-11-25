@@ -2,8 +2,9 @@ import { withAuth } from 'next-auth/middleware';
 import { NextResponse } from 'next/server';
 
 export default withAuth(
-	function middleware(req) {
-		if (req?.nextauth?.token?.role !== 'admin') {
+	function middleware(req: any) {
+		const role = req?.nextauth?.token?.user?.role;
+		if (role && role !== 'admin') {
 			return NextResponse.rewrite(new URL('/non-privileged', req.url));
 		}
 	},
@@ -11,7 +12,7 @@ export default withAuth(
 		callbacks: {
 			authorized: ({ token }) => !!token,
 		},
-	}
+	},
 );
 
 export const config = { matcher: ['/admin/:path*'] };
