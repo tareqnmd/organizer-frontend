@@ -10,9 +10,8 @@ import {
 	ForgotPasswordSchema,
 	ForgotPasswordSchemaType,
 } from '@/lib/helper/auth';
-import { getError } from '@/lib/utils';
+import { baseAxiosInstance, getError } from '@/lib/utils';
 import { Loader, Send } from 'lucide-react';
-import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -31,18 +30,18 @@ const ForgotPassword = () => {
 	const onSubmit = async (data: ForgotPasswordSchemaType) => {
 		try {
 			setLoading(true);
-			const res = await signIn('send-reset-link', {
-				...data,
-				redirect: false,
-			});
-			if (res?.ok) {
-				toast.success('Reset link sent successfully');
+			const res = await baseAxiosInstance.post(
+				'/user/forgot-password',
+				data,
+			);
+			if (res?.status === 200) {
+				toast.success(res?.data?.message);
 				router.refresh();
 			} else {
-				toast.error(getError(res?.error));
+				toast.error(getError(res?.data?.message));
 			}
-		} catch (error) {
-			toast.error(getError(error));
+		} catch (error: any) {
+			toast.error(getError(error?.response));
 		} finally {
 			setLoading(false);
 		}
