@@ -1,7 +1,9 @@
-const GoogleIcon = () => {
+import { cn } from '@/lib/utils';
+
+const GoogleIcon = ({ className }: { className?: string }) => {
 	return (
 		<svg
-			className="h-[24px] w-[24px] shrink-0"
+			className={cn('h-[24px] w-[24px] shrink-0', className)}
 			stroke="currentColor"
 			fill="currentColor"
 			stroke-width="0"
