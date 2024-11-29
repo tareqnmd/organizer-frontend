@@ -10,15 +10,18 @@ import {
 	ResetPasswordSchema,
 	ResetPasswordSchemaType,
 } from '@/lib/helper/auth';
-import { getError } from '@/lib/utils';
+import { baseAxiosInstance, getError } from '@/lib/utils';
 import { Loader, Lock } from 'lucide-react';
-import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import CustomFormInput from '../common/input/CustomFormInput';
 
-const ResetPassword = () => {
+const ResetPassword = ({
+	searchParams,
+}: {
+	searchParams: { token: string; id: string };
+}) => {
 	const router = useRouter();
 	const [loading, setLoading] = useState(false);
 	const form = useForm<ResetPasswordSchemaType>({
@@ -32,15 +35,17 @@ const ResetPassword = () => {
 	const onSubmit = async (data: ResetPasswordSchemaType) => {
 		try {
 			setLoading(true);
-			const res = await signIn('reset-password', {
+			const res = await baseAxiosInstance.post('/user/reset-password', {
 				...data,
-				redirect: false,
+				token: searchParams.token,
+				id: searchParams.id,
 			});
-			if (res?.ok) {
+			if (res?.status === 200) {
 				toast.success('Password reset successfully');
 				router.refresh();
+				router.push('/login');
 			} else {
-				toast.error(getError(res?.error));
+				toast.error(getError(res?.data?.message));
 			}
 		} catch (error) {
 			toast.error(getError(error));
@@ -48,6 +53,12 @@ const ResetPassword = () => {
 			setLoading(false);
 		}
 	};
+
+	useEffect(() => {
+		if (!searchParams.token || !searchParams.id) {
+			router.push('/forgot-password');
+		}
+	}, [router, searchParams]);
 
 	return (
 		<Form {...form}>
