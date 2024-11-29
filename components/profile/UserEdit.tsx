@@ -56,7 +56,6 @@ const UserEdit = ({ user }: { user: UserType }) => {
 				data: { ...data, passwordChange },
 			});
 			await update({ name: data.name });
-			router.refresh();
 		} catch (error) {}
 	};
 
@@ -73,7 +72,6 @@ const UserEdit = ({ user }: { user: UserType }) => {
 					},
 				});
 				await update({ name: data.name });
-				router.refresh();
 			} else {
 				toast.error('Password miss match');
 			}
