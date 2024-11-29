@@ -64,24 +64,8 @@ export const authOptions = (query?: { [key: string]: string | string[] }) => {
 							credentials,
 						);
 						return user ?? null;
-					} catch (error) {
-						return null;
-					}
-				},
-			}),
-			CredentialsProvider({
-				id: 'register',
-				name: 'Register',
-				credentials: {},
-				async authorize(credentials) {
-					try {
-						const { data: user } = await axiosInstance.post(
-							'/user/register',
-							credentials,
-						);
-						return user ?? null;
-					} catch (error) {
-						return null;
+					} catch (error: any) {
+						throw new Error(error.message);
 					}
 				},
 			}),
