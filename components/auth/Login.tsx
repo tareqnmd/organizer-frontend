@@ -11,8 +11,8 @@ import {
 	LoginSchemaType,
 } from '@/lib/helper/auth';
 import { getRouteName, Routes } from '@/lib/routes';
-import { getError } from '@/lib/utils';
-import { Loader, LogIn } from 'lucide-react';
+import { baseAxiosInstance, getError } from '@/lib/utils';
+import { Loader, LogIn, Mail } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -23,6 +23,7 @@ import CustomFormInput from '../common/input/CustomFormInput';
 const Login = () => {
 	const router = useRouter();
 	const [loading, setLoading] = useState(false);
+	const [verifyEmail, setVerifyEmail] = useState(false);
 	const form = useForm<LoginSchemaType>({
 		resolver: zodResolver(LoginSchema),
 		defaultValues: {
@@ -30,6 +31,29 @@ const Login = () => {
 			password: '',
 		},
 	});
+
+	const sendVerificationEmail = async () => {
+		if (form.getValues('email')) {
+			try {
+				setLoading(true);
+				const res = await baseAxiosInstance.post(
+					'/user/send-verification-email',
+					{ email: form.getValues('email') },
+				);
+				if (res?.data) {
+					toast.success('Verification Email Sent');
+				} else {
+					toast.error(getError(res?.data));
+				}
+			} catch (error) {
+				toast.error(getError(error));
+			} finally {
+				setLoading(false);
+			}
+		} else {
+			toast.error('Please enter your email');
+		}
+	};
 
 	const onSubmit = async (data: LoginSchemaType) => {
 		try {
@@ -39,6 +63,12 @@ const Login = () => {
 				toast.success('Login Successful');
 				router.refresh();
 			} else {
+				const verifyEmail = res?.error === 'Email is not verified';
+				setVerifyEmail(verifyEmail);
+				const timeout = setTimeout(() => {
+					setVerifyEmail(false);
+					clearTimeout(timeout);
+				}, 10000);
 				toast.error(getError(res?.error));
 			}
 		} catch (error) {
@@ -68,14 +98,35 @@ const Login = () => {
 				>
 					{getRouteName('auth', Routes.FORGOT_PASSWORD)}?
 				</Link>
-				<Button
-					className="mt-2 flex w-full gap-2"
-					type="submit"
-					disabled={loading}
-				>
-					{loading ? <Loader className="animate-spin" /> : <LogIn />}{' '}
-					Login
-				</Button>
+				{!verifyEmail && (
+					<Button
+						className="mt-2 flex w-full gap-2"
+						type="submit"
+						disabled={loading}
+					>
+						{loading ? (
+							<Loader className="animate-spin" />
+						) : (
+							<LogIn />
+						)}
+						Login
+					</Button>
+				)}
+				{verifyEmail && (
+					<Button
+						className="mt-2 flex w-full gap-2"
+						type="button"
+						disabled={loading}
+						onClick={sendVerificationEmail}
+					>
+						{loading ? (
+							<Loader className="animate-spin" />
+						) : (
+							<Mail className="h-4 w-4" />
+						)}
+						Verify Email
+					</Button>
+				)}
 			</form>
 		</Form>
 	);
