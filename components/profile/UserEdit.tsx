@@ -56,7 +56,6 @@ const UserEdit = ({ user }: { user: UserType }) => {
 				data: { ...data, passwordChange },
 			});
 			await update({ name: data.name });
-			router.refresh();
 		} catch (error) {}
 	};
 
@@ -73,7 +72,6 @@ const UserEdit = ({ user }: { user: UserType }) => {
 					},
 				});
 				await update({ name: data.name });
-				router.refresh();
 			} else {
 				toast.error('Password miss match');
 			}
@@ -104,7 +102,7 @@ const UserEdit = ({ user }: { user: UserType }) => {
 				passwordChange={passwordChange}
 				setPasswordChange={setPasswordChange}
 			/>
-			{passwordChange ? (
+			{passwordChange && (
 				<Form {...formWithPassword}>
 					<form
 						onSubmit={formWithPassword.handleSubmit(
@@ -132,7 +130,8 @@ const UserEdit = ({ user }: { user: UserType }) => {
 						</Button>
 					</form>
 				</Form>
-			) : (
+			)}
+			{!passwordChange && (
 				<Form {...formWithoutPassword}>
 					<form
 						onSubmit={formWithoutPassword.handleSubmit(

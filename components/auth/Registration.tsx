@@ -4,10 +4,9 @@ import {
 	registrationFormItems,
 	RegistrationSchema,
 } from '@/lib/helper/auth';
-import { getError } from '@/lib/utils';
+import { baseAxiosInstance, getError } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader, LogIn } from 'lucide-react';
-import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -31,12 +30,12 @@ const Registration = () => {
 	const onSubmit = async (data: RegisterSchemaType) => {
 		try {
 			setLoading(true);
-			const res = await signIn('register', { ...data, redirect: false });
-			if (res?.ok) {
-				toast.success('Registration Successful');
-				router.refresh();
+			const res = await baseAxiosInstance.post('/user/register', data);
+			if (res?.status === 201) {
+				toast.success(res?.data?.message);
+				router.push('/login');
 			} else {
-				toast.error(getError(res?.error));
+				toast.error(getError(res?.data));
 			}
 		} catch (error) {
 			toast.error(getError(error));

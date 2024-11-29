@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { type ClassValue, clsx } from 'clsx';
 import { signOut } from 'next-auth/react';
-import { redirect } from 'next/navigation';
 import { twMerge } from 'tailwind-merge';
 
 export async function fetchSession(queryParamString?: string) {
@@ -32,17 +31,15 @@ export const logoutHandler = async () => {
 		await signOut({
 			callbackUrl: `${window.location.origin}/login`,
 		});
-	} catch (error) {
-		redirect('/login');
-	} finally {
-		clearAllCookies();
-	}
+	} catch (error) {}
 };
 
 export const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
 export const getError = (error: any, defaultMessage = 'Error Found') => {
-	return error?.data?.message ?? error?.message ?? defaultMessage;
+	return typeof error === 'string'
+		? error
+		: (error?.data?.message ?? error?.message ?? defaultMessage);
 };
 export const toQueryString = (
 	obj: Record<string, string | number | boolean | null | undefined>,
