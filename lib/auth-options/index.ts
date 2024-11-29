@@ -64,8 +64,8 @@ export const authOptions = (query?: { [key: string]: string | string[] }) => {
 							credentials,
 						);
 						return user ?? null;
-					} catch (error) {
-						return null;
+					} catch (error: any) {
+						throw new Error(error.message);
 					}
 				},
 			}),
