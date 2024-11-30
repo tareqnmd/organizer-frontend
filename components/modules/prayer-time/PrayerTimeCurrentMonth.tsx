@@ -1,7 +1,24 @@
 import { Card } from '@/components/ui/card';
 import { PrayerTimesType } from '@/lib/helper/prayer-time';
+import { cn } from '@/lib/utils';
 
 const PrayerTimeCurrentMonth = ({ data }: { data: PrayerTimesType }) => {
+	const dateIsSame = (date: string) => {
+		try {
+			return (
+				new Date().toLocaleDateString('en-US', {
+					month: 'long',
+					day: 'numeric',
+				}) ===
+				new Date(date).toLocaleDateString('en-US', {
+					month: 'long',
+					day: 'numeric',
+				})
+			);
+		} catch (error) {
+			return false;
+		}
+	};
 	return (
 		<Card className="flex flex-col gap-3 p-2">
 			<h2 className="text-lg font-bold">Prayer Times for this month</h2>
@@ -21,12 +38,23 @@ const PrayerTimeCurrentMonth = ({ data }: { data: PrayerTimesType }) => {
 						))}
 						{data.map((item) => (
 							<>
-								<span className="border p-2 text-sm font-medium">
+								<span
+									className={cn(
+										'border p-2 text-sm font-medium',
+										dateIsSame(item.date.gregorianDate) &&
+											'bg-gray-300 dark:bg-gray-700',
+									)}
+								>
 									{item.date.gregorianDate}
 								</span>
 								{item.timings.map((prayer) => (
 									<span
-										className="border p-2 text-sm"
+										className={cn(
+											'border p-2 text-sm',
+											dateIsSame(
+												item.date.gregorianDate,
+											) && 'bg-gray-300 dark:bg-gray-700',
+										)}
 										key={prayer.name}
 									>
 										{prayer.time}
