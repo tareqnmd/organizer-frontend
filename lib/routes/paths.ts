@@ -58,6 +58,12 @@ export const routes = {
 			icon: 'list-todo',
 			description: 'Personal Task Management',
 		},
+		{
+			name: 'Prayer',
+			path: Routes.PRAYER_TIMES,
+			icon: 'clock',
+			description: 'Prayer Times Information',
+		},
 	],
 	module_admin: [
 		{
