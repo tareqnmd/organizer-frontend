@@ -20,7 +20,7 @@ const PrayerTimeToday = ({
 				Prayer Times in <span className="capitalize">{city}</span>,{' '}
 				<span className="capitalize">{country}</span>
 			</div>
-			<div className="flex items-center justify-between">
+			<div className="flex flex-wrap items-center justify-between gap-3">
 				<span className="text-md">{data.date.gregorianDate}</span>
 				<span className="text-md font-medium">
 					{data.date.hijriDate}

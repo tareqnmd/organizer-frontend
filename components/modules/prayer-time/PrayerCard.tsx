@@ -14,16 +14,27 @@ const PrayerCard = ({
 	const [isActivated, setIsActivated] = useState(false);
 	const [upcomingTime, setUpcomingTime] = useState('00:00:00');
 
+	const calculateTotalMinutes = (time: string) => {
+		const [hours, minutes] = time.split(':').map(Number);
+		return hours * 60 + minutes;
+	};
+
+	const formatTime = (totalSeconds: number) => {
+		return `${Math.floor(totalSeconds / 3600)
+			.toString()
+			.padStart(2, '0')}:${Math.floor((totalSeconds % 3600) / 60)
+			.toString()
+			.padStart(2, '0')}:${Math.floor(totalSeconds % 60)
+			.toString()
+			.padStart(2, '0')}`;
+	};
+
 	useEffect(() => {
-		const currentTimeHours = new Date().getHours();
-		const currentTimeMinutes = new Date().getMinutes();
-		const totalTime = currentTimeHours * 60 + currentTimeMinutes;
-		const prevTime = prevPrayerTime.split(':');
-		const prevTimeTotal =
-			parseInt(prevTime[0]) * 60 + parseInt(prevTime[1]);
-		const prayerTime = prayerInfo.time.split(':');
-		const prayerTimeTotal =
-			parseInt(prayerTime[0]) * 60 + parseInt(prayerTime[1]);
+		const totalTime = calculateTotalMinutes(
+			`${new Date().getHours()}:${new Date().getMinutes()}`,
+		);
+		const prevTimeTotal = calculateTotalMinutes(prevPrayerTime);
+		const prayerTimeTotal = calculateTotalMinutes(prayerInfo.time);
 		const inBetween =
 			totalTime > prevTimeTotal && totalTime < prayerTimeTotal;
 		setIsActivated(inBetween);
@@ -32,8 +43,8 @@ const PrayerCard = ({
 	useEffect(() => {
 		const updateUpcomingTime = () => {
 			if (!isActivated) return;
-			const [hours, minutes] = prayerInfo.time.split(':').map(Number);
 			const prayerTime = new Date();
+			const [hours, minutes] = prayerInfo.time.split(':').map(Number);
 			prayerTime.setHours(hours, minutes, 0, 0);
 			const diff = prayerTime.getTime() - new Date().getTime();
 			const totalSeconds = diff / 1000;
@@ -41,14 +52,7 @@ const PrayerCard = ({
 				clearInterval(intervalId);
 				return;
 			}
-			const formattedTime = `${Math.floor(totalSeconds / 3600)
-				.toString()
-				.padStart(2, '0')}:${Math.floor((totalSeconds % 3600) / 60)
-				.toString()
-				.padStart(2, '0')}:${Math.floor(totalSeconds % 60)
-				.toString()
-				.padStart(2, '0')}`;
-			setUpcomingTime(formattedTime);
+			setUpcomingTime(formatTime(totalSeconds));
 		};
 		const intervalId = setInterval(updateUpcomingTime, 1000);
 		return () => clearInterval(intervalId);
@@ -57,12 +61,12 @@ const PrayerCard = ({
 	return (
 		<div
 			className={cn(
-				'flex min-w-[60px] flex-col items-center justify-center rounded-lg bg-gray-200 p-2',
+				'flex min-w-[60px] flex-col items-center justify-center rounded-lg bg-gray-300 p-2 dark:bg-gray-700',
 				isActivated && 'px-4',
 			)}
 		>
 			{isActivated && <span className="text-xs">Upcoming prayer</span>}
-			<span className="text-sm">{prayerInfo.name}</span>
+			<span className="text-xs">{prayerInfo.name}</span>
 			{isActivated && (
 				<span className="text-lg font-medium">{upcomingTime}</span>
 			)}
@@ -72,3 +76,4 @@ const PrayerCard = ({
 };
 
 export default PrayerCard;
+3;
