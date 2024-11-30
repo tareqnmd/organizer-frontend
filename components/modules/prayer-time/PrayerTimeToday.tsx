@@ -27,8 +27,14 @@ const PrayerTimeToday = ({
 				</span>
 			</div>
 			<div className="flex flex-wrap items-center gap-3">
-				{data?.timings?.map((item) => (
-					<PrayerCard key={item.name} prayerInfo={item} />
+				{data?.timings?.map((item, index) => (
+					<PrayerCard
+						key={item.name}
+						prayerInfo={item}
+						prevPrayerTime={
+							data.timings[index - 1]?.time || '00:00'
+						}
+					/>
 				))}
 			</div>
 		</Card>
