@@ -1,10 +1,25 @@
+import { Card } from '@/components/ui/card';
 import { PrayerTimeType } from '@/lib/helper/prayer-time';
 import PrayerCard from './PrayerCard';
 
-const PrayerTimeToday = ({ data }: { data: PrayerTimeType }) => {
+const PrayerTimeToday = ({
+	data,
+	city,
+	country,
+}: {
+	data: PrayerTimeType;
+	city: string;
+	country: string;
+}) => {
+	if (!data?.date?.gregorianDate) {
+		return <Card className="p-4 text-center">No data found</Card>;
+	}
 	return (
-		<div className="flex flex-col justify-between gap-3 rounded-lg border p-2 shadow">
-			<div className="text-lg font-bold">Prayer Times in Dhaka</div>
+		<Card className="flex flex-col justify-between gap-3 p-2">
+			<div className="text-lg font-bold">
+				Prayer Times in <span className="capitalize">{city}</span>,{' '}
+				<span className="capitalize">{country}</span>
+			</div>
 			<div className="flex items-center justify-between">
 				<span className="text-md">{data.date.gregorianDate}</span>
 				<span className="text-md font-medium">
@@ -16,7 +31,7 @@ const PrayerTimeToday = ({ data }: { data: PrayerTimeType }) => {
 					<PrayerCard key={item.name} prayerInfo={item} />
 				))}
 			</div>
-		</div>
+		</Card>
 	);
 };
 

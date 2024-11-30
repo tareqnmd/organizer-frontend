@@ -1,8 +1,9 @@
+import { Card } from '@/components/ui/card';
 import { PrayerTimesType } from '@/lib/helper/prayer-time';
 
 const PrayerTimeCurrentMonth = ({ data }: { data: PrayerTimesType }) => {
 	return (
-		<div className="mt-3 flex flex-col gap-3">
+		<Card className="flex flex-col gap-3 p-2">
 			<h2 className="text-lg font-bold">Prayer Times for this month</h2>
 			<div className="overflow-hidden rounded border">
 				<div className="flex flex-col gap-3 overflow-x-auto">
@@ -36,7 +37,7 @@ const PrayerTimeCurrentMonth = ({ data }: { data: PrayerTimesType }) => {
 					</div>
 				</div>
 			</div>
-		</div>
+		</Card>
 	);
 };
 
