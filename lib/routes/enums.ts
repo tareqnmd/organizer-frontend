@@ -20,6 +20,7 @@ export enum Routes {
 	BUDGET = '/budget',
 	NOTE = '/note',
 	TODO = '/todo',
+	PRAYER_TIMES = '/prayer-times',
 
 	// module budget
 	BUDGET_TRANSACTION = '/budget/transaction',
