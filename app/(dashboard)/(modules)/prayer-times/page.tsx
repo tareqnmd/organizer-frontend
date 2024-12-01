@@ -1,7 +1,17 @@
 import PrayerTime from '@/components/modules/prayer-time/PrayerTime';
+import { PrayerTimeSearchOptions } from '@/lib/helper/prayer-time';
 
-const Page = ({ searchParams = { city: 'Dhaka', country: 'Bangladesh' } }) => {
-	return <PrayerTime searchOptions={searchParams} />;
+const Page = ({ searchParams }: { searchParams: PrayerTimeSearchOptions }) => {
+	return (
+		<PrayerTime
+			searchOptions={{
+				city: searchParams.city ?? 'Dhaka',
+				country: searchParams.country ?? 'Bangladesh',
+				month: searchParams.month ?? new Date().getMonth().toString(),
+				year: searchParams.year ?? new Date().getFullYear().toString(),
+			}}
+		/>
+	);
 };
 
 export default Page;
