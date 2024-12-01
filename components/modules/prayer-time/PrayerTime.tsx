@@ -1,12 +1,14 @@
 import { generateDataFromServer, nextProperties } from '@/lib/utils';
 import PrayerLocationSelect from './PrayerLocationSelect';
-import PrayerTimeCurrentMonth from './PrayerTimeCurrentMonth';
+import PrayerTimeMonthYearSelector from './PrayerTimeMonthYearSelector';
 import PrayerTimeToday from './PrayerTimeToday';
 
+import { PrayerTimeSearchOptions } from '@/lib/helper/prayer-time';
+import PrayerTimeMonthWise from './PrayerTimeMonthWise';
 const PrayerTime = async ({
 	searchOptions,
 }: {
-	searchOptions: { city: string; country: string };
+	searchOptions: PrayerTimeSearchOptions;
 }) => {
 	const queryParams = new URLSearchParams(searchOptions);
 	const url = `prayer-time/today?${queryParams}`;
@@ -15,7 +17,7 @@ const PrayerTime = async ({
 		nextProperties({}),
 	);
 	const { data: currentMonthPrayerTime = [] } = await generateDataFromServer(
-		`prayer-time/current-month?${queryParams}`,
+		`prayer-time/month/${searchOptions.year}/${searchOptions.month}?${queryParams}`,
 		nextProperties({}),
 	);
 
@@ -31,7 +33,12 @@ const PrayerTime = async ({
 				data={todayPrayerTime}
 			/>
 			{currentMonthPrayerTime?.length > 0 && (
-				<PrayerTimeCurrentMonth data={currentMonthPrayerTime} />
+				<>
+					<PrayerTimeMonthYearSelector
+						searchOptions={searchOptions}
+					/>
+					<PrayerTimeMonthWise data={currentMonthPrayerTime} />
+				</>
 			)}
 		</div>
 	);

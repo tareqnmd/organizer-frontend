@@ -13,4 +13,11 @@ export type PrayerTimeType = {
 	};
 };
 
+export type PrayerTimeSearchOptions = {
+	city: string;
+	country: string;
+	month: string;
+	year: string;
+};
+
 export type PrayerTimesType = PrayerTimeType[];
