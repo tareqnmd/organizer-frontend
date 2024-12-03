@@ -1,6 +1,6 @@
 import { ListType } from '@/lib/helper/todo';
 import { generateDataFromServer, nextProperties } from '@/lib/utils';
-import BoardDetails from './BardDetails';
+import BoardDetails from './BoardDetails';
 import BoardDnDContent from './BoardDnDContent';
 
 const BoardView = async ({ boardId }: { boardId: string }) => {
@@ -21,10 +21,7 @@ const BoardView = async ({ boardId }: { boardId: string }) => {
 
 	return (
 		<>
-			<div
-				className="absolute inset-0 !bg-cover !bg-center !bg-no-repeat"
-				style={{ backgroundImage: board?.boardBg }}
-			></div>
+			<div className="absolute inset-0 !bg-cover !bg-center !bg-no-repeat"></div>
 			<div className="flex h-full flex-col gap-4">
 				<BoardDetails board={board} />
 				<BoardDnDContent
