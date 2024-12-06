@@ -83,6 +83,7 @@ export function GetFormatterForCurrency(currency: string) {
 	return new Intl.NumberFormat(locale, {
 		style: 'currency',
 		currency,
+		currencySign: 'accounting',
 	});
 }
 
