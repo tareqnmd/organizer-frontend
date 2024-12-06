@@ -59,7 +59,7 @@ export const routes = {
 			description: 'Personal Task Management',
 		},
 		{
-			name: 'Prayer',
+			name: 'Prayer Times',
 			path: Routes.PRAYER_TIMES,
 			icon: 'clock',
 			description: 'Prayer Times Information',
