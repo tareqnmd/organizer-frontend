@@ -7,6 +7,7 @@ export const loginFormItems = [
 		type: FormInputType.EMAIL,
 		placeholder: 'Email',
 		description: '',
+		fieldRequired: true,
 	},
 	{
 		name: 'password',
@@ -14,6 +15,7 @@ export const loginFormItems = [
 		type: FormInputType.PASSWORD,
 		placeholder: 'Password',
 		description: '',
+		fieldRequired: true,
 	},
 ];
 
@@ -24,6 +26,7 @@ export const registrationFormItems = [
 		type: FormInputType.TEXT,
 		placeholder: 'Name',
 		description: '',
+		fieldRequired: true,
 	},
 	{
 		name: 'email',
@@ -31,6 +34,7 @@ export const registrationFormItems = [
 		type: FormInputType.EMAIL,
 		placeholder: 'Email',
 		description: '',
+		fieldRequired: true,
 	},
 	{
 		name: 'password',
@@ -38,6 +42,7 @@ export const registrationFormItems = [
 		type: FormInputType.PASSWORD,
 		placeholder: 'Password',
 		description: '',
+		fieldRequired: true,
 	},
 	{
 		name: 'confirm_password',
@@ -45,6 +50,7 @@ export const registrationFormItems = [
 		type: FormInputType.PASSWORD,
 		placeholder: 'Confirm Password',
 		description: '',
+		fieldRequired: true,
 	},
 ];
 
@@ -55,6 +61,7 @@ export const forgotPasswordFormItems = [
 		type: FormInputType.EMAIL,
 		placeholder: 'Email',
 		description: '',
+		fieldRequired: true,
 	},
 ];
 
@@ -65,6 +72,7 @@ export const resetPasswordFormItems = [
 		type: FormInputType.PASSWORD,
 		placeholder: 'Password',
 		description: '',
+		fieldRequired: true,
 	},
 	{
 		name: 'confirm_password',
@@ -72,5 +80,6 @@ export const resetPasswordFormItems = [
 		type: FormInputType.PASSWORD,
 		placeholder: 'Confirm Password',
 		description: '',
+		fieldRequired: true,
 	},
 ];

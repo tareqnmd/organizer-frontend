@@ -12,6 +12,7 @@ import { CustomFormInputPropsType } from '@/lib/helper/shared';
 import { FormInputType } from '@/lib/helper/shared/enum';
 import { cn } from '@/lib/utils';
 import { ControllerRenderProps } from 'react-hook-form';
+import CheckboxInput from './Checkbox';
 import FormDate from './Date';
 import FormRadio from './Radio';
 import FormSelect from './Select';
@@ -22,7 +23,14 @@ const CustomFormInput = ({
 	control,
 	extraClassName = '',
 }: CustomFormInputPropsType) => {
-	const { label, name, type, placeholder = '', description } = input;
+	const {
+		label,
+		name,
+		type,
+		fieldRequired = false,
+		placeholder = '',
+		description,
+	} = input;
 
 	const getTypes = (type: FormInputType, field: ControllerRenderProps) => {
 		return type === FormInputType.EDITOR ? (
@@ -35,6 +43,8 @@ const CustomFormInput = ({
 			<FormDate field={field} />
 		) : type === FormInputType.TEXTAREA ? (
 			<Textarea placeholder={placeholder} {...field} />
+		) : type === FormInputType.CHECKBOX ? (
+			<CheckboxInput input={input} field={field} />
 		) : (
 			<Input placeholder={placeholder} {...{ ...input, ...field }} />
 		);
@@ -47,7 +57,12 @@ const CustomFormInput = ({
 			name={name}
 			render={({ field }) => (
 				<FormItem className={cn(extraClassName)}>
-					<FormLabel>{label}</FormLabel>
+					<FormLabel>
+						{label}
+						{fieldRequired && (
+							<span className="pl-0.5 text-status-danger">*</span>
+						)}
+					</FormLabel>
 					<FormControl>
 						{getTypes(type || FormInputType.TEXT, field)}
 					</FormControl>

@@ -56,7 +56,7 @@ const config = {
 				status: {
 					inactive: '#e5e7eb',
 					success: '#127369',
-					danger: '#8C1F28',
+					danger: '#ef4444',
 					neutral: '#01415B',
 				},
 			},

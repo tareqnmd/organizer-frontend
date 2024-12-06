@@ -98,25 +98,20 @@ const Login = () => {
 				>
 					{getRouteName('auth', Routes.FORGOT_PASSWORD)}?
 				</Link>
-				{!verifyEmail && (
-					<Button
-						className="mt-2 flex w-full gap-2"
-						type="submit"
-						disabled={loading}
-					>
-						{loading ? (
-							<Loader className="animate-spin" />
-						) : (
-							<LogIn />
-						)}
-						Login
-					</Button>
-				)}
+				<Button
+					className="mt-2 flex w-full gap-2"
+					type="submit"
+					disabled={loading}
+				>
+					{loading ? <Loader className="animate-spin" /> : <LogIn />}
+					Login
+				</Button>
 				{verifyEmail && (
 					<Button
-						className="mt-2 flex w-full gap-2"
+						className="flex w-full gap-2 border border-dashed border-dark dark:border-light"
 						type="button"
 						disabled={loading}
+						variant="link"
 						onClick={sendVerificationEmail}
 					>
 						{loading ? (

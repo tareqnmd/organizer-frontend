@@ -27,9 +27,14 @@ const BudgetTransactionStatus = ({
 	const [statusToggle, { isLoading, isError, isSuccess, error, data = {} }] =
 		useEditBudgetTransactionMutation();
 	const statusHandler = () => {
+		const extraData = transaction?.savingCategoryId
+			? {
+					savingCategoryId: transaction.savingCategoryId,
+				}
+			: {};
 		statusToggle({
 			id: transaction.id,
-			data: { status: transaction.status === 1 ? 0 : 1 },
+			data: { status: transaction.status === 1 ? 0 : 1, ...extraData },
 		});
 	};
 

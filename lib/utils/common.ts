@@ -37,9 +37,13 @@ export const logoutHandler = async () => {
 export const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
 export const getError = (error: any, defaultMessage = 'Error Found') => {
-	return typeof error === 'string'
-		? error
-		: (error?.data?.message ?? error?.message ?? defaultMessage);
+	try {
+		return typeof error === 'string'
+			? error
+			: (error?.data?.message ?? error?.message ?? defaultMessage);
+	} catch (error) {
+		return defaultMessage;
+	}
 };
 export const toQueryString = (
 	obj: Record<string, string | number | boolean | null | undefined>,

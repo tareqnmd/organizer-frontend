@@ -65,7 +65,9 @@ export const authOptions = (query?: { [key: string]: string | string[] }) => {
 						);
 						return user ?? null;
 					} catch (error: any) {
-						throw new Error(error.message);
+						throw new Error(
+							error?.message ?? 'Error Found! Please try again.',
+						);
 					}
 				},
 			}),

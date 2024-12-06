@@ -8,6 +8,9 @@ const BudgetTransactionAction = ({
 }: {
 	transaction: BudgetTransactionType;
 }) => {
+	if (transaction.typeName === 'Saving') {
+		return null;
+	}
 	return (
 		<div className="flex items-center gap-1">
 			{transaction.status === 1 ? (
