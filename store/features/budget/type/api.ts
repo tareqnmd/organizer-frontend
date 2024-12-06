@@ -22,6 +22,11 @@ export const budgetTypeApi = apiSlice.injectEndpoints({
 				method: 'DELETE',
 			}),
 		}),
+		typeIsExpense: builder.mutation({
+			query: (id) => ({
+				url: `budget/type-is-expense/${id}`,
+			}),
+		}),
 	}),
 });
 
@@ -29,4 +34,5 @@ export const {
 	useDeleteBudgetTypeMutation,
 	useEditBudgetTypeMutation,
 	useCreateBudgetTypeMutation,
+	useTypeIsExpenseMutation,
 } = budgetTypeApi;

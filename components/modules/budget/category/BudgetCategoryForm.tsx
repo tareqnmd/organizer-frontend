@@ -14,10 +14,11 @@ import {
 	useCreateBudgetCategoryMutation,
 	useEditBudgetCategoryMutation,
 } from '@/store/features/budget/category/api';
+import { useTypeIsExpenseMutation } from '@/store/features/budget/type/api';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
@@ -29,6 +30,7 @@ const BudgetCategoryForm = ({
 	setOpen: (arg: boolean) => void;
 }) => {
 	const router = useRouter();
+	const [saveExpense, setSaveExpense] = useState(false);
 	const form = useForm<BudgetCategorySchemaType>({
 		resolver: zodResolver(BudgetCategorySchema),
 		defaultValues: {
@@ -36,6 +38,8 @@ const BudgetCategoryForm = ({
 			typeId: '',
 		},
 	});
+	const [typeIsExpense] = useTypeIsExpenseMutation();
+	const type = form.watch('typeId');
 	const [
 		edit,
 		{
@@ -61,9 +65,18 @@ const BudgetCategoryForm = ({
 	};
 
 	useEffect(() => {
+		if (type) {
+			typeIsExpense(type).then((res) => {
+				setSaveExpense(res?.data ?? false);
+			});
+		}
+	}, [type, typeIsExpense]);
+
+	useEffect(() => {
 		if (category?.name && category.typeId) {
 			form.setValue('name', category.name);
 			form.setValue('typeId', category.typeId);
+			form.setValue('expenseSaving', category.savingExpense);
 		}
 	}, [form, category]);
 
@@ -88,19 +101,24 @@ const BudgetCategoryForm = ({
 		router,
 		setOpen,
 	]);
+
 	return (
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
 				className="grid w-full gap-3"
 			>
-				{categoryFormItems.map((input) => (
-					<CustomFormInput
-						key={input.name}
-						input={input}
-						control={form?.control}
-					/>
-				))}
+				{categoryFormItems
+					.filter((item) =>
+						saveExpense ? true : item.name !== 'expenseSaving',
+					)
+					.map((input) => (
+						<CustomFormInput
+							key={input.name}
+							input={input}
+							control={form?.control}
+						/>
+					))}
 				<DialogFooter>
 					<Button
 						disabled={isCreateLoading || isEditLoading}

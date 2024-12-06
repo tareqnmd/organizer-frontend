@@ -5,7 +5,7 @@ export type ChildrenType = {
 };
 
 export type InputOptionType = {
-	value: string;
+	value: string | boolean;
 	label: string;
 };
 
@@ -17,7 +17,7 @@ export type CustomFormInputType = {
 	optionUrl?: string;
 	staticOptions?: InputOptionType[];
 	description?: string;
-	required?: boolean;
+	fieldRequired?: boolean;
 	disabled?: boolean;
 	hidden?: boolean;
 	className?: string;

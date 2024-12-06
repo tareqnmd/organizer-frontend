@@ -7,7 +7,7 @@ export const userUpdateFormInputs = [
 		type: FormInputType.TEXT,
 		placeholder: 'Name',
 		description: '',
-		required: true,
+		fieldRequired: true,
 	},
 	{
 		name: 'email',
@@ -15,7 +15,7 @@ export const userUpdateFormInputs = [
 		type: FormInputType.EMAIL,
 		placeholder: 'Email',
 		description: '',
-		required: true,
+		fieldRequired: true,
 		disabled: true,
 	},
 ];
@@ -27,6 +27,7 @@ export const userUpdateFormInputsWithPassword = [
 		type: FormInputType.TEXT,
 		placeholder: 'Name',
 		description: '',
+		fieldRequired: true,
 	},
 	{
 		name: 'email',
@@ -34,6 +35,7 @@ export const userUpdateFormInputsWithPassword = [
 		type: FormInputType.EMAIL,
 		placeholder: 'Email',
 		description: '',
+		fieldRequired: true,
 		disabled: true,
 	},
 	{
@@ -42,6 +44,7 @@ export const userUpdateFormInputsWithPassword = [
 		type: FormInputType.PASSWORD,
 		placeholder: 'Current Password',
 		description: '',
+		fieldRequired: true,
 	},
 	{
 		name: 'password',
@@ -49,6 +52,7 @@ export const userUpdateFormInputsWithPassword = [
 		type: FormInputType.PASSWORD,
 		placeholder: 'Password',
 		description: '',
+		fieldRequired: true,
 	},
 	{
 		name: 'confirm_password',
@@ -56,5 +60,6 @@ export const userUpdateFormInputsWithPassword = [
 		type: FormInputType.PASSWORD,
 		placeholder: 'Confirm Password',
 		description: '',
+		fieldRequired: true,
 	},
 ];

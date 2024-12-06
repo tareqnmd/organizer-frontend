@@ -7,6 +7,7 @@ export const noteFormItems = [
 		type: FormInputType.TEXT,
 		placeholder: 'Subject',
 		description: '',
+		fieldRequired: true,
 	},
 	{
 		name: 'details',

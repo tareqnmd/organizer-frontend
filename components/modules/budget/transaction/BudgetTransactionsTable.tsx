@@ -12,7 +12,8 @@ import { format } from 'date-fns';
 import { ArrowDownUp } from 'lucide-react';
 import BudgetTransactionAction from './BudgetTransactionAction';
 
-const typeClass = (type: string) => (type === 'Expense' ? 'expense' : 'income');
+const typeClass = (type: string) =>
+	type === 'Expense' ? 'expense' : type === 'Income' ? 'income' : 'neutral';
 
 const BudgetTransactionsTable = ({
 	transactions,

@@ -10,4 +10,5 @@ export enum FormInputType {
 	EDITOR = 'editor',
 	RADIO = 'radio',
 	COLOR = 'color',
+	CHECKBOX = 'checkbox',
 }

@@ -22,10 +22,10 @@ export type BudgetDashboardOverviewCategoryDetailType = {
 };
 
 export type BudgetDashboardOverviewAmountType = {
-	grandTotal: number;
 	income: number;
 	expense: number;
 	balance: number;
+	saving: number;
 };
 
 export type BudgetDashboardOverviewCategoryType = {
@@ -111,6 +111,7 @@ export type BudgetCategoryType = {
 	name: string;
 	type: TransactionTypeEnum;
 	status: number;
+	savingExpense: boolean;
 };
 
 export type BudgetCategoryParamType = {
@@ -131,6 +132,7 @@ export type BudgetTransactionType = {
 	amount: number;
 	description: string;
 	status: number;
+	savingCategoryId: string;
 };
 
 export type BudgetTransactionsType = BudgetTransactionType[];

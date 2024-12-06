@@ -63,7 +63,10 @@ const FormSelect = ({
 				<SelectGroup>
 					{options?.length > 0 ? (
 						options?.map((item: InputOptionType, index: number) => (
-							<SelectItem key={index} value={item?.value}>
+							<SelectItem
+								key={index}
+								value={item?.value.toString()}
+							>
 								{item?.label}
 							</SelectItem>
 						))
