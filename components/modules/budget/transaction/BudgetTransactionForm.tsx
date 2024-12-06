@@ -10,6 +10,7 @@ import {
 } from '@/lib/helper/budget';
 import { transactionFormItems } from '@/lib/helper/budget/form-items';
 import { baseInputDateFormat, getError } from '@/lib/utils';
+import { useIsSelectedCategoryExpenseMutation } from '@/store/features/budget/category/api';
 import {
 	useCreateBudgetTransactionMutation,
 	useEditBudgetTransactionMutation,
@@ -17,7 +18,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
@@ -29,6 +30,7 @@ const BudgetTransactionForm = ({
 	setOpen: (arg: boolean) => void;
 }) => {
 	const router = useRouter();
+	const [saveExpense, setSaveExpense] = useState(false);
 	const form = useForm<BudgetTransactionSchemaType>({
 		resolver: zodResolver(BudgetTransactionSchema),
 		defaultValues: {
@@ -36,6 +38,8 @@ const BudgetTransactionForm = ({
 			description: '',
 		},
 	});
+	const [categoryIsExpense] = useIsSelectedCategoryExpenseMutation();
+
 	const [
 		edit,
 		{
@@ -56,16 +60,37 @@ const BudgetTransactionForm = ({
 	] = useCreateBudgetTransactionMutation();
 
 	const onSubmit = async (values: BudgetTransactionSchemaType) => {
+		const extraData = values.savingCategoryId
+			? { savingCategoryId: values.savingCategoryId }
+			: {};
 		transaction?.id
 			? await edit({
 					data: { ...values, date: baseInputDateFormat(values.date) },
 					id: transaction.id,
+					...extraData,
 				})
 			: await create({
 					...values,
 					date: baseInputDateFormat(values.date),
+					...extraData,
 				});
 	};
+
+	const categoryId = form.watch('categoryId');
+
+	useEffect(() => {
+		if (categoryId) {
+			categoryIsExpense(categoryId).then((res) => {
+				const data = res?.data ?? false;
+				setSaveExpense(data);
+				if (!data) {
+					form.setValue('savingCategoryId', '');
+				}
+			});
+		} else {
+			form.setValue('savingCategoryId', '');
+		}
+	}, [categoryId, categoryIsExpense, form]);
 
 	useEffect(() => {
 		if (transaction?.id) {
@@ -73,6 +98,9 @@ const BudgetTransactionForm = ({
 			form.setValue('categoryId', transaction.categoryId);
 			form.setValue('description', transaction.description);
 			form.setValue('date', new Date(transaction.date));
+			if (transaction.savingCategoryId) {
+				form.setValue('savingCategoryId', transaction.savingCategoryId);
+			}
 		}
 	}, [form, transaction]);
 
@@ -103,13 +131,19 @@ const BudgetTransactionForm = ({
 				onSubmit={form.handleSubmit(onSubmit)}
 				className="grid w-full gap-3"
 			>
-				{transactionFormItems.map((input) => (
-					<CustomFormInput
-						key={input.name}
-						input={input}
-						control={form?.control}
-					/>
-				))}
+				{transactionFormItems
+					.filter((item) =>
+						saveExpense
+							? true
+							: !item.name.includes('savingCategoryId'),
+					)
+					.map((input) => (
+						<CustomFormInput
+							key={input.name}
+							input={input}
+							control={form?.control}
+						/>
+					))}
 				<DialogFooter>
 					<Button
 						disabled={isCreateLoading || isEditLoading}

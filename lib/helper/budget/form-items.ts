@@ -1,4 +1,4 @@
-import { FormInputType } from "../shared/enum";
+import { FormInputType } from '../shared/enum';
 
 export const transactionFormItems = [
 	{
@@ -8,7 +8,16 @@ export const transactionFormItems = [
 		placeholder: 'Select a Category',
 		optionUrl: '/budget/type-category-select',
 		description: '',
-		required: true,
+		fieldRequired: true,
+	},
+	{
+		name: 'savingCategoryId',
+		label: 'Saving Category',
+		type: FormInputType.SELECT,
+		placeholder: 'Select a Category',
+		optionUrl: '/budget/type-category-saving-select',
+		description: '',
+		fieldRequired: false,
 	},
 	{
 		name: 'amount',
@@ -16,7 +25,7 @@ export const transactionFormItems = [
 		type: FormInputType.NUMBER,
 		placeholder: 'Amount',
 		description: '',
-		required: true,
+		fieldRequired: true,
 	},
 	{
 		name: 'date',
@@ -24,7 +33,7 @@ export const transactionFormItems = [
 		type: FormInputType.DATE,
 		placeholder: 'Date',
 		description: '',
-		required: true,
+		fieldRequired: true,
 	},
 	{
 		name: 'description',
@@ -32,7 +41,7 @@ export const transactionFormItems = [
 		type: FormInputType.TEXTAREA,
 		placeholder: 'Description',
 		description: '',
-		required: true,
+		fieldRequired: true,
 	},
 ];
 
@@ -43,6 +52,7 @@ export const typeFormItems = [
 		type: FormInputType.TEXT,
 		placeholder: 'Name',
 		description: '',
+		fieldRequired: true,
 	},
 ];
 
@@ -53,6 +63,7 @@ export const categoryFormItems = [
 		type: FormInputType.TEXT,
 		placeholder: 'Name',
 		description: '',
+		fieldRequired: true,
 	},
 	{
 		name: 'typeId',
@@ -61,5 +72,18 @@ export const categoryFormItems = [
 		placeholder: 'Select a Type',
 		optionUrl: '/budget/type-select',
 		description: '',
+		fieldRequired: true,
+	},
+	{
+		name: 'expenseSaving',
+		label: 'Expense related to Saving',
+		type: FormInputType.CHECKBOX,
+		fieldRequired: false,
+		staticOptions: [
+			{
+				label: 'Yes',
+				value: true,
+			},
+		],
 	},
 ];

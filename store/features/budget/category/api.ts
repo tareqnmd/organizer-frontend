@@ -22,6 +22,11 @@ export const budgetCategoryApi = apiSlice.injectEndpoints({
 				method: 'DELETE',
 			}),
 		}),
+		isSelectedCategoryExpense: builder.mutation({
+			query: (id) => ({
+				url: `budget/category-is-expense-saving/${id}`,
+			}),
+		}),
 	}),
 });
 
@@ -29,4 +34,5 @@ export const {
 	useCreateBudgetCategoryMutation,
 	useEditBudgetCategoryMutation,
 	useDeleteBudgetCategoryMutation,
+	useIsSelectedCategoryExpenseMutation,
 } = budgetCategoryApi;
