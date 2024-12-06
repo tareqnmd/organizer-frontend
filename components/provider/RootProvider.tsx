@@ -1,8 +1,9 @@
 import StoreProvider from '@/components/provider/StoreProvider';
 import { Toaster } from '@/components/ui/sonner';
+import NextTopLoader from 'nextjs-toploader';
 import AuthProvider from './AuthProvider';
-import { ThemeProvider } from './ThemeProvider';
 import RefreshSession from './RefreshSession';
+import { ThemeProvider } from './ThemeProvider';
 
 const RootProvider = ({ children }: { children: React.ReactNode }) => {
 	return (
@@ -16,6 +17,7 @@ const RootProvider = ({ children }: { children: React.ReactNode }) => {
 				<StoreProvider>
 					<Toaster richColors />
 					<RefreshSession />
+					<NextTopLoader color="#01415B" showSpinner={false} />
 					<div id="organizer">{children}</div>
 				</StoreProvider>
 			</ThemeProvider>

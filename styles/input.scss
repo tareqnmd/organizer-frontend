@@ -29,3 +29,18 @@ select:-webkit-autofill:focus,
 select:-webkit-autofill:active {
 	@apply shadow-[inset_0_0_0_30px_white] dark:shadow-[inset_0_0_0_30px_black];
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+input[type='number'] {
+	-moz-appearance: textfield;
+	@apply text-right;
+}
+
+.basic-input {
+	@apply focus-visible:!ring-transparent focus-visible:!ring-offset-transparent dark:!shadow-none;
+}

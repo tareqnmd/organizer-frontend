@@ -7,7 +7,7 @@ import { getRouteName, getRoutes, Routes } from '@/lib/routes';
 const Links = async () => {
 	const session = await getServerSession(authOptions());
 	return (
-		<ul className="hidden items-center gap-2 text-sm md:flex">
+		<ul className="hidden items-center gap-3 text-sm md:flex">
 			{session?.user?.role === UserRoleEnum.ADMIN && (
 				<li>
 					<NavLink

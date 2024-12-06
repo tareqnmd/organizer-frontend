@@ -4,6 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "rm -rf .next && next dev -p 3200",
+		"fresh-dev": "rm -rf node_modules && rm -rf .next && npm install && next dev -p 3200",
 		"turbo-dev": "rm -rf .next && next dev --turbo -p 3200",
 		"build": "rm -rf .next && next build",
 		"start": "next start -p 3200",
@@ -39,6 +40,7 @@
 		"next": "^14.2.4",
 		"next-auth": "^4.24.5",
 		"next-themes": "^0.2.1",
+		"nextjs-toploader": "^3.7.15",
 		"react": "^18",
 		"react-countup": "^6.5.3",
 		"react-day-picker": "^8.10.1",

@@ -42,11 +42,19 @@ const CustomFormInput = ({
 		) : type === FormInputType.DATE ? (
 			<FormDate field={field} />
 		) : type === FormInputType.TEXTAREA ? (
-			<Textarea placeholder={placeholder} {...field} />
+			<Textarea
+				className={'basic-input'}
+				placeholder={placeholder}
+				{...field}
+			/>
 		) : type === FormInputType.CHECKBOX ? (
 			<CheckboxInput input={input} field={field} />
 		) : (
-			<Input placeholder={placeholder} {...{ ...input, ...field }} />
+			<Input
+				className={'basic-input'}
+				placeholder={placeholder}
+				{...{ ...input, ...field }}
+			/>
 		);
 	};
 
