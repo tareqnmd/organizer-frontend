@@ -17,7 +17,11 @@ const RootProvider = ({ children }: { children: React.ReactNode }) => {
 				<StoreProvider>
 					<Toaster richColors />
 					<RefreshSession />
-					<NextTopLoader color="#01415B" showSpinner={false} />
+					<NextTopLoader
+						color="#219aca"
+						showSpinner={false}
+						shadow="none"
+					/>
 					<div id="organizer">{children}</div>
 				</StoreProvider>
 			</ThemeProvider>
