@@ -1,4 +1,5 @@
 import { AuthErrorEnum } from '@/lib/helper/auth';
+import { CommonHeaders } from '@/lib/helper/shared/enum';
 import { fetchSession, logoutHandler } from '@/lib/utils';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { getSession } from 'next-auth/react';
@@ -8,7 +9,11 @@ const baseQuery = fetchBaseQuery({
 	credentials: 'include',
 	prepareHeaders: async (headers) => {
 		const authToken = await getSession();
-		headers.set('Authorization', authToken?.accessToken ?? '');
+		headers.set(CommonHeaders.AUTHORIZATION, authToken?.accessToken ?? '');
+		headers.set(
+			CommonHeaders.API_SECRET_KEY,
+			process.env.NEXT_PUBLIC_API_SECRET_KEY ?? '',
+		);
 		return headers;
 	},
 });

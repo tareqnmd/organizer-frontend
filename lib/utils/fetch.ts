@@ -1,7 +1,10 @@
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth-options';
 import { AuthErrorEnum } from '../helper/auth';
+import { CommonHeaders } from '../helper/shared/enum';
 import { fetchSession, logoutHandler } from './common';
+
+const apiSecretKey = process.env.NEXT_PUBLIC_API_SECRET_KEY;
 
 export const nextProperties = ({ revalidate = 0 }) => {
 	return { next: { revalidate } };
@@ -11,10 +14,15 @@ export const serverAuthFetch = async (url: string, next_options = {}) => {
 	const baseURL = process.env.NEXT_PUBLIC_API_URL;
 	const path = `${baseURL}/${url}`;
 	const session = await getServerSession(authOptions());
+	const headers: Record<string, string> = {};
+	if (session?.accessToken) {
+		headers[CommonHeaders.AUTHORIZATION] = session.accessToken;
+	}
+	if (apiSecretKey) {
+		headers[CommonHeaders.API_SECRET_KEY] = apiSecretKey;
+	}
 	return fetch(path, {
-		headers: session?.accessToken
-			? { Authorization: session.accessToken }
-			: undefined,
+		headers,
 		...next_options,
 	});
 };
@@ -22,7 +30,13 @@ export const serverAuthFetch = async (url: string, next_options = {}) => {
 export const baseFetch = (url: string, next_options = {}) => {
 	const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 	const path = `${baseURL}/${url}`;
+	const headers = apiSecretKey
+		? new Headers({
+				[CommonHeaders.API_SECRET_KEY]: apiSecretKey,
+			})
+		: undefined;
 	return fetch(path, {
+		headers,
 		...next_options,
 	});
 };

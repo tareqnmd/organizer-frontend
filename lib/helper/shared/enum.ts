@@ -12,3 +12,8 @@ export enum FormInputType {
 	COLOR = 'color',
 	CHECKBOX = 'checkbox',
 }
+
+export enum CommonHeaders {
+	API_SECRET_KEY = 'api-secret-key',
+	AUTHORIZATION = 'authorization',
+}
