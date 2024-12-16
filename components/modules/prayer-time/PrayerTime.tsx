@@ -1,4 +1,4 @@
-import { generateDataFromServer, nextProperties } from '@/lib/utils';
+import { baseFetch, nextProperties } from '@/lib/utils';
 import PrayerLocationSelect from './PrayerLocationSelect';
 import PrayerTimeMonthYearSelector from './PrayerTimeMonthYearSelector';
 import PrayerTimeToday from './PrayerTimeToday';
@@ -12,11 +12,11 @@ const PrayerTime = async ({
 }) => {
 	const queryParams = new URLSearchParams(searchOptions);
 	const url = `prayer-time/today?${queryParams}`;
-	const { data: todayPrayerTime = {} } = await generateDataFromServer(
+	const { data: todayPrayerTime = {} } = await baseFetch(
 		url,
 		nextProperties({}),
 	);
-	const { data: currentMonthPrayerTime = [] } = await generateDataFromServer(
+	const { data: currentMonthPrayerTime = [] } = await baseFetch(
 		`prayer-time/month/${searchOptions.year}/${searchOptions.month}?${queryParams}`,
 		nextProperties({}),
 	);
