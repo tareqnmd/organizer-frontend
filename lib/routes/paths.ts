@@ -3,114 +3,126 @@ import { Routes } from './enums';
 export const routes = {
 	misc: [
 		{
-			name: 'Home',
-			path: Routes.DASHBOARD,
+			name: Routes.DASHBOARD_NAME,
+			path: Routes.DASHBOARD_PATH,
 		},
 		{
-			name: 'Admin',
-			path: Routes.ADMIN,
+			name: Routes.ADMIN_NAME,
+			path: Routes.ADMIN_PATH,
 		},
 	],
 	user: [
 		{
-			name: 'Profile',
-			path: Routes.PROFILE,
+			name: Routes.PROFILE_NAME,
+			path: Routes.PROFILE_PATH,
 		},
 	],
 	auth: [
 		{
-			name: 'Login',
-			path: Routes.LOGIN,
+			name: Routes.LOGIN_NAME,
+			path: Routes.LOGIN_PATH,
 		},
 		{
-			name: 'Create One',
-			path: Routes.REGISTER,
+			name: Routes.REGISTER_NAME,
+			path: Routes.REGISTER_PATH,
 		},
 		{
-			name: 'Forgot Password',
-			path: Routes.FORGOT_PASSWORD,
+			name: Routes.FORGOT_PASSWORD_NAME,
+			path: Routes.FORGOT_PASSWORD_PATH,
 		},
 		{
-			name: 'Reset Password',
-			path: Routes.RESET_PASSWORD,
+			name: Routes.RESET_PASSWORD_NAME,
+			path: Routes.RESET_PASSWORD_PATH,
 		},
 		{
-			name: 'Verify Email',
-			path: Routes.VERIFY_EMAIL,
+			name: Routes.VERIFY_EMAIL_NAME,
+			path: Routes.VERIFY_EMAIL_PATH,
 		},
 	],
 	modules: [
 		{
-			name: 'Budget',
-			path: Routes.BUDGET,
+			name: Routes.BUDGET_NAME,
+			path: Routes.BUDGET_PATH,
 			icon: 'wallet',
 			description: 'Personal Financial Management',
 		},
 		{
-			name: 'Note',
-			path: Routes.NOTE,
+			name: Routes.NOTE_NAME,
+			path: Routes.NOTE_PATH,
 			icon: 'scroll-text',
 			description: 'Personal Note Management',
 		},
 		{
-			name: 'Todo',
-			path: Routes.TODO,
+			name: Routes.TODO_NAME,
+			path: Routes.TODO_PATH,
 			icon: 'list-todo',
 			description: 'Personal Task Management',
 		},
 		{
-			name: 'Prayer Times',
-			path: Routes.PRAYER_TIMES,
+			name: Routes.PUBLIC_NAME,
+			path: Routes.PUBLIC_PATH,
+			icon: 'component',
+			description: 'Public Modules',
+		},
+	],
+	public: [
+		{
+			name: Routes.PRAYER_TIMES_NAME,
+			path: Routes.PRAYER_TIMES_PATH,
 			icon: 'clock',
 			description: 'Prayer Times Information',
+		},
+		{
+			name: Routes.CURRENCY_CONVERTER_NAME,
+			path: Routes.CURRENCY_CONVERTER_PATH,
 		},
 	],
 	module_admin: [
 		{
-			name: 'Admin',
-			path: Routes.ADMIN,
+			name: Routes.ADMIN_NAME,
+			path: Routes.ADMIN_PATH,
 		},
 		{
-			name: 'User Management',
-			path: Routes.ADMIN_USERS,
+			name: Routes.ADMIN_USERS_NAME,
+			path: Routes.ADMIN_USERS_PATH,
 		},
 	],
 	module_budget: [
 		{
-			name: 'Budget',
-			path: Routes.BUDGET,
+			name: Routes.BUDGET_NAME,
+			path: Routes.BUDGET_PATH,
 		},
 		{
-			name: 'Transaction',
-			path: Routes.BUDGET_TRANSACTION,
+			name: Routes.BUDGET_TRANSACTION_NAME,
+			path: Routes.BUDGET_TRANSACTION_PATH,
 		},
 		{
-			name: 'Type',
-			path: Routes.BUDGET_TYPE,
+			name: Routes.BUDGET_TYPE_NAME,
+			path: Routes.BUDGET_TYPE_PATH,
 		},
 		{
-			name: 'Category',
-			path: Routes.BUDGET_CATEGORY,
+			name: Routes.BUDGET_CATEGORY_NAME,
+			path: Routes.BUDGET_CATEGORY_PATH,
 		},
 	],
 	module_note: [
 		{
-			name: 'Notes',
-			path: Routes.NOTES,
+			name: Routes.NOTES_NAME,
+			path: Routes.NOTES_PATH,
 		},
 		{
-			name: 'Starred',
-			path: Routes.NOTE_STARRED,
+			name: Routes.NOTE_STARRED_NAME,
+			path: Routes.NOTE_STARRED_PATH,
 		},
 	],
 	module_todo: [
 		{
-			name: 'Workspaces',
-			path: Routes.TODO_WORKSPACES,
+			name: Routes.TODO_WORKSPACES_NAME,
+			path: Routes.TODO_WORKSPACES_PATH,
 		},
 		{
-			name: 'Boards',
-			path: Routes.TODO_BOARDS,
+			name: Routes.TODO_BOARDS_NAME,
+			path: Routes.TODO_BOARDS_PATH,
 		},
 	],
 };
@@ -128,9 +140,12 @@ export const getRouteName = (type: keyof typeof routes, path: Routes) => {
 };
 
 export const publicPaths = [
-	Routes.VERIFY_EMAIL,
-	Routes.LOGIN,
-	Routes.REGISTER,
-	Routes.FORGOT_PASSWORD,
-	Routes.RESET_PASSWORD,
+	Routes.VERIFY_EMAIL_PATH,
+	Routes.LOGIN_PATH,
+	Routes.REGISTER_PATH,
+	Routes.FORGOT_PASSWORD_PATH,
+	Routes.RESET_PASSWORD_PATH,
+	Routes.PRAYER_TIMES_PATH,
+	Routes.CURRENCY_CONVERTER_PATH,
+	Routes.PUBLIC_PATH,
 ];

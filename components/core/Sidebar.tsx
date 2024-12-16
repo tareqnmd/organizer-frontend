@@ -35,7 +35,10 @@ const Sidebar = ({ user }: { user: UserType }) => {
 						<li className="w-full border-b py-2 dark:border-slate-700">
 							<NavLink
 								exact={false}
-								link={{ name: 'Admin', path: Routes.ADMIN }}
+								link={{
+									name: Routes.ADMIN_NAME,
+									path: Routes.ADMIN_PATH,
+								}}
 							/>
 						</li>
 					)}

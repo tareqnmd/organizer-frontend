@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth';
 import NavLink from '@/components/layout/NavLink';
 import { authOptions } from '@/lib/auth-options';
 import { UserRoleEnum } from '@/lib/helper/profile';
-import { getRouteName, getRoutes, Routes } from '@/lib/routes';
+import { getRoutes, Routes } from '@/lib/routes';
 const Links = async () => {
 	const session = await getServerSession(authOptions());
 	return (
@@ -13,8 +13,8 @@ const Links = async () => {
 					<NavLink
 						exact={false}
 						link={{
-							name: getRouteName('misc', Routes.ADMIN),
-							path: Routes.ADMIN,
+							name: Routes.ADMIN_NAME,
+							path: Routes.ADMIN_PATH,
 						}}
 					/>
 				</li>

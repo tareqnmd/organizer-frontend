@@ -7,9 +7,9 @@ import Link from 'next/link';
 const routes = (type: string) => {
 	switch (type) {
 		case 'users':
-			return Routes.ADMIN_USERS;
+			return Routes.ADMIN_USERS_PATH;
 		default:
-			return Routes.ADMIN_USERS;
+			return Routes.ADMIN_USERS_PATH;
 	}
 };
 

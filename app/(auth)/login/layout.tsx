@@ -1,13 +1,13 @@
 import AuthContentLayout from '@/components/auth/AuthContentLayout';
-import { getRouteName, Routes } from '@/lib/routes';
+import { Routes } from '@/lib/routes';
 
 const LoginLayout = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<AuthContentLayout
 			title="Welcome"
 			anotherLink={{
-				href: Routes.REGISTER,
-				label: getRouteName('auth', Routes.REGISTER),
+				href: Routes.REGISTER_PATH,
+				label: Routes.REGISTER_NAME,
 			}}
 			anotherLinkText="Don't have an account?"
 		>
