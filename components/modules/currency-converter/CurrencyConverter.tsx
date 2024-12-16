@@ -64,7 +64,19 @@ const CurrencyConverter = ({ currencies }: { currencies: CurrencyType[] }) => {
 					/>
 				</div>
 			</div>
-			<Button onClick={handleConvert}>Convert</Button>
+			<Button
+				disabled={
+					!inputData.from ||
+					!inputData.to ||
+					!inputData.amount ||
+					(inputData.from === result?.from &&
+						inputData.to === result?.to &&
+						inputData.amount === result?.amountToConvert)
+				}
+				onClick={handleConvert}
+			>
+				Convert
+			</Button>
 			{result && <CurrencyConverterResult result={result} />}
 		</div>
 	);
