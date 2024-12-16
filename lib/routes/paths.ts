@@ -58,14 +58,8 @@ export const routes = {
 			icon: 'list-todo',
 			description: 'Personal Task Management',
 		},
-		{
-			name: Routes.PUBLIC_NAME,
-			path: Routes.PUBLIC_PATH,
-			icon: 'component',
-			description: 'Public Modules',
-		},
 	],
-	public: [
+	public_modules: [
 		{
 			name: Routes.PRAYER_TIMES_NAME,
 			path: Routes.PRAYER_TIMES_PATH,
@@ -75,6 +69,8 @@ export const routes = {
 		{
 			name: Routes.CURRENCY_CONVERTER_NAME,
 			path: Routes.CURRENCY_CONVERTER_PATH,
+			icon: 'arrow-left-right',
+			description: 'Currency Converter Information',
 		},
 	],
 	module_admin: [
