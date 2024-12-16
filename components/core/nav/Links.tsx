@@ -5,10 +5,14 @@ import { authOptions } from '@/lib/auth-options';
 import { UserRoleEnum } from '@/lib/helper/profile';
 import { getRoutes, Routes } from '@/lib/routes';
 const Links = async () => {
-	const session = await getServerSession(authOptions());
+	const { user = { role: null } } = (await getServerSession(
+		authOptions(),
+	)) || {
+		user: { role: null },
+	};
 	return (
 		<ul className="hidden items-center gap-3 text-sm md:flex">
-			{session?.user?.role === UserRoleEnum.ADMIN && (
+			{user?.role === UserRoleEnum.ADMIN && (
 				<li>
 					<NavLink
 						exact={false}

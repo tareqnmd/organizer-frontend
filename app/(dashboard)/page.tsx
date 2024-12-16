@@ -6,7 +6,9 @@ import { getServerSession } from 'next-auth';
 const page = async () => {
 	const {
 		user: { email },
-	} = await getServerSession(authOptions());
+	} = (await getServerSession(authOptions())) || {
+		user: { email: null },
+	};
 	const links = email
 		? [...getRoutes('modules'), ...getRoutes('public_modules')]
 		: getRoutes('public_modules');

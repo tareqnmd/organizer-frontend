@@ -121,6 +121,16 @@ export const routes = {
 			path: Routes.TODO_BOARDS_PATH,
 		},
 	],
+	public_links: [
+		{
+			name: Routes.LOGIN_NAME,
+			path: Routes.LOGIN_PATH,
+		},
+		{
+			name: Routes.REGISTER_NAME,
+			path: Routes.REGISTER_PATH,
+		},
+	],
 };
 
 export const getRoutes = (type: keyof typeof routes) => {
