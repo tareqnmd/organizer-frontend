@@ -14,6 +14,6 @@ export enum FormInputType {
 }
 
 export enum CommonHeaders {
-	API_SECRET_KEY = 'api-secret-key',
+	API_SECRET_KEY = 'x-api-key',
 	AUTHORIZATION = 'authorization',
 }

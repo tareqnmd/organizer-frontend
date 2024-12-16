@@ -10,7 +10,7 @@ import {
 	LoginSchema,
 	LoginSchemaType,
 } from '@/lib/helper/auth';
-import { getRouteName, Routes } from '@/lib/routes';
+import { Routes } from '@/lib/routes';
 import { baseAxiosInstance, getError } from '@/lib/utils';
 import { Loader, LogIn, Mail } from 'lucide-react';
 import { signIn } from 'next-auth/react';
@@ -94,9 +94,9 @@ const Login = () => {
 
 				<Link
 					className="ml-auto w-max text-xs"
-					href={Routes.FORGOT_PASSWORD}
+					href={Routes.FORGOT_PASSWORD_PATH}
 				>
-					{getRouteName('auth', Routes.FORGOT_PASSWORD)}?
+					{Routes.FORGOT_PASSWORD_NAME}?
 				</Link>
 				<Button
 					className="mt-2 flex w-full gap-2"

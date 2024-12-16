@@ -27,18 +27,18 @@ export const serverAuthFetch = async (url: string, next_options = {}) => {
 	});
 };
 
-export const baseFetch = (url: string, next_options = {}) => {
-	const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
+export const baseFetch = async (url: string, next_options = {}) => {
+	const baseURL = process.env.NEXT_PUBLIC_API_URL;
 	const path = `${baseURL}/${url}`;
-	const headers = apiSecretKey
-		? new Headers({
-				[CommonHeaders.API_SECRET_KEY]: apiSecretKey,
-			})
-		: undefined;
-	return fetch(path, {
-		headers,
-		...next_options,
-	});
+	const options = apiSecretKey
+		? {
+				headers: { [CommonHeaders.API_SECRET_KEY]: apiSecretKey },
+				...next_options,
+			}
+		: { ...next_options };
+	const response = await fetch(path, options);
+	const data = await response.json();
+	return data;
 };
 
 export const generateDataFromServer = async (
