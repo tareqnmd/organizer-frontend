@@ -10,6 +10,13 @@ export const baseAxiosInstance = axios.create({
 	withCredentials: true,
 });
 
+baseAxiosInstance.interceptors.request.use(async (config) => {
+	if (secretKey) {
+		config.headers[CommonHeaders.API_SECRET_KEY] = secretKey;
+	}
+	return config;
+});
+
 export const axiosInstance = axios.create({
 	baseURL: process.env.NEXT_PUBLIC_API_URL,
 	withCredentials: true,
