@@ -28,7 +28,10 @@ const Navbar = async () => {
 						</div>
 					</>
 				) : (
-					<PublicLinks />
+					<>
+						<PublicLinks />
+						<ModeToggle />
+					</>
 				)}
 			</div>
 		</nav>
