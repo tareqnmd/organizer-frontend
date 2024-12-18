@@ -7,6 +7,9 @@ export const baseDateFormat = (date: string | Date) =>
 export const baseInputDateFormat = (date: string | Date) =>
 	format(date, 'yyyy-MM-dd');
 
+export const baseDateTimeFormat = (date: string | Date) =>
+	format(date, 'dd-MM-yyyy HH:mm:ss');
+
 export const stringToNewDate = (date: string) =>
 	new Date(date?.split('-').reverse().join(',')) ?? date ?? null;
 

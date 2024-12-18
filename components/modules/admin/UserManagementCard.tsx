@@ -3,6 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { AdminUserType } from '@/lib/helper/admin';
+import { baseDateTimeFormat } from '@/lib/utils/date';
 import { Github, Mail } from 'lucide-react';
 
 const UserManagementCard = ({ user }: { user: AdminUserType }) => {
@@ -39,6 +40,16 @@ const UserManagementCard = ({ user }: { user: AdminUserType }) => {
 						Email
 					</Badge>
 				)}
+			</div>
+			<div className="flex items-center gap-1">
+				<p className="text-muted-foreground text-sm">
+					Last Login Time :
+				</p>
+				<span className="text-sm">
+					{user?.lastLoginTime
+						? baseDateTimeFormat(user.lastLoginTime)
+						: 'N/A'}
+				</span>
 			</div>
 		</Card>
 	);

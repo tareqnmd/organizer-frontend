@@ -14,4 +14,5 @@ export type AdminUserType = {
 	githubLinked: boolean;
 	emailLinked: boolean;
 	image: string;
+	lastLoginTime: string | null;
 };
