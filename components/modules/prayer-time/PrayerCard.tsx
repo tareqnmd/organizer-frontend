@@ -1,8 +1,8 @@
 'use client';
 
-import { PrayerInfo } from '@/lib/helper/prayer-time';
+import { PrayerInfo, PrayerTimeEnum } from '@/lib/helper/prayer-time';
 import { cn } from '@/lib/utils';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 const PrayerCard = ({
 	prayerInfo,
@@ -29,16 +29,26 @@ const PrayerCard = ({
 			.padStart(2, '0')}`;
 	};
 
+	const isNextDayFajr = useMemo(
+		() => prayerInfo.name === PrayerTimeEnum.NEXT_DAY_FAJR,
+		[prayerInfo.name],
+	);
+
 	useEffect(() => {
+		const currentTime = isNextDayFajr
+			? new Date(new Date().setDate(new Date().getDate() + 1))
+			: new Date();
 		const totalTime = calculateTotalMinutes(
-			`${new Date().getHours()}:${new Date().getMinutes()}`,
+			`${currentTime.getHours()}:${currentTime.getMinutes()}`,
 		);
 		const prevTimeTotal = calculateTotalMinutes(prevPrayerTime);
-		const prayerTimeTotal = calculateTotalMinutes(prayerInfo.time);
+		const prayerTimeTotal =
+			calculateTotalMinutes(prayerInfo.time) +
+			(isNextDayFajr ? 24 * 60 : 0);
 		const inBetween =
 			totalTime > prevTimeTotal && totalTime < prayerTimeTotal;
 		setIsActivated(inBetween);
-	}, [prayerInfo.time, prevPrayerTime]);
+	}, [isNextDayFajr, prayerInfo.time, prevPrayerTime]);
 
 	useEffect(() => {
 		const updateUpcomingTime = () => {
@@ -46,6 +56,9 @@ const PrayerCard = ({
 			const prayerTime = new Date();
 			const [hours, minutes] = prayerInfo.time.split(':').map(Number);
 			prayerTime.setHours(hours, minutes, 0, 0);
+			if (isNextDayFajr) {
+				prayerTime.setDate(prayerTime.getDate() + 1);
+			}
 			const diff = prayerTime.getTime() - new Date().getTime();
 			const totalSeconds = diff / 1000;
 			if (totalSeconds < 0) {
@@ -56,7 +69,7 @@ const PrayerCard = ({
 		};
 		const intervalId = setInterval(updateUpcomingTime, 1000);
 		return () => clearInterval(intervalId);
-	}, [prayerInfo.time, isActivated]);
+	}, [prayerInfo.time, isActivated, prayerInfo.name, isNextDayFajr]);
 
 	return (
 		<div
