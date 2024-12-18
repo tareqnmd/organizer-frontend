@@ -21,17 +21,14 @@ const Navbar = async () => {
 				{user ? (
 					<>
 						<Links />
-						<div className="flex gap-4">
+						<div className="flex items-center gap-4">
 							{user ? <UserOptions user={user} /> : null}
 							<ModeToggle />
 							{user ? <Sidebar user={user} /> : null}
 						</div>
 					</>
 				) : (
-					<>
-						<PublicLinks />
-						<ModeToggle />
-					</>
+					<PublicLinks />
 				)}
 			</div>
 		</nav>

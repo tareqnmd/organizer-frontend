@@ -1,5 +1,6 @@
 import NavLink from '@/components/layout/NavLink';
 import { getRoutes } from '@/lib/routes';
+import { ModeToggle } from './ModeToggle';
 const PublicLinks = async () => {
 	return (
 		<ul className="flex items-center gap-3 text-sm">
@@ -8,6 +9,7 @@ const PublicLinks = async () => {
 					<NavLink exact={false} link={link} />
 				</li>
 			))}
+			<ModeToggle />
 		</ul>
 	);
 };
