@@ -5,4 +5,5 @@ export enum PrayerTimeEnum {
 	ASR = 'Asr',
 	MAGHRIB = 'Maghrib',
 	ISHA = 'Isha',
+	NEXT_DAY_FAJR = 'Next Day Fajr',
 }
