@@ -7,6 +7,7 @@ import {
 	CurrencyType,
 } from '@/lib/helper/currency-converter';
 import { baseFetch } from '@/lib/utils';
+import { Loader } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import CurrencyConverterInput from './CurrencyConverterInput';
@@ -20,10 +21,12 @@ const CurrencyConverter = ({ currencies }: { currencies: CurrencyType[] }) => {
 		to: 'BDT',
 		amount: null,
 	});
+	const [isLoading, setIsLoading] = useState(false);
 	const [result, setResult] = useState<CurrencyConverterType | null>(null);
 
 	const handleConvert = async () => {
 		if (inputData.from && inputData.to && inputData.amount) {
+			setIsLoading(true);
 			const params = new URLSearchParams({
 				from: inputData.from,
 				to: inputData.to,
@@ -33,6 +36,7 @@ const CurrencyConverter = ({ currencies }: { currencies: CurrencyType[] }) => {
 				`currency-converter/convert?${params.toString()}`,
 			);
 			setResult(convertedAmount);
+			setIsLoading(false);
 		} else {
 			toast.error('Please fill all the fields');
 		}
@@ -74,7 +78,9 @@ const CurrencyConverter = ({ currencies }: { currencies: CurrencyType[] }) => {
 						inputData.amount === result?.amountToConvert)
 				}
 				onClick={handleConvert}
+				className="flex items-center gap-1"
 			>
+				{isLoading && <Loader className="animate-spin" size={16} />}
 				Convert
 			</Button>
 			{result && <CurrencyConverterResult result={result} />}
