@@ -1,4 +1,4 @@
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const ProfileLayout = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<main className="container mx-auto py-4">
 			<div className="">{children}</div>
@@ -6,4 +6,4 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 	);
 };
 
-export default Layout;
+export default ProfileLayout;

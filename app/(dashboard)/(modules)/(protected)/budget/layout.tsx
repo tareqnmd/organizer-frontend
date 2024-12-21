@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 	},
 };
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const BudgetLayout = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<ModuleLayout links={getRoutes('module_budget')}>
 			{children}
@@ -17,4 +17,4 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 	);
 };
 
-export default Layout;
+export default BudgetLayout;

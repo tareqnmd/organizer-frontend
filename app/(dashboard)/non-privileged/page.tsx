@@ -1,7 +1,7 @@
 import NonPrivileged from '@/components/core/NonPrivileged';
 
-const Page = () => {
+const NonPrivilegedPage = () => {
 	return <NonPrivileged />;
 };
 
-export default Page;
+export default NonPrivilegedPage;

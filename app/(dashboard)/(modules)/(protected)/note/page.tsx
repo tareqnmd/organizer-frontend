@@ -1,7 +1,7 @@
 import Note from '@/components/modules/note/Note';
 
-const Page = () => {
+const NotePage = () => {
 	return <Note />;
 };
 
-export default Page;
+export default NotePage;

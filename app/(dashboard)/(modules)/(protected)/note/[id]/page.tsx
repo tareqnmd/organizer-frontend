@@ -1,8 +1,5 @@
 import NoteDetails from '@/components/modules/note/NoteDetails';
-import {
-	generateDataFromServer,
-	nextProperties,
-} from '@/lib/utils';
+import { generateDataFromServer, nextProperties } from '@/lib/utils';
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
 	const { data: note } = await generateDataFromServer(
@@ -18,8 +15,8 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 	};
 }
 
-const Page = ({ params }: { params: { id: string } }) => {
+const NoteDetailsPage = ({ params }: { params: { id: string } }) => {
 	return <NoteDetails id={params.id} />;
 };
 
-export default Page;
+export default NoteDetailsPage;
