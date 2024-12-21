@@ -12,6 +12,7 @@ import {
 } from '@/lib/helper/auth';
 import { Routes } from '@/lib/routes';
 import { baseAxiosInstance, getError } from '@/lib/utils';
+import { sendGAEvent } from '@next/third-parties/google';
 import { Loader, LogIn, Mail } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
@@ -58,6 +59,7 @@ const Login = () => {
 	const onSubmit = async (data: LoginSchemaType) => {
 		try {
 			setLoading(true);
+			sendGAEvent('login', 'buttonClicked', { value: data.email });
 			const res = await signIn('login', { ...data, redirect: false });
 			if (res?.ok) {
 				toast.success('Login Successful');

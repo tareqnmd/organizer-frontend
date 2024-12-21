@@ -7,6 +7,7 @@ import {
 	CurrencyType,
 } from '@/lib/helper/currency-converter';
 import { baseFetch } from '@/lib/utils';
+import { sendGTMEvent } from '@next/third-parties/google';
 import { Loader } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -27,6 +28,10 @@ const CurrencyConverter = ({ currencies }: { currencies: CurrencyType[] }) => {
 	const handleConvert = async () => {
 		if (inputData.from && inputData.to && inputData.amount) {
 			setIsLoading(true);
+			sendGTMEvent(
+				'currencyConverter',
+				`convert_${inputData.from}_${inputData.to}_${inputData.amount}`,
+			);
 			const params = new URLSearchParams({
 				from: inputData.from,
 				to: inputData.to,
