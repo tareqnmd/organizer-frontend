@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth';
 import NavLink from '@/components/layout/NavLink';
 import { authOptions } from '@/lib/auth-options';
 import { UserRoleEnum } from '@/lib/helper/profile';
-import { getRoutes, Routes } from '@/lib/routes';
+import { Routes } from '@/lib/routes';
 const Links = async () => {
 	const { user = { role: null } } = (await getServerSession(
 		authOptions(),
@@ -11,7 +11,7 @@ const Links = async () => {
 		user: { role: null },
 	};
 	return (
-		<ul className="hidden items-center gap-3 text-sm md:flex">
+		<ul className="flex items-center gap-3 text-sm">
 			{user?.role === UserRoleEnum.ADMIN && (
 				<li>
 					<NavLink
@@ -23,11 +23,15 @@ const Links = async () => {
 					/>
 				</li>
 			)}
-			{getRoutes('modules').map((link) => (
-				<li key={link.path}>
-					<NavLink exact={false} link={link} />
-				</li>
-			))}
+			<li>
+				<NavLink
+					exact={false}
+					link={{
+						name: Routes.DASHBOARD_MODULE_NAME,
+						path: Routes.DASHBOARD_PATH,
+					}}
+				/>
+			</li>
 		</ul>
 	);
 };

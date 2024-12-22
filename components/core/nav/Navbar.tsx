@@ -5,7 +5,6 @@ import Logo from '../Logo';
 import Sidebar from '../Sidebar';
 import Links from './Links';
 import { ModeToggle } from './ModeToggle';
-import PublicLinks from './PublicLinks';
 import { UserOptions } from './UserOptions';
 
 const Navbar = async () => {
@@ -18,18 +17,12 @@ const Navbar = async () => {
 				<Link href="/">
 					<Logo />
 				</Link>
-				{user ? (
-					<>
-						<Links />
-						<div className="flex items-center gap-4">
-							{user ? <UserOptions user={user} /> : null}
-							<ModeToggle />
-							{user ? <Sidebar user={user} /> : null}
-						</div>
-					</>
-				) : (
-					<PublicLinks />
-				)}
+				<Links />
+				<div className="flex items-center gap-4">
+					{user ? <UserOptions user={user} /> : null}
+					<ModeToggle />
+					<Sidebar />
+				</div>
 			</div>
 		</nav>
 	);

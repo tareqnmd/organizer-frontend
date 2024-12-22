@@ -133,7 +133,7 @@ export const routes = {
 			path: Routes.LOGIN_PATH,
 		},
 		{
-			name: Routes.REGISTER_NAME,
+			name: Routes.REGISTER_FULL_NAME,
 			path: Routes.REGISTER_PATH,
 		},
 	],

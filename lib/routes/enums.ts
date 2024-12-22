@@ -1,6 +1,7 @@
 export enum Routes {
 	// dashboard
 	DASHBOARD_PATH = '/',
+	DASHBOARD_MODULE_NAME = 'Modules',
 	DASHBOARD_NAME = 'Dashboard',
 
 	// auth
@@ -8,6 +9,7 @@ export enum Routes {
 	LOGIN_NAME = 'Login',
 	REGISTER_PATH = '/registration',
 	REGISTER_NAME = 'Create One',
+	REGISTER_FULL_NAME = 'Register',
 	FORGOT_PASSWORD_PATH = '/forgot-password',
 	FORGOT_PASSWORD_NAME = 'Forgot Password',
 	RESET_PASSWORD_PATH = '/reset-password',
