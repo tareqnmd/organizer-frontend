@@ -4,15 +4,15 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
 	title: {
-		template: '%s | Todo',
-		default: 'Todo',
+		template: '%s | Time Tracking',
+		default: 'Time Tracking',
 	},
 };
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const TimeTrackingLayout = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<ModuleLayout links={getRoutes('module_todo')}>{children}</ModuleLayout>
 	);
 };
 
-export default Layout;
+export default TimeTrackingLayout;

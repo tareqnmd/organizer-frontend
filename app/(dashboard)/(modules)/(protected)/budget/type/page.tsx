@@ -1,7 +1,7 @@
 import TransactionTypes from '@/components/modules/budget/type/BudgetTypes';
 
-const Page = () => {
+const BudgetTypePage = () => {
 	return <TransactionTypes />;
 };
 
-export default Page;
+export default BudgetTypePage;

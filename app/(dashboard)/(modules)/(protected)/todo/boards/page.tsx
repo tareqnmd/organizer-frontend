@@ -9,7 +9,7 @@ const BoardsPage = async () => {
 	);
 	return (
 		<div className="flex flex-col gap-4">
-			<BoardCreate  />
+			<BoardCreate />
 			<Boards boards={boards} />
 		</div>
 	);

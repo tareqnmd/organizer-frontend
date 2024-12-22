@@ -1,7 +1,11 @@
 import PrayerTime from '@/components/modules/prayer-time/PrayerTime';
 import { PrayerTimeSearchOptions } from '@/lib/helper/prayer-time';
 
-const Page = ({ searchParams }: { searchParams: PrayerTimeSearchOptions }) => {
+const PrayerTimesPage = ({
+	searchParams,
+}: {
+	searchParams: PrayerTimeSearchOptions;
+}) => {
 	return (
 		<PrayerTime
 			searchOptions={{
@@ -14,4 +18,4 @@ const Page = ({ searchParams }: { searchParams: PrayerTimeSearchOptions }) => {
 	);
 };
 
-export default Page;
+export default PrayerTimesPage;

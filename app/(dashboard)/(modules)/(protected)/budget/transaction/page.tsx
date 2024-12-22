@@ -3,7 +3,7 @@ import { BudgetTransactionParamType } from '@/lib/helper/budget';
 import { baseDateFormat } from '@/lib/utils';
 import { endOfMonth, startOfMonth } from 'date-fns';
 
-const Page = ({
+const BudgetTransactionPage = ({
 	searchParams,
 }: {
 	searchParams: BudgetTransactionParamType;
@@ -21,4 +21,4 @@ const Page = ({
 	);
 };
 
-export default Page;
+export default BudgetTransactionPage;

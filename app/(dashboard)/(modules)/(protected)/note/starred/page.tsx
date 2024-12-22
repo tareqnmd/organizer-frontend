@@ -1,7 +1,7 @@
 import Notes from '@/components/modules/note/Notes';
 
-const Page = () => {
+const NoteStarredPage = () => {
 	return <Notes searchOptions={{ starred: 'true' }} />;
 };
 
-export default Page;
+export default NoteStarredPage;

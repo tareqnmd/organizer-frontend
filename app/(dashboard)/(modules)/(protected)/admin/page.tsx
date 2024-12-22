@@ -1,7 +1,7 @@
 import AdminDashboard from '@/components/modules/admin/AdminDashboard';
 
-const Page = () => {
+const AdminPage = () => {
 	return <AdminDashboard />;
 };
 
-export default Page;
+export default AdminPage;

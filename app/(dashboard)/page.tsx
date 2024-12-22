@@ -3,7 +3,7 @@ import { authOptions } from '@/lib/auth-options';
 import { getRoutes } from '@/lib/routes';
 import { getServerSession } from 'next-auth';
 
-const page = async () => {
+const DashboardPage = async () => {
 	const {
 		user: { email },
 	} = (await getServerSession(authOptions())) || {
@@ -15,9 +15,9 @@ const page = async () => {
 
 	return (
 		<main className="container mx-auto py-4">
-			<Dashboard modules={links} />
+			<Dashboard modules={links} loggedIn={!!email} />
 		</main>
 	);
 };
 
-export default page;
+export default DashboardPage;

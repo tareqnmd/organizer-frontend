@@ -58,6 +58,12 @@ export const routes = {
 			icon: 'list-todo',
 			description: 'Personal Task Management',
 		},
+		{
+			name: Routes.TIME_TRACKING_NAME,
+			path: Routes.TIME_TRACKING_PATH,
+			icon: 'timer',
+			description: 'Time Tracking',
+		},
 	],
 	public_modules: [
 		{
@@ -127,7 +133,7 @@ export const routes = {
 			path: Routes.LOGIN_PATH,
 		},
 		{
-			name: Routes.REGISTER_NAME,
+			name: Routes.REGISTER_FULL_NAME,
 			path: Routes.REGISTER_PATH,
 		},
 	],

@@ -9,10 +9,10 @@ export const metadata: Metadata = {
 	},
 };
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const NoteLayout = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<ModuleLayout links={getRoutes('module_note')}>{children}</ModuleLayout>
 	);
 };
 
-export default Layout;
+export default NoteLayout;
