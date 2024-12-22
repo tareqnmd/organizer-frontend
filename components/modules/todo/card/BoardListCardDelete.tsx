@@ -38,7 +38,7 @@ const BoardListCardDelete = ({ card }: { card: CardType }) => {
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
 				<Trash
-					className="cursor-pointer transition-all active:scale-75"
+					className="shrink-0 cursor-pointer transition-all active:scale-75"
 					size={16}
 				/>
 			</DialogTrigger>
