@@ -4,6 +4,7 @@ import PrayerTimeMonthYearSelector from './PrayerTimeMonthYearSelector';
 import PrayerTimeToday from './PrayerTimeToday';
 
 import { PrayerTimeSearchOptions } from '@/lib/helper/prayer-time';
+import FreeAPIInfo from '../FreeAPIInfo';
 import PrayerTimeMonthWise from './PrayerTimeMonthWise';
 const PrayerTime = async ({
 	searchOptions,
@@ -23,6 +24,10 @@ const PrayerTime = async ({
 
 	return (
 		<div className="container my-3 flex flex-col gap-3">
+			<FreeAPIInfo
+				apiName="ALADHAN (Prayer Time)"
+				apiLink="https://aladhan.com/prayer-times-api"
+			/>
 			<PrayerLocationSelect
 				city={searchOptions.city ?? 'Dhaka'}
 				country={searchOptions.country ?? 'Bangladesh'}

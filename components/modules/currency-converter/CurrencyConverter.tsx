@@ -11,6 +11,7 @@ import { sendGTMEvent } from '@next/third-parties/google';
 import { Loader } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
+import FreeAPIInfo from '../FreeAPIInfo';
 import CurrencyConverterInput from './CurrencyConverterInput';
 import CurrencyConverterResult from './CurrencyConverterResult';
 import CurrencyConverterSelect from './CurrencyConverterSelect';
@@ -49,6 +50,10 @@ const CurrencyConverter = ({ currencies }: { currencies: CurrencyType[] }) => {
 
 	return (
 		<div className="container my-3 flex flex-col gap-3">
+			<FreeAPIInfo
+				apiName="RapidAPI(Currency Converter)"
+				apiLink="https://rapidapi.com/not-null-solutions1-not-null-solutions-default/api/currency-converter18"
+			/>
 			<div className="grid items-center gap-3 md:grid-cols-3">
 				<CurrencyConverterInput
 					inputData={inputData}
