@@ -1,4 +1,4 @@
-import { RouteType } from '@/lib/routes';
+import { Routes, RouteType } from '@/lib/routes';
 import Link from 'next/link';
 import Module from './Module';
 
@@ -18,8 +18,8 @@ const Dashboard = ({
 				<div className="col-span-full my-2">
 					<div className="mx-auto w-max gap-1 rounded-md border px-4 py-2 text-center text-sm">
 						Please{' '}
-						<Link className="underline" href="/login">
-							login
+						<Link className="underline" href={Routes.LOGIN_PATH}>
+							{Routes.LOGIN_NAME}
 						</Link>{' '}
 						to see more modules
 					</div>

@@ -25,7 +25,6 @@ const Links = async () => {
 			)}
 			<li>
 				<NavLink
-					exact={false}
 					link={{
 						name: Routes.DASHBOARD_MODULE_NAME,
 						path: Routes.DASHBOARD_PATH,
