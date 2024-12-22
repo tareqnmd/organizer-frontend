@@ -15,7 +15,7 @@ const DashboardPage = async () => {
 
 	return (
 		<main className="container mx-auto py-4">
-			<Dashboard modules={links} />
+			<Dashboard modules={links} loggedIn={!!email} />
 		</main>
 	);
 };
