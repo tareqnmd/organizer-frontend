@@ -11,7 +11,7 @@ const Links = async () => {
 		user: { role: null },
 	};
 	return (
-		<ul className="flex items-center gap-3 text-sm">
+		<ul className="flex items-center gap-1.5 md:gap-3 text-sm">
 			{user?.role === UserRoleEnum.ADMIN && (
 				<li>
 					<NavLink
