@@ -1,7 +1,7 @@
 const TimeTracking = () => {
 	return (
 		<div>
-			<b>Upcoming</b>
+			<h1>Time Tracking</h1>
 		</div>
 	);
 };

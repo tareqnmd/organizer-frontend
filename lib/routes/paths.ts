@@ -127,6 +127,20 @@ export const routes = {
 			path: Routes.TODO_BOARDS_PATH,
 		},
 	],
+	module_time_tracking: [
+		{
+			name: Routes.TIME_TRACKING_NAME,
+			path: Routes.TIME_TRACKING_PATH,
+		},
+		{
+			name: Routes.TIME_TRACKING_PROJECTS_NAME,
+			path: Routes.TIME_TRACKING_PROJECTS_PATH,
+		},
+		{
+			name: Routes.TIME_TRACKING_TRACKS_NAME,
+			path: Routes.TIME_TRACKING_TRACKS_PATH,
+		},
+	],
 	public_links: [
 		{
 			name: Routes.LOGIN_NAME,
