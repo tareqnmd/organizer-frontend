@@ -62,7 +62,7 @@ export const routes = {
 			name: Routes.TIME_TRACKING_NAME,
 			path: Routes.TIME_TRACKING_PATH,
 			icon: 'timer',
-			description: 'Time Tracking',
+			description: 'Time Tracking & Project Management',
 		},
 	],
 	public_modules: [
