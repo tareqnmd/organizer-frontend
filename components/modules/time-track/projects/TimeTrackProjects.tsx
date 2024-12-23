@@ -4,13 +4,13 @@ import {
 	TimeTrackProjectType,
 } from '@/lib/helper/time-track';
 import TimeTrackingProject from './TimeTrackProject';
-import TimeTrackingProjectCreate from './TimeTrackProjectCreate';
+import TimeTrackProjectAdd from './TimeTrackProjectAdd';
 
 const TimeTrackProjects = async () => {
 	const projects = await getTimeTrackProjects();
 	return (
-		<div className="flex flex-col gap-2">
-			<TimeTrackingProjectCreate />
+		<div className="flex flex-col gap-3">
+			<TimeTrackProjectAdd />
 			<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
 				{projects.length > 0 ? (
 					projects?.map((project: TimeTrackProjectType) => (

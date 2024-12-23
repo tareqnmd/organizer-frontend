@@ -3,6 +3,7 @@ import {
 	formatTimeFromMinutes,
 	TimeTrackProjectType,
 } from '@/lib/helper/time-track';
+import { cn } from '@/lib/utils';
 import TimeTrackingProjectAction from './TimeTrackProjectAction';
 
 const TimeTrackProject = async ({
@@ -11,7 +12,7 @@ const TimeTrackProject = async ({
 	project: TimeTrackProjectType;
 }) => {
 	return (
-		<Card className="basic-card">
+		<Card className={cn('basic-card active:scale-100')}>
 			<div className="flex flex-wrap items-center justify-between gap-1">
 				<div className="flex items-center gap-1">
 					<span className="font-medium">{project.name}</span>

@@ -10,9 +10,13 @@ const TimeTrackProjectAction = ({
 }) => {
 	return (
 		<div className="flex items-center gap-1">
-			<TimeTrackingProjectEdit project={project} />
+			{project.status === 1 && (
+				<TimeTrackingProjectEdit project={project} />
+			)}
+			{project.status === 1 && (
+				<TimeTrackingProjectDelete project={project} />
+			)}
 			<TimeTrackingProjectToggle project={project} />
-			<TimeTrackingProjectDelete project={project} />
 		</div>
 	);
 };

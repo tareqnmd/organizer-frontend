@@ -6,6 +6,7 @@ export const timeTrackProjectFormItems = [
 		label: 'Project Name',
 		type: FormInputType.TEXT,
 		placeholder: 'Enter project name',
+		fieldRequired: true,
 	},
 	{
 		name: 'baseTime',

@@ -51,12 +51,12 @@ const TimeTrackProjectStatus = ({
 			<DialogTrigger asChild>
 				{project.status === 0 ? (
 					<BadgeCheck
-						className="cursor-pointer transition-all active:scale-75"
+						className="cursor-pointer stroke-status-success transition-all active:scale-75"
 						size={16}
 					/>
 				) : (
 					<BadgeMinus
-						className="cursor-pointer transition-all active:scale-75"
+						className="cursor-pointer stroke-status-danger transition-all active:scale-75"
 						size={16}
 					/>
 				)}

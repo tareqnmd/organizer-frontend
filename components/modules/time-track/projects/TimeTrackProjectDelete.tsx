@@ -43,7 +43,7 @@ const TimeTrackProjectDelete = ({
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
 				<Trash
-					className="cursor-pointer transition-all active:scale-75"
+					className="cursor-pointer stroke-status-danger transition-all active:scale-75"
 					size={16}
 				/>
 			</DialogTrigger>

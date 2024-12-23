@@ -12,7 +12,7 @@ export const timeTrackProjectApi = apiSlice.injectEndpoints({
 		timeTrackProjectEdit: builder.mutation({
 			query: (payload) => ({
 				url: `time-track/project/${payload?.id}`,
-				method: 'PUT',
+				method: 'PATCH',
 				body: payload?.data,
 			}),
 		}),
