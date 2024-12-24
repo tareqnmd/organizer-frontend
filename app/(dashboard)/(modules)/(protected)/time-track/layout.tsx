@@ -11,7 +11,9 @@ export const metadata: Metadata = {
 
 const TimeTrackingLayout = ({ children }: { children: React.ReactNode }) => {
 	return (
-		<ModuleLayout links={getRoutes('module_todo')}>{children}</ModuleLayout>
+		<ModuleLayout links={getRoutes('module_time_tracking')}>
+			{children}
+		</ModuleLayout>
 	);
 };
 

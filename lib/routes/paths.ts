@@ -59,10 +59,10 @@ export const routes = {
 			description: 'Personal Task Management',
 		},
 		{
-			name: Routes.TIME_TRACKING_NAME,
-			path: Routes.TIME_TRACKING_PATH,
+			name: Routes.TIME_TRACK_NAME,
+			path: Routes.TIME_TRACK_PATH,
 			icon: 'timer',
-			description: 'Time Tracking',
+			description: 'Time Tracking & Project Management',
 		},
 	],
 	public_modules: [
@@ -125,6 +125,20 @@ export const routes = {
 		{
 			name: Routes.TODO_BOARDS_NAME,
 			path: Routes.TODO_BOARDS_PATH,
+		},
+	],
+	module_time_tracking: [
+		{
+			name: Routes.TIME_TRACK_NAME,
+			path: Routes.TIME_TRACK_PATH,
+		},
+		{
+			name: Routes.TIME_TRACK_PROJECTS_NAME,
+			path: Routes.TIME_TRACK_PROJECTS_PATH,
+		},
+		{
+			name: Routes.TIME_TRACK_TRACKS_NAME,
+			path: Routes.TIME_TRACK_TRACKS_PATH,
 		},
 	],
 	public_links: [

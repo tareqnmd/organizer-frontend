@@ -18,7 +18,9 @@ const Module = ({ module }: { module: RouteType }) => {
 					<h3 className="font-semibold leading-none">
 						{module.name}
 					</h3>
-					<p className="leading-none">{module.description}</p>
+					<span className="text-sm leading-none">
+						{module.description}
+					</span>
 				</div>
 			</Card>
 		</Link>

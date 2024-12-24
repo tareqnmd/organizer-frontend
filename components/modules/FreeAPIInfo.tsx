@@ -8,7 +8,7 @@ const FreeAPIInfo = ({
 	apiLink: string;
 }) => {
 	return (
-		<div className="rounded border border-dashed border-light-border/80 p-2 text-center text-sm text-dark/80 dark:border-dark-border/80 dark:text-light/80">
+		<div className="rounded border border-dashed border-light-border/80 p-2 text-center text-xs text-dark/80 dark:border-dark-border/80 dark:text-light/80 md:text-sm">
 			Using the free API from{' '}
 			<Link className="underline" target="_blank" href={apiLink}>
 				{apiName}

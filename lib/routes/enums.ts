@@ -34,8 +34,12 @@ export enum Routes {
 	NOTE_NAME = 'Note',
 	TODO_PATH = '/todo',
 	TODO_NAME = 'Todo',
-	TIME_TRACKING_PATH = '/time-tracking',
-	TIME_TRACKING_NAME = 'Time Tracking',
+	TIME_TRACK_PATH = '/time-track',
+	TIME_TRACK_NAME = 'Time Track',
+	TIME_TRACK_PROJECTS_PATH = '/time-track/projects',
+	TIME_TRACK_PROJECTS_NAME = 'Projects',
+	TIME_TRACK_TRACKS_PATH = '/time-track/tracks',
+	TIME_TRACK_TRACKS_NAME = 'Tracks',
 
 	// public
 	PUBLIC_PATH = '/public',
