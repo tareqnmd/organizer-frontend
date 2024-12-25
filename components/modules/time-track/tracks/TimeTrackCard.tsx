@@ -1,7 +1,7 @@
 import { TimeTrackType } from '@/lib/helper/time-track';
 import { baseDateTimeFormat } from '@/lib/utils';
 import TimeTrackStopButton from './TimeTrackStopButton';
-import TrackingTimeCounting from './TrackingTimeCounting';
+import TrackingTimeCounting from './TimeTrackCounting';
 
 const TimeTrackCard = ({ track }: { track: TimeTrackType }) => {
 	return (

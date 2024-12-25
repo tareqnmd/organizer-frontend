@@ -1,11 +1,11 @@
 import { getTimeTrackTracks, TimeTrackType } from '@/lib/helper/time-track';
-import TimeTrackCard from './TmeTrackCard';
+import TimeTrackCard from './TimeTrackCard';
 
-const RecentTimeTracks = async () => {
-	const tracks = await getTimeTrackTracks({ limit: 5 });
+const TimeTracksActive = async () => {
+	const tracks = await getTimeTrackTracks({ isActive: true, limit: 5 });
 	return (
 		<div className="basic-card flex flex-col gap-3 active:scale-100">
-			<strong className="font-semibold">Recent Time Tracks</strong>
+			<strong className="font-semibold">Active Time Tracks</strong>
 			{tracks?.length > 0 ? (
 				<div className="flex flex-col gap-2">
 					{tracks.map((track: TimeTrackType) => (
@@ -13,10 +13,10 @@ const RecentTimeTracks = async () => {
 					))}
 				</div>
 			) : (
-				<div className="text-sm">No recent time tracks</div>
+				<div className="text-sm">No active time tracks</div>
 			)}
 		</div>
 	);
 };
 
-export default RecentTimeTracks;
+export default TimeTracksActive;

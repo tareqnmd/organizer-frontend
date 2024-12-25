@@ -2,7 +2,7 @@
 import { formatTimeFromMinutes } from '@/lib/helper/time-track';
 import { useEffect, useState } from 'react';
 
-const TrackingTimeCounting = ({
+const TimeTrackCounting = ({
 	timeTracked,
 	isActive,
 	startTime,
@@ -31,4 +31,4 @@ const TrackingTimeCounting = ({
 	return <div className="text-sm">{formatTimeFromMinutes(countingTime)}</div>;
 };
 
-export default TrackingTimeCounting;
+export default TimeTrackCounting;

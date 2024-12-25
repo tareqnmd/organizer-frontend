@@ -1,5 +1,5 @@
-import ActiveTimeTracks from './tracks/ActiveTimeTracks';
-import RecentTimeTracks from './tracks/RecentTimeTracks';
+import ActiveTimeTracks from './tracks/TimeTracksActive';
+import RecentTimeTracks from './tracks/TimeTracksRecent';
 import TimeTrackStart from './tracks/TimeTrackStart';
 
 const TimeTrackDashboard = () => {
