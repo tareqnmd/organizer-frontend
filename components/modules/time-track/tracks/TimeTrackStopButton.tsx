@@ -40,8 +40,8 @@ const TimeTrackStopButton = ({ trackId }: { trackId: string }) => {
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
-				<Button variant="destructive" size="sm" className="h-auto p-1">
-					<CircleStop className="h-3 w-3" />
+				<Button variant="ghost" size="sm" className="h-auto p-0">
+					<CircleStop className="h-4 w-4" />
 				</Button>
 			</DialogTrigger>
 			<DialogContent className="basic-modal">
