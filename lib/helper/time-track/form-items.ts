@@ -15,3 +15,14 @@ export const timeTrackProjectFormItems = [
 		placeholder: 'Enter base time in minutes',
 	},
 ];
+
+export const timeTrackStartFormItems = [
+	{
+		name: 'projectId',
+		type: FormInputType.SELECT,
+		placeholder: 'Select Project',
+		label: 'Select Project',
+		optionUrl: '/time-track/project/select',
+		fieldRequired: true,
+	},
+];

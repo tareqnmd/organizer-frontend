@@ -1,5 +1,5 @@
 import * as z from 'zod';
-import { TimeTrackProjectSchema } from './schemas';
+import { TimeTrackProjectSchema, TimeTrackStartSchema } from './schemas';
 
 export type TimeTrackProjectType = {
 	id: string;
@@ -10,7 +10,7 @@ export type TimeTrackProjectType = {
 };
 export type TimeTrackProjectSchemaType = z.infer<typeof TimeTrackProjectSchema>;
 
-export type TimeTrackTrackType = {
+export type TimeTrackType = {
 	id: string;
 	projectName: string;
 	baseTime: number;
@@ -18,4 +18,14 @@ export type TimeTrackTrackType = {
 	isActive: boolean;
 	status: number;
 	createdAt: string;
+	startTime: string;
+	endTime: string;
 };
+
+export type TimeTrackListParams = {
+	isActive?: boolean;
+	projectId?: string;
+	limit?: number;
+};
+
+export type TimeTrackStartSchemaType = z.infer<typeof TimeTrackStartSchema>;

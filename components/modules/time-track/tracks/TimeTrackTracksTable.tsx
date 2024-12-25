@@ -1,6 +1,6 @@
-import { TimeTrackTrackType } from '@/lib/helper/time-track/types';
+import { TimeTrackType } from '@/lib/helper/time-track';
 
-const TimeTracksTable = ({ tracks }: { tracks: TimeTrackTrackType[] }) => {
+const TimeTracksTable = ({ tracks }: { tracks: TimeTrackType[] }) => {
 	return <div>Time Tracking Tracks Table</div>;
 };
 
