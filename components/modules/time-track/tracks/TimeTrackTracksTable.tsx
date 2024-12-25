@@ -7,6 +7,7 @@ import { baseDateTimeFormat } from '@/lib/utils';
 import { ColumnDef } from '@tanstack/react-table';
 import { ArrowDownUp } from 'lucide-react';
 import TimeTrackAction from './TimeTrackAction';
+import TimeTrackCounting from './TimeTrackCounting';
 
 const typeClass = (type: string) =>
 	type === 'Expense' ? 'expense' : type === 'Income' ? 'income' : 'neutral';
@@ -74,7 +75,11 @@ const TimeTrackTracksTable = ({ tracks }: { tracks: TimeTrackType[] }) => {
 			),
 			cell: ({ row }) => (
 				<span className="text-nowrap">
-					{formatTimeFromMinutes(row.getValue('timeTracked'))}
+					<TimeTrackCounting
+						timeTracked={row.original.timeTracked}
+						isActive={row.original.isActive}
+						startTime={row.original.startTime}
+					/>
 				</span>
 			),
 		},

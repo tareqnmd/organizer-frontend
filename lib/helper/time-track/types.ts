@@ -1,5 +1,9 @@
 import * as z from 'zod';
-import { TimeTrackProjectSchema, TimeTrackStartSchema } from './schemas';
+import {
+	TimeTrackEditSchema,
+	TimeTrackProjectSchema,
+	TimeTrackStartSchema,
+} from './schemas';
 
 export type TimeTrackProjectType = {
 	id: string;
@@ -29,3 +33,4 @@ export type TimeTrackListParams = {
 };
 
 export type TimeTrackStartSchemaType = z.infer<typeof TimeTrackStartSchema>;
+export type TimeTrackEditSchemaType = z.infer<typeof TimeTrackEditSchema>;

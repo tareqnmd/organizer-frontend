@@ -35,3 +35,8 @@ const projectIdSchema = z.string({
 export const TimeTrackStartSchema = z.object({
 	projectId: projectIdSchema,
 });
+
+export const TimeTrackEditSchema = z.object({
+	startTime: z.string().optional(),
+	endTime: z.string().optional(),
+});

@@ -26,3 +26,18 @@ export const timeTrackStartFormItems = [
 		fieldRequired: true,
 	},
 ];
+
+export const timeTrackEditFormItems = [
+	{
+		name: 'startTime',
+		type: FormInputType.DATE,
+		placeholder: 'Start Time',
+		label: 'Start Time',
+	},
+	{
+		name: 'endTime',
+		type: FormInputType.DATE,
+		placeholder: 'End Time',
+		label: 'End Time',
+	},
+];
