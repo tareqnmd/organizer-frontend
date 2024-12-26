@@ -11,7 +11,10 @@ const Budget = async ({
 }: {
 	searchParams?: BudgetDashboardSearchParamsType;
 }) => {
-	const queryParams = new URLSearchParams(searchParams);
+	const queryParams = new URLSearchParams();
+	Object.entries(searchParams).forEach(([key, value]) => {
+		if (value !== null) queryParams.append(key, value);
+	});
 	const url = `budget?${queryParams}`;
 	const { data: budget = {} } = await generateDataFromServer(
 		url,
