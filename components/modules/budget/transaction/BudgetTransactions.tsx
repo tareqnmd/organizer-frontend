@@ -8,7 +8,10 @@ const Transactions = async ({
 }: {
 	searchOptions: BudgetTransactionParamType;
 }) => {
-	const queryParams = new URLSearchParams(searchOptions);
+	const queryParams = new URLSearchParams();
+	Object.entries(searchOptions).forEach(([key, value]) => {
+		if (value !== null) queryParams.append(key, value);
+	});
 	const url = `budget/transactions?${queryParams}`;
 	const { data: transactions = [], total = 0 } = await generateDataFromServer(
 		url,

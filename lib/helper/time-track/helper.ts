@@ -1,5 +1,5 @@
-export const formatTimeFromMinutes = (time: number) => {
+export const formatTimeFromMinutes = (time: number = 0) => {
 	const hours = Math.floor(time / 60);
-	const minutes = time % 60;
-	return minutes === 0 ? `${hours}h` : `${hours}h ${minutes}m`;
+	const minutes = Math.floor(time % 60);
+	return hours < 1 ? `${minutes}m` : `${hours}h ${minutes}m`;
 };

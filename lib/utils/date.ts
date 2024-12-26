@@ -2,13 +2,13 @@ import { format, getDaysInMonth, getYear } from 'date-fns';
 import { Period } from '../helper/budget';
 
 export const baseDateFormat = (date: string | Date) =>
-	format(date, 'dd-MM-yyyy');
+	date ? format(date, 'dd-MM-yyyy') : null;
 
 export const baseInputDateFormat = (date: string | Date) =>
-	format(date, 'yyyy-MM-dd');
+	date ? format(date, 'yyyy-MM-dd') : null;
 
 export const baseDateTimeFormat = (date: string | Date) =>
-	format(date, 'dd-MM-yyyy hh:mm:ss a');
+	date ? format(date, 'dd-MM-yyyy hh:mm:ss a') : null;
 
 export const stringToNewDate = (date: string) =>
 	new Date(date?.split('-').reverse().join(',')) ?? date ?? null;

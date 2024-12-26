@@ -31,3 +31,13 @@ export type InputFieldsType = {
 export type CustomFormInputPropsType = InputFieldsType & {
 	input: CustomFormInputType;
 };
+
+export type DateTimeType = {
+	date: string;
+	time: {
+		hour: string;
+		minute: string;
+		second: string;
+	};
+};
+

@@ -1,4 +1,9 @@
-import { generateDataFromServer, nextProperties } from '@/lib/utils';
+import {
+	generateDataFromServer,
+	nextProperties,
+	toQueryString,
+} from '@/lib/utils';
+import { TimeTrackListParams } from './types';
 
 export const getTimeTrackProjects = async () => {
 	const { data: projects } = await generateDataFromServer(
@@ -8,9 +13,10 @@ export const getTimeTrackProjects = async () => {
 	return projects ?? [];
 };
 
-export const getTimeTrackTracks = async () => {
+export const getTimeTrackTracks = async (params: TimeTrackListParams = {}) => {
+	const modifiedParams = toQueryString(params ?? {});
 	const { data: tracks } = await generateDataFromServer(
-		'time-track/list',
+		`time-track/list${modifiedParams}`,
 		nextProperties({}),
 	);
 	return tracks ?? [];
