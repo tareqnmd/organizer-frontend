@@ -40,7 +40,10 @@ const TimeTrackForm = ({
 	] = useTimeTrackEditMutation();
 
 	const onSubmit = async (values: TimeTrackEditSchemaType) => {
-		await update(values);
+		await update({
+			data: values,
+			id: track.id,
+		});
 	};
 	useEffect(() => {
 		if (isSuccess) {
@@ -52,8 +55,10 @@ const TimeTrackForm = ({
 	}, [error, isError, isSuccess, router]);
 
 	useEffect(() => {
-		if (track?.startTime && track?.endTime) {
+		if (track?.startTime) {
 			form.setValue('startTime', new Date(track.startTime));
+		}
+		if (track?.endTime) {
 			form.setValue('endTime', new Date(track.endTime));
 		}
 	}, [form, track]);
