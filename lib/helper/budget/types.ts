@@ -10,8 +10,8 @@ import {
 export type BudgetDashboardSearchParamsType = {
 	page?: string;
 	limit?: string;
-	from?: string;
-	to?: string;
+	from?: string | null;
+	to?: string | null;
 };
 
 // Budget Dashboard Overview
@@ -141,8 +141,8 @@ export type BudgetTransactionParamType = {
 	type?: TransactionTypeEnum;
 	category?: string;
 	transaction?: string;
-	from: string;
-	to: string;
+	from: string | null;
+	to: string | null;
 	page?: string;
 	perPage?: string;
 };

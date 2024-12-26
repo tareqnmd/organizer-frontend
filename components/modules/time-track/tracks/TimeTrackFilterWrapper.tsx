@@ -1,32 +1,27 @@
 'use client';
-import Pagination from '@/components/common/paginate/Pagination';
-import { useDebounce } from '@/hooks/useDebounce';
-import { BudgetTransactionParamType } from '@/lib/helper/budget';
-import { baseDateFormat, getPageNumbers, toQueryString } from '@/lib/utils';
-import { useRouter } from 'next/navigation';
-import { ReactNode, useEffect, useRef, useState } from 'react';
-import BudgetTransactionAdd from './BudgetTransactionAdd';
-import BudgetTransactionFilter from './BudgetTransactionFilter';
 
-const BudgetTransactionsWrapper = ({
+import Pagination from '@/components/common/paginate/Pagination';
+import { TimeTrackListParams } from '@/lib/helper/time-track/types';
+import { getPageNumbers, toQueryString } from '@/lib/utils';
+import { baseDateFormat } from '@/lib/utils/date';
+import { useRouter } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
+import TimeTrackFilter from './TimeTrackFilter';
+
+const TimeTrackFilterWrapper = ({
+	initialValues,
 	children,
-	searchOptions,
-	totalTransactions,
+	totalTracks,
 }: {
-	children: ReactNode;
-	searchOptions: BudgetTransactionParamType;
-	totalTransactions: number;
+	initialValues: TimeTrackListParams;
+	children: React.ReactNode;
+	totalTracks: number;
 }) => {
 	const router = useRouter();
 	const hasRendered = useRef(false);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pages, setPages] = useState<number[]>([]);
-	const [filterData, setFilterData] = useState(searchOptions);
-	const debouncedText = useDebounce(filterData?.transaction ?? '', 500);
-
-	const changeHandler = (value: string, name: string) => {
-		setFilterData((prev) => ({ ...prev, [name]: value }));
-	};
+	const [filterData, setFilterData] = useState(initialValues);
 
 	const changePaginate = (value: string | number) => {
 		const updatedCurrentPage =
@@ -42,14 +37,6 @@ const BudgetTransactionsWrapper = ({
 		}));
 	};
 
-	const dateRangeUpdate = (value: { from: Date; to: Date }) => {
-		setFilterData((prev: BudgetTransactionParamType) => ({
-			...prev,
-			from: value?.from ? baseDateFormat(value.from) : null,
-			to: value?.to ? baseDateFormat(value.to) : null,
-		}));
-	};
-
 	let timeout: NodeJS.Timeout;
 	const changePerPage = (value: number) => {
 		if (timeout) clearTimeout(timeout);
@@ -58,9 +45,8 @@ const BudgetTransactionsWrapper = ({
 			const updatedPerPage =
 				Number(value) < 10
 					? 10
-					: Number(value) > totalTransactions &&
-						  totalTransactions > 10
-						? totalTransactions
+					: Number(value) > totalTracks && totalTracks > 10
+						? totalTracks
 						: Number(value);
 			setFilterData((prev) => ({
 				...prev,
@@ -68,6 +54,18 @@ const BudgetTransactionsWrapper = ({
 				page: '1',
 			}));
 		}, 500);
+	};
+
+	const onChange = (value: string, name: string) => {
+		setFilterData((prev) => ({ ...prev, [name]: value }));
+	};
+
+	const onDateRangeUpdate = (value: { from: Date; to: Date }) => {
+		setFilterData((prev: TimeTrackListParams) => ({
+			...prev,
+			from: value?.from ? baseDateFormat(value.from) : null,
+			to: value?.to ? baseDateFormat(value.to) : null,
+		}));
 	};
 
 	useEffect(() => {
@@ -93,10 +91,9 @@ const BudgetTransactionsWrapper = ({
 				pagination['perPage'] = filterData?.perPage;
 			}
 			router.push(
-				`/budget/transaction${toQueryString({
-					type: filterData.type,
-					category: filterData.category,
-					transaction: debouncedText,
+				`/time-track/tracks${toQueryString({
+					isActive: filterData.isActive,
+					projectId: filterData.projectId,
 					...dateRange,
 					...pagination,
 				})}`,
@@ -105,35 +102,29 @@ const BudgetTransactionsWrapper = ({
 			hasRendered.current = true;
 		}
 	}, [
-		debouncedText,
-		filterData.type,
-		filterData.category,
 		filterData.from,
 		filterData.to,
 		filterData.perPage,
 		filterData.page,
+		filterData.isActive,
+		filterData.projectId,
 		router,
 	]);
 
 	useEffect(() => {
-		if (totalTransactions > 0 && Number(filterData.perPage) > 0) {
-			setPages(
-				getPageNumbers(totalTransactions, Number(filterData.perPage)),
-			);
+		if (totalTracks > 0 && Number(filterData.perPage) > 0) {
+			setPages(getPageNumbers(totalTracks, Number(filterData.perPage)));
 			setCurrentPage(1);
 		}
-	}, [totalTransactions, filterData.perPage]);
+	}, [totalTracks, filterData.perPage]);
 
 	return (
-		<div className="flex flex-col gap-4">
-			<div className="grid grid-cols-4 gap-2">
-				<BudgetTransactionFilter
-					filterData={filterData}
-					onChange={changeHandler}
-					onDateRangeUpdate={dateRangeUpdate}
-				/>
-				<BudgetTransactionAdd />
-			</div>
+		<>
+			<TimeTrackFilter
+				filterData={filterData}
+				onChange={onChange}
+				onDateRangeUpdate={onDateRangeUpdate}
+			/>
 			{children}
 			<Pagination
 				currentPage={currentPage}
@@ -141,10 +132,10 @@ const BudgetTransactionsWrapper = ({
 				perPage={Number(filterData?.perPage)}
 				changePerPage={changePerPage}
 				pages={pages}
-				total={totalTransactions}
+				total={totalTracks}
 			/>
-		</div>
+		</>
 	);
 };
 
-export default BudgetTransactionsWrapper;
+export default TimeTrackFilterWrapper;

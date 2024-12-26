@@ -30,6 +30,10 @@ export type TimeTrackListParams = {
 	isActive?: boolean;
 	projectId?: string;
 	limit?: number;
+	from?: string | null;
+	to?: string | null;
+	page?: string;
+	perPage?: string;
 };
 
 export type TimeTrackStartSchemaType = z.infer<typeof TimeTrackStartSchema>;
