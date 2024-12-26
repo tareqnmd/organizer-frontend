@@ -30,13 +30,13 @@ export const timeTrackStartFormItems = [
 export const timeTrackEditFormItems = [
 	{
 		name: 'startTime',
-		type: FormInputType.DATE,
+		type: FormInputType.DATETIME,
 		placeholder: 'Start Time',
 		label: 'Start Time',
 	},
 	{
 		name: 'endTime',
-		type: FormInputType.DATE,
+		type: FormInputType.DATETIME,
 		placeholder: 'End Time',
 		label: 'End Time',
 	},

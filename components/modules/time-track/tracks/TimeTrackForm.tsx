@@ -52,9 +52,9 @@ const TimeTrackForm = ({
 	}, [error, isError, isSuccess, router]);
 
 	useEffect(() => {
-		if (track?.startTime && track.endTime) {
-			form.setValue('startTime', track.startTime);
-			form.setValue('endTime', track.endTime);
+		if (track?.startTime && track?.endTime) {
+			form.setValue('startTime', new Date(track.startTime));
+			form.setValue('endTime', new Date(track.endTime));
 		}
 	}, [form, track]);
 

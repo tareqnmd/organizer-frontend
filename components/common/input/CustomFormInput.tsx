@@ -14,6 +14,7 @@ import { cn } from '@/lib/utils';
 import { ControllerRenderProps } from 'react-hook-form';
 import CheckboxInput from './Checkbox';
 import FormDate from './Date';
+import FormDateTime from './DateTime';
 import FormRadio from './Radio';
 import FormSelect from './Select';
 import FormTextEditor from './TextEditor';
@@ -41,6 +42,8 @@ const CustomFormInput = ({
 			<FormSelect input={input} field={field} />
 		) : type === FormInputType.DATE ? (
 			<FormDate field={field} />
+		) : type === FormInputType.DATETIME ? (
+			<FormDateTime field={field} />
 		) : type === FormInputType.TEXTAREA ? (
 			<Textarea
 				className={'basic-input'}

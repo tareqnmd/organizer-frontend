@@ -4,6 +4,7 @@ export enum FormInputType {
 	TEXT = 'text',
 	NUMBER = 'number',
 	DATE = 'date',
+	DATETIME = 'datetime',
 	DATE_RANGE = 'date_range',
 	TEXTAREA = 'textarea',
 	SELECT = 'select',
