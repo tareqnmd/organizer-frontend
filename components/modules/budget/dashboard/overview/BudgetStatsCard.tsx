@@ -26,14 +26,14 @@ const BudgetStatsCard = ({
 		<Card className="flex w-full items-center gap-2 p-2">
 			{icon}
 			<div className="flex flex-col items-start gap-0">
-				<p className="text-muted-foreground">{title}</p>
+				<p className="text-sm">{title}</p>
 				<CountUp
 					preserveValue
 					redraw={false}
 					end={value}
 					decimals={2}
 					formattingFn={formatFn}
-					className="text-xl"
+					className="text-md"
 				/>
 			</div>
 		</Card>

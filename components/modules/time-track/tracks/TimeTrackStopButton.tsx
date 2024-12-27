@@ -46,10 +46,9 @@ const TimeTrackStopButton = ({ trackId }: { trackId: string }) => {
 			</DialogTrigger>
 			<DialogContent className="basic-modal">
 				<DialogHeader>
-					<DialogTitle>
-						Do you want to End the Time Track?
-					</DialogTitle>
+					<DialogTitle>Stop Time Track</DialogTitle>
 				</DialogHeader>
+				Do you want to stop this Time Track?
 				<DialogFooter>
 					<Button
 						onClick={trackEndHandler}

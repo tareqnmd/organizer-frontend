@@ -9,12 +9,7 @@ const ErrorArea = ({
 	error: Error & { digest?: string };
 	reset: () => void;
 }) => {
-	return (
-		<RootError
-			error={error}
-			reset={reset}
-		/>
-	);
+	return <RootError error={error} reset={reset} />;
 };
 
 export default ErrorArea;

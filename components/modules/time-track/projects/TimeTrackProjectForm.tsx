@@ -10,7 +10,10 @@ import {
 	TimeTrackProjectType,
 } from '@/lib/helper/time-track';
 import { getError } from '@/lib/utils';
-import { useTimeTrackProjectCreateMutation, useTimeTrackProjectEditMutation } from '@/store/features/time-track/project/api';
+import {
+	useTimeTrackProjectCreateMutation,
+	useTimeTrackProjectEditMutation,
+} from '@/store/features/time-track/project/api';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';

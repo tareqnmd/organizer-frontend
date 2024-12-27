@@ -25,21 +25,22 @@ const BudgetCategoryCardDetails = ({
 					return (
 						<div key={item.name}>
 							<div className="flex flex-col gap-2">
-								<div className="flex items-center justify-between">
-									<span className="flex items-center">
-										{item.name}
-										<span className="text-muted-foreground ml-2 text-xs">
-											({item.percentage.toFixed(0)}
-											%)
-										</span>
+								<div className="flex items-center justify-between gap-2">
+									<span className="flex items-center text-sm">
+										{item.name} (
+										{item.percentage.toFixed(0)}%)
 									</span>
-									<span className="text-sm">
+									<span className="text-sm font-medium">
 										{formatter.format(item.amount)}
 									</span>
 								</div>
 								<Progress
 									value={item.percentage}
-									indicator={type}
+									indicator={
+										type === TransactionTypeEnum.SAVING
+											? 'neutral'
+											: type
+									}
 								/>
 							</div>
 						</div>

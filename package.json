@@ -9,6 +9,7 @@
 		"build": "rm -rf .next && next build",
 		"start": "next start -p 3200",
 		"format": "prettier --write .",
+		"format-check": "prettier --check .",
 		"lint": "next lint"
 	},
 	"dependencies": {
@@ -65,6 +66,7 @@
 		"autoprefixer": "^10.0.1",
 		"eslint": "^8",
 		"eslint-config-next": "14.0.3",
+		"husky": "^9.1.7",
 		"postcss": "^8",
 		"prettier": "^3.3.3",
 		"prettier-plugin-tailwindcss": "^0.6.8",
