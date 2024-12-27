@@ -27,7 +27,7 @@ const BudgetCategoryCard = ({
 						? 'Incomes'
 						: type === TransactionTypeEnum.SAVING
 							? 'Savings'
-							: 'Expenses'}
+							: 'Expenses'}{' '}
 					by category
 				</CardTitle>
 			</CardHeader>
