@@ -4,20 +4,19 @@ import { useSortable } from '@dnd-kit/sortable';
 import { useState } from 'react';
 import { Item } from './Item';
 
-function SortableItem({ id, index, containerId, getIndex }: any) {
+function SortableItem({ id, index }: any) {
 	const {
 		setNodeRef,
 		setActivatorNodeRef,
 		listeners,
 		isDragging,
 		isSorting,
-		over,
-		overIndex,
 		transform,
 		transition,
 	} = useSortable({
 		id,
 	});
+
 	function useMountStatus() {
 		const [isMounted, setIsMounted] = useState(false);
 

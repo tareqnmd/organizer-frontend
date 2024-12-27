@@ -1,40 +1,26 @@
 'use client';
 import {
-	DndContext,
-	DragOverlay,
-	MeasuringStrategy,
-	rectIntersection,
-} from '@dnd-kit/core';
-
-import {
-	closestCenter,
-	getFirstCollision,
-	KeyboardSensor,
-	MouseSensor,
-	pointerWithin,
-	TouchSensor,
-	UniqueIdentifier,
-	useSensor,
-	useSensors,
-} from '@dnd-kit/core';
-import { useCallback, useEffect, useRef } from 'react';
-
-import {
 	createRange,
+	findContainer,
 	multipleCoordinateGetter,
 } from '@/lib/helper/todo/helper';
 import {
-	arrayMove,
-	horizontalListSortingStrategy,
-	SortableContext,
-	verticalListSortingStrategy,
-} from '@dnd-kit/sortable';
-import { useState } from 'react';
-import { createPortal } from 'react-dom';
-import { Container } from './Container';
-import DroppableContainer from './DroppableContainer';
-import { Item } from './Item';
-import SortableItem from './SortableItem';
+	closestCenter,
+	DndContext,
+	getFirstCollision,
+	KeyboardSensor,
+	MeasuringStrategy,
+	MouseSensor,
+	pointerWithin,
+	rectIntersection,
+	TouchSensor,
+	useSensor,
+	useSensors,
+} from '@dnd-kit/core';
+import { arrayMove } from '@dnd-kit/sortable';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import TodoOverlayItem from './TodoOverlayItem';
+import TodoSortableArea from './TodoSortableArea';
 
 const TestTodo = ({ lists, cards }: any) => {
 	const [items, setItems] = useState<any>({
@@ -59,22 +45,17 @@ const TestTodo = ({ lists, cards }: any) => {
 				});
 			}
 
-			// Start by finding any intersecting droppable
 			const pointerIntersections = pointerWithin(args);
 			const intersections =
 				pointerIntersections.length > 0
-					? // If there are droppables intersecting with the pointer, return those
-						pointerIntersections
+					? pointerIntersections
 					: rectIntersection(args);
 			let overId = getFirstCollision(intersections, 'id');
 
 			if (overId != null) {
 				if (overId in items) {
 					const containerItems = items[overId];
-
-					// If a container is matched and it contains items (columns 'A', 'B', 'C')
 					if (containerItems.length > 0) {
-						// Return the closest droppable within that container
 						overId = closestCenter({
 							...args,
 							droppableContainers:
@@ -86,21 +67,12 @@ const TestTodo = ({ lists, cards }: any) => {
 						})[0]?.id;
 					}
 				}
-
 				lastOverId.current = overId;
-
 				return [{ id: overId }];
 			}
-
-			// When a draggable item moves to a new container, the layout may shift
-			// and the `overId` may become `null`. We manually set the cached `lastOverId`
-			// to the id of the draggable item that was moved to the new container, otherwise
-			// the previous `overId` will be returned which can cause items to incorrectly shift positions
 			if (recentlyMovedToNewContainer.current) {
 				lastOverId.current = activeId;
 			}
-
-			// If no droppable is matched, return the last match
 			return lastOverId.current ? [{ id: lastOverId.current }] : [];
 		},
 		[activeId, items],
@@ -114,27 +86,11 @@ const TestTodo = ({ lists, cards }: any) => {
 			coordinateGetter: multipleCoordinateGetter,
 		}),
 	);
-	const findContainer = (id: any) => {
-		if (id in items) {
-			return id;
-		}
-		return Object.keys(items).find((key) => items[key].includes(id));
-	};
-
-	const getIndex = (id: UniqueIdentifier) => {
-		const container = findContainer(id);
-		if (!container) {
-			return -1;
-		}
-		const index = items[container].indexOf(id);
-		return index;
-	};
 
 	const onDragCancel = () => {
 		if (clonedItems) {
 			setItems(clonedItems);
 		}
-
 		setActiveId(null);
 		setClonedItems(null);
 	};
@@ -151,25 +107,92 @@ const TestTodo = ({ lists, cards }: any) => {
 		);
 	}
 
-	function renderSortableItemDragOverlay(id: UniqueIdentifier) {
-		return <Item value={id} dragOverlay />;
-	}
+	const onDragOver = ({ active, over }: any) => {
+		const overId = over?.id;
+		if (overId == null || active.id in items) {
+			return;
+		}
+		const overContainer = findContainer(overId, items);
+		const activeContainer = findContainer(active.id, items);
+		if (!overContainer || !activeContainer) {
+			return;
+		}
+		if (activeContainer !== overContainer) {
+			setItems((items: any) => {
+				const activeItems = items[activeContainer];
+				const overItems = items[overContainer];
+				const overIndex = overItems.indexOf(overId);
+				const activeIndex = activeItems.indexOf(active.id);
+				let newIndex: number;
+				if (overId in items) {
+					newIndex = overItems.length + 1;
+				} else {
+					const isBelowOverItem =
+						over &&
+						active.rect.current.translated &&
+						active.rect.current.translated.top >
+							over.rect.top + over.rect.height;
 
-	function renderContainerDragOverlay(containerId: UniqueIdentifier) {
-		return (
-			<Container
-				label={`Container ${containerId}`}
-				style={{
-					height: '100%',
-				}}
-				shadow
-			>
-				{items[containerId].map((item: any) => (
-					<Item key={item} value={item} />
-				))}
-			</Container>
-		);
-	}
+					const modifier = isBelowOverItem ? 1 : 0;
+					newIndex =
+						overIndex >= 0
+							? overIndex + modifier
+							: overItems.length + 1;
+				}
+				recentlyMovedToNewContainer.current = true;
+				return {
+					...items,
+					[activeContainer]: items[activeContainer].filter(
+						(item: any) => item !== active.id,
+					),
+					[overContainer]: [
+						...items[overContainer].slice(0, newIndex),
+						items[activeContainer][activeIndex],
+						...items[overContainer].slice(
+							newIndex,
+							items[overContainer].length,
+						),
+					],
+				};
+			});
+		}
+	};
+
+	const onDragEnd = ({ active, over }: any) => {
+		if (active.id in items && over?.id) {
+			setContainers((containers: any) => {
+				const activeIndex = containers.indexOf(active.id);
+				const overIndex = containers.indexOf(over.id);
+				return arrayMove(containers, activeIndex, overIndex);
+			});
+		}
+		const activeContainer = findContainer(active.id, items);
+		if (!activeContainer) {
+			setActiveId(null);
+			return;
+		}
+		const overId = over?.id;
+		if (overId == null) {
+			setActiveId(null);
+			return;
+		}
+		const overContainer = findContainer(overId, items);
+		if (overContainer) {
+			const activeIndex = items[activeContainer].indexOf(active.id);
+			const overIndex = items[overContainer].indexOf(overId);
+			if (activeIndex !== overIndex) {
+				setItems((items: any) => ({
+					...items,
+					[overContainer]: arrayMove(
+						items[overContainer],
+						activeIndex,
+						overIndex,
+					),
+				}));
+			}
+		}
+		setActiveId(null);
+	};
 
 	return (
 		<DndContext
@@ -184,166 +207,20 @@ const TestTodo = ({ lists, cards }: any) => {
 				setActiveId(active.id);
 				setClonedItems(items);
 			}}
-			onDragOver={({ active, over }) => {
-				const overId = over?.id;
-
-				if (overId == null || active.id in items) {
-					return;
-				}
-
-				const overContainer = findContainer(overId);
-				const activeContainer = findContainer(active.id);
-
-				if (!overContainer || !activeContainer) {
-					return;
-				}
-
-				if (activeContainer !== overContainer) {
-					setItems((items: any) => {
-						const activeItems = items[activeContainer];
-						const overItems = items[overContainer];
-						const overIndex = overItems.indexOf(overId);
-						const activeIndex = activeItems.indexOf(active.id);
-
-						let newIndex: number;
-
-						if (overId in items) {
-							newIndex = overItems.length + 1;
-						} else {
-							const isBelowOverItem =
-								over &&
-								active.rect.current.translated &&
-								active.rect.current.translated.top >
-									over.rect.top + over.rect.height;
-
-							const modifier = isBelowOverItem ? 1 : 0;
-
-							newIndex =
-								overIndex >= 0
-									? overIndex + modifier
-									: overItems.length + 1;
-						}
-
-						recentlyMovedToNewContainer.current = true;
-
-						return {
-							...items,
-							[activeContainer]: items[activeContainer].filter(
-								(item: any) => item !== active.id,
-							),
-							[overContainer]: [
-								...items[overContainer].slice(0, newIndex),
-								items[activeContainer][activeIndex],
-								...items[overContainer].slice(
-									newIndex,
-									items[overContainer].length,
-								),
-							],
-						};
-					});
-				}
-			}}
-			onDragEnd={({ active, over }) => {
-				if (active.id in items && over?.id) {
-					setContainers((containers: any) => {
-						const activeIndex = containers.indexOf(active.id);
-						const overIndex = containers.indexOf(over.id);
-
-						return arrayMove(containers, activeIndex, overIndex);
-					});
-				}
-
-				const activeContainer = findContainer(active.id);
-
-				if (!activeContainer) {
-					setActiveId(null);
-					return;
-				}
-
-				const overId = over?.id;
-
-				if (overId == null) {
-					setActiveId(null);
-					return;
-				}
-
-				const overContainer = findContainer(overId);
-
-				if (overContainer) {
-					const activeIndex = items[activeContainer].indexOf(
-						active.id,
-					);
-					const overIndex = items[overContainer].indexOf(overId);
-
-					if (activeIndex !== overIndex) {
-						setItems((items: any) => ({
-							...items,
-							[overContainer]: arrayMove(
-								items[overContainer],
-								activeIndex,
-								overIndex,
-							),
-						}));
-					}
-				}
-
-				setActiveId(null);
-			}}
+			onDragOver={onDragOver}
+			onDragEnd={onDragEnd}
 			onDragCancel={onDragCancel}
 		>
-			<div
-				style={{
-					boxSizing: 'border-box',
-					zIndex: 1,
-					position: 'relative',
-				}}
-			>
-				<SortableContext
-					items={containers}
-					strategy={horizontalListSortingStrategy}
-				>
-					<div className="flex gap-2 overflow-x-auto">
-						{containers.map((containerId: any) => (
-							<DroppableContainer
-								key={containerId}
-								id={containerId}
-								label={`Container ${containerId}`}
-								items={items[containerId]}
-								onRemove={() => handleRemove(containerId)}
-							>
-								<SortableContext
-									items={items[containerId]}
-									strategy={verticalListSortingStrategy}
-								>
-									{items[containerId].map(
-										(value: any, index: any) => {
-											return (
-												<SortableItem
-													key={value}
-													id={value}
-													index={index}
-													containerId={containerId}
-													getIndex={getIndex}
-												/>
-											);
-										},
-									)}
-								</SortableContext>
-							</DroppableContainer>
-						))}
-					</div>
-				</SortableContext>
-			</div>
-			{createPortal(
-				<DragOverlay adjustScale={false}>
-					{activeId
-						? containers.includes(activeId)
-							? renderContainerDragOverlay(activeId)
-							: renderSortableItemDragOverlay(activeId)
-						: null}
-				</DragOverlay>,
-				document.body,
-			)}
+			<TodoSortableArea
+				lists={containers}
+				items={items}
+				handleRemove={handleRemove}
+			/>
+			<TodoOverlayItem
+				activeId={activeId}
+				lists={containers}
+				cards={items}
+			/>
 		</DndContext>
 	);
 };

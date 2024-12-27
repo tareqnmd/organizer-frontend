@@ -1,20 +1,4 @@
-import { KeyboardCoordinateGetter, UniqueIdentifier } from '@dnd-kit/core';
-
-export const findContainer = (id: any, items: any) => {
-	if (id in items) {
-		return id;
-	}
-	return Object.keys(items).find((key) => items[key].includes(id));
-};
-
-export const getIndex = (id: UniqueIdentifier, items: any) => {
-	const container = findContainer(id, items);
-	if (!container) {
-		return -1;
-	}
-	const index = items[container].indexOf(id);
-	return index;
-};
+import { KeyboardCoordinateGetter } from '@dnd-kit/core';
 
 const defaultInitializer = (index: number) => index;
 
@@ -39,6 +23,13 @@ const directions: string[] = [
 	DirectionEnum.UP,
 	DirectionEnum.LEFT,
 ];
+
+export const findContainer = (id: any, items: any) => {
+	if (id in items) {
+		return id;
+	}
+	return Object.keys(items).find((key) => items[key].includes(id));
+};
 
 export const multipleCoordinateGetter: KeyboardCoordinateGetter = (
 	event,

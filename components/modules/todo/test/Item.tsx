@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
-
 import { cn } from '@/lib/utils';
 import { GripVertical, X } from 'lucide-react';
+import React, { useEffect } from 'react';
 import styles from './Item.module.css';
 
 export const Item = React.memo(
