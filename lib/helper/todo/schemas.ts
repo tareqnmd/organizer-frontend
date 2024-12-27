@@ -36,4 +36,3 @@ export const BoardSchema = z.object({
 export const CardSchema = z.object({
 	description: z.string(),
 });
-

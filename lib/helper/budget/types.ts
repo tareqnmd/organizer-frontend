@@ -31,6 +31,7 @@ export type BudgetDashboardOverviewAmountType = {
 export type BudgetDashboardOverviewCategoryType = {
 	income: BudgetDashboardOverviewCategoryDetailType[];
 	expense: BudgetDashboardOverviewCategoryDetailType[];
+	saving: BudgetDashboardOverviewCategoryDetailType[];
 };
 
 export type BudgetDashboardOverviewType = {

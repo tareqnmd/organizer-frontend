@@ -9,10 +9,5 @@ export default function GlobalError({
 	error: Error & { digest?: string };
 	reset: () => void;
 }) {
-	return (
-		<Error
-			error={error}
-			reset={reset}
-		/>
-	);
+	return <Error error={error} reset={reset} />;
 }

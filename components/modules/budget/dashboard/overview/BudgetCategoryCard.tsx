@@ -3,8 +3,7 @@ import {
 	BudgetDashboardOverviewCategoryDetailType,
 	TransactionTypeEnum,
 } from '@/lib/helper/budget';
-import { cn, GetFormatterForCurrency } from '@/lib/utils';
-import { useMemo } from 'react';
+import { cn } from '@/lib/utils';
 import BudgetCategoryCardDetails from './BudgetCategoryCardDetails';
 import BudgetCategoryCardEmpty from './BudgetCategoryCardEmpty';
 
@@ -15,26 +14,20 @@ const BudgetCategoryCard = ({
 	type: TransactionTypeEnum;
 	data: BudgetDashboardOverviewCategoryDetailType[];
 }) => {
-	const formatter = useMemo(() => {
-		return GetFormatterForCurrency('BDT');
-	}, []);
-
 	return (
-		<Card
-			className={cn(
-				'flex w-full flex-col gap-2 p-2',
-				data?.length === 0 ? 'p-4' : '',
-			)}
-		>
-			<CardHeader className="p-0">
+		<Card className="basic-card">
+			<CardHeader className="p-0 pb-2">
 				<CardTitle
-					className={
-						(cn('text-lg'), data?.length === 0 ? 'text-center' : '')
-					}
+					className={cn(
+						'text-xl',
+						data?.length === 0 ? 'text-center' : '',
+					)}
 				>
 					{type === TransactionTypeEnum.INCOME
 						? 'Incomes'
-						: 'Expenses'}{' '}
+						: type === TransactionTypeEnum.SAVING
+							? 'Savings'
+							: 'Expenses'}{' '}
 					by category
 				</CardTitle>
 			</CardHeader>
