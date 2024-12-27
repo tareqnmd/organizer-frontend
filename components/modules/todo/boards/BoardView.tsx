@@ -1,5 +1,6 @@
 import { ListType } from '@/lib/helper/todo';
 import { generateDataFromServer, nextProperties } from '@/lib/utils';
+import TestTodo from '../test/TestTodo';
 import BoardDetails from './BardDetails';
 import BoardDnDContent from './BoardDnDContent';
 
@@ -21,6 +22,7 @@ const BoardView = async ({ boardId }: { boardId: string }) => {
 
 	return (
 		<>
+			<TestTodo lists={lists} cards={cards} />
 			<div
 				className="absolute inset-0 !bg-cover !bg-center !bg-no-repeat"
 				style={{ backgroundImage: board?.boardBg }}

@@ -4,7 +4,7 @@ import PrayerTimeMonthYearSelector from './PrayerTimeMonthYearSelector';
 import PrayerTimeToday from './PrayerTimeToday';
 
 import { PrayerTimeSearchOptions } from '@/lib/helper/prayer-time';
-import FreeAPIInfo from '../FreeAPIInfo';
+import FreeAPIInfo from '../shared/FreeAPIInfo';
 import PrayerTimeMonthWise from './PrayerTimeMonthWise';
 const PrayerTime = async ({
 	searchOptions,

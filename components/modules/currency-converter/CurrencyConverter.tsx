@@ -11,7 +11,7 @@ import { sendGTMEvent } from '@next/third-parties/google';
 import { Loader } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
-import FreeAPIInfo from '../FreeAPIInfo';
+import FreeAPIInfo from '../shared/FreeAPIInfo';
 import CurrencyConverterInput from './CurrencyConverterInput';
 import CurrencyConverterResult from './CurrencyConverterResult';
 import CurrencyConverterSelect from './CurrencyConverterSelect';
