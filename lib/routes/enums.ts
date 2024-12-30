@@ -40,6 +40,8 @@ export enum Routes {
 	TIME_TRACK_PROJECTS_NAME = 'Projects',
 	TIME_TRACK_TRACKS_PATH = '/time-track/tracks',
 	TIME_TRACK_TRACKS_NAME = 'Tracks',
+	TIME_TRACK_TRACKS_CALCULATION_PATH = '/time-track/tracks-calculation',
+	TIME_TRACK_TRACKS_CALCULATION_NAME = 'Track Calculation',
 
 	// public
 	PUBLIC_PATH = '/public',

@@ -11,7 +11,7 @@ const ModuleLayout = ({
 	return (
 		<>
 			<header className="border-b py-2 dark:border-slate-700">
-				<div className="container mx-auto flex items-center justify-end gap-2 text-sm">
+				<div className="container mx-auto flex flex-wrap items-center justify-end gap-2 text-sm">
 					{links.map((link) => (
 						<ModuleLink key={link.path} link={link} />
 					))}
