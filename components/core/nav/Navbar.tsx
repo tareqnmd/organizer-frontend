@@ -17,10 +17,10 @@ const Navbar = async () => {
 				<Link href="/">
 					<Logo />
 				</Link>
-				<Links />
 				<div className="flex items-center gap-2 md:gap-4">
-					{user ? <UserOptions user={user} /> : null}
+					<Links />
 					<ModeToggle />
+					{user ? <UserOptions user={user} /> : null}
 					<Sidebar />
 				</div>
 			</div>

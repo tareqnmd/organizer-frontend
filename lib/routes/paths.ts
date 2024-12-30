@@ -140,6 +140,10 @@ export const routes = {
 			name: Routes.TIME_TRACK_TRACKS_NAME,
 			path: Routes.TIME_TRACK_TRACKS_PATH,
 		},
+		{
+			name: Routes.TIME_TRACK_TRACKS_CALCULATION_NAME,
+			path: Routes.TIME_TRACK_TRACKS_CALCULATION_PATH,
+		},
 	],
 	public_links: [
 		{
