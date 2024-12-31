@@ -29,7 +29,7 @@ const TimeTracksCalculationSearch = ({
 		<div className="flex flex-col gap-2 overflow-hidden">
 			<div className="grid grid-cols-2 gap-2">
 				<FormSelect
-					extraTriggerClassName="h-8"
+					extraTriggerClassName="h-8 focus:outline-none focus:ring-0 focus-visible:ring-0"
 					input={{
 						type: FormInputType.SELECT,
 						placeholder: 'Select Project',
