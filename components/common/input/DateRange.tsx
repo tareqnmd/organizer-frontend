@@ -157,12 +157,12 @@ const FormDateRange = ({
 						id="date"
 						variant={'outline'}
 						className={cn(
-							'justify-start overflow-hidden text-left font-normal',
+							'justify-start overflow-auto text-left font-normal',
 							!date && 'text-muted-foreground',
 							triggerClassName,
 						)}
 					>
-						<CalendarIcon className="mr-2 h-4 w-4" />
+						<CalendarIcon className="mr-2 h-4 w-4 shrink-0" />
 						{date?.from ? (
 							date.to ? (
 								<>
