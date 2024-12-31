@@ -6,7 +6,7 @@ const TimeTracksCalculationData = ({ tracks }: { tracks: TimeTrackType[] }) => {
 	const updatedTracks = tracks.map((track) => {
 		return {
 			...track,
-			timeExtra: track.timeTracked - track.baseTime ?? 0,
+			timeExtra: track?.timeTracked - (track?.baseTime ?? 0),
 		};
 	});
 
