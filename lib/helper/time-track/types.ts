@@ -38,3 +38,9 @@ export type TimeTrackListParams = {
 
 export type TimeTrackStartSchemaType = z.infer<typeof TimeTrackStartSchema>;
 export type TimeTrackEditSchemaType = z.infer<typeof TimeTrackEditSchema>;
+
+export type TimeTrackCalculationParams = {
+	projectId: string;
+	from: string;
+	to: string;
+};

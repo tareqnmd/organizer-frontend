@@ -43,7 +43,7 @@ const FormDateRange = ({
 	initialValues,
 	onUpdate,
 }: {
-	className: string;
+	className?: string;
 	triggerClassName: string;
 	initialValues?: { from?: string | null; to?: string | null };
 	onUpdate: (values: { from: Date; to: Date }) => void;
@@ -152,17 +152,17 @@ const FormDateRange = ({
 	return (
 		<div className={cn('grid gap-2', className)}>
 			<Popover open={open} onOpenChange={setOpen}>
-				<PopoverTrigger asChild>
+				<PopoverTrigger className="" asChild>
 					<Button
 						id="date"
 						variant={'outline'}
 						className={cn(
-							'justify-start text-left font-normal',
+							'justify-start overflow-auto text-left font-normal',
 							!date && 'text-muted-foreground',
 							triggerClassName,
 						)}
 					>
-						<CalendarIcon className="mr-2 h-4 w-4" />
+						<CalendarIcon className="mr-2 h-4 w-4 shrink-0" />
 						{date?.from ? (
 							date.to ? (
 								<>
