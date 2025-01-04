@@ -1,3 +1,4 @@
+import { CardType } from '@/lib/helper/todo';
 import { DragOverlay, UniqueIdentifier } from '@dnd-kit/core';
 import { createPortal } from 'react-dom';
 import { Container } from './Container';
@@ -8,8 +9,8 @@ function renderSortableItemDragOverlay(id: UniqueIdentifier) {
 }
 
 function renderContainerDragOverlay(
-	containerId: UniqueIdentifier,
-	cards: { [key: string]: string[] },
+	containerId: string,
+	items: { [key: string]: CardType[] },
 ) {
 	return (
 		<Container
@@ -19,27 +20,28 @@ function renderContainerDragOverlay(
 			}}
 			shadow
 		>
-			{cards[containerId].map((item: any) => (
-				<Item key={item} value={item} />
-			))}
+			{items[containerId] &&
+				items[containerId].map((item: CardType) => (
+					<Item key={item.id} value={item.id} dragOverlay />
+				))}
 		</Container>
 	);
 }
 
 const TodoOverlayItem = ({
 	activeId,
-	lists,
-	cards,
+	containers,
+	items,
 }: {
 	activeId: string;
-	lists: string[];
-	cards: { [key: string]: string[] };
+	containers: string[];
+	items: { [key: string]: CardType[] };
 }) => {
 	return createPortal(
 		<DragOverlay adjustScale={false}>
 			{activeId
-				? lists.includes(activeId)
-					? renderContainerDragOverlay(activeId, cards)
+				? containers.includes(activeId)
+					? renderContainerDragOverlay(activeId, items)
 					: renderSortableItemDragOverlay(activeId)
 				: null}
 		</DragOverlay>,

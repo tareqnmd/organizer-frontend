@@ -3,17 +3,18 @@ import {
 	verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 
+import { CardType } from '@/lib/helper/todo';
 import { horizontalListSortingStrategy } from '@dnd-kit/sortable';
 import DroppableContainer from './DroppableContainer';
 import SortableItem from './SortableItem';
 
 const TodoSortableArea = ({
-	lists,
+	containers,
 	items,
 	handleRemove,
 }: {
-	lists: string[];
-	items: { [key: string]: string[] };
+	containers: string[];
+	items: { [key: string]: CardType[] };
 	handleRemove: (id: string) => void;
 }) => {
 	return (
@@ -25,7 +26,7 @@ const TodoSortableArea = ({
 			}}
 		>
 			<SortableContext
-				items={lists}
+				items={containers}
 				strategy={horizontalListSortingStrategy}
 			>
 				<div
@@ -36,11 +37,11 @@ const TodoSortableArea = ({
 					}}
 				>
 					<SortableContext
-						items={lists}
+						items={containers}
 						strategy={horizontalListSortingStrategy}
 					>
 						<div className="flex gap-2 overflow-x-auto">
-							{lists.map((containerId: any) => (
+							{containers.map((containerId: string) => (
 								<DroppableContainer
 									key={containerId}
 									id={containerId}
@@ -53,11 +54,11 @@ const TodoSortableArea = ({
 										strategy={verticalListSortingStrategy}
 									>
 										{items[containerId].map(
-											(value: any, index: any) => {
+											(card: CardType, index: number) => {
 												return (
 													<SortableItem
-														key={value}
-														id={value}
+														key={card.id}
+														id={card.id}
 														index={index}
 													/>
 												);

@@ -1,6 +1,6 @@
 'use client';
+import { CardType, ListType } from '@/lib/helper/todo';
 import {
-	createRange,
 	findContainer,
 	multipleCoordinateGetter,
 } from '@/lib/helper/todo/helper';
@@ -14,6 +14,7 @@ import {
 	pointerWithin,
 	rectIntersection,
 	TouchSensor,
+	UniqueIdentifier,
 	useSensor,
 	useSensors,
 } from '@dnd-kit/core';
@@ -22,16 +23,25 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import TodoOverlayItem from './TodoOverlayItem';
 import TodoSortableArea from './TodoSortableArea';
 
+const makeItems = (lists: ListType[], cards: CardType[]) => {
+	return (
+		lists.reduce(
+			(acc, list) => {
+				acc[list.id] = cards.filter((card) => card.listId === list.id);
+				return acc;
+			},
+			{} as Record<string, CardType[]>,
+		) ?? {}
+	);
+};
+
 const TestTodo = ({ lists, cards }: any) => {
-	const [items, setItems] = useState<any>({
-		A: createRange(3, (index: any) => `A${index + 1}`),
-		B: createRange(3, (index: any) => `B${index + 1}`),
-		C: createRange(3, (index: any) => `C${index + 1}`),
-	});
-	console.log(lists, cards);
-	const [containers, setContainers] = useState(Object.keys(items) as any);
-	const [activeId, setActiveId] = useState<any>(null);
-	const lastOverId = useRef<any>(null);
+	const [items, setItems] = useState<Record<string, CardType[]>>(
+		makeItems(lists, cards),
+	);
+	const [containers, setContainers] = useState<string[]>(Object.keys(items));
+	const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
+	const lastOverId = useRef<UniqueIdentifier | null>(null);
 	const recentlyMovedToNewContainer = useRef(false);
 
 	const collisionDetectionStrategy: any = useCallback(
@@ -40,7 +50,7 @@ const TestTodo = ({ lists, cards }: any) => {
 				return closestCenter({
 					...args,
 					droppableContainers: args.droppableContainers.filter(
-						(container: any) => container.id in items,
+						(container: { id: string }) => container.id in items,
 					),
 				});
 			}
@@ -212,14 +222,14 @@ const TestTodo = ({ lists, cards }: any) => {
 			onDragCancel={onDragCancel}
 		>
 			<TodoSortableArea
-				lists={containers}
+				containers={containers}
 				items={items}
 				handleRemove={handleRemove}
 			/>
 			<TodoOverlayItem
-				activeId={activeId}
-				lists={containers}
-				cards={items}
+				activeId={activeId as string}
+				containers={containers}
+				items={items}
 			/>
 		</DndContext>
 	);
