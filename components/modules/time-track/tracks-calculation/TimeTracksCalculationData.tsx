@@ -1,12 +1,17 @@
 import { TimeTrackType } from '@/lib/helper/time-track';
 import { cn } from '@/lib/utils';
 import { baseDateTimeFormat } from '@/lib/utils/date';
+import { getMinutes } from 'date-fns';
 
 const TimeTracksCalculationData = ({ tracks }: { tracks: TimeTrackType[] }) => {
 	const updatedTracks = tracks.map((track) => {
+		const timeTracked = track?.isActive
+			? getMinutes(new Date()) - getMinutes(track?.startTime)
+			: track?.timeTracked;
 		return {
 			...track,
-			timeExtra: track?.timeTracked - (track?.baseTime ?? 0),
+			timeTracked,
+			timeExtra: timeTracked - (track?.baseTime ?? 0),
 		};
 	});
 
@@ -42,11 +47,14 @@ const TimeTracksCalculationData = ({ tracks }: { tracks: TimeTrackType[] }) => {
 							)}
 							key={track.id}
 						>
-							<div className="p-2">
+							<div className="flex gap-1 p-2">
 								{baseDateTimeFormat(track.startTime)}
+								{track.isActive && (
+									<span className="h-2 w-2 shrink-0 animate-pulse rounded-full bg-status-neutral duration-500 dark:bg-status-success"></span>
+								)}
 							</div>
 							<div className="p-2">
-								{baseDateTimeFormat(track.endTime)}
+								{baseDateTimeFormat(track.endTime) ?? 'N/A'}
 							</div>
 							<div className="p-2">
 								{formattedMinutes(track.timeTracked)}
