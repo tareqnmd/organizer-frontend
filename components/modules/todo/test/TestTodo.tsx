@@ -1,9 +1,16 @@
 'use client';
-import { CardType, ListType } from '@/lib/helper/todo';
 import {
 	findContainer,
 	multipleCoordinateGetter,
 } from '@/lib/helper/todo/helper';
+import { CardType, ListType } from '@/lib/helper/todo/types';
+import {
+	getBoardState,
+	setBoardItems,
+	setContainers,
+	setInitialBoard,
+} from '@/store/features/todo/card/slice';
+import { useAppDispatch } from '@/store/hooks';
 import {
 	closestCenter,
 	DndContext,
@@ -14,34 +21,40 @@ import {
 	pointerWithin,
 	rectIntersection,
 	TouchSensor,
-	UniqueIdentifier,
 	useSensor,
 	useSensors,
 } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import TodoOverlayItem from './TodoOverlayItem';
 import TodoSortableArea from './TodoSortableArea';
 
-const makeItems = (lists: ListType[], cards: CardType[]) => {
+const makeItemss = (lists: ListType[], cards: CardType[]) => {
 	return (
 		lists.reduce(
 			(acc, list) => {
-				acc[list.id] = cards.filter((card) => card.listId === list.id);
+				acc[list.id] = cards
+					.filter((card) => card.listId === list.id)
+					.map((item) => item.id);
 				return acc;
 			},
-			{} as Record<string, CardType[]>,
+			{} as Record<string, string[]>,
 		) ?? {}
 	);
 };
 
-const TestTodo = ({ lists, cards }: any) => {
-	const [items, setItems] = useState<Record<string, CardType[]>>(
-		makeItems(lists, cards),
-	);
-	const [containers, setContainers] = useState<string[]>(Object.keys(items));
-	const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
-	const lastOverId = useRef<UniqueIdentifier | null>(null);
+const TestTodo = ({
+	lists,
+	cards,
+}: {
+	lists: ListType[];
+	cards: CardType[];
+}) => {
+	const dispatch = useAppDispatch();
+	const { items, containers } = useSelector(getBoardState);
+	const [activeId, setActiveId] = useState<any>(null);
+	const lastOverId = useRef<any>(null);
 	const recentlyMovedToNewContainer = useRef(false);
 
 	const collisionDetectionStrategy: any = useCallback(
@@ -50,7 +63,7 @@ const TestTodo = ({ lists, cards }: any) => {
 				return closestCenter({
 					...args,
 					droppableContainers: args.droppableContainers.filter(
-						(container: { id: string }) => container.id in items,
+						(container: any) => container.id in items,
 					),
 				});
 			}
@@ -99,7 +112,7 @@ const TestTodo = ({ lists, cards }: any) => {
 
 	const onDragCancel = () => {
 		if (clonedItems) {
-			setItems(clonedItems);
+			dispatch(setBoardItems(clonedItems));
 		}
 		setActiveId(null);
 		setClonedItems(null);
@@ -112,8 +125,8 @@ const TestTodo = ({ lists, cards }: any) => {
 	}, [items]);
 
 	function handleRemove(containerID: any) {
-		setContainers((containers: any) =>
-			containers.filter((id: any) => id !== containerID),
+		dispatch(
+			setContainers(containers.filter((id: any) => id !== containerID)),
 		);
 	}
 
@@ -128,53 +141,55 @@ const TestTodo = ({ lists, cards }: any) => {
 			return;
 		}
 		if (activeContainer !== overContainer) {
-			setItems((items: any) => {
-				const activeItems = items[activeContainer];
-				const overItems = items[overContainer];
-				const overIndex = overItems.indexOf(overId);
-				const activeIndex = activeItems.indexOf(active.id);
-				let newIndex: number;
-				if (overId in items) {
-					newIndex = overItems.length + 1;
-				} else {
-					const isBelowOverItem =
-						over &&
-						active.rect.current.translated &&
-						active.rect.current.translated.top >
-							over.rect.top + over.rect.height;
+			const activeItems = items[activeContainer];
+			const overItems = items[overContainer];
+			const overIndex = overItems.indexOf(overId);
+			const activeIndex = activeItems.indexOf(active.id);
+			let newIndex: number;
+			if (overId in items) {
+				newIndex = overItems.length + 1;
+			} else {
+				const isBelowOverItem =
+					over &&
+					active.rect.current.translated &&
+					active.rect.current.translated.top >
+						over.rect.top + over.rect.height;
 
-					const modifier = isBelowOverItem ? 1 : 0;
-					newIndex =
-						overIndex >= 0
-							? overIndex + modifier
-							: overItems.length + 1;
-				}
-				recentlyMovedToNewContainer.current = true;
-				return {
-					...items,
-					[activeContainer]: items[activeContainer].filter(
-						(item: any) => item !== active.id,
+				const modifier = isBelowOverItem ? 1 : 0;
+				newIndex =
+					overIndex >= 0
+						? overIndex + modifier
+						: overItems.length + 1;
+			}
+			recentlyMovedToNewContainer.current = true;
+			const updatedBoardItems = {
+				...items,
+				[activeContainer]: items[activeContainer].filter(
+					(item: any) => item !== active.id,
+				),
+				[overContainer]: [
+					...items[overContainer].slice(0, newIndex),
+					items[activeContainer][activeIndex],
+					...items[overContainer].slice(
+						newIndex,
+						items[overContainer].length,
 					),
-					[overContainer]: [
-						...items[overContainer].slice(0, newIndex),
-						items[activeContainer][activeIndex],
-						...items[overContainer].slice(
-							newIndex,
-							items[overContainer].length,
-						),
-					],
-				};
-			});
+				],
+			};
+			dispatch(setBoardItems(updatedBoardItems));
 		}
 	};
 
 	const onDragEnd = ({ active, over }: any) => {
 		if (active.id in items && over?.id) {
-			setContainers((containers: any) => {
-				const activeIndex = containers.indexOf(active.id);
-				const overIndex = containers.indexOf(over.id);
-				return arrayMove(containers, activeIndex, overIndex);
-			});
+			const activeIndex = containers.indexOf(active.id);
+			const overIndex = containers.indexOf(over.id);
+			const updatedContainers = arrayMove(
+				containers,
+				activeIndex,
+				overIndex,
+			);
+			dispatch(setContainers(updatedContainers));
 		}
 		const activeContainer = findContainer(active.id, items);
 		if (!activeContainer) {
@@ -191,18 +206,21 @@ const TestTodo = ({ lists, cards }: any) => {
 			const activeIndex = items[activeContainer].indexOf(active.id);
 			const overIndex = items[overContainer].indexOf(overId);
 			if (activeIndex !== overIndex) {
-				setItems((items: any) => ({
-					...items,
-					[overContainer]: arrayMove(
-						items[overContainer],
-						activeIndex,
-						overIndex,
-					),
-				}));
+				const updatedItems = { ...items };
+				updatedItems[overContainer] = arrayMove(
+					items[overContainer],
+					activeIndex,
+					overIndex,
+				);
+				dispatch(setBoardItems(updatedItems));
 			}
 		}
 		setActiveId(null);
 	};
+
+	useEffect(() => {
+		dispatch(setInitialBoard({ lists, cards }));
+	}, [lists, cards, dispatch]);
 
 	return (
 		<DndContext
@@ -221,16 +239,8 @@ const TestTodo = ({ lists, cards }: any) => {
 			onDragEnd={onDragEnd}
 			onDragCancel={onDragCancel}
 		>
-			<TodoSortableArea
-				containers={containers}
-				items={items}
-				handleRemove={handleRemove}
-			/>
-			<TodoOverlayItem
-				activeId={activeId as string}
-				containers={containers}
-				items={items}
-			/>
+			<TodoSortableArea handleRemove={handleRemove} />
+			<TodoOverlayItem activeId={activeId} />
 		</DndContext>
 	);
 };

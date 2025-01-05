@@ -1,6 +1,7 @@
-import { CardType } from '@/lib/helper/todo';
+import { getBoardState } from '@/store/features/todo/card/slice';
 import { DragOverlay, UniqueIdentifier } from '@dnd-kit/core';
 import { createPortal } from 'react-dom';
+import { useSelector } from 'react-redux';
 import { Container } from './Container';
 import { Item } from './Item';
 
@@ -9,8 +10,8 @@ function renderSortableItemDragOverlay(id: UniqueIdentifier) {
 }
 
 function renderContainerDragOverlay(
-	containerId: string,
-	items: { [key: string]: CardType[] },
+	containerId: UniqueIdentifier,
+	cards: { [key: string]: string[] },
 ) {
 	return (
 		<Container
@@ -20,27 +21,19 @@ function renderContainerDragOverlay(
 			}}
 			shadow
 		>
-			{items[containerId] &&
-				items[containerId].map((item: CardType) => (
-					<Item key={item.id} value={item.id} dragOverlay />
-				))}
+			{cards[containerId].map((item: any) => (
+				<Item key={item} value={item} />
+			))}
 		</Container>
 	);
 }
 
-const TodoOverlayItem = ({
-	activeId,
-	containers,
-	items,
-}: {
-	activeId: string;
-	containers: string[];
-	items: { [key: string]: CardType[] };
-}) => {
+const TodoOverlayItem = ({ activeId }: { activeId: string }) => {
+	const { items, containers } = useSelector(getBoardState);
 	return createPortal(
 		<DragOverlay adjustScale={false}>
 			{activeId
-				? containers.includes(activeId)
+				? containers?.includes(activeId)
 					? renderContainerDragOverlay(activeId, items)
 					: renderSortableItemDragOverlay(activeId)
 				: null}

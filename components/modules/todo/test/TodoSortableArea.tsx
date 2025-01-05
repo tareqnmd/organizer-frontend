@@ -3,20 +3,18 @@ import {
 	verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 
-import { CardType } from '@/lib/helper/todo';
+import { getBoardState } from '@/store/features/todo/card/slice';
 import { horizontalListSortingStrategy } from '@dnd-kit/sortable';
+import { useSelector } from 'react-redux';
 import DroppableContainer from './DroppableContainer';
 import SortableItem from './SortableItem';
 
 const TodoSortableArea = ({
-	containers,
-	items,
 	handleRemove,
 }: {
-	containers: string[];
-	items: { [key: string]: CardType[] };
 	handleRemove: (id: string) => void;
 }) => {
+	const { containers, items, getBoardContainer } = useSelector(getBoardState);
 	return (
 		<div
 			style={{
@@ -41,11 +39,13 @@ const TodoSortableArea = ({
 						strategy={horizontalListSortingStrategy}
 					>
 						<div className="flex gap-2 overflow-x-auto">
-							{containers.map((containerId: string) => (
+							{containers?.map((containerId: any) => (
 								<DroppableContainer
 									key={containerId}
 									id={containerId}
-									label={`Container ${containerId}`}
+									label={
+										getBoardContainer(containerId)?.title
+									}
 									items={items[containerId]}
 									onRemove={() => handleRemove(containerId)}
 								>
@@ -53,12 +53,12 @@ const TodoSortableArea = ({
 										items={items[containerId]}
 										strategy={verticalListSortingStrategy}
 									>
-										{items[containerId].map(
-											(card: CardType, index: number) => {
+										{items[containerId]?.map(
+											(value: any, index: any) => {
 												return (
 													<SortableItem
-														key={card.id}
-														id={card.id}
+														key={value}
+														id={value}
 														index={index}
 													/>
 												);
