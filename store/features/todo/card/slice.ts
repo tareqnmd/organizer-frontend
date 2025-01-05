@@ -40,6 +40,12 @@ const boardSlice = createSlice({
 				action.payload.lists,
 				action.payload.cards,
 			);
+			state.getBoardContainer = (id: string) =>
+				action.payload.lists.find((item: ListType) => item.id === id) ??
+				null;
+			state.getBoardCard = (id: string) =>
+				action.payload.cards.find((item: CardType) => item.id === id) ??
+				null;
 			state.containers = Object.keys(state.items);
 		},
 		setBoardItems: (state, action) => {
