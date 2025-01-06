@@ -12,16 +12,17 @@ function renderSortableItemDragOverlay(id: UniqueIdentifier) {
 function renderContainerDragOverlay(
 	containerId: UniqueIdentifier,
 	cards: { [key: string]: string[] },
+	getBoardContainer: (containerId: string) => { title: string },
 ) {
 	return (
 		<Container
-			label={`Container ${containerId}`}
+			label={getBoardContainer(containerId as string).title}
 			style={{
 				height: '100%',
 			}}
 			shadow
 		>
-			{cards[containerId].map((item: any) => (
+			{cards[containerId].map((item: string) => (
 				<Item key={item} value={item} />
 			))}
 		</Container>
@@ -29,12 +30,20 @@ function renderContainerDragOverlay(
 }
 
 const TodoOverlayItem = ({ activeId }: { activeId: string }) => {
-	const { items, containers } = useSelector(getBoardState);
+	const boardState = useSelector(getBoardState);
+	const { items, containers, getBoardContainer } = boardState;
 	return createPortal(
 		<DragOverlay adjustScale={false}>
 			{activeId
 				? containers?.includes(activeId)
-					? renderContainerDragOverlay(activeId, items)
+					? renderContainerDragOverlay(
+							activeId,
+							items,
+							(containerId) =>
+								getBoardContainer(containerId) || {
+									title: 'Default',
+								},
+						)
 					: renderSortableItemDragOverlay(activeId)
 				: null}
 		</DragOverlay>,
