@@ -1,12 +1,16 @@
 import { TimeTrackType } from '@/lib/helper/time-track';
 import { cn } from '@/lib/utils';
 import { baseDateTimeFormat } from '@/lib/utils/date';
-import { getMinutes } from 'date-fns';
+import TimeTrackCounting from '../tracks/TimeTrackCounting';
 
 const TimeTracksCalculationData = ({ tracks }: { tracks: TimeTrackType[] }) => {
+	const currentTime = new Date();
 	const updatedTracks = tracks.map((track) => {
+		const timeDifference =
+			(currentTime.getTime() - new Date(track.startTime).getTime()) /
+			60000;
 		const timeTracked = track?.isActive
-			? getMinutes(new Date()) - getMinutes(track?.startTime)
+			? Math.floor(timeDifference)
 			: track?.timeTracked;
 		return {
 			...track,
@@ -57,7 +61,11 @@ const TimeTracksCalculationData = ({ tracks }: { tracks: TimeTrackType[] }) => {
 								{baseDateTimeFormat(track.endTime) ?? 'N/A'}
 							</div>
 							<div className="p-2">
-								{formattedMinutes(track.timeTracked)}
+								<TimeTrackCounting
+									timeTracked={track.timeTracked}
+									isActive={track.isActive}
+									startTime={track.startTime}
+								/>
 							</div>
 							<div className="p-2">
 								{formattedMinutes(track.timeExtra)}
