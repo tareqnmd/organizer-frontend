@@ -5,6 +5,7 @@ import {
 import { baseDateFormat } from '@/lib/utils';
 import { Document, Page, StyleSheet, Text } from '@react-pdf/renderer';
 import { View } from 'lucide-react';
+import React from 'react';
 
 const BudgetTransactionsPdf = ({
 	transactions,
@@ -60,11 +61,11 @@ const BudgetTransactionsPdf = ({
 			fontWeight: 'bold',
 			color: '#ffffff',
 		},
-		evenRow: {
-			backgroundColor: '#fafafa',
+		incomeRow: {
+			backgroundColor: '#ccffcc50',
 		},
-		oddRow: {
-			backgroundColor: '#ececec',
+		expenseRow: {
+			backgroundColor: '#ffcccc50',
 		},
 		text_left: {
 			textAlign: 'left',
@@ -87,19 +88,50 @@ const BudgetTransactionsPdf = ({
 	});
 
 	const totalIncomeAmount = transactions?.reduce(
-		(acc: number, transaction: BudgetTransactionType) =>
+		(acc, transaction) =>
 			acc +
 			(transaction?.typeName === 'Income' ? transaction?.amount : 0),
 		0,
 	);
 	const totalExpenseAmount = transactions?.reduce(
-		(acc: number, transaction: BudgetTransactionType) =>
+		(acc, transaction) =>
 			acc +
 			(transaction?.typeName === 'Expense' ? transaction?.amount : 0),
 		0,
 	);
 
 	const totalAmount = totalIncomeAmount - totalExpenseAmount;
+
+	const renderTransactionRow = (
+		transaction: BudgetTransactionType,
+		index: number,
+	) => (
+		<View
+			style={{
+				...styles.row,
+				...(transaction?.typeName === 'Income'
+					? styles.incomeRow
+					: styles.expenseRow),
+			}}
+			key={index}
+		>
+			<Text style={[styles.column]} wrap={false}>
+				{transaction?.categoryName}
+			</Text>
+			<Text style={[styles.column, styles.sm_column]}>
+				{transaction?.typeName}
+			</Text>
+			<Text style={[styles.column, styles.md_column]}>
+				{baseDateFormat(transaction?.date)}
+			</Text>
+			<Text style={[styles.column, styles.lg_column]}>
+				{transaction?.description}
+			</Text>
+			<Text style={[styles.column, styles.sm_column, styles.text_right]}>
+				{transaction?.amount}
+			</Text>
+		</View>
+	);
 
 	return (
 		<Document>
@@ -110,8 +142,8 @@ const BudgetTransactionsPdf = ({
 				<Text fixed style={styles.pdfSubHeader}>
 					{subHeader}
 				</Text>
-				{transactions ? (
-					<>
+				{transactions && (
+					<React.Fragment>
 						<View style={{ ...styles.row, ...styles.headerRow }}>
 							<Text style={[styles.column]}>Category</Text>
 							<Text style={[styles.column, styles.sm_column]}>
@@ -133,56 +165,7 @@ const BudgetTransactionsPdf = ({
 								Amount
 							</Text>
 						</View>
-						{transactions?.map(
-							(transaction: any, index: number) => (
-								<View
-									style={{
-										...styles.row,
-										...(index % 2 === 0
-											? styles.evenRow
-											: styles.oddRow),
-									}}
-									key={index}
-								>
-									<Text style={[styles.column]} wrap={false}>
-										{transaction?.categoryName}
-									</Text>
-									<Text
-										style={[
-											styles.column,
-											styles.sm_column,
-										]}
-									>
-										{transaction?.typeName}
-									</Text>
-									<Text
-										style={[
-											styles.column,
-											styles.md_column,
-										]}
-									>
-										{baseDateFormat(transaction?.date)}
-									</Text>
-									<Text
-										style={[
-											styles.column,
-											styles.lg_column,
-										]}
-									>
-										{transaction?.description}
-									</Text>
-									<Text
-										style={[
-											styles.column,
-											styles.sm_column,
-											styles.text_right,
-										]}
-									>
-										{transaction?.amount}
-									</Text>
-								</View>
-							),
-						)}
+						{transactions.map(renderTransactionRow)}
 						<View style={styles.row}>
 							<Text
 								style={[
@@ -219,8 +202,8 @@ const BudgetTransactionsPdf = ({
 								Total Amount: {totalAmount}
 							</Text>
 						</View>
-					</>
-				) : null}
+					</React.Fragment>
+				)}
 				<Text
 					style={styles.pageNumber}
 					render={({ pageNumber, totalPages }) =>
