@@ -29,7 +29,6 @@ const Transactions = async ({
 				perPage: searchOptions.perPage ?? '10',
 			}}
 			totalTransactions={total}
-			transactions={transactions}
 		>
 			<BudgetTransactionsTable transactions={transactions} />
 		</BudgetTransactionsWrapper>
