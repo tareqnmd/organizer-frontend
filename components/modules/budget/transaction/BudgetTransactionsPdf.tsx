@@ -1,18 +1,38 @@
-import { BudgetTransactionsType } from '@/lib/helper/budget';
-import { baseDateFormat, moneyFormat } from '@/lib/utils';
+import {
+	BudgetTransactionsType,
+	BudgetTransactionType,
+} from '@/lib/helper/budget';
+import { baseDateFormat } from '@/lib/utils';
 import { Document, Page, StyleSheet, Text } from '@react-pdf/renderer';
 import { View } from 'lucide-react';
 
 const BudgetTransactionsPdf = ({
 	transactions,
+	subHeader,
 }: {
 	transactions: BudgetTransactionsType;
+	subHeader: string;
 }) => {
 	const styles = StyleSheet.create({
 		page: {
-			padding: 35,
+			padding: 20,
+			paddingBottom: 60,
 			color: '#000000',
-			fontSize: 12,
+			fontSize: 10,
+		},
+		pdfHeader: {
+			fontSize: 24,
+			fontWeight: 'bold',
+			textAlign: 'center',
+			padding: 10,
+			paddingTop: 0,
+			borderBottom: '1px solid #000',
+		},
+		pdfSubHeader: {
+			fontSize: 16,
+			fontWeight: 'bold',
+			textAlign: 'center',
+			padding: 16,
 		},
 		row: {
 			flexDirection: 'row',
@@ -20,7 +40,7 @@ const BudgetTransactionsPdf = ({
 			alignItems: 'center',
 			padding: 10,
 			textAlign: 'left',
-			border: '1px solid #999999',
+			border: '1px solid #000',
 			borderTop: 'none',
 		},
 		column: {
@@ -41,10 +61,10 @@ const BudgetTransactionsPdf = ({
 			color: '#ffffff',
 		},
 		evenRow: {
-			backgroundColor: '#f0f0f0',
+			backgroundColor: '#fafafa',
 		},
 		oddRow: {
-			backgroundColor: '#ffffff',
+			backgroundColor: '#ececec',
 		},
 		text_left: {
 			textAlign: 'left',
@@ -53,7 +73,7 @@ const BudgetTransactionsPdf = ({
 			textAlign: 'right',
 		},
 		font_bold: {
-			fontWeight: 'bold',
+			fontWeight: 'extrabold',
 		},
 		pageNumber: {
 			position: 'absolute',
@@ -66,16 +86,30 @@ const BudgetTransactionsPdf = ({
 		},
 	});
 
-	const totalAmount = transactions?.reduce(
-		(acc: number, transaction: any) => acc + transaction?.amount,
+	const totalIncomeAmount = transactions?.reduce(
+		(acc: number, transaction: BudgetTransactionType) =>
+			acc +
+			(transaction?.typeName === 'Income' ? transaction?.amount : 0),
+		0,
+	);
+	const totalExpenseAmount = transactions?.reduce(
+		(acc: number, transaction: BudgetTransactionType) =>
+			acc +
+			(transaction?.typeName === 'Expense' ? transaction?.amount : 0),
 		0,
 	);
 
-	console.log(transactions);
+	const totalAmount = totalIncomeAmount - totalExpenseAmount;
 
 	return (
 		<Document>
 			<Page size="A4" style={styles.page}>
+				<Text fixed style={styles.pdfHeader}>
+					Organizer
+				</Text>
+				<Text fixed style={styles.pdfSubHeader}>
+					{subHeader}
+				</Text>
 				{transactions ? (
 					<>
 						<View style={{ ...styles.row, ...styles.headerRow }}>
@@ -110,7 +144,7 @@ const BudgetTransactionsPdf = ({
 									}}
 									key={index}
 								>
-									<Text style={[styles.column]}>
+									<Text style={[styles.column]} wrap={false}>
 										{transaction?.categoryName}
 									</Text>
 									<Text
@@ -158,7 +192,31 @@ const BudgetTransactionsPdf = ({
 									{ width: '100%' },
 								]}
 							>
-								{moneyFormat(totalAmount, 'BDT')}
+								Total Income: {totalIncomeAmount}
+							</Text>
+						</View>
+						<View style={styles.row}>
+							<Text
+								style={[
+									styles.column,
+									styles.text_right,
+									styles.font_bold,
+									{ width: '100%' },
+								]}
+							>
+								Total Expense: {totalExpenseAmount}
+							</Text>
+						</View>
+						<View style={styles.row}>
+							<Text
+								style={[
+									styles.column,
+									styles.text_right,
+									styles.font_bold,
+									{ width: '100%' },
+								]}
+							>
+								Total Amount: {totalAmount}
 							</Text>
 						</View>
 					</>
