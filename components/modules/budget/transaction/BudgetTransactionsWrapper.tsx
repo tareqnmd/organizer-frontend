@@ -126,7 +126,7 @@ const BudgetTransactionsWrapper = ({
 
 	return (
 		<div className="flex flex-col gap-4">
-			<div className="grid grid-cols-4 gap-2">
+			<div className="grid grid-cols-6 gap-2">
 				<BudgetTransactionFilter
 					filterData={filterData}
 					onChange={changeHandler}

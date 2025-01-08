@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { BudgetTransactionParamType } from '@/lib/helper/budget';
 import { FormInputType } from '@/lib/helper/shared/enum';
 import { ControllerRenderProps } from 'react-hook-form';
+import BudgetTransactionsPdf from './BudgetTransactionsPdf';
 
 const BudgetTransactionFilter = ({
 	filterData,
@@ -18,14 +19,13 @@ const BudgetTransactionFilter = ({
 	return (
 		<>
 			<Input
-				className="col-span-2 h-8"
+				className="col-span-6 h-8 sm:col-span-3 md:col-span-2"
 				placeholder="Search By Description"
 				value={filterData.transaction}
 				onChange={(e) => onChange(e.target.value, 'transaction')}
 			/>
-
 			<FormSelect
-				extraTriggerClassName="h-8 col-span-2 md:col-span-1"
+				extraTriggerClassName="h-8 col-span-3 md:col-span-2"
 				input={{
 					type: FormInputType.SELECT,
 					placeholder: 'Select Type',
@@ -40,7 +40,7 @@ const BudgetTransactionFilter = ({
 				}
 			/>
 			<FormSelect
-				extraTriggerClassName="h-8 col-span-2 md:col-span-1"
+				extraTriggerClassName="h-8 col-span-3 md:col-span-2"
 				input={{
 					type: FormInputType.SELECT,
 					placeholder: 'Select Category',
@@ -58,12 +58,13 @@ const BudgetTransactionFilter = ({
 			<FormDateRange
 				onUpdate={onDateRangeUpdate}
 				triggerClassName="h-8"
-				className="col-span-2 w-full md:col-span-3"
+				className="col-span-6 w-full sm:col-span-3 md:col-span-2"
 				initialValues={{
 					from: filterData.from,
 					to: filterData.to,
 				}}
 			/>
+			<BudgetTransactionsPdf extraClassName="h-8 col-span-3 md:col-span-2" />
 		</>
 	);
 };
