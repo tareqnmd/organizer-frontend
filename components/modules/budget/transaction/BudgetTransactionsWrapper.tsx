@@ -1,21 +1,30 @@
 'use client';
 import Pagination from '@/components/common/paginate/Pagination';
+import { Button } from '@/components/ui/button';
 import { useDebounce } from '@/hooks/useDebounce';
-import { BudgetTransactionParamType } from '@/lib/helper/budget';
+import {
+	BudgetTransactionParamType,
+	BudgetTransactionsType,
+} from '@/lib/helper/budget';
 import { baseDateFormat, getPageNumbers, toQueryString } from '@/lib/utils';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import { FileText } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import BudgetTransactionAdd from './BudgetTransactionAdd';
 import BudgetTransactionFilter from './BudgetTransactionFilter';
+import BudgetTransactionsPdf from './BudgetTransactionsPdf';
 
 const BudgetTransactionsWrapper = ({
 	children,
 	searchOptions,
 	totalTransactions,
+	transactions,
 }: {
 	children: ReactNode;
 	searchOptions: BudgetTransactionParamType;
 	totalTransactions: number;
+	transactions: BudgetTransactionsType;
 }) => {
 	const router = useRouter();
 	const hasRendered = useRef(false);
@@ -133,6 +142,18 @@ const BudgetTransactionsWrapper = ({
 					onDateRangeUpdate={dateRangeUpdate}
 				/>
 				<BudgetTransactionAdd />
+				<PDFDownloadLink
+					document={
+						<BudgetTransactionsPdf transactions={transactions} />
+					}
+					fileName={`Transactions_${filterData?.from}_${filterData?.to}`}
+					className="col-span-3 h-8 w-full items-center gap-1 md:col-span-2"
+				>
+					<Button className="flex h-8 w-full items-center gap-1">
+						<FileText className="h-4 w-4 shrink-0" />
+						Download PDF
+					</Button>
+				</PDFDownloadLink>
 			</div>
 			{children}
 			<Pagination

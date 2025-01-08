@@ -1,16 +1,24 @@
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-import { FileText } from 'lucide-react';
+import { BudgetTransactionsType } from '@/lib/helper/budget';
+import { Document, Page, StyleSheet, Text } from '@react-pdf/renderer';
+
 const BudgetTransactionsPdf = ({
-	extraClassName,
+	transactions,
 }: {
-	extraClassName?: string;
+	transactions: BudgetTransactionsType;
 }) => {
+	console.log(transactions);
+	const styles = StyleSheet.create({
+		page: {
+			padding: 10,
+		},
+	});
+
 	return (
-		<Button className={cn('flex items-center gap-1', extraClassName)}>
-			<FileText className="h-4 w-4" />
-			Download PDF
-		</Button>
+		<Document>
+			<Page size="A4" style={styles.page}>
+				<Text>Hello World</Text>
+			</Page>
+		</Document>
 	);
 };
 
