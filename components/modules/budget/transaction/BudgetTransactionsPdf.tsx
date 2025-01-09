@@ -97,8 +97,15 @@ const BudgetTransactionsPdf = ({
 				{baseDateFormat(date)}
 			</Text>
 			<Text style={[styles.column, styles.lg_column]}>{description}</Text>
-			<Text style={[styles.column, styles.sm_column, styles.text_right]}>
-				{amount}
+			<Text
+				style={[
+					styles.column,
+					styles.sm_column,
+					styles.text_right,
+					styles.font_bold,
+				]}
+			>
+				{typeName === 'Expense' ? `(${amount})` : amount}
 			</Text>
 		</View>
 	);
