@@ -1,40 +1,22 @@
+import OrganizerPdf from '@/components/common/pdf/OrganizerPdf';
 import {
 	BudgetTransactionsType,
 	BudgetTransactionType,
 } from '@/lib/helper/budget';
+import { pdfStyles } from '@/lib/helper/shared';
 import { baseDateFormat } from '@/lib/utils';
-import { Document, Page, StyleSheet, Text } from '@react-pdf/renderer';
-import { View } from 'lucide-react';
-import React from 'react';
+import { StyleSheet, Text, View } from '@react-pdf/renderer';
+import { useMemo } from 'react';
 
 const BudgetTransactionsPdf = ({
-	transactions,
+	transactions = [],
 	subHeader,
 }: {
-	transactions: BudgetTransactionsType;
+	transactions?: BudgetTransactionsType;
 	subHeader: string;
 }) => {
 	const styles = StyleSheet.create({
-		page: {
-			padding: 20,
-			paddingBottom: 60,
-			color: '#000000',
-			fontSize: 10,
-		},
-		pdfHeader: {
-			fontSize: 24,
-			fontWeight: 'bold',
-			textAlign: 'center',
-			padding: 10,
-			paddingTop: 0,
-			borderBottom: '1px solid #000',
-		},
-		pdfSubHeader: {
-			fontSize: 16,
-			fontWeight: 'bold',
-			textAlign: 'center',
-			padding: 16,
-		},
+		...pdfStyles,
 		row: {
 			flexDirection: 'row',
 			justifyContent: 'space-between',
@@ -62,157 +44,120 @@ const BudgetTransactionsPdf = ({
 			color: '#ffffff',
 		},
 		incomeRow: {
-			backgroundColor: '#ccffcc50',
+			backgroundColor: '#e1f1e1',
 		},
 		expenseRow: {
-			backgroundColor: '#ffcccc50',
-		},
-		text_left: {
-			textAlign: 'left',
-		},
-		text_right: {
-			textAlign: 'right',
-		},
-		font_bold: {
-			fontWeight: 'extrabold',
-		},
-		pageNumber: {
-			position: 'absolute',
-			fontSize: 12,
-			bottom: 30,
-			left: 0,
-			right: 0,
-			textAlign: 'center',
-			color: 'grey',
+			backgroundColor: '#ebdddd',
 		},
 	});
 
-	const totalIncomeAmount = transactions?.reduce(
-		(acc, transaction) =>
-			acc +
-			(transaction?.typeName === 'Income' ? transaction?.amount : 0),
-		0,
+	const totalIncomeAmount = useMemo(
+		() =>
+			transactions.reduce(
+				(acc, { typeName, amount }) =>
+					acc + (typeName === 'Income' ? amount : 0),
+				0,
+			),
+		[transactions],
 	);
-	const totalExpenseAmount = transactions?.reduce(
-		(acc, transaction) =>
-			acc +
-			(transaction?.typeName === 'Expense' ? transaction?.amount : 0),
-		0,
+
+	const totalExpenseAmount = useMemo(
+		() =>
+			transactions.reduce(
+				(acc, { typeName, amount }) =>
+					acc + (typeName === 'Expense' ? amount : 0),
+				0,
+			),
+		[transactions],
 	);
 
 	const totalAmount = totalIncomeAmount - totalExpenseAmount;
 
 	const renderTransactionRow = (
-		transaction: BudgetTransactionType,
+		{
+			categoryName,
+			typeName,
+			date,
+			description,
+			amount,
+		}: BudgetTransactionType,
 		index: number,
 	) => (
 		<View
 			style={{
 				...styles.row,
-				...(transaction?.typeName === 'Income'
+				...(typeName === 'Income'
 					? styles.incomeRow
 					: styles.expenseRow),
 			}}
 			key={index}
+			wrap={false}
 		>
-			<Text style={[styles.column]} wrap={false}>
-				{transaction?.categoryName}
-			</Text>
-			<Text style={[styles.column, styles.sm_column]}>
-				{transaction?.typeName}
-			</Text>
+			<Text style={[styles.column]}>{categoryName}</Text>
+			<Text style={[styles.column, styles.sm_column]}>{typeName}</Text>
 			<Text style={[styles.column, styles.md_column]}>
-				{baseDateFormat(transaction?.date)}
+				{baseDateFormat(date)}
 			</Text>
-			<Text style={[styles.column, styles.lg_column]}>
-				{transaction?.description}
-			</Text>
+			<Text style={[styles.column, styles.lg_column]}>{description}</Text>
 			<Text style={[styles.column, styles.sm_column, styles.text_right]}>
-				{transaction?.amount}
+				{amount}
 			</Text>
 		</View>
 	);
 
 	return (
-		<Document>
-			<Page size="A4" style={styles.page}>
-				<Text fixed style={styles.pdfHeader}>
-					Organizer
+		<OrganizerPdf subHeader={subHeader}>
+			<View fixed style={{ ...styles.row, ...styles.headerRow }}>
+				<Text style={[styles.column]}>Category</Text>
+				<Text style={[styles.column, styles.sm_column]}>Type</Text>
+				<Text style={[styles.column, styles.md_column]}>Date</Text>
+				<Text style={[styles.column, styles.lg_column]}>
+					Description
 				</Text>
-				<Text fixed style={styles.pdfSubHeader}>
-					{subHeader}
-				</Text>
-				{transactions && (
-					<React.Fragment>
-						<View style={{ ...styles.row, ...styles.headerRow }}>
-							<Text style={[styles.column]}>Category</Text>
-							<Text style={[styles.column, styles.sm_column]}>
-								Type
-							</Text>
-							<Text style={[styles.column, styles.md_column]}>
-								Date
-							</Text>
-							<Text style={[styles.column, styles.lg_column]}>
-								Description
-							</Text>
-							<Text
-								style={[
-									styles.column,
-									styles.sm_column,
-									styles.text_right,
-								]}
-							>
-								Amount
-							</Text>
-						</View>
-						{transactions.map(renderTransactionRow)}
-						<View style={styles.row}>
-							<Text
-								style={[
-									styles.column,
-									styles.text_right,
-									styles.font_bold,
-									{ width: '100%' },
-								]}
-							>
-								Total Income: {totalIncomeAmount}
-							</Text>
-						</View>
-						<View style={styles.row}>
-							<Text
-								style={[
-									styles.column,
-									styles.text_right,
-									styles.font_bold,
-									{ width: '100%' },
-								]}
-							>
-								Total Expense: {totalExpenseAmount}
-							</Text>
-						</View>
-						<View style={styles.row}>
-							<Text
-								style={[
-									styles.column,
-									styles.text_right,
-									styles.font_bold,
-									{ width: '100%' },
-								]}
-							>
-								Total Amount: {totalAmount}
-							</Text>
-						</View>
-					</React.Fragment>
-				)}
 				<Text
-					style={styles.pageNumber}
-					render={({ pageNumber, totalPages }) =>
-						`${pageNumber} / ${totalPages}`
-					}
-					fixed
-				/>
-			</Page>
-		</Document>
+					style={[styles.column, styles.sm_column, styles.text_right]}
+				>
+					Amount
+				</Text>
+			</View>
+			{transactions.map(renderTransactionRow)}
+			<View style={styles.row}>
+				<Text
+					style={[
+						styles.column,
+						styles.text_right,
+						styles.font_bold,
+						{ width: '100%' },
+					]}
+				>
+					Total Income: {totalIncomeAmount}
+				</Text>
+			</View>
+			<View style={styles.row}>
+				<Text
+					style={[
+						styles.column,
+						styles.text_right,
+						styles.font_bold,
+						{ width: '100%' },
+					]}
+				>
+					Total Expense: {totalExpenseAmount}
+				</Text>
+			</View>
+			<View style={styles.row}>
+				<Text
+					style={[
+						styles.column,
+						styles.text_right,
+						styles.font_bold,
+						{ width: '100%' },
+					]}
+				>
+					Total Amount: {totalAmount}
+				</Text>
+			</View>
+		</OrganizerPdf>
 	);
 };
 
