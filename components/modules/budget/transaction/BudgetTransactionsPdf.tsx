@@ -43,11 +43,11 @@ const BudgetTransactionsPdf = ({
 			fontWeight: 'bold',
 			color: '#ffffff',
 		},
-		incomeRow: {
-			backgroundColor: '#e1f1e1',
+		evenRow: {
+			backgroundColor: '#ffffff',
 		},
-		expenseRow: {
-			backgroundColor: '#ebdddd',
+		oddRow: {
+			backgroundColor: '#f0f0f0',
 		},
 	});
 
@@ -86,9 +86,7 @@ const BudgetTransactionsPdf = ({
 		<View
 			style={{
 				...styles.row,
-				...(typeName === 'Income'
-					? styles.incomeRow
-					: styles.expenseRow),
+				...(index % 2 === 0 ? styles.evenRow : styles.oddRow),
 			}}
 			key={index}
 			wrap={false}
