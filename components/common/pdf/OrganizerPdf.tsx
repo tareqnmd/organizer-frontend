@@ -1,3 +1,4 @@
+import { baseDateFormat } from '@/lib/utils';
 import { Document, Page, StyleSheet, Text, View } from '@react-pdf/renderer';
 import OrganizerPdfLogo from './OrganizerPdfLogo';
 
@@ -55,7 +56,7 @@ const OrganizerPdf = ({
 						) : null}
 					</View>
 					<Text style={styles.pdfSubHeader}>
-						Issue Date: {new Date().toLocaleDateString()}
+						Issue Date: {baseDateFormat(new Date())}
 					</Text>
 				</View>
 				<View style={styles.pdfContent}>{children}</View>
