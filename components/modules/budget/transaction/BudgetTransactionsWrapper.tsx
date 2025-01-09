@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import BudgetTransactionAdd from './BudgetTransactionAdd';
 import BudgetTransactionFilter from './BudgetTransactionFilter';
+import BudgetTransactionsPdfButton from './BudgetTransactionsPdfButton';
 
 const BudgetTransactionsWrapper = ({
 	children,
@@ -126,13 +127,14 @@ const BudgetTransactionsWrapper = ({
 
 	return (
 		<div className="flex flex-col gap-4">
-			<div className="grid grid-cols-4 gap-2">
+			<div className="grid grid-cols-6 gap-2">
 				<BudgetTransactionFilter
 					filterData={filterData}
 					onChange={changeHandler}
 					onDateRangeUpdate={dateRangeUpdate}
 				/>
 				<BudgetTransactionAdd />
+				<BudgetTransactionsPdfButton filterData={filterData} />
 			</div>
 			{children}
 			<Pagination
