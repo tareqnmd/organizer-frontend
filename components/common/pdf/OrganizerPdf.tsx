@@ -1,4 +1,5 @@
 import { Document, Page, StyleSheet, Text, View } from '@react-pdf/renderer';
+import OrganizerPdfLogo from './OrganizerPdfLogo';
 
 const OrganizerPdf = ({
 	children,
@@ -27,12 +28,8 @@ const OrganizerPdf = ({
 			display: 'flex',
 			flexDirection: 'column',
 		},
-		pdfHeaderTextTitle: {
-			fontSize: 24,
-			fontWeight: 'bold',
-		},
 		pdfSubHeader: {
-			fontSize: 14,
+			fontSize: 12,
 			fontWeight: 'bold',
 		},
 		pdfContent: {},
@@ -52,7 +49,7 @@ const OrganizerPdf = ({
 			<Page size="A4" style={styles.page}>
 				<View fixed style={styles.pdfHeader}>
 					<View style={styles.pdfHeaderText}>
-						<Text style={styles.pdfHeaderTextTitle}>Organizer</Text>
+						<OrganizerPdfLogo />
 						{subHeader ? (
 							<Text style={styles.pdfSubHeader}>{subHeader}</Text>
 						) : null}
