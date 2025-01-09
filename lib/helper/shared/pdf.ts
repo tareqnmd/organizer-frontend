@@ -1,19 +1,19 @@
 import { StyleSheet } from '@react-pdf/renderer';
 
 export const pdfStyles = StyleSheet.create({
-	text_left: {
+	textLeft: {
 		textAlign: 'left',
 	},
-	text_right: {
+	textRight: {
 		textAlign: 'right',
 	},
-	font_bold: {
+	fontBold: {
 		fontWeight: 'bold',
 	},
-	font_extra_bold: {
+	fontExtraBold: {
 		fontWeight: 'extrabold',
 	},
-	text_center: {
+	textCenter: {
 		textAlign: 'center',
 	},
 });
