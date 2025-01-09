@@ -159,7 +159,8 @@ const BudgetTransactionsPdf = ({
 						{ width: '100%' },
 					]}
 				>
-					Total Amount: {totalAmount}
+					Total Amount:{' '}
+					{totalAmount < 0 ? `(${totalAmount * -1})` : totalAmount}
 				</Text>
 			</View>
 		</OrganizerPdf>
