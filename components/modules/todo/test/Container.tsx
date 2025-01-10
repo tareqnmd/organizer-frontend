@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 
 import { cn } from '@/lib/utils';
-import { GripVertical, X } from 'lucide-react';
+import { GripVertical, Trash } from 'lucide-react';
 
 export interface Props {
 	children: React.ReactNode;
@@ -35,7 +35,7 @@ export const Container = forwardRef<HTMLDivElement, Props>(
 				ref={ref as any}
 				style={style}
 				className={cn(
-					'flex min-h-[200px] min-w-[350px] flex-col overflow-hidden rounded-lg border border-gray-200 bg-white transition-colors duration-300',
+					'flex min-w-[300px] flex-col overflow-hidden rounded-lg border border-gray-200 bg-white transition-colors duration-300',
 					shadow && 'shadow-lg',
 				)}
 				onClick={onClick}
@@ -43,11 +43,21 @@ export const Container = forwardRef<HTMLDivElement, Props>(
 			>
 				{label ? (
 					<div className="flex items-center justify-between rounded-t-lg border-b border-gray-200 bg-white p-2">
-						<div className="ml-3">
-							<GripVertical {...handleProps} />
-						</div>
+						<GripVertical
+							className="cursor-pointer focus:outline-none"
+							size={16}
+							{...handleProps}
+						/>
 						<div>{label}</div>
-						<div>{onRemove ? <X onClick={onRemove} /> : null}</div>
+						{onRemove ? (
+							<Trash
+								className="cursor-pointer focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-0"
+								size={16}
+								onClick={onRemove}
+							/>
+						) : (
+							<div className="w-4" />
+						)}
 					</div>
 				) : null}
 				<ul className="bg-gray flex flex-col gap-2 overflow-hidden p-4">

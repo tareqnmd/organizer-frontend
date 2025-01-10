@@ -3,6 +3,7 @@ import {
 	verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 
+import { Button } from '@/components/ui/button';
 import { getBoardState } from '@/store/features/todo/card/slice';
 import { horizontalListSortingStrategy } from '@dnd-kit/sortable';
 import { useSelector } from 'react-redux';
@@ -38,7 +39,7 @@ const TodoSortableArea = ({
 						items={containers}
 						strategy={horizontalListSortingStrategy}
 					>
-						<div className="flex gap-2 overflow-x-auto">
+						<div className="flex items-start gap-2 overflow-x-auto">
 							{containers?.map((containerId: any) => (
 								<DroppableContainer
 									key={containerId}
@@ -67,6 +68,9 @@ const TodoSortableArea = ({
 									</SortableContext>
 								</DroppableContainer>
 							))}
+							<div className="block w-[300px]">
+								<Button>Add</Button>
+							</div>
 						</div>
 					</SortableContext>
 				</div>

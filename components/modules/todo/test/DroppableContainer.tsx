@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button';
 import {
 	AnimateLayoutChanges,
 	defaultAnimateLayoutChanges,
@@ -42,6 +43,7 @@ function DroppableContainer({ children, id, items, style, ...props }: any) {
 			{...props}
 		>
 			{children}
+			<Button>Add</Button>
 		</Container>
 	);
 }

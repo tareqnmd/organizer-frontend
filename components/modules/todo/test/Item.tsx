@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 import { getBoardState } from '@/store/features/todo/card/slice';
-import { GripVertical, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import styles from './Item.module.css';
@@ -96,10 +96,9 @@ export const Item = React.memo(
 						)}
 						style={style}
 						{...props}
+						{...handleProps}
+						{...listeners}
 					>
-						<div className="flex items-center gap-2">
-							<GripVertical {...handleProps} {...listeners} />
-						</div>
 						{getBoardCard(value)?.title}
 						<span>
 							{onRemove ? <X onClick={onRemove} /> : null}
