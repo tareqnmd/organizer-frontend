@@ -6,8 +6,8 @@ import {
 import { getBoardState } from '@/store/features/todo/card/slice';
 import { horizontalListSortingStrategy } from '@dnd-kit/sortable';
 import { useSelector } from 'react-redux';
-import AddList from './AddList';
 import DroppableContainer from './DroppableContainer';
+import AddList from './list/AddList';
 import SortableItem from './SortableItem';
 
 const TodoSortableArea = ({
@@ -44,9 +44,6 @@ const TodoSortableArea = ({
 								<DroppableContainer
 									key={containerId}
 									id={containerId}
-									label={
-										getBoardContainer(containerId)?.title
-									}
 									items={items[containerId]}
 									onRemove={() => handleRemove(containerId)}
 								>
@@ -68,7 +65,6 @@ const TodoSortableArea = ({
 									</SortableContext>
 								</DroppableContainer>
 							))}
-
 							<AddList />
 						</div>
 					</SortableContext>

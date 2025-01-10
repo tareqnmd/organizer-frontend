@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom';
 import { useSelector } from 'react-redux';
 import { Container } from './Container';
 import Item from './Item';
+import AddCard from './card/AddCard';
 
 function renderSortableItemDragOverlay(id: UniqueIdentifier) {
 	return <Item value={id} />;
@@ -12,11 +13,10 @@ function renderSortableItemDragOverlay(id: UniqueIdentifier) {
 function renderContainerDragOverlay(
 	containerId: UniqueIdentifier,
 	cards: { [key: string]: string[] },
-	getBoardContainer: (containerId: string) => { title: string },
 ) {
 	return (
 		<Container
-			label={getBoardContainer(containerId as string).title}
+			id={containerId as string}
 			style={{
 				height: '100%',
 			}}
@@ -25,6 +25,7 @@ function renderContainerDragOverlay(
 			{cards[containerId].map((item: string) => (
 				<Item key={item} value={item} />
 			))}
+			<AddCard listId={containerId as string} />
 		</Container>
 	);
 }
@@ -36,14 +37,7 @@ const TodoOverlayItem = ({ activeId }: { activeId: string }) => {
 		<DragOverlay adjustScale={false}>
 			{activeId
 				? containers?.includes(activeId)
-					? renderContainerDragOverlay(
-							activeId,
-							items,
-							(containerId) =>
-								getBoardContainer(containerId) || {
-									title: 'Default',
-								},
-						)
+					? renderContainerDragOverlay(activeId, items)
 					: renderSortableItemDragOverlay(activeId)
 				: null}
 		</DragOverlay>,

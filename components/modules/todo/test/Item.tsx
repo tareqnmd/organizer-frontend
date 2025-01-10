@@ -3,6 +3,7 @@ import { getBoardState } from '@/store/features/todo/card/slice';
 import { Trash } from 'lucide-react';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import CardModal from './card/CardModal';
 
 const Item = React.memo(
 	React.forwardRef<any, any>(
@@ -51,9 +52,7 @@ const Item = React.memo(
 						{...handleProps}
 						{...listeners}
 					>
-						<span className="truncate text-sm">
-							{getBoardCard(value)?.title}
-						</span>
+						<CardModal cardId={value} />
 						<Trash
 							className="shrink-0"
 							size={16}

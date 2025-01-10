@@ -91,7 +91,12 @@ const TestTodo = ({
 
 	const [clonedItems, setClonedItems] = useState<any>(null);
 	const sensors = useSensors(
-		useSensor(MouseSensor),
+		useSensor(MouseSensor, {
+			activationConstraint: {
+				delay: 200,
+				tolerance: 5,
+			},
+		}),
 		useSensor(TouchSensor),
 		useSensor(KeyboardSensor, {
 			coordinateGetter: multipleCoordinateGetter,
