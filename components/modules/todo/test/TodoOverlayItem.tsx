@@ -3,10 +3,10 @@ import { DragOverlay, UniqueIdentifier } from '@dnd-kit/core';
 import { createPortal } from 'react-dom';
 import { useSelector } from 'react-redux';
 import { Container } from './Container';
-import { Item } from './Item';
+import Item from './Item';
 
 function renderSortableItemDragOverlay(id: UniqueIdentifier) {
-	return <Item value={id} dragOverlay />;
+	return <Item value={id} />;
 }
 
 function renderContainerDragOverlay(

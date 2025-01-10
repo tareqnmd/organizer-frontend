@@ -1,75 +1,31 @@
 import { cn } from '@/lib/utils';
 import { getBoardState } from '@/store/features/todo/card/slice';
-import { X } from 'lucide-react';
-import React, { useEffect } from 'react';
+import { Trash } from 'lucide-react';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import styles from './Item.module.css';
 
-export const Item = React.memo(
+const Item = React.memo(
 	React.forwardRef<any, any>(
 		(
 			{
-				dragOverlay,
+				value,
 				dragging,
-				disabled,
-				fadeIn,
 				handleProps,
-				height,
 				index,
-				listeners,
-				onRemove,
-				renderItem,
-				sorting,
-				style,
 				transition,
 				transform,
-				value,
-				wrapperStyle,
-				...props
+				listeners,
 			},
 			ref,
 		) => {
 			const { getBoardCard } = useSelector(getBoardState);
-			useEffect(() => {
-				if (!dragOverlay) {
-					return;
-				}
 
-				document.body.style.cursor = 'grabbing';
-
-				return () => {
-					document.body.style.cursor = '';
-				};
-			}, [dragOverlay]);
-
-			return renderItem ? (
-				renderItem({
-					dragOverlay: Boolean(dragOverlay),
-					dragging: Boolean(dragging),
-					sorting: Boolean(sorting),
-					index,
-					fadeIn: Boolean(fadeIn),
-					listeners,
-					ref,
-					style,
-					transform,
-					transition,
-					value,
-				})
-			) : (
+			return (
 				<li
-					className={cn(
-						styles.wrapper,
-						fadeIn && styles.fadeIn,
-						sorting && styles.sorting,
-						dragOverlay && styles.dragOverlay,
-					)}
+					className={cn('todo-cards-wrapper')}
 					style={
 						{
-							...wrapperStyle,
-							transition: [transition, wrapperStyle?.transition]
-								.filter(Boolean)
-								.join(', '),
+							transition: [transition].filter(Boolean).join(', '),
 							'--translate-x': transform
 								? `${Math.round(transform.x)}px`
 								: undefined,
@@ -89,23 +45,25 @@ export const Item = React.memo(
 				>
 					<div
 						className={cn(
-							styles.item,
-							dragging && styles.dragging,
-							dragOverlay && styles.dragOverlay,
-							disabled && styles.disabled,
+							'relative flex w-full cursor-pointer items-center justify-between gap-2 rounded-md border bg-light p-2 text-black shadow-sm',
+							dragging && 'opacity-50',
 						)}
-						style={style}
-						{...props}
 						{...handleProps}
 						{...listeners}
 					>
-						{getBoardCard(value)?.title}
-						<span>
-							{onRemove ? <X onClick={onRemove} /> : null}
+						<span className="truncate text-sm">
+							{getBoardCard(value)?.title}
 						</span>
+						<Trash
+							className="shrink-0"
+							size={16}
+							onClick={() => {}}
+						/>
 					</div>
 				</li>
 			);
 		},
 	),
 );
+
+export default Item;

@@ -35,7 +35,7 @@ export const Container = forwardRef<HTMLDivElement, Props>(
 				ref={ref as any}
 				style={style}
 				className={cn(
-					'flex min-w-[300px] flex-col overflow-hidden rounded-lg border border-gray-200 bg-white transition-colors duration-300',
+					'flex min-w-[300px] flex-col overflow-hidden rounded-lg bg-white text-dark transition-colors duration-300',
 					shadow && 'shadow-lg',
 				)}
 				onClick={onClick}
