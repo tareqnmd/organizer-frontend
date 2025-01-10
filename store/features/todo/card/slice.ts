@@ -12,6 +12,7 @@ const initialState: BoardSliceType = {
 	cards: [],
 	items: {},
 	containers: [],
+	boardId: '',
 	getBoardContainer: (id: string) => {
 		return initialState.lists.find((item) => item.id === id) ?? null;
 	},
@@ -46,6 +47,7 @@ const boardSlice = createSlice({
 			state.getBoardCard = (id: string) =>
 				action.payload.cards.find((item: CardType) => item.id === id) ??
 				null;
+			state.boardId = action.payload.boardId;
 			state.containers = Object.keys(state.items);
 		},
 		setBoardItems: (state, action) => {

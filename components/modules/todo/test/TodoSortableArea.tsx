@@ -3,10 +3,10 @@ import {
 	verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 
-import { Button } from '@/components/ui/button';
 import { getBoardState } from '@/store/features/todo/card/slice';
 import { horizontalListSortingStrategy } from '@dnd-kit/sortable';
 import { useSelector } from 'react-redux';
+import AddList from './AddList';
 import DroppableContainer from './DroppableContainer';
 import SortableItem from './SortableItem';
 
@@ -68,9 +68,8 @@ const TodoSortableArea = ({
 									</SortableContext>
 								</DroppableContainer>
 							))}
-							<div className="block w-[300px]">
-								<Button>Add</Button>
-							</div>
+
+							<AddList />
 						</div>
 					</SortableContext>
 				</div>

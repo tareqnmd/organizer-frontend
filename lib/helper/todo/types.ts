@@ -62,4 +62,5 @@ export type BoardSliceType = {
 	containers: string[];
 	getBoardContainer: (id: string) => ListType | null;
 	getBoardCard: (id: string) => CardType | null;
+	boardId: string;
 };

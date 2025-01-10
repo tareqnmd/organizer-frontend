@@ -30,26 +30,14 @@ import { useSelector } from 'react-redux';
 import TodoOverlayItem from './TodoOverlayItem';
 import TodoSortableArea from './TodoSortableArea';
 
-const makeItemss = (lists: ListType[], cards: CardType[]) => {
-	return (
-		lists.reduce(
-			(acc, list) => {
-				acc[list.id] = cards
-					.filter((card) => card.listId === list.id)
-					.map((item) => item.id);
-				return acc;
-			},
-			{} as Record<string, string[]>,
-		) ?? {}
-	);
-};
-
 const TestTodo = ({
 	lists,
 	cards,
+	boardId,
 }: {
 	lists: ListType[];
 	cards: CardType[];
+	boardId: string;
 }) => {
 	const dispatch = useAppDispatch();
 	const { items, containers } = useSelector(getBoardState);
@@ -219,8 +207,8 @@ const TestTodo = ({
 	};
 
 	useEffect(() => {
-		dispatch(setInitialBoard({ lists, cards }));
-	}, [lists, cards, dispatch]);
+		dispatch(setInitialBoard({ lists, cards, boardId }));
+	}, [lists, cards, dispatch, boardId]);
 
 	return (
 		<DndContext

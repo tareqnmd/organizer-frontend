@@ -22,7 +22,7 @@ const BoardView = async ({ boardId }: { boardId: string }) => {
 
 	return (
 		<>
-			<TestTodo lists={lists} cards={cards} />
+			<TestTodo lists={lists} cards={cards} boardId={boardId} />
 			<div
 				className="absolute inset-0 !bg-cover !bg-center !bg-no-repeat"
 				style={{ backgroundImage: board?.boardBg }}

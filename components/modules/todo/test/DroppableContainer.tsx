@@ -1,10 +1,10 @@
-import { Button } from '@/components/ui/button';
 import {
 	AnimateLayoutChanges,
 	defaultAnimateLayoutChanges,
 	useSortable,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import AddCard from './AddCard';
 import { Container } from './Container';
 
 const animateLayoutChanges: AnimateLayoutChanges = (args: any) =>
@@ -43,7 +43,7 @@ function DroppableContainer({ children, id, items, style, ...props }: any) {
 			{...props}
 		>
 			{children}
-			<Button>Add</Button>
+			<AddCard listId={id} />
 		</Container>
 	);
 }
