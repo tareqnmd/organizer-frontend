@@ -29,19 +29,20 @@ const BudgetTransactionsPdf = ({
 		column: {
 			width: '30%',
 		},
-		lg_column: {
+		lgColumn: {
 			width: '30%',
 		},
-		md_column: {
+		mdColumn: {
 			width: '16%',
 		},
-		sm_column: {
+		smColumn: {
 			width: '12%',
+		},
+		footerRow: {
+			backgroundColor: '#dfdfdf',
 		},
 		headerRow: {
 			backgroundColor: '#222222',
-			fontWeight: 'bold',
-			color: '#ffffff',
 		},
 		evenRow: {
 			backgroundColor: '#ffffff',
@@ -92,17 +93,17 @@ const BudgetTransactionsPdf = ({
 			wrap={false}
 		>
 			<Text style={[styles.column]}>{categoryName}</Text>
-			<Text style={[styles.column, styles.sm_column]}>{typeName}</Text>
-			<Text style={[styles.column, styles.md_column]}>
+			<Text style={[styles.column, styles.smColumn]}>{typeName}</Text>
+			<Text style={[styles.column, styles.mdColumn]}>
 				{baseDateFormat(date)}
 			</Text>
-			<Text style={[styles.column, styles.lg_column]}>{description}</Text>
+			<Text style={[styles.column, styles.lgColumn]}>{description}</Text>
 			<Text
 				style={[
 					styles.column,
-					styles.sm_column,
-					styles.text_right,
-					styles.font_bold,
+					styles.smColumn,
+					styles.textRight,
+					styles.fontBold,
 				]}
 			>
 				{typeName === 'Expense' ? `(${amount})` : amount}
@@ -114,52 +115,53 @@ const BudgetTransactionsPdf = ({
 		<OrganizerPdf subHeader={subHeader}>
 			<View fixed style={{ ...styles.row, ...styles.headerRow }}>
 				<Text style={[styles.column]}>Category</Text>
-				<Text style={[styles.column, styles.sm_column]}>Type</Text>
-				<Text style={[styles.column, styles.md_column]}>Date</Text>
-				<Text style={[styles.column, styles.lg_column]}>
+				<Text style={[styles.column, styles.smColumn]}>Type</Text>
+				<Text style={[styles.column, styles.mdColumn]}>Date</Text>
+				<Text style={[styles.column, styles.lgColumn]}>
 					Description
 				</Text>
 				<Text
-					style={[styles.column, styles.sm_column, styles.text_right]}
+					style={[styles.column, styles.smColumn, styles.textRight]}
 				>
 					Amount
 				</Text>
 			</View>
 			{transactions.map(renderTransactionRow)}
-			<View style={styles.row}>
+			<View style={[styles.row, styles.footerRow]}>
 				<Text
 					style={[
 						styles.column,
-						styles.text_right,
-						styles.font_bold,
+						styles.textRight,
+						styles.fontBold,
 						{ width: '100%' },
 					]}
 				>
 					Total Income: {totalIncomeAmount}
 				</Text>
 			</View>
-			<View style={styles.row}>
+			<View style={[styles.row, styles.footerRow]}>
 				<Text
 					style={[
 						styles.column,
-						styles.text_right,
-						styles.font_bold,
+						styles.textRight,
+						styles.fontBold,
 						{ width: '100%' },
 					]}
 				>
 					Total Expense: {totalExpenseAmount}
 				</Text>
 			</View>
-			<View style={styles.row}>
+			<View style={[styles.row, styles.footerRow]}>
 				<Text
 					style={[
 						styles.column,
-						styles.text_right,
-						styles.font_bold,
+						styles.textRight,
+						styles.fontBold,
 						{ width: '100%' },
 					]}
 				>
-					Total Amount: {totalAmount}
+					Total Amount:{' '}
+					{totalAmount < 0 ? `(${totalAmount * -1})` : totalAmount}
 				</Text>
 			</View>
 		</OrganizerPdf>
