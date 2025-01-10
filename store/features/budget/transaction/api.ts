@@ -2,6 +2,12 @@ import apiSlice from '../../api';
 
 export const budgetTransactionApi = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
+		getBudgetTransactions: builder.query({
+			query: (params) => ({
+				url: 'budget/transactions',
+				params,
+			}),
+		}),
 		createBudgetTransaction: builder.mutation({
 			query: (payload) => ({
 				url: 'budget/transaction',
@@ -29,4 +35,5 @@ export const {
 	useCreateBudgetTransactionMutation,
 	useEditBudgetTransactionMutation,
 	useDeleteBudgetTransactionMutation,
+	useGetBudgetTransactionsQuery,
 } = budgetTransactionApi;
