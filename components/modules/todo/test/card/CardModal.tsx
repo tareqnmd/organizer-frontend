@@ -6,33 +6,24 @@ import {
 	DialogTrigger,
 } from '@/components/ui/dialog';
 import { getBoardState } from '@/store/features/todo/card/slice';
-import { useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import BorderListCardDetails from './CardDetails';
 import BoardListCardTitle from './CardTitle';
 
 const CardModal = ({ cardId }: { cardId: string }) => {
 	const { getBoardCard } = useSelector(getBoardState);
-	const card = getBoardCard(cardId);
-	const isFirstRender = useRef(false);
-	const router = useRouter();
+	const card = useMemo(() => getBoardCard(cardId), [cardId, getBoardCard]);
 	const [open, setOpen] = useState(false);
 
-	useEffect(() => {
-		if (isFirstRender.current) {
-			if (!open) {
-				router.refresh();
-			}
-		} else {
-			isFirstRender.current = true;
-		}
-	}, [card, open, router]);
+	if (!card) {
+		return null;
+	}
 
-	return card ? (
+	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
-				<div>{card?.title}</div>
+				<div>{card.title}</div>
 			</DialogTrigger>
 			<DialogContent className="basic-modal">
 				<DialogHeader>
@@ -43,7 +34,7 @@ const CardModal = ({ cardId }: { cardId: string }) => {
 				<BorderListCardDetails card={card} />
 			</DialogContent>
 		</Dialog>
-	) : null;
+	);
 };
 
 export default CardModal;
