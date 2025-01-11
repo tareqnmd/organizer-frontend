@@ -12,12 +12,14 @@ const BoardView = async ({ boardId }: { boardId: string }) => {
 		`todo/list/all?boardId=${boardId}`,
 		nextProperties({}),
 	);
-	const { data: cards = [] } = await generateDataFromServer(
-		`todo/card/list-wise?listIds=${lists
-			.map((list: ListType) => list.id)
-			.join(',')}`,
-		nextProperties({}),
-	);
+	const { data: cards = [] } = lists.length
+		? await generateDataFromServer(
+				`todo/card/list-wise?listIds=${lists
+					.map((list: ListType) => list.id)
+					.join(',')}`,
+				nextProperties({}),
+			)
+		: [];
 
 	return (
 		<div className="flex h-full flex-col gap-4">
