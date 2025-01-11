@@ -2,7 +2,7 @@ import { Input } from '@/components/ui/input';
 import { useDebounce } from '@/hooks/useDebounce';
 import { CardType } from '@/lib/helper/todo';
 import { useEditCardMutation } from '@/store/features/todo/card/api';
-import { setInitialBoard } from '@/store/features/todo/card/slice';
+import { updateFullBoard } from '@/store/features/todo/card/slice';
 import { useAppDispatch } from '@/store/hooks';
 import { useEffect, useRef, useState } from 'react';
 
@@ -23,7 +23,7 @@ const BoardListCardTitle = ({ card }: { card: CardType }) => {
 		if (debouncedUpdateTitle) {
 			updateTitle({ id: card.id, data: { title: debouncedUpdateTitle } });
 			dispatch(
-				setInitialBoard({
+				updateFullBoard({
 					updatedCard: {
 						id: card.id,
 						data: { title: debouncedUpdateTitle },

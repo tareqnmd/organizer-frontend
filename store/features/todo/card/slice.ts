@@ -34,7 +34,7 @@ const boardSlice = createSlice({
 	name: 'board',
 	initialState,
 	reducers: {
-		setInitialBoard: (state, action) => {
+		updateFullBoard: (state, action) => {
 			const updatedLists = action.payload.lists
 				? action.payload.lists
 				: [...state.lists];
@@ -73,7 +73,7 @@ const boardSlice = createSlice({
 	},
 });
 
-export const { setInitialBoard, setBoardItems, setContainers } =
+export const { updateFullBoard, setBoardItems, setContainers } =
 	boardSlice.actions;
 export const getBoardState = (state: RootState): typeof initialState =>
 	state.board;

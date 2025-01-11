@@ -5,7 +5,7 @@ import { FormInputType } from '@/lib/helper/shared/enum';
 import { CardSchemaType, CardType } from '@/lib/helper/todo';
 import { CardSchema } from '@/lib/helper/todo/schemas';
 import { useEditCardMutation } from '@/store/features/todo/card/api';
-import { setInitialBoard } from '@/store/features/todo/card/slice';
+import { updateFullBoard } from '@/store/features/todo/card/slice';
 import { useAppDispatch } from '@/store/hooks';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useRef } from 'react';
@@ -34,7 +34,7 @@ const BorderListCardDetails = ({ card }: { card: CardType }) => {
 				id: card.id,
 			});
 			dispatch(
-				setInitialBoard({
+				updateFullBoard({
 					updatedCard: {
 						id: card.id,
 						data: { description: debouncedValue },

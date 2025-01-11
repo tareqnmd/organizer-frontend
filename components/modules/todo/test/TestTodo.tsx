@@ -10,7 +10,7 @@ import {
 	getBoardState,
 	setBoardItems,
 	setContainers,
-	setInitialBoard,
+	updateFullBoard,
 } from '@/store/features/todo/card/slice';
 import { useUpdateListsOrderMutation } from '@/store/features/todo/list/api';
 import { useAppDispatch } from '@/store/hooks';
@@ -225,7 +225,7 @@ const TestTodo = ({
 	};
 
 	useEffect(() => {
-		dispatch(setInitialBoard({ lists, cards, boardId }));
+		dispatch(updateFullBoard({ lists, cards, boardId }));
 	}, [lists, cards, dispatch, boardId]);
 
 	return (
