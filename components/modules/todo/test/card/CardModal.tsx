@@ -5,7 +5,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-import { getBoardState } from '@/store/features/todo/card/slice';
+import { getBoardState } from '@/store/features/todo/board/slice';
 import { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import BorderListCardDetails from './CardDetails';

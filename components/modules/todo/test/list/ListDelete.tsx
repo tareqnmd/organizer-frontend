@@ -9,35 +9,38 @@ import {
 	DialogTrigger,
 } from '@/components/ui/dialog';
 import { getError } from '@/lib/utils';
-import { getBoardState } from '@/store/features/todo/card/slice';
+import {
+	getBoardState,
+	updateFullBoard,
+} from '@/store/features/todo/board/slice';
 import { useDeleteListMutation } from '@/store/features/todo/list/api';
+import { useAppDispatch } from '@/store/hooks';
 import { Loader, Trash } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { toast } from 'sonner';
 
 const ListDelete = ({ listId }: { listId: string }) => {
+	const dispatch = useAppDispatch();
 	const { getBoardContainer } = useSelector(getBoardState);
 	const list = getBoardContainer(listId);
 
 	const [open, setOpen] = useState(false);
-	const router = useRouter();
 	const [deleteList, { isLoading, isError, isSuccess, error }] =
 		useDeleteListMutation();
-	const deleteHandler = () => {
-		deleteList(listId);
+	const deleteHandler = async () => {
+		await deleteList(listId);
+		dispatch(updateFullBoard({ deleteList: { id: listId } }));
 	};
 
 	useEffect(() => {
 		if (isSuccess) {
 			toast.success(`List successfully deleted`);
 			setOpen(false);
-			router.refresh();
 		} else if (isError) {
 			toast.error(getError(error));
 		}
-	}, [error, isError, isSuccess, router]);
+	}, [error, isError, isSuccess]);
 
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>

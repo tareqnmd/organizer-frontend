@@ -3,7 +3,7 @@ import storage from '@/store/storage';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
 import themeSlice from './features/theme/slice';
-import boardSlice from './features/todo/card/slice';
+import boardSlice from './features/todo/board/slice';
 
 const persistConfig = {
 	key: 'organizer',

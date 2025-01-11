@@ -1,4 +1,4 @@
-import { getBoardState } from '@/store/features/todo/card/slice';
+import { getBoardState } from '@/store/features/todo/board/slice';
 import { DragOverlay, UniqueIdentifier } from '@dnd-kit/core';
 import { createPortal } from 'react-dom';
 import { useSelector } from 'react-redux';

@@ -1,6 +1,6 @@
 import { Input } from '@/components/ui/input';
 import { useDebounce } from '@/hooks/useDebounce';
-import { getBoardState } from '@/store/features/todo/card/slice';
+import { getBoardState } from '@/store/features/todo/board/slice';
 import { useEditListMutation } from '@/store/features/todo/list/api';
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';

@@ -3,7 +3,7 @@ import {
 	verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 
-import { getBoardState } from '@/store/features/todo/card/slice';
+import { getBoardState } from '@/store/features/todo/board/slice';
 import { horizontalListSortingStrategy } from '@dnd-kit/sortable';
 import { useSelector } from 'react-redux';
 import DroppableContainer from './DroppableContainer';

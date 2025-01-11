@@ -9,34 +9,37 @@ import {
 	DialogTrigger,
 } from '@/components/ui/dialog';
 import { getError } from '@/lib/utils';
+import {
+	getBoardState,
+	updateFullBoard,
+} from '@/store/features/todo/board/slice';
 import { useDeleteCardMutation } from '@/store/features/todo/card/api';
-import { getBoardState } from '@/store/features/todo/card/slice';
+import { useAppDispatch } from '@/store/hooks';
 import { Loader, Trash } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { toast } from 'sonner';
 
 const CardDelete = ({ cardId }: { cardId: string }) => {
+	const dispatch = useAppDispatch();
 	const { getBoardCard } = useSelector(getBoardState);
 	const card = getBoardCard(cardId);
 	const [open, setOpen] = useState(false);
-	const router = useRouter();
 	const [deleteCard, { isLoading, isError, isSuccess, error }] =
 		useDeleteCardMutation();
-	const deleteHandler = () => {
-		deleteCard(cardId);
+	const deleteHandler = async () => {
+		await deleteCard(cardId);
+		dispatch(updateFullBoard({ deleteCard: { id: cardId } }));
 	};
 
 	useEffect(() => {
 		if (isSuccess) {
 			toast.success(`Card successfully deleted`);
 			setOpen(false);
-			router.refresh();
 		} else if (isError) {
 			toast.error(getError(error));
 		}
-	}, [error, isError, isSuccess, router]);
+	}, [error, isError, isSuccess]);
 
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>

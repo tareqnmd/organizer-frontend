@@ -1,12 +1,15 @@
 import { getError } from '@/lib/utils';
-import { getBoardState } from '@/store/features/todo/card/slice';
+import {
+	getBoardState,
+	updateFullBoard,
+} from '@/store/features/todo/board/slice';
 import { useCreateListMutation } from '@/store/features/todo/list/api';
+import { useAppDispatch } from '@/store/hooks';
 import { Loader, X } from 'lucide-react';
 
 import { Check } from 'lucide-react';
 
 import { Plus } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -14,7 +17,7 @@ import { toast } from 'sonner';
 
 const AddList = () => {
 	const boardId = useSelector(getBoardState).boardId;
-	const router = useRouter();
+	const dispatch = useAppDispatch();
 	const [listForm, setListForm] = useState(false);
 	const [listName, setListName] = useState('');
 
@@ -32,12 +35,12 @@ const AddList = () => {
 
 	useEffect(() => {
 		if (isSuccess && data?.id) {
-			router.refresh();
+			dispatch(updateFullBoard({ addList: { ...data } }));
 			clearList();
 		} else if (isError) {
 			toast.error(getError('Failed to create list'));
 		}
-	}, [isError, isSuccess, data, router]);
+	}, [isError, isSuccess, data, dispatch]);
 
 	if (!boardId) return null;
 

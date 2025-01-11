@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { getBoardState } from '@/store/features/todo/card/slice';
+import { getBoardState } from '@/store/features/todo/board/slice';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import CardDelete from './card/CardDelete';

@@ -1,8 +1,8 @@
 import { Input } from '@/components/ui/input';
 import { useDebounce } from '@/hooks/useDebounce';
 import { CardType } from '@/lib/helper/todo';
+import { updateFullBoard } from '@/store/features/todo/board/slice';
 import { useEditCardMutation } from '@/store/features/todo/card/api';
-import { updateFullBoard } from '@/store/features/todo/card/slice';
 import { useAppDispatch } from '@/store/hooks';
 import { useEffect, useRef, useState } from 'react';
 

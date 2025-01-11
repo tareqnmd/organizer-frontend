@@ -37,11 +37,17 @@ const boardSlice = createSlice({
 		updateFullBoard: (state, action) => {
 			const updatedLists = action.payload.lists
 				? action.payload.lists
-				: [...state.lists];
+				: [...state.lists.map((list) => ({ ...list }))];
 			const updatedCards = action.payload.cards
 				? action.payload.cards
 				: [...state.cards.map((card) => ({ ...card }))];
 			const updatedBoardId = action.payload.boardId ?? state.boardId;
+			if (action.payload.addCard) {
+				updatedCards.push(action.payload.addCard);
+			}
+			if (action.payload.addList) {
+				updatedLists.push(action.payload.addList);
+			}
 			if (action.payload.updatedCard) {
 				updatedCards.forEach(
 					(card: CardType, index: number, array: CardType[]) => {
@@ -50,6 +56,24 @@ const boardSlice = createSlice({
 								...card,
 								...action.payload.updatedCard.data,
 							};
+						}
+					},
+				);
+			}
+			if (action.payload.deleteCard) {
+				updatedCards.forEach(
+					(card: CardType, index: number, array: CardType[]) => {
+						if (card.id === action.payload.deleteCard.id) {
+							array.splice(index, 1);
+						}
+					},
+				);
+			}
+			if (action.payload.deleteList) {
+				updatedLists.forEach(
+					(list: ListType, index: number, array: ListType[]) => {
+						if (list.id === action.payload.deleteList.id) {
+							array.splice(index, 1);
 						}
 					},
 				);

@@ -1,17 +1,18 @@
 import { getError } from '@/lib/utils';
+import { updateFullBoard } from '@/store/features/todo/board/slice';
 import { useCreateCardMutation } from '@/store/features/todo/card/api';
+import { useAppDispatch } from '@/store/hooks';
 import { Loader, X } from 'lucide-react';
 
 import { Check } from 'lucide-react';
 
 import { Plus } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 const AddCard = ({ listId }: { listId: string }) => {
-	const router = useRouter();
+	const dispatch = useAppDispatch();
 	const [cardForm, setCardForm] = useState(false);
 	const [cardName, setCardName] = useState('');
 
@@ -29,12 +30,12 @@ const AddCard = ({ listId }: { listId: string }) => {
 
 	useEffect(() => {
 		if (isSuccess && data?.id) {
-			router.refresh();
+			dispatch(updateFullBoard({ addCard: { ...data } }));
 			clearList();
 		} else if (isError) {
 			toast.error(getError('Failed to create list'));
 		}
-	}, [isError, isSuccess, data, router]);
+	}, [isError, isSuccess, data, dispatch]);
 
 	return (
 		<div className="mt-2">

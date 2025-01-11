@@ -5,13 +5,13 @@ import {
 	multipleCoordinateGetter,
 } from '@/lib/helper/todo/helper';
 import { CardType, ListType } from '@/lib/helper/todo/types';
-import { useUpdateCardsOrderMutation } from '@/store/features/todo/card/api';
 import {
 	getBoardState,
 	setBoardItems,
 	setContainers,
 	updateFullBoard,
-} from '@/store/features/todo/card/slice';
+} from '@/store/features/todo/board/slice';
+import { useUpdateCardsOrderMutation } from '@/store/features/todo/card/api';
 import { useUpdateListsOrderMutation } from '@/store/features/todo/list/api';
 import { useAppDispatch } from '@/store/hooks';
 import {
