@@ -4,7 +4,7 @@ import {
 	useSortable,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import AddCard from './card/AddCard';
+import AddCard from '../card/AddCard';
 import { Container } from './Container';
 
 const animateLayoutChanges: AnimateLayoutChanges = (args: any) =>

@@ -6,11 +6,11 @@ import {
 import { getBoardState } from '@/store/features/todo/board/slice';
 import { horizontalListSortingStrategy } from '@dnd-kit/sortable';
 import { useSelector } from 'react-redux';
-import DroppableContainer from './DroppableContainer';
-import AddList from './list/AddList';
-import SortableItem from './SortableItem';
+import SortableItem from '../card/CardItemSortable';
+import AddList from '../list/AddList';
+import DroppableContainer from '../list/DroppableContainer';
 
-const TodoSortableArea = ({
+const BoardSortableArea = ({
 	handleRemove,
 }: {
 	handleRemove: (id: string) => void;
@@ -74,4 +74,4 @@ const TodoSortableArea = ({
 	);
 };
 
-export default TodoSortableArea;
+export default BoardSortableArea;

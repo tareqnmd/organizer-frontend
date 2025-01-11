@@ -30,10 +30,10 @@ import {
 import { arrayMove } from '@dnd-kit/sortable';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import TodoOverlayItem from './TodoOverlayItem';
-import TodoSortableArea from './TodoSortableArea';
+import TodoOverlayItem from './BoardOverlayItem';
+import TodoSortableArea from './BoardSortableArea';
 
-const TestTodo = ({
+const BoardDetails = ({
 	lists,
 	cards,
 	boardId,
@@ -251,4 +251,4 @@ const TestTodo = ({
 	);
 };
 
-export default TestTodo;
+export default BoardDetails;

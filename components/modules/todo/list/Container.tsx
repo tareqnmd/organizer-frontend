@@ -1,9 +1,9 @@
 import React, { forwardRef } from 'react';
 
 import { cn } from '@/lib/utils';
-import { GripVertical, Trash } from 'lucide-react';
-import ListTitle from './list/ListTitle';
-import ListDelete from './list/ListDelete';
+import { GripVertical } from 'lucide-react';
+import ListDelete from './ListDelete';
+import ListTitle from './ListTitle';
 
 export interface Props {
 	children: React.ReactNode;

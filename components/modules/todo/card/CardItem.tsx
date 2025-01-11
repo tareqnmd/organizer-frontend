@@ -2,10 +2,10 @@ import { cn } from '@/lib/utils';
 import { getBoardState } from '@/store/features/todo/board/slice';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import CardDelete from './card/CardDelete';
-import CardModal from './card/CardModal';
+import CardDelete from './CardDelete';
+import CardModal from './CardModal';
 
-const Item = React.memo(
+const CardItem = React.memo(
 	React.forwardRef<any, any>(
 		(
 			{
@@ -61,4 +61,4 @@ const Item = React.memo(
 	),
 );
 
-export default Item;
+export default CardItem;

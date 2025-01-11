@@ -2,9 +2,9 @@ import { getBoardState } from '@/store/features/todo/board/slice';
 import { DragOverlay, UniqueIdentifier } from '@dnd-kit/core';
 import { createPortal } from 'react-dom';
 import { useSelector } from 'react-redux';
-import { Container } from './Container';
-import Item from './Item';
-import AddCard from './card/AddCard';
+import AddCard from '../card/AddCard';
+import Item from '../card/CardItem';
+import { Container } from '../list/Container';
 
 function renderSortableItemDragOverlay(id: UniqueIdentifier) {
 	return <Item value={id} />;
@@ -30,7 +30,7 @@ function renderContainerDragOverlay(
 	);
 }
 
-const TodoOverlayItem = ({ activeId }: { activeId: string }) => {
+const BoardOverlayItem = ({ activeId }: { activeId: string }) => {
 	const boardState = useSelector(getBoardState);
 	const { items, containers, getBoardContainer } = boardState;
 	return createPortal(
@@ -45,4 +45,4 @@ const TodoOverlayItem = ({ activeId }: { activeId: string }) => {
 	);
 };
 
-export default TodoOverlayItem;
+export default BoardOverlayItem;

@@ -1,7 +1,7 @@
 import { BoardType } from '@/lib/helper/todo';
 import { baseDateFormat } from '@/lib/utils';
 
-const BoardDetails = ({ board }: { board: BoardType }) => {
+const BoardHeaderInfo = ({ board }: { board: BoardType }) => {
 	return (
 		<div
 			className="z-10 flex flex-col rounded bg-cover bg-center bg-no-repeat px-2 py-4 text-lg font-bold text-white"
@@ -15,4 +15,4 @@ const BoardDetails = ({ board }: { board: BoardType }) => {
 	);
 };
 
-export default BoardDetails;
+export default BoardHeaderInfo;

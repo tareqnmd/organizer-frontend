@@ -1,7 +1,7 @@
 import { useSortable } from '@dnd-kit/sortable';
-import Item from './Item';
+import Item from './CardItem';
 
-function SortableItem({ id, index }: { id: string; index: number }) {
+function SortableCardItem({ id, index }: { id: string; index: number }) {
 	const {
 		setNodeRef,
 		setActivatorNodeRef,
@@ -27,4 +27,4 @@ function SortableItem({ id, index }: { id: string; index: number }) {
 	);
 }
 
-export default SortableItem;
+export default SortableCardItem;
