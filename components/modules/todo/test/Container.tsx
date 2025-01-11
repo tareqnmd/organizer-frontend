@@ -3,6 +3,7 @@ import React, { forwardRef } from 'react';
 import { cn } from '@/lib/utils';
 import { GripVertical, Trash } from 'lucide-react';
 import ListTitle from './list/ListTitle';
+import ListDelete from './list/ListDelete';
 
 export interface Props {
 	children: React.ReactNode;
@@ -50,11 +51,7 @@ export const Container = forwardRef<HTMLDivElement, Props>(
 							{...handleProps}
 						/>
 						<ListTitle listId={id} />
-						<Trash
-							className="shrink-0 cursor-pointer focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:ring-0"
-							size={16}
-							onClick={onRemove ?? undefined}
-						/>
+						<ListDelete listId={id} />
 					</div>
 				) : null}
 				<ul className="bg-gray flex flex-col gap-2 overflow-hidden p-4">

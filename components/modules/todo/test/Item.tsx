@@ -1,8 +1,8 @@
 import { cn } from '@/lib/utils';
 import { getBoardState } from '@/store/features/todo/card/slice';
-import { Trash } from 'lucide-react';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import CardDelete from './card/CardDelete';
 import CardModal from './card/CardModal';
 
 const Item = React.memo(
@@ -53,11 +53,7 @@ const Item = React.memo(
 						{...listeners}
 					>
 						<CardModal cardId={value} />
-						<Trash
-							className="shrink-0"
-							size={16}
-							onClick={() => {}}
-						/>
+						<CardDelete cardId={value} />
 					</div>
 				</li>
 			);
