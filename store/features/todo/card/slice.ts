@@ -35,19 +35,33 @@ const boardSlice = createSlice({
 	initialState,
 	reducers: {
 		setInitialBoard: (state, action) => {
-			state.lists = action.payload.lists;
-			state.cards = action.payload.cards;
-			state.items = makeBoardItems(
-				action.payload.lists,
-				action.payload.cards,
-			);
+			const updatedLists = action.payload.lists
+				? action.payload.lists
+				: [...state.lists];
+			const updatedCards = action.payload.cards
+				? action.payload.cards
+				: [...state.cards.map((card) => ({ ...card }))];
+			const updatedBoardId = action.payload.boardId ?? state.boardId;
+			if (action.payload.updatedCard) {
+				updatedCards.forEach(
+					(card: CardType, index: number, array: CardType[]) => {
+						if (card.id === action.payload.updatedCard.id) {
+							array[index] = {
+								...card,
+								...action.payload.updatedCard.data,
+							};
+						}
+					},
+				);
+			}
+			state.lists = updatedLists;
+			state.cards = updatedCards;
+			state.items = makeBoardItems(updatedLists, updatedCards);
 			state.getBoardContainer = (id: string) =>
-				action.payload.lists.find((item: ListType) => item.id === id) ??
-				null;
+				updatedLists.find((item: ListType) => item.id === id) ?? null;
 			state.getBoardCard = (id: string) =>
-				action.payload.cards.find((item: CardType) => item.id === id) ??
-				null;
-			state.boardId = action.payload.boardId;
+				updatedCards.find((item: CardType) => item.id === id) ?? null;
+			state.boardId = updatedBoardId;
 			state.containers = Object.keys(state.items);
 		},
 		setBoardItems: (state, action) => {
