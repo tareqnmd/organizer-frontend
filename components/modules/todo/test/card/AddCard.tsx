@@ -50,7 +50,7 @@ const AddCard = ({ listId }: { listId: string }) => {
 			) : (
 				<div className="flex items-center justify-between gap-1">
 					<input
-						className="w-full border-b !bg-background-light p-1 !shadow-none focus-visible:outline-none"
+						className="w-full border-b !bg-white p-1 !shadow-none focus-visible:outline-none"
 						type="text"
 						value={cardName}
 						autoFocus

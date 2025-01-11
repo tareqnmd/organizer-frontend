@@ -22,13 +22,13 @@ const BoardView = async ({ boardId }: { boardId: string }) => {
 
 	return (
 		<>
-			<TestTodo lists={lists} cards={cards} boardId={boardId} />
 			<div
 				className="absolute inset-0 !bg-cover !bg-center !bg-no-repeat"
 				style={{ backgroundImage: board?.boardBg }}
 			></div>
 			<div className="flex h-full flex-col gap-4">
 				<BoardDetails board={board} />
+				<TestTodo lists={lists} cards={cards} boardId={boardId} />
 				<BoardDnDContent
 					boardId={boardId}
 					lists={lists}
