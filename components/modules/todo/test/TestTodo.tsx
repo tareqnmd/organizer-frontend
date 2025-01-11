@@ -1,15 +1,18 @@
 'use client';
 import {
 	findContainer,
+	generatePayload,
 	multipleCoordinateGetter,
 } from '@/lib/helper/todo/helper';
 import { CardType, ListType } from '@/lib/helper/todo/types';
+import { useUpdateCardsOrderMutation } from '@/store/features/todo/card/api';
 import {
 	getBoardState,
 	setBoardItems,
 	setContainers,
 	setInitialBoard,
 } from '@/store/features/todo/card/slice';
+import { useUpdateListsOrderMutation } from '@/store/features/todo/list/api';
 import { useAppDispatch } from '@/store/hooks';
 import {
 	closestCenter,
@@ -44,6 +47,8 @@ const TestTodo = ({
 	const [activeId, setActiveId] = useState<any>(null);
 	const lastOverId = useRef<any>(null);
 	const recentlyMovedToNewContainer = useRef(false);
+	const [updateListsOrder] = useUpdateListsOrderMutation();
+	const [updateCardsOrder] = useUpdateCardsOrderMutation();
 
 	const collisionDetectionStrategy: any = useCallback(
 		(args: any) => {
@@ -170,6 +175,7 @@ const TestTodo = ({
 				],
 			};
 			dispatch(setBoardItems(updatedBoardItems));
+			updateCardsOrder(generatePayload(updatedBoardItems));
 		}
 	};
 
@@ -183,6 +189,12 @@ const TestTodo = ({
 				overIndex,
 			);
 			dispatch(setContainers(updatedContainers));
+			updateListsOrder(
+				updatedContainers.map((id: string, index: number) => ({
+					id,
+					listOrder: index,
+				})),
+			);
 		}
 		const activeContainer = findContainer(active.id, items);
 		if (!activeContainer) {
@@ -206,6 +218,7 @@ const TestTodo = ({
 					overIndex,
 				);
 				dispatch(setBoardItems(updatedItems));
+				updateCardsOrder(generatePayload(updatedItems));
 			}
 		}
 		setActiveId(null);

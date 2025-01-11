@@ -134,3 +134,17 @@ export const multipleCoordinateGetter: KeyboardCoordinateGetter = (
 
 	return undefined;
 };
+
+export const generatePayload = (items: any) => {
+	const itemsMap = Object.keys(items);
+
+	const cardUpdate = itemsMap.map((listId) =>
+		Object.values(items[listId]).map((cardId, index) => ({
+			id: cardId,
+			listId: listId,
+			cardOrder: index,
+		})),
+	);
+
+	return cardUpdate.flat();
+};

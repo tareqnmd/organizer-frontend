@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/dialog';
 import { BoardType } from '@/lib/helper/todo';
 import { getError } from '@/lib/utils';
-import { useDeleteBoardMutation } from '@/store/features/todo/border/api';
+import { useDeleteBoardMutation } from '@/store/features/todo/board/api';
 import { Loader, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
