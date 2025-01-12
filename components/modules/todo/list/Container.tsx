@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 
 import { cn } from '@/lib/utils';
 import { GripVertical } from 'lucide-react';
+import AddCard from '../card/AddCard';
 import ListDelete from './ListDelete';
 import ListTitle from './ListTitle';
 
@@ -13,6 +14,7 @@ export interface Props {
 	shadow?: boolean;
 	onClick?(): void;
 	onRemove?(): void;
+	height?: number;
 }
 
 export const Container = forwardRef<HTMLDivElement, Props>(
@@ -24,6 +26,7 @@ export const Container = forwardRef<HTMLDivElement, Props>(
 			onRemove,
 			id,
 			style,
+			height,
 			shadow,
 			...props
 		}: Props,
@@ -54,9 +57,13 @@ export const Container = forwardRef<HTMLDivElement, Props>(
 						<ListDelete listId={id} />
 					</div>
 				) : null}
-				<ul className="bg-gray flex flex-col gap-2 overflow-hidden p-4">
+				<ul
+					className="bg-gray flex flex-col gap-2 overflow-hidden overflow-y-auto p-4"
+					style={{ maxHeight: height ? height - 100 : 0 }}
+				>
 					{children}
 				</ul>
+				{id && <AddCard listId={id} />}
 			</Component>
 		);
 	},

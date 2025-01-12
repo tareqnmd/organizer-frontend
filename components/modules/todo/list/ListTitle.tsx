@@ -38,7 +38,7 @@ const ListTitle = ({ listId }: { listId: string }) => {
 		/>
 	) : (
 		<span
-			className="border-b border-b-[#00000000] text-base font-bold"
+			className="truncate border-b border-b-[#00000000] text-base font-bold"
 			onClick={() => {
 				setIsEditing(true);
 				setTimeout(() => inputRef.current?.focus(), 0);
