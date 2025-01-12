@@ -1,24 +1,23 @@
-import { ListType } from '@/lib/helper/todo';
 import { getError } from '@/lib/utils';
+import {
+	getBoardState,
+	updateFullBoard,
+} from '@/store/features/todo/board/slice';
 import { useCreateListMutation } from '@/store/features/todo/list/api';
+import { useAppDispatch } from '@/store/hooks';
 import { Loader, X } from 'lucide-react';
 
 import { Check } from 'lucide-react';
 
 import { Plus } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { toast } from 'sonner';
 
-const BoardListForm = ({
-	setLists,
-	boardId,
-}: {
-	setLists: (lists: ListType[]) => void;
-	boardId: string;
-}) => {
-	const router = useRouter();
+const AddList = () => {
+	const boardId = useSelector(getBoardState).boardId;
+	const dispatch = useAppDispatch();
 	const [listForm, setListForm] = useState(false);
 	const [listName, setListName] = useState('');
 
@@ -36,15 +35,17 @@ const BoardListForm = ({
 
 	useEffect(() => {
 		if (isSuccess && data?.id) {
-			router.refresh();
+			dispatch(updateFullBoard({ addList: { ...data } }));
 			clearList();
 		} else if (isError) {
 			toast.error(getError('Failed to create list'));
 		}
-	}, [isError, isSuccess, data, setLists, router]);
+	}, [isError, isSuccess, data, dispatch]);
+
+	if (!boardId) return null;
 
 	return (
-		<div className="w-[280px] rounded border bg-background-light p-2 shadow">
+		<div className="flex min-w-[300px] flex-col overflow-hidden rounded-lg bg-white p-2 text-dark transition-colors duration-300">
 			{!listForm ? (
 				<button
 					className="flex w-full items-center justify-center gap-2 rounded border p-2 text-sm"
@@ -57,7 +58,7 @@ const BoardListForm = ({
 			) : (
 				<div className="flex items-center justify-between gap-1">
 					<input
-						className="w-full border-b !bg-background-light p-1 !shadow-none focus-visible:outline-none"
+						className="w-full border-b !bg-white p-1 !shadow-none focus-visible:outline-none"
 						type="text"
 						value={listName}
 						autoFocus
@@ -85,4 +86,4 @@ const BoardListForm = ({
 	);
 };
 
-export default BoardListForm;
+export default AddList;

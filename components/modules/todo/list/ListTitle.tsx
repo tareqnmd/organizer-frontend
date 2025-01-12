@@ -1,12 +1,16 @@
 import { Input } from '@/components/ui/input';
 import { useDebounce } from '@/hooks/useDebounce';
-import { ListType } from '@/lib/helper/todo';
+import { getBoardState } from '@/store/features/todo/board/slice';
 import { useEditListMutation } from '@/store/features/todo/list/api';
 import { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 
-const BoardListTitle = ({ list }: { list: ListType }) => {
+const ListTitle = ({ listId }: { listId: string }) => {
+	const { getBoardContainer } = useSelector(getBoardState);
+	const list = getBoardContainer(listId);
+
 	const [updateTitle] = useEditListMutation();
-	const [newTitle, setNewTitle] = useState(list.title);
+	const [newTitle, setNewTitle] = useState(list?.title ?? '');
 	const debouncedUpdateTitle = useDebounce(newTitle, 1000);
 	const [isEditing, setIsEditing] = useState(false);
 	const inputRef = useRef<HTMLInputElement>(null);
@@ -15,10 +19,13 @@ const BoardListTitle = ({ list }: { list: ListType }) => {
 	};
 
 	useEffect(() => {
-		if (debouncedUpdateTitle === list.title) return;
+		if (debouncedUpdateTitle === list?.title) return;
 		debouncedUpdateTitle &&
-			updateTitle({ id: list.id, data: { title: debouncedUpdateTitle } });
-	}, [updateTitle, debouncedUpdateTitle, list.id, list.title]);
+			updateTitle({
+				id: list?.id ?? '',
+				data: { title: debouncedUpdateTitle },
+			});
+	}, [updateTitle, debouncedUpdateTitle, list?.id, list?.title]);
 
 	return isEditing ? (
 		<Input
@@ -27,11 +34,11 @@ const BoardListTitle = ({ list }: { list: ListType }) => {
 			value={newTitle}
 			onChange={titleChangeHandler}
 			onBlur={() => setIsEditing(false)}
-			className="text-md h-auto rounded-none border-0 border-b border-b-light-border !bg-transparent p-0 font-bold !shadow-none focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 dark:!bg-transparent"
+			className="h-auto rounded-none border-0 border-b border-b-transparent !bg-transparent bg-white p-0 text-center text-base font-bold !shadow-none focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 dark:!bg-transparent"
 		/>
 	) : (
 		<span
-			className="text-md border-b border-b-[#00000000] font-bold"
+			className="border-b border-b-[#00000000] text-base font-bold"
 			onClick={() => {
 				setIsEditing(true);
 				setTimeout(() => inputRef.current?.focus(), 0);
@@ -42,4 +49,4 @@ const BoardListTitle = ({ list }: { list: ListType }) => {
 	);
 };
 
-export default BoardListTitle;
+export default ListTitle;

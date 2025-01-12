@@ -1,24 +1,18 @@
-import { CardType } from '@/lib/helper/todo';
 import { getError } from '@/lib/utils';
+import { updateFullBoard } from '@/store/features/todo/board/slice';
 import { useCreateCardMutation } from '@/store/features/todo/card/api';
+import { useAppDispatch } from '@/store/hooks';
 import { Loader, X } from 'lucide-react';
 
 import { Check } from 'lucide-react';
 
 import { Plus } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
-const BoardListCardForm = ({
-	setCards,
-	listId,
-}: {
-	setCards: (cards: CardType[]) => void;
-	listId: string;
-}) => {
-	const router = useRouter();
+const AddCard = ({ listId }: { listId: string }) => {
+	const dispatch = useAppDispatch();
 	const [cardForm, setCardForm] = useState(false);
 	const [cardName, setCardName] = useState('');
 
@@ -36,12 +30,12 @@ const BoardListCardForm = ({
 
 	useEffect(() => {
 		if (isSuccess && data?.id) {
-			router.refresh();
+			dispatch(updateFullBoard({ addCard: { ...data } }));
 			clearList();
 		} else if (isError) {
 			toast.error(getError('Failed to create list'));
 		}
-	}, [isError, isSuccess, data, setCards, router]);
+	}, [isError, isSuccess, data, dispatch]);
 
 	return (
 		<div className="mt-2">
@@ -57,7 +51,7 @@ const BoardListCardForm = ({
 			) : (
 				<div className="flex items-center justify-between gap-1">
 					<input
-						className="w-full border-b !bg-background-light p-1 !shadow-none focus-visible:outline-none"
+						className="w-full border-b !bg-white p-1 !shadow-none focus-visible:outline-none"
 						type="text"
 						value={cardName}
 						autoFocus
@@ -85,4 +79,4 @@ const BoardListCardForm = ({
 	);
 };
 
-export default BoardListCardForm;
+export default AddCard;

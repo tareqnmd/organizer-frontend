@@ -1,7 +1,7 @@
 import { ListType } from '@/lib/helper/todo';
 import { generateDataFromServer, nextProperties } from '@/lib/utils';
-import BoardDetails from './BardDetails';
-import BoardDnDContent from './BoardDnDContent';
+import BoardDetails from './BoardDetails';
+import BoardHeaderInfo from './BoardHeaderInfo';
 
 const BoardView = async ({ boardId }: { boardId: string }) => {
 	const { data: board } = await generateDataFromServer(
@@ -12,28 +12,20 @@ const BoardView = async ({ boardId }: { boardId: string }) => {
 		`todo/list/all?boardId=${boardId}`,
 		nextProperties({}),
 	);
-	const { data: cards = [] } = await generateDataFromServer(
-		`todo/card/list-wise?listIds=${lists
-			.map((list: ListType) => list.id)
-			.join(',')}`,
-		nextProperties({}),
-	);
+	const { data: cards = [] } = lists.length
+		? await generateDataFromServer(
+				`todo/card/list-wise?listIds=${lists
+					.map((list: ListType) => list.id)
+					.join(',')}`,
+				nextProperties({}),
+			)
+		: [];
 
 	return (
-		<>
-			<div
-				className="absolute inset-0 !bg-cover !bg-center !bg-no-repeat"
-				style={{ backgroundImage: board?.boardBg }}
-			></div>
-			<div className="flex h-full flex-col gap-4">
-				<BoardDetails board={board} />
-				<BoardDnDContent
-					boardId={boardId}
-					lists={lists}
-					cards={cards}
-				/>
-			</div>
-		</>
+		<div className="flex h-full flex-col gap-4">
+			<BoardHeaderInfo board={board} />
+			<BoardDetails lists={lists} cards={cards} boardId={boardId} />
+		</div>
 	);
 };
 

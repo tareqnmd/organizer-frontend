@@ -4,12 +4,15 @@ import { useDebounce } from '@/hooks/useDebounce';
 import { FormInputType } from '@/lib/helper/shared/enum';
 import { CardSchemaType, CardType } from '@/lib/helper/todo';
 import { CardSchema } from '@/lib/helper/todo/schemas';
+import { updateFullBoard } from '@/store/features/todo/board/slice';
 import { useEditCardMutation } from '@/store/features/todo/card/api';
+import { useAppDispatch } from '@/store/hooks';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 
 const BorderListCardDetails = ({ card }: { card: CardType }) => {
+	const dispatch = useAppDispatch();
 	const isFirstRender = useRef(false);
 	const [editCard] = useEditCardMutation();
 	const form = useForm<CardSchemaType>({
@@ -30,10 +33,18 @@ const BorderListCardDetails = ({ card }: { card: CardType }) => {
 				data: { description: debouncedValue },
 				id: card.id,
 			});
+			dispatch(
+				updateFullBoard({
+					updatedCard: {
+						id: card.id,
+						data: { description: debouncedValue },
+					},
+				}),
+			);
 		} else {
 			isFirstRender.current = true;
 		}
-	}, [debouncedValue, editCard, card.id]);
+	}, [debouncedValue, editCard, card.id, dispatch]);
 
 	return (
 		<Form {...form}>

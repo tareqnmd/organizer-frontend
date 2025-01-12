@@ -1,8 +1,5 @@
 import * as z from 'zod';
-import { TodoTypeEnum } from './enums';
 import { BoardSchema, CardSchema, WorkspaceSchema } from './schemas';
-
-export type TodoType = TodoTypeEnum;
 
 export type WorkspaceType = {
 	id: string;
@@ -54,4 +51,16 @@ export type CardType = {
 	description: string;
 	listId: string;
 	cardOrder: number;
+};
+
+export type BoardItemsType = Record<string, string[]>;
+
+export type BoardSliceType = {
+	lists: ListType[];
+	cards: CardType[];
+	items: BoardItemsType;
+	containers: string[];
+	getBoardContainer: (id: string) => ListType | null;
+	getBoardCard: (id: string) => CardType | null;
+	boardId: string;
 };

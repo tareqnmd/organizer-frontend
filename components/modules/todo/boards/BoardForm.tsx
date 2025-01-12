@@ -14,7 +14,7 @@ import { getError } from '@/lib/utils';
 import {
 	useCreateBoardMutation,
 	useEditBoardMutation,
-} from '@/store/features/todo/border/api';
+} from '@/store/features/todo/board/api';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';
