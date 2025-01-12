@@ -5,6 +5,7 @@ import {
 
 import { getBoardState } from '@/store/features/todo/board/slice';
 import { horizontalListSortingStrategy } from '@dnd-kit/sortable';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import SortableItem from '../card/CardItemSortable';
 import AddList from '../list/AddList';
@@ -15,14 +16,26 @@ const BoardSortableArea = ({
 }: {
 	handleRemove: (id: string) => void;
 }) => {
-	const { containers, items, getBoardContainer } = useSelector(getBoardState);
+	const { containers, items } = useSelector(getBoardState);
+
+	const refDndContext = useRef<HTMLDivElement>(null);
+	const [height, setHeight] = useState(0);
+
+	useEffect(() => {
+		if (refDndContext.current) {
+			setHeight(refDndContext.current.getBoundingClientRect().height);
+		}
+	}, [refDndContext]);
+
 	return (
 		<div
 			style={{
 				boxSizing: 'border-box',
 				zIndex: 1,
 				position: 'relative',
+				height: '100%',
 			}}
+			ref={refDndContext}
 		>
 			<SortableContext
 				items={containers}
@@ -46,6 +59,7 @@ const BoardSortableArea = ({
 									id={containerId}
 									items={items[containerId]}
 									onRemove={() => handleRemove(containerId)}
+									height={height}
 								>
 									<SortableContext
 										items={items[containerId]}

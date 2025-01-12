@@ -4,13 +4,12 @@ import {
 	useSortable,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import AddCard from '../card/AddCard';
 import { Container } from './Container';
 
 const animateLayoutChanges: AnimateLayoutChanges = (args: any) =>
 	defaultAnimateLayoutChanges({ ...args, wasDragging: true });
 
-function DroppableContainer({ children, id, items, ...props }: any) {
+function DroppableContainer({ children, id, items, height, ...props }: any) {
 	const {
 		attributes,
 		isDragging,
@@ -41,9 +40,9 @@ function DroppableContainer({ children, id, items, ...props }: any) {
 			}}
 			id={id}
 			{...props}
+			height={height}
 		>
 			{children}
-			<AddCard listId={id} />
 		</Container>
 	);
 }
