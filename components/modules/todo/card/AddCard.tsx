@@ -38,7 +38,7 @@ const AddCard = ({ listId }: { listId: string }) => {
 	}, [isError, isSuccess, data, dispatch]);
 
 	return (
-		<div className="mt-2">
+		<div className="m-2">
 			{!cardForm ? (
 				<button
 					className="flex w-full items-center justify-center gap-2 rounded border p-2 text-sm"
