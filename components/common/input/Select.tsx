@@ -10,7 +10,7 @@ import {
 	CustomFormInputType,
 	InputOptionType,
 } from '@/lib/helper/shared/types';
-import { axiosInstance } from '@/lib/utils';
+import { useGetOptionsQuery } from '@/store/features/common/options-api';
 import { useEffect, useState } from 'react';
 import { ControllerRenderProps } from 'react-hook-form';
 
@@ -27,6 +27,9 @@ const FormSelect = ({
 	const [options, setOptions] = useState<InputOptionType[]>([]);
 	const [value, setValue] = useState('');
 	const { placeholder, staticOptions = [], optionUrl, disabled } = input;
+	const { data: getOptionsData = [] } = useGetOptionsQuery(optionUrl, {
+		skip: !optionUrl,
+	});
 
 	useEffect(() => {
 		if (field?.value && options?.length > 0) {
@@ -35,12 +38,10 @@ const FormSelect = ({
 	}, [field?.value, options]);
 
 	useEffect(() => {
-		const getDynamicData = async (url: string) => {
-			const { data = [] } = await axiosInstance(url);
-			setDynamicOptions(data);
-		};
-		optionUrl && getDynamicData(optionUrl);
-	}, [optionUrl]);
+		if (getOptionsData?.length > 0) {
+			setDynamicOptions(getOptionsData);
+		}
+	}, [getOptionsData]);
 
 	useEffect(() => {
 		const updatedOptions =

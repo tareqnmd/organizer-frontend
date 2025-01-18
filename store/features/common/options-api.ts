@@ -6,6 +6,7 @@ export const optionsApi = apiSlice.injectEndpoints({
 			query: (url) => ({
 				url: url,
 			}),
+			providesTags: (result, error, arg) => ['Options', arg],
 		}),
 	}),
 });

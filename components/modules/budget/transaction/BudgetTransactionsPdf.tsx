@@ -43,6 +43,7 @@ const BudgetTransactionsPdf = ({
 		},
 		headerRow: {
 			backgroundColor: '#222222',
+			color: '#ffffff',
 		},
 		evenRow: {
 			backgroundColor: '#ffffff',

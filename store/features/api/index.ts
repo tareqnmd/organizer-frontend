@@ -34,7 +34,7 @@ const apiSlice = createApi({
 		}
 		return { ...result, data: result?.data?.data };
 	},
-	tagTypes: [],
+	tagTypes: ['Options'],
 	endpoints: () => ({}),
 });
 
