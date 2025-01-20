@@ -31,9 +31,6 @@ const TimeTrackTracksTable = ({ tracks }: { tracks: TimeTrackType[] }) => {
 			cell: ({ row }) => (
 				<span className="flex items-center gap-1 text-nowrap">
 					{row.getValue('projectName')}
-					{row.original.isActive && (
-						<span className="h-2 w-2 animate-pulse rounded-full bg-status-success duration-500"></span>
-					)}
 				</span>
 			),
 		},

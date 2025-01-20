@@ -1,15 +1,18 @@
 'use client';
 import { formatTimeFromMinutes } from '@/lib/helper/time-track';
+import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 
 const TimeTrackCounting = ({
 	timeTracked,
 	isActive,
 	startTime,
+	extraBlinkClassName = '',
 }: {
 	timeTracked: number;
 	isActive: boolean;
 	startTime: string;
+	extraBlinkClassName?: string;
 }) => {
 	const [countingTime, setCountingTime] = useState(timeTracked);
 
@@ -28,7 +31,19 @@ const TimeTrackCounting = ({
 		}
 	}, [isActive, startTime]);
 
-	return <div className="text-sm">{formatTimeFromMinutes(countingTime)}</div>;
+	return (
+		<div className="flex items-center gap-1 text-sm">
+			{formatTimeFromMinutes(countingTime, true)}
+			{isActive && (
+				<span
+					className={cn(
+						'h-2 w-2 shrink-0 animate-pulse rounded-full bg-status-success duration-500',
+						extraBlinkClassName,
+					)}
+				></span>
+			)}
+		</div>
+	);
 };
 
 export default TimeTrackCounting;
