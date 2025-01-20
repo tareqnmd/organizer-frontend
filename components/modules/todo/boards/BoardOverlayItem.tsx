@@ -21,6 +21,7 @@ function renderContainerDragOverlay(
 				height: '100%',
 			}}
 			shadow
+			itemsLength={cards[containerId]?.length ?? 0}
 		>
 			{cards[containerId].map((item: string) => (
 				<Item key={item} value={item} />

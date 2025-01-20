@@ -15,6 +15,7 @@ export interface Props {
 	onClick?(): void;
 	onRemove?(): void;
 	height?: number;
+	itemsLength?: number;
 }
 
 export const Container = forwardRef<HTMLDivElement, Props>(
@@ -28,6 +29,7 @@ export const Container = forwardRef<HTMLDivElement, Props>(
 			style,
 			height,
 			shadow,
+			itemsLength = 0,
 			...props
 		}: Props,
 		ref,
@@ -57,14 +59,18 @@ export const Container = forwardRef<HTMLDivElement, Props>(
 						<ListDelete listId={id} />
 					</div>
 				) : null}
-				<ul
-					className="bg-gray flex flex-col gap-2 overflow-hidden overflow-y-auto p-4"
-					style={
-						shadow ? {} : { maxHeight: height ? height - 100 : 0 }
-					}
-				>
-					{children}
-				</ul>
+				{itemsLength > 0 && (
+					<ul
+						className="bg-gray flex flex-col gap-2 overflow-hidden overflow-y-auto p-2"
+						style={
+							shadow
+								? {}
+								: { maxHeight: height ? height - 100 : 0 }
+						}
+					>
+						{children}
+					</ul>
+				)}
 				{id && <AddCard listId={id} />}
 			</Component>
 		);
