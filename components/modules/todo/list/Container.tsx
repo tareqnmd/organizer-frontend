@@ -59,7 +59,9 @@ export const Container = forwardRef<HTMLDivElement, Props>(
 				) : null}
 				<ul
 					className="bg-gray flex flex-col gap-2 overflow-hidden overflow-y-auto p-4"
-					style={{ maxHeight: height ? height - 100 : 0 }}
+					style={
+						shadow ? {} : { maxHeight: height ? height - 100 : 0 }
+					}
 				>
 					{children}
 				</ul>
