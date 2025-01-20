@@ -21,6 +21,7 @@ function renderContainerDragOverlay(
 				height: '100%',
 			}}
 			shadow
+			itemsLength={cards[containerId]?.length ?? 0}
 		>
 			{cards[containerId].map((item: string) => (
 				<Item key={item} value={item} />
@@ -32,7 +33,7 @@ function renderContainerDragOverlay(
 
 const BoardOverlayItem = ({ activeId }: { activeId: string }) => {
 	const boardState = useSelector(getBoardState);
-	const { items, containers, getBoardContainer } = boardState;
+	const { items, containers } = boardState;
 	return createPortal(
 		<DragOverlay adjustScale={false}>
 			{activeId

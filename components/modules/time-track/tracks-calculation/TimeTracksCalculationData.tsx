@@ -53,9 +53,6 @@ const TimeTracksCalculationData = ({ tracks }: { tracks: TimeTrackType[] }) => {
 						>
 							<div className="flex gap-1 p-2">
 								{baseDateTimeFormat(track.startTime)}
-								{track.isActive && (
-									<span className="h-2 w-2 shrink-0 animate-pulse rounded-full bg-status-neutral duration-500 dark:bg-status-success"></span>
-								)}
 							</div>
 							<div className="p-2">
 								{baseDateTimeFormat(track.endTime) ?? 'N/A'}
@@ -65,6 +62,7 @@ const TimeTracksCalculationData = ({ tracks }: { tracks: TimeTrackType[] }) => {
 									timeTracked={track.timeTracked}
 									isActive={track.isActive}
 									startTime={track.startTime}
+									extraBlinkClassName="bg-status-neutral duration-500 dark:bg-status-success"
 								/>
 							</div>
 							<div className="p-2">

@@ -46,13 +46,14 @@ const BoardSortableArea = ({
 						boxSizing: 'border-box',
 						zIndex: 1,
 						position: 'relative',
+						height: '100%',
 					}}
 				>
 					<SortableContext
 						items={containers}
 						strategy={horizontalListSortingStrategy}
 					>
-						<div className="flex items-start gap-2 overflow-x-auto">
+						<div className="flex h-full items-start gap-2 overflow-x-auto">
 							{containers?.map((containerId: any) => (
 								<DroppableContainer
 									key={containerId}

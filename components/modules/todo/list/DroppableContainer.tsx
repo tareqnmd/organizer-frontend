@@ -41,6 +41,7 @@ function DroppableContainer({ children, id, items, height, ...props }: any) {
 			id={id}
 			{...props}
 			height={height}
+			itemsLength={items?.length ?? 0}
 		>
 			{children}
 		</Container>
