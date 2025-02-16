@@ -1,6 +1,7 @@
 import { AuthErrorEnum } from '@/lib/helper/auth';
 import { CommonHeaders } from '@/lib/helper/shared/enum';
 import { fetchSession, logoutHandler } from '@/lib/utils';
+import { TagsEnum } from '@/store/enum';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { getSession } from 'next-auth/react';
 
@@ -34,7 +35,11 @@ const apiSlice = createApi({
 		}
 		return { ...result, data: result?.data?.data };
 	},
-	tagTypes: ['Options'],
+	tagTypes: [
+		TagsEnum.OPTIONS,
+		TagsEnum.BUDGET_TYPE_CATEGORY,
+		TagsEnum.BUDGET_TYPE,
+	],
 	endpoints: () => ({}),
 });
 
