@@ -1,3 +1,5 @@
+import { ZakatCalculationType } from './enum';
+
 export type ZakatFieldType = {
 	name: string;
 	label: string;
@@ -8,4 +10,15 @@ export type ZakatFormItem = {
 	name: string;
 	label: string;
 	children: ZakatFieldType[];
+};
+
+export type ZakatField = {
+	name: string;
+	value: number;
+	type: ZakatCalculationType;
+};
+
+export type ZakatResult = {
+	due: number;
+	isZakatApplicable: boolean;
 };

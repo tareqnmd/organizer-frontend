@@ -1,33 +1,31 @@
-import { ZakatFormItems } from './form-items';
+import { ZakatField } from './type';
 
-const getFieldNames = (category: string) => {
-	return ZakatFormItems.find((item) => item.name === category)?.children.map(
-		(child) => child.name,
+export const calculateZakatDue = (fields: ZakatField[]) => {
+	const nisab = fields.filter((field) => field.type === 'nisab');
+	const assets = fields.filter((field) => field.type === 'assets');
+	const liabilities = fields.filter((field) => field.type === 'liabilities');
+
+	const nisabValue = nisab.reduce((acc, field) => acc + field.value, 0);
+	const assetsValue = assets.reduce((acc, field) => acc + field.value, 0);
+	const liabilitiesValue = liabilities.reduce(
+		(acc, field) => acc + field.value,
+		0,
 	);
-};
 
-const calculateFieldValue = (
-	fields: string[] | undefined,
-	data: Record<string, number>,
-) => {
-	return fields?.reduce((acc, field) => acc + (data[field] ?? 0), 0) ?? 0;
-};
-
-export const calculateZakat = (fields: Record<string, number>) => {
-	const assetFields = getFieldNames('assets');
-	const liabilityFields = getFieldNames('liabilities');
-	const nisabValue = fields.nisab ?? 0;
-	const assetValue = calculateFieldValue(assetFields, fields);
-	const liabilityValue = calculateFieldValue(liabilityFields, fields);
-
-	if (assetValue <= nisabValue) {
-		return 0;
-	}
-
-	const totalAssets = assetValue - liabilityValue;
+	const netAssets = assetsValue - liabilitiesValue;
 
 	const zakatPercentage = 0.025;
-	const zakatAmount = totalAssets * zakatPercentage;
 
-	return zakatAmount;
+	if (netAssets >= nisabValue) {
+		const zakatAmount = netAssets * zakatPercentage;
+		return {
+			due: zakatAmount,
+			isZakatApplicable: true,
+		};
+	} else {
+		return {
+			due: 0,
+			isZakatApplicable: false,
+		};
+	}
 };
