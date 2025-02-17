@@ -1,7 +1,7 @@
-import RootLoading from '@/components/core/RootLoading';
+import BaseLoading from '@/components/core/BaseLoading';
 
 const Loading = () => {
-	return <RootLoading />;
+	return <BaseLoading />;
 };
 
 export default Loading;

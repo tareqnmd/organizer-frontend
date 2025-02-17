@@ -70,4 +70,8 @@ export enum Routes {
 	TODO_WORKSPACES_NAME = 'Workspaces',
 	TODO_BOARDS_PATH = '/todo/boards',
 	TODO_BOARDS_NAME = 'Boards',
+
+	// module zakat
+	ZAKAT_PATH = '/zakat-calculator',
+	ZAKAT_NAME = 'Zakat Calculator',
 }

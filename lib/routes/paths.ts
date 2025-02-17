@@ -78,6 +78,12 @@ export const routes = {
 			icon: 'arrow-left-right',
 			description: 'Currency Converter Information',
 		},
+		{
+			name: Routes.ZAKAT_NAME,
+			path: Routes.ZAKAT_PATH,
+			icon: 'hand-coins',
+			description: 'Zakat Calculation',
+		},
 	],
 	module_admin: [
 		{
