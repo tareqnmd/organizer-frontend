@@ -1,3 +1,4 @@
+import { TagsEnum } from '@/store/enum';
 import apiSlice from '../api';
 
 export const optionsApi = apiSlice.injectEndpoints({
@@ -6,7 +7,7 @@ export const optionsApi = apiSlice.injectEndpoints({
 			query: (url) => ({
 				url: url,
 			}),
-			providesTags: (result, error, arg) => ['Options', arg],
+			providesTags: (result, error, arg) => [TagsEnum.OPTIONS, arg],
 		}),
 	}),
 });
