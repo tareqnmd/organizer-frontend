@@ -12,7 +12,7 @@ const Nisab = ({
 	) => void;
 }) => {
 	return (
-		<ZakatCardWrapper headerTitle="Nisab">
+		<ZakatCardWrapper extraClass="max-lg:col-span-full" headerTitle="Nisab">
 			<div className="flex flex-col gap-2">
 				<Label className="text-sm font-medium">Nisab</Label>
 				<Input

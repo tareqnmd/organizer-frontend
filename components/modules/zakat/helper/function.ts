@@ -1,4 +1,5 @@
-import { ZakatField } from './type';
+import { toast } from 'sonner';
+import { ZakatField, ZakatFormItem } from './type';
 
 export const calculateZakatDue = (fields: ZakatField[]) => {
 	const nisab = fields.filter((field) => field.type === 'nisab');
@@ -28,4 +29,28 @@ export const calculateZakatDue = (fields: ZakatField[]) => {
 			isZakatApplicable: false,
 		};
 	}
+};
+
+export const validateZakatFields = (fields: ZakatField[]) => {
+	const nisab = fields.filter((field) => field.type === 'nisab');
+	const assets = fields.filter((field) => field.type === 'assets');
+
+	if (nisab.length === 0) {
+		toast.error('Nisab is required');
+		return false;
+	}
+
+	if (assets.length === 0) {
+		toast.error('Assets are required');
+		return false;
+	}
+
+	return true;
+};
+
+export const filterFormItems = (
+	items: ZakatFormItem[],
+	advanceMode: boolean,
+) => {
+	return items.filter((item) => item.advanceMode === advanceMode);
 };

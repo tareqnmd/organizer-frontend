@@ -9,7 +9,8 @@ export type ZakatFieldType = {
 export type ZakatFormItem = {
 	name: string;
 	label: string;
-	children: ZakatFieldType[];
+	advanceMode: boolean;
+	placeholder?: string;
 };
 
 export type ZakatField = {
