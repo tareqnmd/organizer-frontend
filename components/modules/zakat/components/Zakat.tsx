@@ -58,7 +58,10 @@ const Zakat: React.FC = () => {
 					Advance Mode
 				</Label>
 				<div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
-					<Nisab updateFields={updateFields} />
+					<Nisab
+						updateFields={updateFields}
+						advanceMode={advanceMode}
+					/>
 					<Assets
 						advanceMode={advanceMode}
 						updateFields={updateFields}
