@@ -86,16 +86,6 @@ const BudgetTransactionsTable = ({
 			),
 		},
 		{
-			accessorKey: 'description',
-			header: 'Description',
-			enableHiding: false,
-			cell: ({ row }) => (
-				<span className="text-nowrap">
-					{row.getValue('description')}
-				</span>
-			),
-		},
-		{
 			accessorKey: 'amount',
 			header: ({ column }) => (
 				<Button
