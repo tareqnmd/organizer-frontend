@@ -72,19 +72,25 @@ const FormSelect = ({
 							className="m-auto my-2 animate-spin"
 						/>
 					)}
-					{!isLoading && options?.length > 0 ? (
-						options?.map((item: InputOptionType, index: number) => (
-							<SelectItem
-								key={index}
-								value={item?.value.toString()}
-							>
-								{item?.label}
-							</SelectItem>
-						))
-					) : (
-						<span className="px-2 text-center text-sm">
-							No Data Found
-						</span>
+					{!isLoading && (
+						<>
+							{options?.length > 0 ? (
+								options?.map(
+									(item: InputOptionType, index: number) => (
+										<SelectItem
+											key={index}
+											value={item?.value.toString()}
+										>
+											{item?.label}
+										</SelectItem>
+									),
+								)
+							) : (
+								<span className="px-2 text-center text-sm">
+									No Data Found
+								</span>
+							)}
+						</>
 					)}
 				</SelectGroup>
 			</SelectContent>
