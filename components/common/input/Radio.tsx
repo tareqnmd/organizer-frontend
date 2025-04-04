@@ -33,14 +33,18 @@ const FormRadio = ({
 			className="flex"
 		>
 			{options?.map((option: InputOptionType) => (
-				<div key={String(option.value)} className="flex gap-1">
+				<div
+					key={String(option.value)}
+					className="flex items-center gap-1"
+				>
 					<RadioGroupItem
+						className="!shrink-0"
 						id={String(option.value)}
 						value={String(option.value)}
 					/>
 					<Label
 						htmlFor={String(option.value)}
-						className="!m-0 font-normal"
+						className="!m-0 cursor-pointer font-normal"
 					>
 						{option.label}
 					</Label>

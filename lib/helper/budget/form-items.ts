@@ -1,4 +1,5 @@
 import { FormInputType } from '../shared/enum';
+import { ExtraOptionEnum } from './enums';
 
 export const transactionFormItems = [
 	{
@@ -79,52 +80,34 @@ export const categoryFormItems = [
 export const categoryTypeExtraOptions = {
 	Expense: [
 		{
-			name: 'increaseSaving',
-			label: 'Add to Saving',
-			type: FormInputType.CHECKBOX,
+			name: 'expenseExtraOptions',
+			type: FormInputType.RADIO,
 			fieldRequired: false,
 			staticOptions: [
 				{
-					label: 'Yes',
-					value: true,
+					label: 'Add to Saving',
+					value: ExtraOptionEnum.INCREASE_SAVING,
 				},
-			],
-		},
-		{
-			name: 'decreaseLoan',
-			label: 'Deduct from Loan',
-			type: FormInputType.CHECKBOX,
-			fieldRequired: false,
-			staticOptions: [
 				{
-					label: 'Yes',
-					value: true,
+					label: 'Deduct from Loan',
+					value: ExtraOptionEnum.DECREASE_LOAN,
 				},
 			],
 		},
 	],
 	Income: [
 		{
-			name: 'addLoan',
-			label: 'Add to Loan',
-			type: FormInputType.CHECKBOX,
+			name: 'incomeExtraOptions',
+			type: FormInputType.RADIO,
 			fieldRequired: false,
 			staticOptions: [
 				{
-					label: 'Yes',
-					value: true,
+					label: 'Add to Loan',
+					value: ExtraOptionEnum.INCREASE_LOAN,
 				},
-			],
-		},
-		{
-			name: 'decreaseSaving',
-			label: 'Deduct from Saving',
-			type: FormInputType.CHECKBOX,
-			fieldRequired: false,
-			staticOptions: [
 				{
-					label: 'Yes',
-					value: true,
+					label: 'Deduct from Saving',
+					value: ExtraOptionEnum.DECREASE_SAVING,
 				},
 			],
 		},

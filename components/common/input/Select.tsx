@@ -11,6 +11,7 @@ import {
 	InputOptionType,
 } from '@/lib/helper/shared/types';
 import { useGetOptionsQuery } from '@/store/features/common/options-api';
+import { Loader } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { ControllerRenderProps } from 'react-hook-form';
 
@@ -27,9 +28,12 @@ const FormSelect = ({
 	const [options, setOptions] = useState<InputOptionType[]>([]);
 	const [value, setValue] = useState('');
 	const { placeholder, staticOptions = [], optionUrl, disabled } = input;
-	const { data: getOptionsData = [] } = useGetOptionsQuery(optionUrl, {
-		skip: !optionUrl,
-	});
+	const { data: getOptionsData = [], isLoading } = useGetOptionsQuery(
+		optionUrl,
+		{
+			skip: !optionUrl,
+		},
+	);
 
 	useEffect(() => {
 		if (field?.value && options?.length > 0) {
@@ -62,7 +66,13 @@ const FormSelect = ({
 			</SelectTrigger>
 			<SelectContent>
 				<SelectGroup>
-					{options?.length > 0 ? (
+					{isLoading && (
+						<Loader
+							size={16}
+							className="m-auto my-2 animate-spin"
+						/>
+					)}
+					{!isLoading && options?.length > 0 ? (
 						options?.map((item: InputOptionType, index: number) => (
 							<SelectItem
 								key={index}
