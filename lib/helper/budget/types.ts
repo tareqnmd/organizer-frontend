@@ -118,7 +118,6 @@ export type BudgetCategoryType = {
 
 export type BudgetCategoryParamType = {
 	category?: string;
-	type: TransactionTypeEnum;
 };
 
 export type BudgetCategorySchemaType = z.infer<typeof BudgetCategorySchema>;

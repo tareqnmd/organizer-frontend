@@ -1,7 +1,6 @@
 export enum TransactionTypeEnum {
-	INCOME = 'income',
-	EXPENSE = 'expense',
-	SAVING = 'saving',
+	INCOME = 'Income',
+	EXPENSE = 'Expense',
 }
 
 export enum TimeFrameEnum {
