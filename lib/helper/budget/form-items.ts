@@ -80,7 +80,7 @@ export const categoryFormItems = [
 export const categoryTypeExtraOptions = {
 	Expense: [
 		{
-			name: 'expenseExtraOptions',
+			name: 'extraOption',
 			type: FormInputType.RADIO,
 			fieldRequired: false,
 			staticOptions: [
@@ -97,7 +97,7 @@ export const categoryTypeExtraOptions = {
 	],
 	Income: [
 		{
-			name: 'incomeExtraOptions',
+			name: 'extraOption',
 			type: FormInputType.RADIO,
 			fieldRequired: false,
 			staticOptions: [

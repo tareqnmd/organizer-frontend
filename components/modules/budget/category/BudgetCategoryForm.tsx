@@ -40,6 +40,7 @@ const BudgetCategoryForm = ({
 		defaultValues: {
 			name: '',
 			typeId: '',
+			extraOption: null,
 		},
 	});
 	const type = form.watch('typeId');
@@ -73,7 +74,7 @@ const BudgetCategoryForm = ({
 		if (category?.name && category.typeId) {
 			form.setValue('name', category.name);
 			form.setValue('typeId', category.typeId);
-			form.setValue('expenseSaving', category.savingExpense);
+			form.setValue('extraOption', category.extraOption);
 		}
 	}, [form, category]);
 
@@ -101,10 +102,11 @@ const BudgetCategoryForm = ({
 
 	useEffect(() => {
 		if (type) {
+			form.setValue('extraOption', null);
 			const typeInfo = types?.find((t: BudgetTypeType) => t.id === type);
 			setTypeInfo(typeInfo);
 		}
-	}, [type, types]);
+	}, [form, type, types]);
 
 	return (
 		<Form {...form}>

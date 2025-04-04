@@ -114,6 +114,7 @@ export type BudgetCategoryType = {
 	type: TransactionTypeEnum;
 	status: number;
 	savingExpense: boolean;
+	extraOption: string | null;
 };
 
 export type BudgetCategoryParamType = {
