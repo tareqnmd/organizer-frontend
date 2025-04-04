@@ -74,16 +74,59 @@ export const categoryFormItems = [
 		description: '',
 		fieldRequired: true,
 	},
-	{
-		name: 'expenseSaving',
-		label: 'Expense related to Saving',
-		type: FormInputType.CHECKBOX,
-		fieldRequired: false,
-		staticOptions: [
-			{
-				label: 'Yes',
-				value: true,
-			},
-		],
-	},
 ];
+
+export const categoryTypeExtraOptions = {
+	Expense: [
+		{
+			name: 'increaseSaving',
+			label: 'Add to Saving',
+			type: FormInputType.CHECKBOX,
+			fieldRequired: false,
+			staticOptions: [
+				{
+					label: 'Yes',
+					value: true,
+				},
+			],
+		},
+		{
+			name: 'decreaseLoan',
+			label: 'Deduct from Loan',
+			type: FormInputType.CHECKBOX,
+			fieldRequired: false,
+			staticOptions: [
+				{
+					label: 'Yes',
+					value: true,
+				},
+			],
+		},
+	],
+	Income: [
+		{
+			name: 'addLoan',
+			label: 'Add to Loan',
+			type: FormInputType.CHECKBOX,
+			fieldRequired: false,
+			staticOptions: [
+				{
+					label: 'Yes',
+					value: true,
+				},
+			],
+		},
+		{
+			name: 'decreaseSaving',
+			label: 'Deduct from Saving',
+			type: FormInputType.CHECKBOX,
+			fieldRequired: false,
+			staticOptions: [
+				{
+					label: 'Yes',
+					value: true,
+				},
+			],
+		},
+	],
+};
