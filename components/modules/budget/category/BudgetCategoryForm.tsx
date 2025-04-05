@@ -118,6 +118,10 @@ const BudgetCategoryForm = ({
 						key={input.name}
 						input={input}
 						control={form?.control}
+						extraOnChange={() => {
+							input.name === 'typeId' &&
+								form.setValue('extraOption', null);
+						}}
 					/>
 				))}
 				{categoryTypeExtraOptions[

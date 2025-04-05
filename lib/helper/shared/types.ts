@@ -30,6 +30,7 @@ export type InputFieldsType = {
 
 export type CustomFormInputPropsType = InputFieldsType & {
 	input: CustomFormInputType;
+	extraOnChange?: () => void;
 };
 
 export type DateTimeType = {

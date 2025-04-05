@@ -23,6 +23,7 @@ const CustomFormInput = ({
 	input,
 	control,
 	extraClassName = '',
+	extraOnChange,
 }: CustomFormInputPropsType) => {
 	const {
 		label,
@@ -39,7 +40,11 @@ const CustomFormInput = ({
 		) : type === FormInputType.RADIO ? (
 			<FormRadio input={input} field={field} />
 		) : type === FormInputType.SELECT ? (
-			<FormSelect input={input} field={field} />
+			<FormSelect
+				input={input}
+				field={field}
+				extraOnChange={extraOnChange}
+			/>
 		) : type === FormInputType.DATE ? (
 			<FormDate field={field} />
 		) : type === FormInputType.DATETIME ? (

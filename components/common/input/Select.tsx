@@ -19,10 +19,12 @@ const FormSelect = ({
 	input,
 	field,
 	extraTriggerClassName = '',
+	extraOnChange,
 }: {
 	input: CustomFormInputType;
 	field: ControllerRenderProps;
 	extraTriggerClassName?: string;
+	extraOnChange?: () => void;
 }) => {
 	const [dynamicOptions, setDynamicOptions] = useState([]);
 	const [options, setOptions] = useState<InputOptionType[]>([]);
@@ -58,7 +60,10 @@ const FormSelect = ({
 	return (
 		<Select
 			disabled={disabled}
-			onValueChange={field.onChange}
+			onValueChange={(data) => {
+				field.onChange(data);
+				extraOnChange?.();
+			}}
 			value={value}
 		>
 			<SelectTrigger className={extraTriggerClassName}>
