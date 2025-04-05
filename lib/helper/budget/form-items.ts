@@ -12,15 +12,6 @@ export const transactionFormItems = [
 		fieldRequired: true,
 	},
 	{
-		name: 'savingCategoryId',
-		label: 'Saving Category',
-		type: FormInputType.SELECT,
-		placeholder: 'Select a Category',
-		optionUrl: '/budget/type-category-saving-select',
-		description: '',
-		fieldRequired: false,
-	},
-	{
 		name: 'amount',
 		label: 'Amount',
 		type: FormInputType.NUMBER,
