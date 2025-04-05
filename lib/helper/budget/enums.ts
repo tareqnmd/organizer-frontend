@@ -10,7 +10,7 @@ export enum TimeFrameEnum {
 
 export enum ExtraOptionEnum {
 	INCREASE_SAVING = 'increaseSaving',
-	DECREASE_LOAN = 'decreaseLoan',
-	INCREASE_LOAN = 'increaseLoan',
 	DECREASE_SAVING = 'decreaseSaving',
+	INCREASE_LOAN = 'increaseLoan',
+	DECREASE_LOAN = 'decreaseLoan',
 }

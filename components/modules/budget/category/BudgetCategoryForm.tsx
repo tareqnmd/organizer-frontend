@@ -71,6 +71,13 @@ const BudgetCategoryForm = ({
 	};
 
 	useEffect(() => {
+		if (type) {
+			const typeInfo = types?.find((t: BudgetTypeType) => t.id === type);
+			setTypeInfo(typeInfo);
+		}
+	}, [type, types]);
+
+	useEffect(() => {
 		if (category?.name && category.typeId) {
 			form.setValue('name', category.name);
 			form.setValue('typeId', category.typeId);
@@ -99,14 +106,6 @@ const BudgetCategoryForm = ({
 		router,
 		setOpen,
 	]);
-
-	useEffect(() => {
-		if (type) {
-			form.setValue('extraOption', null);
-			const typeInfo = types?.find((t: BudgetTypeType) => t.id === type);
-			setTypeInfo(typeInfo);
-		}
-	}, [form, type, types]);
 
 	return (
 		<Form {...form}>
