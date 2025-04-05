@@ -81,6 +81,7 @@ export const categoryTypeExtraOptions = {
 	Expense: [
 		{
 			name: 'extraOption',
+			label: 'Extra Option for Expense',
 			type: FormInputType.RADIO,
 			fieldRequired: false,
 			staticOptions: [
@@ -98,6 +99,7 @@ export const categoryTypeExtraOptions = {
 	Income: [
 		{
 			name: 'extraOption',
+			label: 'Extra Option for Income',
 			type: FormInputType.RADIO,
 			fieldRequired: false,
 			staticOptions: [
