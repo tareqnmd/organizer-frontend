@@ -74,7 +74,7 @@ const FormSelect = ({
 					{isLoading && (
 						<Loader
 							size={16}
-							className="m-auto my-2 animate-spin"
+							className="m-auto my-2 shrink-0 animate-spin"
 						/>
 					)}
 					{!isLoading && (
