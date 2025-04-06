@@ -36,11 +36,7 @@ const BudgetCategoryCardDetails = ({
 								</div>
 								<Progress
 									value={item.percentage}
-									indicator={
-										type === TransactionTypeEnum.SAVING
-											? 'neutral'
-											: type
-									}
+									indicator={type}
 								/>
 							</div>
 						</div>

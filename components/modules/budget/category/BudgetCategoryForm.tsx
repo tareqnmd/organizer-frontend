@@ -7,14 +7,18 @@ import {
 	BudgetCategorySchema,
 	BudgetCategorySchemaType,
 	BudgetCategoryType,
+	BudgetTypeType,
 } from '@/lib/helper/budget';
-import { categoryFormItems } from '@/lib/helper/budget/form-items';
+import {
+	categoryFormItems,
+	categoryTypeExtraOptions,
+} from '@/lib/helper/budget/form-items';
 import { getError } from '@/lib/utils';
 import {
 	useCreateBudgetCategoryMutation,
 	useEditBudgetCategoryMutation,
 } from '@/store/features/budget/category/api';
-import { useTypeIsExpenseMutation } from '@/store/features/budget/type/api';
+import { useGetAllTypesQuery } from '@/store/features/budget/type/api';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -30,16 +34,18 @@ const BudgetCategoryForm = ({
 	setOpen: (arg: boolean) => void;
 }) => {
 	const router = useRouter();
-	const [saveExpense, setSaveExpense] = useState(false);
+	const [typeInfo, setTypeInfo] = useState<BudgetTypeType | null>(null);
 	const form = useForm<BudgetCategorySchemaType>({
 		resolver: zodResolver(BudgetCategorySchema),
 		defaultValues: {
 			name: '',
 			typeId: '',
+			extraOption: null,
 		},
 	});
-	const [typeIsExpense] = useTypeIsExpenseMutation();
 	const type = form.watch('typeId');
+	const { data: types } = useGetAllTypesQuery({});
+
 	const [
 		edit,
 		{
@@ -66,17 +72,16 @@ const BudgetCategoryForm = ({
 
 	useEffect(() => {
 		if (type) {
-			typeIsExpense(type).then((res) => {
-				setSaveExpense(res?.data ?? false);
-			});
+			const typeInfo = types?.find((t: BudgetTypeType) => t.id === type);
+			setTypeInfo(typeInfo);
 		}
-	}, [type, typeIsExpense]);
+	}, [type, types]);
 
 	useEffect(() => {
 		if (category?.name && category.typeId) {
 			form.setValue('name', category.name);
 			form.setValue('typeId', category.typeId);
-			form.setValue('expenseSaving', category.savingExpense);
+			form.setValue('extraOption', category.extraOption);
 		}
 	}, [form, category]);
 
@@ -108,17 +113,26 @@ const BudgetCategoryForm = ({
 				onSubmit={form.handleSubmit(onSubmit)}
 				className="grid w-full gap-3"
 			>
-				{categoryFormItems
-					.filter((item) =>
-						saveExpense ? true : item.name !== 'expenseSaving',
-					)
-					.map((input) => (
-						<CustomFormInput
-							key={input.name}
-							input={input}
-							control={form?.control}
-						/>
-					))}
+				{categoryFormItems.map((input) => (
+					<CustomFormInput
+						key={input.name}
+						input={input}
+						control={form?.control}
+						extraOnChange={() => {
+							input.name === 'typeId' &&
+								form.setValue('extraOption', null);
+						}}
+					/>
+				))}
+				{categoryTypeExtraOptions[
+					typeInfo?.name as keyof typeof categoryTypeExtraOptions
+				]?.map((input) => (
+					<CustomFormInput
+						key={input.name}
+						input={input}
+						control={form?.control}
+					/>
+				))}
 				<DialogFooter>
 					<Button
 						disabled={isCreateLoading || isEditLoading}

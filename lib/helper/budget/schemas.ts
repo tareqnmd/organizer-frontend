@@ -50,6 +50,7 @@ export const BudgetCategorySchema = z.object({
 	name,
 	typeId,
 	expenseSaving: z.boolean().optional(),
+	extraOption: z.string().optional().nullable(),
 });
 
 export const BudgetTransactionSchema = z.object({

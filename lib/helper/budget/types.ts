@@ -26,6 +26,7 @@ export type BudgetDashboardOverviewAmountType = {
 	expense: number;
 	balance: number;
 	saving: number;
+	loan: number;
 };
 
 export type BudgetDashboardOverviewCategoryType = {
@@ -113,11 +114,11 @@ export type BudgetCategoryType = {
 	type: TransactionTypeEnum;
 	status: number;
 	savingExpense: boolean;
+	extraOption: string | null;
 };
 
 export type BudgetCategoryParamType = {
 	category?: string;
-	type: TransactionTypeEnum;
 };
 
 export type BudgetCategorySchemaType = z.infer<typeof BudgetCategorySchema>;

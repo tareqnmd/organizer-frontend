@@ -10,24 +10,16 @@ function BudgetCategoryStats({
 }: {
 	category: BudgetDashboardOverviewCategoryType;
 }) {
-	const { income = [], expense = [], saving = [] } = category || {};
+	const { income = [], expense = [] } = category || {};
 
 	return (
 		<div className="grid gap-4 md:grid-cols-2">
-			<div className="flex flex-col gap-4">
-				<SkeletonWrapper isLoading={false}>
-					<BudgetCategoryCard
-						type={TransactionTypeEnum.INCOME}
-						data={income}
-					/>
-				</SkeletonWrapper>
-				<SkeletonWrapper isLoading={false}>
-					<BudgetCategoryCard
-						type={TransactionTypeEnum.SAVING}
-						data={saving}
-					/>
-				</SkeletonWrapper>
-			</div>
+			<SkeletonWrapper isLoading={false}>
+				<BudgetCategoryCard
+					type={TransactionTypeEnum.INCOME}
+					data={income}
+				/>
+			</SkeletonWrapper>
 			<SkeletonWrapper isLoading={false}>
 				<BudgetCategoryCard
 					type={TransactionTypeEnum.EXPENSE}

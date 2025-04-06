@@ -4,6 +4,7 @@ import {
 } from '@/lib/helper/budget';
 import { generateDataFromServer, nextProperties } from '@/lib/utils';
 import BudgetCategoriesFilter from './BudgetCategoriesFilter';
+import BudgetCategoriesWrapper from './BudgetCategoriesWrapper';
 import BudgetCategoryAdd from './BudgetCategoryAdd';
 import BudgetCategoryCard from './BudgetCategoryCard';
 
@@ -14,23 +15,29 @@ const BudgetCategories = async ({
 }) => {
 	const queryParams = new URLSearchParams(searchParams);
 	const url = `budget/type-categories?${queryParams}`;
-	const { data: categories } = await generateDataFromServer(
-		url,
-		nextProperties({}),
-	);
+	const {
+		data: { incomeCategories = [], expenseCategories = [] },
+	} = await generateDataFromServer(url, nextProperties({}));
 
 	return (
-		<>
-			<div className="mb-4 ml-auto flex items-center gap-2 sm:w-[80%] md:w-[60%] xl:w-[40%]">
+		<div className="flex flex-col gap-4">
+			<div className="ml-auto flex items-center gap-2 sm:w-[80%] md:w-[60%] xl:w-[40%]">
 				<BudgetCategoriesFilter searchParams={searchParams} />
 				<BudgetCategoryAdd />
 			</div>
-			<div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-				{categories?.map((category: BudgetCategoryType) => (
+
+			<BudgetCategoriesWrapper title="Income Categories">
+				{incomeCategories.map((category: BudgetCategoryType) => (
 					<BudgetCategoryCard key={category.id} category={category} />
 				))}
-			</div>
-		</>
+			</BudgetCategoriesWrapper>
+
+			<BudgetCategoriesWrapper title="Expense Categories">
+				{expenseCategories.map((category: BudgetCategoryType) => (
+					<BudgetCategoryCard key={category.id} category={category} />
+				))}
+			</BudgetCategoriesWrapper>
+		</div>
 	);
 };
 

@@ -1,6 +1,7 @@
 'use client';
 
 import { Card } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 import { ReactNode, useCallback } from 'react';
 import CountUp from 'react-countup';
 
@@ -9,11 +10,13 @@ const BudgetStatsCard = ({
 	value,
 	title,
 	icon,
+	className,
 }: {
 	formatter: Intl.NumberFormat;
 	icon: ReactNode;
 	title: String;
 	value: number;
+	className?: string;
 }) => {
 	const formatFn = useCallback(
 		(value: number) => {
@@ -23,7 +26,7 @@ const BudgetStatsCard = ({
 	);
 
 	return (
-		<Card className="flex w-full items-center gap-2 p-2">
+		<Card className={cn('flex w-full items-center gap-2 p-2', className)}>
 			{icon}
 			<div className="flex flex-col items-start gap-0">
 				<p className="text-sm">{title}</p>
