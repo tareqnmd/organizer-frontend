@@ -26,17 +26,22 @@ const BudgetStatsCard = ({
 	);
 
 	return (
-		<Card className={cn('flex w-full items-center gap-2 p-2', className)}>
+		<Card
+			className={cn(
+				'flex w-full flex-wrap items-center gap-2 overflow-hidden p-2',
+				className,
+			)}
+		>
 			{icon}
-			<div className="flex flex-col items-start gap-0">
-				<p className="text-xs md:text-sm">{title}</p>
+			<div className="flex flex-col items-start gap-0 overflow-hidden">
+				<p className="text-sm">{title}</p>
 				<CountUp
 					preserveValue
 					redraw={false}
 					end={value}
 					decimals={2}
 					formattingFn={formatFn}
-					className="text-md"
+					className="md:text-md text-xs xs:text-sm"
 				/>
 			</div>
 		</Card>
