@@ -1,19 +1,19 @@
 .income {
-	@apply bg-status-success text-white dark:!bg-status-success;
+	@apply bg-status-success text-white;
 }
 
 .expense {
-	@apply bg-status-danger text-white dark:!bg-status-danger;
+	@apply bg-status-danger text-white;
 }
 
 .neutral {
-	@apply bg-status-neutral text-white dark:!bg-status-neutral;
+	@apply bg-status-neutral text-white;
 }
 
 .inactive {
-	@apply bg-status-inactive text-gray-400 dark:!bg-status-inactive;
+	@apply bg-status-inactive text-gray-400;
 }
 
 .stat-card {
-	@apply flex h-8 w-8 shrink-0 items-center rounded-sm bg-violet-400/10 p-1 xs:h-10 xs:w-10 xs:rounded-md md:h-12 md:w-12 md:rounded-lg md:p-2;
+	@apply flex h-8 w-8 shrink-0 items-center rounded-sm p-1 xs:h-10 xs:w-10 xs:rounded-md md:h-12 md:w-12 md:rounded-lg md:p-2;
 }

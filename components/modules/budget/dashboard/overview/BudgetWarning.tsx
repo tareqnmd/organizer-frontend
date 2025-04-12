@@ -8,8 +8,8 @@ const BudgetWarning = ({
 	const { balance } = amount;
 
 	return balance < 0 ? (
-		<div className="rounded-md border border-red-500 bg-red-500/10 p-2 text-center">
-			<p className="text-sm leading-4 text-red-500">
+		<div className="rounded-md border border-dashed border-red-500 p-2 text-center md:p-3">
+			<p className="text-sm leading-4 text-red-500 md:text-base">
 				Your expenses exceed your income
 			</p>
 		</div>
