@@ -26,7 +26,8 @@ export type BudgetDashboardOverviewAmountType = {
 	expense: number;
 	balance: number;
 	saving: number;
-	loan: number;
+	loanTaken: number;
+	loanGiven: number;
 };
 
 export type BudgetDashboardOverviewCategoryType = {

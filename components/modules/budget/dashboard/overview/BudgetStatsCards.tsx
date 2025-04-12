@@ -25,7 +25,8 @@ function BudgetStatsCards({
 		expense = 0,
 		balance = 0,
 		saving = 0,
-		loan = 0,
+		loanTaken = 0,
+		loanGiven = 0,
 	} = amount || {};
 
 	return (
@@ -65,7 +66,7 @@ function BudgetStatsCards({
 			<SkeletonWrapper isLoading={false}>
 				<BudgetStatsCard
 					formatter={formatter}
-					value={loan}
+					value={loanTaken}
 					title="Loan Taken"
 					icon={<HandCoins className="expense stat-card" />}
 				/>
@@ -73,7 +74,7 @@ function BudgetStatsCards({
 			<SkeletonWrapper isLoading={false}>
 				<BudgetStatsCard
 					formatter={formatter}
-					value={loan}
+					value={loanGiven}
 					title="Loan Given"
 					icon={<HandCoins className="income stat-card" />}
 				/>
