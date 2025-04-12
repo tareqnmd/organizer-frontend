@@ -35,10 +35,7 @@ function BudgetStatsCards({
 					formatter={formatter}
 					value={income}
 					title="Income"
-					className="lg:col-span-3"
-					icon={
-						<TrendingUp className="income h-12 w-12 items-center rounded-lg bg-emerald-400/10 p-2" />
-					}
+					icon={<TrendingUp className="income stat-card" />}
 				/>
 			</SkeletonWrapper>
 			<SkeletonWrapper isLoading={false}>
@@ -46,32 +43,7 @@ function BudgetStatsCards({
 					formatter={formatter}
 					value={expense}
 					title="Expense"
-					className="lg:col-span-3"
-					icon={
-						<TrendingDown className="expense h-12 w-12 items-center rounded-lg bg-red-400/10 p-2" />
-					}
-				/>
-			</SkeletonWrapper>
-			<SkeletonWrapper isLoading={false}>
-				<BudgetStatsCard
-					formatter={formatter}
-					value={saving}
-					title="Saving"
-					className="lg:col-span-2"
-					icon={
-						<Wallet className="neutral h-12 w-12 items-center rounded-lg bg-violet-400/10 p-2" />
-					}
-				/>
-			</SkeletonWrapper>
-			<SkeletonWrapper isLoading={false}>
-				<BudgetStatsCard
-					formatter={formatter}
-					value={loan}
-					title="Loan"
-					className="lg:col-span-2"
-					icon={
-						<HandCoins className="neutral h-12 w-12 items-center rounded-lg bg-violet-400/10 p-2" />
-					}
+					icon={<TrendingDown className="expense stat-card" />}
 				/>
 			</SkeletonWrapper>
 			<SkeletonWrapper isLoading={false}>
@@ -79,10 +51,31 @@ function BudgetStatsCards({
 					formatter={formatter}
 					value={balance}
 					title="Balance"
-					className="col-span-full lg:col-span-2"
-					icon={
-						<WalletMinimal className="neutral h-12 w-12 items-center rounded-lg bg-violet-400/10 p-2" />
-					}
+					icon={<WalletMinimal className="neutral stat-card" />}
+				/>
+			</SkeletonWrapper>
+			<SkeletonWrapper isLoading={false}>
+				<BudgetStatsCard
+					formatter={formatter}
+					value={saving}
+					title="Saving"
+					icon={<Wallet className="neutral stat-card" />}
+				/>
+			</SkeletonWrapper>
+			<SkeletonWrapper isLoading={false}>
+				<BudgetStatsCard
+					formatter={formatter}
+					value={loan}
+					title="Loan Taken"
+					icon={<HandCoins className="expense stat-card" />}
+				/>
+			</SkeletonWrapper>
+			<SkeletonWrapper isLoading={false}>
+				<BudgetStatsCard
+					formatter={formatter}
+					value={loan}
+					title="Loan Given"
+					icon={<HandCoins className="income stat-card" />}
 				/>
 			</SkeletonWrapper>
 		</div>

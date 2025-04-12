@@ -81,8 +81,12 @@ export const categoryTypeExtraOptions = {
 					value: ExtraOptionEnum.INCREASE_SAVING,
 				},
 				{
-					label: 'Deduct from Loan',
-					value: ExtraOptionEnum.DECREASE_LOAN,
+					label: 'Deduct from Loan Taken',
+					value: ExtraOptionEnum.DECREASE_LOAN_TAKEN,
+				},
+				{
+					label: 'Add to Loan Given',
+					value: ExtraOptionEnum.INCREASE_LOAN_GIVEN,
 				},
 			],
 		},
@@ -95,12 +99,16 @@ export const categoryTypeExtraOptions = {
 			fieldRequired: false,
 			staticOptions: [
 				{
-					label: 'Add to Loan',
-					value: ExtraOptionEnum.INCREASE_LOAN,
+					label: 'Add to Loan Taken',
+					value: ExtraOptionEnum.INCREASE_LOAN_TAKEN,
 				},
 				{
 					label: 'Deduct from Saving',
 					value: ExtraOptionEnum.DECREASE_SAVING,
+				},
+				{
+					label: 'Deduct from Loan Given',
+					value: ExtraOptionEnum.DECREASE_LOAN_GIVEN,
 				},
 			],
 		},
