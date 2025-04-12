@@ -30,7 +30,7 @@ const FormRadio = ({
 		<RadioGroup
 			onValueChange={field.onChange}
 			value={field.value}
-			className="flex"
+			className="flex flex-col gap-2"
 		>
 			{options?.map((option: InputOptionType) => (
 				<div
