@@ -25,7 +25,7 @@ const BudgetCategoryCardDetails = ({
 					return (
 						<div key={item.name}>
 							<div className="flex flex-col gap-2">
-								<div className="flex items-center justify-between gap-2">
+								<div className="flex flex-wrap items-center justify-between gap-2">
 									<span className="flex items-center text-sm">
 										{item.name} (
 										{item.percentage.toFixed(0)}%)

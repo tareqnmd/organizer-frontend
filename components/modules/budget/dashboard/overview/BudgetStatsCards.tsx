@@ -30,7 +30,7 @@ function BudgetStatsCards({
 	} = amount || {};
 
 	return (
-		<div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+		<div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-4">
 			<SkeletonWrapper isLoading={false}>
 				<BudgetStatsCard
 					formatter={formatter}
