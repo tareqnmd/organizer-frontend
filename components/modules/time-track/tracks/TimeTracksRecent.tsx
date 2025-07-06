@@ -2,7 +2,7 @@ import { getTimeTrackTracks, TimeTrackType } from '@/lib/helper/time-track';
 import TimeTrackCard from './TimeTrackCard';
 
 const TimeTracksRecent = async () => {
-	const tracks = await getTimeTrackTracks({ limit: 5 });
+	const tracks = await getTimeTrackTracks({ limit: 5, isActive: false });
 	return (
 		<div className="basic-card flex flex-col gap-3 active:scale-100">
 			<strong className="font-semibold">Recent Time Tracks</strong>
